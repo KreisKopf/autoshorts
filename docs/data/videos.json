@@ -3348,7 +3348,7 @@
   "id": 96,
   "category": "mysterien",
   "topic": "Der Schatz im Toplitzsee: Was liegt wirklich am Grund des Bergsees – wahre Geschichte, in eigenen Worten spannend erzählt: etwa zwanzig kurze Sätze, höchstens zwölf Wörter je Satz, jeder Satz ein neues Bild. Der erste Satz nennt den Toplitzsee und den Schatz. Der zweite Satz ist der Cliffhanger: Was Taucher dort fanden, war kein Gold. Danach der Reihe nach diese geprüften Fakten (Stichpunkte, nicht wörtlich abschreiben): ein Bergsee in den österreichischen Alpen, über hundert Meter tief; Frühjahr 1945, kurz vor Kriegsende: Soldaten bringen schwere Holzkisten ans Ufer und versenken sie im See; sofort entsteht das Gerücht vom versunkenen Gold; Schatzsucher tauchen im eiskalten Wasser; 1959 holt eine Expedition die ersten Kisten an die Oberfläche; darin liegt kein Gold, sondern gefälschte britische Banknoten; mit dem Falschgeld sollte im Krieg die Wirtschaft Großbritanniens geschwächt werden; 1963 ertrinkt ein junger Taucher bei einer heimlichen Suche; seitdem ist das Tauchen im See verboten; in der Tiefe schwebt eine dichte Schicht aus versunkenen Baumstämmen, wer sich darin verfängt, kommt nicht mehr heraus; unterhalb von zwanzig Metern gibt es im Wasser keinen Sauerstoff, deshalb verrottet dort unten fast nichts; was unter den Stämmen noch liegt, weiß bis heute niemand; Gold wurde nie gefunden. Keine anderen Zahlen oder Jahreszahlen, keine Geldsummen, keine Stückzahlen, keine Namen von Personen, Zeitschriften, Filmen oder Marken, keine Raketen, kein Tauchboot, kein Büro. Taucher sind Menschen im Neoprenanzug (kind diver), niemals Fische. Keine Grafik mit Fragezeichen, höchstens zwei Grafiken. Der letzte Satz ist ein vollständiger neuer Satz ohne Auslassungspunkte und wiederholt nicht den ersten. Titel nennt den Toplitzsee. Titelbild-Text: SCHATZ IM SEE? Beschreibung: Im Toplitzsee in Österreich wurden 1945 geheimnisvolle Kisten versenkt. Taucher fanden später kein Gold, sondern Falschgeld. Was liegt noch unter den Baumstämmen am Grund? Würdest du dort tauchen?",
-  "status": "rendered",
+  "status": "published",
   "created": 1794685923.3784642,
   "title": "Der mysteriöse Schatz im Toplitzsee",
   "description": "Im Toplitzsee wurden 1945 Kisten versenkt.\nTaucher fanden kein Gold, sondern gefälschte Banknoten.\nWürdest du im See tauchen?",
@@ -3382,6 +3382,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af8bda74b99baa160bc646b",
+  "yt_status": "Zernio: published",
+  "yt_id": "Scid6XfafOU",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af8bda74b99baa160bc646b",
+  "error": null
  }
 ]
