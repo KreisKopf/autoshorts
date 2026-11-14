@@ -1,5 +1,5 @@
 {
- "updated": 1794680513.5564609,
+ "updated": 1794682668.1352465,
  "enough": true,
  "counted": 11,
  "total": 13,
@@ -9,19 +9,19 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1582,
-   "avg_likes": 64.0,
-   "like_rate": 4.05,
-   "avg_score": 2542
+   "avg_views": 1584,
+   "avg_likes": 65.0,
+   "like_rate": 4.1,
+   "avg_score": 2559
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1616,
+   "avg_views": 1619,
    "avg_likes": 40.0,
    "like_rate": 2.47,
-   "avg_score": 2221
+   "avg_score": 2224
   },
   {
    "slug": "fakten",
@@ -36,24 +36,24 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 743,
-   "avg_likes": 31.0,
-   "like_rate": 4.17,
-   "avg_score": 1208
+   "avg_views": 926,
+   "avg_likes": 34.0,
+   "like_rate": 3.67,
+   "avg_score": 1436
   }
  ],
  "weights": {
-  "fakten": 0.74,
+  "fakten": 0.73,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.1,
+  "whatif": 1.09,
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1582 Aufrufe, 4.05 % Likes).",
-  "Schwächste Kategorie: 🤪 Comedy (Ø 743 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2319 zu 704 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1584 Aufrufe, 4.1 % Likes).",
+  "Schwächste Kategorie: 🤪 Comedy (Ø 926 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2348 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,31 +62,31 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2515,
+   "views": 2519,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3355
+   "score": 3359
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2108,
+   "views": 2111,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3023
+   "score": 3026
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1846,
+   "views": 1859,
    "likes": 60,
    "comments": 0,
    "shares": 0,
-   "score": 2746
+   "score": 2759
   },
   {
    "id": 80,
@@ -102,23 +102,23 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1582,
-   "likes": 64,
+   "views": 1584,
+   "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2542
+   "score": 2559
   }
  ],
  "flop": [
   {
-   "id": 81,
-   "title": "Als meine KI-Agenten die Kontrolle übernahmen",
-   "category": "comedy",
-   "views": 743,
-   "likes": 31,
-   "comments": 0,
+   "id": 38,
+   "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
+   "category": "whatif",
+   "views": 1123,
+   "likes": 17,
+   "comments": 1,
    "shares": 0,
-   "score": 1208
+   "score": 1408
   },
   {
    "id": 58,
