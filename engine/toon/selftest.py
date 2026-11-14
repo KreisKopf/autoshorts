@@ -747,6 +747,12 @@ def main():
         assert not any(extras.PROP_ALIASES.get(str(q.get("type")), str(q.get("type"))) == "goldbars" for q in ng_[1].get("props") or []), ng_[1]
         assert places.resolve(stage.backdrop(ng_[2])) not in stage.MAPS and ng_[2]["actors"], ng_[2]
         assert ng_[3].get("_ov_low") == 3, ng_[3]
+        mo_ = stage.direct([{"text": "Im Toplitzsee liegt ein Schatz am Grund.", "place": "underwater"}, {"text": "Im Frühjahr neunzehnhundertfünfundvierzig kamen Lastwagen.", "place": "lake", "overlay": {"type": "tag", "text": "MAI 1945"}},
+                            {"text": "Im August 1914 begann es.", "place": "street", "overlay": {"type": "tag", "text": "AUGUST 1914"}},
+                            {"text": "Taucher holen eine Kiste vom Grund.", "place": "underwater"}, {"text": "Darin liegen gefälschte Banknoten.", "place": "underwater"}],
+                           [(0, 4), (4, 8), (8, 12), (12, 16), (16, 20)], "Der Schatz im Toplitzsee", "mysterien")
+        assert mo_[1]["overlay"]["text"] == "1945" and mo_[2]["overlay"]["text"] == "AUGUST 1914", (mo_[1]["overlay"], mo_[2]["overlay"])
+        assert any(extras.PROP_ALIASES.get(str(q.get("type")), str(q.get("type"))) == "cashcrate" for q in mo_[4].get("props") or []), mo_[4]
         assert not end_[2]["props"] and len(end_[2]["actors"]) == 1 and not end_[2]["actors"][0].get("kind"), end_[2]
         for k_ in extras.LAKE_KINDS:
             lay_ = Image_.new("RGBA", (places.W, places.H), (0, 0, 0, 0))

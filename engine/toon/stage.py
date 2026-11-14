@@ -1101,6 +1101,10 @@ def direct(scenes, times, topic="", style="", look=""):
             for key in ("text", "kicker", "sub", "label", "title") if isinstance(box, dict) else ():
                 if isinstance(box.get(key), str) and "hundert" in box[key].lower():
                     box[key] = year_digits(box[key])
+        if isinstance(ov_m := sc.get("overlay"), dict) and str(ov_m.get("type") or "") == "tag" and isinstance(ov_m.get("text"), str):
+            for mon_c in _MONTHS.split("|"):               # Schild „MAI 1945“, der Satz sagt aber nur „im Frühjahr“: den erfundenen Monat streichen
+                if _re0.search(r"(?i)\b" + mon_c + r"\b", ov_m["text"]) and mon_c not in low_c0 and _re0.search(r"\d{4}", ov_m["text"]):
+                    ov_m["text"] = " ".join(_re0.sub(r"(?i)\b\d{0,2}\.?\s*" + mon_c + r"\b", "", ov_m["text"]).split())
         g_c = sc.get("graphic")
         if isinstance(g_c, dict) and str(g_c.get("type") or "").lower() == "question" and "?" not in str(sc.get("text") or "") and str(g_c.get("text") or "").strip():
             g_c["type"] = "badge"                         # großes Fragezeichen über einem Satz, der nichts fragt („Tauchen ist streng verboten“): als Plakette zeigen
@@ -2133,7 +2137,7 @@ def _lake_story(scenes, topic="", main_id="du"):
                 n_under += 1
                 continue
             follow = prev_under and not _re.search(LAKE_UNDER_RE + "|" + LAKE_LOG_RE + "|" + LAKE_DIVE_RE + "|" + LAKE_CRATE_RE, low)
-            thing = (prev_thing or "") if follow else "logs" if _re.search(LAKE_LOG_RE, low) else "cashcrate" if cash else "rocketpart" if (_re.search(LAKE_ROCKET_RE, low) or "rocketpart" in keys) else \
+            thing = "cashcrate" if cash else (prev_thing or "") if follow else "logs" if _re.search(LAKE_LOG_RE, low) else "rocketpart" if (_re.search(LAKE_ROCKET_RE, low) or "rocketpart" in keys) else \
                 "crates" if (_re.search(LAKE_CRATE_RE, low) or gold or "crates" in keys or "crate" in keys) else ""
             dive = bool(_re.search(LAKE_DIVE_RE, low)) or any(_re.search(DIVER_ID_RE, str(a.get("id") or "").lower()) or str(a.get("kind") or "") == "diver" for a in acts)
             if follow and _re.search(r"\bwer\b|verf[aä]ng|niemand|\bman\b", low):
