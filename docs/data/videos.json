@@ -3213,5 +3213,48 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7708072534259862816?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 93,
+  "category": "mysterien",
+  "topic": "Der verschollene Nazi-Goldschatz im Toplitzsee: Was liegt wirklich im tiefsten Wasser?",
+  "status": "review",
+  "created": 1794679798.8397548,
+  "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
+  "description": "Was liegt wirklich am Grund des Toplitzsees?\nTaucher suchten nach Nazi-Gold und fanden ungeahnte Rätsel in hundert Meter Tiefe.\nGlaubst du an den versunkenen Schatz?",
+  "hashtags": [
+   "#shorts",
+   "#mysterien",
+   "#toplitzsee",
+   "#geschichte",
+   "#nazigold",
+   "#rätsel",
+   "#viral",
+   "#deutschland"
+  ],
+  "tags": [
+   "toplitzsee",
+   "nazi gold",
+   "schatzsuche",
+   "ungelöste mysterien",
+   "geheimnis",
+   "österreich",
+   "taucher",
+   "geschichte"
+  ],
+  "thumb_text": "GOLD IM SEE?",
+  "missing": null,
+  "cover_ms": 97919,
+  "duration": 97.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-14 21:00",
+  "review_at": 1794680360.5281525
  }
 ]

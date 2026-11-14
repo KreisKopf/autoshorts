@@ -1,0 +1,451 @@
+{
+ "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
+ "scenes": [
+  {
+   "text": "Drei mysteriöse Kisten im Toplitzsee verändern bis heute die Geschichtsbücher.",
+   "see": "Ein einsamer See zwischen steilen Bergen im Nebel.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "taucher",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "TOPLITZSEE"
+   }
+  },
+  {
+   "text": "Und das gruseligste Rätsel wartet tief auf dem dunklen Grund.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "actors": [
+    {
+     "id": "taucher",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "scary"
+  },
+  {
+   "text": "Im April neunzehnhundertfünfundvierzig transportierten deutsche Soldaten schwere Holzkisten an den See.",
+   "see": "Eine Figur blickt erstaunt auf eine alte Landkarte.",
+   "place": "lake",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "rock",
+    "elements": [
+     "mountains",
+     "lake"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "map",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "APRIL 1945"
+   }
+  },
+  {
+   "text": "Sie versenkten alles mitten in der Nacht im über hundert Meter tiefen Wasser.",
+   "see": "Holzkisten versinken im Wasser.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "taucher",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 100,
+    "unit": "METER"
+   }
+  },
+  {
+   "text": "Sofort entstanden Gerüchte über Milliarden an verstecktem Gold der Nazi-Führung.",
+   "see": "Grafik über Gerüchte und Goldstangen.",
+   "place": "office",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "kicker": "GERÜCHTE",
+    "value": "BILLIONEN",
+    "label": "REICHSMARK IN GOLD",
+    "dark": false
+   }
+  },
+  {
+   "text": "Zahlreiche Schatzsucher riskierten in den folgenden Jahrzehnten ihr Leben im kalten See.",
+   "see": "Taucher schwimmt im dunklen Wasser.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "actors": [
+    {
+     "id": "taucher",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "fish",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Neunzehnhundertsiebenundfünfzig ertrank ein Taucher bei einer verbotenen Geheim-Expedition mysteriös.",
+   "see": "Zeitungsmeldung fliegt ins Bild.",
+   "place": "office",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "crowd": "walk",
+   "graphic": {
+    "type": "news",
+    "kicker": "ALPEN-KURIER",
+    "sub": "Tödliches Unglück im Toplitzsee",
+    "text": "TAUCHER VERMISST",
+    "dark": false
+   }
+  },
+  {
+   "text": "Zwei Jahre später holte ein Forscherteam endlich die ersten Kisten an die Oberfläche.",
+   "see": "Taucher findet eine Kiste am Boden.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "kiste"
+    }
+   ],
+   "actors": [
+    {
+     "id": "taucher",
+     "speaks": true,
+     "action": "point",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "JAHR 1959"
+   }
+  },
+  {
+   "text": "Doch darin lag kein Gold, sondern gefälschte britische Pfund-Banknoten.",
+   "see": "Große Zahlen-Grafik über gefälschtes Geld.",
+   "place": "office",
+   "time": "night",
+   "mood": "scary",
+   "crowd": "walk",
+   "overlay": {
+    "type": "stamp",
+    "text": "FAKE",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Die Nazis wollten damit eigentlich die britische Wirtschaft komplett lahmlegen.",
+   "see": "Hauptfigur sieht schockiert auf eine gefälschte Banknote.",
+   "place": "office",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Fünfundachtzig Millionen gefälschte Scheine wurden offiziell aus dem Wasser geborgen.",
+   "see": "Prüfstempel für den Fund.",
+   "place": "office",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "crowd": "walk",
+   "graphic": {
+    "type": "badge",
+    "kicker": "BELEGT",
+    "text": "85 MIO. SCHEINE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Spätere High-Tech-Suchboote entdeckten außerdem geheime Raketenbauteile und Waffenprüfstände.",
+   "see": "Tauchboot sucht den Grund ab.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "rocket"
+    },
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Aber am Boden liegt eine zwanzig Meter dicke Schicht aus umgestürzten Bäumen.",
+   "see": "Radarschirm zeigt Hindernisse unter Wasser.",
+   "place": "underwater",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "radar",
+    "kicker": "SONAR-SCAN",
+    "sub": "BLOCKIERT",
+    "text": "BAUMSCHICHT 20m",
+    "dark": false
+   }
+  },
+  {
+   "text": "Niemand weiß genau, was unter diesem riesigen Holzverhau noch verborgen bleibt.",
+   "see": "Hauptfigur grübelt vor einer Karte.",
+   "place": "office",
+   "time": "night",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Ab zwanzig Meter Tiefe enthält der See nämlich überhaupt keinen Sauerstoff mehr.",
+   "see": "Grafik über fehlenden Sauerstoff im Wasser.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 20,
+    "unit": "METER"
+   }
+  },
+  {
+   "text": "Deshalb verwesen dort unten weder altes Papier noch empfindliche Kisten.",
+   "see": "Kiste im tiefen Wasser gut erhalten.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "speaks": true,
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Heute ist das Tauchen im gesamten Toplitzsee strengstens verboten.",
+   "see": "Stempelschild: Tauchverbot im See.",
+   "place": "lake",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "mountains",
+     "lake"
+    ]
+   },
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "question",
+    "text": "STRENG VERBOTEN",
+    "dark": false
+   },
+   "overlay": {
+    "type": "stamp",
+    "text": "VERBOTEN",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Das Gold wurde nie gefunden, aber Forscher vermuten noch immer unbekannte Dokumente.",
+   "see": "Hauptfigur zeigt ratlos auf den See.",
+   "place": "lake",
+   "backdrop": {
+    "sky": "sunset",
+    "ground": "grass",
+    "elements": [
+     "mountains",
+     "lake"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "quote",
+    "title": "FORSCHER VERMUTEN",
+    "text": "…noch immer unbekannte Dokumente."
+   }
+  },
+  {
+   "text": "Und genau deshalb faszinieren die ...",
+   "see": "Kamera taucht wieder schnell unter Wasser.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "tense"
+  }
+ ]
+}
