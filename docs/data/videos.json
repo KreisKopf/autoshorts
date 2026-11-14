@@ -3123,5 +3123,45 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Erster Neubau: Figur im Wald statt Ballon beim Vorgriff, Gedränge im Laden statt Familie, fertiger Ballon mit Lagerfeuer beim Aufbau, Zähler quer über dem Ballon, erfundene Uhrzeit 02:00 bis zum Schluss, Auswahl-Einblendung ohne Frage, DDR nie genannt"
+ },
+ {
+  "id": 91,
+  "category": "storys",
+  "topic": "Die Flucht zweier Familien mit einem selbst genähten Heißluftballon aus der DDR – wahre Geschichte aus der Nacht zum 16. September 1979, spannend und der Reihe nach erzählt, je Abschnitt ein bis zwei kurze Sätze. Der erste Satz nennt die DDR, zum Beispiel: Acht Menschen fliehen im selbst genähten Heißluftballon aus der DDR. Dann: Zwei Familien aus Thüringen, vier Erwachsene und vier Kinder, wollen in den Westen. Heimlich kaufen sie über tausend Quadratmeter Stoff, immer nur kleine Mengen in vielen verschiedenen Geschäften, damit die Stasi nichts merkt. Zu Hause nähen sie die Stoffbahnen an einer alten Nähmaschine zusammen. Der Ballon wird rund achtundzwanzig Meter hoch. Die Gondel ist nur eine kleine Plattform aus Blech mit einer Wäscheleine als Geländer, in der Mitte stehen vier Gasflaschen. Mitten in der Nacht bauen sie den Ballon auf einer Waldlichtung auf, der Brenner faucht, die Hülle richtet sich auf. Acht Menschen drängen sich in der Gondel, dann hebt der Ballon ab. Er steigt auf rund zweitausend Meter Höhe, dort oben sind es minus acht Grad. Suchscheinwerfer der Grenze tasten den Himmel ab. Dann geht das Gas aus, die Flamme erlischt, der Ballon sinkt immer schneller. Nach achtundzwanzig Minuten Flug landen sie in einem Gebüsch. Sie wissen nicht, auf welcher Seite der Grenze sie sind, bis sie einen Streifenwagen der bayerischen Polizei sehen: Sie sind in Bayern, alle acht haben überlebt. Keine anderen Zahlen als diese, keine Uhrzeit (auch nicht in Einblendungen), keine Namen von Personen, Filmen oder Marken. Nicht Gefängnis, nicht Ausbruch, nicht freier Fall sagen. Der letzte Satz ist ein vollständiger Satz ohne Auslassungspunkte. Titel nennt DDR und Heißluftballon. Titelbild-Text: FLUCHT IM BALLON. Beschreibung: Zwei Familien nähen heimlich einen Heißluftballon und fliehen 1979 damit aus der DDR. Acht Menschen auf einer Plattform aus Blech, achtundzwanzig Minuten Flug. Hättest du dich in diese Gondel getraut?",
+  "status": "rendered",
+  "created": 1794673195.8074596,
+  "title": "Acht Menschen fliehen im Heißluftballon aus der DDR",
+  "description": "Zwei Familien nähen heimlich einen Heißluftballon und fliehen 1979 damit aus der DDR.\nAcht Menschen auf einer Plattform aus Blech, achtundzwanzig Minuten Flug.\nHättest du dich in diese Gondel getraut?",
+  "hashtags": [
+   "#shorts",
+   "#geschichte",
+   "#ddr",
+   "#flucht",
+   "#viral",
+   "#foryou",
+   "#wissen"
+  ],
+  "tags": [
+   "ddr flucht",
+   "heißluftballon",
+   "geschichte",
+   "wahre begebenheit",
+   "1979",
+   "thüringen",
+   "bayern",
+   "grenze"
+  ],
+  "thumb_text": "FLUCHT IM BALLON",
+  "missing": null,
+  "cover_ms": 71689,
+  "duration": 71.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
