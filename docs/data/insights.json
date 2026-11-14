@@ -1,36 +1,36 @@
 {
- "updated": 1794674623.4192734,
+ "updated": 1794675884.0328295,
  "enough": true,
  "counted": 11,
- "total": 12,
+ "total": 13,
  "needed": 6,
  "categories": [
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1574,
+   "avg_views": 1577,
    "avg_likes": 63.0,
-   "like_rate": 4.0,
-   "avg_score": 2519
+   "like_rate": 3.99,
+   "avg_score": 2522
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1609,
+   "avg_views": 1610,
    "avg_likes": 40.0,
-   "like_rate": 2.49,
-   "avg_score": 2214
+   "like_rate": 2.48,
+   "avg_score": 2215
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1017,
+   "avg_views": 1020,
    "avg_likes": 30.5,
-   "like_rate": 3.0,
-   "avg_score": 1490
+   "like_rate": 2.99,
+   "avg_score": 1492
   },
   {
    "slug": "comedy",
@@ -51,9 +51,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1574 Aufrufe, 4.0 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1577 Aufrufe, 3.99 % Likes).",
   "Schwächste Kategorie: 🤪 Comedy (Ø 743 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2311 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2312 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,51 +62,51 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2509,
+   "views": 2511,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3349
+   "score": 3351
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2083,
+   "views": 2085,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 2998
+   "score": 3000
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1840,
+   "views": 1841,
    "likes": 60,
    "comments": 0,
    "shares": 0,
-   "score": 2740
+   "score": 2741
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 1961,
+   "views": 1964,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2561
+   "score": 2564
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1574,
+   "views": 1577,
    "likes": 63,
    "comments": 0,
    "shares": 0,
-   "score": 2519
+   "score": 2522
   }
  ],
  "flop": [
