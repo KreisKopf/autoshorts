@@ -44,26 +44,72 @@ def _smooth(pts, n=6):
     return out
 
 
-def _hair_shape(d, pts, fill, shade, o, f, k, n=6, strands=0):
-    """Haarfläche: kräftiger Umriss, Füllung und – auf der lichtabgewandten Seite – eine dunklere Bahn; dazu ein paar Strähnen-Linien."""
-    sm = _smooth(pts, n)
-    d.polygon(sm, fill=INK)
-    cx = sum(x for x, _ in sm) / len(sm)
-    cy = sum(y for _, y in sm) / len(sm)
-    inset = []
-    for x, y in sm:                                       # Umriss nach innen versetzen (Abstand o)
-        dx, dy = x - cx, y - cy
-        ln = math.hypot(dx, dy) or 1.0
-        inset.append((x - dx / ln * o, y - dy / ln * o))
-    d.polygon(inset, fill=shade)
-    lit = [(x + 0.32 * (cx - x) * (1 if (x - cx) * f < 0 else 0) + 6 * k * f * 0, y) for x, y in inset]
-    d.polygon([(x if (x - cx) * f >= 0 else x + (cx - x) * 0.28, y) for x, y in lit], fill=fill)
-    for i in range(strands):                              # feine Strähnen in Fließrichtung
-        t = (i + 1) / (strands + 1)
-        x0 = min(x for x, _ in inset) + (max(x for x, _ in inset) - min(x for x, _ in inset)) * t
-        y0 = min(y for _, y in inset)
-        y1 = max(y for _, y in inset)
-        d.line((x0, y0 + (y1 - y0) * 0.45, x0 + 4 * k * f, y1 - (y1 - y0) * 0.08), fill=shade, width=max(2, int(3 * k)))
+def _ell(c, rx, ry, deg):
+    a = math.radians(deg)
+    return c[0] + math.cos(a) * rx, c[1] + math.sin(a) * ry
+
+
+def _back_hair(d, look, hc, rx, ry, hr, k, f, o, hair, hair_d, hair_l, pose):
+    """Hinteres Haar als eine weiche Fläche mit Umriss (keine Segmente). Liegt hinter dem Körper – der Hals bleibt frei."""
+    ow = max(2, int(o))
+    if look.hair in ("long", "bob"):
+        low = ry * (1.78 if look.hair == "long" else 1.0)
+        side = rx * (1.15 if look.hair == "long" else 1.17)
+        top = [_ell(hc, rx * 1.07, ry * 1.08, a) for a in range(190, 351, 20)]
+        right = [(hc[0] + side, hc[1] + ry * 0.25), (hc[0] + side * 1.03, hc[1] + low * 0.75), (hc[0] + side * 0.86, hc[1] + low)]
+        if look.hair == "long":                          # unten weich gewellt, Spitze in der Mitte
+            bottom = [(hc[0] + rx * 0.45, hc[1] + low * 0.97), (hc[0], hc[1] + low * 1.02), (hc[0] - rx * 0.45, hc[1] + low * 0.97)]
+        else:                                            # Bob: gerade Kante, nach innen geschwungen
+            bottom = [(hc[0] + rx * 0.4, hc[1] + low * 0.94), (hc[0] - rx * 0.4, hc[1] + low * 0.94)]
+        left = [(hc[0] - side * 0.86, hc[1] + low), (hc[0] - side * 1.03, hc[1] + low * 0.75), (hc[0] - side, hc[1] + ry * 0.25)]
+        pts = _smooth(top + right + bottom + left, 6)
+        back = _mix(hair, hair_d, 0.5)                    # hinteres Haar etwas dunkler als das Deckhaar, aber nicht schmutzig
+        d.polygon(pts, fill=back, outline=INK, width=ow)
+        # Glanzstreifen auf der Lichtseite – eine weiche Linie, kein Segment
+        gx = hc[0] + side * 0.82 * f
+        d.line((gx, hc[1] + ry * 0.35, gx + 3 * k * f, hc[1] + low * 0.78), fill=_mix(back, hair, 0.6), width=max(2, int(7 * k)))
+    elif look.hair == "ponytail":
+        sw = (pose.head + pose.lean) * 0.8
+        bx = hc[0] - rx * 0.92 * f
+        by = hc[1] - ry * 0.45
+        tip = (bx - 40 * k * f + sw * k, hc[1] + ry * 1.3)
+        pts = _smooth([(bx + 10 * k * f, by - 6 * k), (bx - 30 * k * f, by + 8 * k), (bx - 46 * k * f + sw * 0.5 * k, hc[1] + ry * 0.55),
+                       tip, (tip[0] + 20 * k * f, hc[1] + ry * 0.75), (bx + 6 * k * f, by + 34 * k)], 6)
+        d.polygon(pts, fill=hair, outline=INK, width=ow)
+        d.line((bx - 18 * k * f, by + 20 * k, tip[0] + 6 * k * f, tip[1] - 30 * k), fill=hair_d, width=max(2, int(5 * k)))
+        d.ellipse((bx - 13 * k, by - 4 * k, bx + 13 * k, by + 20 * k), fill=(230, 80, 120), outline=INK, width=max(2, int(o * 0.7)))
+    elif look.hair == "curly":                           # Lockenwolke hinter dem Kopf
+        lobes = []
+        for i in range(15):
+            a = -205 + i * 230 / 14
+            r0 = hr * (0.38 + 0.06 * (i % 3))
+            lobes.append((_ell(hc, rx * 1.02, ry * 1.0, a), r0))
+        for (bx, by), r0 in lobes:
+            d.ellipse((bx - r0 - o, by - r0 - o, bx + r0 + o, by + r0 + o), fill=INK)
+        for (bx, by), r0 in lobes:
+            d.ellipse((bx - r0, by - r0, bx + r0, by + r0), fill=hair_d if (bx - hc[0]) * f < 0 else hair)
+        for (bx, by), r0 in lobes[::2]:
+            d.arc((bx - r0 * 0.55, by - r0 * 0.55, bx + r0 * 0.55, by + r0 * 0.55), 200, 290, fill=hair_l, width=max(2, int(4 * k)))
+
+
+def _face_lock(d, hc, rx, ry, k, side, col, o, length=1.0):
+    """Strähne, die das Gesicht rahmt: Sichel entlang des Kopfrands von der Schläfe bis unters Kinn, spitz auslaufend."""
+    a0, a1 = -58, 78 + 14 * (length - 1)                  # Winkel auf der rechten Seite (0° = rechts, 90° = unten); oben deckt sie den Rand der Haarkappe
+    n = 14
+    outer, inner = [], []
+    for i in range(n + 1):
+        t = i / n
+        a = a0 + (a1 - a0) * t
+        thick = math.sin(math.pi * min(1.0, t * 1.15)) ** 0.8 * 0.2
+        ro = 1.06 + 0.08 * t * (length - 1) * 2
+        p_o = _ell(hc, rx * ro, ry * (ro + 0.04 * t), a)
+        p_i = _ell(hc, rx * (ro - thick), ry * (ro - thick * 0.8 + 0.04 * t), a)
+        outer.append(p_o)
+        inner.append(p_i)
+    pts = outer + inner[::-1]
+    if side < 0:
+        pts = [(2 * hc[0] - x, y) for x, y in pts]
+    d.polygon(pts, fill=col, outline=INK, width=max(2, int(o * 0.8)))
 
 
 @dataclass
@@ -244,6 +290,11 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         return p2
 
     shoe_col = _mix(shirt, (250, 250, 250), 0.12) if not mask else (60, 60, 70)
+    # Haar hinten (lang, Bob, Pferdeschwanz, Locken): VOR dem Körper gezeichnet, liegt also hinter Hals, Kapuze und Schultern
+    if not mask and look.hat not in ("helmet", "army") and look.hair in ("long", "bob", "ponytail", "curly"):
+        _hr = 80 * k
+        _hc = _pt(top, 180 - (pose.head * f + lean), _hr * 0.86)
+        _back_hair(d, look, _hc, _hr * 1.04, _hr * 0.96, _hr, k, f, o, hair, hair_d, hair_l, pose)
     # hinterer Arm, Beine
     sh_b = (shoulder[0] - 36 * k * f, shoulder[1] + 6 * k)      # hintere / vordere Schulter (leicht frontal gezeichnet)
     sh_f = (shoulder[0] + 36 * k * f, shoulder[1] + 6 * k)
@@ -284,45 +335,28 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     rx, ry = hr * 1.04, hr * 0.96
     hairy = not mask and look.hat not in ("helmet", "army")
     fem = look.fem and not mask
-    if hairy and look.hair in ("long", "bob"):           # Haar hinten: fließt weich bis über die Schultern (bob: bis zum Kinn), runde Spitzen
-        low = ry * (1.55 if look.hair == "long" else 0.92)
-        wid = rx * (1.16 if look.hair == "long" else 1.12)
-        cx, cy = hc[0] - 4 * k * f, hc[1]
-        pts = [(cx - rx * 0.9, cy - ry * 0.75), (cx, cy - ry * 1.08), (cx + rx * 0.9, cy - ry * 0.75), (cx + wid, cy + ry * 0.1),
-               (cx + wid * 1.04, cy + low * 0.72), (cx + wid * 0.88, cy + low), (cx + wid * 0.55, cy + low * 0.9),
-               (cx + wid * 0.2, cy + low * 1.02), (cx - wid * 0.2, cy + low * 0.92), (cx - wid * 0.55, cy + low * 1.03),
-               (cx - wid * 0.88, cy + low * 0.94), (cx - wid * 1.04, cy + low * 0.7), (cx - wid, cy + ry * 0.1)]
-        _hair_shape(d, pts, hair, hair_d, o, f, k, strands=4 if look.hair == "long" else 2)
-    if hairy and look.hair == "curly":                   # Locken: runde Wolke aus vielen Kringeln um den Kopf
-        for i in range(14):
-            a = math.radians(-200 + i * 220 / 13)
-            bx, by = hc[0] + math.cos(a) * rx * 1.05, hc[1] - ry * 0.05 + math.sin(a) * ry * 1.02
-            r0 = hr * (0.36 + 0.05 * (i % 3))
-            d.ellipse((bx - r0 - o, by - r0 - o, bx + r0 + o, by + r0 + o), fill=INK)
-        for i in range(14):
-            a = math.radians(-200 + i * 220 / 13)
-            bx, by = hc[0] + math.cos(a) * rx * 1.05, hc[1] - ry * 0.05 + math.sin(a) * ry * 1.02
-            r0 = hr * (0.36 + 0.05 * (i % 3))
-            d.ellipse((bx - r0, by - r0, bx + r0, by + r0), fill=hair_d if math.cos(a) * f < 0 else hair)
-            d.arc((bx - r0 * 0.6, by - r0 * 0.6, bx + r0 * 0.6, by + r0 * 0.6), 200, 290, fill=hair_l, width=max(2, int(4 * k)))
-    if hairy and look.hair == "ponytail":                # Pferdeschwanz hinten, schwingt mit dem Kopf
-        sw = (pose.head + pose.lean) * 0.8
-        bx = hc[0] - rx * 0.95 * f
-        tip = (bx - 46 * k * f + sw * k, hc[1] + ry * 1.25)
-        pts = [(bx + 6 * k * f, hc[1] - ry * 0.55), (bx - 34 * k * f, hc[1] - ry * 0.2), (tip[0] - 10 * k * f, hc[1] + ry * 0.55),
-               tip, (tip[0] + 22 * k * f, hc[1] + ry * 0.7), (bx + 4 * k * f, hc[1] + ry * 0.05)]
-        _hair_shape(d, pts, hair, hair_d, o, f, k)
-        d.ellipse((bx - 12 * k, hc[1] - ry * 0.52 - 10 * k, bx + 12 * k, hc[1] - ry * 0.52 + 14 * k), fill=look.hat_color if look.hat == "bow" else (230, 80, 120), outline=INK, width=max(2, int(o * 0.7)))
     if hairy and look.hair == "bun":
         _blob(d, (hc[0] - hr * 0.44 - 10 * k * f, hc[1] - ry * 1.62, hc[0] + hr * 0.44 - 10 * k * f, hc[1] - ry * 0.82), hair, o)
         d.arc((hc[0] - hr * 0.3 - 10 * k * f, hc[1] - ry * 1.5, hc[0] + hr * 0.3 - 10 * k * f, hc[1] - ry * 0.95), 200, 300, fill=hair_l, width=max(2, int(6 * k)))
-    if not mask:                                          # Ohr auf der abgewandten Seite
+    if not mask and not (fem and look.hair in ("long", "bob", "curly")):   # Ohr auf der abgewandten Seite (unter langem Haar verborgen)
         e0 = (hc[0] - rx * 0.93 * f, hc[1] + ry * 0.12)
         _blob(d, (e0[0] - 15 * k, e0[1] - 20 * k, e0[0] + 15 * k, e0[1] + 20 * k), skin_d, o * 0.8)
     d.ellipse((hc[0] - rx - o, hc[1] - ry - o, hc[0] + rx + o, hc[1] + ry + o), fill=INK)
     d.ellipse((hc[0] - rx, hc[1] - ry, hc[0] + rx, hc[1] + ry), fill=skin_d)
     d.ellipse((hc[0] - rx + (12 * k if f > 0 else 0), hc[1] - ry, hc[0] + rx - (12 * k if f < 0 else 0), hc[1] + ry - 5 * k), fill=skin)
-    if hairy:                                             # Deckhaar mit Pony und Glanz
+    if hairy and look.hair == "curly":                    # Locken auch vorn: Kringel entlang des Haaransatzes statt glatter Kappe
+        for i in range(9):
+            a = -172 + i * 164 / 8
+            bx, by = _ell(hc, rx * 0.86, ry * 0.86, a)
+            r0 = hr * (0.27 + 0.04 * (i % 2))
+            d.ellipse((bx - r0 - o * 0.8, by - r0 - o * 0.8, bx + r0 + o * 0.8, by + r0 + o * 0.8), fill=INK)
+        for i in range(9):
+            a = -172 + i * 164 / 8
+            bx, by = _ell(hc, rx * 0.86, ry * 0.86, a)
+            r0 = hr * (0.27 + 0.04 * (i % 2))
+            d.ellipse((bx - r0, by - r0, bx + r0, by + r0), fill=hair)
+            d.arc((bx - r0 * 0.5, by - r0 * 0.5, bx + r0 * 0.5, by + r0 * 0.5), 200, 290, fill=hair_l, width=max(2, int(4 * k)))
+    elif hairy:                                           # Deckhaar mit Pony und Glanz
         hb = (hc[0] - rx - 4 * k, hc[1] - ry - 10 * k, hc[0] + rx + 4 * k, hc[1] + 10 * k)
         d.chord((hb[0] - o * 0.7, hb[1] - o * 0.7, hb[2] + o * 0.7, hb[3] + o * 0.7), 180, 360, fill=INK)
         top_y = (hb[1] + hb[3]) / 2 - 2 * k
@@ -337,13 +371,9 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         d.polygon(pts, fill=INK)                           # Pony: schräg gekämmte Strähnen mit Umriss
         d.polygon([(x, y - (o * 0.9 if 0 < i < len(pts) - 1 else 0)) for i, (x, y) in enumerate(pts)], fill=hair)
         d.chord(hb, 180, 360, fill=hair)
-        if fem and look.hair in ("long", "bob"):           # Strähnen rahmen das Gesicht: schmal, liegen am Wangenrand an
-            for sgn in (-1, 1):
-                x0 = hc[0] + sgn * rx * 0.99
-                ln = ry * (1.0 if look.hair == "long" else 0.72)
-                lock = [(x0 + sgn * 6 * k, hc[1] - ry * 0.4), (x0 + sgn * 8 * k, hc[1] + ln * 0.5), (x0 + sgn * 2 * k, hc[1] + ln),
-                        (x0 - sgn * 12 * k, hc[1] + ln * 0.62), (x0 - sgn * 14 * k, hc[1] - ry * 0.05)]
-                _hair_shape(d, lock, hair, hair_d if sgn != f else hair, o * 0.8, f, k, 5)
+        if fem and look.hair in ("long", "bob"):           # Strähnen rahmen das Gesicht: schmal, schmiegen sich an den Kopf, laufen spitz aus
+            for side in (-1, 1):
+                _face_lock(d, hc, rx, ry, k, side, hair if side == f else hair_d, o, 1.12 if look.hair == "long" else 1.0)
         d.arc((hc[0] - rx * 0.6 + 18 * k * f, hc[1] - ry * 0.96, hc[0] + rx * 0.6 + 18 * k * f, hc[1] - ry * 0.2), 208, 300, fill=hair_l, width=max(2, int(9 * k)))
     u = k * 0.84
     # Gesicht (leicht in Blickrichtung versetzt)
