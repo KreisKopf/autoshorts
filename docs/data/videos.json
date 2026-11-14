@@ -3163,5 +3163,44 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 92,
+  "category": "storys",
+  "topic": "Die Flucht zweier Familien mit einem selbst genähten Heißluftballon aus der DDR – wahre Geschichte, in eigenen Worten spannend erzählt: etwa zwanzig kurze Sätze, höchstens zwölf Wörter je Satz, jeder Satz ein neues Bild. Der erste Satz nennt die DDR und den Heißluftballon. Der zweite Satz ist der Cliffhanger: Kurz vor dem Ziel geht das Gas aus. Danach der Reihe nach diese geprüften Fakten (nicht wörtlich abschreiben): September 1979; zwei Familien aus Thüringen, vier Erwachsene und vier Kinder, wollen in den Westen; sie kaufen heimlich über tausend Quadratmeter Stoff, immer nur kleine Mengen in vielen Geschäften, damit die Stasi nichts merkt; zu Hause nähen sie die Stoffbahnen an einer alten Nähmaschine zusammen; der Ballon ist rund achtundzwanzig Meter hoch; die Gondel ist nur eine Plattform aus Blech mit einer Wäscheleine als Geländer, in der Mitte vier Gasflaschen; nachts bauen sie den Ballon auf einer Waldlichtung auf, der Brenner faucht, die Hülle richtet sich auf; acht Menschen drängen sich in der Gondel, der Ballon hebt ab; er steigt auf rund zweitausend Meter Höhe, dort sind es minus acht Grad; Suchscheinwerfer der Grenze tasten den Himmel ab; das Gas geht aus, die Flamme erlischt, der Ballon sinkt immer schneller; nach achtundzwanzig Minuten Flug landen sie in einem Gebüsch; sie wissen nicht, auf welcher Seite der Grenze sie sind; dann sehen sie einen Streifenwagen der bayerischen Polizei; sie sind in Bayern, alle acht haben überlebt. Keine anderen Zahlen, keine Uhrzeit (auch nicht in Einblendungen), keine Namen von Personen, Filmen oder Marken. Nicht Gefängnis, nicht Ausbruch, nicht freier Fall sagen. Der letzte Satz ist ein vollständiger neuer Satz, er wiederholt nicht den ersten. Titel nennt DDR und Heißluftballon. Titelbild-Text: FLUCHT IM BALLON. Beschreibung: Zwei Familien nähen heimlich einen Heißluftballon und fliehen 1979 damit aus der DDR. Acht Menschen auf einer Plattform aus Blech, achtundzwanzig Minuten Flug. Hättest du dich in diese Gondel getraut?",
+  "status": "rendered",
+  "created": 1794674810.7347088,
+  "title": "Mit dem Heißluftballon aus der DDR",
+  "description": "Zwei Familien nähen heimlich einen Heißluftballon und fliehen 1979 damit aus der DDR.\nAcht Menschen auf einer Plattform aus Blech, achtundzwanzig Minuten Flug.\nHättest du dich in diese Gondel getraut?",
+  "hashtags": [
+   "#shorts",
+   "#geschichte",
+   "#ddr",
+   "#flucht",
+   "#history",
+   "#wissen",
+   "#viral"
+  ],
+  "tags": [
+   "ddr geschichte",
+   "heißluftballon flucht",
+   "wahre geschichte",
+   "1979",
+   "flucht aus der ddr",
+   "grenze",
+   "bayern"
+  ],
+  "thumb_text": "FLUCHT IM BALLON",
+  "missing": null,
+  "cover_ms": 79799,
+  "duration": 79.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
