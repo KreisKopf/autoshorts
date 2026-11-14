@@ -3083,5 +3083,44 @@
   "slot": "2026-11-14 18:00",
   "review_at": 1794669516.119308,
   "error": "Bei der Prüfung verworfen: Kein Ballon im Bild: Einkaufsbeutel schwebt statt Heißluftballon, Figur schwebt auf der Wiese, Seilbahn-Gondel im Keller, Zeile FALL 15 M/S bis zum Schluss"
+ },
+ {
+  "id": 90,
+  "category": "storys",
+  "topic": "Die Flucht zweier Familien mit einem selbst genähten Heißluftballon aus der DDR – wahre Geschichte aus der Nacht zum 16. September 1979, spannend und der Reihe nach erzählt, je Abschnitt ein bis zwei kurze Sätze: Zwei Familien aus Thüringen, vier Erwachsene und vier Kinder, wollen in den Westen. Heimlich kaufen sie über tausend Quadratmeter Stoff, immer nur kleine Mengen in vielen verschiedenen Geschäften, damit die Stasi nichts merkt. Zu Hause nähen sie die Stoffbahnen an einer alten Nähmaschine zusammen. Der Ballon wird rund achtundzwanzig Meter hoch. Die Gondel ist nur eine kleine Plattform aus Blech mit einer Wäscheleine als Geländer, in der Mitte stehen vier Gasflaschen. Mitten in der Nacht bauen sie den Ballon auf einer Waldlichtung auf, der Brenner faucht, die Hülle richtet sich auf. Acht Menschen drängen sich in der Gondel, dann hebt der Ballon ab. Er steigt auf rund zweitausend Meter Höhe, dort oben sind es minus acht Grad. Suchscheinwerfer der Grenze tasten den Himmel ab. Dann geht das Gas aus, die Flamme erlischt, der Ballon sinkt immer schneller. Nach achtundzwanzig Minuten Flug landen sie in einem Gebüsch. Sie wissen nicht, auf welcher Seite der Grenze sie sind, bis sie einen Streifenwagen der bayerischen Polizei sehen: Sie sind in Bayern, alle acht haben überlebt. Keine anderen Zahlen als diese, keine Uhrzeit, keine Namen von Personen, Orten, Filmen oder Marken. Nicht Gefängnis, nicht Ausbruch, nicht freier Fall sagen. Der letzte Satz ist ein vollständiger Satz ohne Auslassungspunkte. Titel nennt den Heißluftballon. Titelbild-Text: FLUCHT IM BALLON. Beschreibung endet mit der Frage: Hättest du dich in diese Gondel getraut?",
+  "status": "rendered",
+  "created": 1794671450.5176482,
+  "title": "Mit dem Heißluftballon über die Grenze: Die spektakulärste Flucht",
+  "description": "Zwei Familien bauten heimlich einen Ballon für die Flucht\nMit Nähmaschine und Tausend Metern Stoff überflogen sie mitten in der Nacht die Grenze.\nHättest du dich in diese Gondel getraut?",
+  "hashtags": [
+   "#shorts",
+   "#geschichte",
+   "#flucht",
+   "#ballon",
+   "#wahrheit",
+   "#spannung",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "heißluftballon flucht",
+   "ddr flucht",
+   "wahre geschichte",
+   "ballonflucht 1979",
+   "spannende storys",
+   "geschichte ddr"
+  ],
+  "thumb_text": "FLUCHT IM BALLON",
+  "missing": null,
+  "cover_ms": 70210,
+  "duration": 70.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

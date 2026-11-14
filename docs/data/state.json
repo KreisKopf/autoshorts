@@ -1,5 +1,5 @@
 {
- "last_category": "mysterien",
+ "last_category": "storys",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -21,20 +21,20 @@
   "qqprosnb9"
  ],
  "last_stats": 1794670481.9579926,
- "next_id": 90,
+ "next_id": 91,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.584,
+ "voice_wps": 2.647,
  "last_trends": 1794662932.2956057,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
-  "palette": 1,
-  "video": 89
+  "palette": 2,
+  "video": 90
  },
  "cat_credit": {
   "fakten": 1.54,

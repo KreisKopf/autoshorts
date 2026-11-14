@@ -1,0 +1,539 @@
+{
+ "title": "Mit dem Heißluftballon über die Grenze: Die spektakulärste Flucht",
+ "scenes": [
+  {
+   "text": "Acht Menschen fliehen im selbst genähten Heißluftballon.",
+   "see": "Ein riesiger selbst genähter Ballon schwebt nachts im Dunkeln.",
+   "place": "highsky",
+   "time": "night",
+   "props": [
+    {
+     "type": "searchlight",
+     "pos": 540
+    },
+    {
+     "type": "balloon",
+     "pos": 540
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "GEHEIME MISSION"
+   },
+   "hud": "SEPTEMBER 1979"
+  },
+  {
+   "text": "Und erst kurz vor dem Ziel geht plötzlich das Gas aus.",
+   "see": "Eine Grafik zeigt die gewaltige Zahl von tausend Quadratmetern.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "frau1",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Vier Erwachsene und vier Kinder wollen unbedingt in den Westen.",
+   "see": "Eine Frau kauft vorsichtig einen einzelnen Ballen Stoff.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "stoffballen"
+    }
+   ],
+   "actors": [
+    {
+     "id": "frau1",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "bag",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Heimlich kaufen sie über tausend Quadratmeter bunten Stoff ein.",
+   "see": "Ein Mann kauft in einem anderen Geschäft einen weiteren Stoffballen.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "stoffballen"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mann1",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "bag",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense"
+  },
+  {
+   "text": "Immer nur kleine Mengen in vielen verschiedenen Geschäften verteilt.",
+   "see": "Ein Schild zeigt die Taktik der vielen kleinen Einkäufe.",
+   "place": "supermarket",
+   "time": "day",
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "TARNUNG"
+   }
+  },
+  {
+   "text": "Kein einziger Nachbar oder Beamter darf Verdacht schöpfen.",
+   "see": "Der Notizzettel erklärt den Grund für die Heimlichkeit.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mann1",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "note",
+    "title": "STASI",
+    "text": "Nichts Auffälliges kaufen"
+   }
+  },
+  {
+   "text": "Zu Hause nähen sie die langen Bahnen mühsam zusammen.",
+   "see": "Zu Hause näht die Frau an einer Nähmaschine die Bahnen zusammen.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "sewing",
+     "pos": 600
+    }
+   ],
+   "actors": [
+    {
+     "id": "frau1",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 250
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Am Ende wird die riesige Hülle achtundzwanzig Meter hoch.",
+   "see": "Grafik zeigt die fertige Höhe des gewaltigen Ballons.",
+   "place": "livingroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "frau1",
+     "action": "point",
+     "pos": 170,
+     "to": "",
+     "emotion": "worried",
+     "hold": "",
+     "facing": "right"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "BALLONHÖHE",
+    "value": "28 m",
+    "label": "GESAMTLÄNGE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Die Gondel besteht nur aus einer kleinen Plattform aus Blech.",
+   "see": "Die metallene Plattform mit der Wäscheleine als Geländer nah im Bild.",
+   "place": "highsky",
+   "time": "night",
+   "props": [
+    {
+     "type": "gondola",
+     "pos": 540
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "NUR BLECH"
+   }
+  },
+  {
+   "text": "Als Geländer dient eine Wäscheleine, mittig stehen vier Gasflaschen.",
+   "see": "Vier schwere Gasflaschen stehen in der Mitte der Konstruktion.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon_fill",
+     "pos": 660
+    }
+   ],
+   "actors": [
+    {
+     "id": "mann1",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 170,
+     "to": ""
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Mitten in der Nacht bauen sie alles im Wald auf.",
+   "see": "Nachts auf einer Lichtung richtet sich der Ballon langsam auf.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon"
+    },
+    {
+     "type": "fire"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "STARTPLATZ"
+   },
+   "hud": "02:00 UHR · WALD"
+  },
+  {
+   "text": "Der Brenner faucht wild und die Hülle richtet sich auf.",
+   "see": "Der Brenner faucht laut und füllt die Stoffhülle mit heißer Luft.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon_fill",
+     "pos": 660
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Acht Menschen drängen sich eng zusammen und heben ab.",
+   "see": "Acht Menschen drängen sich dicht aneinander in der winzigen Gondel.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon",
+     "pos": 540
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 8,
+    "unit": "MENSCHEN"
+   }
+  },
+  {
+   "text": "Er steigt schnell auf rund zweitausend Meter Höhe.",
+   "see": "Der Ballon steigt in den dunklen Himmel auf.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": [
+     "mountains"
+    ]
+   },
+   "time": "night",
+   "weather": "wind",
+   "props": [
+    {
+     "type": "balloon"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "02:00 UHR · WALD",
+    "value": "2000",
+    "label": "METER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dort oben herrschen eisige minus acht Grad Temperatur.",
+   "see": "Das Thermometer fällt tief unter den Gefrierpunkt.",
+   "place": "highsky",
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon",
+     "pos": 610
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "thermo",
+    "value": -8.0
+   }
+  },
+  {
+   "text": "Am Boden tasten riesige Suchscheinwerfer vorsichtig den Himmel ab.",
+   "see": "Suchscheinwerfer kreuzen sich am Nachthimmel.",
+   "place": "highsky",
+   "time": "night",
+   "props": [
+    {
+     "type": "searchlight",
+     "pos": 540
+    },
+    {
+     "type": "balloon",
+     "pos": 540
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Plötzlich geht das Gas aus und die Flamme erlischt.",
+   "see": "Der Brenner erlischt plötzlich, dunkler Rauch steigt auf.",
+   "place": "highsky",
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon_dark",
+     "pos": 470
+    }
+   ],
+   "mood": "tense",
+   "status": "GAS: LEER"
+  },
+  {
+   "text": "Der Ballon sinkt nach achtundzwanzig Minuten Flug rapide ab.",
+   "see": "Ein Timer zählt achtundzwanzig Minuten Flugzeit herunter.",
+   "place": "highsky",
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon_out",
+     "pos": 610
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 28,
+    "unit": "MINUTEN"
+   }
+  },
+  {
+   "text": "Sie landen unsanft mitten in einem dichten Gebüsch.",
+   "see": "Der Ballon krallt sich in dichtem Gebüsch am Boden fest.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "balloon_down",
+     "pos": 650
+    }
+   ],
+   "actors": [
+    {
+     "id": "mann1",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 170,
+     "to": ""
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Sie sehen einen Streifenwagen und wissen, sie sind gerettet.",
+   "see": "Ein Polizeiauto fährt langsam heran und erhellt die Szene.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "police"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mann1",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "frau1",
+     "speaks": false,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Sie haben es geschafft und sind endlich in Sicherheit.",
+   "see": "Die beiden Hauptfiguren stehen glücklich vor dem Schild der Polizeistation.",
+   "place": "village",
+   "backdrop": {
+    "sky": "night",
+    "ground": "road",
+    "elements": [
+     "village"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "mann1",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "frau1",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Freiheit",
+    "b": "Sicherheit"
+   }
+  }
+ ]
+}
