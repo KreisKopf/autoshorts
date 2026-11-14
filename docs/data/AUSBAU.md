@@ -101,10 +101,16 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   `B_DOWN_RE`): Flug-Sätze spielen ohne Figuren vor dem hohen Himmel (Suchscheinwerfer, Gas aus, Absturz je ein eigenes Bild), der erste Satz zeigt
   den Ballon im Scheinwerferlicht, am Boden steht die Wiese ohne Bäume und Windräder davor. Einblendungen stehen über dem Ballon (`_ov_low` 3),
   nachts leuchtet er im eigenen Schein (`GLOWS`, `_light`). Selbsttest: `_balloon`.
+  Vorgriff am Anfang („kurz vor dem Ziel geht das Gas aus“) zeigt den dunklen Ballon, ohne dass die Geschichte schon fliegt; nach der Gondel ganz nah
+  zeigt der Folgesatz (Geländer, Wäscheleine, Gasflaschen) die leere Gondel `gondola_empty` auf der Wiese; „bauen … auf“ zeigt den Stoffberg auch
+  ohne das Wort Ballon; ein Ballon aus dem Drehbuch in einem Satz, der nicht vom Ballon handelt, entfällt; Zähler werden über dem Ballon zum Schild.
+  Nähmaschine: Figur steht daneben, kein Schnitt auf die Maschine allein (`_no_cut`).
 - Familie im Bild (`stage._family`, `FAMILY_RE`): Spricht der Satz von Familien, Frauen und Kindern, stehen neben der Hauptfigur eine Frau und ein
   Kind (Nebenfiguren dürfen über `look` jetzt auch `size`, `gender`, `hair_color` mitbringen).
 - Ecken-Zeilen (`render.build_ass`): Die Zeile oben links wird am Wortende gekürzt; bleibt sie das ganze Video gleich, entfällt eine Uhrzeit darin.
   Eine einzelne Zustands-Angabe oben rechts gilt nur zwei Sätze weiter; nennt sie eine Zahl, die niemand sagt, entfällt sie.
+  Eine Uhrzeit in der Ecken-Zeile oder über einer Zahl-Grafik, die der Satz nicht nennt, entfällt (`stage.direct`, Anfang); eine Orts-Angabe je Szene
+  („WALD“) gilt nur zwei Sätze weiter und ist keine Überschrift für eine Zahl. Auswahl-Einblendung (`choice`) nur an einer Frage oder einem „oder“.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

@@ -125,12 +125,14 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
     if hud and len(huds) < 2:
         hud = re.sub(r"\s*[·|,–-]\s*\d{1,2}[:.]\d{2}(?:\s*UHR?\w*)?\s*$", "", str(hud), flags=re.I).strip() or None   # eine Uhrzeit, die 80 Sekunden lang stehen bleibt, stimmt für fast keine Szene – das Datum bleibt
     if hud:
-        cur_hud = hud
-        for sc, (s, e) in zip(scenes, times):
+        cur_hud, hud_i = hud, -9
+        for n_h, (sc, (s, e)) in enumerate(zip(scenes, times)):
+            if isinstance(sc.get("hud"), str) and sc.get("hud").strip():
+                cur_hud, hud_i = sc.get("hud"), n_h   # gilt weiter, bis eine neue Angabe kommt –
+            elif n_h - hud_i > 2 and not any(isinstance(x.get("hud"), str) and x.get("hud").strip() for x in scenes[n_h:]):
+                cur_hud = hud                  # – aber nicht bis zum Schluss: „WALD“ steht sonst noch über dem Dorf am Ende
             if str(sc.get("shot") or "") == "graphic":
-                cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud
                 continue                       # über einer Grafik (Karten-Titel, Zahl mit Überschrift) stünde die Zeile im Weg
-            cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud   # gilt weiter, bis eine neue Angabe kommt
             lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()
             if len(lab) > 30:                  # zu lang: am Wortende kürzen, nicht mitten im Wort („2:00 UH“)
                 lab = lab[:31].rsplit(" ", 1)[0].rstrip(" ·|,–-:")

@@ -512,7 +512,7 @@ def _light_kind(place, night, mood, xs):
     return "floor"
 
 
-GLOWS = {"balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
+GLOWS = {"gondola_empty": (0, places.GROUND - 300, 460), "balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
          "balloon_ground": (-80, places.GROUND - 130, 420), "balloon_down": (-60, places.GROUND - 150, 420)}   # leuchtet nachts selbst (Brenner) bzw. steht im Blick
 
 
@@ -918,6 +918,8 @@ def auto_graphic(text, hud=""):
     raw = str(text or "").strip()
     low = raw.lower()
     kick = str(hud or "")[:36]
+    if not _re.search(r"\d|\bTAG\b|\bJAHR", kick.upper()):
+        kick = ""                                         # ein bloßer Ort („WALD“) ist keine Überschrift für eine Zahl
     if "?" in raw and _re.search(r"\b(warum|wieso|weshalb)\b", low):
         return {"type": "question", "text": _re.search(r"\b(warum|wieso|weshalb)\b", low).group(1).upper() + "?"}
     if _re.search(r"ganz europa|in europa|europaweit|europäisch|\beu\b|eu-staaten|quer durch europa", low):
@@ -1061,6 +1063,17 @@ def direct(scenes, times, topic="", style="", look=""):
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
     prev_place, same, changes, prev_bd = None, 0, 0, None
     import re as _re0
+    _clock = r"\d{1,2}[:.]\d{2}(?:\s*UHR)?|\d{1,2}\s*UHR"
+    for sc in scenes:                                     # erfundene Uhrzeit („02:00 UHR · WALD“) in der Ecke oder über einer Zahl: sagt der Satz keine Uhrzeit, entfällt sie
+        if not isinstance(sc, dict) or _re0.search(r"\buhr\b", str(sc.get("text") or "").lower()):
+            continue
+        for box, key in ((sc, "hud"), (sc.get("graphic") if isinstance(sc.get("graphic"), dict) else {}, "kicker")):
+            if isinstance(box.get(key), str) and _re0.search(_clock, box[key].upper()):
+                parts = [x.strip() for x in _re0.split(r"\s*[·|•]\s*|\s+[–-]\s+", box[key]) if x.strip() and not _re0.fullmatch(_clock, x.strip().upper())]
+                box[key] = " · ".join(parts) if key == "hud" else ""
+        ov_c = sc.get("overlay")
+        if isinstance(ov_c, dict) and str(ov_c.get("type") or "") == "choice" and "?" not in str(sc.get("text") or "") and not _re0.search(r"\boder\b", str(sc.get("text") or "").lower()):
+            sc["overlay"] = None                          # Auswahl „A/B“ an einem Satz, der gar keine Frage stellt
     power_out = False
     last_id = None
     maps_used = 0
@@ -1846,9 +1859,11 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["props"] = [dict(q, pos=600) for q in sc["props"] if isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) == "sewing"]
                 hs_n = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
                 if 1 <= len(hs_n) <= 2 and not any(a.get("to") for a in hs_n):
-                    hs_n[0].update(pos=250, facing="right")
+                    hs_n[0].update(pos=330, facing="right", action="talk" if str(hs_n[0].get("action") or "") in ("sit", "sleep", "fall", "float", "walk", "run") else hs_n[0].get("action") or "idle")
                     for a in hs_n[1:]:
-                        a.update(pos=950, facing="left")
+                        a.update(pos=960, facing="left")
+                sc["props"] = [dict(q, pos=650) for q in sc["props"]]
+                sc["_no_cut"] = True                       # kein harter Schnitt auf die Maschine allein vor leerem Grund: die Figur näht
                 if sc.get("shot") in ("close", "event"):
                     sc["shot"] = ""
     _cold_open(scenes)
@@ -2103,7 +2118,7 @@ def _carry_thing(scenes, main_id=None):
             sc["actors"] = [{"id": main_id, "action": "shocked", "emotion": "shocked", "emote": "!", "pos": "left", "speaks": False}]
 
 
-FAMILY_RE = (r"\bfamilien?\b|frauen und (?:\w+ ){0,2}kinder|(?:ehe)?frau(?:en)? und (?:\w+ ){0,2}kind|mit (?:ihren|seinen|den|ihrer|seiner|deinen|deiner) (?:\w+ ){0,3}kindern|eltern und (?:\w+ ){0,2}kinder|"
+FAMILY_RE = (r"\bfamilien?\b|frauen und (?:\w+ ){0,2}kinder|erwachsene und (?:\w+ ){0,2}kinder|(?:ehe)?frau(?:en)? und (?:\w+ ){0,2}kind|mit (?:ihren|seinen|den|ihrer|seiner|deinen|deiner) (?:\w+ ){0,3}kindern|eltern und (?:\w+ ){0,2}kinder|"
              r"\bmutter\b.{0,40}\bkind|\bkinder\b.{0,40}\b(?:mutter|eltern|ehefrau)")
 FAMILY_LOOKS = ({"shirt": "lila", "hair": "long", "hair_color": "braun", "gender": "w"}, {"shirt": "gelb", "hair": "bob", "hair_color": "blond", "size": 0.62, "gender": "w"},
                 {"shirt": "grün", "hat": "cap", "size": 0.6})
@@ -2117,13 +2132,17 @@ def _family(scenes, main_id="du"):
         if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert", "event") or sc.get("_balloon") or sc.get("_sea") or sc.get("float"):
             continue
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
-        if not acts or len(acts) > 2 or any(a.get("kind") or a.get("to") for a in acts) or not _re.search(FAMILY_RE, str(sc.get("text") or "").lower()):
+        if not acts or len(acts) > 2 or any(a.get("kind") for a in acts) or not _re.search(FAMILY_RE, str(sc.get("text") or "").lower()):
             continue
         if places.resolve(backdrop(sc)) in MAPS + ("space", "underwater", "cave", "highsky"):
             continue
+        if places.resolve(backdrop(sc)) in ("supermarket", "supermarket_empty", "office", "serverroom", "lab") and not _re.search(r"kauf|laden|geschäft|supermarkt|büro|labor", str(sc.get("text") or "").lower()):
+            sc["place"] = "livingroom"                                    # die Familie ist zu Hause, nicht zwischen Regalen
+            sc.pop("backdrop", None)
+            sc["props"] = []
         lead = acts[0]
         emo = lead.get("emotion") or ""
-        lead.update(pos=230, hold="" if str(lead.get("hold") or "").startswith("prop:") else lead.get("hold") or "")
+        lead.update(pos=230, to="", hold="" if str(lead.get("hold") or "").startswith("prop:") else lead.get("hold") or "")
         if str(lead.get("action") or "") in ("sit", "sleep", "fall", "float", "run", "walk"):
             lead["action"] = "talk"
         sc["actors"] = [lead, {"id": "_frau", "action": "idle", "emotion": emo, "pos": 560, "speaks": False, "look": dict(FAMILY_LOOKS[0])},
@@ -2219,9 +2238,18 @@ def _balloon_story(scenes, topic=""):
             stage_it(sc, kind, "ground" if first and not _re.search(B_LIGHT_RE, low) else "highsky", props)
             last_kind = kind
             continue
-        if _re.search(r"\bgondel|ballonkorb|\bplattform", low):                       # die winzige Gondel ganz nah – mit allen, die hineinmüssen
-            stage_it(sc, "gondola", "highsky", [{"type": "gondola", "pos": 540}])
-            prev_ground, last_kind = True, "gondola"
+        indoor = bool(_re.search(B_INDOOR_RE, low))
+        if not indoor and (_re.search(B_GAS_RE, low) and _re.search(r"\bgas\b|flamme|brenner", low) or (word and _re.search(B_FALL_RE, low))):
+            fall_t = bool(_re.search(B_FALL_RE, low))                     # Vorgriff („kurz vor dem Ziel geht das Gas aus“): das Bild dazu, die Geschichte läuft am Boden weiter
+            stage_it(sc, "fall" if fall_t else "dark", "highsky", [{"type": "balloon_out" if fall_t else "balloon_dark", "pos": 540}])
+            prev_ground, last_kind = False, sc["_balloon"]
+            continue
+        if _re.search(r"\bgondel|ballonkorb|\bplattform|wäscheleine|geländer", low):  # die winzige Gondel ganz nah – mit allen, die hineinmüssen;
+            if last_kind == "gondola":                                    # im Folgesatz steht sie leer auf der Wiese: Geländer und Gasflaschen sind zu sehen
+                stage_it(sc, "basket", "ground", [{"type": "gondola_empty", "pos": 540}])
+            else:
+                stage_it(sc, "gondola", "highsky", [{"type": "gondola", "pos": 540}])
+            prev_ground, last_kind = True, sc["_balloon"]
             continue
         if word and down and not _re.search(B_INDOOR_RE, low):          # ein Versuch endet am Boden, ohne dass der Flug erzählt wurde
             for a in humans[:1]:
@@ -2230,13 +2258,24 @@ def _balloon_story(scenes, topic=""):
             prev_ground, last_kind = False, "down"
             continue
         fill = _re.search(B_FILL_RE, low) or (word and _re.search(r"meter (?:hoch|breit|groß)|riesig|gigantisch|gewaltig|so (?:hoch|groß) wie|kubikmeter|fertig|steht", low))
-        if (word and (fill or _re.search(B_SETUP_RE, low) or not _re.search(B_INDOOR_RE, low))) or (prev_ground and fill and not _re.search(B_INDOOR_RE, low)):
+        setup = not indoor and _re.search(r"bau\w* (?:\w+ ){0,8}auf\b|aufbau|aufgebaut|startplatz|breiten (?:\w+ ){0,6}aus\b|ausgebreitet", low)
+        if (word and (fill or _re.search(B_SETUP_RE, low) or not indoor)) or (prev_ground and fill and not indoor) or setup:
             for j, a in enumerate(humans[:1]):
                 a.update(action="point" if fill else "look_around", emotion=a.get("emotion") or "worried", pos=170, to="", hold="", facing="right")
             stage_it(sc, "fill" if fill else "ground", "ground", [{"type": "balloon_fill", "pos": 660}] if fill else [{"type": "balloon_ground", "pos": 640}], humans[:1])
             prev_ground, last_kind = True, sc["_balloon"]
             continue
         prev_ground = False
+        if sc.get("shot") != "graphic":                                   # ein Ballon aus dem Drehbuch in einem Satz, der nicht vom Ballon handelt (im Wohnzimmer, im Laden): raus
+            kept = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in extras.BALLOON_KINDS)]
+            if len(kept) != len(sc.get("props") or []):
+                sc["props"] = kept
+    for sc in scenes:                                                     # Zähler liefe groß quer über den Ballon: als Schild darüber
+        ov_b = sc.get("overlay") if isinstance(sc, dict) and sc.get("_balloon") else None
+        if isinstance(ov_b, dict) and str(ov_b.get("type") or "") == "counter" and sc.get("shot") != "graphic":
+            val_b = ov_b.get("value")
+            val_b = int(val_b) if isinstance(val_b, float) and val_b == int(val_b) else val_b
+            sc["overlay"] = {"type": "card", "text": f"{val_b} {str(ov_b.get('unit') or ov_b.get('label') or '').strip()}".strip().upper()}
     first_sc = scenes[0] if scenes and isinstance(scenes[0], dict) else None
     if first_sc is not None and len(scenes) >= 4 and first_sc.get("_balloon") not in ("fly", "light", "dark", "fall") and first_sc.get("shot") != "graphic":
         src = next((sc for sc in scenes if isinstance(sc, dict) and sc.get("_balloon") == "light"), None) or \
@@ -2837,7 +2876,7 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
     („insert“) oder auf die Großaufnahme der Hauptfigur bzw. des Tiers („close“). Jede dritte Szene bleibt ruhig ohne Schnitt.
     Gibt (Schnittzeit oder None, Art, Gegenstände) zurück und schaltet den Kamerasprung ab, wenn geschnitten wird."""
     if special or shot or moving or ov_tall or scene.get("float") or dur < CUT_MIN or place in MAPS or index % 3 == 2 \
-            or str(scene.get("shot") or "") in ("event", "insert", "graphic", "close") or scene.get("_balloon"):
+            or str(scene.get("shot") or "") in ("event", "insert", "graphic", "close") or scene.get("_balloon") or scene.get("_no_cut"):
         return None, "", []
     low = str(scene.get("text") or "").lower()
     named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL

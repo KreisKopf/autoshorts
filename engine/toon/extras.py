@@ -892,7 +892,7 @@ def _basket(d, tr, cx, gy, R, t, people=8, flame=1.0, mouth_y=None):
     def quad(x0, y0, x1, y1, col, o=lw):
         d.polygon([tr(x0, y0), tr(x1, y0), tr(x1, y1), tr(x0, y1)], fill=col, outline=INK, width=o)
 
-    for bx in (-0.09, 0.09):                                                          # Gasflaschen und Brennerrohr
+    for bx in ((-0.09, 0.09) if people else (-0.24, -0.09, 0.09, 0.24)):              # Gasflaschen (leer sieht man alle vier) und Brennerrohr
         quad(cx + (bx - 0.065) * R, gy + 0.08 * R, cx + (bx + 0.065) * R, py, (150, 160, 176))
         quad(cx + (bx - 0.03) * R, gy + 0.03 * R, cx + (bx + 0.03) * R, gy + 0.08 * R, (96, 104, 122))
     d.line([tr(cx, gy + 0.05 * R), tr(cx, gy - 0.16 * R)], fill=INK, width=max(4, int(R * 0.05)))
@@ -1064,6 +1064,13 @@ def p_gondola(d, x, t, s=1.0):
     """Die Gondel ganz nah: acht Menschen auf einer winzigen Plattform, über ihnen die Öffnung der Hülle mit der Flamme."""
     R = 620.0
     _balloon(d, x, 760 - 2.75 * R + math.sin(t * 1.1) * 8, R / 250.0, t, 0.8 + 0.2 * math.sin(t * 3))
+
+
+def p_gondola_empty(d, x, t, s=1.0):
+    """Die leere Gondel groß auf der Wiese: Blechplatte, Eckpfosten, Wäscheleine als Geländer, in der Mitte die Gasflaschen mit dem Brenner."""
+    R = 560.0
+    gy = GROUND - 0.455 * R
+    _basket(d, _rot((x, gy), 0), x, gy, R, t, 0, 0.0)
 
 
 def p_searchlight(d, x, t, s=1.0):
@@ -1280,12 +1287,12 @@ PROP_ALIASES.update({"sonar": "submersible", "tauchboot": "submersible", "tauchb
                      "unterseeboot": "submersible", "tauchroboter": "submersible", "tiefseeroboter": "submersible", "submarine": "submersible"})
 SKY += ("submersible", "ping")
 PROPS.update({"balloon": p_balloon, "balloon_out": p_balloon_out, "balloon_dark": p_balloon_dark, "balloon_fill": p_balloon_fill, "balloon_ground": p_balloon_ground, "balloon_down": p_balloon_down,
-              "gondola": p_gondola, "searchlight": p_searchlight, "sewing": p_sewing, "fabric": p_fabric})
+              "gondola": p_gondola, "gondola_empty": p_gondola_empty, "searchlight": p_searchlight, "sewing": p_sewing, "fabric": p_fabric})
 PROP_ALIASES.update({"heißluftballon": "balloon", "heissluftballon": "balloon", "hot air balloon": "balloon", "fesselballon": "balloon", "ballonhülle": "balloon_ground",
                      "gondel": "gondola", "ballongondel": "gondola", "ballonkorb": "gondola", "suchscheinwerfer": "searchlight", "flakscheinwerfer": "searchlight",
                      "nähmaschine": "sewing", "naehmaschine": "sewing", "sewing machine": "sewing", "stoffballen": "fabric", "stoffrollen": "fabric", "stoffbahnen": "fabric"})
 SKY += ("balloon", "balloon_out", "balloon_dark", "gondola", "searchlight")     # Ballon in der Luft: schwebt frei im Bild (die Regie setzt ihn vor den hohen Himmel)
-BALLOON_KINDS = ("balloon", "balloon_out", "balloon_dark", "balloon_fill", "balloon_ground", "balloon_down", "gondola", "searchlight")
+BALLOON_KINDS = ("balloon", "balloon_out", "balloon_dark", "gondola_empty", "balloon_fill", "balloon_ground", "balloon_down", "gondola", "searchlight")
 
 
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
