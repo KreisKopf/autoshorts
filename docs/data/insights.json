@@ -1,5 +1,5 @@
 {
- "updated": 1794686577.0370996,
+ "updated": 1794688239.3183093,
  "enough": true,
  "counted": 11,
  "total": 14,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1595,
+   "avg_views": 1599,
    "avg_likes": 65.0,
-   "like_rate": 4.08,
-   "avg_score": 2570
+   "like_rate": 4.07,
+   "avg_score": 2574
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1623,
+   "avg_views": 1620,
    "avg_likes": 40.1,
-   "like_rate": 2.47,
-   "avg_score": 2229
+   "like_rate": 2.48,
+   "avg_score": 2226
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 982,
+   "avg_views": 991,
    "avg_likes": 36.0,
-   "like_rate": 3.67,
-   "avg_score": 1522
+   "like_rate": 3.63,
+   "avg_score": 1531
   },
   {
    "slug": "fakten",
@@ -51,9 +51,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1595 Aufrufe, 4.08 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1599 Aufrufe, 4.07 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2364 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2363 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,21 +62,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2524,
+   "views": 2515,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3364
+   "score": 3355
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2121,
+   "views": 2108,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3036
+   "score": 3023
   },
   {
    "id": 84,
@@ -92,11 +92,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1595,
+   "views": 1599,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2570
+   "score": 2574
   },
   {
    "id": 80,
