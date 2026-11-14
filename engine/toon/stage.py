@@ -2184,6 +2184,8 @@ def _balloon_story(scenes, topic=""):
         return
     night = any(isinstance(sc, dict) and str(sc.get("time") or "").lower() == "night" for sc in scenes)
     air = dark = fell = prev_ground = landed = False
+    lead_id = next((a.get("id") for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind") and a.get("id")
+                    and not str(a.get("id")).startswith("_")), None)
     n_air, last_kind = 0, ""
 
     def stage_it(sc, kind, place, props, actors=()):
@@ -2259,7 +2261,8 @@ def _balloon_story(scenes, topic=""):
             stage_it(sc, "fall" if fall_t else "dark", "highsky", [{"type": "balloon_out" if fall_t else "balloon_dark", "pos": 540}])
             prev_ground, last_kind = False, sc["_balloon"]
             continue
-        if _re.search(r"\bgondel|ballonkorb|\bplattform|wäscheleine|geländer", low):  # die winzige Gondel ganz nah – mit allen, die hineinmüssen;
+        if _re.search(r"\bgondel|ballonkorb|\bplattform|wäscheleine|geländer", low) or (
+                last_kind in ("gondola", "basket") and prev_ground and _re.search(r"gasflasche|\bmitte\b|mittig", low) and not _re.search(r"brenner|flamme|\bfeuer|füll|bläh|richtet|faucht", low)):   # die winzige Gondel ganz nah – mit allen, die hineinmüssen;
             if last_kind == "gondola":                                    # im Folgesatz steht sie leer auf der Wiese: Geländer und Gasflaschen sind zu sehen
                 stage_it(sc, "basket", "ground", [{"type": "gondola_empty", "pos": 540}])
             else:
@@ -2277,15 +2280,25 @@ def _balloon_story(scenes, topic=""):
         if (word and (fill or _re.search(B_SETUP_RE, low) or not indoor)) or (prev_ground and fill and not indoor) or setup:
             for j, a in enumerate(humans[:1]):
                 a.update(action="point" if fill else "look_around", emotion=a.get("emotion") or "worried", pos=170, to="", hold="", facing="right")
-            stage_it(sc, "fill" if fill else "ground", "ground", [{"type": "balloon_fill", "pos": 660}] if fill else [{"type": "balloon_ground", "pos": 640}], humans[:1])
+            stage_it(sc, "fill" if fill else "ground", "ground", [{"type": "balloon_fill", "pos": 660}] if fill else [{"type": "balloon_ground", "pos": 560}], humans[:1])
             prev_ground, last_kind = True, sc["_balloon"]
             continue
         prev_ground = False
-        if landed and sc.get("shot") != "graphic" and not _said_place(low) and places.resolve(backdrop(sc)) in ("street", "plain", "livingroom", "basement", "supermarket", "highsky"):
+        bd_l = sc.get("backdrop") if isinstance(sc.get("backdrop"), dict) else {}
+        city_l = places.resolve(backdrop(sc)) in ("street", "plain", "livingroom", "basement", "supermarket", "highsky", "office") or \
+            str(bd_l.get("ground") or "") == "road" or any(e in ("street", "city", "ruins", "factory") for e in bd_l.get("elements") or [])
+        if landed and sc.get("shot") not in ("graphic", "insert") and not _said_place(low) and city_l:
             sc["place"], sc["backdrop"] = "fields", {"sky": "night" if night else "day", "ground": "grass", "elements": ["village"]}   # gelandet wird auf dem Land: Wiese am Dorfrand, keine Großstadtstraße
             sc["crowd"] = ""
             if night:
                 sc["time"] = "night"
+            if sc.get("shot") == "event":
+                sc["shot"] = ""
+            if not humans and lead_id:                                    # die Geretteten sind im Bild – nicht nur ein Streifenwagen vor leeren Häusern
+                glad = bool(_re.search(r"überleb|geschafft|gerettet|\bfrei\b|freiheit|sicherheit|bayern|westen|jubel", low))
+                sc["actors"] = [{"id": lead_id, "action": "jump" if glad else "look_around", "emotion": "happy" if glad else "worried", "emote": "" if glad else "?",
+                                 "pos": 250, "speaks": False, "say": "", "hold": "", "facing": "right"}]
+                sc["props"] = [dict(q, pos=760) if isinstance(q, dict) and not q.get("pos") else q for q in (sc.get("props") or [])]
         if landed and sc.get("shot") != "graphic" and not _re.search(r"\bauto|\bpkw|\bwagen\b|\bbus\b|laster|lkw", low):   # kein beliebiges rotes Auto neben den Geretteten
             sc["props"] = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in ("car", "bus", "truck", "trafficlight", "streetlamp"))]
         if sc.get("shot") != "graphic":                                   # ein Ballon aus dem Drehbuch in einem Satz, der nicht vom Ballon handelt (im Wohnzimmer, im Laden): raus

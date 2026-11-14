@@ -678,6 +678,14 @@ def main():
                           [(n_ * 4, n_ * 4 + 4) for n_ in range(5)], "Flucht mit dem Heißluftballon", "storys", "")
         assert [sc.get("_balloon") for sc in s3][1:4] == ["fly", "fly", "down"] and s3[1].get("shot") != "graphic" and s3[3].get("shot") != "graphic", [(sc.get("_balloon"), sc.get("shot")) for sc in s3]
         assert places.resolve(stage.backdrop(s3[4])) != "street" and not s3[4].get("props"), s3[4]
+        s4 = stage.direct([{"text": t_, "place": "street", "backdrop": {"sky": "night", "ground": "road", "elements": ["street"]} if n_ >= 3 else None, "time": "night",
+                            "shot": "event" if n_ == 3 else "", "props": ["police"] if n_ >= 3 else [], "actors": [{"id": "du"}] if n_ < 3 else []}
+                           for n_, t_ in enumerate(["Sie fliehen im Heißluftballon.", "Der Ballon hebt ab.", "Sie landen in einem Gebüsch.", "Dann taucht ein Streifenwagen auf.", "Alle acht haben überlebt."])],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(5)], "Flucht mit dem Heißluftballon", "storys", "")
+        for n_ in (3, 4):                                         # Schluss: Wiese am Dorfrand mit den Geretteten – nicht nur ein Streifenwagen vor leeren Häusern
+            assert isinstance(s4[n_].get("backdrop"), dict) and s4[n_]["backdrop"].get("ground") == "grass" and [a.get("id") for a in s4[n_].get("actors") or []] == ["du"], s4[n_]
+            assert frame(s4[n_], {"du": {}}) is not None
+
         assert s3[0]["overlay"]["text"] == "1000 QUADRATMETER STOFF", s3[0]["overlay"]
         from .. import writer as _wr
         echo = _wr.polish({"title": "x", "scenes": [{"text": "Acht Menschen fliehen im Ballon aus der DDR."}] + [{"text": f"Satz Nummer {n_} erzählt etwas anderes."} for n_ in range(8)] + [{"text": "Acht Menschen fliehen im Ballon aus der DDR."}]})

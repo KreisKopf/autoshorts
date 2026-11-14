@@ -105,6 +105,8 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   zeigt der Folgesatz (Geländer, Wäscheleine, Gasflaschen) die leere Gondel `gondola_empty` auf der Wiese; „bauen … auf“ zeigt den Stoffberg auch
   ohne das Wort Ballon; ein Ballon aus dem Drehbuch in einem Satz, der nicht vom Ballon handelt, entfällt; Zähler werden über dem Ballon zum Schild.
   Nähmaschine: Figur steht daneben, kein Schnitt auf die Maschine allein (`_no_cut`).
+  Abheben und Landung zeigen den Ballon (eine Zahlen-Tafel wird dort zum Schild). Nach der Landung spielt der Schluss auf der Wiese am Dorfrand mit
+  der Hauptfigur – keine Großstadtstraße, kein beliebiges Auto, nicht nur ein Streifenwagen vor leeren Häusern.
 - Familie im Bild (`stage._family`, `FAMILY_RE`): Spricht der Satz von Familien, Frauen und Kindern, stehen neben der Hauptfigur eine Frau und ein
   Kind (Nebenfiguren dürfen über `look` jetzt auch `size`, `gender`, `hair_color` mitbringen).
 - Ecken-Zeilen (`render.build_ass`): Die Zeile oben links wird am Wortende gekürzt; bleibt sie das ganze Video gleich, entfällt eine Uhrzeit darin.
