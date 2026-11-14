@@ -1,5 +1,5 @@
 {
- "updated": 1794688239.3183093,
+ "updated": 1794689501.2389505,
  "enough": true,
  "counted": 11,
  "total": 14,
@@ -18,19 +18,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1620,
+   "avg_views": 1622,
    "avg_likes": 40.1,
    "like_rate": 2.48,
-   "avg_score": 2226
+   "avg_score": 2228
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 991,
-   "avg_likes": 36.0,
-   "like_rate": 3.63,
-   "avg_score": 1531
+   "avg_views": 966,
+   "avg_likes": 37.0,
+   "like_rate": 3.83,
+   "avg_score": 1521
   },
   {
    "slug": "fakten",
@@ -62,21 +62,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2515,
+   "views": 2526,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3355
+   "score": 3366
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2108,
+   "views": 2111,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3023
+   "score": 3026
   },
   {
    "id": 84,
