@@ -3048,7 +3048,7 @@
   "id": 89,
   "category": "storys",
   "topic": "Der spektakulärste Gefängnisausbruch aller Zeiten: Wie zwei Männer mit einem selbstgebauten Heißluftballon über die DDR-Grenze flohen",
-  "status": "review",
+  "status": "discarded",
   "created": 1794669056.422152,
   "title": "DDR-Flucht: Die unmöglichste Flucht mit einem Ballon",
   "description": "Zwei Familien bauten heimlich einen Ballon für die Flucht.\nSie riskierten ihr Leben für die Freiheit über der DDR-Grenze.\nWürdest du dich in diesen Ballon trauen?",
@@ -3081,6 +3081,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-14 18:00",
-  "review_at": 1794669516.119308
+  "review_at": 1794669516.119308,
+  "error": "Bei der Prüfung verworfen: Kein Ballon im Bild: Einkaufsbeutel schwebt statt Heißluftballon, Figur schwebt auf der Wiese, Seilbahn-Gondel im Keller, Zeile FALL 15 M/S bis zum Schluss"
  }
 ]
