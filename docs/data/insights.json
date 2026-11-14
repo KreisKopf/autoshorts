@@ -1,5 +1,5 @@
 {
- "updated": 1794682668.1352465,
+ "updated": 1794684765.6342423,
  "enough": true,
  "counted": 11,
  "total": 13,
@@ -9,19 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1584,
+   "avg_views": 1592,
    "avg_likes": 65.0,
-   "like_rate": 4.1,
-   "avg_score": 2559
+   "like_rate": 4.08,
+   "avg_score": 2567
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1619,
+   "avg_views": 1621,
    "avg_likes": 40.0,
    "like_rate": 2.47,
-   "avg_score": 2224
+   "avg_score": 2226
+  },
+  {
+   "slug": "comedy",
+   "name": "🤪 Comedy",
+   "n": 1,
+   "avg_views": 972,
+   "avg_likes": 36.0,
+   "like_rate": 3.7,
+   "avg_score": 1512
   },
   {
    "slug": "fakten",
@@ -31,29 +40,20 @@
    "avg_likes": 30.5,
    "like_rate": 2.99,
    "avg_score": 1492
-  },
-  {
-   "slug": "comedy",
-   "name": "🤪 Comedy",
-   "n": 1,
-   "avg_views": 926,
-   "avg_likes": 34.0,
-   "like_rate": 3.67,
-   "avg_score": 1436
   }
  ],
  "weights": {
-  "fakten": 0.73,
+  "fakten": 0.72,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.09,
+  "whatif": 1.08,
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1584 Aufrufe, 4.1 % Likes).",
-  "Schwächste Kategorie: 🤪 Comedy (Ø 926 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2348 zu 704 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1592 Aufrufe, 4.08 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2359 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -72,21 +72,21 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2111,
+   "views": 2116,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3026
+   "score": 3031
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1859,
+   "views": 1867,
    "likes": 60,
    "comments": 0,
    "shares": 0,
-   "score": 2759
+   "score": 2767
   },
   {
    "id": 80,
@@ -102,11 +102,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1584,
+   "views": 1592,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2559
+   "score": 2567
   }
  ],
  "flop": [
