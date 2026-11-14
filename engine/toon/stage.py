@@ -2025,7 +2025,7 @@ LAKE_CRATE_RE = r"kiste|truhe|behälter|\bschatz\b|\bfracht|ladung"
 LAKE_LOG_RE = r"baumst[aä]mm|\bbäume[n]?\b|\bstämme[n]?\b|holzverhau|treibholz|holzschicht|\bstamm\b|schicht aus (?:\w+ )?holz"
 LAKE_CASH_RE = r"banknote|geldschein|\bscheine[n]?\b|falschgeld|\bblüten\b|gefälschte[sn]? (?:geld|pfund)|pfundnote|pfund-|falsche[sn]? (?:geld|pfund)|geldfälsch"
 LAKE_GOLD_RE = r"\bgold|goldbarren|goldschatz"
-LAKE_NOGOLD_RE = r"kein(?:e|en)? (?:\w+ )?gold|gold (?:\w+ ){0,5}nie\b|nie (?:\w+ )?gold|statt gold|kein einziger barren|gold fehlt|vom gold fehlt"
+LAKE_NOGOLD_RE = r"kein(?:e|en)? (?:\w+ )?gold|gold (?:\w+ ){0,7}(?:nie|niemals|nicht)\b|(?:nie|niemals) (?:\w+ ){0,3}gold|nie (?:\w+ )?gold|statt gold|kein einziger barren|gold fehlt|vom gold fehlt"
 LAKE_ROCKET_RE = r"rakete|torpedo|sprengk|versuchsstation|prüfst[aä]nd|unterwasserwaffe|marine\w* test"
 LAKE_SOLDIER_RE = r"soldaten|truppen|offizier|wehrmacht|\bss-|lastwagen|\blkws?\b"
 LAKE_SHORE_RE = r"\bufer\b|an den see|an land|verboten|\bverbot\b|tauchverbot|gesperrt|aus dem wasser (?:gezogen|geholt)|an die oberfläche|ans licht"
@@ -2161,6 +2161,8 @@ def _lake_story(scenes, topic="", main_id="du"):
                     sc["actors"] = [_diver(None, 400, "right", scared)]
                     sc["props"] = [dict(q, pos=800) if q.get("type") != "logs" else q for q in sc["props"]]
                 sig = (tuple((q.get("type"), q.get("pos")) for q in sc["props"]), tuple((a.get("kind"), a.get("pos"), a.get("facing")) for a in sc["actors"]))
+            if sc["actors"] and isinstance(sc.get("overlay"), dict) and not sub:
+                sc["_ov_low"] = 3                         # Karte/Schild ganz nach oben: der Taucher schwimmt sonst dahinter
             last_under = sig
             prev_under, prev_thing = True, thing
             last_shore = None
@@ -2176,7 +2178,7 @@ def _lake_story(scenes, topic="", main_id="du"):
             at_lake = False                               # offene Wasserfläche mit Dampfer: am Bergsee steht man am Ufer
             if not _re.search(r"\bboot|schiff|\bfloß|\bkahn|ruder", low):
                 sc["props"] = [q for q in sc["props"] if _key(q) not in ("ship", "wave", "debris")]
-        if rp == "underwater" or (not at_lake and rp not in MAPS and not _re.search(LAKE_INDOOR_OK_RE, low)):
+        if rp == "underwater" or rp in MAPS or (not at_lake and not _re.search(LAKE_INDOOR_OK_RE, low)):      # auch keine Deutschlandkarte für „die Wirtschaft Großbritanniens“
             sc["place"], sc["backdrop"] = "lake", dict(LAKE_SHORE)      # die Geschichte spielt am See – nicht im Büro mit Bildschirmen
             rp = "custom"
             sc["props"] = [q for q in sc["props"] if _key(q) not in INDOOR_THINGS and _key(q) not in ("table", "shelf", "tv", "computer", "fridge", "door", "clock")]
