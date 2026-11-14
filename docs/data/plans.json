@@ -1,805 +1,4 @@
 {
- "2026-11-13 21:00": {
-  "category": "whatif",
-  "topic": "Ein kleiner Akt der Menschlichkeit, der die Welt für einen Moment rettet",
-  "trend": null,
-  "script": {
-   "title": "Was wenn alle Menschen gleichzeitig nett wären?",
-   "description": "Was wäre, wenn acht Milliarden Menschen für eine Minute komplett nett zueinander sind?\nPhysik, Psychologie und Alltag spielen verrückt – das passiert Sekunde für Sekunde!\nMachst du mit oder nervst du deinen Nachbarn weiter?",
-   "hashtags": [
-    "#shorts",
-    "#whatif",
-    "#gedankenexperiment",
-    "#wissen",
-    "#wissenschaft",
-    "#menschen",
-    "#viral"
-   ],
-   "tags": [
-    "what if deutsch",
-    "was wäre wenn",
-    "gedankenexperiment",
-    "menschlichkeit",
-    "weltfrieden",
-    "psychologie fakten",
-    "wissenschaft einfach erklärt"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a young man with wide glowing eyes looking at a globe of Earth in his hands, soft golden light, surprised expression, high contrast background",
-    "text": "DIE WELT STEHT STILL"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "held": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "kurz",
-     "hair_color": "dunkelbraun",
-     "skin": "hell",
-     "glasses": false
-    },
-    "nachbar": {
-     "shirt": "rot",
-     "hat": "cap",
-     "hair": "",
-     "hair_color": "schwarz",
-     "skin": "mittel",
-     "glasses": false
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein Mann schaut überrascht auf seine schwebende Handuhr.",
-     "text": "Alle acht Milliarden Menschen sind eine Minute lang nett.",
-     "image": "Close up of a young man looking down at his glowing wrist watch in shock",
-     "who": [
-      "held"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "acht Milliarden",
-      "nett"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "8 MRD. MENSCHEN"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "clock"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "Modern bedroom with a warm desk lamp and clean shelf",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Weltkugel leuchtet hell auf.",
-     "text": "Und die Folgen verändern unseren Planeten für immer.",
-     "image": "A bright glowing globe floating in center space",
-     "who": [],
-     "place": "space",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Planeten",
-      "für immer"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "earth"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sekunde eins wird auf einem Puls-Bildschirm angezeigt.",
-     "text": "In Sekunde eins stoppen weltweit alle sechzigtausend laufenden Kriege und Streitigkeiten schlagartig.",
-     "image": "Digital pulse line with glowing peak showing time step",
-     "who": [],
-     "place": "germany",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Sekunde eins",
-      "stoppen"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "KONFLIKTE GESTOPPT",
-      "value": 60000
-     },
-     "graphic": {
-      "type": "pulse",
-      "value": "1",
-      "label": "SEKUNDE EINS"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Menschen auf der Straße umarmen sich freundlich.",
-     "text": "Autofahrer hupen nicht mehr, sondern lassen sich lächelnd gegenseitig den Vortritt.",
-     "image": "Two drivers waving politely at each other on a street",
-     "who": [
-      "held",
-      "nachbar"
-     ],
-     "place": "street",
-     "camera": "pan_right",
-     "sfx": "pop",
-     "highlight": [
-      "Autofahrer",
-      "lächelnd"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "SEKUNDE 10"
-     },
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "street",
-       "city"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "car",
-      "trafficlight"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "nachbar",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "cheer",
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "; ",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nach zehn Sekunden sinkt der Blutdruck sichtbar.",
-     "text": "Nach zehn Sekunden sinkt weltweit der Stresspegel der Menschheit spürbar ab.",
-     "image": "Bar chart comparing stress levels plummeting down",
-     "who": [],
-     "place": "hospital",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Stresspegel",
-      "zwanzig Prozent"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "compare",
-      "left": "VORHER",
-      "right": "JETZT",
-      "value": "100%",
-      "sub": "STRESS"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Herz schlägt ruhig im Bild.",
-     "text": "Das entlastet in diesem Moment Millionen von Menschen körperlich und mental.",
-     "image": "A stylized red glowing heart icon pulsing softly",
-     "who": [],
-     "place": "hospital",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "dreitausend",
-      "Herzinfarkte"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "RUHE FÜR ALLE",
-      "value": 3000
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "held",
-       "action": "think",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "insert",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nach dreißig Sekunden tippen Leute nette Nachrichten ins Handy.",
-     "text": "In Sekunde dreißig verschicken Menschen über zehn Milliarden freundliche Nachrichten an ihre Ex-Partner.",
-     "image": "Close up of a phone displaying nice chat messages",
-     "who": [
-      "held"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "zehn Milliarden",
-      "Nachrichten"
-     ],
-     "overlay": {
-      "type": "phone",
-      "title": "12:00",
-      "items": [
-       "Ex: Danke für alles!",
-       "Du: Dir auch nur das Beste ❤️"
-      ]
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "held",
-       "action": "think",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "Modern bedroom with a warm desk lamp and clean shelf",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Serverzentren geraten ins Schwitzen.",
-     "text": "Die Server von großen Messenger-Diensten glühen beinahe durch wegen der Datenmenge.",
-     "image": "Racks of computer servers glowing with light",
-     "who": [],
-     "place": "serverroom",
-     "camera": "pan_left",
-     "sfx": "whoosh",
-     "highlight": [
-      "Server",
-      "Datenmenge"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DATEN-REKORD"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Mann im Büro gibt seinem Kollegen den letzten Keks.",
-     "text": "Im Büro teilt der Kollege plötzlich sein letztes Stück Kuchen ganz freiwillig.",
-     "image": "One worker offering a slice of cake to a happy colleague",
-     "who": [
-      "held",
-      "nachbar"
-     ],
-     "place": "office",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kuchen",
-      "freiwillig"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "nachbar",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "; ",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nach fünfzig Sekunden sinkt die Kriminalität auf Null.",
-     "text": "Nach fünfzig Sekunden geht die weltweite Kriminalitätsrate drastisch zurück.",
-     "image": "Graphic badge showing zero percent crime rate",
-     "who": [],
-     "place": "germany",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Kriminalitätsrate",
-      "Null"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "badge",
-      "kicker": "KRIMINALITÄT",
-      "text": "FAST NULL"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Polizeiautos stehen ruhig an der Straße.",
-     "text": "Einsatzkräfte weltweit haben für sechzig Sekunden absolut nichts mehr zu tun.",
-     "image": "Police cars parked quietly on empty street",
-     "who": [],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Einsatzkräfte",
-      "nichts zu tun"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "NOTRUF: STILL"
-     },
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "street"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "car"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Höhepunkt: Nach einer Minute endet die Zeit.",
-     "text": "Aber dann läuft die eine Minute ab und der Alltag kehrt zurück.",
-     "image": "Clock hand reaching the top twelve position with dynamic effect",
-     "who": [
-      "held"
-     ],
-     "place": "zimmer",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Minute ab",
-      "Alltag"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "60 SEKUNDEN UM"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "Modern bedroom with a warm desk lamp and clean shelf",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Wirtschafts-Chart steigt steil nach oben.",
-     "text": "Experten vermuten: Diese sechzig Sekunden sparen der Weltwirtschaft enorm viel Geld.",
-     "image": "Stock chart line shooting straight up with dollar signs",
-     "who": [],
-     "place": "buero",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "fünf Milliarden",
-      "sparen"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "chart",
-      "kicker": "ERSPARNIS",
-      "value": "5 MRD.",
-      "label": "GELD GESPART"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "graphic",
-     "who_desc": "",
-     "place_desc": "Bright modern office room with computers",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Schäden an Autos und Gebäuden wurden vermieden.",
-     "text": "Weil weniger Sachschäden entstehen und stundenlange Staus gar nicht erst passieren.",
-     "image": "A clean smooth road with cars driving without any congestion",
-     "who": [],
-     "place": "street",
-     "camera": "pan_left",
-     "sfx": "whoosh",
-     "highlight": [
-      "weniger Sachschäden",
-      "keine Staus"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GEWINN",
-      "color": "green"
-     },
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "street",
-       "city"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "car"
-     ],
-     "actors": [],
-     "crowd": "walk",
-     "mood": "calm",
-     "shot": "event",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein kleines Pflanzgut sprießt am Wegesrand.",
-     "text": "Zusätzlich würde das allgemeine Vertrauen unter Menschen für Wochen extrem ansteigen.",
-     "image": "A green sprout breaking out of the soil into light",
-     "who": [],
-     "place": "park",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Vertrauen",
-      "ansteigen"
-     ],
-     "overlay": null,
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "sprout"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "insert",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Kalender hakt verbleibende Tage ab.",
-     "text": "Denn Erfahrungsgemäß wirkt echte Freundlichkeit ansteckend und hält oft tagelang an.",
-     "image": "Calendar month page with days being checked off quickly",
-     "who": [],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "ansteckend",
-      "tagelang"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "days",
-      "text": "FREUNDLICHKEIT WIRKT",
-      "value": "7",
-      "sub": "EFFEKT",
-      "label": "GUTE LAUNE"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "graphic",
-     "who_desc": "",
-     "place_desc": "Modern bedroom with a warm desk lamp and clean shelf",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Hauptdarsteller schaut fragend in die Kamera.",
-     "text": "Also: Eine einzige Minute Freundlichkeit könnte wirklich die Welt ein Stück retten.",
-     "image": "Young man smiling and nodding calmly towards camera",
-     "who": [
-      "held"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Freundlichkeit",
-      "Welt retten"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DEINE MINUTE?"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "held",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "Modern bedroom with a warm desk lamp and clean shelf",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zwei Nachbarn stehen nebeneinander.",
-     "text": "Würdest du heute damit anfangen oder lieber deinen Nachbarn weiter ärgern?",
-     "image": "Man pointing playfully at neighbor who looks back confused",
-     "who": [
-      "held",
-      "nachbar"
-     ],
-     "place": "hallway",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "anfangen",
-      "ärgern"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Nett sein",
-      "b": "Weiter ärgern"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "?",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "nachbar",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "; ",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Schlussbild mit Aufforderung.",
-     "text": "Schreib es in die Kommentare und folg für mehr Fakten!",
-     "image": "Young man waving at camera with warm smile",
-     "who": [
-      "held"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_out",
-     "sfx": "ding",
-     "highlight": [
-      "Kommentare",
-      "folg für mehr"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "FOLGEN FÜR MEHR"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "held",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "Modern bedroom with a warm desk lamp and clean shelf",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "needs": [
-   "stoppuhr"
-  ],
-  "title": "Was wenn alle Menschen gleichzeitig nett wären?",
-  "created": 1794585214.5695457
- },
  "2026-11-14 13:00": {
   "category": "whatif",
   "topic": "Die wissenschaftliche Rekonstruktion eines spurlosen Flugzeugabsturzes",
@@ -3129,5 +2328,805 @@
   "needs": [],
   "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
   "created": 1794669720.3536534
+ },
+ "2026-11-15 13:00": {
+  "category": "tiere",
+  "topic": "Der Fangschreckenkrebs: Das Tier mit dem stärksten Punch im Universum, das dich wortwörtlich one-shotted",
+  "trend": null,
+  "script": {
+   "title": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich",
+   "description": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich\nEin winziger Krebs schlägt so schnell zu wie eine Pistolenkugel. Kannst du den Punch in Zeitlupe überhaupt erkennen?\nSchnelligkeit oder pure Muskelkraft?",
+   "hashtags": [
+    "#shorts",
+    "#tierfakten",
+    "#wissenschaft",
+    "#fangschreckenkrebs",
+    "#nature",
+    "#viral"
+   ],
+   "tags": [
+    "fangschreckenkrebs",
+    "stärkster punch",
+    "tierreichfakten",
+    "meerestiere",
+    "zeitlupe punch",
+    "biologie",
+    "spannende tierfakten"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a colorful mantis shrimp in action underwater, its claws punching forward at extreme speed, shocked cartoon scuba diver watching in background, dramatic lighting, vector art",
+    "text": "TÖDLICHER ALS PISTOLE"
+   },
+   "wishes": [
+    "krebs",
+    "keule",
+    "muschel"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "short",
+     "hair_color": "braun",
+     "gender": "m",
+     "skin": "hell"
+    },
+    "krebs": {
+     "kind": "mantis"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Das bunte Meerestier schwimmt am Meeresboden, während eine Zahl die Kugelgeschwindigkeit zeigt.",
+     "text": "Drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "drei"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "3 UNMÖGLICHE FAKTEN"
+     },
+     "image": "Drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Krebs holt Schwung und der Sprecher warnt vor dem Gefährlichsten.",
+     "text": "Und der letzte Fakt zerstört sogar Panzerglas.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs",
+      "keule"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "point",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "panzerglas"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GEFÄHRLICH",
+      "color": "red"
+     },
+     "image": "Und der letzte Fakt zerstört sogar Panzerglas.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Erster Fakt wird eingeblendet, der Krebs schlägt zu.",
+     "text": "Erstens: Sein Schlag ist so schnell wie eine Kugel aus einer Pistole.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "jump",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "pistole"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "FAKT EINS"
+     },
+     "image": "Erstens: Sein Schlag ist so schnell wie eine Kugel aus einer Pistole.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zähler zeigt die Beschleunigung der Fangschreckenkrebs-Keule.",
+     "text": "Seine Keulen beschleunigen in zwei Millisekunden auf achtzig Kilometer pro Stunde.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "none",
+     "graphic": {
+      "type": "number",
+      "kicker": "BESCHLEUNIGUNG",
+      "value": "80 KM/H",
+      "label": "IN 2 MILLISEKUNDEN"
+     },
+     "highlight": [
+      "achtzig"
+     ],
+     "overlay": null,
+     "image": "Seine Keulen beschleunigen in zwei Millisekunden auf achtzig Kilometer pro Stunde.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Krabbe wird vom Schlag völlig überrascht weggeschleudert.",
+     "text": "Das ist fünfzigmal schneller als ein menschlicher Wimpernschlag.",
+     "who": [
+      "du"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "muschel"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "pan_left",
+     "sfx": "whoosh",
+     "highlight": [
+      "fünfzigmal"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "GESCHWINDIGKEIT",
+      "value": 50,
+      "unit": "MAL SCHNELLER",
+      "sub": "ALS DEIN WIMPERNSCHLAG"
+     },
+     "image": "Das ist fünfzigmal schneller als ein menschlicher Wimpernschlag.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Balkendiagramm vergleicht die Beschleunigung mit einer echten Kugel.",
+     "text": "Da die Muskeln das nicht schaffen, nutzt er eine Art Sprungfeder-Mechanismus.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "sprungfeder"
+     ],
+     "overlay": null,
+     "image": "Da die Muskeln das nicht schaffen, nutzt er eine Art Sprungfeder-Mechanismus.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zweiter Fakt wird gezeigt: Explosion unter Wasser.",
+     "text": "Nummer zwei: Er lässt das Wasser wortwörtlich kochen.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "steam",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "shake",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "kochen"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": 4700
+     },
+     "image": "Nummer zwei: Er lässt das Wasser wortwörtlich kochen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Kleine Blasen entstehen durch die extreme Bewegung im Wasser.",
+     "text": "Durch den extremen Unterdruck entstehen kleine Dampfblasen.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "blase"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "insert",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "dampfblasen"
+     ],
+     "overlay": null,
+     "image": "Durch den extremen Unterdruck entstehen kleine Dampfblasen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Thermometer zeigt eine extrem hohe Temperatur kurz an.",
+     "text": "Wenn diese Blasen kollabieren, entstehen mehrere tausend Grad Celsius.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "graphic": {
+      "type": "number",
+      "kicker": "TEMPERATUR DER BLASE",
+      "value": "4.700 °C",
+      "label": "SO HEISS WIE DIE SONNENOBERFLÄCHE"
+     },
+     "highlight": [
+      "vierundsiebzighundert"
+     ],
+     "overlay": null,
+     "image": "Wenn diese Blasen kollabieren, entstehen mehrere tausend Grad Celsius.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Sonne wird kurz zum Vergleich mit der Blase eingeblendet.",
+     "text": "Das ist fast so heiß wie die Oberfläche der Sonne.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "sun"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "sonne"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "SONNENHITZE"
+     },
+     "image": "Das ist fast so heiß wie die Oberfläche der Sonne.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Krebs schaut frech und triumphiert über seine Beute.",
+     "text": "Selbst wenn er das Opfer verfehlt, tötet die Druckwelle der Blase.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs",
+      "muschel"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "druckwelle"
+     ],
+     "overlay": null,
+     "image": "Selbst wenn er das Opfer verfehlt, tötet die Druckwelle der Blase.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Bonuspunkte-Grafikschild kündigt Fakt drei an.",
+     "text": "Drittens: Seine Augen sind ein absoluter Cheat-Code.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "auge"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "augen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "FAKT DREI"
+     },
+     "image": "Drittens: Seine Augen sind ein absoluter Cheat-Code.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Menschliche Augen werden mit Krebsaugen im Duell verglichen.",
+     "text": "Menschen haben drei Farbrezeptoren im Auge.",
+     "who": [
+      "du"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "auge"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "drei"
+     ],
+     "overlay": {
+      "type": "compare",
+      "left": "MENSCH",
+      "right": "KREBS",
+      "value": "3",
+      "sub": "16"
+     },
+     "image": "Menschen haben drei Farbrezeptoren im Auge.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein riesiges Ziffernschild stellt die sechzehn Farbrezeptoren dar.",
+     "text": "Dieser Krebs besitzt sechzehn und sieht ultraviolettes sowie polarisiertes Licht.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "look_around",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "close",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "sechzehn"
+     ],
+     "overlay": null,
+     "image": "Dieser Krebs besitzt sechzehn und sieht ultraviolettes sowie polarisiertes Licht.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Tauchboot zerspringt symbolisch unter Wasser am Aquariumsglas.",
+     "text": "Er ist so stark, dass er sogar normales Aquarienglas zerschmettert.",
+     "who": [
+      "du"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "glasscheibe"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "zerschmettert"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "ZERSTÖRT",
+      "color": "red"
+     },
+     "image": "Er ist so stark, dass er sogar normales Aquarienglas zerschmettert.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Notizzettel mahnt vor dem Halten im Heimaquarium.",
+     "text": "Forscher müssen ihn deshalb in speziellen dickwandigen Plastikbecken halten.",
+     "who": [],
+     "place": "lab",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "barrel"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "graphic": {
+      "type": "badge",
+      "kicker": "WARNUNG",
+      "text": "PLASTIKBECKEN PFLICHT"
+     },
+     "highlight": [
+      "plastikbecken"
+     ],
+     "overlay": null,
+     "image": "Forscher müssen ihn deshalb in speziellen dickwandigen Plastikbecken halten.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Tier blickt starr in die Kamera, Keulen bereit zum Schlag.",
+     "text": "Ein Schlag auf deine Hand würde Knochen sofort brechen.",
+     "who": [
+      "du",
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "right",
+       "speaks": false
+      },
+      {
+       "id": "krebs",
+       "action": "jump",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "knochen"
+     ],
+     "overlay": null,
+     "image": "Ein Schlag auf deine Hand würde Knochen sofort brechen.",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Krebs schaut direkt auf den Betrachter und holt aus.",
+     "text": "Man nennt ihn nicht umsonst den stärksten Boxer der Meere.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "boxer"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "STÄRKSTER BOXER"
+     },
+     "image": "Man nennt ihn nicht umsonst den stärksten Boxer der Meere.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Krebs setzt zum finalen Schlag an, der nahtlos zum Start führt.",
+     "text": "Und hier kommen drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "krebs"
+     ],
+     "actors": [
+      {
+       "id": "krebs",
+       "action": "jump",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "unmöglich"
+     ],
+     "overlay": null,
+     "image": "Und hier kommen drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "pistole",
+   "sprungfeder"
+  ],
+  "title": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich",
+  "created": 1794680506.4394143
  }
 }

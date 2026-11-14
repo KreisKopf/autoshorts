@@ -1,5 +1,5 @@
 {
- "last_category": "mysterien",
+ "last_category": "tiere",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -21,7 +21,7 @@
   "qnqm93yzl",
   "qqprosnb9"
  ],
- "last_stats": 1794678285.9388664,
+ "last_stats": 1794680513.5564508,
  "next_id": 94,
  "connected": {
   "youtube": {
@@ -38,11 +38,11 @@
   "video": 93
  },
  "cat_credit": {
-  "fakten": 1.54,
-  "storys": -4.209999999999999,
-  "mysterien": -4.26,
-  "tiere": 2.4,
-  "whatif": 2.13,
-  "comedy": 2.4
+  "fakten": 2.2800000000000002,
+  "storys": -3.009999999999999,
+  "mysterien": -3.0599999999999996,
+  "tiere": -3.04,
+  "whatif": 3.23,
+  "comedy": 3.5999999999999996
  }
 }
