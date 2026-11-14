@@ -1,5 +1,5 @@
 {
- "updated": 1794666527.6994972,
+ "updated": 1794668323.3981986,
  "enough": true,
  "counted": 10,
  "total": 12,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1569,
+   "avg_views": 1574,
    "avg_likes": 63.0,
-   "like_rate": 4.02,
-   "avg_score": 2514
+   "like_rate": 4.0,
+   "avg_score": 2519
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 6,
-   "avg_views": 1562,
+   "avg_views": 1566,
    "avg_likes": 36.8,
-   "like_rate": 2.36,
-   "avg_score": 2119
+   "like_rate": 2.35,
+   "avg_score": 2124
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1016,
+   "avg_views": 1017,
    "avg_likes": 30.5,
    "like_rate": 3.0,
-   "avg_score": 1488
+   "avg_score": 1490
   },
   {
    "slug": "comedy",
@@ -51,9 +51,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1569 Aufrufe, 4.02 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1574 Aufrufe, 4.0 % Likes).",
   "Schwächste Kategorie: 🤪 Comedy (Ø 743 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2251 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2255 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -72,31 +72,31 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2044,
+   "views": 2069,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 2974
+   "score": 2999
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 1953,
+   "views": 1954,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2553
+   "score": 2554
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1569,
+   "views": 1574,
    "likes": 63,
    "comments": 0,
    "shares": 0,
-   "score": 2514
+   "score": 2519
   },
   {
    "id": 54,
