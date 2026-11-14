@@ -1,7 +1,7 @@
 {
- "updated": 1794668323.3981986,
+ "updated": 1794670481.9604788,
  "enough": true,
- "counted": 10,
+ "counted": 11,
  "total": 12,
  "needed": 6,
  "categories": [
@@ -17,11 +17,11 @@
   {
    "slug": "whatif",
    "name": "🤯 What If",
-   "n": 6,
-   "avg_views": 1566,
-   "avg_likes": 36.8,
-   "like_rate": 2.35,
-   "avg_score": 2124
+   "n": 7,
+   "avg_views": 1603,
+   "avg_likes": 40.0,
+   "like_rate": 2.5,
+   "avg_score": 2207
   },
   {
    "slug": "fakten",
@@ -43,17 +43,17 @@
   }
  ],
  "weights": {
-  "fakten": 0.77,
+  "fakten": 0.74,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.09,
+  "whatif": 1.1,
   "comedy": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1574 Aufrufe, 4.0 % Likes).",
   "Schwächste Kategorie: 🤪 Comedy (Ø 743 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2255 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2306 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -79,6 +79,16 @@
    "score": 2999
   },
   {
+   "id": 84,
+   "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
+   "category": "whatif",
+   "views": 1824,
+   "likes": 59,
+   "comments": 0,
+   "shares": 0,
+   "score": 2709
+  },
+  {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
@@ -97,16 +107,6 @@
    "comments": 0,
    "shares": 0,
    "score": 2519
-  },
-  {
-   "id": 54,
-   "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
-   "category": "whatif",
-   "views": 1752,
-   "likes": 46,
-   "comments": 0,
-   "shares": 0,
-   "score": 2442
   }
  ],
  "flop": [
