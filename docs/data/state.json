@@ -1,5 +1,5 @@
 {
- "last_category": "storys",
+ "last_category": "mysterien",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -37,11 +37,11 @@
   "video": 89
  },
  "cat_credit": {
-  "fakten": 0.77,
-  "storys": -5.409999999999999,
-  "mysterien": 1.2,
-  "tiere": 1.2,
-  "whatif": 1.04,
-  "comedy": 1.2
+  "fakten": 1.54,
+  "storys": -4.209999999999999,
+  "mysterien": -4.26,
+  "tiere": 2.4,
+  "whatif": 2.13,
+  "comedy": 2.4
  }
 }

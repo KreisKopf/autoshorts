@@ -1,865 +1,4 @@
 {
- "2026-11-13 18:00": {
-  "category": "whatif",
-  "topic": "Wenn physische Spielregeln plötzlich in der Realität gelten würden",
-  "trend": null,
-  "script": {
-   "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
-   "description": "Was passiert, wenn du plötzlich durch Wände glitchen kannst?\nErlebe die verrücktesten physischen Spielregeln in der echten Welt.\nWürdest du lieber fliegen oder unendlich oft respawnen?",
-   "hashtags": [
-    "#shorts",
-    "#gaming",
-    "#whatif",
-    "#physik",
-    "#funny",
-    "#viral",
-    "#foryou"
-   ],
-   "tags": [
-    "spielregeln",
-    "physik",
-    "was wäre wenn",
-    "videospiele",
-    "glitch",
-    "alltag",
-    "lustig"
-   ],
-   "thumbnail": {
-    "place": "street",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "box"
-    ],
-    "weather": "",
-    "image": "Close-up of a cartoon character looking confused with floating error pixels around, bright background, bold composition",
-    "text": "SPIELREGELN IM ALLTAG"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "leo": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "long",
-     "hair_color": "braun",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Drei Videospiel-Bugs, die unser Leben komplett ruinieren würden.",
-     "image": "Drei Videospiel-Bugs, die unser Leben komplett ruinieren würden.",
-     "who": [
-      "leo"
-     ],
-     "place": "street",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Spielregeln",
-      "Realität"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "card",
-      "text": "GLITCH IM SYSTEM"
-     },
-     "see": "Du stehst erschrocken auf der Straße, während rote Warnzeichen um dich herum flimmern.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Einer davon macht deinen Einkaufsbeutel absolut überflüssig.",
-     "image": "Einer davon macht deinen Einkaufsbeutel absolut überflüssig.",
-     "who": [
-      "leo"
-     ],
-     "place": "supermarket",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Bug",
-      "Fußboden"
-     ],
-     "hud": "",
-     "status": "BUG: AKTIV",
-     "overlay": null,
-     "see": "Im Supermarkt lässt du den Einkaufsbeutel fallen, weil Gegenstände von alleine hinter dir her schweben.",
-     "time": "day",
-     "props": [
-      "cart",
-      "cans"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true,
-       "hold": "bag"
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "watch",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Zweiter Bug: Unsichtbare Mauern stoppen dich auf jedem Feldweg.",
-     "image": "Zweiter Bug: Unsichtbare Mauern stoppen dich auf jedem Feldweg.",
-     "who": [
-      "leo"
-     ],
-     "place": "fields",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Mauern",
-      "Feldweg"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "tag",
-      "text": "KEIN DURCHGANG"
-     },
-     "see": "Auf einem Feldweg läufst du gegen eine unsichtbare Wand und prallst ab.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "soil",
-      "elements": [
-       "fields",
-       "trees"
-      ]
-     },
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "fall",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Dritter Bug: Dein Inventar fasst genau neunundneunzig Wassermelonen auf einmal.",
-     "image": "Dritter Bug: Dein Inventar fasst genau neunundneunzig Wassermelonen auf einmal.",
-     "who": [
-      "leo"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "pop",
-     "highlight": [
-      "Inventar",
-      "Wassermelonen"
-     ],
-     "hud": "",
-     "status": "GEWICHT: 0 KG",
-     "overlay": {
-      "type": "counter",
-      "label": "MELONEN",
-      "value": 99,
-      "unit": "99 STÜCK"
-     },
-     "see": "Nahaufnahme von riesigen Wassermelonen, die sich in deinem Inventar stapeln.",
-     "time": "day",
-     "props": [
-      "box",
-      "pile"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "A cozy living room with a sofa, a table, and a window."
-    },
-    {
-     "text": "Vierter Bug: Essen heilt sofort jeden blauen Fleck am Knie.",
-     "image": "Vierter Bug: Essen heilt sofort jeden blauen Fleck am Knie.",
-     "who": [
-      "leo"
-     ],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Essen",
-      "heilt"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du beißt in einen Apfel und der blaue Fleck an deinem Knie verschwindet augenblicklich.",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Fünfter Bug: Du kannst Gegenstände in der Luft einfrieren und stapeln.",
-     "image": "Fünfter Bug: Du kannst Gegenstände in der Luft einfrieren und stapeln.",
-     "who": [
-      "leo"
-     ],
-     "place": "street",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Gegenstände",
-      "einfrieren"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "card",
-      "text": "PHYSIK DEAKTIVIERT"
-     },
-     "see": "Kisten schweben mitten im Raum in der Luft aufeinander gestapelt.",
-     "time": "day",
-     "props": [
-      "box",
-      "barrel"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "float",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Sechster Bug: Jeder Mensch läuft exakt die gleiche steife Standard-Animation.",
-     "image": "Sechster Bug: Jeder Mensch läuft exakt die gleiche steife Standard-Animation.",
-     "who": [
-      "leo"
-     ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Mensch",
-      "Standard-Animation"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Mehrere Passanten in der Stadt laufen völlig steif und identisch wie in einer T-Pose.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "passant",
-       "action": "walk",
-       "emotion": "",
-       "emote": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "walk",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Siebter Bug: Nachts schaltet die Welt komplett auf dunkle Grafik um.",
-     "image": "Siebter Bug: Nachts schaltet die Welt komplett auf dunkle Grafik um.",
-     "who": [
-      "leo"
-     ],
-     "place": "park",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Nachts",
-      "Grafik"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "tag",
-      "text": "RENDER-FEHLER"
-     },
-     "see": "Schlagartig wird es stockfinster und die Umgebung wechselt zu minimalistischer Vektorgrafik.",
-     "backdrop": {
-      "sky": "night",
-      "ground": "grass",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [
-      "streetlamp"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "flashlight"
-      }
-     ],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Achter Bug: Du hörst plötzlich immer dieselbe dreiminütige Hintergrundmusik in Dauerschleife.",
-     "image": "Achter Bug: Du hörst plötzlich immer dieselbe dreiminütige Hintergrundmusik in Dauerschleife.",
-     "who": [
-      "leo"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Hintergrundmusik",
-      "Dauerschleife"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du hältst dir genervt die Ohren zu, während Noten-Symbole über deinem Kopf schweben.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "angry",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Neunter Bug: Du kannst mit NPC-Passanten nur drei vorgefertigte Sätze reden.",
-     "image": "Neunter Bug: Du kannst mit NPC-Passanten nur drei vorgefertigte Sätze reden.",
-     "who": [
-      "leo"
-     ],
-     "place": "park",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Passanten",
-      "Sätze"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "checklist",
-      "title": "DIALOGE",
-      "items": [
-       [
-        "Hallo",
-        true
-       ],
-       [
-        "Schönes Wetter",
-        true
-       ],
-       [
-        "Hilfe",
-        false
-       ]
-      ]
-     },
-     "see": "Du sprichst mit einer Person im Park, über der drei vorgegebene Textboxen schweben.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "?",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "passant",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "right",
-       "speaks": false,
-       "say": "HALLO! JA. NEIN."
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Zehnter Bug: Speichern vor der Prüfung ist erlaubt.",
-     "image": "Zehnter Bug: Speichern vor der Prüfung ist erlaubt.",
-     "who": [
-      "leo"
-     ],
-     "place": "classroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Speichern",
-      "Prüfung"
-     ],
-     "hud": "",
-     "status": "STAND: GESPEICHERT",
-     "overlay": null,
-     "see": "Vor einem Klassenzimmer drückst du auf ein schwebendes Speichern-Symbol.",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Elfter Bug: Ein kleiner Fehler beim Speichern löscht dein ganzes Leben.",
-     "image": "Elfter Bug: Ein kleiner Fehler beim Speichern löscht dein ganzes Leben.",
-     "who": [
-      "leo"
-     ],
-     "place": "hallway",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Fehler",
-      "löscht"
-     ],
-     "hud": "",
-     "status": "FEHLER 404",
-     "overlay": {
-      "type": "card",
-      "text": "SAVEGAME KORRUPT"
-     },
-     "see": "Ein riesiges rotes Error-Fenster löscht den Hintergrund weg.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "fall",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Zwölfter Bug: Die Schwerkraft setzt kurz aus, wenn du laut niesen musst.",
-     "image": "Zwölfter Bug: Die Schwerkraft setzt kurz aus, wenn du laut niesen musst.",
-     "who": [
-      "leo"
-     ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Schwerkraft",
-      "niesen"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du musst niesen und schwebst dabei hilflos in der Luft nach oben.",
-     "time": "day",
-     "weather": "wind",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "float",
-       "emotion": "shocked",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "watch",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Dreizehnter Bug: Jede Tür führt in denselben blauen Raum.",
-     "image": "Dreizehnter Bug: Jede Tür führt in denselben blauen Raum.",
-     "who": [
-      "leo"
-     ],
-     "place": "hallway",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Tür",
-      "Raum"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du öffnest eine Haustür und schaust in einen komplett leeren, blauen Raum.",
-     "time": "day",
-     "props": [
-      "door"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Vierzehnter Bug: Du kannst im Laden einfach den Spruch vom Händler überspringen.",
-     "image": "Vierzehnter Bug: Du kannst im Laden einfach den Spruch vom Händler überspringen.",
-     "who": [
-      "leo"
-     ],
-     "place": "supermarket",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "überspringen",
-      "Händler"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Im Supermarkt drückst du auf einen Skip-Button, um das Gerede des Kassierers abzubrechen.",
-     "time": "day",
-     "props": [
-      "cart"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "speaks": true,
-       "say": "SKIP >"
-      },
-      {
-       "id": "passant",
-       "action": "idle",
-       "emotion": "shocked",
-       "emote": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Fünfzehnter Bug: Dein Kontostand zeigt plötzlich unendlich viele Neunen.",
-     "image": "Fünfzehnter Bug: Dein Kontostand zeigt plötzlich unendlich viele Neunen.",
-     "who": [
-      "leo"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Kontostand",
-      "Neunen"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "counter",
-      "label": "GELD",
-      "value": 999999,
-      "unit": "EURO"
-     },
-     "see": "Du schaust ungläubig auf dein Smartphone, wo der Kontostand mit unzähligen Neunen überläuft.",
-     "time": "day",
-     "props": [
-      "money"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "A cozy living room with a sofa, a table, and a window."
-    },
-    {
-     "text": "Sechzehnter Bug: Das Spiel stürzt ab und du wachst in deinem Bett auf.",
-     "image": "Sechzehnter Bug: Das Spiel stürzt ab und du wachst in deinem Bett auf.",
-     "who": [
-      "leo"
-     ],
-     "place": "bedroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "abstürzt",
-      "Bett"
-     ],
-     "hud": "",
-     "status": "CRASH",
-     "overlay": null,
-     "see": "Die Welt friert mit Glitch-Effekten ein und du schreckst im Bett auf.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "shocked",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Siebzehnter Bug: Die Entwickler haben vergessen, die Weltgrenze zu sperren.",
-     "image": "Siebzehnter Bug: Die Entwickler haben vergessen, die Weltgrenze zu sperren.",
-     "who": [
-      "leo"
-     ],
-     "place": "street",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Entwickler",
-      "Weltgrenze"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "card",
-      "text": "ENDE DER MAP"
-     },
-     "see": "Ein Zaun am Rande der Stadt ist durchbrochen und dahinter fehlt die Bodentextur.",
-     "backdrop": {
-      "sky": "storm",
-      "ground": "rock",
-      "elements": [
-       "ruins"
-      ]
-     },
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Achtzehnter Bug: Dahinter wartet nur das pure Nichts.",
-     "image": "Achtzehnter Bug: Dahinter wartet nur das pure Nichts.",
-     "who": [
-      "leo"
-     ],
-     "place": "space",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Dahinter",
-      "Nichts"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Blick in ein endloses graues Nichts ohne Boden und Himmel.",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Neunzehnter Bug: Du musst folgen, bevor dein Spiel komplett einfriert.",
-     "image": "Neunzehnter Bug: Du musst folgen, bevor dein Spiel komplett einfriert.",
-     "who": [
-      "leo"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "folg",
-      "Update"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "choice",
-      "a": "Update laden",
-      "b": "Spiel beenden"
-     },
-     "see": "Du zeigst dringend auf den Zuschauer, während hinter dir das Bild langsam einfriert.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "say": "FOLGEN!"
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "A cozy living room with a sofa, a table, and a window."
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "needs": [
-   "einkaufsbeutel",
-   "wassermelone",
-   "tuer"
-  ],
-  "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
-  "created": 1794565631.8571453
- },
  "2026-11-13 21:00": {
   "category": "whatif",
   "topic": "Ein kleiner Akt der Menschlichkeit, der die Welt für einen Moment rettet",
@@ -3236,5 +2375,759 @@
   ],
   "title": "DDR-Flucht: Die unmöglichste Flucht mit einem Ballon",
   "created": 1794651878.6275818
+ },
+ "2026-11-14 21:00": {
+  "category": "mysterien",
+  "topic": "Der verschollene Nazi-Goldschatz im Toplitzsee: Was liegt wirklich im tiefsten Wasser?",
+  "trend": null,
+  "script": {
+   "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
+   "description": "Was liegt wirklich am Grund des Toplitzsees?\nTaucher suchten nach Nazi-Gold und fanden ungeahnte Rätsel in hundert Meter Tiefe.\nGlaubst du an den versunkenen Schatz?",
+   "hashtags": [
+    "#shorts",
+    "#mysterien",
+    "#toplitzsee",
+    "#geschichte",
+    "#nazigold",
+    "#rätsel",
+    "#viral",
+    "#deutschland"
+   ],
+   "tags": [
+    "toplitzsee",
+    "nazi gold",
+    "schatzsuche",
+    "ungelöste mysterien",
+    "geheimnis",
+    "österreich",
+    "taucher",
+    "geschichte"
+   ],
+   "thumbnail": {
+    "image": "A mysterious dark underwater scene inside a deep alpine lake. Heavy wooden crates with rusted metallic locks rest on the murky bottom mud. Submersible lights shine brightly through pitch black water onto the mysterious boxes. High contrast, cinematic suspense, top third clear.",
+    "text": "GOLD IM SEE?"
+   },
+   "wishes": [
+    "kiste"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "orange",
+     "hat": "",
+     "hair": "curly",
+     "gender": "w",
+     "hair_color": "dunkelbraun",
+     "skin": "mittel"
+    },
+    "taucher": {
+     "shirt": "schwarz",
+     "hat": "helmet",
+     "hair": "",
+     "gender": "m",
+     "hair_color": "schwarz",
+     "skin": "weiß"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein einsamer See zwischen steilen Bergen im Nebel.",
+     "text": "Drei mysteriöse Kisten im Toplitzsee verändern bis heute die Geschichtsbücher.",
+     "image": "A calm foggy mountain lake surrounded by steep dark cliffs. A small wooden boat floats empty near the shore. Dark moody atmosphere.",
+     "who": [],
+     "place": "lake",
+     "backdrop": {
+      "sky": "haze",
+      "ground": "water",
+      "elements": [
+       "mountains",
+       "lake",
+       "forest"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "mysteriöse",
+      "Kisten"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "TOPLITZSEE"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und das gruseligste Rätsel wartet tief auf dem dunklen Grund.",
+     "image": "Deep black water with muddy bottom. Light beams cut through the darkness.",
+     "who": [],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "submersible"
+     ],
+     "actors": [
+      {
+       "id": "taucher",
+       "action": "float",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "flashlight"
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "shot": "event",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "gruseligste",
+      "Rätsel"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Figur blickt erstaunt auf eine alte Landkarte.",
+     "text": "Im April neunzehnhundertfünfundvierzig transportierten deutsche Soldaten schwere Holzkisten an den See.",
+     "image": "A person holding an old yellowed map near a mountain lake, pointing at the water with a shocked expression.",
+     "who": [
+      "du"
+     ],
+     "place": "lake",
+     "backdrop": {
+      "sky": "storm",
+      "ground": "rock",
+      "elements": [
+       "mountains",
+       "lake"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "map"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Holzkisten"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "APRIL 1945"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Holzkisten versinken im Wasser.",
+     "text": "Sie versenkten alles mitten in der Nacht im über hundert Meter tiefen Wasser.",
+     "image": "Wooden heavy crates falling down into deep dark blue water creating bubbles.",
+     "who": [],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "taucher",
+       "action": "float",
+       "emotion": "tense",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "hundert",
+      "Meter"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "103 METER TIEF"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik über Gerüchte und Goldstangen.",
+     "text": "Sofort entstanden Gerüchte über Milliarden an verstecktem Gold der Nazi-Führung.",
+     "image": "Sofort entstanden Gerüchte über Milliarden an verstecktem Gold der Nazi-Führung.",
+     "who": [],
+     "place": "office",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "GERÜCHTE",
+      "value": "BILLIONEN",
+      "label": "REICHSMARK IN GOLD"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Milliarden",
+      "Gold"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Taucher schwimmt im dunklen Wasser.",
+     "text": "Zahlreiche Schatzsucher riskierten in den folgenden Jahrzehnten ihr Leben im kalten See.",
+     "image": "A diver in black suit swimming through pitch dark murky underwater space with flashlight.",
+     "who": [
+      "taucher"
+     ],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "submersible"
+     ],
+     "actors": [
+      {
+       "id": "taucher",
+       "action": "float",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "flashlight"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Schatzsucher",
+      "Leben"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zeitungsmeldung fliegt ins Bild.",
+     "text": "Neunzehnhundertsiebenundfünfzig ertrank ein Taucher bei einer verbotenen Geheim-Expedition mysteriös.",
+     "image": "Neunzehnhundertsiebenundfünfzig ertrank ein Taucher bei einer verbotenen Geheim-Expedition mysteriös.",
+     "who": [],
+     "place": "office",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "shot": "graphic",
+     "graphic": {
+      "type": "news",
+      "kicker": "ALPEN-KURIER",
+      "text": "TAUCHER VERMISST",
+      "sub": "Tödliches Unglück im Toplitzsee"
+     },
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "ertrank",
+      "mysteriös"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "TÖDLICH",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Taucher findet eine Kiste am Boden.",
+     "text": "Zwei Jahre später holte ein Forscherteam endlich die ersten Kisten an die Oberfläche.",
+     "image": "Diver near wooden crate resting in mud under water pointing flashlight.",
+     "who": [
+      "taucher"
+     ],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "kiste"
+     ],
+     "actors": [
+      {
+       "id": "taucher",
+       "action": "point",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "right",
+       "speaks": true,
+       "hold": "flashlight"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Forscherteam",
+      "Kisten"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "JAHR 1959"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Große Zahlen-Grafik über gefälschtes Geld.",
+     "text": "Doch darin lag kein Gold, sondern gefälschte britische Pfund-Banknoten.",
+     "image": "Doch darin lag kein Gold, sondern gefälschte britische Pfund-Banknoten.",
+     "who": [],
+     "place": "office",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "GEFUNDEN",
+      "value": "134 MIO.",
+      "label": "GEFÄLSCHTE PFUND"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "kein Gold",
+      "gefälschte"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Hauptfigur sieht schockiert auf eine gefälschte Banknote.",
+     "text": "Die Nazis wollten damit eigentlich die britische Wirtschaft komplett lahmlegen.",
+     "image": "Character looking at paper with shocked expression in office room.",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Wirtschaft",
+      "lahmlegen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Prüfstempel für den Fund.",
+     "text": "Fünfundachtzig Millionen gefälschte Scheine wurden offiziell aus dem Wasser geborgen.",
+     "image": "Fünfundachtzig Millionen gefälschte Scheine wurden offiziell aus dem Wasser geborgen.",
+     "who": [],
+     "place": "office",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "badge",
+      "kicker": "BELEGT",
+      "text": "85 MIO. SCHEINE"
+     },
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Fünfundachtzig",
+      "Millionen"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "BEWIESEN",
+      "color": "green"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Tauchboot sucht den Grund ab.",
+     "text": "Spätere High-Tech-Suchboote entdeckten außerdem geheime Raketenbauteile und Waffenprüfstände.",
+     "image": "Yellow research submersible underwater near rocky sunken structure using spotlight.",
+     "who": [],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "rocket",
+      "submersible"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "High-Tech",
+      "Raketenbauteile"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Radarschirm zeigt Hindernisse unter Wasser.",
+     "text": "Aber am Boden liegt eine zwanzig Meter dicke Schicht aus umgestürzten Bäumen.",
+     "image": "Aber am Boden liegt eine zwanzig Meter dicke Schicht aus umgestürzten Bäumen.",
+     "who": [],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "radar",
+      "kicker": "SONAR-SCAN",
+      "text": "BAUMSCHICHT 20m",
+      "sub": "BLOCKIERT"
+     },
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "zwanzig",
+      "Meter"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "20 METER HOLZ"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Hauptfigur grübelt vor einer Karte.",
+     "text": "Niemand weiß genau, was unter diesem riesigen Holzverhau noch verborgen bleibt.",
+     "image": "Character looking puzzled at blue prints on a table with hand on chin.",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "verborgen",
+      "bleibt"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik über fehlenden Sauerstoff im Wasser.",
+     "text": "Ab zwanzig Meter Tiefe enthält der See nämlich überhaupt keinen Sauerstoff mehr.",
+     "image": "Ab zwanzig Meter Tiefe enthält der See nämlich überhaupt keinen Sauerstoff mehr.",
+     "who": [],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "OBERFLÄCHE",
+      "right": "TIEFE",
+      "value": "100%",
+      "sub": "0%"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "keinen",
+      "Sauerstoff"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": 4
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Kiste im tiefen Wasser gut erhalten.",
+     "text": "Deshalb verwesen dort unten weder altes Papier noch empfindliche Kisten.",
+     "image": "Underwater crate resting preserved in dark mud without damage.",
+     "who": [],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "insert",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "verwesen",
+      "Papier"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Stempelschild: Tauchverbot im See.",
+     "text": "Heute ist das Tauchen im gesamten Toplitzsee strengstens verboten.",
+     "image": "Heute ist das Tauchen im gesamten Toplitzsee strengstens verboten.",
+     "who": [],
+     "place": "lake",
+     "backdrop": {
+      "sky": "day",
+      "ground": "water",
+      "elements": [
+       "mountains",
+       "lake"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "question",
+      "text": "STRENG VERBOTEN"
+     },
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "strengstens",
+      "verboten"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "VERBOTEN",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Hauptfigur zeigt ratlos auf den See.",
+     "text": "Das Gold wurde nie gefunden, aber Forscher vermuten noch immer unbekannte Dokumente.",
+     "image": "Character standing near lake, shaking head with open arms.",
+     "who": [
+      "du"
+     ],
+     "place": "lake",
+     "backdrop": {
+      "sky": "sunset",
+      "ground": "grass",
+      "elements": [
+       "mountains",
+       "lake"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "unbekannte",
+      "Dokumente"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Kamera taucht wieder schnell unter Wasser.",
+     "text": "Und genau deshalb faszinieren die ...",
+     "image": "Quick transition down into deep murky lake water again.",
+     "who": [],
+     "place": "underwater",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "genau",
+      "deshalb"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "TOPLITZSEE · ÖSTERREICH",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [],
+  "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
+  "created": 1794669720.3536534
  }
 }
