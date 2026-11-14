@@ -1097,6 +1097,10 @@ def direct(scenes, times, topic="", style="", look=""):
                     for cur_c in ("reichsmark", "euro", "dollar", "pfund", "franken", "rubel", "yen", "d-mark", "goldmark"):
                         if cur_c in v_c.lower() and cur_c not in low_c0:
                             box[key] = ""
+        for box in (sc.get("overlay"), sc.get("graphic")):  # ausgeschriebene Jahreszahl auf Schild oder Grafik → Ziffern (sonst wird das Schild abgeschnitten)
+            for key in ("text", "kicker", "sub", "label", "title") if isinstance(box, dict) else ():
+                if isinstance(box.get(key), str) and "hundert" in box[key].lower():
+                    box[key] = year_digits(box[key])
         g_c = sc.get("graphic")
         if isinstance(g_c, dict) and str(g_c.get("type") or "").lower() == "question" and "?" not in str(sc.get("text") or "") and str(g_c.get("text") or "").strip():
             g_c["type"] = "badge"                         # großes Fragezeichen über einem Satz, der nichts fragt („Tauchen ist streng verboten“): als Plakette zeigen
@@ -2144,8 +2148,8 @@ def _lake_story(scenes, topic="", main_id="du"):
                 sc["props"] = [{"type": "logs", "pos": 540}]
                 sc["actors"] = [_diver(acts[0] if acts else None, "center", "left" if n_under % 2 else "right", True)] if dive else []
             elif thing:
-                sc["props"] = [{"type": thing, "pos": 640 if thing == "rocketpart" else 820 if dive else 540}]
-                sc["actors"] = [_diver(acts[0] if acts else None, 400, "right", scared)] if dive else []
+                sc["props"] = [{"type": thing, "pos": 640 if thing == "rocketpart" else 800 if dive else 540}]
+                sc["actors"] = [_diver(acts[0] if acts else None, 410, "right", scared)] if dive else []
             else:
                 sc["props"] = []
                 sc["actors"] = [_diver(acts[0] if acts else None, "center", "left" if n_under % 2 else "right", scared)]
@@ -2155,7 +2159,7 @@ def _lake_story(scenes, topic="", main_id="du"):
                     sc["actors"][0].update(facing="left" if sc["actors"][0].get("facing") == "right" else "right", pos=650 if not sc["props"] else sc["actors"][0].get("pos"))
                 else:
                     sc["actors"] = [_diver(None, 400, "right", scared)]
-                    sc["props"] = [dict(q, pos=820) if q.get("type") != "logs" else q for q in sc["props"]]
+                    sc["props"] = [dict(q, pos=800) if q.get("type") != "logs" else q for q in sc["props"]]
                 sig = (tuple((q.get("type"), q.get("pos")) for q in sc["props"]), tuple((a.get("kind"), a.get("pos"), a.get("facing")) for a in sc["actors"]))
             last_under = sig
             prev_under, prev_thing = True, thing
@@ -2168,6 +2172,10 @@ def _lake_story(scenes, topic="", main_id="du"):
         rp = places.resolve(backdrop(sc))
         bd_l = backdrop(sc)
         at_lake = isinstance(bd_l, dict) and any("lake" in str(e).lower() or "see" == str(e).lower() for e in (bd_l.get("elements") or []))
+        if isinstance(bd_l, dict) and str(bd_l.get("ground") or "").lower() in ("water", "wasser"):
+            at_lake = False                               # offene Wasserfläche mit Dampfer: am Bergsee steht man am Ufer
+            if not _re.search(r"\bboot|schiff|\bfloß|\bkahn|ruder", low):
+                sc["props"] = [q for q in sc["props"] if _key(q) not in ("ship", "wave", "debris")]
         if rp == "underwater" or (not at_lake and rp not in MAPS and not _re.search(LAKE_INDOOR_OK_RE, low)):
             sc["place"], sc["backdrop"] = "lake", dict(LAKE_SHORE)      # die Geschichte spielt am See – nicht im Büro mit Bildschirmen
             rp = "custom"
@@ -2198,6 +2206,8 @@ def _lake_story(scenes, topic="", main_id="du"):
             last_shore = thing
         else:
             sc["actors"] = people[:2]                     # kein Fisch an Land
+            if not sc["actors"] and not sc["props"]:      # leeres Ufer: die Hauptfigur blickt auf den See
+                sc["actors"] = [{"id": main_id, "action": "look_around", "emotion": "worried", "pos": "center", "speaks": False, "emote": "?", "hold": "", "say": "", "facing": ""}]
 
 
 # Tier/Wesen im Titel → es wird die Hauptfigur des Videos (wie in den Vorbild-Shorts: die Spinne ist fast in jeder Szene, mit Gefühl)
@@ -2787,6 +2797,26 @@ def _term(text):
     return term.upper() if 6 <= len(term) <= 30 and ("-" in term or " " in term or len(term) >= 10) else None
 
 
+_CENTURY = {"fünfzehn": 15, "sechzehn": 16, "siebzehn": 17, "achtzehn": 18, "neunzehn": 19}
+
+
+def year_digits(text):
+    """„FRÜHJAHR NEUNZEHNHUNDERTFÜNFUNDVIERZIG“ → „FRÜHJAHR 1945“: ausgeschriebene Jahreszahlen passen auf kein Schild."""
+    import re as _re
+    def rep(m):
+        rest = m.group(2).lower()
+        n = 0 if not rest else _number(rest)
+        if n is None or not 0 <= n < 100:
+            return m.group(0)
+        return str(_CENTURY[m.group(1).lower()] * 100 + int(n))
+    out = _re.sub(r"(?i)\b(" + "|".join(_CENTURY) + r")hundert([a-zäöüß]*)\b", rep, str(text))
+    def rep2(m):
+        rest = m.group(1).lower()
+        n = 0 if not rest else _number(rest)
+        return m.group(0) if n is None or not 0 <= n < 100 else str(2000 + int(n))
+    return _re.sub(r"(?i)\bzweitausend(?:und)?([a-zäöüß]*)\b(?=\s*(?:$|[.,!?;:·]))", rep2, out)
+
+
 def _auto_tags(scenes):
     """Beschriftungs-Schild wie in den Vorbild-Shorts: nennt der Satz ein Datum, eine Jahreszahl oder einen Anlass, steht es als kleines
     Etikett oben im Bild – nur ohne andere Einblendung, nie in zwei Szenen hintereinander und nicht in Grafik-Szenen."""
@@ -3182,6 +3212,14 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
         for a_l in actors:                                              # lange Tiere (Krebs samt Schere/Keule) ganz im Bild lassen
             if a_l.get("kind") in LONG_KINDS:
                 xs += [a_l["x1"] - 190, a_l["x1"] + 190]
+                cam["punch"] = None
+        for a_l in actors:                                              # Taucher samt Flossen und Lampe ganz im Bild lassen
+            if a_l.get("kind") == "diver":
+                xs += [max(210, a_l["x1"] - 330), min(W - 210, a_l["x1"] + 330)]
+                cam["punch"] = None
+        for k_b, x_b in props:                                          # Kistenstapel, Baumstämme: breiter als eine Figur – nicht am Rand anschneiden
+            if extras.PROP_ALIASES.get(k_b, k_b) in ("crates", "cashcrate", "rocketpart", "logs", "crates_sink"):
+                xs += [max(210, x_b - 250), min(W - 210, x_b + 250)]
                 cam["punch"] = None
         for a_l in actors:                                              # wer umfällt oder liegt, ist so breit wie sonst hoch: ganz im Bild lassen
             if a_l.get("action") in ("fall", "sleep"):

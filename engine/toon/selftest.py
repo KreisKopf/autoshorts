@@ -734,6 +734,13 @@ def main():
         assert g_[0]["graphic"]["value"] == "MILLIARDEN" and not g_[0]["graphic"].get("label"), g_[0]["graphic"]
         assert g_[1]["graphic"]["type"] == "badge", g_[1]["graphic"]
         from PIL import Image as Image_
+        assert stage.year_digits("FRÜHJAHR NEUNZEHNHUNDERTFÜNFUNDVIERZIG") == "FRÜHJAHR 1945" and stage.year_digits("EXPEDITION neunzehnhundertneunundfünfzig") == "EXPEDITION 1959" \
+            and stage.year_digits("NEUNZEHNHUNDERT") == "1900" and stage.year_digits("HUNDERT METER") == "HUNDERT METER" and stage.year_digits("ZWEITAUSENDACHT") == "2008"
+        end_ = stage.direct([{"text": "Im Toplitzsee liegt ein Schatz am Grund.", "place": "underwater"}, {"text": "Im Jahr neunzehnhundertneunundfünfzig holte eine Expedition Kisten aus dem See.", "place": "underwater", "overlay": {"type": "tag", "text": "EXPEDITION NEUNZEHNHUNDERTNEUNUNDFÜNFZIG"}},
+                             {"text": "Am dunklen Alpenufer beginnt das Rätsel von vorn.", "backdrop": {"sky": "night", "ground": "water", "elements": ["mountains", "lake"]}, "props": ["ship"], "actors": []}],
+                            [(0, 4), (4, 8), (8, 12)], "Der Schatz im Toplitzsee", "mysterien")
+        assert end_[1]["overlay"]["text"] == "EXPEDITION 1959", end_[1]["overlay"]
+        assert not end_[2]["props"] and len(end_[2]["actors"]) == 1 and not end_[2]["actors"][0].get("kind"), end_[2]
         for k_ in extras.LAKE_KINDS:
             lay_ = Image_.new("RGBA", (places.W, places.H), (0, 0, 0, 0))
             extras.draw_prop(lay_, k_, 540, 1.2)
