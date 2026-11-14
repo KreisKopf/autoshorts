@@ -1,0 +1,630 @@
+{
+ "title": "DDR-Flucht: Die unmöglichste Flucht mit einem Ballon",
+ "scenes": [
+  {
+   "text": "Zwei Familien wagen die unmöglichste Flucht aus der DDR.",
+   "see": "Zwei Männer nähen heimlich in einem dunklen Keller den riesigen Stoff zusammen.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel",
+     "pos": 650
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 240
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "DDR · 1979"
+   },
+   "status": "PLAN: GEHEIM"
+  },
+  {
+   "text": "Ihr waghalsiger Plan droht bis zur letzten Sekunde tödlich zu scheitern.",
+   "see": "Ein Notizzettel mit den strikten Gesetzen der DDR liegt auf dem Tisch.",
+   "place": "basement",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "emotion": "worried",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "TÖDLICH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Heimlich kaufen sie über tausend Quadratmeter Stoff in verschiedensten Geschäften.",
+   "see": "Die Männer nähen hunderte Quadratmeter Stoff mit einer kleinen Maschine.",
+   "place": "supermarket",
+   "time": "night",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "bag",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Jeder einzelne Kauf könnte die Stasi sofort auf ihre Spur bringen.",
+   "see": "Ein Agent beobachtet argwöhnisch ein Haus durch ein Fernglas.",
+   "place": "street",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "crowd": "worried"
+  },
+  {
+   "text": "Gemeinsam mit ihren Frauen und vier kleinen Kindern riskieren sie alles.",
+   "see": "Zwei Frauen und vier Kinder packen ängstlich kleine Taschen.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "partner",
+     "speaks": false,
+     "action": "think",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Acht Personen müssen gleichzeitig in eine selbst gebaute kleine Gondel passen.",
+   "see": "Grafik zeigt das Gewicht der Passagiere und die Tragkraft.",
+   "place": "basement",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gondel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Mitten in der Nacht bauen sie den Ballon auf einer Wiese auf.",
+   "see": "In der Nacht tragen sie den riesigen Sack auf ein dunkles Feld.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "status": "WIND: RUHIG"
+  },
+  {
+   "text": "Mit vier Gasflaschen erzeugen sie das heiße Feuer für den Auftrieb.",
+   "see": "Der Brenner zündet mit einer riesigen Stichflamme im Feld.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": []
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "fire"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "4 GASFLASCHEN"
+   }
+  },
+  {
+   "text": "Der gigantische Stoffbeutel füllt sich langsam und hebt in die Dunkelheit ab.",
+   "see": "Der Ballon hebt langsam in den Nachthimmel ab.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel",
+     "pos": 650
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 240
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Sie steigen rasend schnell auf über zweitausend Meter Höhe auf.",
+   "see": "Eine Höhenmesser-Grafik schießt extrem schnell nach oben.",
+   "place": "sky",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "FLUGHÖHE",
+    "value": "2.000 M",
+    "label": "ÜBER DEM BODEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dort oben herrscht eiskalte Temperatur von minus acht Grad Celsius.",
+   "see": "Die Menschen in der Gondel frieren extrem und zittern.",
+   "place": "sky",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "partner",
+     "speaks": false,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "thermo",
+    "value": -8.0
+   }
+  },
+  {
+   "text": "Plötzlich erfassen riesige Suchscheinwerfer der Grenze den Ballon am Himmel.",
+   "see": "Grenz-Suchscheinwerfer suchen am Boden hektisch den Himmel ab.",
+   "place": "sky",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "suchscheinwerfer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "partner",
+     "speaks": false,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "ALARM AN DER GRENZE"
+   }
+  },
+  {
+   "text": "Genau in diesem Schreckensmoment geht ihnen das allerletzte Gas aus.",
+   "see": "Das Gas brennt plötzlich aus, die Flamme erlischt zischend.",
+   "place": "sky",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_suchscheinwerfer",
+     "pos": 800
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Ballon beginnt ungebremst im freien Fall abzustürzen.",
+   "see": "Der Ballon stürzt steil durch die Wolken nach unten.",
+   "place": "sky",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "weather": "wind",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "partner",
+     "speaks": false,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "status": "FALL: 15 M/S"
+  },
+  {
+   "text": "Nach achtundzwanzig Minuten Flug krachen sie hart in ein Gebüsch.",
+   "see": "Der Ballon schlägt hart auf Bäumen und Ästen auf.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "tree",
+     "pos": 540
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "partner",
+     "speaks": false,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "28 MINUTEN FLUG"
+   }
+  },
+  {
+   "text": "Niemand weiß im dunklen Wald, auf welcher Seite der Grenze sie sind.",
+   "see": "Die Menschen schauen ängstlich in der Dunkelheit umher.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "night",
+    "ground": "soil",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Da entdecken sie ein Polizeiauto und erkennen das westliche Schild.",
+   "see": "Ein Polizeiauto steht mit blauen Lichtern an einer Straße.",
+   "place": "street",
+   "time": "night",
+   "props": [
+    {
+     "type": "police"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "partner",
+     "speaks": false,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Sie haben es tatsächlich nach Bayern geschafft und sind endlich völlig frei.",
+   "see": "Die Familien jubeln vor Erleichterung und umarmen sich.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "village"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "partner",
+     "speaks": false,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "BAYERN · BRD"
+   }
+  },
+  {
+   "text": "Eine unglaubliche Tat, denn genau so planen...",
+   "see": "Grafik einer Zeitungsmeldung über die Ballonflucht.",
+   "place": "basement",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "news",
+    "kicker": "TAGESZEITUNG",
+    "sub": "Spektakuläre Landung in Bayern",
+    "text": "FLUCHT MIT BALLON GLÜCKT",
+    "dark": false
+   }
+  }
+ ]
+}

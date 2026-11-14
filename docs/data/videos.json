@@ -3043,5 +3043,44 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7707995281513614625?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 89,
+  "category": "storys",
+  "topic": "Der spektakulärste Gefängnisausbruch aller Zeiten: Wie zwei Männer mit einem selbstgebauten Heißluftballon über die DDR-Grenze flohen",
+  "status": "review",
+  "created": 1794669056.422152,
+  "title": "DDR-Flucht: Die unmöglichste Flucht mit einem Ballon",
+  "description": "Zwei Familien bauten heimlich einen Ballon für die Flucht.\nSie riskierten ihr Leben für die Freiheit über der DDR-Grenze.\nWürdest du dich in diesen Ballon trauen?",
+  "hashtags": [
+   "#shorts",
+   "#geschichte",
+   "#ddr",
+   "#flucht",
+   "#spannung",
+   "#viral",
+   "#wissen"
+  ],
+  "tags": [
+   "ddr flucht",
+   "heißluftballon flucht",
+   "stasi",
+   "deutsche geschichte",
+   "spannende storys"
+  ],
+  "thumb_text": "FLUCHT IM BALLON",
+  "missing": null,
+  "cover_ms": 74799,
+  "duration": 74.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-14 18:00",
+  "review_at": 1794669516.119308
  }
 ]
