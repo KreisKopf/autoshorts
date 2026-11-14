@@ -670,6 +670,18 @@ def main():
         assert s2[5].get("hud") == "WALD" and s2[6]["overlay"] == {"type": "card", "text": "8 MENSCHEN"} and not s2[8].get("overlay"), (s2[5].get("hud"), s2[6].get("overlay"), s2[8].get("overlay"))
         for sc in s2:
             assert frame(sc, {"du": {}}) is not None
+        s3 = stage.direct([{"text": t_, "place": "street", "time": "night", "props": ["car"] if n_ == 4 else [], "actors": [{"id": "du"}],
+                            "shot": "graphic" if n_ in (1, 3) else "", "graphic": {"type": "number", "value": "8", "label": "MENSCHEN"} if n_ in (1, 3) else None,
+                            "overlay": {"type": "card", "text": "1000 METER STOFF"} if n_ == 0 else None}
+                           for n_, t_ in enumerate(["Sie kaufen über tausend Quadratmeter Stoff für den Heißluftballon.", "Acht Menschen steigen ein, der Ballon hebt ab.", "Er fliegt über die Grenze.",
+                                                    "Nach achtundzwanzig Minuten landen sie in einem Gebüsch.", "Sie sind in Bayern, alle haben überlebt."])],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(5)], "Flucht mit dem Heißluftballon", "storys", "")
+        assert [sc.get("_balloon") for sc in s3][1:4] == ["fly", "fly", "down"] and s3[1].get("shot") != "graphic" and s3[3].get("shot") != "graphic", [(sc.get("_balloon"), sc.get("shot")) for sc in s3]
+        assert places.resolve(stage.backdrop(s3[4])) != "street" and not s3[4].get("props"), s3[4]
+        assert s3[0]["overlay"]["text"] == "1000 QUADRATMETER STOFF", s3[0]["overlay"]
+        from .. import writer as _wr
+        echo = _wr.polish({"title": "x", "scenes": [{"text": "Acht Menschen fliehen im Ballon aus der DDR."}] + [{"text": f"Satz Nummer {n_} erzählt etwas anderes."} for n_ in range(8)] + [{"text": "Acht Menschen fliehen im Ballon aus der DDR."}]})
+        assert len(echo["scenes"]) == 9, len(echo["scenes"])
         party = stage.direct([{"text": "Zum Geburtstag gibt es einen Luftballon.", "place": "livingroom", "actors": [{"id": "du"}]}] * 4, [(n_ * 3, n_ * 3 + 3) for n_ in range(4)], "Geburtstag")
         assert not any(sc.get("_balloon") for sc in party), "Luftballon ist kein Heißluftballon"
         for k_ in extras.BALLOON_KINDS + ("sewing", "fabric"):

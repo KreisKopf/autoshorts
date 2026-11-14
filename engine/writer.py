@@ -459,6 +459,12 @@ def fix_label_typos(label, sentence):
 def polish(js):
     """Letzter Schliff ohne Text-KI: ß in Sprechertext, Titel und Beschreibung; englische Wörter in Einblendungen und Grafiken
     („GEHIRN-EFFECT“) werden deutsch."""
+    import re as _re_p
+    scs_p = [x for x in js.get("scenes") or [] if isinstance(x, dict)]
+    if len(scs_p) >= 8:                                   # „Schleife“ wörtlich genommen: der letzte Satz wiederholt den ersten – niemand will denselben Satz zweimal hören
+        w_a, w_b = (set(_re_p.sub(r"[^a-zäöüß0-9 ]", "", str(x.get("text") or "").lower()).split()) for x in (scs_p[0], scs_p[-1]))
+        if w_a and len(w_b) >= 4 and len(w_a & w_b) / max(len(w_a), len(w_b)) >= 0.8:
+            js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
     for k in ("title", "description"):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])

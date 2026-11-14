@@ -1071,6 +1071,13 @@ def direct(scenes, times, topic="", style="", look=""):
             if isinstance(box.get(key), str) and _re0.search(_clock, box[key].upper()):
                 parts = [x.strip() for x in _re0.split(r"\s*[·|•]\s*|\s+[–-]\s+", box[key]) if x.strip() and not _re0.fullmatch(_clock, x.strip().upper())]
                 box[key] = " · ".join(parts) if key == "hud" else ""
+        low_c0 = str(sc.get("text") or "").lower()
+        for pre_c in ("quadrat", "kubik"):                # „über tausend Quadratmeter Stoff“ → Schild „1000 METER STOFF“: die Einheit stimmt nicht
+            if pre_c + "meter" in low_c0 and not _re0.search(r"(?<![a-zäöü])(?:kilo)?meter", low_c0):
+                for box in (sc.get("overlay"), sc.get("graphic")):
+                    for key in ("text", "label", "unit", "sub") if isinstance(box, dict) else ():
+                        if isinstance(box.get(key), str):
+                            box[key] = _re0.sub(r"(?<![A-Za-zÄÖÜäöü])METERN?\b", pre_c.upper() + "METER", box[key])
         ov_c = sc.get("overlay")
         if isinstance(ov_c, dict) and str(ov_c.get("type") or "") == "choice" and "?" not in str(sc.get("text") or "") and not _re0.search(r"\boder\b", str(sc.get("text") or "").lower()):
             sc["overlay"] = None                          # Auswahl „A/B“ an einem Satz, der gar keine Frage stellt
@@ -2176,7 +2183,7 @@ def _balloon_story(scenes, topic=""):
     if not _re.search(HOTAIR_RE, (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in scenes if isinstance(sc, dict))).lower()):
         return
     night = any(isinstance(sc, dict) and str(sc.get("time") or "").lower() == "night" for sc in scenes)
-    air = dark = fell = prev_ground = False
+    air = dark = fell = prev_ground = landed = False
     n_air, last_kind = 0, ""
 
     def stage_it(sc, kind, place, props, actors=()):
@@ -2210,10 +2217,14 @@ def _balloon_story(scenes, topic=""):
         humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")][:2]
         if air and down:                                                  # Landung: Hülle im Gebüsch, Gondel schief im Gras, die Menschen stehen daneben
             air = dark = fell = prev_ground = False
+            g_d = graphics.clean(sc.get("graphic")) if sc.get("shot") == "graphic" else None
+            if g_d and g_d.get("type") in ("number", "counter"):          # die Landung will man sehen – die Zahl („28 MINUTEN“) wird zum Schild
+                sc["overlay"] = {"type": "card", "text": f"{g_d.get('value')} {g_d.get('label') or g_d.get('unit') or ''}".strip().upper()}
+                sc["shot"], sc["graphic"] = "", None
             for a in humans[:1]:
                 a.update(action="shocked", emotion="scared", pos=170, to="", hold="", emote="!", facing="right")
             stage_it(sc, "down", "ground", [{"type": "balloon_down", "pos": 650}], humans[:1])
-            last_kind = "down"
+            last_kind, landed = "down", True
             continue
         if air or (up and (word or prev_ground)):                         # in der Luft
             first = not air
@@ -2222,6 +2233,10 @@ def _balloon_story(scenes, topic=""):
                 fell = True
             elif _re.search(B_GAS_RE, low):
                 dark = True
+            g_b = graphics.clean(sc.get("graphic")) if sc.get("shot") == "graphic" else None
+            if first and g_b and g_b.get("type") in ("number", "counter"):   # der Ballon hebt ab: das will man sehen – die Zahl wird zum Schild
+                sc["overlay"] = {"type": "card", "text": f"{g_b.get('value')} {g_b.get('label') or g_b.get('unit') or ''}".strip().upper()}
+                sc["shot"], sc["graphic"] = "", None
             pos = (540, 470, 610)[n_air % 3]
             n_air += 1
             if fell:
@@ -2266,6 +2281,13 @@ def _balloon_story(scenes, topic=""):
             prev_ground, last_kind = True, sc["_balloon"]
             continue
         prev_ground = False
+        if landed and sc.get("shot") != "graphic" and not _said_place(low) and places.resolve(backdrop(sc)) in ("street", "plain", "livingroom", "basement", "supermarket", "highsky"):
+            sc["place"], sc["backdrop"] = "fields", {"sky": "night" if night else "day", "ground": "grass", "elements": ["village"]}   # gelandet wird auf dem Land: Wiese am Dorfrand, keine Großstadtstraße
+            sc["crowd"] = ""
+            if night:
+                sc["time"] = "night"
+        if landed and sc.get("shot") != "graphic" and not _re.search(r"\bauto|\bpkw|\bwagen\b|\bbus\b|laster|lkw", low):   # kein beliebiges rotes Auto neben den Geretteten
+            sc["props"] = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in ("car", "bus", "truck", "trafficlight", "streetlamp"))]
         if sc.get("shot") != "graphic":                                   # ein Ballon aus dem Drehbuch in einem Satz, der nicht vom Ballon handelt (im Wohnzimmer, im Laden): raus
             kept = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in extras.BALLOON_KINDS)]
             if len(kept) != len(sc.get("props") or []):
@@ -2499,6 +2521,9 @@ def _auto_explain(scenes):
             prev_stamp = ""
             continue
         items = _list_items(txt)
+        _cnt = r"(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\d+)"
+        if items and not any(_re.search(pat, low) for pat, _tt in LIST_TITLES) and (_re.search(_cnt + r" \w+ und " + _cnt + r" \w+", low) or _re.search(FAMILY_RE, low)):
+            items = None                                  # „vier Erwachsene und vier Kinder“ nennt Mengen, keine Punkte zum Abhaken
         if items:
             title = next((tt for pat, tt in LIST_TITLES if _re.search(pat, low)), "LISTE")
             sc["overlay"] = {"type": "checklist", "title": title, "items": [[w, True] for w in items]}
