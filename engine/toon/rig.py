@@ -282,7 +282,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     ha = pose.head * f + lean
     hc = _pt(top, 180 - ha, hr * 0.86)
     rx, ry = hr * 1.04, hr * 0.96
-    hairy = not mask and look.hat not in ("helmet",)
+    hairy = not mask and look.hat not in ("helmet", "army")
     fem = look.fem and not mask
     if hairy and look.hair in ("long", "bob"):           # Haar hinten: fließt weich bis über die Schultern (bob: bis zum Kinn), runde Spitzen
         low = ry * (1.55 if look.hair == "long" else 0.92)
@@ -404,7 +404,15 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     # Kopfbedeckung
     hcx, ty = hc[0], hc[1] - ry
     hat_box = (hcx - rx * 1.04, ty - 12 * u, hcx + rx * 1.04, ty + hr * 1.2)
-    if look.hat in ("cap", "helmet", "beanie"):
+    if look.hat == "army":                                 # schlichter graugrüner Helm ohne jedes Abzeichen (Soldaten in Geschichts-Videos)
+        col = (104, 116, 100)
+        d.chord((hat_box[0] - 8 * u - o, hat_box[1] - o, hat_box[2] + 8 * u + o, hat_box[3] + 10 * u + o), 180, 360, fill=INK)
+        d.chord((hat_box[0] - 8 * u, hat_box[1], hat_box[2] + 8 * u, hat_box[3] + 10 * u), 180, 360, fill=_dark(col, 0.22))
+        d.chord((hat_box[0] - 8 * u + (12 * k if f > 0 else 0), hat_box[1], hat_box[2] + 8 * u - (12 * k if f < 0 else 0), hat_box[3] + 10 * u), 180, 360, fill=col)
+        base = ty + hr * 0.6
+        d.rounded_rectangle((hcx - rx * 1.16 - o, base - 2 * u - o, hcx + rx * 1.16 + o, base + 12 * u + o), 8 * u, fill=INK)
+        d.rounded_rectangle((hcx - rx * 1.16, base - 2 * u, hcx + rx * 1.16, base + 12 * u), 7 * u, fill=_dark(col, 0.1))
+    elif look.hat in ("cap", "helmet", "beanie"):
         col = (242, 140, 40) if look.hat == "helmet" else look.hat_color
         d.chord((hat_box[0] - o, hat_box[1] - o, hat_box[2] + o, hat_box[3] + o), 180, 360, fill=INK)
         d.chord(hat_box, 180, 360, fill=_dark(col, 0.22))

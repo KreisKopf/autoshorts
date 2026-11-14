@@ -197,6 +197,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Tiefsee: submersible (Forschungs-Tauchboot mit Scheinwerfer und Sonar-Ringen – nur am Ort underwater). "place": "underwater" mit
            "time": "night" zeigt die dunkle Tiefsee (Schlick, Felsen, kein Sonnenlicht) – für Meeresboden, Wracks, Flugschreiber; dafür KEIN
            "backdrop" mit Meeresoberfläche angeben. Nennt der Satz Blackbox/Flugschreiber, Wrack oder Sonar/Tauchboot, stellt die Regie sie dort selbst hin.
+           Schatz im See (versenkte Kisten, Taucher): "kind": "diver" ist ein Taucher im Neoprenanzug (nur am Ort underwater) – NIE fish für einen
+           Taucher. Dinge: crate/crates (Holzkisten), cashcrate (offene Kiste voller Geldscheine), goldbars (Goldbarren), logs (versunkene
+           Baumstämme, nur underwater). Spielt die Geschichte an einem See, zeigt die Regie unter Wasser von selbst den dunklen Seegrund.
            Heißluftballon: balloon (fliegt, acht Köpfe in der Gondel), gondola (die Gondel ganz nah), searchlight (Suchscheinwerfer vom Boden),
            dazu sewing (Nähmaschine mit Stoffbahnen) und fabric (Stoffballen). Die Regie stellt den Ballon selbst richtig hin (am Boden als Stoffberg
            mit Gondel, beim Start mit Flamme, in der Luft vor hohem Himmel, nach der Landung im Gebüsch) – in Flug-Sätzen KEINE Figuren angeben.

@@ -209,6 +209,7 @@ def _prepare(scene, cast):
     scene = sanitize(scene)
     cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
+    places.LAKE[0] = bool(scene.get("_lake"))             # Schatzsuche im See: „unter Wasser“ ist der Seegrund, nicht das Meer
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
     ov = scene.get("overlay") if isinstance(scene.get("overlay"), dict) else {}
     scale = 0.9 if str(ov.get("type")) in TALL_OV else SCALE
@@ -289,7 +290,7 @@ def _prepare(scene, cast):
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "submersible":
             continue                                              # ein Tauchboot schwebt nur unter Wasser frei im Bild – nicht am Himmel, nicht im Zimmer
         if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain", "highsky") and not (place == "underwater" and
-                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("submersible", "ping")) and \
+                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.WATER_KINDS) and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY and str(scene.get("shot") or "") != "insert":
             if place in places.WINDOWS and len(win) < 2:          # was am Himmel passiert, sieht man drinnen durchs Fenster
                 win.append(extras.PROP_ALIASES.get(str(p["type"]).lower(), str(p["type"]).lower()))
@@ -488,7 +489,7 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
             _shadow(frame, int(x), int(gy), int(cut.width * 0.42))
         frame.paste(cut, (int(px0), int(py0)), cut)
         return
-    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse", "ship", "debris"):
+    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse", "ship", "debris", "logs", "crates_sink"):
         extras.draw_prop(frame, kind, x, t)
         return
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -746,6 +747,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         a_lift, a_hit = _float_lift(flo, t, a["seed"], 190.0, aloft) if flo else (0.0, None)
         if a["kind"] in SEA_KINDS and a.get("hero") and not close and not props:
             a_lift += (70 if a["kind"] == "jelly" else 150) * scale                          # Schwimmer treiben über dem Grund – frei von der Untertitel-Zeile
+        if a["kind"] == "diver" and not close:
+            a_lift += 150 * scale                                                             # der Taucher schwebt über Kisten und Stämmen, nicht darin
         landed = a_hit if a_hit is not None and (landed is None or a_hit > landed) else landed
         head_y = gy - 505 * scale
         if a["kind"]:
@@ -1078,6 +1081,25 @@ def direct(scenes, times, topic="", style="", look=""):
                     for key in ("text", "label", "unit", "sub") if isinstance(box, dict) else ():
                         if isinstance(box.get(key), str):
                             box[key] = _re0.sub(r"(?<![A-Za-zÄÖÜäöü])METERN?\b", pre_c.upper() + "METER", box[key])
+        for box in (sc.get("overlay"), sc.get("graphic")):  # „Milliarden“ gesagt, „BILLIONEN“ gezeigt (falscher Freund aus dem Englischen) – und Währungen, die niemand nennt
+            if not isinstance(box, dict):
+                continue
+            for key in ("value", "text", "label", "sub", "unit", "kicker"):
+                v_c = box.get(key)
+                if not isinstance(v_c, str):
+                    continue
+                if "milliard" in low_c0 and "billion" not in low_c0 and _re0.search(r"BILLION|\bBIO\b", v_c.upper()):
+                    v_c = _re0.sub(r"(?i)billionen", "MILLIARDEN", v_c)
+                    v_c = _re0.sub(r"(?i)billion", "MILLIARDE", v_c)
+                    v_c = _re0.sub(r"(?i)\bbio\b\.?", "MRD.", v_c)
+                    box[key] = v_c
+                if key in ("label", "sub", "unit", "kicker"):
+                    for cur_c in ("reichsmark", "euro", "dollar", "pfund", "franken", "rubel", "yen", "d-mark", "goldmark"):
+                        if cur_c in v_c.lower() and cur_c not in low_c0:
+                            box[key] = ""
+        g_c = sc.get("graphic")
+        if isinstance(g_c, dict) and str(g_c.get("type") or "").lower() == "question" and "?" not in str(sc.get("text") or "") and str(g_c.get("text") or "").strip():
+            g_c["type"] = "badge"                         # großes Fragezeichen über einem Satz, der nichts fragt („Tauchen ist streng verboten“): als Plakette zeigen
         ov_c = sc.get("overlay")
         if isinstance(ov_c, dict) and str(ov_c.get("type") or "") == "choice" and "?" not in str(sc.get("text") or "") and not _re0.search(r"\boder\b", str(sc.get("text") or "").lower()):
             sc["overlay"] = None                          # Auswahl „A/B“ an einem Satz, der gar keine Frage stellt
@@ -1896,7 +1918,7 @@ def direct(scenes, times, topic="", style="", look=""):
         seas = [a for a in acts_s if str(a.get("kind") or "").lower() in SEA_KINDS]
         low_s = str(sc.get("text") or "").lower()
         _key_s = lambda q: extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower())      # noqa: E731
-        sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and (_key_s(q) not in extras.SKY or _key_s(q) in ("submersible", "ping"))]   # unter Wasser fliegt kein Flugzeug, scheint keine Sonne
+        sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and (_key_s(q) not in extras.SKY or _key_s(q) in extras.WATER_KINDS)]   # unter Wasser fliegt kein Flugzeug, scheint keine Sonne
         if sc.get("_deep") and not seas and sc.get("shot") not in ("graphic", "insert"):                           # Tiefsee-Technik: Blackbox, Wrack, Tauchboot mit Sonar
             for pat_s, k_s in ((DEEP_WRECK_RE, "lib_wrack"), (DEEP_BOX_RE, "lib_blackbox"), (SUB_RE, "submersible")):
                 if _re0.search(pat_s, low_s) and k_s in extras.PROPS and k_s not in [_key_s(q) for q in sc["props"]]:
@@ -1980,7 +2002,202 @@ def direct(scenes, times, topic="", style="", look=""):
         if sky_w and all(k in sky_w or k == "ship" for k in keys_w) and not sc.get("actors") and not sc.get("crowd") \
                 and shot_w in ("", "event", "wide") and (rp_w in places.OUTDOOR or rp_w == "space"):
             sc["_ov_low"] = 2 if "ship" in keys_w else 1  # nur Flugzeug/Satellit am Himmel (und ein Schiff darunter): das Schild steht tiefer im freien Bild, nicht quer über dem Flugzeug
+    _divers(scenes)
+    _lake_story(scenes, topic, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                                     if isinstance(a, dict) and not a.get("kind") and not str(a.get("id") or "").startswith("_")), "du"))
     return scenes
+
+
+# Schatzsuche im See (versenkte Kisten, Taucher, Baumstämme am Grund): Unter Wasser ist der dunkle Seegrund zu sehen – kein Meeresboden
+# mit Röhrenwürmern –, es taucht ein Mensch im Neoprenanzug, kein Goldfisch, und am Ufer stehen Holzkisten statt Pappkartons.
+LAKE_RE = (r"toplitzsee|bergsee|alpensee|stausee|baggersee|gebirgssee|kratersee|waldsee|\bseegrund|\bseeboden|\bseeufer|loch ness|"
+           r"\b(?:im|am|den|der|dem|des|einem|einen|diesem|diesen|tiefen|kalten|dunklen|gesamten|ganzen) see(?:s|n)?\b")
+LAKE_DIVE_RE = (r"taucher|tauch(?:t|en|te|ten|gang|gänge|gängen)\b|schatzsucher|froschm[aä]nn|expedition|forscherteam|bergungsteam|suchtrupp|"
+                r"\bbarg(?:en)?\b|\bbergen\b|geborgen|\bholt\w*\b.{0,50}(?:oberfläche|herauf|nach oben|aus dem (?:see|wasser))|ertrank|ertrink|ertrunken")
+LAKE_UNDER_RE = (r"versenk|versank|versunken|\bsinken|\bsank|auf (?:dem|den) (?:\w+ )?grund|am (?:\w+ )?(?:grund|seegrund|seeboden)\b|in der tiefe|in die tiefe|unter wasser|"
+                 r"metern? tief|tiefen wasser|sauerstoff|dort unten|da unten|in (?:\w+ )?metern? tiefe|taucher|\btauch|schlick|schlamm")
+LAKE_SINK_RE = r"versenk|versank|\bsinken\b|\bsank(?:en)?\b|ins wasser (?:geworfen|gekippt)|warfen .{0,30}(?:in den see|ins wasser)|kippten"
+LAKE_CRATE_RE = r"kiste|truhe|behälter|\bschatz\b|\bfracht|ladung"
+LAKE_LOG_RE = r"baumst[aä]mm|\bbäume[n]?\b|\bstämme[n]?\b|holzverhau|treibholz|holzschicht|\bstamm\b|schicht aus (?:\w+ )?holz"
+LAKE_CASH_RE = r"banknote|geldschein|\bscheine[n]?\b|falschgeld|\bblüten\b|gefälschte[sn]? (?:geld|pfund)|pfundnote|pfund-|falsche[sn]? (?:geld|pfund)|geldfälsch"
+LAKE_GOLD_RE = r"\bgold|goldbarren|goldschatz"
+LAKE_NOGOLD_RE = r"kein(?:e|en)? (?:\w+ )?gold|gold (?:\w+ ){0,5}nie\b|nie (?:\w+ )?gold|statt gold|kein einziger barren|gold fehlt|vom gold fehlt"
+LAKE_ROCKET_RE = r"rakete|torpedo|sprengk|versuchsstation|prüfst[aä]nd|unterwasserwaffe|marine\w* test"
+LAKE_SOLDIER_RE = r"soldaten|truppen|offizier|wehrmacht|\bss-|lastwagen|\blkws?\b"
+LAKE_SHORE_RE = r"\bufer\b|an den see|an land|verboten|\bverbot\b|tauchverbot|gesperrt|aus dem wasser (?:gezogen|geholt)|an die oberfläche|ans licht"
+LAKE_SCARE_RE = r"ertrank|ertrink|ertrunken|starb|stirbt|\btod\b|\btot\b|tödlich|gefahr|gefährlich|riskier|verunglück|lebensgefahr|verfangen|kein sauerstoff"
+LAKE_INDOOR_OK_RE = r"büro|labor|museum|archiv|\bbank\b|keller|zimmer|werkstatt|druckerei|baracke|fabrik|\blager\b|zeitung|redaktion|gericht"
+LAKE_PLAIN = ("office", "livingroom", "bedroom", "kitchen", "lab", "plain", "basement", "classroom", "serverroom", "street", "park", "headquarters", "hospital",
+              "supermarket", "cinema", "restaurant", "beach", "desert", "space", "hallway", "attic", "station")
+LAKE_SHORE = {"sky": "", "ground": "grass", "elements": ["mountains", "lake"]}
+SOLDIER_LOOKS = ({"shirt": "grau", "hat": "army", "hair": "kurz", "hair_color": "braun"}, {"shirt": "grau", "hat": "army", "hair": "kurz", "hair_color": "blond", "size": 0.95})
+DIVER_ID_RE = r"tauch|diver|schatzsuch|froschmann"
+DIVER_TEXT_RE = r"\btaucher|tauchgang|tauchgänge|schatzsucher|froschm[aä]nn|taucht (?:\w+ )?(?:hinab|ab|hinunter)"
+
+
+def _diver(a=None, pos="center", facing="right", scared=False):
+    d_ = {"id": str((a or {}).get("id") or "_taucher"), "kind": "diver", "action": "idle", "speaks": False, "emote": "", "say": "", "hold": "",
+          "facing": facing, "emotion": "scared" if scared else "", "hero": True, "pos": pos}
+    return d_
+
+
+def _divers(scenes):
+    """Unter Wasser taucht ein Mensch im Neoprenanzug: Heißt die Figur „taucher“ oder spricht der Satz von Tauchern, wird aus dem Ersatz-Fisch
+    (oder der Figur im Pulli) ein Taucher – in jedem Video, nicht nur am See."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict) or places.resolve(backdrop(sc)) != "underwater" or sc.get("shot") in ("graphic", "insert"):
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        low = str(sc.get("text") or "").lower()
+        hit = [a for a in acts if _re.search(DIVER_ID_RE, str(a.get("id") or "").lower()) and str(a.get("kind") or "fish").lower() in ("fish", "monster", "diver", "")]
+        if not hit and _re.search(DIVER_TEXT_RE, low) and not _re.search(r"\bfisch|\bhai", low):
+            hit = [a for a in acts if str(a.get("kind") or "fish").lower() in ("fish", "")][:1]
+            if not hit and not acts and not any(extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) == "submersible" for q in (sc.get("props") or []) if isinstance(q, dict)):
+                hit = [{}]
+        if not hit:
+            continue
+        has_thing = bool(sc.get("props"))
+        sc["actors"] = [_diver(hit[0], 400 if has_thing else "center", "right", bool(_re.search(LAKE_SCARE_RE, low)))]
+        if sc.get("shot") in ("close", "event"):
+            sc["shot"] = ""                               # der Taucher ist breit: keine Vergrößerung über den Bildrand
+
+
+def lake_story(scenes, topic=""):
+    import re as _re
+    texts = [str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict)]
+    n_lake = sum(1 for t_ in texts if _re.search(LAKE_RE, t_))
+    if not (_re.search(LAKE_RE, topic_head(topic).lower()) or n_lake >= 2):
+        return False
+    return any(_re.search(LAKE_UNDER_RE, t_) for t_ in texts) or bool(_re.search(LAKE_UNDER_RE + "|schatz", str(topic or "").lower()))
+
+
+def _lake_story(scenes, topic="", main_id="du"):
+    """Regie für Geschichten vom Seegrund (siehe oben). Läuft ganz am Schluss, damit keine spätere Regel wieder einen Fisch, einen Karton
+    oder Passanten ins Bild stellt."""
+    import re as _re
+    if not lake_story(scenes, topic):
+        return
+    _key = lambda q: extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower())      # noqa: E731
+    n_under = 0
+    last_shore = last_under = prev_thing = None
+    prev_under = False
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        shot = str(sc.get("shot") or "")
+        sc["crowd"] = ""                                  # an einem einsamen Bergsee laufen keine Passanten
+        props = []
+        for q in (sc.get("props") or []):                 # Holzkiste statt Pappkarton, Versuchsteil am Grund statt startender Rakete, Scheine in der Kiste
+            if not isinstance(q, dict):
+                continue
+            k = _key(q)
+            if k == "box":
+                q = dict(q, type="crates" if _re.search(r"kisten", low) else "crate")
+            elif k == "rocket":
+                q = dict(q, type="rocketpart")
+            elif k == "money":
+                q = dict(q, type="cashcrate")
+            props.append(q)
+        sc["props"] = props
+        if shot == "graphic" and sc.get("graphic"):
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        under = places.resolve(backdrop(sc)) == "underwater"
+        shore_said = bool(_re.search(LAKE_SHORE_RE, low))
+        soldiers = bool(_re.search(LAKE_SOLDIER_RE, low)) and not _re.search(LAKE_SINK_RE, low)
+        if soldiers or (shore_said and not _re.search(LAKE_SINK_RE, low)):
+            under = False
+        elif _re.search(LAKE_UNDER_RE + "|" + LAKE_LOG_RE + "|" + LAKE_DIVE_RE, low) and shot != "insert":
+            under = True
+        elif prev_under and shot != "insert" and _re.search(r"\bdarin\b|\bdort\b|\bdarunter\b|\bdaraus\b|\bhinab\b|verf[aä]ng|\bunten\b", low) and not _re.search(LAKE_CASH_RE, low):
+            under = True                                  # Folgesatz über die Tiefe („Wer sich darin verfängt …“): bleibt unter Wasser beim Ding von eben
+        scared = bool(_re.search(LAKE_SCARE_RE, low))
+        cash = bool(_re.search(LAKE_CASH_RE, low))
+        gold = bool(_re.search(LAKE_GOLD_RE, low)) and not _re.search(LAKE_NOGOLD_RE, low)
+        if under:
+            sc.update(place="underwater", backdrop=None, time="night", weather="", float="", _lake=True, _no_cut=True)
+            if shot in ("event", "close", "insert"):
+                sc["shot"] = ""
+            keys = [_key(q) for q in props]
+            dive_txt = bool(_re.search(LAKE_DIVE_RE, low))
+            sub = bool(_re.search(SUB_RE, low)) or ("submersible" in keys and not dive_txt)   # „Schatzsucher riskierten ihr Leben“: Menschen tauchen, kein Tauchboot
+            if _re.search(LAKE_SINK_RE, low) and not sub:
+                sc["props"], sc["actors"] = [{"type": "crates_sink", "pos": 540}], []      # die Kisten sinken trudelnd in die Tiefe
+                prev_under, prev_thing, last_under, last_shore = True, "crates", None, None
+                n_under += 1
+                continue
+            follow = prev_under and not _re.search(LAKE_UNDER_RE + "|" + LAKE_LOG_RE + "|" + LAKE_DIVE_RE + "|" + LAKE_CRATE_RE, low)
+            thing = (prev_thing or "") if follow else "logs" if _re.search(LAKE_LOG_RE, low) else "cashcrate" if cash else "rocketpart" if (_re.search(LAKE_ROCKET_RE, low) or "rocketpart" in keys) else \
+                "crates" if (_re.search(LAKE_CRATE_RE, low) or gold or "crates" in keys or "crate" in keys) else ""
+            dive = bool(_re.search(LAKE_DIVE_RE, low)) or any(_re.search(DIVER_ID_RE, str(a.get("id") or "").lower()) or str(a.get("kind") or "") == "diver" for a in acts)
+            if follow and _re.search(r"\bwer\b|verf[aä]ng|niemand|\bman\b", low):
+                dive = True
+            if not thing and not dive and not sub:
+                dive, thing = (n_under % 2 == 0), ("" if n_under % 2 == 0 else "crates")   # nie ein leerer Grund: abwechselnd Taucher und Kisten
+            if sub:
+                sc["props"] = [{"type": "submersible", "pos": 270}] + ([{"type": thing, "pos": 540 if thing == "logs" else 640 if thing == "rocketpart" else 720}] if thing else [])
+                sc["actors"] = []
+                sc["_ov_low"] = 3
+            elif thing == "logs":
+                sc["props"] = [{"type": "logs", "pos": 540}]
+                sc["actors"] = [_diver(acts[0] if acts else None, "center", "left" if n_under % 2 else "right", True)] if dive else []
+            elif thing:
+                sc["props"] = [{"type": thing, "pos": 640 if thing == "rocketpart" else 820 if dive else 540}]
+                sc["actors"] = [_diver(acts[0] if acts else None, 400, "right", scared)] if dive else []
+            else:
+                sc["props"] = []
+                sc["actors"] = [_diver(acts[0] if acts else None, "center", "left" if n_under % 2 else "right", scared)]
+            sig = (tuple((q.get("type"), q.get("pos")) for q in sc["props"]), tuple((a.get("kind"), a.get("pos"), a.get("facing")) for a in sc["actors"]))
+            if sig == last_under and not sub:             # zweimal hintereinander genau dasselbe Bild: Taucher kommt dazu bzw. wechselt die Seite
+                if sc["actors"]:
+                    sc["actors"][0].update(facing="left" if sc["actors"][0].get("facing") == "right" else "right", pos=650 if not sc["props"] else sc["actors"][0].get("pos"))
+                else:
+                    sc["actors"] = [_diver(None, 400, "right", scared)]
+                    sc["props"] = [dict(q, pos=820) if q.get("type") != "logs" else q for q in sc["props"]]
+                sig = (tuple((q.get("type"), q.get("pos")) for q in sc["props"]), tuple((a.get("kind"), a.get("pos"), a.get("facing")) for a in sc["actors"]))
+            last_under = sig
+            prev_under, prev_thing = True, thing
+            last_shore = None
+            n_under += 1
+            continue
+        # ---- am Ufer / an Land
+        last_under, prev_under = None, False
+        sc["_lake"] = False
+        rp = places.resolve(backdrop(sc))
+        bd_l = backdrop(sc)
+        at_lake = isinstance(bd_l, dict) and any("lake" in str(e).lower() or "see" == str(e).lower() for e in (bd_l.get("elements") or []))
+        if rp == "underwater" or (not at_lake and rp not in MAPS and not _re.search(LAKE_INDOOR_OK_RE, low)):
+            sc["place"], sc["backdrop"] = "lake", dict(LAKE_SHORE)      # die Geschichte spielt am See – nicht im Büro mit Bildschirmen
+            rp = "custom"
+            sc["props"] = [q for q in sc["props"] if _key(q) not in INDOOR_THINGS and _key(q) not in ("table", "shelf", "tv", "computer", "fridge", "door", "clock")]
+        people = [a for a in acts if not a.get("kind")]
+        if shot == "insert":
+            continue
+        thing = "cashcrate" if cash else "goldbars" if gold else "crates" if _re.search(LAKE_CRATE_RE, low) else ""
+        if soldiers:
+            sc["actors"] = [{"id": "_soldat1", "action": "idle", "emotion": "worried", "pos": 190, "facing": "right", "speaks": False, "hold": "prop:crate", "look": dict(SOLDIER_LOOKS[0])},
+                            {"id": "_soldat2", "action": "point", "emotion": "worried", "pos": 430, "facing": "right", "speaks": False, "hold": "", "look": dict(SOLDIER_LOOKS[1])}]
+            sc["props"] = [{"type": "crates", "pos": 800}]
+            sc["shot"] = ""
+            last_shore = "crates"
+            continue
+        if not thing and not sc["props"] and last_shore and _re.search(r"\bdamit\b|\bdarin\b|\bdavon\b|\bdiese[nr]? (?:scheine|kisten|fund)|\bsie\b", low):
+            thing = last_shore                            # Folgesatz über den Fund von eben: er bleibt im Bild
+        if thing:
+            lead = dict(people[0]) if people else {"id": main_id, "action": "shocked", "emotion": "shocked", "speaks": False}
+            lead.update(pos=290, facing="right", hold="")
+            lead.pop("to", None)
+            if str(lead.get("action") or "") in ("sit", "sleep", "fall", "float", "run", "walk", ""):
+                lead["action"] = "point"
+            sc["actors"] = [lead]
+            sc["props"] = [{"type": thing, "pos": 760}] + ([{"type": "crate", "pos": 930}] if thing == "goldbars" else [])
+            if sc.get("shot") in ("close", "event"):
+                sc["shot"] = ""
+            last_shore = thing
+        else:
+            sc["actors"] = people[:2]                     # kein Fisch an Land
 
 
 # Tier/Wesen im Titel → es wird die Hauptfigur des Videos (wie in den Vorbild-Shorts: die Spinne ist fast in jeder Szene, mit Gefühl)
@@ -2040,7 +2257,7 @@ def _sea_kind(low, sea):
     return None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -2745,7 +2962,7 @@ TEXT_PROPS = [(SUB_RE, "submersible"), (r"nähmaschine|\bnäh(?:en|t|ten|te)\b|z
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",

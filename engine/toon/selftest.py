@@ -699,6 +699,49 @@ def main():
                 assert lay.getbbox(), k_
         assert places.background("highsky", True).size == (places.W, places.H) and places.background("highsky", False) is not None
 
+    def _lake():                                                 # Schatz im See: Taucher statt Goldfisch, Seegrund, Holzkisten, sinkende Kisten, Baumstämme, Scheine am Ufer
+        T = [("Im Toplitzsee liegen bis heute geheimnisvolle Kisten.", "underwater", [{"id": "taucher", "kind": "fish", "action": "talk"}], ["box"], "event"),
+             ("Soldaten bringen schwere Holzkisten an den See.", "lake", [{"id": "du", "action": "point"}], [], ""),
+             ("Sie versenken alles im über hundert Meter tiefen Wasser.", "underwater", [{"id": "taucher", "kind": "fish"}], ["box"], "event"),
+             ("Schatzsucher riskieren im kalten See ihr Leben.", "underwater", [{"id": "taucher", "kind": "fish"}], ["submersible"], ""),
+             ("Doch darin liegt kein Gold, sondern gefälschte Banknoten.", "office", [{"id": "du", "action": "shocked"}], [], ""),
+             ("Am Grund liegt eine dicke Schicht aus Baumstämmen.", "underwater", [], [], "event"),
+             ("Ein Tauchboot entdeckt dort unten alte Raketenteile.", "underwater", [], ["rocket", "submersible"], "event"),
+             ("Dort unten gibt es keinen Sauerstoff.", "underwater", [{"id": "du", "kind": "fish"}], [], ""),
+             ("Dort unten verrottet nichts.", "underwater", [{"id": "du", "kind": "fish"}], [], "")]
+        sd = stage.direct([{"text": t_, "place": pl_, "time": "night", "actors": a_, "props": pr_, "shot": sh_, "crowd": "walk"} for t_, pl_, a_, pr_, sh_ in T],
+                          [(i_ * 4.0, i_ * 4.0 + 4.0) for i_ in range(len(T))], "Der Schatz im Toplitzsee: Was liegt am Grund?", "mysterien")
+        ks = [[extras.PROP_ALIASES.get(str(q.get("type")), str(q.get("type"))) for q in sc_.get("props") or []] for sc_ in sd]
+        kinds = [[str(a.get("kind") or "") for a in sc_.get("actors") or []] for sc_ in sd]
+        assert not any("fish" in k_ for k_ in kinds), f"Fisch im See: {kinds}"
+        assert not any(k_ in ("box", "rocket") for ks_ in ks for k_ in ks_), f"Karton/Rakete im See: {ks}"
+        assert kinds[0] == ["diver"] and "crates" in ks[0] and sd[0].get("_lake"), (kinds[0], ks[0])
+        assert len(sd[1]["actors"]) == 2 and all((a.get("look") or {}).get("hat") == "army" for a in sd[1]["actors"]) and "crates" in ks[1] and places.resolve(stage.backdrop(sd[1])) != "underwater", sd[1]
+        assert ks[2] == ["crates_sink"] and not sd[2]["actors"], sd[2]
+        assert kinds[3] == ["diver"] and "submersible" not in ks[3], sd[3]
+        assert "cashcrate" in ks[4] and places.resolve(stage.backdrop(sd[4])) not in ("office", "underwater") and not sd[4].get("crowd"), sd[4]
+        assert ks[5] == ["logs"], sd[5]
+        assert ks[6] == ["submersible", "rocketpart"] and not sd[6]["actors"], sd[6]
+        assert (ks[7], kinds[7]) != (ks[8], kinds[8]) or sd[7]["actors"][0].get("facing") != sd[8]["actors"][0].get("facing"), "zweimal dasselbe Bild am Seegrund"
+        for sc_ in sd:
+            im_ = frame(sc_, {"du": {"shirt": "orange"}})
+            assert im_.size == (places.W, places.H)
+        sea = stage.direct([{"text": "Ein Taucher schwimmt durch das Korallenriff im Ozean.", "place": "underwater", "actors": [{"id": "taucher", "kind": "fish"}], "props": []},
+                            {"text": "Der Goldfisch schwimmt im Riff.", "place": "underwater", "actors": [{"id": "fisch", "kind": "fish"}], "props": []}], [(0, 4), (4, 8)], "Leben im Ozean", "fakten")
+        assert sea[0]["actors"][0]["kind"] == "diver" and not sea[0].get("_lake") and sea[1]["actors"][0]["kind"] == "fish", sea
+        g_ = stage.direct([{"text": "Es gab Gerüchte über Milliarden an Gold.", "shot": "graphic", "graphic": {"type": "number", "value": "BILLIONEN", "label": "REICHSMARK IN GOLD"}},
+                           {"text": "Tauchen ist dort streng verboten.", "shot": "graphic", "graphic": {"type": "question", "text": "STRENG VERBOTEN"}}], [(0, 4), (4, 8)], "Gold", "fakten")
+        assert g_[0]["graphic"]["value"] == "MILLIARDEN" and not g_[0]["graphic"].get("label"), g_[0]["graphic"]
+        assert g_[1]["graphic"]["type"] == "badge", g_[1]["graphic"]
+        from PIL import Image as Image_
+        for k_ in extras.LAKE_KINDS:
+            lay_ = Image_.new("RGBA", (places.W, places.H), (0, 0, 0, 0))
+            extras.draw_prop(lay_, k_, 540, 1.2)
+            assert lay_.getbbox(), k_
+        assert extras.creature("diver", 1.0) is not None and places.lakebed().size == (places.W, places.H)
+
+    check("See-Schatz", _lake)
+
     def _surface():                                              # Meeresoberfläche: kein Mensch auf dem Wasser, Treibgut statt Karton, Radarschirm, Satellit im All statt Länderkarte
         T = [("Ein Passagierflugzeug verschwindet mitten über dem Ozean.", "space", [], ["plane"], "event", None, {"type": "card", "text": "SIGNAL VERLOREN"}),
              ("Aber moderne Satelliten empfangen noch stumme Pings.", "worldmap", [{"id": "du"}], [], "graphic", {"type": "map", "value": "germany,uk", "text": "PING"}, None),

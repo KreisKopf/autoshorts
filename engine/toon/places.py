@@ -747,6 +747,39 @@ def underwater(night):
     return p.vignette()
 
 
+def lakebed(night=True):
+    """Grund eines tiefen Bergsees (Regie: Schatzsuche im See): grünschwarzes Süßwasser, steile Felswände, Schlick und versunkene
+    Baumstämme – keine Korallen, keine Röhrenwürmer, kein rauchender Schlot wie in der Tiefsee."""
+    p = P(False)
+    p.grad((0, 0, W, H), (18, 74, 78), (4, 16, 20), raw=True)
+    p.veil((W / 2 - 480, -460, W / 2 + 480, 560), (110, 190, 170), 58, 170)                    # fahles Licht von der Oberfläche
+    p.poly([(-60, GROUND), (-60, 120), (60, 260), (30, 520), (150, 760), (110, GROUND - 190), (260, GROUND - 40)], (20, 48, 52), o=0)          # Felswand links
+    p.poly([(W + 60, GROUND), (W + 60, 60), (W - 80, 300), (W - 40, 600), (W - 190, 820), (W - 130, GROUND - 170), (W - 300, GROUND - 40)], (20, 48, 52), o=0)
+    p.fade((0, GROUND - 520, W, GROUND - 20), (6, 24, 28), 0, 130)
+    p.d.ellipse((-200, GROUND - 90, W + 200, H + 400), fill=(62, 78, 72), outline=INK, width=O)                                              # Schlick
+    p.fade((0, GROUND - 40, W, GROUND + 260), (130, 160, 140), 40, 0)
+    rnd = random.Random(23)
+    for x0, y0, x1, y1, r in ((-80, GROUND - 60, 330, GROUND - 96, 26), (640, GROUND - 110, W + 90, GROUND - 70, 30), (180, GROUND - 40, 520, GROUND - 20, 20)):   # Stämme am Grund
+        ang = math.atan2(y1 - y0, x1 - x0)
+        nx, ny = -math.sin(ang) * r, math.cos(ang) * r
+        p.poly([(x0 + nx, y0 + ny), (x1 + nx, y1 + ny), (x1 - nx, y1 - ny), (x0 - nx, y0 - ny)], (66, 60, 50), o=5)
+        p.oval((x1 - r * 0.6, y1 - r, x1 + r * 0.6, y1 + r), (112, 100, 78), o=5)
+    for _ in range(8):
+        x, y, r = rnd.randint(40, W - 40), rnd.randint(GROUND + 40, H - 120), rnd.randint(16, 40)
+        p.oval((x - r * 1.5, y - r * 0.7, x + r * 1.5, y + r * 0.7), (44, 58, 54), o=4)
+    snow = Image.new("L", (W, H), 0)                                                           # Schwebeteilchen
+    sd = ImageDraw.Draw(snow)
+    for _ in range(80):
+        x, y, r = rnd.randint(0, W), rnd.randint(0, H), rnd.choice((2, 3, 3, 4, 5))
+        sd.ellipse((x - r, y - r, x + r, y + r), fill=rnd.randint(50, 130))
+    p.im.paste(Image.new("RGB", (W, H), (196, 230, 214)), (0, 0), snow.filter(ImageFilter.GaussianBlur(1.2)))
+    p.d = ImageDraw.Draw(p.im)
+    return p.vignette()
+
+
+LAKE = [False]             # die Regie (stage._prepare) schaltet um: „underwater“ ist dann der Grund eines Sees statt des Meeres
+
+
 def mountain(night):
     p = P(night)
     p.sky()
@@ -1861,8 +1894,10 @@ def background(place, night=False, dark=False):
             _masks["last"] = _masks.get(key)
             return _cache[key]
         key = resolve(place)
+        if key == "underwater" and LAKE[0]:
+            key = "lakebed"
         if (key, bool(night), bool(dark)) not in _cache:
-            _cache[(key, bool(night), bool(dark))] = PLACES[key](bool(night)).convert("RGB")
+            _cache[(key, bool(night), bool(dark))] = (lakebed if key == "lakebed" else PLACES[key])(bool(night)).convert("RGB")
         _masks["last"] = None
         return _cache[(key, bool(night), bool(dark))]
     finally:

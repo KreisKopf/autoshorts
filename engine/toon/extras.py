@@ -1303,6 +1303,147 @@ SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "b
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
          "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255)}
+# ------------------------------------------------------------------ See-Schatz (versenkte Kisten, Taucher, Baumstämme am Seegrund)
+def _rotp(pivot, deg):
+    """Wie _rot, nimmt aber einen Punkt (x, y) als ein Argument."""
+    f_ = _rot(pivot, deg)
+    return lambda q: f_(q[0], q[1])
+
+
+def _crate(d, cx, by, w, h, rot=0.0, lid=True):
+    """Eine Holzkiste aus Brettern mit Eisenbändern; (cx, by) = Mitte der Unterkante, rot in Grad."""
+    piv = (cx, by - h / 2)
+    r_ = _rotp(piv, rot)
+    def Q(x0, y0, x1, y1):
+        return [r_((cx + x0 * w, by - y0 * h)), r_((cx + x1 * w, by - y0 * h)), r_((cx + x1 * w, by - y1 * h)), r_((cx + x0 * w, by - y1 * h))]
+    wood, dark = (176, 128, 78), (120, 84, 52)
+    d.polygon(Q(-0.5, 0, 0.5, 1), fill=_dk(wood, 0.2), outline=INK, width=O)
+    d.polygon(Q(-0.5, 0.06, 0.44, 1), fill=wood)
+    for i in range(1, 4):                                                   # Bretterfugen
+        a, b = r_((cx - 0.5 * w, by - h * i / 4)), r_((cx + 0.5 * w, by - h * i / 4))
+        d.line((*a, *b), fill=dark, width=max(3, int(h * 0.03)))
+    for fx in (-0.34, 0.34):                                                # Eisenbänder
+        d.polygon(Q(fx - 0.05, 0, fx + 0.05, 1), fill=(86, 88, 98), outline=INK, width=max(2, O // 2))
+    if lid:
+        d.polygon(Q(-0.55, 0.9, 0.55, 1.04), fill=_lt(wood, 0.12), outline=INK, width=O)
+    d.polygon(Q(-0.5, 0, 0.5, 1), outline=INK, width=O)
+
+
+def p_crate(d, x, t, s=1.0):
+    """Schwere Holzkiste (Schatzkiste, Transportkiste) – kein Pappkarton."""
+    _crate(d, x, GROUND, 230, 170)
+
+
+def p_crates(d, x, t, s=1.0):
+    """Stapel aus drei Holzkisten."""
+    _crate(d, x - 122, GROUND, 230, 170)
+    _crate(d, x + 122, GROUND, 230, 170)
+    _crate(d, x + 10, GROUND - 176, 230, 170, rot=-4)
+
+
+def _note(d, cx, cy, w, h, rot=0.0):
+    r_ = _rotp((cx, cy), rot)
+    box = [r_((cx - w / 2, cy - h / 2)), r_((cx + w / 2, cy - h / 2)), r_((cx + w / 2, cy + h / 2)), r_((cx - w / 2, cy + h / 2))]
+    d.polygon(box, fill=(238, 234, 214), outline=INK, width=4)
+    inn = [r_((cx - w * 0.42, cy - h * 0.34)), r_((cx + w * 0.42, cy - h * 0.34)), r_((cx + w * 0.42, cy + h * 0.34)), r_((cx - w * 0.42, cy + h * 0.34))]
+    d.line(inn + [inn[0]], fill=(120, 140, 120), width=3)
+    d.ellipse((cx - h * 0.2, cy - h * 0.2, cx + h * 0.2, cy + h * 0.2), outline=(120, 140, 120), width=3)
+
+
+def p_cashcrate(d, x, t, s=1.0):
+    """Offene Holzkiste voller gebündelter Geldscheine (ohne echtes Banknoten-Motiv); ein paar Scheine flattern heraus."""
+    for i, (dx, rot) in enumerate(((-70, -16), (-10, 6), (56, 20))):          # Bündel ragen heraus
+        _note(d, x + dx, GROUND - 204 - (i % 2) * 16, 150, 92, rot)
+    _crate(d, x, GROUND, 250, 170, lid=False)
+    r_ = _rotp((x - 125, GROUND - 170), -62)                                   # aufgeklappter Deckel
+    d.polygon([r_((x - 125, GROUND - 170)), r_((x + 125, GROUND - 170)), r_((x + 125, GROUND - 200)), r_((x - 125, GROUND - 200))], fill=(196, 148, 96), outline=INK, width=O)
+    for i in range(3):                                                        # Scheine in der Luft
+        ph = (t * 0.35 + i / 3) % 1
+        _note(d, x + 40 + i * 60 + math.sin(t * 2 + i) * 16, GROUND - 270 - ph * 170, 120, 72, 20 + i * 25 + math.sin(t * 3 + i) * 14)
+
+
+def p_goldbars(d, x, t, s=1.0):
+    """Kleine Pyramide aus Goldbarren mit Glanz."""
+    gold = (244, 196, 56)
+    for row, n in enumerate((3, 2, 1)):
+        for i in range(n):
+            bx = x + (i - (n - 1) / 2) * 112
+            y1 = GROUND - row * 56
+            d.polygon([(bx - 52, y1), (bx + 52, y1), (bx + 40, y1 - 52), (bx - 40, y1 - 52)], fill=_dk(gold, 0.2), outline=INK, width=O)
+            d.polygon([(bx - 44, y1 - 8), (bx + 30, y1 - 8), (bx + 24, y1 - 46), (bx - 34, y1 - 46)], fill=gold)
+            d.line((bx - 26, y1 - 38, bx + 4, y1 - 38), fill=(255, 240, 170), width=6)
+    tw = 0.5 + 0.5 * math.sin(t * 5)
+    gx, gy_ = x + 70, GROUND - 150
+    d.line((gx - 22 * tw, gy_, gx + 22 * tw, gy_), fill=(255, 250, 210), width=6)
+    d.line((gx, gy_ - 22 * tw, gx, gy_ + 22 * tw), fill=(255, 250, 210), width=6)
+
+
+def _log(d, x0, y0, x1, y1, r, col=(112, 84, 58)):
+    """Ein versunkener Baumstamm von (x0, y0) nach (x1, y1) mit Schnittfläche und Jahresringen am rechten Ende."""
+    ang = math.atan2(y1 - y0, x1 - x0)
+    nx, ny = -math.sin(ang) * r, math.cos(ang) * r
+    d.polygon([(x0 + nx, y0 + ny), (x1 + nx, y1 + ny), (x1 - nx, y1 - ny), (x0 - nx, y0 - ny)], fill=_dk(col, 0.22), outline=INK, width=O)
+    d.polygon([(x0 + nx * 0.2, y0 + ny * 0.2), (x1 + nx * 0.2, y1 + ny * 0.2), (x1 - nx * 0.9, y1 - ny * 0.9), (x0 - nx * 0.9, y0 - ny * 0.9)], fill=col)
+    for f_ in (0.25, 0.55, 0.8):                                              # Rinde
+        mx, my = x0 + (x1 - x0) * f_, y0 + (y1 - y0) * f_
+        d.line((mx - nx * 0.5, my - ny * 0.5, mx + math.cos(ang) * r * 1.6 - nx * 0.5, my + math.sin(ang) * r * 1.6 - ny * 0.5), fill=_dk(col, 0.4), width=5)
+    mx, my = x0 + (x1 - x0) * 0.4, y0 + (y1 - y0) * 0.4                       # Aststumpf
+    d.polygon([(mx - nx * 0.9, my - ny * 0.9), (mx - nx * 2.0 + math.cos(ang) * r * 0.5, my - ny * 2.0 + math.sin(ang) * r * 0.5), (mx - nx * 0.9 + math.cos(ang) * r * 1.1, my - ny * 0.9 + math.sin(ang) * r * 1.1)],
+              fill=col, outline=INK, width=5)
+    d.ellipse((x1 - r * 0.62, y1 - r, x1 + r * 0.62, y1 + r), fill=(206, 172, 120), outline=INK, width=O)
+    d.ellipse((x1 - r * 0.36, y1 - r * 0.6, x1 + r * 0.36, y1 + r * 0.6), outline=(150, 116, 76), width=4)
+    d.ellipse((x1 - r * 0.14, y1 - r * 0.24, x1 + r * 0.14, y1 + r * 0.24), fill=(150, 116, 76))
+
+
+def p_logs(d, x, t, s=1.0):
+    """Schicht aus versunkenen Baumstämmen: kreuz und quer, schwebt als Sperre mitten im Wasser (nur unter Wasser)."""
+    y = GROUND - 330
+    sway = math.sin(t * 0.9) * 6
+    for i, (x0, y0, x1, y1, r) in enumerate(((-420, 40, 300, -30, 40), (-300, -80, 440, 60, 36), (-460, 150, 180, 110, 44), (-140, 190, 470, 150, 38), (-380, -150, 240, -120, 32))):
+        _log(d, x + x0, y + y0 + sway * (1 if i % 2 else -1), x + x1, y + y1 + sway * (1 if i % 2 else -1), r, ((112, 84, 58), (96, 76, 56), (124, 96, 66))[i % 3])
+
+
+def p_crates_sink(d, x, t, s=1.0):
+    """Drei Holzkisten sinken trudelnd in die Tiefe und ziehen Blasen hinter sich her (nur unter Wasser)."""
+    for i, (dx, y0, w) in enumerate(((-250, 330, 200), (40, 170, 230), (270, 420, 190))):
+        y = y0 + t * 78
+        _crate(d, x + dx + math.sin(t * 1.4 + i * 2) * 18, y, w, w * 0.74, rot=math.sin(t * 1.1 + i * 1.7) * 16 + (i - 1) * 8)
+        for j in range(5):                                                    # Blasenspur nach oben
+            ph = (t * 0.9 + j / 5 + i * 0.13) % 1
+            bx, by_ = x + dx + math.sin(ph * 9 + i) * 26, y - w * 0.8 - ph * 330
+            r = 8 + (1 - ph) * 14
+            d.ellipse((bx - r, by_ - r, bx + r, by_ + r), outline=(226, 246, 252, int(230 * (1 - ph * 0.7))), width=4)
+
+
+def p_rocketpart(d, x, t, s=1.0):
+    """Verrostetes Versuchsteil am Grund: ein zylindrischer Körper mit Leitwerk, schräg im Schlick – keine startende Weltraumrakete."""
+    rust, dark = (146, 104, 78), (92, 70, 62)
+    r_ = _rotp((x, GROUND - 60), -14)
+    def R(pts):
+        return [r_(q) for q in pts]
+    d.polygon(R([(x - 250, GROUND - 60), (x - 330, GROUND - 150), (x - 220, GROUND - 110)]), fill=dark, outline=INK, width=O)      # Leitwerk
+    d.polygon(R([(x - 250, GROUND - 40), (x - 330, GROUND + 40), (x - 220, GROUND - 4)]), fill=dark, outline=INK, width=O)
+    body = R([(x - 250, GROUND - 112), (x + 150, GROUND - 112), (x + 150, GROUND - 4), (x - 250, GROUND - 4)])
+    d.polygon(body, fill=_dk(rust, 0.2), outline=INK, width=O)
+    d.polygon(R([(x - 240, GROUND - 104), (x + 150, GROUND - 104), (x + 150, GROUND - 40), (x - 240, GROUND - 40)]), fill=rust)
+    d.polygon(R([(x + 150, GROUND - 112), (x + 290, GROUND - 58), (x + 150, GROUND - 4)]), fill=_dk(rust, 0.1), outline=INK, width=O)   # Spitze
+    for bx in (-150, -20, 100):                                                # Nietenbänder, Rostflecken
+        d.line((*r_((x + bx, GROUND - 110)), *r_((x + bx, GROUND - 6))), fill=dark, width=8)
+    for bx, by_, rr in ((-90, -70, 18), (40, -36, 14), (-190, -30, 12)):
+        c = r_((x + bx, GROUND + by_))
+        d.ellipse((c[0] - rr, c[1] - rr * 0.7, c[0] + rr, c[1] + rr * 0.7), fill=(176, 96, 60))
+    d.ellipse((x - 330, GROUND - 26, x + 300, GROUND + 26), fill=(70, 80, 78), outline=INK, width=5)                               # Schlick, in dem es steckt
+
+
+PROPS.update({"crate": p_crate, "crates": p_crates, "cashcrate": p_cashcrate, "goldbars": p_goldbars, "logs": p_logs, "crates_sink": p_crates_sink, "rocketpart": p_rocketpart})
+PROP_ALIASES.update({"holzkiste": "crate", "holzkisten": "crates", "kisten": "crates", "schatzkiste": "crate", "schatztruhe": "crate", "truhe": "crate", "transportkiste": "crate",
+                     "banknoten": "cashcrate", "geldscheine": "cashcrate", "falschgeld": "cashcrate", "geldkiste": "cashcrate",
+                     "goldbarren": "goldbars", "gold": "goldbars", "goldschatz": "goldbars", "baumstämme": "logs", "baumstamm": "logs", "stämme": "logs"})
+SIZES.update({"crate": (0.8, 1255), "crates": (1.5, 1250), "cashcrate": (1.25, 1255), "goldbars": (0.5, 1262), "rocketpart": (0.85, 1245)})     # leicht überzeichnet, damit man sie neben den Figuren erkennt
+SKY += ("logs", "crates_sink")                              # schweben frei im Wasser (nur von der Regie unter Wasser gesetzt)
+WATER_KINDS = ("submersible", "ping", "logs", "crates_sink")     # schweben unter Wasser frei im Bild
+LAKE_KINDS = ("crate", "crates", "cashcrate", "goldbars", "logs", "crates_sink", "rocketpart")
+
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
@@ -2329,6 +2470,36 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
             poly([(tx, cy_ + 10), (tx + 12, cy_ + 34), (tx + 24, cy_ + 10)], (252, 252, 244), shade=0, line=False)
         cheek(-90, cy_ - 10, 18)
         cheek(130, cy_ - 10, 18)
+    elif kind in ("diver", "taucher"):
+        fly = True                                                                 # Taucher im Neoprenanzug: schwimmt waagerecht, Lampe voraus, Blasen steigen auf
+        by = -330 + bob * 1.6
+        suit, trim, skin = (44, 52, 66), (246, 196, 56), (244, 204, 170)
+        kick = math.sin(t * 6) * 26
+        d.polygon([P(150, by + 34), P(300, by + 70), P(300, by + 210), P(214, by + 96)], fill=(255, 240, 170, 60))    # Lichtkegel der Lampe
+        for sgn, off in ((1, 14), (-1, -10)):                                      # Beine mit Flossen
+            ky = kick * sgn
+            stroke([(-70, by + off), (-150, by + off + ky * 0.5), (-214, by + off + ky)], 34, suit)
+            poly([(-204, by + off + ky - 20), (-296, by + off + ky * 1.5 - 44), (-290, by + off + ky * 1.5 + 44), (-204, by + off + ky + 20)], trim)
+        rr(-96, by - 96, 30, by - 44, 22, trim)                                    # Pressluftflasche auf dem Rücken
+        rr(30, by - 84, 52, by - 58, 6, (150, 156, 170))
+        rr(-104, by - 46, 78, by + 44, 40, suit)                                   # Rumpf
+        d.line((*P(-60, by + 22), *P(50, by + 22)), fill=trim, width=max(2, int(8 * k)))
+        stroke([(40, by + 20), (96, by + 52), (150, by + 40)], 26, suit)           # Arm nach vorn mit Lampe
+        rr(140, by + 24, 196, by + 56, 8, (200, 60, 50))
+        ell(186, by + 22, 208, by + 58, (255, 244, 180), shade=0)
+        ell(44, by - 66, 156, by + 42, suit)                                       # Kopf in der Haube
+        ell(74, by - 46, 150, by + 30, skin, shade=0)                              # Gesicht
+        rr(84, by - 44, 158, by + 2, 14, (150, 214, 240), shade=0)                 # Maske
+        d.arc(B(92, by - 38, 126, by - 10), 190, 262, fill=(240, 250, 255), width=max(2, int(5 * k)))
+        eye(126, by - 20, 11)
+        d.line((*P(84, by - 22), *P(50, by - 22)), fill=INK, width=max(2, int(7 * k)))   # Maskenband
+        rr(132, by + 6, 164, by + 30, 6, (96, 104, 122))                           # Atemregler
+        stroke([(134, by + 18), (90, by + 50), (20, by - 50)], 8, (96, 104, 122))  # Schlauch zur Flasche
+        for i in range(4):                                                         # Blasen
+            ph = (t * 0.8 + i / 4) % 1
+            bx, by2 = 160 + math.sin(ph * 8 + i) * 16 - ph * 40, by - 20 - ph * 230
+            r = 6 + (1 - ph) * 12
+            d.ellipse(B(bx - r, by2 - r, bx + r, by2 + r), outline=(230, 250, 255, int(235 * (1 - ph * 0.6))), width=max(2, int(4 * k)))
     elif kind in ("fish", "fisch", "shark", "hai"):
         fly = True
         shark = kind in ("shark", "hai")
@@ -2704,4 +2875,4 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver")
