@@ -93,6 +93,19 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Land im Satz (`GEO_RE`) entfällt. Grafik `radar` (Radarschirm, mit `"sub": "lost"` erlischt der Leuchtpunkt) – ab dem zweiten Satz automatisch bei
   „Radar“, „Funkkontakt“, „Transponder“. Bibliothek: `muschel`. Selbsttest: `_surface`.
 
+- Heißluftballon (Ballonflucht, Ballonfahrt – `stage._balloon_story`, greift bei `HOTAIR_RE` in Thema oder Sätzen; ein „Luftballon“ zählt nicht): Requisiten
+  `balloon` (fliegt, acht Köpfe in der Plattform-Gondel, Brennerflamme), `balloon_dark` (Gas aus), `balloon_out` (sackt schräg durch), `balloon_fill`
+  (richtet sich am Boden mit Flamme auf), `balloon_ground` (Stoffberg mit Gondel), `balloon_down` (Hülle im Gebüsch), `gondola` (Gondel ganz nah),
+  `searchlight` (zwei schwenkende Lichtkegel); dazu `sewing` (Nähmaschine mit Stoffbahnen, Wörter nähen/Nähmaschine) und `fabric` (Stoffballen).
+  Ort `highsky` (`places.highsky`: hoher Himmel, Wolken, tief unten das Land). Die Regie führt Buch, ob der Ballon in der Luft ist (`B_UP_RE` …
+  `B_DOWN_RE`): Flug-Sätze spielen ohne Figuren vor dem hohen Himmel (Suchscheinwerfer, Gas aus, Absturz je ein eigenes Bild), der erste Satz zeigt
+  den Ballon im Scheinwerferlicht, am Boden steht die Wiese ohne Bäume und Windräder davor. Einblendungen stehen über dem Ballon (`_ov_low` 3),
+  nachts leuchtet er im eigenen Schein (`GLOWS`, `_light`). Selbsttest: `_balloon`.
+- Familie im Bild (`stage._family`, `FAMILY_RE`): Spricht der Satz von Familien, Frauen und Kindern, stehen neben der Hauptfigur eine Frau und ein
+  Kind (Nebenfiguren dürfen über `look` jetzt auch `size`, `gender`, `hair_color` mitbringen).
+- Ecken-Zeilen (`render.build_ass`): Die Zeile oben links wird am Wortende gekürzt; bleibt sie das ganze Video gleich, entfällt eine Uhrzeit darin.
+  Eine einzelne Zustands-Angabe oben rechts gilt nur zwei Sätze weiter; nennt sie eine Zahl, die niemand sagt, entfällt sie.
+
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
 2. Einzelne Gegenstände: sauber als Eintrag in `docs/data/shapes.json` zeichnen (Format siehe Kopf von `engine/toon/library.py`:

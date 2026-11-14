@@ -1767,12 +1767,31 @@ def plain(night):
     return p.vignette()
 
 
+def highsky(night):
+    """Hoch in der Luft (Ballonfahrt): nur Himmel, Wolkenfetzen ziehen vorbei, tief unten das Land mit ein paar Lichtern."""
+    p = P(night)
+    p.outdoor = True
+    p.sky(H - 250)
+    land = (26, 34, 52) if night else (96, 150, 110)
+    p.grad((0, H - 330, W, H), land, _mix(land, 0.35, (0, 0, 0)), raw=True)
+    rnd = random.Random(23)
+    pts = [(0, H - 300)] + [(x, H - 330 - rnd.randint(0, 46)) for x in range(0, W + 1, 90)] + [(W, H - 300), (W, H), (0, H)]
+    p.d.polygon(pts, fill=land)
+    for _ in range(16):                                           # Dörfer tief unten: winzige Lichter
+        x, y = rnd.randint(30, W - 30), rnd.randint(H - 280, H - 60)
+        p.d.ellipse((x - 4, y - 3, x + 4, y + 3), fill=(255, 220, 140) if night else (236, 236, 226))
+    col, shade = ((70, 76, 120), (48, 52, 92)) if night else ((255, 255, 255), (214, 228, 246))
+    for cx, cy, sc in ((120, 1330, 1.3), (960, 1400, 1.6), (520, 1560, 2.2), (40, 1640, 1.6), (1030, 1660, 1.5), (200, 470, 0.8)):
+        p.cloud(cx, cy, sc, col, shade)
+    return p.vignette()
+
+
 PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basement": basement, "park": park,
           "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema}
+          "serverroom": serverroom, "cinema": cinema, "highsky": highsky}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"asphalt": "street", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
            "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "livingroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",

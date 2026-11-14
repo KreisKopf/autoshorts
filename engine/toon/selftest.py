@@ -635,6 +635,37 @@ def main():
         assert not stage._lib_props() or all(any(k_ == key_ for _p, k_ in stage._lib_props()) for key_ in ("lib_blackbox", "lib_wrack")), "Blackbox/Wrack fehlen in der Bibliothek"
     check("Tiefsee: Blackbox, Sonar, Wrack", _deep)
 
+    def _balloon():                                              # Ballonflucht: Stoffberg und Gondel am Boden, Ballon mit acht Köpfen am Himmel, Suchscheinwerfer, Landung im Gebüsch – keine Figur „schwebt“ auf der Wiese
+        from PIL import Image
+        T = ["Zwei Familien fliehen mit einem selbst genähten Heißluftballon.", "Im Keller nähen sie heimlich über tausend Quadratmeter Stoff zusammen.",
+             "Heimlich kaufen sie den Stoff in vielen Geschäften.", "Acht Personen müssen in eine winzige Gondel passen.",
+             "Mitten in der Nacht bauen sie den Ballon auf einer Wiese auf.", "Mit vier Gasflaschen erzeugen sie das Feuer für den Auftrieb.",
+             "Der gigantische Stoffbeutel füllt sich langsam und hebt in die Dunkelheit ab.", "Dort oben herrscht eiskalte Temperatur von minus acht Grad.",
+             "Plötzlich erfassen Suchscheinwerfer der Grenze den Ballon am Himmel.", "Genau jetzt geht ihnen das Gas aus.",
+             "Der Ballon beginnt abzustürzen.", "Nach achtundzwanzig Minuten krachen sie hart in ein Gebüsch.", "Sie sind endlich frei."]
+        sb = stage.direct([{"text": t_, "place": "basement" if n_ < 4 else "fields", "time": "night", "status": "FALL: 15 M/S" if n_ == 10 else "", "overlay": {"type": "thermo", "value": -8} if n_ == 7 else None,
+                            "actors": [{"id": "du", "action": "float" if n_ in (6, 11) else "talk"}], "props": ["fire"] if n_ == 5 else []}
+                           for n_, t_ in enumerate(T)], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Flucht mit dem Heißluftballon", "storys", "")
+        kinds = [sc.get("_balloon") for sc in sb]
+        assert kinds == ["open", None, None, "gondola", "ground", "fill", "fly", "fly", "light", "dark", "fall", "down", None], kinds   # Thermometer: Ballon von fern, nicht die Gondel nah
+        keys = [[extras.PROP_ALIASES.get(str(q.get("type")), str(q.get("type"))) for q in sc.get("props") or [] if isinstance(q, dict)] for sc in sb]
+        assert keys[0] == ["searchlight", "balloon"] and keys[8] == ["searchlight", "balloon"] and keys[9] == ["balloon_dark"] and keys[10] == ["balloon_out"], keys
+        assert "sewing" in keys[1] and "fabric" in keys[2] and keys[11] == ["balloon_down"], keys
+        assert all(places.resolve(stage.backdrop(sb[n_])) == "highsky" and not sb[n_].get("actors") for n_ in (0, 3, 7, 8, 9, 10)), "Flug vor hohem Himmel, ohne Figuren"
+        assert all(sb[n_].get("_ov_low") == 3 for n_ in (5, 7, 8)), "Einblendung über dem Ballon"
+        assert not any(str(a.get("action")) == "float" for sc in sb for a in sc.get("actors") or []), "niemand schwebt"
+        assert not sb[10].get("status"), "Zustands-Zeile mit nicht gesprochener Zahl"
+        for sc in sb:
+            assert frame(sc, {"du": {}}) is not None
+        party = stage.direct([{"text": "Zum Geburtstag gibt es einen Luftballon.", "place": "livingroom", "actors": [{"id": "du"}]}] * 4, [(n_ * 3, n_ * 3 + 3) for n_ in range(4)], "Geburtstag")
+        assert not any(sc.get("_balloon") for sc in party), "Luftballon ist kein Heißluftballon"
+        for k_ in extras.BALLOON_KINDS + ("sewing", "fabric"):
+            for t_ in (0.2, 1.7, 3.3):
+                lay = Image.new("RGBA", (places.W, places.H), (0, 0, 0, 0))
+                extras.draw_prop(lay, k_, 540, t_)
+                assert lay.getbbox(), k_
+        assert places.background("highsky", True).size == (places.W, places.H) and places.background("highsky", False) is not None
+
     def _surface():                                              # Meeresoberfläche: kein Mensch auf dem Wasser, Treibgut statt Karton, Radarschirm, Satellit im All statt Länderkarte
         T = [("Ein Passagierflugzeug verschwindet mitten über dem Ozean.", "space", [], ["plane"], "event", None, {"type": "card", "text": "SIGNAL VERLOREN"}),
              ("Aber moderne Satelliten empfangen noch stumme Pings.", "worldmap", [{"id": "du"}], [], "graphic", {"type": "map", "value": "germany,uk", "text": "PING"}, None),
@@ -664,6 +695,7 @@ def main():
                             [(0, 4), (4, 8)], "Flugzeug", "whatif")
         assert places.resolve(stage.backdrop(land[0])) == "lab" and land[0].get("actors"), f"Trümmer im Labor: {land[0].get('place')} {land[0].get('backdrop')}"
     check("Meeresoberfläche: Treibgut, Radar, Satellit", _surface)
+    check("Ballonflucht: Ballon am Boden, am Himmel, im Gebüsch", _balloon)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")

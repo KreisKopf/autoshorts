@@ -122,6 +122,8 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
     huds = {str(x).strip().upper() for x in [hud] + [sc.get("hud") for sc in scenes if isinstance(sc.get("hud"), str)] if str(x or "").strip()}
     if hud and len(huds) < 2 and not re.search(r"\d|·|\bTAG\b|\bUHR\b|\bNACHT\b|\bJAHR", str(hud).upper()):
         hud = None                             # eine Zeile, die sich nie ändert und weder Ort noch Zeit nennt („SUCHE GESTARTET“), sagt 90 Sekunden lang nichts
+    if hud and len(huds) < 2:
+        hud = re.sub(r"\s*[·|,–-]\s*\d{1,2}[:.]\d{2}(?:\s*UHR?\w*)?\s*$", "", str(hud), flags=re.I).strip() or None   # eine Uhrzeit, die 80 Sekunden lang stehen bleibt, stimmt für fast keine Szene – das Datum bleibt
     if hud:
         cur_hud = hud
         for sc, (s, e) in zip(scenes, times):
@@ -129,14 +131,20 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
                 cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud
                 continue                       # über einer Grafik (Karten-Titel, Zahl mit Überschrift) stünde die Zeile im Weg
             cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud   # gilt weiter, bis eine neue Angabe kommt
-            lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()[:28]
+            lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()
+            if len(lab) > 30:                  # zu lang: am Wortende kürzen, nicht mitten im Wort („2:00 UH“)
+                lab = lab[:31].rsplit(" ", 1)[0].rstrip(" ·|,–-:")
             if lab:
                 lines.append(f"Dialogue: 3,{_ts(s)},{_ts(e)},Hud,,0,0,0,,{lab}")
     # Ecke oben rechts: Zustands-Anzeige der Geschichte („SEIL: LÄUFT“ → „SEIL: STEHT“), gilt weiter bis zur nächsten Angabe
     if not (countdown and countdown.get("seconds")):
-        cur = ""
-        for sc, (s, e) in zip(scenes, times):
-            cur = sc.get("status") if isinstance(sc.get("status"), str) and sc.get("status").strip() else cur
+        cur, cur_i = "", -9
+        stats = [str(sc.get("status") or "").strip() if isinstance(sc.get("status"), str) else "" for sc in scenes]
+        for n_sc, (sc, (s, e)) in enumerate(zip(scenes, times)):
+            if stats[n_sc]:
+                cur, cur_i = stats[n_sc], n_sc
+            elif cur and n_sc - cur_i > 2 and not any(x.partition(":")[0].strip().upper() == cur.partition(":")[0].strip().upper() for x in stats[n_sc:] if x):
+                cur = ""                       # eine einzelne Angabe („WIND: RUHIG“) gilt zwei Sätze weiter – nicht bis zum Schluss über Absturz und Jubel
             lab, _, val = str(cur or "").replace("{", "").replace("}", "").replace("\\", "").upper().partition(":")
             lab, val = (lab.strip()[:14], val.strip()[:12]) if val.strip() else ("", lab.strip()[:12])
             if val:

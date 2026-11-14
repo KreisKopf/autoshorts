@@ -192,7 +192,7 @@ def sanitize(sc):
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
             if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
-                c["look"] = {k: v for k, v in a["look"].items() if k in ("shirt", "hair", "hat", "glasses", "skin") and isinstance(v, (str, bool))}
+                c["look"] = {k: v for k, v in a["look"].items() if k in ("shirt", "hair", "hat", "glasses", "skin", "hair_color", "gender", "size") and isinstance(v, (str, bool, int, float))}
             say = a.get("say")
             c["say"] = "".join(ch for ch in say if ch not in "{}<>\\").strip()[:16] if isinstance(say, str) else ""
             for k in ("pos", "to"):
@@ -288,13 +288,13 @@ def _prepare(scene, cast):
         if isinstance(p, dict) and place != "underwater" and str(scene.get("shot") or "") != "insert" and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "submersible":
             continue                                              # ein Tauchboot schwebt nur unter Wasser frei im Bild – nicht am Himmel, nicht im Zimmer
-        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain") and not (place == "underwater" and
+        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain", "highsky") and not (place == "underwater" and
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("submersible", "ping")) and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY and str(scene.get("shot") or "") != "insert":
             if place in places.WINDOWS and len(win) < 2:          # was am Himmel passiert, sieht man drinnen durchs Fenster
                 win.append(extras.PROP_ALIASES.get(str(p["type"]).lower(), str(p["type"]).lower()))
             continue                                              # Sonne, Mond, Wolken stehen nicht im Zimmer
-        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain", "cave", "underwater") and \
+        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain", "cave", "underwater", "highsky") and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("fire", "volcano", "tornado", "car", "police", "ambulance", "bus", "truck", "house", "tree", "meteor", "wave") \
                 and str(scene.get("shot") or "") != "insert":
             continue                                              # gehört nach draußen, nicht ins Zimmer
@@ -512,9 +512,14 @@ def _light_kind(place, night, mood, xs):
     return "floor"
 
 
-def _light(frame, kind, xs):
+GLOWS = {"balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
+         "balloon_ground": (-80, places.GROUND - 130, 420), "balloon_down": (-60, places.GROUND - 150, 420)}   # leuchtet nachts selbst (Brenner) bzw. steht im Blick
+
+
+def _light(frame, kind, xs, glows=()):
     """Legt Licht und Schatten über das fertige Bild (Maske in kleiner Auflösung, weich, zwischengespeichert)."""
-    key = (kind, tuple(sorted(int(x) // 30 for x in xs)) if kind in ("spot", "night") else ())
+    glows = tuple((int(gx) // 30 * 30, int(gy), int(gr)) for gx, gy, gr in glows) if kind == "night" else ()
+    key = (kind, tuple(sorted(int(x) // 30 for x in xs)) if kind in ("spot", "night") else (), glows)
     if key not in _lights:
         if len(_lights) > 60:
             _lights.clear()
@@ -534,6 +539,8 @@ def _light(frame, kind, xs):
                 xx = x / f
                 d.ellipse((xx - 52, g - 120, xx + 52, g + 10), fill=255)
                 d.ellipse((xx - 70, g - 8, xx + 70, g + 18), fill=225)
+            for gx, gy, gr in glows:                                 # der Ballon im Schein seines Brenners: nachts nicht nur ein dunkler Fleck
+                d.ellipse(((gx - gr) / f, (gy - gr) / f, (gx + gr) / f, (gy + gr) / f), fill=240)
             m = m.filter(ImageFilter.GaussianBlur(10))
             tint = Image.new("RGB", m.size, (150, 165, 235))                                   # Mondlicht-Blau, im Lichtfleck warm
             warm = Image.new("RGB", m.size, (255, 236, 200))
@@ -816,7 +823,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     if opt.get("mood"):
         extras.draw_mood(over, opt["mood"], t, opt.get("confetti", False))
     if not close:
-        frame = _light(frame, _light_kind(place, night, opt.get("mood"), xs_now), xs_now)
+        glows = [(x + GLOWS[extras.PROP_ALIASES.get(k_, k_)][0],) + GLOWS[extras.PROP_ALIASES.get(k_, k_)][1:] for k_, x in props if extras.PROP_ALIASES.get(k_, k_) in GLOWS]
+        frame = _light(frame, "night" if glows and night and place in places.OUTDOOR else _light_kind(place, night, opt.get("mood"), xs_now), xs_now, glows)
     if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
         k = 1 - landed / 0.5
         dx, dy = int(math.sin(t * 61) * 22 * k), int(math.cos(t * 53) * 26 * k)
@@ -1826,6 +1834,23 @@ def direct(scenes, times, topic="", style="", look=""):
         if isinstance(scenes[i], dict) and isinstance(scenes[i - 1], dict) and scenes[i].get("shot") == "close" == scenes[i - 1].get("shot"):
             scenes[i]["shot"] = ""
     _auto_tags(scenes)
+    for sc in scenes:                                     # Zustands-Zeile oben rechts mit einer Zahl, die niemand sagt („FALL: 15 M/S“): erfunden, entfällt
+        if isinstance(sc, dict) and isinstance(sc.get("status"), str) and unspoken_figures({"text": sc["status"]}, str(sc.get("text") or "")):
+            sc["status"] = ""
+    _balloon_story(scenes, topic)
+    _family(scenes, main_id)
+    for sc in scenes:                                     # Nähmaschine: steht frei zwischen den Figuren, nicht dahinter; der Stoffberg gehört schon dazu
+        if isinstance(sc, dict) and sc.get("shot") not in ("graphic", "insert"):
+            ks_n = [extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or []) if isinstance(q, dict)]
+            if "sewing" in ks_n:
+                sc["props"] = [dict(q, pos=600) for q in sc["props"] if isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) == "sewing"]
+                hs_n = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
+                if 1 <= len(hs_n) <= 2 and not any(a.get("to") for a in hs_n):
+                    hs_n[0].update(pos=250, facing="right")
+                    for a in hs_n[1:]:
+                        a.update(pos=950, facing="left")
+                if sc.get("shot") in ("close", "event"):
+                    sc["shot"] = ""
     _cold_open(scenes)
     for sc in scenes:                                     # Tier als Figur der Szene: bleibt allein im Bild – spätere Regeln (Ereignis-Bild ohne
         if isinstance(sc, dict) and sc.get("_sea") and isinstance(sc.get("_keep"), dict):   # Figur, Hauptfigur dazustellen) gelten hier nicht
@@ -1929,7 +1954,7 @@ def direct(scenes, times, topic="", style="", look=""):
             keys_w = ["satellite", "earth"]
             sc["shot"] = shot_w = ""                       # ohne Ereignis-Vergrößerung: sonst ragt die Erde aus dem Bild
         sky_w = [k for k in keys_w if k in extras.SKY and k not in ("submersible", "ping")]
-        sc["_ov_low"] = 3 if (rp_w == "underwater" and keys_w == ["submersible"] and not sc.get("actors")) else 0   # 3 = ganz oben, über dem Tauchboot
+        sc["_ov_low"] = 3 if (rp_w == "underwater" and keys_w == ["submersible"] and not sc.get("actors")) or (rp_w == "highsky" and sc.get("_balloon")) or sc.get("_balloon") in ("fill", "fly") else 0   # 3 = ganz oben, über dem Tauchboot
         if sky_w and all(k in sky_w or k == "ship" for k in keys_w) and not sc.get("actors") and not sc.get("crowd") \
                 and shot_w in ("", "event", "wide") and (rp_w in places.OUTDOOR or rp_w == "space"):
             sc["_ov_low"] = 2 if "ship" in keys_w else 1  # nur Flugzeug/Satellit am Himmel (und ein Schiff darunter): das Schild steht tiefer im freien Bild, nicht quer über dem Flugzeug
@@ -2076,6 +2101,155 @@ def _carry_thing(scenes, main_id=None):
             acts[0]["pos"] = "left"
         elif main_id:
             sc["actors"] = [{"id": main_id, "action": "shocked", "emotion": "shocked", "emote": "!", "pos": "left", "speaks": False}]
+
+
+FAMILY_RE = (r"\bfamilien?\b|frauen und (?:\w+ ){0,2}kinder|(?:ehe)?frau(?:en)? und (?:\w+ ){0,2}kind|mit (?:ihren|seinen|den|ihrer|seiner|deinen|deiner) (?:\w+ ){0,3}kindern|eltern und (?:\w+ ){0,2}kinder|"
+             r"\bmutter\b.{0,40}\bkind|\bkinder\b.{0,40}\b(?:mutter|eltern|ehefrau)")
+FAMILY_LOOKS = ({"shirt": "lila", "hair": "long", "hair_color": "braun", "gender": "w"}, {"shirt": "gelb", "hair": "bob", "hair_color": "blond", "size": 0.62, "gender": "w"},
+                {"shirt": "grün", "hat": "cap", "size": 0.6})
+
+
+def _family(scenes, main_id="du"):
+    """Spricht der Satz von Familien, Frauen und Kindern, stehen sie auch im Bild: neben der Hauptfigur eine Frau und ein Kind –
+    nicht wieder nur die zwei Männer aus dem Keller."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert", "event") or sc.get("_balloon") or sc.get("_sea") or sc.get("float"):
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if not acts or len(acts) > 2 or any(a.get("kind") or a.get("to") for a in acts) or not _re.search(FAMILY_RE, str(sc.get("text") or "").lower()):
+            continue
+        if places.resolve(backdrop(sc)) in MAPS + ("space", "underwater", "cave", "highsky"):
+            continue
+        lead = acts[0]
+        emo = lead.get("emotion") or ""
+        lead.update(pos=230, hold="" if str(lead.get("hold") or "").startswith("prop:") else lead.get("hold") or "")
+        if str(lead.get("action") or "") in ("sit", "sleep", "fall", "float", "run", "walk"):
+            lead["action"] = "talk"
+        sc["actors"] = [lead, {"id": "_frau", "action": "idle", "emotion": emo, "pos": 560, "speaks": False, "look": dict(FAMILY_LOOKS[0])},
+                        {"id": "_kind", "action": "idle", "emotion": emo, "pos": 850, "speaks": False, "look": dict(FAMILY_LOOKS[1 + (len(str(sc.get("text") or "")) % 2)])}]
+        sc["crowd"] = ""
+        if sc.get("shot") == "close":
+            sc["shot"] = ""
+
+
+# Ballonfahrt / Ballonflucht: Der Heißluftballon ist das Bild der Geschichte – am Boden als Stoffberg mit Gondel, beim Start mit Flamme,
+# in der Luft vor dem hohen Himmel (acht Köpfe in der Gondel statt Figuren, die auf einer Wiese stehen), nach der Landung im Gebüsch.
+HOTAIR_RE = r"heißluftballon|heissluftballon|ballonfahr|ballonflucht|ballonflug|ballonhülle|fesselballon|\bgondel|flucht (?:\w+ ){0,3}ballon|ballon (?:\w+ ){0,6}(?:brenner|gasflasche|flucht|fliehen)"
+B_WORD_RE = r"ballon|\bhülle\b|stoffbeutel|stoffsack|stoffhülle"
+B_UP_RE = (r"\bheb\w* (?:\w+ ){0,6}ab\b|abheb|abgehoben|steig\w* (?:\w+ ){0,6}(?:auf\b|höher|empor|in die höhe|in den himmel|nach oben|in die nacht|in die dunkelheit)|aufsteig|aufgestiegen|"
+           r"schieß\w* (?:\w+ ){0,4}(?:nach oben|in die höhe|in den himmel|empor)|kapp\w* (?:\w+ ){0,3}(?:seil|leine)|start(?:et|en) (?:\w+ ){0,5}(?:nacht|himmel|flug|luft)|"
+           r"in der luft|am himmel|dort oben|hoch oben|meter(?:n)? höhe|über den wolken|schweb|treib\w* (?:\w+ ){0,4}(?:über|richtung|durch)|flieg\w* (?:\w+ ){0,4}(?:über|richtung|durch)")
+B_DOWN_RE = (r"\bland(?:en|et|ete|eten|ung)\b|gelandet|krach\w*|aufschlag|schl[aä]g\w* (?:\w+ ){0,5}auf\b|aufprall|prall\w* |setz\w* (?:\w+ ){0,5}auf\b|aufgesetzt|bruchland|"
+             r"im gebüsch|in ein gebüsch|in (?:den|die|einen) (?:bäume|baumkronen|wald|busch)|am boden angekommen|wieder (?:am|auf dem) boden|festen boden")
+B_FALL_RE = r"abstürz|absturz|abzustürzen|stürz\w* (?:\w+ ){0,3}(?:ab\b|in die tiefe|zu boden|richtung)|freien fall|sink\w*|sackt|verlier\w* (?:\w+ ){0,3}höhe|rast\w* (?:\w+ ){0,4}(?:boden|erde|tiefe)"
+B_GAS_RE = r"gas (?:\w+ ){0,4}(?:aus\b|leer|alle\b|zu ende)|kein gas|flamme (?:\w+ ){0,3}(?:erlisch|aus\b)|brenner (?:\w+ ){0,3}(?:aus\b|versagt|erlisch)|erlischt|geht (?:\w+ ){0,4}aus\b"
+B_FILL_RE = r"gasflasche|brenner|flamme|\bfeuer|auftrieb|heiße[rn]? luft|füll\w*|bläh\w*|richtet sich auf|propan"
+B_SETUP_RE = r"wiese|\bfeld|lichtung|waldrand|draußen|startplatz|aufbau|bauen (?:\w+ ){0,8}auf\b|baut (?:\w+ ){0,8}auf\b|ausbreit|entfalt|ausroll|auslegen|schleppen|tragen"
+B_INDOOR_RE = r"keller|dachboden|garage|wohnzimmer|zimmer|\bnäh|genäht|\bkauf|gekauft|\bstoff\b|stoffe\b|\bplan\b|planen|\bidee|versteck|maschine|zeitschrift|\bbuch\b|heimlich|stasi|verrat|erste[nr]? versuch"
+B_PEOPLE_RE = r"frier|zitter|eiskalt|kälte|\bminus\b|personen|familien|kinder|menschen|passagier|insassen|an bord|klammer|drängen|kauern|\bangst"
+B_LIGHT_RE = r"scheinwerfer|lichtkegel|leuchtrakete|lichtstrahl|grelles licht|strahler"
+
+
+def _balloon_story(scenes, topic=""):
+    import copy
+    import re as _re
+    if not _re.search(HOTAIR_RE, (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in scenes if isinstance(sc, dict))).lower()):
+        return
+    night = any(isinstance(sc, dict) and str(sc.get("time") or "").lower() == "night" for sc in scenes)
+    air = dark = fell = prev_ground = False
+    n_air, last_kind = 0, ""
+
+    def stage_it(sc, kind, place, props, actors=()):
+        if sc.get("shot") != "graphic" or not graphics.clean(sc.get("graphic")):
+            if place == "highsky":
+                sc["place"] = "highsky"
+                sc.pop("backdrop", None)
+            elif isinstance(sc.get("backdrop"), dict) and str(sc["backdrop"].get("ground") or "") in ("grass", "soil", "snow", "sand"):
+                sc["backdrop"]["elements"] = [e for e in sc["backdrop"].get("elements") or [] if e in ("hills", "mountains", "village")] or ["hills"]   # freier Blick: keine Baumstämme, keine Windräder
+            else:
+                sc["place"], sc["backdrop"] = "fields", {"sky": "night" if night else "day", "ground": "grass", "elements": ["hills"]}
+            if night:
+                sc["time"] = "night"
+            sc["props"] = [dict(q) for q in props]
+            sc["actors"] = list(actors)
+            sc["crowd"] = ""
+            sc["shot"] = ""
+            sc["weather"] = "" if place == "highsky" else sc.get("weather") or ""
+            for k in ("float", "aloft", "low", "dark_city"):
+                sc.pop(k, None)
+            if isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") in ("phone", "note", "list", "bubble"):
+                sc["overlay"] = None
+        sc["_balloon"] = kind
+
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        word = bool(_re.search(B_WORD_RE, low))
+        up, down = _re.search(B_UP_RE, low), _re.search(B_DOWN_RE, low)
+        humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")][:2]
+        if air and down:                                                  # Landung: Hülle im Gebüsch, Gondel schief im Gras, die Menschen stehen daneben
+            air = dark = fell = prev_ground = False
+            for a in humans[:1]:
+                a.update(action="shocked", emotion="scared", pos=170, to="", hold="", emote="!", facing="right")
+            stage_it(sc, "down", "ground", [{"type": "balloon_down", "pos": 650}], humans[:1])
+            last_kind = "down"
+            continue
+        if air or (up and (word or prev_ground)):                         # in der Luft
+            first = not air
+            air, prev_ground = True, False
+            if _re.search(B_FALL_RE, low):
+                fell = True
+            elif _re.search(B_GAS_RE, low):
+                dark = True
+            pos = (540, 470, 610)[n_air % 3]
+            n_air += 1
+            if fell:
+                kind, props = "fall", [{"type": "balloon_out", "pos": pos}]
+            elif dark:
+                kind, props = "dark", [{"type": "balloon_dark", "pos": pos}]
+            elif _re.search(B_PEOPLE_RE, low) and last_kind != "gondola" and not first and \
+                    str((sc.get("overlay") or {}).get("type") or "") not in ("thermo", "bar", "counter"):   # das Thermometer stünde quer über der Hülle
+                kind, props = "gondola", [{"type": "gondola", "pos": 540}]
+            else:
+                kind, props = "fly", [{"type": "balloon", "pos": pos}]
+            if _re.search(B_LIGHT_RE, low):
+                kind, props = "light", [{"type": "searchlight", "pos": props[0]["pos"]}] + props
+            stage_it(sc, kind, "ground" if first and not _re.search(B_LIGHT_RE, low) else "highsky", props)
+            last_kind = kind
+            continue
+        if _re.search(r"\bgondel|ballonkorb|\bplattform", low):                       # die winzige Gondel ganz nah – mit allen, die hineinmüssen
+            stage_it(sc, "gondola", "highsky", [{"type": "gondola", "pos": 540}])
+            prev_ground, last_kind = True, "gondola"
+            continue
+        if word and down and not _re.search(B_INDOOR_RE, low):          # ein Versuch endet am Boden, ohne dass der Flug erzählt wurde
+            for a in humans[:1]:
+                a.update(action="shocked", emotion="scared", pos=170, to="", hold="", emote="!", facing="right")
+            stage_it(sc, "down", "ground", [{"type": "balloon_down", "pos": 650}], humans[:1])
+            prev_ground, last_kind = False, "down"
+            continue
+        fill = _re.search(B_FILL_RE, low) or (word and _re.search(r"meter (?:hoch|breit|groß)|riesig|gigantisch|gewaltig|so (?:hoch|groß) wie|kubikmeter|fertig|steht", low))
+        if (word and (fill or _re.search(B_SETUP_RE, low) or not _re.search(B_INDOOR_RE, low))) or (prev_ground and fill and not _re.search(B_INDOOR_RE, low)):
+            for j, a in enumerate(humans[:1]):
+                a.update(action="point" if fill else "look_around", emotion=a.get("emotion") or "worried", pos=170, to="", hold="", facing="right")
+            stage_it(sc, "fill" if fill else "ground", "ground", [{"type": "balloon_fill", "pos": 660}] if fill else [{"type": "balloon_ground", "pos": 640}], humans[:1])
+            prev_ground, last_kind = True, sc["_balloon"]
+            continue
+        prev_ground = False
+    first_sc = scenes[0] if scenes and isinstance(scenes[0], dict) else None
+    if first_sc is not None and len(scenes) >= 4 and first_sc.get("_balloon") not in ("fly", "light", "dark", "fall") and first_sc.get("shot") != "graphic":
+        src = next((sc for sc in scenes if isinstance(sc, dict) and sc.get("_balloon") == "light"), None) or \
+            next((sc for sc in scenes if isinstance(sc, dict) and sc.get("_balloon") == "fly" and sc.get("place") == "highsky"), None) or \
+            next((sc for sc in scenes[1:] if isinstance(sc, dict) and sc.get("_balloon") in ("fly", "dark", "fall")), None)
+        if src is not None:                                               # erstes Bild: der Ballon am Nachthimmel im Scheinwerferlicht – nicht zwei Leute im Keller
+            for k in ("time", "props"):
+                first_sc[k] = copy.deepcopy(src.get(k))
+            first_sc["place"] = "highsky"
+            first_sc.pop("backdrop", None)
+            first_sc.update(actors=[], crowd="", shot="", weather="", _balloon="open", _cold_open=True)
+            for k in ("float", "aloft", "low", "dark_city"):
+                first_sc.pop(k, None)
 
 
 def _scene_punch(sc):
@@ -2479,7 +2653,7 @@ OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornad
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
-TEXT_PROPS = [(SUB_RE, "submersible"), (r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
+TEXT_PROPS = [(SUB_RE, "submersible"), (r"nähmaschine|\bnäh(?:en|t|ten|te)\b|zusammennäh|zusammengenäh|vernäh", "sewing"), (r"stoffbahn|stoffballen|stoffrolle|(?:quadrat)?meter (?:\w+ )?stoff\b|\bstoff\b.{0,60}(?:kauf|geschäft|läden)|kauf\w*\b.{0,60}\bstoff\b", "fabric"), (r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
               (r"krankenwagen|rettungswagen|notarzt|sanitäter|rettungsdienst|rettungskräfte|einsatzkräfte|\bnotruf", "ambulance"), (r"polizeiauto|polizeiwagen|streifenwagen|\bpolizei\b|polizist", "police"),
               (r"\bautos?\b|\bstau\b", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
@@ -2663,7 +2837,7 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
     („insert“) oder auf die Großaufnahme der Hauptfigur bzw. des Tiers („close“). Jede dritte Szene bleibt ruhig ohne Schnitt.
     Gibt (Schnittzeit oder None, Art, Gegenstände) zurück und schaltet den Kamerasprung ab, wenn geschnitten wird."""
     if special or shot or moving or ov_tall or scene.get("float") or dur < CUT_MIN or place in MAPS or index % 3 == 2 \
-            or str(scene.get("shot") or "") in ("event", "insert", "graphic", "close"):
+            or str(scene.get("shot") or "") in ("event", "insert", "graphic", "close") or scene.get("_balloon"):
         return None, "", []
     low = str(scene.get("text") or "").lower()
     named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL
@@ -2719,8 +2893,14 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
             if a_l.get("action") in ("fall", "sleep"):
                 xs += [a_l["x1"] - 200, a_l["x1"] + 60]
                 cam["punch"] = None                                         # kein Sprung auf den Kopf – der läge dann am Bildrand
+        for k_b, x_b in props:                                          # Ballon am Boden (Stoffberg, Gondel): ganz im Bild lassen, kein Sprung auf den Kopf
+            if extras.PROP_ALIASES.get(k_b, k_b) in extras.BALLOON_KINDS:
+                xs += [max(210, x_b - 260), min(W - 210, x_b + 190)]
+                cam["punch"] = None
         span = max(xs) - min(xs) + 420                                  # Breite der Gruppe samt Armen
         cam.update(tight=True, zt=max(1.0, min(1.42, W / span)), fx=(max(xs) + min(xs)) / 2)
+    if scene.get("_balloon") and isinstance(scene.get("overlay"), dict):
+        cam["punch"] = None                                                 # kein Sprung ins Bild: der Ballon wüchse sonst unter das Schild
     cam["opener"] = index == 0
     cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"], "opener": index == 0}
     cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall, place, actors, props, dur, cam, index)

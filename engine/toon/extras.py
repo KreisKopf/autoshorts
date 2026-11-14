@@ -859,6 +859,261 @@ def p_ping(d, x, t, s=1.0):
         d.arc((x - rr, cy - rr, x + rr, cy + rr), 200, 340, fill=(120, 244, 220, int(235 * (1 - ph) ** 0.8)), width=13)
 
 
+# ------------------------------------------------------------------ Heißluftballon (Ballonflucht, Ballonfahrt)
+BALLOON_COLS = ((214, 70, 60), (246, 196, 56), (70, 130, 200), (238, 236, 226), (90, 170, 110), (236, 140, 50), (150, 100, 180), (120, 190, 220))
+_HEADS = (((250, 214, 180), (92, 60, 40)), ((240, 196, 160), (40, 36, 40)), ((250, 220, 190), (190, 140, 60)), ((232, 184, 150), (120, 70, 40)))
+_SHIRTS = ((120, 124, 136), (70, 110, 190), (190, 80, 70), (90, 150, 110))
+
+
+def _rot(pivot, deg):
+    """Punkt-Abbildung: Drehung um pivot (Grad, im Uhrzeigersinn auf dem Bildschirm)."""
+    a = math.radians(deg)
+    ca, sa = math.cos(a), math.sin(a)
+    px_, py_ = pivot
+    return lambda x, y: (px_ + (x - px_) * ca - (y - py_) * sa, py_ + (x - px_) * sa + (y - py_) * ca)
+
+
+def _flame(d, tr, cx, y0, hgt, wd, t):
+    """Brennerflamme von (cx, y0) nach oben (drei Farbschichten, flackert)."""
+    for i, (col, sc) in enumerate((((236, 84, 40), 1.0), ((250, 150, 44), 0.7), ((255, 226, 110), 0.42))):
+        fl = 1 + 0.14 * math.sin(t * 12 + i * 2)
+        h_, w_ = hgt * sc * fl, wd * sc
+        tip = cx + math.sin(t * 8 + i) * wd * 0.3
+        pts = [tr(cx - w_, y0), tr(cx - w_ * 0.9, y0 - h_ * 0.5), tr(tip, y0 - h_), tr(cx + w_ * 0.9, y0 - h_ * 0.5), tr(cx + w_, y0), tr(cx, y0 + w_ * 0.4)]
+        d.polygon(pts, fill=col, outline=INK if i == 0 else None, width=max(2, int(wd * 0.12)) if i == 0 else 0)
+
+
+def _basket(d, tr, cx, gy, R, t, people=8, flame=1.0, mouth_y=None):
+    """Offene Plattform-Gondel wie bei selbstgebauten Ballons: Stahlplatte, vier Eckpfosten, Seil als Geländer, in der Mitte die
+    Gasflaschen mit Brenner; dicht gedrängt die Fahrgäste (people: 0, 4 oder 8 – Erwachsene hinten, Kinder vorn)."""
+    gw, py = 0.36 * R, gy + 0.38 * R
+    lw = max(2, int(R * 0.022))
+
+    def quad(x0, y0, x1, y1, col, o=lw):
+        d.polygon([tr(x0, y0), tr(x1, y0), tr(x1, y1), tr(x0, y1)], fill=col, outline=INK, width=o)
+
+    for bx in (-0.09, 0.09):                                                          # Gasflaschen und Brennerrohr
+        quad(cx + (bx - 0.065) * R, gy + 0.08 * R, cx + (bx + 0.065) * R, py, (150, 160, 176))
+        quad(cx + (bx - 0.03) * R, gy + 0.03 * R, cx + (bx + 0.03) * R, gy + 0.08 * R, (96, 104, 122))
+    d.line([tr(cx, gy + 0.05 * R), tr(cx, gy - 0.16 * R)], fill=INK, width=max(4, int(R * 0.05)))
+    quad(cx - 0.07 * R, gy - 0.2 * R, cx + 0.07 * R, gy - 0.13 * R, (96, 104, 122))
+    if flame > 0:
+        top = (mouth_y if mouth_y is not None else gy - 0.5 * R)
+        _flame(d, tr, cx, gy - 0.2 * R, (gy - 0.2 * R - top) * (0.75 + 0.35 * flame), 0.085 * R * (0.8 + 0.3 * flame), t)
+    if people:
+        ad = (-0.25, 0.25) if people <= 4 else (-0.27, -0.1, 0.1, 0.27)
+        kd = (-0.12, 0.12) if people <= 4 else (-0.19, -0.02, 0.02 + 0.0, 0.19)
+        hr = 0.085 * R
+        for i, ox in enumerate(ad):                                                   # Erwachsene: Oberkörper und Kopf über dem Geländer
+            skin, hair = _HEADS[i % 4]
+            hx, hy = cx + ox * R, gy - 0.02 * R + math.sin(t * 2.2 + i * 1.7) * 0.012 * R
+            quad(hx - hr * 0.95, hy + hr * 0.7, hx + hr * 0.95, py, _SHIRTS[i % 4])
+            c = tr(hx, hy)
+            d.ellipse((c[0] - hr, c[1] - hr, c[0] + hr, c[1] + hr), fill=skin, outline=INK, width=lw)
+            d.chord((c[0] - hr, c[1] - hr, c[0] + hr, c[1] + hr), 180, 360, fill=hair, outline=INK, width=lw)
+            if hr >= 12:
+                for sx in (-0.36, 0.36):
+                    d.ellipse((c[0] + sx * hr - hr * 0.13, c[1] + hr * 0.14, c[0] + sx * hr + hr * 0.13, c[1] + hr * 0.4), fill=INK)
+        kr = hr * 0.72
+        for i, ox in enumerate(kd[:max(0, people - len(ad))]):                        # Kinder: kleiner, eine Reihe tiefer
+            skin, hair = _HEADS[(i + 2) % 4]
+            hx, hy = cx + ox * R + (0.0 if people <= 4 else (-0.03 if i == 1 else 0.03 if i == 2 else 0)) * R, gy + 0.2 * R
+            quad(hx - kr * 0.9, hy + kr * 0.7, hx + kr * 0.9, py, _SHIRTS[(i + 1) % 4])
+            c = tr(hx, hy)
+            d.ellipse((c[0] - kr, c[1] - kr, c[0] + kr, c[1] + kr), fill=skin, outline=INK, width=lw)
+            d.chord((c[0] - kr, c[1] - kr, c[0] + kr, c[1] + kr), 180, 360, fill=hair, outline=INK, width=lw)
+            if kr >= 12:
+                for sx in (-0.36, 0.36):
+                    d.ellipse((c[0] + sx * kr - kr * 0.14, c[1] + kr * 0.14, c[0] + sx * kr + kr * 0.14, c[1] + kr * 0.42), fill=INK)
+    for ry in (0.1, 0.24):                                                            # Geländer: Wäscheleine zwischen den Pfosten
+        d.line([tr(cx - gw, gy + ry * R), tr(cx + gw, gy + ry * R)], fill=INK, width=max(3, int(R * 0.03)))
+        d.line([tr(cx - gw, gy + ry * R), tr(cx + gw, gy + ry * R)], fill=(226, 204, 150), width=max(1, int(R * 0.014)))
+    for sx in (-1, 1):                                                                # Eckpfosten
+        quad(cx + sx * gw - 0.022 * R, gy - 0.02 * R, cx + sx * gw + 0.022 * R, py, (120, 126, 140))
+    quad(cx - gw - 0.05 * R, py, cx + gw + 0.05 * R, py + 0.075 * R, (150, 156, 170))  # Plattform
+
+
+def _balloon(d, cx, top, k, t, flame=1.0, rot=0.0, sag=0.0, people=8):
+    """Selbstgenähter Heißluftballon: Hülle aus bunten Stoffbahnen, Seile, darunter die Plattform-Gondel mit Brenner.
+    cx = Mitte, top = Scheitel der Hülle, k = Maßstab (1 → Hülle 500 px breit); rot = Schräglage in Grad um die Gondel,
+    sag = 0..1 (schlaffe, einfallende Hülle, wenn die heiße Luft fehlt)."""
+    R = 250.0 * k
+    cy = top + R
+    my, mw = 1.25 * R, 0.2 * R
+    gy = cy + my + 0.5 * R
+    tr = _rot((cx, gy + 0.3 * R), rot)
+
+    def half(yy):
+        if yy <= 0:
+            w_ = math.sqrt(max(0.0, R * R - yy * yy))
+        else:
+            w_ = mw + (R - mw) * (0.5 + 0.5 * math.cos(math.pi * yy / my)) ** 0.85
+        if sag:
+            w_ *= 1 - 0.2 * sag + 0.07 * sag * math.sin(yy / R * 7 + t * 6)
+        return w_
+
+    def yy_s(yy):                                                                     # schlaffe Hülle: der Scheitel sackt ein
+        return yy * (1 - 0.28 * sag) if yy < 0 else yy
+
+    ys = [-R + i * (R + my) / 30 for i in range(31)]
+    n = 8
+    us = [math.sin(-math.pi / 2 + j * math.pi / n) for j in range(n + 1)]
+    out = [tr(cx - half(y), cy + yy_s(y)) for y in ys] + [tr(cx + half(y), cy + yy_s(y)) for y in reversed(ys)]
+    d.polygon(out, fill=INK)
+    warm = [y for y in ys if y >= my * 0.3]
+    for j in range(n):                                                                # Stoffbahnen: links im Licht, rechts im Schatten
+        col = BALLOON_COLS[(j * 3) % len(BALLOON_COLS)]
+        col = _lt(col, 0.16) if j < 2 else _dk(col, 0.1 + 0.09 * (j - 4)) if j > 4 else col
+        if flame <= 0:
+            col = _dk(col, 0.34)                                                      # ohne Feuer wird die Hülle dunkel
+        d.polygon([tr(cx + us[j] * half(y), cy + yy_s(y)) for y in ys] + [tr(cx + us[j + 1] * half(y), cy + yy_s(y)) for y in reversed(ys)], fill=col)
+        if flame > 0:                                                                 # Feuerschein unten in der Hülle (flackert)
+            f = 0.3 + 0.08 * math.sin(t * 9)
+            glow = tuple(int(col[i] * (1 - f) + (255, 206, 110)[i] * f) for i in range(3))
+            d.polygon([tr(cx + us[j] * half(y), cy + yy_s(y)) for y in warm] + [tr(cx + us[j + 1] * half(y), cy + yy_s(y)) for y in reversed(warm)], fill=glow)
+    for j in range(1, n):                                                             # Nähte zwischen den Bahnen
+        d.line([tr(cx + us[j] * half(y), cy + yy_s(y)) for y in ys], fill=(58, 50, 62), width=max(2, int(4 * k)))
+    for fy in (-0.42, 0.3, 0.8):                                                      # Quernähte: zusammengestückelter Stoff
+        y = fy * R
+        d.line([tr(cx + (i / 12 - 1) * half(y), cy + yy_s(y) + 0.1 * R * (1 - (i / 12 - 1) ** 2)) for i in range(25)], fill=(58, 50, 62), width=max(2, int(3 * k)))
+    d.line(out + out[:1], fill=INK, width=max(4, int(O * k)), joint="curve")
+    m = [tr(cx - mw, cy + my), tr(cx + mw, cy + my)]
+    d.line(m, fill=INK, width=max(6, int(0.07 * R)))
+    d.line(m, fill=(96, 60, 44), width=max(2, int(0.035 * R)))
+    gw = 0.36 * R
+    for sx in (-1, 1):                                                                # Seile zur Gondel
+        for ex, ey in ((mw, my), (half(my * 0.86), my * 0.86)):
+            d.line([tr(cx + sx * ex, cy + ey), tr(cx + sx * gw, gy)], fill=INK, width=max(2, int(4 * k)))
+    _basket(d, tr, cx, gy, R, t, people, flame, cy + my)
+
+
+def _mound(d, x0, x1, gy, hgt, t, limp=1.0):
+    """Schlaffe Ballonhülle am Boden: gestreifter Stoffberg von x0 bis x1 (Fußlinie gy)."""
+    n, st = 6, 28
+
+    def prof(s):
+        return hgt * (math.sin(math.pi * s) ** 0.55) * (1 + 0.05 * limp * math.sin(s * 15 + t * 2.4)) * (0.7 + 0.3 * math.sin(math.pi * min(1.0, s * 1.3)) ** 2)
+
+    xs = [x0 + (x1 - x0) * i / st for i in range(st + 1)]
+    top = [(x, gy - prof(i / st)) for i, x in enumerate(xs)]
+    d.polygon(top + [(x1, gy + 6), (x0, gy + 6)], fill=INK)
+    for j in range(n):
+        lo = [(x, gy - prof(i / st) * j / n) for i, x in enumerate(xs)]
+        hi = [(x, gy - prof(i / st) * (j + 1) / n) for i, x in enumerate(xs)]
+        d.polygon(lo + hi[::-1], fill=_dk(BALLOON_COLS[(j * 3 + 1) % len(BALLOON_COLS)], 0.05 * (n - j)))
+        d.line(hi, fill=(58, 50, 62), width=4)
+    d.line(top, fill=INK, width=O, joint="curve")
+    d.line((x0 - 4, gy + 3, x1 + 4, gy + 3), fill=INK, width=O)
+
+
+def p_balloon(d, x, t, s=1.0):
+    """Heißluftballon in der Luft: die Hülle leuchtet vom Brenner, acht Köpfe drängen sich in der kleinen Gondel."""
+    _balloon(d, x + math.sin(t * 0.6) * 8, 420 + math.sin(t * 1.1) * 12, 1.0, t, 0.8 + 0.2 * math.sin(t * 3))
+
+
+def p_balloon_out(d, x, t, s=1.0):
+    """Der Brenner ist aus: schlaffe Hülle, Schräglage, der Ballon sackt durch – Fahrtwind-Striche zeigen nach oben."""
+    for i in range(9):
+        ph = (t * 1.5 + i * 0.37) % 1
+        lx = x + (-430 + i * 108) + (54 if i % 2 else 0)
+        if abs(lx - x) < 250 and 0.25 < ph < 0.8:
+            continue
+        ly = 1400 - ph * 1150
+        d.line((lx, ly, lx, ly - 150), fill=(255, 255, 255, int(150 * math.sin(math.pi * ph))), width=9)
+    _balloon(d, x - 70 + math.sin(t * 5) * 10, 440 + math.sin(t * 3.1) * 16, 1.0, t, 0.0, 10 + 4 * math.sin(t * 2.3), 0.85)
+
+
+def p_balloon_dark(d, x, t, s=1.0):
+    """Das Gas ist aus: keine Flamme mehr, die Hülle wird dunkel und beginnt einzufallen."""
+    _balloon(d, x + math.sin(t * 0.9) * 10, 425 + math.sin(t * 1.4) * 12, 1.0, t, 0.0, 3 * math.sin(t * 1.1), 0.35)
+
+
+def p_balloon_fill(d, x, t, s=1.0):
+    """Start auf der Wiese: Der Brenner faucht, die Hülle bläht sich auf und richtet sich auf – die Gondel steht noch am Boden."""
+    k = 0.86
+    R = 250 * k
+    _balloon(d, x, GROUND - 3.42 * R, k, t, 1.7, -13 + 3 * math.sin(t * 1.3), 0.22, 0)
+
+
+def p_balloon_ground(d, x, t, s=1.0):
+    """Aufbau auf der Wiese: Die Hülle liegt als bunter Stoffberg im Gras, daneben steht die Gondel mit den Gasflaschen."""
+    _mound(d, x - 470, x + 150, GROUND + 4, 250, t)
+    R = 250 * 0.9
+    gy = GROUND - 0.455 * R
+    tr = _rot((x, gy), 0)
+    for sx in (-1, 1):
+        d.line([(x + 150, GROUND - 30), tr(x + 300 + sx * 0.36 * R, gy)], fill=INK, width=4)
+    _basket(d, tr, x + 300, gy, R, t, 0, 0.0)
+
+
+def p_balloon_down(d, x, t, s=1.0):
+    """Nach der Landung: Die Hülle hängt zerknittert im Gebüsch, die Gondel steht schief im Gras."""
+    _blobs(d, [(x - 330, GROUND - 90, 96), (x - 190, GROUND - 130, 120), (x - 30, GROUND - 100, 104), (x + 110, GROUND - 70, 80)], (62, 128, 78))
+    _mound(d, x - 400, x + 90, GROUND - 120, 190, t * 0.3, 2.0)
+    for bx, by, br in ((x - 300, GROUND - 40, 60), (x - 120, GROUND - 30, 54), (x + 40, GROUND - 34, 50)):
+        _blobs(d, [(bx, by, br), (bx + br * 0.9, by + 8, br * 0.7)], (74, 146, 88), 5)
+    R = 250 * 0.9
+    gy = GROUND - 0.5 * R
+    tr = _rot((x + 290, GROUND), 14)
+    for sx in (-1, 1):
+        d.line([(x + 60, GROUND - 150), tr(x + 290 + sx * 0.36 * R, gy)], fill=INK, width=4)
+    _basket(d, tr, x + 290, gy, R, t, 0, 0.0)
+
+
+def p_gondola(d, x, t, s=1.0):
+    """Die Gondel ganz nah: acht Menschen auf einer winzigen Plattform, über ihnen die Öffnung der Hülle mit der Flamme."""
+    R = 620.0
+    _balloon(d, x, 760 - 2.75 * R + math.sin(t * 1.1) * 8, R / 250.0, t, 0.8 + 0.2 * math.sin(t * 3))
+
+
+def p_searchlight(d, x, t, s=1.0):
+    """Suchscheinwerfer vom Boden: zwei Lichtkegel schwenken über den Nachthimmel und kreuzen sich am Ziel."""
+    for bx, ph, by in ((120, 0.0, 1790), (960, 1.9, 1830)):
+        txx = x + math.sin(t * 0.9 + ph) * 150
+        ty = 760.0
+        dx, dy = txx - bx, ty - by
+        ln = math.hypot(dx, dy)
+        ux, uy = dx / ln, dy / ln
+        ex, ey = bx + ux * 2200, by + uy * 2200
+        nx, ny = -uy, ux
+        for wd, al in ((150, 44), (86, 50)):
+            d.polygon([(bx - nx * 16, by - ny * 16), (bx + nx * 16, by + ny * 16), (ex + nx * wd * 2.2, ey + ny * wd * 2.2), (ex - nx * wd * 2.2, ey - ny * wd * 2.2)], fill=(255, 246, 196, al))
+        _r(d, (bx - 44, by - 20, bx + 44, by + 56), (70, 76, 92), 10)
+        _o(d, (bx - 30, by - 44, bx + 30, by + 8), (255, 244, 180), 5, False)
+
+
+def p_sewing(d, x, t, s=1.0):
+    """Alte Nähmaschine auf einem Tisch: die Nadel rattert, bunte Stoffbahnen laufen darunter durch und türmen sich am Boden."""
+    ty = GROUND - 250
+    for i, col in enumerate(BALLOON_COLS[:4]):                                          # Stoffberg neben dem Tisch
+        _o(d, (x + 150 - i * 26, GROUND - 70 - i * 44, x + 400 - i * 34, GROUND + 6 - i * 40), col)
+    for lx in (-200, 150):
+        _r(d, (x + lx, ty, x + lx + 36, GROUND), (150, 104, 70), 4)
+    _r(d, (x - 250, ty - 34, x + 240, ty + 6), (176, 124, 84), 8)
+    _poly(d, [(x - 250, ty - 40), (x + 250, ty - 40), (x + 330, GROUND - 150), (x + 200, GROUND - 150), (x + 170, ty - 14), (x - 250, ty - 14)], BALLOON_COLS[1], shade=0)
+    _poly(d, [(x - 250, ty - 40), (x - 60, ty - 40), (x - 60, ty - 14), (x - 250, ty - 14)], BALLOON_COLS[0], shade=0)
+    _r(d, (x - 190, ty - 76, x + 150, ty - 40), (44, 44, 52), 10)                         # Maschine: Sockel, Säule, Arm, Kopf
+    _r(d, (x + 60, ty - 250, x + 150, ty - 66), (44, 44, 52), 16)
+    _r(d, (x - 170, ty - 250, x + 150, ty - 180), (44, 44, 52), 22)
+    _r(d, (x - 180, ty - 250, x - 110, ty - 130), (44, 44, 52), 12)
+    d.line((x - 60, ty - 216, x + 40, ty - 216), fill=(226, 190, 90), width=6)            # Zierlinie
+    ny = ty - 130 + (math.sin(t * 26) * 0.5 + 0.5) * 44
+    d.line((x - 145, ty - 130, x - 145, ny + 44), fill=(210, 214, 224), width=7)          # Nadel
+    _o(d, (x + 130, ty - 240, x + 210, ty - 160), (150, 156, 170), 6)                     # Handrad
+    a = t * 9
+    d.line((x + 170, ty - 200, x + 170 + math.cos(a) * 30, ty - 200 + math.sin(a) * 30), fill=INK, width=6)
+    _o(d, (x - 30, ty - 292, x + 6, ty - 250), (236, 236, 228), 5, False)                 # Garnrolle
+
+
+def p_fabric(d, x, t, s=1.0):
+    """Stoffballen: bunte Rollen, gestapelt."""
+    for i, (ox, oy, col) in enumerate(((-110, 0, BALLOON_COLS[2]), (110, 0, BALLOON_COLS[0]), (0, -116, BALLOON_COLS[1]))):
+        cx, cy = x + ox, GROUND - 62 + oy
+        _r(d, (cx - 150, cy - 58, cx + 150, cy + 58), col, 56)
+        _o(d, (cx + 96, cy - 58, cx + 204, cy + 58), _lt(col, 0.25), O, False)
+        d.ellipse((cx + 132, cy - 20, cx + 168, cy + 20), fill=(120, 96, 70), outline=INK, width=4)
+
+
 def p_door(d, x, t, s=1.0):
     _r(d, (x - 130, GROUND - 500, x + 130, GROUND), (96, 66, 46), 6)
     _r(d, (x - 110, GROUND - 480, x + 110, GROUND), (150, 100, 64), 4, 5)
@@ -1024,6 +1279,13 @@ PROPS["submersible"] = p_submersible                       # Tauchboot mit Sonar
 PROP_ALIASES.update({"sonar": "submersible", "tauchboot": "submersible", "tauchboote": "submersible", "u-boot": "submersible", "uboot": "submersible",
                      "unterseeboot": "submersible", "tauchroboter": "submersible", "tiefseeroboter": "submersible", "submarine": "submersible"})
 SKY += ("submersible", "ping")
+PROPS.update({"balloon": p_balloon, "balloon_out": p_balloon_out, "balloon_dark": p_balloon_dark, "balloon_fill": p_balloon_fill, "balloon_ground": p_balloon_ground, "balloon_down": p_balloon_down,
+              "gondola": p_gondola, "searchlight": p_searchlight, "sewing": p_sewing, "fabric": p_fabric})
+PROP_ALIASES.update({"heißluftballon": "balloon", "heissluftballon": "balloon", "hot air balloon": "balloon", "fesselballon": "balloon", "ballonhülle": "balloon_ground",
+                     "gondel": "gondola", "ballongondel": "gondola", "ballonkorb": "gondola", "suchscheinwerfer": "searchlight", "flakscheinwerfer": "searchlight",
+                     "nähmaschine": "sewing", "naehmaschine": "sewing", "sewing machine": "sewing", "stoffballen": "fabric", "stoffrollen": "fabric", "stoffbahnen": "fabric"})
+SKY += ("balloon", "balloon_out", "balloon_dark", "gondola", "searchlight")     # Ballon in der Luft: schwebt frei im Bild (die Regie setzt ihn vor den hohen Himmel)
+BALLOON_KINDS = ("balloon", "balloon_out", "balloon_dark", "balloon_fill", "balloon_ground", "balloon_down", "gondola", "searchlight")
 
 
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
@@ -1033,7 +1295,7 @@ SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "b
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
-         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245)}
+         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255)}
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
