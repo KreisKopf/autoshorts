@@ -3218,7 +3218,7 @@
   "id": 93,
   "category": "mysterien",
   "topic": "Der verschollene Nazi-Goldschatz im Toplitzsee: Was liegt wirklich im tiefsten Wasser?",
-  "status": "review",
+  "status": "discarded",
   "created": 1794679798.8397548,
   "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
   "description": "Was liegt wirklich am Grund des Toplitzsees?\nTaucher suchten nach Nazi-Gold und fanden ungeahnte Rätsel in hundert Meter Tiefe.\nGlaubst du an den versunkenen Schatz?",
@@ -3255,6 +3255,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-14 21:00",
-  "review_at": 1794680360.5281525
+  "review_at": 1794680360.5281525,
+  "error": "Bei der Prüfung verworfen: Taucher als Goldfisch, Meeresboden statt Bergsee, Weltraumrakete, Billionen statt Milliarden, falsche Jahreszahl, Schlusssatz abgebrochen"
  }
 ]
