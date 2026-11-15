@@ -3686,11 +3686,14 @@
   "look": "cartoon",
   "mp4": true,
   "zernio_id": "6af9e4c096af248a9f6cbc9e",
-  "yt_status": "Zernio: published",
+  "yt_status": "public",
   "yt_id": "wKvF6yjpNEU",
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6af9e4c096af248a9f6cbc9e",
-  "error": null
+  "error": null,
+  "yt_thumb_at": 1794762249.4283652,
+  "yt_thumb_tries": 1,
+  "yt_thumb": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
  },
  {
   "id": 104,

@@ -1,51 +1,51 @@
 {
- "updated": 1794761835.5564797,
+ "updated": 1794762251.8195014,
  "enough": true,
  "counted": 14,
- "total": 15,
+ "total": 16,
  "needed": 6,
  "categories": [
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1693,
+   "avg_views": 1694,
    "avg_likes": 39.9,
-   "like_rate": 2.36,
-   "avg_score": 2295
+   "like_rate": 2.35,
+   "avg_score": 2296
   },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1528,
+   "avg_views": 1526,
    "avg_likes": 50.0,
-   "like_rate": 3.27,
-   "avg_score": 2278
+   "like_rate": 3.28,
+   "avg_score": 2276
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1344,
+   "avg_views": 1393,
    "avg_likes": 46.0,
-   "like_rate": 3.42,
-   "avg_score": 2034
+   "like_rate": 3.3,
+   "avg_score": 2083
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1324,
+   "avg_views": 1325,
    "avg_likes": 34.0,
    "like_rate": 2.57,
-   "avg_score": 1834
+   "avg_score": 1835
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1023,
+   "avg_views": 1024,
    "avg_likes": 30.5,
    "like_rate": 2.98,
    "avg_score": 1496
@@ -61,9 +61,9 @@
   "musik": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤯 What If (Ø 1693 Aufrufe, 2.36 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1023 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2364 zu 704 Punkte)."
+  "Stärkste Kategorie: 🤯 What If (Ø 1694 Aufrufe, 2.35 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2369 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -82,11 +82,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2182,
+   "views": 2191,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3097
+   "score": 3106
   },
   {
    "id": 84,
@@ -102,21 +102,21 @@
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2111,
+   "views": 2114,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2801
+   "score": 2804
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1635,
+   "views": 1641,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2610
+   "score": 2616
   }
  ],
  "flop": [
