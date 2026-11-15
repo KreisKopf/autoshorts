@@ -1,10 +1,19 @@
 {
- "updated": 1794763330.0194583,
+ "updated": 1794763689.3339694,
  "enough": true,
  "counted": 14,
  "total": 16,
  "needed": 6,
  "categories": [
+  {
+   "slug": "storys",
+   "name": "🔥 Spannende Storys",
+   "n": 2,
+   "avg_views": 1542,
+   "avg_likes": 50.5,
+   "like_rate": 3.27,
+   "avg_score": 2300
+  },
   {
    "slug": "whatif",
    "name": "🤯 What If",
@@ -15,31 +24,22 @@
    "avg_score": 2296
   },
   {
-   "slug": "storys",
-   "name": "🔥 Spannende Storys",
-   "n": 2,
-   "avg_views": 1526,
-   "avg_likes": 50.0,
-   "like_rate": 3.28,
-   "avg_score": 2276
-  },
-  {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1400,
+   "avg_views": 1405,
    "avg_likes": 47.0,
-   "like_rate": 3.36,
-   "avg_score": 2105
+   "like_rate": 3.35,
+   "avg_score": 2110
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1335,
+   "avg_views": 1337,
    "avg_likes": 34.0,
-   "like_rate": 2.55,
-   "avg_score": 1845
+   "like_rate": 2.54,
+   "avg_score": 1847
   },
   {
    "slug": "fakten",
@@ -53,17 +53,17 @@
  ],
  "weights": {
   "fakten": 0.7,
-  "storys": 1.07,
+  "storys": 1.08,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.08,
+  "whatif": 1.07,
   "comedy": 1.2,
   "musik": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤯 What If (Ø 1694 Aufrufe, 2.35 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1542 Aufrufe, 3.27 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2371 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2376 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
