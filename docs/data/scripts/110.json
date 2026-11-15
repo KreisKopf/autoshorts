@@ -1,0 +1,323 @@
+{
+ "title": "Was passiert, wenn die Ostsee komplett zufriert?",
+ "scenes": [
+  {
+   "text": "Wenn die Ostsee komplett zufriert, steht die Schifffahrt sofort still.",
+   "see": "Schiffe stecken im dicken Eis der Ostsee fest",
+   "place": "icesea",
+   "time": "day",
+   "props": [
+    {
+     "type": "ship_ice",
+     "pos": 540
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "STOPP"
+   }
+  },
+  {
+   "text": "Und am Ende erfährst du, wann eine Armee tatsächlich über dieses Eis marschierte.",
+   "see": "Eine historische Armee marschiert über das gefrorene Meer",
+   "place": "icesea",
+   "time": "day",
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Bleibt die Frage, warum ausgerechnet dieses Meer so schnell dickes Eis bildet.",
+   "see": "Das Meer bildet schnelles dickes Eis aus",
+   "place": "icesea",
+   "time": "day",
+   "weather": "wind",
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Die Ostsee friert leichter zu als die Nordsee, weil ihr Wasser viel weniger Salz enthält.",
+   "see": "Die Ostsee zeigt eine massive Eisfläche im Vergleich zur Nordsee",
+   "place": "icesea",
+   "time": "day",
+   "props": [
+    {
+     "type": "pile"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "WENIGER SALZ"
+   }
+  },
+  {
+   "text": "Nur was passiert mit dem Leben unter dieser gewaltigen Eisdecke.",
+   "see": "Unter der dicken Eisdecke im Wasser verändert sich das Leben",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_fisch",
+     "kind": "fish",
+     "action": "idle",
+     "emotion": "worried",
+     "pos": "center",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Unter dem Eis wird für die Fische der Sauerstoff knapp.",
+   "see": "Fische schwimmen langsam im Wasser unter dem Eis",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_fisch",
+     "kind": "fish",
+     "action": "idle",
+     "emotion": "worried",
+     "pos": "center",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "bar",
+    "label": "SAUERSTOFF",
+    "value": 15
+   }
+  },
+  {
+   "text": "Wer atmet denn eigentlich sonst noch in diesem eisigen Gewässer.",
+   "see": "Ein Schweinswal schwimmt im eisigen Wasser",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_fisch",
+     "kind": "fish",
+     "action": "idle",
+     "emotion": "worried",
+     "pos": "center",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Schweinswale, die einzigen Wale der Ostsee, müssen zum Atmen auftauchen und brauchen Atemlöcher im Eis.",
+   "see": "Ein Schweinswal taucht an einem Atemloch im Eis auf",
+   "place": "icesea",
+   "time": "day",
+   "props": [
+    {
+     "type": "icehole",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das ändert schlagartig auch den Weg für alle Menschen an Land.",
+   "see": "Menschen stehen an der gefrorenen Küste und blicken auf das Eis",
+   "place": "village",
+   "backdrop": {
+    "sky": "",
+    "ground": "snow",
+    "elements": [
+     "village",
+     "packice"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "watch"
+  },
+  {
+   "text": "Du könntest zu Fuß von Deutschland nach Dänemark und Schweden laufen.",
+   "see": "Jemand geht zu Fuß über das dicke Eis der Ostsee",
+   "place": "icesea",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "ZU FUSS"
+   }
+  },
+  {
+   "text": "Und welche spürbaren Folgen hat das für das Wetter an der Küste.",
+   "see": "Kalter Wind weht über die verschneite Küstenlandschaft",
+   "place": "village",
+   "backdrop": {
+    "sky": "",
+    "ground": "snow",
+    "elements": [
+     "village",
+     "packice"
+    ]
+   },
+   "time": "day",
+   "weather": "snow",
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "An der Küste wird es kälter, weil das Meer im Winter nicht mehr wärmt.",
+   "see": "Schnee und Eis bedecken die kalte Küste",
+   "place": "village",
+   "backdrop": {
+    "sky": "",
+    "ground": "snow",
+    "elements": [
+     "village",
+     "packice"
+    ]
+   },
+   "time": "day",
+   "weather": "storm",
+   "shot": "event",
+   "mood": "cold"
+  },
+  {
+   "text": "Das klingt völlig absurd und nach reiner Science-Fiction.",
+   "see": "Eine Person staunt über das gefrorene Szenario",
+   "place": "icesea",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Das klingt nach Science-Fiction, ist aber schon passiert.",
+   "see": "Eis bedeckt die weite See wie im Film",
+   "place": "icesea",
+   "time": "day",
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "GESCHICHTE"
+   }
+  },
+  {
+   "text": "Denn im Winter sechzehnhundertachtundfünfzig marschierte eine schwedische Armee über das Eis der Ostsee nach Dänemark.",
+   "see": "Eine historische Armee marschiert über das dicke Meereis",
+   "place": "icesea",
+   "time": "day",
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "card",
+    "text": "WINTER 1658"
+   }
+  },
+  {
+   "text": "Und auch in der moderneren Geschichte gab es einen solchen Rekordwinter.",
+   "see": "Alte Archivbilder zeigen einen extremen Rekordwinter",
+   "place": "icesea",
+   "time": "day",
+   "weather": "snow",
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "REKORD",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Im Winter neunzehnhundertsiebenundachtzig war die Ostsee zuletzt fast komplett zugefroren.",
+   "see": "Die komplett zugefrorene Ostsee im harten Winter",
+   "place": "icesea",
+   "time": "day",
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "1987"
+   }
+  },
+  {
+   "text": "Bleibt nur die Frage, ob das heute überhaupt noch völlig unmöglich ist.",
+   "see": "Blick über die weite, eisige Meereslandschaft",
+   "place": "icesea",
+   "time": "day",
+   "mood": "calm"
+  },
+  {
+   "text": "Ganz im Norden friert die Ostsee bis heute jeden Winter zu.",
+   "see": "Im hohen Norden friert das Meer im Winter komplett zu",
+   "place": "icesea",
+   "time": "day",
+   "weather": "snow",
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "JEDEN WINTER"
+   }
+  }
+ ]
+}
