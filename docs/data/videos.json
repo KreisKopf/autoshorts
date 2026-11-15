@@ -3932,7 +3932,7 @@
   "id": 110,
   "category": "whatif",
   "topic": "Was wäre, wenn die Ostsee plötzlich komplett zufriert? – Vorgaben: Der erste Satz ist der Hook und nennt das Thema (Wenn die Ostsee plötzlich komplett zufriert, …). Danach folgen diese Folgen, jede genau EINMAL und in eigenen, lebendigen Worten mit je zwei Sätzen erzählt, in dieser Reihenfolge: Containerschiffe und Fähren stecken im Eis fest und die Häfen stehen still; die Ostsee friert leichter zu als die Nordsee, weil ihr Wasser viel weniger Salz enthält; unter dem Eis wird für die Fische der Sauerstoff knapp; Schweinswale, die einzigen Wale der Ostsee (nicht Delfine sagen), müssen zum Atmen auftauchen und brauchen Atemlöcher im Eis; du könntest zu Fuß von Deutschland nach Dänemark und Schweden laufen; an der Küste wird es kälter, weil das Meer im Winter nicht mehr wärmt. Dann die Finte: Das klingt nach Science-Fiction, ist aber schon passiert, denn im Winter 1658 marschierte eine schwedische Armee über das Eis der Ostsee nach Dänemark, und im Winter 1987 war die Ostsee zuletzt fast komplett zugefroren. Der allerletzte Satz ist die Pointe: Ganz im Norden friert die Ostsee bis heute jeden Winter zu. Kein Satz und kein Gedanke kommt zweimal vor; die Vorgaben nicht wörtlich abschreiben. Keine anderen Jahreszahlen, keine erfundenen Zahlen (keine Sekunden-, Grad-, Meter- oder Prozentangaben), kein Bärtierchen, keine Wirtshäuser, keine Heizkosten, kein Klimawandel, kein Ausblick in die Zukunft, das Wort „eisern“ nicht verwenden. Ort der Eis-Szenen: icesea. Titelbild-Text: OSTSEE ZUGEFROREN",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794771131.858772,
   "title": "Was passiert, wenn die Ostsee komplett zufriert?",
   "description": "Was passiert mit der Natur, wenn die Ostsee von Eis bedeckt ist?\nErlebe die extremen Folgen des zugefrorenen Meeres Schritt für Schritt.\nWäre das ein Vorteil für die Schifffahrt oder das absolute Chaos?",
@@ -3971,6 +3971,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Dritter Neubau: rund ein Drittel des Videos zeigt eine leere Eisfläche (10-14 s, 56-60 s, die letzten 18 s durchgehend), Sauerstoff-Balken mit 15 Prozent, die niemand sagt, Küstendorf ohne Menschen, Armee als drei Spaziergänger"
  }
 ]
