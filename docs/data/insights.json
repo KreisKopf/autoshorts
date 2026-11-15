@@ -1,5 +1,5 @@
 {
- "updated": 1794752270.01393,
+ "updated": 1794754061.9049325,
  "enough": true,
  "counted": 13,
  "total": 15,
@@ -9,28 +9,28 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1685,
+   "avg_views": 1692,
    "avg_likes": 39.9,
-   "like_rate": 2.37,
-   "avg_score": 2287
+   "like_rate": 2.36,
+   "avg_score": 2293
   },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1474,
+   "avg_views": 1484,
    "avg_likes": 49.0,
-   "like_rate": 3.32,
-   "avg_score": 2209
+   "like_rate": 3.3,
+   "avg_score": 2220
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1315,
-   "avg_likes": 45.0,
-   "like_rate": 3.42,
-   "avg_score": 1990
+   "avg_views": 1343,
+   "avg_likes": 46.0,
+   "like_rate": 3.43,
+   "avg_score": 2033
   },
   {
    "slug": "fakten",
@@ -52,9 +52,9 @@
   "musik": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤯 What If (Ø 1685 Aufrufe, 2.37 % Likes).",
+  "Stärkste Kategorie: 🤯 What If (Ø 1692 Aufrufe, 2.36 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2390 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2400 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -73,11 +73,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2161,
+   "views": 2178,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3076
+   "score": 3093
   },
   {
    "id": 84,
@@ -93,11 +93,11 @@
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2079,
+   "views": 2109,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2769
+   "score": 2799
   },
   {
    "id": 62,
