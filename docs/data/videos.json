@@ -3399,7 +3399,7 @@
   "id": 97,
   "category": "tiere",
   "topic": "Der Fangschreckenkrebs: Das Tier mit dem stärksten Punch im Universum, das dich wortwörtlich one-shotted",
-  "status": "review",
+  "status": "discarded",
   "created": 1794737419.5811563,
   "title": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich",
   "description": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich\nEin winziger Krebs schlägt so schnell zu wie eine Pistolenkugel. Kannst du den Punch in Zeitlupe überhaupt erkennen?\nSchnelligkeit oder pure Muskelkraft?",
@@ -3433,6 +3433,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-15 13:00",
-  "review_at": 1794737938.330597
+  "review_at": 1794737938.330597,
+  "error": "Bei der Prüfung verworfen: Prüfung: falsches Tier (Pistolenkrebs statt Fangschreckenkrebs) in fast allen Szenen, fast immer dasselbe Bild, falsche Aussagen (Panzerglas, so schnell wie eine Kugel), Schlusssatz wiederholt den ersten"
  }
 ]
