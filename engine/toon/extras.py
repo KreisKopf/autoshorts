@@ -212,8 +212,9 @@ def p_tv(d, x, t, s=1.0):
     d.polygon([(x - 176, GROUND - 300), (x - 96, GROUND - 376), (x - 40, GROUND - 376), (x - 176, GROUND - 240)], fill=(255, 255, 255, 70))   # Spiegelung
 
 
-def p_aquarium(d, x, t, s=1.0):
-    """Aquarium auf einem Schränkchen: Wasser, Kies, Pflanze, Luftblasen und ein Goldfisch, der hin und her schwimmt."""
+def p_aquarium(d, x, t, s=1.0, crab=False):
+    """Aquarium auf einem Schränkchen: Wasser, Kies, Pflanze, Luftblasen und ein Goldfisch, der hin und her schwimmt
+    (crab=True: Forschungsbecken mit einem bunten Krebs am Kies statt des Goldfischs)."""
     _r(d, (x - 190, GROUND - 190, x + 190, GROUND), (150, 104, 70), 10)                          # Schränkchen
     _r(d, (x - 150, GROUND - 150, x - 14, GROUND - 30), (176, 124, 84), 8, 5)
     _r(d, (x + 14, GROUND - 150, x + 150, GROUND - 30), (176, 124, 84), 8, 5)
@@ -233,6 +234,31 @@ def p_aquarium(d, x, t, s=1.0):
     for i in range(3):                                                                             # Luftblasen
         by_ = bot - 50 - ((t * 70 + i * 60) % 170)
         d.ellipse((x + 96 + i * 12 - 7, by_ - 7, x + 96 + i * 12 + 7, by_ + 7), outline=(236, 250, 255), width=3)
+    if crab:                                                                                       # Krebs im Becken: sitzt am Kies, die Keule schnellt gegen die Scheibe
+        cx_, cy_ = x - 10 + math.sin(t * 1.1) * 14, bot - 86
+        gr, gd = (70, 176, 124), (48, 132, 92)
+        for i, (ox, oy, r_) in enumerate(((-96, 26, 20), (-70, 12, 27), (-38, 2, 33))):            # Hinterleib aus Ringen
+            d.ellipse((cx_ + ox - r_, cy_ + oy - r_, cx_ + ox + r_, cy_ + oy + r_), fill=gd if i % 2 else gr, outline=INK, width=4)
+        d.polygon([(cx_ - 112, cy_ + 30), (cx_ - 146, cy_ + 12), (cx_ - 140, cy_ + 52)], fill=(60, 130, 220), outline=INK, width=4)   # Schwanzfächer
+        for lx in (-50, -24, 2):
+            d.line([(cx_ + lx, cy_ + 28), (cx_ + lx - 6 + math.sin(t * 7 + lx) * 4, cy_ + 50)], fill=gd, width=6)
+        d.ellipse((cx_ - 30, cy_ - 40, cx_ + 62, cy_ + 34), fill=gr, outline=INK, width=5)           # Panzer
+        for sx in (-8, 18):
+            d.ellipse((cx_ + sx - 6, cy_ - 28, cx_ + sx + 6, cy_ - 16), fill=(250, 206, 80))
+        for ex in (30, 54):                                                                        # Stielaugen
+            d.line([(cx_ + ex, cy_ - 30), (cx_ + ex, cy_ - 52)], fill=(150, 110, 200), width=7)
+            d.ellipse((cx_ + ex - 12, cy_ - 72, cx_ + ex + 12, cy_ - 48), fill=(255, 255, 255), outline=INK, width=4)
+            d.ellipse((cx_ + ex - 2, cy_ - 64, cx_ + ex + 8, cy_ - 54), fill=INK)
+        ph = (t * 0.9) % 1.0
+        ext = 1.0 if ph > 0.8 else 0.0
+        fx_ = cx_ + 74 + 46 * ext
+        d.line([(cx_ + 46, cy_ + 12), (cx_ + 66 + 10 * ext, cy_ + 26), (fx_, cy_ + 10)], fill=gd, width=9, joint="curve")
+        d.ellipse((fx_ - 15, cy_ - 4, fx_ + 17, cy_ + 24), fill=(232, 84, 60), outline=INK, width=4)   # Keule
+        if ext:
+            for i in range(8):
+                a_ = i / 8 * math.tau
+                d.line([(fx_ + 30 + math.cos(a_) * 10, cy_ + 10 + math.sin(a_) * 10), (fx_ + 30 + math.cos(a_) * 26, cy_ + 10 + math.sin(a_) * 26)], fill=(255, 236, 120), width=5)
+        return
     sw = math.sin(t * 1.3)
     fx, fy = x + sw * 70, top + 150 + math.sin(t * 2.4) * 12
     fd = 1 if math.cos(t * 1.3) >= 0 else -1                                                       # schwimmt in Blickrichtung
@@ -850,6 +876,52 @@ def p_submersible(d, x, t, s=1.0):
     d.line([(x + 196, y + 136), (x + 228, y + 152)], fill=INK, width=8)
 
 
+def p_tank(d, x, t, s=1.0):
+    """Forschungsbecken aus dickem Kunststoff mit einem Krebs darin (Tier-Videos: „Forscher halten ihn in Plastikbecken“)."""
+    p_aquarium(d, x, t, s, crab=True)
+
+
+CAVI_Y = 930                                                # Höhe der Keule eines Meerestiers als Hauptfigur (stage: HERO_SIZE)
+
+
+def p_cavitation(d, x, t, s=1.0):
+    """Kavitationsblase vor der Keule des Krebses: wächst nach dem Schlag, fällt in sich zusammen und blitzt dabei hell auf –
+    mit Druckringen, die sich im Wasser ausbreiten. Läuft im Takt des Schlags (extras.creature, mantis)."""
+    cy = CAVI_Y
+    ph = (t * 0.9 + 0.2) % 1.0
+    if ph < 0.5:                                           # Blase wächst
+        g = ph / 0.5
+        r_ = 26 + 96 * g ** 0.7
+    elif ph < 0.62:                                        # fällt zusammen
+        g = (ph - 0.5) / 0.12
+        r_ = 122 * (1 - g) + 14
+    else:
+        r_ = 0
+    if r_:
+        d.ellipse((x - r_, cy - r_, x + r_, cy + r_), fill=(214, 240, 252, 150), outline=(240, 252, 255, 240), width=max(4, int(r_ * 0.09)))
+        d.ellipse((x - r_ * 0.55, cy - r_ * 0.62, x - r_ * 0.1, cy - r_ * 0.2), fill=(255, 255, 255, 210))
+        for i in range(5):                                 # kleine Dampfblasen steigen daneben auf
+            bx = x - 90 + i * 46 + math.sin(t * 3 + i) * 8
+            by_ = cy + 150 - ((t * 120 + i * 53) % 260)
+            d.ellipse((bx - 11, by_ - 11, bx + 11, by_ + 11), outline=(236, 250, 255, 220), width=4)
+    else:                                                  # Blitz und Druckwelle beim Zusammenfallen
+        g = (ph - 0.62) / 0.38
+        fl = max(0.0, 1 - g * 1.6)
+        if fl > 0:
+            pts = []
+            for i in range(20):
+                a_ = i / 20 * math.tau + 0.2
+                rr = (150 if i % 2 else 62) * (0.6 + 0.6 * g)
+                pts.append((x + math.cos(a_) * rr, cy + math.sin(a_) * rr))
+            d.polygon(pts, fill=(255, 244, 170, int(240 * fl)), outline=(255, 190, 60, int(255 * fl)), width=6)
+            d.ellipse((x - 46, cy - 46, x + 46, cy + 46), fill=(255, 255, 255, int(250 * fl)))
+        for i in range(3):
+            rr = 80 + (g + i * 0.22) * 300
+            al = int(230 * max(0.0, 1 - g - i * 0.2))
+            if al > 0:
+                d.ellipse((x - rr, cy - rr, x + rr, cy + rr), outline=(255, 255, 255, al), width=12)
+
+
 def p_ping(d, x, t, s=1.0):
     """Ortungs-Signal eines Senders am Boden (Blackbox): Ringe steigen vom Gerät auf, werden größer und verblassen."""
     cy = GROUND - 150
@@ -1281,11 +1353,13 @@ FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
 SKY = ("drone", "earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
 PROPS["debris"] = p_debris                                 # Treibgut auf dem Meer (nur von der Regie gesetzt)
+PROPS["tank"] = p_tank                                     # Forschungsbecken mit Krebs (nur von der Regie gesetzt)
+PROPS["cavitation"] = p_cavitation                         # Kavitationsblase vor der Keule (nur von der Regie gesetzt)
 PROPS["ping"] = p_ping                                     # Signal-Ringe über einem Sender (nur von der Regie gesetzt)
 PROPS["submersible"] = p_submersible                       # Tauchboot mit Sonar: schwebt wie die Himmels-Dinge frei im Bild (unter Wasser)
 PROP_ALIASES.update({"sonar": "submersible", "tauchboot": "submersible", "tauchboote": "submersible", "u-boot": "submersible", "uboot": "submersible",
                      "unterseeboot": "submersible", "tauchroboter": "submersible", "tiefseeroboter": "submersible", "submarine": "submersible"})
-SKY += ("submersible", "ping")
+SKY += ("submersible", "ping", "cavitation")
 PROPS.update({"balloon": p_balloon, "balloon_out": p_balloon_out, "balloon_dark": p_balloon_dark, "balloon_fill": p_balloon_fill, "balloon_ground": p_balloon_ground, "balloon_down": p_balloon_down,
               "gondola": p_gondola, "gondola_empty": p_gondola_empty, "searchlight": p_searchlight, "sewing": p_sewing, "fabric": p_fabric})
 PROP_ALIASES.update({"heißluftballon": "balloon", "heissluftballon": "balloon", "hot air balloon": "balloon", "fesselballon": "balloon", "ballonhülle": "balloon_ground",
@@ -1302,7 +1376,7 @@ SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "b
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
-         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255)}
+         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "tank": (1.75, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255)}
 # ------------------------------------------------------------------ See-Schatz (versenkte Kisten, Taucher, Baumstämme am Seegrund)
 def _rotp(pivot, deg):
     """Wie _rot, nimmt aber einen Punkt (x, y) als ein Argument."""
@@ -1441,7 +1515,7 @@ PROP_ALIASES.update({"holzkiste": "crate", "holzkisten": "crates", "kisten": "cr
                      "goldbarren": "goldbars", "gold": "goldbars", "goldschatz": "goldbars", "baumstämme": "logs", "baumstamm": "logs", "stämme": "logs"})
 SIZES.update({"crate": (0.8, 1255), "crates": (1.5, 1250), "cashcrate": (1.25, 1255), "goldbars": (0.5, 1262), "rocketpart": (0.85, 1245)})     # leicht überzeichnet, damit man sie neben den Figuren erkennt
 SKY += ("logs", "crates_sink")                              # schweben frei im Wasser (nur von der Regie unter Wasser gesetzt)
-WATER_KINDS = ("submersible", "ping", "logs", "crates_sink")     # schweben unter Wasser frei im Bild
+WATER_KINDS = ("submersible", "ping", "logs", "crates_sink", "cavitation")     # schweben unter Wasser frei im Bild
 LAKE_KINDS = ("crate", "crates", "cashcrate", "goldbars", "logs", "crates_sink", "rocketpart")
 
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",

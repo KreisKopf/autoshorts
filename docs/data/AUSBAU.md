@@ -196,3 +196,13 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   `schweißbrenner`, `usb-stick`. Die vorläufige Zeichnung `tuer` ist entfernt – die eingebaute Tür (`door`) kennt jetzt auch „tuer“, „Türe“, „Türen“,
   „Haustür“. Die vorläufige Krabbe `krebs` ist entfernt: ein bloßes „Krebs“ ist im Meer der Krebs als Figur (`stage._sea_kind`), sonst die Krankheit –
   als Bibliotheks-Gegenstand stünde bei jedem Satz über die Krankheit eine rote Krabbe im Bild. `main.known_thing` kennt „Krebs“ deshalb fest.
+
+- Video über ein einziges Meerestier (Prüfung 15.11.2026, „Fangschreckenkrebs“): Nennt das Thema genau ein Meerestier (`stage._sea_default`), meint ein bloßes
+  „Krebs“ – im Satz wie als Figuren-Kennung – dieses Tier und nicht mehr den Pistolenkrebs. Damit nicht jede Szene dasselbe Bild ist: Stellt das Drehbuch bei einem
+  Satz über Menschen („ein menschlicher Wimpernschlag“, „Menschen haben drei Farbrezeptoren“ – `SEA_HUMAN_RE`) einen Menschen unter Wasser, spielt der Satz als
+  Großaufnahme der Figur im Zimmer; mit Becken/Aquarium im Satz (`TANK_RE`) steht die Figur im Labor neben dem Forschungsbecken `tank` (Aquarium mit Krebs).
+  Vor der Keule erscheint, wovon der Satz spricht (`SEA_TARGETS`): die Requisite `cavitation` (Dampfblase wächst, fällt zusammen, blitzt mit Druckringen – Wörter
+  Dampfblase, Kavitation, Blase kollabiert, Druckwelle: `CAVI_RE`) oder die Sprungfeder aus der Bibliothek; zweimal hintereinander steht das Bild gespiegelt.
+  Dinge neben dem groß gezeichneten Tier sind mindestens 300 px hoch (`_PROP_MIN`), Blitz, Glasscheibe und Feder stehen auch bei dunkler Stimmung im Licht (`GLOWS`).
+  Küchendampf (`steam`) gibt es unter Wasser nicht. „Mehrere tausend Grad“ ergibt keinen Zähler „1.000 GRAD“ (`find_figure`). `writer.polish` streicht den
+  Schlusssatz auch dann, wenn er den ersten mit Vorspann wiederholt („Und hier kommen drei Fakten …“). Selbsttest: `_one_animal`.

@@ -471,7 +471,8 @@ def polish(js):
     scs_p = [x for x in js.get("scenes") or [] if isinstance(x, dict)]
     if len(scs_p) >= 8:                                   # „Schleife“ wörtlich genommen: der letzte Satz wiederholt den ersten – niemand will denselben Satz zweimal hören
         w_a, w_b = (set(_re_p.sub(r"[^a-zäöüß0-9 ]", "", str(x.get("text") or "").lower()).split()) for x in (scs_p[0], scs_p[-1]))
-        if w_a and len(w_b) >= 4 and len(w_a & w_b) / max(len(w_a), len(w_b)) >= 0.8:
+        if w_a and len(w_b) >= 4 and (len(w_a & w_b) / max(len(w_a), len(w_b)) >= 0.8 or        # auch mit Vorspann („Und hier kommen drei Fakten …“)
+                                      (len(w_a) >= 5 and len(w_a & w_b) / len(w_a) >= 0.8 and len(w_b) <= len(w_a) + 5)):
             js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
     for k in ("title", "description"):
         if isinstance(js.get(k), str):

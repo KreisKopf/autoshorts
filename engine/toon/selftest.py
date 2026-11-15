@@ -251,6 +251,40 @@ def main():
         assert scs[1].get("place") == "cinema", scs[1].get("place")
         assert len([a for a in scs[2].get("actors") or [] if not a.get("kind")]) == 3, "drei Gründer"
     check("Ort aus dem Satz", _places_said)
+    def _one_animal():                                           # Video über ein einziges Meerestier: „Krebs“ meint dieses Tier, Menschen-Sätze spielen an Land
+        T = [("Drei Fakten über den Fangschreckenkrebs.", "underwater", [{"id": "krebs"}], "", ""),
+             ("Und der letzte Fakt zerbricht sogar Glas.", "underwater", [{"id": "krebs", "action": "point"}], "", ""),
+             ("Das ist fünfzigmal schneller als ein menschlicher Wimpernschlag.", "underwater", [{"id": "du", "action": "shocked"}], "", ""),
+             ("Dafür nutzt er eine Art Sprungfeder.", "underwater", [{"id": "krebs"}], "", ""),
+             ("Er lässt das Wasser wortwörtlich kochen.", "underwater", [{"id": "krebs"}], "steam", ""),
+             ("Durch den Unterdruck entstehen kleine Dampfblasen.", "underwater", [], "", "insert"),
+             ("Wenn diese Blasen kollabieren, entstehen mehrere tausend Grad.", "underwater", [], "", ""),
+             ("Forscher halten ihn deshalb in dickwandigen Plastikbecken.", "lab", [{"id": "du", "action": "look_around"}], "", ""),
+             ("Dieser Krebs sieht ultraviolettes Licht.", "underwater", [{"id": "krebs"}], "", "close")]
+        scs = stage.direct([{"text": t_, "place": pl_, "actors": a_, "weather": w_, "shot": sh_} for t_, pl_, a_, w_, sh_ in T],
+                           [(n_ * 3, n_ * 3 + 3) for n_ in range(len(T))], "Der Fangschreckenkrebs: Das Tier mit dem stärksten Schlag")
+        kinds = [[a.get("kind") or "" for a in sc.get("actors") or []] for sc in scs]
+        keys = [[q.get("type") for q in sc.get("props") or []] for sc in scs]
+        for n_ in (0, 1, 3, 4, 5, 6, 8):
+            assert kinds[n_] == ["mantis"], f"Ein-Tier-Video Szene {n_}: {kinds[n_]} statt Fangschreckenkrebs"
+        assert kinds[2] == [""] and places.resolve(stage.backdrop(scs[2])) == "livingroom" and scs[2].get("shot") == "close", f"Wimpernschlag ohne Mensch: {kinds[2]}"
+        assert keys[3] == ["lib_sprungfeder"] or "lib_sprungfeder" not in extras.PROPS, f"Sprungfeder fehlt: {keys[3]}"
+        assert not scs[4].get("weather"), "Küchendampf unter Wasser"
+        assert keys[5] == ["cavitation"] and keys[6] == ["cavitation"], f"Dampfblase fehlt: {keys[5]} {keys[6]}"
+        assert scs[5]["actors"][0].get("facing") != scs[6]["actors"][0].get("facing"), "zweimal dasselbe Blasen-Bild"
+        assert not scs[6].get("overlay"), f"Zähler aus „mehrere tausend“: {scs[6].get('overlay')}"
+        assert keys[7] == ["tank"] and kinds[7] == [""], f"Forschungsbecken fehlt: {keys[7]} {kinds[7]}"
+        for sc in scs:
+            frame(sc, {"du": {"shirt": "blau"}})
+            frame(sc, {"du": {"shirt": "blau"}}, 2.7)
+        js = {"scenes": [{"text": "Drei Fakten über den Fangschreckenkrebs, die unmöglich klingen."}] + [{"text": f"Satz Nummer {n_} erzählt etwas Neues."} for n_ in range(8)]
+                        + [{"text": "Und hier kommen drei Fakten über den Fangschreckenkrebs, die unmöglich klingen."}]}
+        from .. import writer
+        writer.polish(js)
+        assert len(js["scenes"]) == 9, "Schlusssatz wiederholt den ersten (mit Vorspann)"
+
+    check("Ein-Tier-Video (Fangschreckenkrebs)", _one_animal)
+
     def _sea():                                                  # Meerestiere: das genannte Tier ist die Figur, allein und unter Wasser
         T = [("Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.", "livingroom", [{"id": "du", "action": "shocked", "hold": "phone"}], ["computer"], "close"),
              ("Der Pistolenkrebs knallt seine Schere zu.", "underwater", [], ["explosion"], "event"),

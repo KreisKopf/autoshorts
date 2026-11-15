@@ -209,6 +209,7 @@ def _prepare(scene, cast):
     scene = sanitize(scene)
     cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
+    _PROP_MIN[0] = 300 if scene.get("_near") else MIN_PROP_PX
     places.LAKE[0] = bool(scene.get("_lake"))             # Schatzsuche im See: „unter Wasser“ ist der Seegrund, nicht das Meer
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
     ov = scene.get("overlay") if isinstance(scene.get("overlay"), dict) else {}
@@ -437,6 +438,9 @@ MIN_PROP_PX = 120      # Mindesthöhe (Bildpunkte) eines Gegenstands am Boden; e
 MIN_TABLE_PX = 95      # … und auf dem Tisch
 
 
+_PROP_MIN = [MIN_PROP_PX]                                 # je Szene: neben einem groß gezeichneten Tier (Krebs mit Sprungfeder, Muschel) ist auch das Ding groß
+
+
 def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
     """Requisite zeichnen. Dinge mit echter Größe (Auto, Regal, Haus …) stehen in ihrer Tiefe im richtigen Verhältnis
     zu den Menschen; Naturereignisse und Himmelskörper sind Schaubilder und dürfen groß sein (big).
@@ -464,8 +468,8 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
     if fit:
         f, gy = fit
         nat = extras._nat.get(key)
-        if nat and not (table and _on_table(key)) and nat * f < MIN_PROP_PX:
-            f = MIN_PROP_PX / nat                         # Kleines (Spinne, Chip, Schuh) erkennbar groß – sonst ist das Thema nur ein Punkt
+        if nat and not (table and _on_table(key)) and nat * f < _PROP_MIN[0]:
+            f = _PROP_MIN[0] / nat                         # Kleines (Spinne, Chip, Schuh) erkennbar groß – sonst ist das Thema nur ein Punkt
         f *= grow                                         # Auftritt: das Ding springt mit kleinem Überschwingen ins Bild
         if table and _on_table(key):
             _prop(frame, "table", x, t, big)
@@ -513,13 +517,13 @@ def _light_kind(place, night, mood, xs):
     return "floor"
 
 
-GLOWS = {"gondola_empty": (0, places.GROUND - 300, 460), "balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
+GLOWS = {"cavitation": (0, 930, 330), "lib_glasscheibe": (0, places.GROUND - 280, 340), "lib_sprungfeder": (0, places.GROUND - 150, 260), "gondola_empty": (0, places.GROUND - 300, 460), "balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
          "balloon_ground": (-80, places.GROUND - 130, 420), "balloon_down": (-60, places.GROUND - 150, 420)}   # leuchtet nachts selbst (Brenner) bzw. steht im Blick
 
 
 def _light(frame, kind, xs, glows=()):
     """Legt Licht und Schatten über das fertige Bild (Maske in kleiner Auflösung, weich, zwischengespeichert)."""
-    glows = tuple((int(gx) // 30 * 30, int(gy), int(gr)) for gx, gy, gr in glows) if kind == "night" else ()
+    glows = tuple((int(gx) // 30 * 30, int(gy), int(gr)) for gx, gy, gr in glows) if kind in ("night", "spot") else ()
     key = (kind, tuple(sorted(int(x) // 30 for x in xs)) if kind in ("spot", "night") else (), glows)
     if key not in _lights:
         if len(_lights) > 60:
@@ -555,6 +559,8 @@ def _light(frame, kind, xs, glows=()):
                 d.polygon([(xx - 8, 0), (xx + 8, 0), (xx + 50, g + 6), (xx - 50, g + 6)], fill=170)     # Lichtkegel von oben
                 d.ellipse((xx - 44, g - 105, xx + 44, g + 14), fill=255)                                 # die Figur steht im Licht
                 d.ellipse((xx - 60, g - 4, xx + 60, g + 16), fill=215)                                   # Lichtfleck am Boden
+            for gx, gy, gr in glows:                                 # was selbst leuchtet (Blitz der Dampfblase), steht nicht im Dunkeln
+                d.ellipse(((gx - gr) / f, (gy - gr) / f, (gx + gr) / f, (gy + gr) / f), fill=250)
             m = m.filter(ImageFilter.GaussianBlur(9))
         else:
             m = m.filter(ImageFilter.GaussianBlur(3))
@@ -892,6 +898,8 @@ def find_figure(text):
     best = None
     for i, w in enumerate(ws):
         v = _number(w)
+        if v is not None and i and ws[i - 1].lower() in ("mehrere", "mehreren", "einige", "einigen", "viele", "vielen", "paar", "etliche", "zig", "unzählige", "hunderte", "tausende"):
+            continue                                      # „mehrere tausend Grad“ ist keine Zahl für einen Zähler („1.000 GRAD“ wäre falsch)
         if v is None or (w.lower().strip(".,") in ("ein", "eine", "einen", "einem", "einer") and
                          (i + 1 >= len(ws) or ws[i + 1].lower().strip(".,;:!?") not in _SCALE)):
             continue
@@ -1130,6 +1138,8 @@ def direct(scenes, times, topic="", style="", look=""):
     cur_hud = ""
     sea_last = any_last = None
     sea_age = any_age = 0
+    _SEA_DEF[0] = None
+    _SEA_DEF[0] = _sea_default(scenes, topic)
     sea_topic = bool(_re0.search(SEA_TOPIC_RE, str(topic or "").lower() + " " + " ".join(str(x.get("text") or "") for x in scenes if isinstance(x, dict)).lower()))
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
@@ -1404,13 +1414,45 @@ def direct(scenes, times, topic="", style="", look=""):
         if under0 and (sea_now or sea_last) and places.resolve(backdrop(sc)) != "underwater":
             sc["place"], sc["backdrop"] = "underwater", None      # das Tier schlägt unter Wasser zu – „zertrümmert“ macht daraus keine Ruinenstadt
             place = "underwater"
+        # Tier-Video, das Drehbuch stellt bei einem Satz über Menschen („ein menschlicher Wimpernschlag“, „Menschen haben drei Farbrezeptoren“,
+        # „Forscher halten ihn …“) einen Menschen unter Wasser: Der Satz spielt mit dem Menschen an Land – das Tier wäre zum x-ten Mal dasselbe Bild.
+        hum_s = [a for a in acts if not a.get("kind") and not _re0.search(SEA_ID_RE, str(a.get("id") or "").lower())]
+        if under0 and not sea_now and not any_now and not gfx_s and not sc.get("_deep") and (sea_last or _SEA_DEF[0]) and hum_s and len(hum_s) == len(acts) \
+                and _re0.search(SEA_HUMAN_RE, txt0) and not _re0.search(DIVER_TEXT_RE, txt0) and shot_s != "insert":
+            lab_s = bool(_re0.search(r"forsch|wissenschaft|labor|\bbecken|aquari|zoo", txt0))
+            sc["place"], sc["backdrop"] = ("lab" if lab_s else "livingroom"), None
+            place = sc["place"]
+            sc["crowd"], sc["weather"], sc["time"] = "", "", "day"
+            who_s = hum_s[0]
+            who_s.update(pos="center", hold="")
+            who_s.pop("to", None)
+            if str(who_s.get("action") or "") in ("walk", "run", "sit", "sleep", "fall", "float", "jump"):
+                who_s["action"] = "talk"
+            sc["actors"] = acts = [who_s]
+            sc["props"] = [{"type": "tank", "pos": 760}] if _re0.search(TANK_RE, txt0) else []
+            if sc["props"]:
+                who_s.update(pos=300, facing="right", action="point", emotion="")
+                sc["shot"] = shot_s = ""
+            else:
+                sc["shot"] = shot_s = "close"            # Großaufnahme: das Gesicht (Auge, Wimpernschlag) ist das Bild
+            sc["_land"] = True
+        elif not under0 and _SEA_DEF[0] in ("mantis", "shrimp") and not sea_now and not gfx_s and hum_s and len(hum_s) == len(acts) and _re0.search(TANK_RE, txt0) \
+                and places.resolve(backdrop(sc)) not in places.OUTDOOR and shot_s != "insert":
+            who_s = hum_s[0]                              # „Forscher halten ihn in Plastikbecken“: Das Becken mit dem Krebs steht im Labor neben der Figur
+            who_s.update(pos=300, facing="right", action="point", emotion="", hold="")
+            who_s.pop("to", None)
+            sc["actors"] = acts = [who_s]
+            sc["props"] = [{"type": "tank", "pos": 760}]
+            sc["crowd"] = ""
+            sc["shot"] = shot_s = ""
+            sc["_land"] = True
         if any(extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) == "aquarium" for q in (sc.get("props") or [])):
             sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) != "glass"]   # Aquarium statt Trinkglas
         if places.resolve(backdrop(sc)) == "underwater":          # unter Wasser schwimmen Meerestiere, keine Menschen
             sea_k = None if any_now else sea_now or (sea_last if not _re0.search(r"\bfisch|\bhai", txt0) else None)
             for a in acts:
                 aid_s = str(a.get("id") or "").lower()
-                own_s = _sea_kind(aid_s.replace("_", " "), True)      # die Kennung nennt das Tier („qualle“, „fangschrecke“): das gilt vor dem Folgesatz-Tier
+                own_s = _sea_named(aid_s.replace("_", " ")) or (None if sea_last else _sea_kind(aid_s.replace("_", " "), True))   # die Kennung nennt das Tier („qualle“, „fangschrecke“): das gilt vor dem Folgesatz-Tier; ein bloßes „krebs“ meint das Tier von eben
                 own_s = "mantis" if _re0.search(r"fangschreck|mantis", aid_s) else "jelly" if "jelly" in aid_s else "axolotl" if "lurch" in aid_s else own_s
                 if own_s and not sea_now:
                     a["kind"] = sea_k = sea_last = own_s
@@ -1921,7 +1963,7 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc.get("shot") in ("event", "insert", "close"):
                 sc["shot"] = ""
     sea_run = (None, 0)
-    sea_prev = None
+    sea_prev = sea_thing = None
     for sc in scenes:                                     # Meerestier-Szenen: Das Tier bleibt allein im Bild – kein Mensch auf dem Meeresgrund,
         if not isinstance(sc, dict) or places.resolve(backdrop(sc)) != "underwater":      # keine Feuer-Explosion und keine Flutwelle unter Wasser
             continue
@@ -1963,6 +2005,25 @@ def direct(scenes, times, topic="", style="", look=""):
         seas[0].update(hero=True, emote="")
         sea_prev = seas[0]["kind"]
         sc["actors"] = seas[:1]
+        if str(sc.get("weather") or "") == "steam":
+            sc["weather"] = ""                            # „lässt das Wasser kochen“: unter Wasser steigt kein Küchendampf auf – die Blase zeigt es
+        if seas[0]["kind"] in ("mantis", "shrimp") and sc.get("shot") not in ("graphic", "insert"):
+            keys_t = [_key_s(q) for q in (sc.get("props") or []) if isinstance(q, dict)]
+            if not any(k in SEA_TARGETS for k in keys_t):   # der Satz nennt, was vor der Keule passiert: Dampfblase, Sprungfeder, Beute
+                add_t = next((k for pat, k in ((CAVI_RE, "cavitation"), (r"sprungfeder|spiralfeder|\bfeder\b|gespannte\w* feder", "lib_sprungfeder"))
+                              if _re0.search(pat, low_s) and k in extras.PROPS), None)
+                if add_t:
+                    flip_t = sea_thing == add_t           # zweimal hintereinander dasselbe Ding: das Bild steht gespiegelt
+                    sc["props"] = [{"type": add_t, "pos": (330 if flip_t else 670) if add_t == "cavitation" else (220 if flip_t else 860)}]
+                    seas[0].update(pos=(700 if flip_t else 380) if add_t == "cavitation" else (680 if flip_t else 400), facing="left" if flip_t else "right")
+                    sea_thing = None if flip_t else add_t
+                    sc["_near"] = add_t != "cavitation"
+                else:
+                    sea_thing = None
+            else:
+                sea_thing = None
+        else:
+            sea_thing = None
         sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and extras.PROP_ALIASES.get(       # nur, worauf das Tier zielt (Stein, Scheibe) –
             str(q.get("type")).lower(), str(q.get("type")).lower()) in SEA_TARGETS][:1]                                # keine Explosion, Flutwelle, gelernten Notbehelfe
         same_s = sea_run[1] + 1 if sea_run[0] == seas[0]["kind"] else 0
@@ -2251,7 +2312,11 @@ DEEP_WRECK_RE = r"\bwracks?\b|flugzeugwrack|schiffswrack|wrackteil"
 DEEP_BOX_RE = r"blackbox|black box|flugschreiber|flugdatenschreiber|flugrekorder"
 DEEP_PING_RE = r"send|signal|\bping|ortung|ultraschall|funk|piep|batterie"
 DEEP_THING_RE = SUB_RE + "|" + DEEP_WRECK_RE + "|" + DEEP_BOX_RE
-SEA_TARGETS = ("rock", "lib_glasscheibe", "lib_tresor", "ship", "box", "barrel", "ice")
+SEA_TARGETS = ("rock", "lib_glasscheibe", "lib_tresor", "ship", "box", "barrel", "ice", "lib_sprungfeder", "cavitation")
+SEA_ID_RE = r"krebs|garnele|qualle|shrimp|jelly|axolotl|lurch|fisch|tier|meer|tauch|diver|mantis|fangschreck"
+SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\bdir\b|\bdich\b"
+TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
+CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
 LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
@@ -2272,8 +2337,27 @@ def _sea_kind(low, sea):
         if _re.search(pat, low):
             return k
     if sea and _re.search(r"\bkrebs(e|es|en)?\b", low) and not _re.search(r"krank|tumor|diagnos|chemo|besieg|geheilt|heilung|\barzt|ärzt|patient|vorsorge|krebs (bekomm|hab|hat|hatte)", low):
-        return "shrimp"
+        return _SEA_DEF[0] or "shrimp"
     return None
+
+
+_SEA_DEF = [None]                                         # das Meerestier des Videos: ein bloßes „Krebs“ meint im Fangschreckenkrebs-Video den Fangschreckenkrebs
+
+
+def _sea_named(low):
+    """Nur ausdrücklich genannte Meerestiere (ohne das bloße „Krebs“)."""
+    import re as _re
+    return next((k for pat, k in SEA_CREATURES if _re.search(pat, low)), None)
+
+
+def _sea_default(scenes, topic):
+    """Nennt das Thema genau ein Meerestier – oder nennen alle Sätze zusammen nur eines –, ist es das Tier des ganzen Videos."""
+    import re as _re
+    head = _sea_named(topic_head(topic).lower())
+    if head:
+        return head
+    kinds = {k for sc in scenes if isinstance(sc, dict) for pat, k in SEA_CREATURES if _re.search(pat, str(sc.get("text") or "").lower())}
+    return next(iter(kinds)) if len(kinds) == 1 else None
 
 
 HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3}   # Hauptfigur: etwa halb so hoch wie ein Mensch
