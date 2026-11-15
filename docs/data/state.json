@@ -1,5 +1,5 @@
 {
- "last_category": "whatif",
+ "last_category": "fakten",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -24,7 +24,7 @@
   "qnqm93yzl",
   "qqprosnb9"
  ],
- "last_stats": 1794764771.9736633,
+ "last_stats": 1794767079.997915,
  "next_id": 107,
  "connected": {
   "youtube": {
@@ -33,7 +33,7 @@
   }
  },
  "voice_wps": 2.557,
- "last_trends": 1794748677.2575746,
+ "last_trends": 1794767079.9992843,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "fish",
@@ -41,12 +41,12 @@
   "video": 106
  },
  "cat_credit": {
-  "fakten": 3.6800000000000006,
-  "storys": -0.7699999999999989,
-  "mysterien": -0.6599999999999997,
-  "tiere": -0.6400000000000001,
-  "whatif": -1.0499999999999998,
-  "comedy": -0.5599999999999998
+  "fakten": -2.079999999999999,
+  "storys": 0.31000000000000116,
+  "mysterien": 0.5400000000000003,
+  "tiere": 0.5599999999999998,
+  "whatif": 0.03000000000000025,
+  "comedy": 0.6400000000000001
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183"

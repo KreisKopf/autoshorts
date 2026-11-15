@@ -1,758 +1,4 @@
 {
- "2026-11-14 21:00": {
-  "category": "mysterien",
-  "topic": "Der verschollene Nazi-Goldschatz im Toplitzsee: Was liegt wirklich im tiefsten Wasser?",
-  "trend": null,
-  "script": {
-   "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
-   "description": "Was liegt wirklich am Grund des Toplitzsees?\nTaucher suchten nach Nazi-Gold und fanden ungeahnte Rätsel in hundert Meter Tiefe.\nGlaubst du an den versunkenen Schatz?",
-   "hashtags": [
-    "#shorts",
-    "#mysterien",
-    "#toplitzsee",
-    "#geschichte",
-    "#nazigold",
-    "#rätsel",
-    "#viral",
-    "#deutschland"
-   ],
-   "tags": [
-    "toplitzsee",
-    "nazi gold",
-    "schatzsuche",
-    "ungelöste mysterien",
-    "geheimnis",
-    "österreich",
-    "taucher",
-    "geschichte"
-   ],
-   "thumbnail": {
-    "image": "A mysterious dark underwater scene inside a deep alpine lake. Heavy wooden crates with rusted metallic locks rest on the murky bottom mud. Submersible lights shine brightly through pitch black water onto the mysterious boxes. High contrast, cinematic suspense, top third clear.",
-    "text": "GOLD IM SEE?"
-   },
-   "wishes": [
-    "kiste"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "orange",
-     "hat": "",
-     "hair": "curly",
-     "gender": "w",
-     "hair_color": "dunkelbraun",
-     "skin": "mittel"
-    },
-    "taucher": {
-     "shirt": "schwarz",
-     "hat": "helmet",
-     "hair": "",
-     "gender": "m",
-     "hair_color": "schwarz",
-     "skin": "weiß"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein einsamer See zwischen steilen Bergen im Nebel.",
-     "text": "Drei mysteriöse Kisten im Toplitzsee verändern bis heute die Geschichtsbücher.",
-     "image": "A calm foggy mountain lake surrounded by steep dark cliffs. A small wooden boat floats empty near the shore. Dark moody atmosphere.",
-     "who": [],
-     "place": "lake",
-     "backdrop": {
-      "sky": "haze",
-      "ground": "water",
-      "elements": [
-       "mountains",
-       "lake",
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "box"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "mysteriöse",
-      "Kisten"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "TOPLITZSEE"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und das gruseligste Rätsel wartet tief auf dem dunklen Grund.",
-     "image": "Deep black water with muddy bottom. Light beams cut through the darkness.",
-     "who": [],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "submersible"
-     ],
-     "actors": [
-      {
-       "id": "taucher",
-       "action": "float",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "flashlight"
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "shot": "event",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "gruseligste",
-      "Rätsel"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Figur blickt erstaunt auf eine alte Landkarte.",
-     "text": "Im April neunzehnhundertfünfundvierzig transportierten deutsche Soldaten schwere Holzkisten an den See.",
-     "image": "A person holding an old yellowed map near a mountain lake, pointing at the water with a shocked expression.",
-     "who": [
-      "du"
-     ],
-     "place": "lake",
-     "backdrop": {
-      "sky": "storm",
-      "ground": "rock",
-      "elements": [
-       "mountains",
-       "lake"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "map"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Holzkisten"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "APRIL 1945"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Holzkisten versinken im Wasser.",
-     "text": "Sie versenkten alles mitten in der Nacht im über hundert Meter tiefen Wasser.",
-     "image": "Wooden heavy crates falling down into deep dark blue water creating bubbles.",
-     "who": [],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "box"
-     ],
-     "actors": [
-      {
-       "id": "taucher",
-       "action": "float",
-       "emotion": "tense",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "hundert",
-      "Meter"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "103 METER TIEF"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik über Gerüchte und Goldstangen.",
-     "text": "Sofort entstanden Gerüchte über Milliarden an verstecktem Gold der Nazi-Führung.",
-     "image": "Sofort entstanden Gerüchte über Milliarden an verstecktem Gold der Nazi-Führung.",
-     "who": [],
-     "place": "office",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "GERÜCHTE",
-      "value": "BILLIONEN",
-      "label": "REICHSMARK IN GOLD"
-     },
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Milliarden",
-      "Gold"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Taucher schwimmt im dunklen Wasser.",
-     "text": "Zahlreiche Schatzsucher riskierten in den folgenden Jahrzehnten ihr Leben im kalten See.",
-     "image": "A diver in black suit swimming through pitch dark murky underwater space with flashlight.",
-     "who": [
-      "taucher"
-     ],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "submersible"
-     ],
-     "actors": [
-      {
-       "id": "taucher",
-       "action": "float",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "flashlight"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Schatzsucher",
-      "Leben"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zeitungsmeldung fliegt ins Bild.",
-     "text": "Neunzehnhundertsiebenundfünfzig ertrank ein Taucher bei einer verbotenen Geheim-Expedition mysteriös.",
-     "image": "Neunzehnhundertsiebenundfünfzig ertrank ein Taucher bei einer verbotenen Geheim-Expedition mysteriös.",
-     "who": [],
-     "place": "office",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "scary",
-     "shot": "graphic",
-     "graphic": {
-      "type": "news",
-      "kicker": "ALPEN-KURIER",
-      "text": "TAUCHER VERMISST",
-      "sub": "Tödliches Unglück im Toplitzsee"
-     },
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "ertrank",
-      "mysteriös"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "TÖDLICH",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Taucher findet eine Kiste am Boden.",
-     "text": "Zwei Jahre später holte ein Forscherteam endlich die ersten Kisten an die Oberfläche.",
-     "image": "Diver near wooden crate resting in mud under water pointing flashlight.",
-     "who": [
-      "taucher"
-     ],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "kiste"
-     ],
-     "actors": [
-      {
-       "id": "taucher",
-       "action": "point",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "right",
-       "speaks": true,
-       "hold": "flashlight"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Forscherteam",
-      "Kisten"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "JAHR 1959"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Große Zahlen-Grafik über gefälschtes Geld.",
-     "text": "Doch darin lag kein Gold, sondern gefälschte britische Pfund-Banknoten.",
-     "image": "Doch darin lag kein Gold, sondern gefälschte britische Pfund-Banknoten.",
-     "who": [],
-     "place": "office",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "GEFUNDEN",
-      "value": "134 MIO.",
-      "label": "GEFÄLSCHTE PFUND"
-     },
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "kein Gold",
-      "gefälschte"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Hauptfigur sieht schockiert auf eine gefälschte Banknote.",
-     "text": "Die Nazis wollten damit eigentlich die britische Wirtschaft komplett lahmlegen.",
-     "image": "Character looking at paper with shocked expression in office room.",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Wirtschaft",
-      "lahmlegen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Prüfstempel für den Fund.",
-     "text": "Fünfundachtzig Millionen gefälschte Scheine wurden offiziell aus dem Wasser geborgen.",
-     "image": "Fünfundachtzig Millionen gefälschte Scheine wurden offiziell aus dem Wasser geborgen.",
-     "who": [],
-     "place": "office",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "badge",
-      "kicker": "BELEGT",
-      "text": "85 MIO. SCHEINE"
-     },
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Fünfundachtzig",
-      "Millionen"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "BEWIESEN",
-      "color": "green"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Tauchboot sucht den Grund ab.",
-     "text": "Spätere High-Tech-Suchboote entdeckten außerdem geheime Raketenbauteile und Waffenprüfstände.",
-     "image": "Yellow research submersible underwater near rocky sunken structure using spotlight.",
-     "who": [],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "rocket",
-      "submersible"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "High-Tech",
-      "Raketenbauteile"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Radarschirm zeigt Hindernisse unter Wasser.",
-     "text": "Aber am Boden liegt eine zwanzig Meter dicke Schicht aus umgestürzten Bäumen.",
-     "image": "Aber am Boden liegt eine zwanzig Meter dicke Schicht aus umgestürzten Bäumen.",
-     "who": [],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "graphic": {
-      "type": "radar",
-      "kicker": "SONAR-SCAN",
-      "text": "BAUMSCHICHT 20m",
-      "sub": "BLOCKIERT"
-     },
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "zwanzig",
-      "Meter"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "20 METER HOLZ"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Hauptfigur grübelt vor einer Karte.",
-     "text": "Niemand weiß genau, was unter diesem riesigen Holzverhau noch verborgen bleibt.",
-     "image": "Character looking puzzled at blue prints on a table with hand on chin.",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "verborgen",
-      "bleibt"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik über fehlenden Sauerstoff im Wasser.",
-     "text": "Ab zwanzig Meter Tiefe enthält der See nämlich überhaupt keinen Sauerstoff mehr.",
-     "image": "Ab zwanzig Meter Tiefe enthält der See nämlich überhaupt keinen Sauerstoff mehr.",
-     "who": [],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "compare",
-      "left": "OBERFLÄCHE",
-      "right": "TIEFE",
-      "value": "100%",
-      "sub": "0%"
-     },
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "keinen",
-      "Sauerstoff"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": 4
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Kiste im tiefen Wasser gut erhalten.",
-     "text": "Deshalb verwesen dort unten weder altes Papier noch empfindliche Kisten.",
-     "image": "Underwater crate resting preserved in dark mud without damage.",
-     "who": [],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "box"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "insert",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "verwesen",
-      "Papier"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Stempelschild: Tauchverbot im See.",
-     "text": "Heute ist das Tauchen im gesamten Toplitzsee strengstens verboten.",
-     "image": "Heute ist das Tauchen im gesamten Toplitzsee strengstens verboten.",
-     "who": [],
-     "place": "lake",
-     "backdrop": {
-      "sky": "day",
-      "ground": "water",
-      "elements": [
-       "mountains",
-       "lake"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "question",
-      "text": "STRENG VERBOTEN"
-     },
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "strengstens",
-      "verboten"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "VERBOTEN",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Hauptfigur zeigt ratlos auf den See.",
-     "text": "Das Gold wurde nie gefunden, aber Forscher vermuten noch immer unbekannte Dokumente.",
-     "image": "Character standing near lake, shaking head with open arms.",
-     "who": [
-      "du"
-     ],
-     "place": "lake",
-     "backdrop": {
-      "sky": "sunset",
-      "ground": "grass",
-      "elements": [
-       "mountains",
-       "lake"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "unbekannte",
-      "Dokumente"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Kamera taucht wieder schnell unter Wasser.",
-     "text": "Und genau deshalb faszinieren die ...",
-     "image": "Quick transition down into deep murky lake water again.",
-     "who": [],
-     "place": "underwater",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "genau",
-      "deshalb"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "TOPLITZSEE · ÖSTERREICH",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [],
-  "title": "Toplitzsee: Liegt das Nazi-Gold wirklich am Grund?",
-  "created": 1794669720.3536534
- },
  "2026-11-15 13:00": {
   "category": "tiere",
   "topic": "Der Fangschreckenkrebs: Das Tier mit dem stärksten Punch im Universum, das dich wortwörtlich one-shotted",
@@ -3056,5 +2302,755 @@
   ],
   "title": "Was passiert, wenn alle Tiere plötzlich sprechen könnten?",
   "created": 1794755909.3713648
+ },
+ "2026-11-16 13:00": {
+  "category": "fakten",
+  "topic": "Warum du Gänsehaut bekommst, wenn dein Lieblingssong droppt: Was dein Gehirn in genau 0,5 Sekunden mit Dopamin anstellt",
+  "trend": null,
+  "script": {
+   "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+   "description": "Warum kriegst du bei Musik Gänsehaut?\nDein Gehirn schüttet Dopamin aus.\nHörst du Lieder lieber laut?",
+   "hashtags": [
+    "#shorts",
+    "#musik",
+    "#wissenschaft",
+    "#fakten",
+    "#gehirn",
+    "#dopamin",
+    "#fyp",
+    "#viral"
+   ],
+   "tags": [
+    "gänsehaut musik",
+    "dopamin gehirn",
+    "warum gänsehaut bei musik",
+    "bass drop gehirn",
+    "musik fakten",
+    "psychologie musik",
+    "gehirn dopamin kick",
+    "musik im kopf"
+   ],
+   "thumbnail": {
+    "image": "Close-up cartoon shot of a young person wearing large glowing headphones with eyes wide in utter disbelief and bliss, tiny dopamine icons floating around the head, bright background with music soundwaves, highly detailed visual narrative",
+    "text": "DOPAMIN-EXPLOSION IM GEHIRN"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "ponytail",
+     "hair_color": "blond",
+     "gender": "w",
+     "skin": "weiß"
+    },
+    "gehirn": {
+     "kind": "brain"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein Mädchen mit Kopfhörern lauscht gespannt der Musik in ihrem Zimmer.",
+     "text": "Dein Gehirn löst deine Musik-Gänsehaut in nur einer halben Sekunde aus.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Gänsehaut"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "MUSIK-KICK"
+     },
+     "image": "Dein Gehirn löst deine Musik-Gänsehaut in nur einer halben Sekunde aus.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn taucht als Figur auf und rechnet aufmerksam mit einer Stoppuhr.",
+     "text": "Und das Erstaunliche passiert bereits kurz vor dem eigentlichen Bassdrop.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true,
+       "hold": "clock"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Gehirn"
+     ],
+     "overlay": null,
+     "image": "Und das Erstaunliche passiert bereits kurz vor dem eigentlichen Bassdrop.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen wartet gespannt auf den Beat und schaut auf den Lautsprecher.",
+     "text": "Schon eine halbe Sekunde vor dem Bassdrop passiert etwas völlig Verrücktes im Kopf.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "Bassdrop"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "0,5 SEKUNDEN"
+     },
+     "image": "Schon eine halbe Sekunde vor dem Bassdrop passiert etwas völlig Verrücktes im Kopf.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Puls-Grafik zeigt die Vorfreude des Gehirns in einer Sekunde.",
+     "text": "Messungen zeigen, dass das Belohnungszentrum schon in der Erwartung komplett hochfährt.",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "0,5",
+      "label": "SEKUNDEN VOR DEM DROP"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Erwartung"
+     ],
+     "overlay": null,
+     "image": "Messungen zeigen, dass das Belohnungszentrum schon in der Erwartung komplett hochfährt.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn feuert im Labor freudig Neurotransmitter wie ein DJ ab.",
+     "text": "Dein Körper schüttet Dopamin aus, aber betrifft das wirklich jede Musikrichtung?",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "pop",
+     "highlight": [
+      "Dopamin"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "DOPAMIN-SPIEGEL",
+      "value": 200,
+      "unit": "GEHIRN",
+      "sub": "MAXIMALER KICK"
+     },
+     "image": "Dein Körper schüttet Dopamin aus, aber betrifft das wirklich jede Musikrichtung?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen zuckt zusammen und spürt ein Kribbeln am Arm.",
+     "text": "Du denkst vielleicht, dass nur traurige Lieder diesen Gänsehaut-Effekt bei dir auslösen.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "traurige Lieder"
+     ],
+     "overlay": null,
+     "image": "Du denkst vielleicht, dass nur traurige Lieder diesen Gänsehaut-Effekt bei dir auslösen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Stempel zeigt, dass diese Vermutung völlig falsch ist.",
+     "text": "Falsch, denn extrem energetische Beats erzeugen im Gehirn exakt dieselbe biochemische Reaktion.",
+     "who": [],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "Falsch"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FALSCH",
+      "color": "red"
+     },
+     "image": "Falsch, denn extrem energetische Beats erzeugen im Gehirn exakt dieselbe biochemische Reaktion.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn steht verdutzt vor einem Diagramm zum Stresshormon.",
+     "text": "Aber warum zieht sich deine Haut dann eigentlich so zusammen wie bei Frost?",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Frost"
+     ],
+     "overlay": null,
+     "image": "Aber warum zieht sich deine Haut dann eigentlich so zusammen wie bei Frost?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik-Frage nach der echten Ursache im Muskelgewebe.",
+     "text": "Es ist ein uralter Überlebensreflex aus der Steinzeit gegen plötzliche Gefahren.",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "question",
+      "text": "ÜBERLEBENSREFLEX?"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Überlebensreflex"
+     ],
+     "overlay": null,
+     "image": "Es ist ein uralter Überlebensreflex aus der Steinzeit gegen plötzliche Gefahren.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen zittert wie bei Kälte im Zimmer und schaut entsetzt.",
+     "text": "Wenn die Musik sich überraschend verändert, meldet dein Nervensystem ganz kurz ein Bedrohungssignal.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "whoosh",
+     "highlight": [
+      "Bedrohungssignal"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ALARM-SIGNAL"
+     },
+     "image": "Wenn die Musik sich überraschend verändert, meldet dein Nervensystem ganz kurz ein Bedrohungssignal.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Notiz zeigt die Regel zum Muskelkrampf der Haarbalgmuskeln.",
+     "text": "Winzige Muskeln an deinen Haarwurzeln spannen sich schlagartig an, doch was schaltet das Signal ab?",
+     "who": [],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Haarwurzeln"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "MUSKEL-REFLEX",
+      "text": "Haarbalgmuskeln spannen sich extrem an"
+     },
+     "image": "Winzige Muskeln an deinen Haarwurzeln spannen sich schlagartig an, doch was schaltet das Signal ab?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn lacht aufgeregt und winkt Entwarnung im Labor.",
+     "text": "Doch direkt danach erkennt dein Denkorgan, dass gar keine reale Gefahr droht.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_out",
+     "sfx": "pop",
+     "highlight": [
+      "keine Gefahr"
+     ],
+     "overlay": null,
+     "image": "Doch direkt danach erkennt dein Denkorgan, dass gar keine reale Gefahr droht.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Vergleichs-Balken zeigen die Messung von Musik-Gänsehaut im Vergleich zu Essen.",
+     "text": "Dieser schnelle Wechsel von Schreck zu Sicherheit löst die Dopamin-Explosion aus, aber trifft das jeden?",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "ESSEN",
+      "right": "MUSIK-DROP",
+      "value": "50%",
+      "sub": "SCHRECK"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Dopamin-Explosion"
+     ],
+     "overlay": null,
+     "image": "Dieser schnelle Wechsel von Schreck zu Sicherheit löst die Dopamin-Explosion aus, aber trifft das jeden?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen tanzt begeistert durch ihr Zimmer mit aufgedrehtem Handy.",
+     "text": "Ein echter Lieblingssong aktiviert dein Gehirn genau wie gutes Essen oder Achterbahnfahren.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Achterbahnfahren"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "REINES GLÜCK"
+     },
+     "image": "Ein echter Lieblingssong aktiviert dein Gehirn genau wie gutes Essen oder Achterbahnfahren.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Podest zeigt die Körperstellen, die am meisten Gänsehaut bekommen.",
+     "text": "Nicht jeder Mensch spürt dieses Gefühl gleich stark, doch woran liegt dieser individuelle Unterschied?",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "podium",
+      "kicker": "KÖRPER",
+      "text": "ARME",
+      "left": "NACKEN",
+      "right": "RÜCKEN"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "fünfzig Prozent"
+     ],
+     "overlay": null,
+     "image": "Nicht jeder Mensch spürt dieses Gefühl gleich stark, doch woran liegt dieser individuelle Unterschied?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn präsentiert stolz eine Erfolgs-Plakette für besondere Vernetzung.",
+     "text": "Wer dieses Kribbeln kennt, besitzt nachweislich dichtere Nervenverbindungen im Gehirn.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Nervenverbindungen"
+     ],
+     "overlay": {
+      "type": "badge",
+      "kicker": "VIP-GEHIRN",
+      "text": "DICHTERE NERVEN"
+     },
+     "image": "Wer dieses Kribbeln kennt, besitzt nachweislich dichtere Nervenverbindungen im Gehirn.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen zeigt auf ihre Arme und schüttelt ungläubig den Kopf.",
+     "text": "Das bedeutet, dass deine Hörrinde extrem stark mit deinen Emotionen verknüpft ist.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Emotionen"
+     ],
+     "overlay": null,
+     "image": "Das bedeutet, dass deine Hörrinde extrem stark mit deinen Emotionen verknüpft ist.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schaltet zufrieden die Musik-Anlage im Labor an.",
+     "text": "Du erlebst Töne also buchstäblich intensiver als viele andere Menschen.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "intensiver"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "SUPER-HÖRER"
+     },
+     "image": "Du erlebst Töne also buchstäblich intensiver als viele andere Menschen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen drückt wieder auf Play am Handy und macht sich für den nächsten Kick bereit.",
+     "text": "Und genau aus diesem Grund passiert das jedes Mal wieder, sobald...",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "jedes Mal"
+     ],
+     "overlay": null,
+     "image": "Und genau aus diesem Grund passiert das jedes Mal wieder, sobald...",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "kopfhörer",
+   "bassbox",
+   "muskel",
+   "achterbahn"
+  ],
+  "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+  "created": 1794767071.456929
  }
 }
