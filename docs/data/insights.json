@@ -1,5 +1,5 @@
 {
- "updated": 1794699284.1259065,
+ "updated": 1794701089.1677542,
  "enough": true,
  "counted": 11,
  "total": 14,
@@ -18,19 +18,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1626,
+   "avg_views": 1627,
    "avg_likes": 40.1,
    "like_rate": 2.47,
-   "avg_score": 2233
+   "avg_score": 2234
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1077,
-   "avg_likes": 38.0,
-   "like_rate": 3.53,
-   "avg_score": 1647
+   "avg_views": 1151,
+   "avg_likes": 39.0,
+   "like_rate": 3.39,
+   "avg_score": 1736
   },
   {
    "slug": "fakten",
@@ -39,7 +39,7 @@
    "avg_views": 1020,
    "avg_likes": 30.5,
    "like_rate": 2.99,
-   "avg_score": 1492
+   "avg_score": 1493
   }
  ],
  "weights": {
@@ -47,13 +47,13 @@
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.08,
+  "whatif": 1.07,
   "comedy": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1602 Aufrufe, 4.06 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2381 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2392 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,21 +62,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2527,
+   "views": 2531,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3367
+   "score": 3371
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2138,
+   "views": 2142,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3053
+   "score": 3057
   },
   {
    "id": 84,
