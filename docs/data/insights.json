@@ -1,5 +1,5 @@
 {
- "updated": 1794761112.697795,
+ "updated": 1794761835.5564797,
  "enough": true,
  "counted": 14,
  "total": 15,
@@ -9,10 +9,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1692,
+   "avg_views": 1693,
    "avg_likes": 39.9,
    "like_rate": 2.36,
-   "avg_score": 2294
+   "avg_score": 2295
   },
   {
    "slug": "storys",
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1312,
+   "avg_views": 1324,
    "avg_likes": 34.0,
-   "like_rate": 2.59,
-   "avg_score": 1822
+   "like_rate": 2.57,
+   "avg_score": 1834
   },
   {
    "slug": "fakten",
@@ -61,9 +61,9 @@
   "musik": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤯 What If (Ø 1692 Aufrufe, 2.36 % Likes).",
+  "Stärkste Kategorie: 🤯 What If (Ø 1693 Aufrufe, 2.36 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1023 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2362 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2364 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -72,11 +72,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2538,
+   "views": 2542,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3378
+   "score": 3382
   },
   {
    "id": 77,
