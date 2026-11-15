@@ -1,5 +1,5 @@
 {
- "updated": 1794779152.2811613,
+ "updated": 1794780891.7898827,
  "enough": true,
  "counted": 14,
  "total": 17,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1591,
-   "avg_likes": 51.0,
-   "like_rate": 3.21,
-   "avg_score": 2356
+   "avg_views": 1576,
+   "avg_likes": 51.5,
+   "like_rate": 3.27,
+   "avg_score": 2348
   },
   {
    "slug": "whatif",
@@ -27,19 +27,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1481,
+   "avg_views": 1405,
    "avg_likes": 47.0,
-   "like_rate": 3.17,
-   "avg_score": 2186
+   "like_rate": 3.35,
+   "avg_score": 2110
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1482,
+   "avg_views": 1497,
    "avg_likes": 36.0,
-   "like_rate": 2.43,
-   "avg_score": 2022
+   "like_rate": 2.4,
+   "avg_score": 2037
   },
   {
    "slug": "fakten",
@@ -56,14 +56,16 @@
   "storys": 1.09,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.06,
+  "whatif": 1.07,
   "comedy": 1.2,
-  "musik": 1.2
+  "musik": 1.2,
+  "vergleich": 1.2,
+  "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1591 Aufrufe, 3.21 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1576 Aufrufe, 3.27 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2409 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2402 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -82,11 +84,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2207,
+   "views": 2206,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3122
+   "score": 3121
   },
   {
    "id": 84,
@@ -112,11 +114,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1642,
+   "views": 1643,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2617
+   "score": 2618
   }
  ],
  "flop": [
