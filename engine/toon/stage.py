@@ -2145,7 +2145,7 @@ def direct(scenes, times, topic="", style="", look=""):
 # Alltags-Geschichten (Prüfung 15.11.2026, „Ich lebte wie 1348“): Haushaltsgerät als Figur, Haustier aus dem Satz, Brief in der Hand
 FRIDGE_ID_RE = r"k(?:ü|ue|u)hlschrank|fridge|gefrierschrank"
 PET_RE = ((r"katze|kater\b|kätzchen", "cat"), (r"\bhund(?:e|es|en|chen)?\b|welpe", "dog"))
-PET_FLEE_RE = r"gerannt|rennt|rannte|flücht|flieh|floh\b|haut ab|abgehauen|weggelaufen|läuft weg|lief weg|versteckt"
+PET_FLEE_RE = r"das weite|wegrenn|davon|reißaus|gerannt|rennt|rannte|flücht|flieh|floh\b|haut ab|abgehauen|weggelaufen|läuft weg|lief weg|versteckt"
 LETTER_RE = r"abmahnung|\bbrief\b|\bbriefe\b|einschreiben|\bmahnung|umschlag|kündigungsschreiben|\bpost vom\b|\bvorladung|\bbescheid\b|strafzettel"
 RADIO_RE = r"radio|funk|durchsage|sender|empfang|lautsprecher"
 TEETH_RE = r"(?:zähne\w*|zahn|gebiss|lächeln)\b[^.!?]{0,60}\b(grün|gelb|schwarz|braun|blau)|\b(grün|gelb|schwarz|braun|blau)e[nrs]? (?:zähne|gebiss|lächeln)"
@@ -2185,6 +2185,14 @@ def _household(scenes):
                                                                                          str((p.get("type") if isinstance(p, dict) else p) or "").lower()) != "fridge"]
             if shot in ("insert", "close"):
                 sc["shot"] = shot = ""
+        if fridge_char and (fridge or re.search(r"kühlschrank", low)) and isinstance(sc.get("props"), list):   # „schließt seine Tür“ meint die Kühlschranktür – keine Zimmertür mitten in der Küche
+            sc["props"] = [p for p in sc["props"] if extras.PROP_ALIASES.get(str((p.get("type") if isinstance(p, dict) else p) or "").lower(),
+                                                                             str((p.get("type") if isinstance(p, dict) else p) or "").lower()) != "door"]
+        ov_h = sc.get("overlay")
+        if isinstance(ov_h, dict) and str(ov_h.get("type") or "") == "note" and not re.search(r"[#\d]|hack|trick|tipp|nummer|regel|schritt|punkt", str(ov_h.get("title") or "").lower()):
+            stems_h = [w_[:5] for w_ in re.findall(r"[a-zäöüß]{5,}", str(ov_h.get("text") or "").lower())]
+            if stems_h and not any(st_ in low for st_ in stems_h):
+                sc["overlay"] = None                      # Notizzettel mit einer Aussage, die der Satz gar nicht macht („FAZIT: Lieber moderne Seife nutzen!“)
         for a in acts:                                    # Radio in der Hand, obwohl niemand von Funk oder Radio spricht
             if str(a.get("hold") or "").lower() == "radio" and not re.search(RADIO_RE, low):
                 a["hold"] = ""
@@ -2206,16 +2214,19 @@ def _household(scenes):
             who_s = next((a for a in acts if not a.get("kind") and not a.get("hold")), None)
             if thing_s and who_s is not None:
                 who_s["hold"] = thing_s
+            for a in acts:                                # schrubben heißt nicht ausschütteln: das Ding bleibt in der Hand, nichts rieselt heraus
+                if thing_s and str(a.get("action") or "").lower() in ("shake", "schütteln") and extras.held_key(a.get("hold")).startswith("prop:"):
+                    a["action"] = "talk"
                 sc["props"] = [p for p in (sc.get("props") or []) if (p.get("type") if isinstance(p, dict) else p) != thing_s]
         pet = next((k for pat, k in PET_RE if re.search(pat, low)), None)
-        if pet and shot not in ("graphic", "insert", "event") and len(acts) < 2 and not any(a.get("kind") for a in acts) and "actors" in sc \
+        if pet and shot not in ("graphic", "insert") and len(acts) < 2 and not any(a.get("kind") for a in acts) and "actors" in sc \
                 and places.resolve(backdrop(sc)) not in MAPS + ("underwater", "space", "highsky"):
             left = any(_x(a.get("to") or a.get("pos"), 540) > 600 for a in acts)
             flee = bool(re.search(PET_FLEE_RE, low))
             sc["actors"] = acts + [{"id": "_haustier", "kind": pet, "action": "walk" if flee else "idle", "emotion": "scared" if flee else "",
                                     "pos": 300 if left else 780, "to": ("offleft" if left else "offright") if flee else None,
                                     "speaks": False, "emote": "", "say": "", "hold": "", "facing": ""}]
-            if shot == "close":
+            if shot in ("close", "event"):
                 sc["shot"] = ""
             for a in acts:                                # die Hauptfigur macht dem Tier Platz
                 if not left and _x(a.get("to") or a.get("pos"), 540) > 450:

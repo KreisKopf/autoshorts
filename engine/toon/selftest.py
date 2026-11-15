@@ -323,6 +323,17 @@ def main():
                            [(0, 3), (3, 6), (6, 9)], "Mein Kühlschrank hat mich verklagt", "comedy", "")
         assert not any((q.get("type") if isinstance(q, dict) else q) == "fridge" for q in sc2[1].get("props") or []), "gesichtsloser Kühlschrank im Bad, obwohl er eine Figur ist"
         assert sc2[2]["actors"][0].get("teeth") == "grün", "grünes Gebiss fehlt"
+        sc3 = stage.direct([{"text": "Mein Kühlschrank brummt laut und schließt seine Tür ganz fest.", "place": "kitchen", "actors": [{"id": "kuehlschrank"}], "props": ["door"]},
+                            {"text": "Der Gestank ist so extrem, dass die Nachbarskatze sofort das Weite sucht.", "place": "hallway", "shot": "event", "actors": [{"id": "du", "action": "walk"}]},
+                            {"text": "Du denkst, alte Hausmittel sparen Geld?", "place": "kitchen", "actors": [{"id": "du"}], "overlay": {"type": "note", "title": "FAZIT", "text": "Lieber moderne Seife nutzen!"}},
+                            {"text": "Zuerst habe ich meine Zähne mit Salbeiblättern geschrubbt.", "place": "bathroom", "actors": [{"id": "du", "action": "shake", "hold": "salbeiblatt"}]}],
+                           [(0, 3), (3, 6), (6, 9), (9, 12)], "Mein Kühlschrank hat mich verklagt", "comedy", "")
+        assert not any((q.get("type") if isinstance(q, dict) else q) == "door" for q in sc3[0].get("props") or []), "Zimmertür neben der Kühlschrank-Figur"
+        assert any(a.get("kind") == "cat" for a in sc3[1]["actors"]), "Katze fehlt in der Ereignis-Einstellung"
+        assert not sc3[2].get("overlay"), "Notizzettel ohne Bezug zum Satz bleibt stehen"
+        assert sc3[3]["actors"][0].get("action") != "shake", "Salbeiblatt wird ausgeschüttelt statt benutzt"
+        for sc in sc3:
+            frame(sc, cast_h)
         from .. import writer as _w
         assert _w.polish({"title": "Ich lebte wie 1348", "scenes": [{"text": "Ich lebte wie im Mittelalter."}], "thumbnail": {"text": "LEBEN WIE 1348"}})["thumbnail"]["text"] == "LEBEN WIE 1348", "Titelbild-Text verliert die Zahl aus dem Titel"
         for sc in scs:

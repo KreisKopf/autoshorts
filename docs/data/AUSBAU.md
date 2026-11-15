@@ -229,6 +229,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Ist der Kühlschrank eine Figur der Geschichte, steht er nirgends mehr als gesichtsloses „Ding des Themas“ (Bad, Flur) und kommt mit Gesicht aufs Titelbild.
   Auch „Gebiss … grün“ färbt die Zähne. Titelbild-Text: Eine Zahl, die im Titel steht („1348“), bleibt; nach dem Streichen einer Zahl bleibt nie ein Rest, der auf
   „WIE“, „MIT“, „DER“ … endet (`writer.polish`).
+  Neben der Kühlschrank-Figur steht keine Zimmertür („schließt seine Tür“ meint die Kühlschranktür). Das Haustier aus dem Satz kommt auch in
+  Ereignis-Einstellungen dazu. Ein Notizzettel ohne Nummern-Titel, dessen Text kein Wort des Satzes aufgreift („FAZIT: …“), entfällt. Schrubben/Putzen mit
+  einem Ding in der Hand ist kein Ausschütteln (nichts rieselt heraus).
 
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
