@@ -78,7 +78,12 @@ def pick(category_slug=None, topic=None):
         q = queue[0]
         return category(q.get("category")) or category("comedy") or [c for c in CONFIG["categories"] if c.get("enabled")][0], \
             q["text"], q["id"], q.get("trend")
-    cats = [c for c in CONFIG["categories"] if c.get("enabled")]
+    for sp in [c for c in CONFIG["categories"] if c.get("enabled") and c.get("every_days")]:   # z. B. Musik-Kugel alle zwei Tage
+        last = float(STATE.get("last_" + sp["slug"]) or 0)
+        if time.time() - last >= float(sp["every_days"]) * 86400 - 3 * 3600:
+            log(f"{sp['emoji']} {sp['name']} ist wieder dran (alle {sp['every_days']} Tage)")
+            return sp, None, None, None
+    cats = [c for c in CONFIG["categories"] if c.get("enabled") and not c.get("every_days")]
     if not cats:
         raise RuntimeError("Keine Kategorie aktiv – bitte im Studio mindestens eine einschalten.")
     try:                                                  # Analyse: was besser läuft, kommt öfter dran
@@ -253,6 +258,11 @@ def prepare(slot):
     if slot in plans:
         return plans[slot]
     cat, topic, qid, qtrend = pick(None, None)
+    if cat.get("special") == "bounce":                    # Musik-Kugel braucht kein Drehbuch
+        plans[slot] = {"category": cat["slug"], "topic": cat["name"], "title": cat["name"], "needs": [], "created": time.time(), "special": "bounce"}
+        save("plans.json", plans)
+        log(f"Vorproduktion für {slot}: {cat['emoji']} {cat['name']} (kein Drehbuch nötig)")
+        return plans[slot]
     rm = queue_remake(qid, cat) if qid else None
     src = None
     if rm:
@@ -296,6 +306,8 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         rm = queue_remake(qid, cat) if qid and not source else None
         if rm:
             cat, topic, source = rm
+    if cat.get("special") == "bounce":
+        return make_bounce(cat, upload)
     STATE["last_category"] = cat["slug"]
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
@@ -497,6 +509,45 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         log(v["error"])
         save_all()
     elif upload:
+        uploaders.upload_video(v, final)
+        save_all()
+    return v
+
+
+def make_bounce(cat, upload=True):
+    """Musik-Kugel: gemeinfreie Melodie wählen, Kugel-Video rendern (eigener Ton, kein Sprecher), wie jedes Video hochladen."""
+    from . import bounce
+    vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
+    STATE["next_id"] = vid + 1
+    used = STATE.setdefault("bounce_songs", [])
+    song = bounce.pick_song(used)
+    title, desc, tags, name = bounce.meta(song)
+    v = {"id": vid, "category": cat["slug"], "topic": f"Musik-Kugel: {name}", "status": "rendering", "created": time.time(),
+         "title": title, "description": desc, "hashtags": tags, "tags": ["musik", "melodie", name.lower(), "satisfying"], "thumb_text": "ERKENNST DU ES?"}
+    VIDEOS.append(v)
+    work = WORK / f"v{vid}"
+    shutil.rmtree(work, ignore_errors=True)
+    work.mkdir(parents=True)
+    final = OUT / f"{vid}.mp4"
+    log(f"Kategorie: {cat['emoji']} {cat['name']} · Melodie: {name}")
+    try:
+        dur, thumb = bounce.render(song, final, seed=vid, work=work)
+        cover = OUT / f"{vid}-cover.jpg"
+        Image.open(thumb).save(cover, quality=92)
+        Image.open(thumb).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
+        v.update(status="rendered", duration=round(dur, 1), providers={"text": "Melodie", "voice": "eigener Ton"}, thumb=True, look="musik")
+        v["mp4"] = publish_mp4([final, cover])
+        used.append(song)
+        STATE["bounce_songs"] = used[-20:]
+        STATE["last_" + cat["slug"]] = time.time()
+        log(f"Video {vid} fertig")
+    except Exception as e:
+        v.update(status="error", error=str(e)[:900])
+        raise
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+        save_all()
+    if upload:
         uploaders.upload_video(v, final)
         save_all()
     return v

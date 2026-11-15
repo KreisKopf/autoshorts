@@ -206,3 +206,12 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Dinge neben dem groß gezeichneten Tier sind mindestens 300 px hoch (`_PROP_MIN`), Blitz, Glasscheibe und Feder stehen auch bei dunkler Stimmung im Licht (`GLOWS`).
   Küchendampf (`steam`) gibt es unter Wasser nicht. „Mehrere tausend Grad“ ergibt keinen Zähler „1.000 GRAD“ (`find_figure`). `writer.polish` streicht den
   Schlusssatz auch dann, wenn er den ersten mit Vorspann wiederholt („Und hier kommen drei Fakten …“). Selbsttest: `_one_animal`.
+
+## Musik-Kugel (Video-Art `musik`, alle zwei Tage)
+- `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
+  rückwärts gebaut (echte Wurfparabel zwischen zwei Tönen, die Scheibe liegt so, dass sie die Richtungsänderung erklärt) – deshalb sitzt
+  jeder Aufprall exakt auf dem Ton. Ton selbst erzeugt (Glockenspiel + Glasklirren + Hall), oben „Erkennst du das Lied?“, am Ende die Auflösung.
+- NUR gemeinfreie Melodien in `SONGS` (Komponist seit über 70 Jahren tot oder Volkslied) – Chart-Songs sind auch nachgespielt geschützt.
+  Neue Melodie: Eintrag `slug: (Name, Komponist, Tempo, _seq("E5:.25 D#5:.25 …"))`, Dauer in Schlägen, `r` = Pause.
+- Kategorie mit `every_days: 2` und `special: "bounce"`: `main.pick` nimmt sie, sobald zwei Tage seit der letzten um sind (`STATE["last_musik"]`),
+  sonst nie; `make_bounce` rendert ohne Drehbuch und Sprecher und lädt hoch wie jedes Video.

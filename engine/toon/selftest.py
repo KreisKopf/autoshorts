@@ -549,6 +549,29 @@ def main():
         t = [x["text"] for x in out["scenes"]]
         assert t[5].startswith("Gold? Falsch") and t[6].startswith("Es sollte") and "500" not in t[4] and t[0] == "Eins.", t
     check("Spannungsbogen (Rehook/Finte)", _loop)
+    def _bounce():                                               # Musik-Kugel: jeder Ton trifft genau eine Scheibe, alle Melodien, Ton und Bild
+        import math
+        import tempfile
+        from pathlib import Path
+        from .. import bounce
+        for song in bounce.SONGS:
+            hits, total = bounce.notes(song)
+            assert 40 <= len(hits) <= 220 and 15 < total < 70, (song, len(hits), total)
+            segs, start = bounce.path(hits, 3)
+            for sg in segs:
+                bx, by = bounce.ball_at(sg["t"], segs, start)
+                assert math.hypot(bx - sg["p"][0], by - sg["p"][1]) < 0.5, song
+                assert bounce.BOX[0] - 1 <= sg["p"][0] <= bounce.BOX[2] + 1 and bounce.BOX[1] - 1 <= sg["p"][1] <= bounce.BOX[3] + 1, song
+        bounce.SONGS["_test"] = ("Test", "Test", 240, bounce._seq("C5:1 E5:1 G5:1 C6:2"))
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                dur, thumb = bounce.render("_test", Path(tmp) / "b.mp4", seed=1, work=Path(tmp))
+                assert (Path(tmp) / "b.mp4").stat().st_size > 10000 and thumb.exists()
+        finally:
+            bounce.SONGS.pop("_test", None)
+        title, desc, tags, name = bounce.meta("ode_freude")
+        assert name in desc and title and "#musik" in tags
+    check("Musik-Kugel", _bounce)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

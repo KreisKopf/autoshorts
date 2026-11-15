@@ -164,7 +164,7 @@ def refresh(force=False):
             token = _yt_access()
     except Exception as e:  # noqa: BLE001
         log(f"Kanal-Analyse: YouTube-Anmeldung nicht nutzbar ({e}) – nehme die öffentliche Suche")
-    cats = [c for c in CONFIG["categories"] if c.get("enabled")] or CONFIG["categories"]
+    cats = [c for c in CONFIG["categories"] if c.get("enabled") and not c.get("special")] or CONFIG["categories"]
     rows, seen = [], set()
     for c in cats:
         found = []
