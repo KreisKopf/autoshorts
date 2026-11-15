@@ -4139,5 +4139,50 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 115,
+  "category": "motivation",
+  "topic": "Dein Algorithmus weiß mehr über deine Träume als du selbst",
+  "status": "rendered",
+  "created": 1794784786.5301228,
+  "title": "Dein Algorithmus weiß mehr über deine Träume als du selbst",
+  "description": "Dein Handy kennt dich besser als jede andere Person!\nErfahre, wie der Algorithmus deine Wünsche vorhersagt.\nScrollst du noch selbst oder wirst du schon gelenkt?",
+  "hashtags": [
+   "#shorts",
+   "#algoritmus",
+   "#psychologie",
+   "#mindset",
+   "#foryou",
+   "#viral",
+   "#gedanken",
+   "#tech"
+  ],
+  "tags": [
+   "algorithmus",
+   "psyche",
+   "handy",
+   "gedanken",
+   "zukunft",
+   "social media",
+   "geheimnis",
+   "verhalten"
+  ],
+  "thumb_text": "ER KENNT DEINE TRÄUME",
+  "missing": [
+   "algorithmus",
+   "statistik",
+   "musik"
+  ],
+  "cover_ms": 68162,
+  "duration": 68.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
