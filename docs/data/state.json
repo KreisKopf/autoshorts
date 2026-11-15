@@ -1,5 +1,5 @@
 {
- "last_category": "comedy",
+ "last_category": "whatif",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -23,7 +23,7 @@
   "qnqm93yzl",
   "qqprosnb9"
  ],
- "last_stats": 1794754061.9022307,
+ "last_stats": 1794755918.2393012,
  "next_id": 103,
  "connected": {
   "youtube": {
@@ -40,12 +40,12 @@
   "video": 102
  },
  "cat_credit": {
-  "fakten": 2.9800000000000004,
-  "storys": -1.809999999999999,
-  "mysterien": -1.8599999999999997,
-  "tiere": -1.84,
-  "whatif": 4.29,
-  "comedy": -1.7599999999999998
+  "fakten": 3.6800000000000006,
+  "storys": -0.7699999999999989,
+  "mysterien": -0.6599999999999997,
+  "tiere": -0.6400000000000001,
+  "whatif": -1.0499999999999998,
+  "comedy": -0.5599999999999998
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183"

@@ -1,5 +1,5 @@
 {
- "updated": 1794754061.9049325,
+ "updated": 1794755918.2393112,
  "enough": true,
  "counted": 13,
  "total": 15,
@@ -12,39 +12,39 @@
    "avg_views": 1692,
    "avg_likes": 39.9,
    "like_rate": 2.36,
-   "avg_score": 2293
+   "avg_score": 2294
   },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1484,
-   "avg_likes": 49.0,
-   "like_rate": 3.3,
-   "avg_score": 2220
+   "avg_views": 1503,
+   "avg_likes": 49.5,
+   "like_rate": 3.29,
+   "avg_score": 2246
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1343,
+   "avg_views": 1344,
    "avg_likes": 46.0,
-   "like_rate": 3.43,
-   "avg_score": 2033
+   "like_rate": 3.42,
+   "avg_score": 2034
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1022,
+   "avg_views": 1023,
    "avg_likes": 30.5,
    "like_rate": 2.98,
-   "avg_score": 1495
+   "avg_score": 1496
   }
  ],
  "weights": {
   "fakten": 0.7,
-  "storys": 1.04,
+  "storys": 1.05,
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
@@ -53,8 +53,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤯 What If (Ø 1692 Aufrufe, 2.36 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2400 zu 704 Punkte)."
+  "Schwächste Kategorie: 💡 Fakten (Ø 1023 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2405 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -73,11 +73,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2178,
+   "views": 2181,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3093
+   "score": 3096
   },
   {
    "id": 84,
@@ -93,21 +93,21 @@
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2109,
+   "views": 2111,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2799
+   "score": 2801
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1631,
+   "views": 1635,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2606
+   "score": 2610
   }
  ],
  "flop": [
