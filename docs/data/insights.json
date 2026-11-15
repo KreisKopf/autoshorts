@@ -1,5 +1,5 @@
 {
- "updated": 1794712844.5196946,
+ "updated": 1794714648.3667223,
  "enough": true,
  "counted": 11,
  "total": 14,
@@ -18,19 +18,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1629,
+   "avg_views": 1628,
    "avg_likes": 40.1,
-   "like_rate": 2.46,
+   "like_rate": 2.47,
    "avg_score": 2235
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1211,
+   "avg_views": 1213,
    "avg_likes": 39.0,
    "like_rate": 3.22,
-   "avg_score": 1796
+   "avg_score": 1798
   },
   {
    "slug": "fakten",
@@ -72,11 +72,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2148,
+   "views": 2145,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3063
+   "score": 3060
   },
   {
    "id": 84,
