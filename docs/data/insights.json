@@ -1,5 +1,5 @@
 {
- "updated": 1794718248.6414566,
+ "updated": 1794720043.3762224,
  "enough": true,
  "counted": 11,
  "total": 14,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1602,
+   "avg_views": 1603,
    "avg_likes": 65.0,
-   "like_rate": 4.06,
-   "avg_score": 2577
+   "like_rate": 4.05,
+   "avg_score": 2578
   },
   {
    "slug": "whatif",
@@ -27,18 +27,18 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1213,
+   "avg_views": 1228,
    "avg_likes": 39.0,
-   "like_rate": 3.22,
-   "avg_score": 1798
+   "like_rate": 3.18,
+   "avg_score": 1813
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1021,
+   "avg_views": 1022,
    "avg_likes": 30.5,
-   "like_rate": 2.99,
+   "like_rate": 2.98,
    "avg_score": 1494
   }
  ],
@@ -51,9 +51,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1602 Aufrufe, 4.06 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1021 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2400 zu 704 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1603 Aufrufe, 4.05 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2402 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,11 +62,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2534,
+   "views": 2533,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3374
+   "score": 3373
   },
   {
    "id": 77,
@@ -82,31 +82,31 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1872,
+   "views": 1873,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 2787
+   "score": 2788
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1602,
+   "views": 1603,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2577
+   "score": 2578
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 1970,
+   "views": 1971,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2570
+   "score": 2571
   }
  ],
  "flop": [
@@ -124,11 +124,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 593,
+   "views": 595,
    "likes": 16,
    "comments": 0,
    "shares": 0,
-   "score": 833
+   "score": 835
   },
   {
    "id": 44,
