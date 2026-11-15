@@ -44,8 +44,13 @@ Regeln für die Sprechertexte:
 - Alle drei bis vier Sekunden ändert sich sichtbar etwas: neue Einstellung, neue Handlung, Grafik oder Großaufnahme.
   Jede Szene ist EIN kurzer Satz (höchstens 14 Wörter). Kein Satz darf ein Bild brauchen, das länger als fünf Sekunden steht.
 - NIEMAND DARF SICH LANGWEILEN: Jede Szene bringt etwas Neues (Zahl, Wendung, Folge, Witz) – keine Wiederholung, keine Überleitung
-  ohne Inhalt („Aber das ist noch nicht alles“ ist verboten). Offene Fragen und kleine Ankündigungen halten die Spannung
-  („… und dann wird es richtig seltsam“), aber höchstens zweimal pro Video. "highlight" nennt das Wort, bei dem die Kamera auf die Figur springt.
+  ohne Inhalt („Aber das ist noch nicht alles“ und andere leere Floskeln sind verboten). "highlight" nennt das Wort, bei dem die Kamera auf die Figur springt.
+- REHOOK: Wird eine Frage beantwortet oder ein Listenpunkt abgeschlossen, öffnet der Satz danach SOFORT die nächste konkrete Frage –
+  mit Inhalt, nicht als Floskel („Bleibt die Frage, warum ausgerechnet Fische das überleben.“ · „Nur: Wer hat die Kisten versenkt?“).
+  Etwa alle zwölf bis fünfzehn Sekunden eine solche neue offene Frage; die Auflösung kommt erst ein paar Sätze später.
+- FINTE (genau eine pro Video): Sprich die naheliegende Erwartung des Zuschauers aus und dreh sie mit einer WAHREN Tatsache um
+  („Du denkst, es lag am Preis. Falsch – niemand hatte das Angebot je gesehen.“ · „Gold? Nein: Falschgeld.“). Die Erwartung muss
+  wirklich naheliegen, die Auflösung muss stimmen – keine erfundenen Wendungen.
 - Inhaltlich korrekt bleiben: nichts als Tatsache ausgeben, was erfunden ist. Bei aktuellen Themen nur das verwenden,
   was in den mitgelieferten Schlagzeilen steht oder allgemein bekanntes Hintergrundwissen ist; keine erfundenen Details,
   Zitate oder Zahlen. Lieber den zeitlosen Hintergrund erklären als Gerüchte wiedergeben.
@@ -748,6 +753,56 @@ def sharpen_hook(js, topic):
     return js
 
 
+LOOP = """Du bist Redakteur für virale deutsche Kurzvideos und verbesserst NUR, wie gut das Drehbuch die Zuschauer hält.
+Prüfe zwei Dinge:
+1. REHOOK: Nach jeder Auflösung und nach jedem abgeschlossenen Listenpunkt muss der nächste Satz eine neue, konkrete offene Frage
+   öffnen (mit Inhalt, keine Floskel wie „Aber das ist noch nicht alles“). Fehlt sie, formuliere den Satz nach der Auflösung so um,
+   dass er dieselbe Information bringt UND die nächste Frage öffnet.
+2. FINTE: Genau eine Stelle, an der die naheliegende Erwartung ausgesprochen und mit der WAHREN Tatsache des Drehbuchs umgedreht wird
+   („Du denkst, … Falsch – …“). Gibt es keine, baue sie aus einem Satzpaar, das schon eine Überraschung enthält.
+Regeln: Ändere höchstens fünf Sätze. Jeder geänderte Satz sagt inhaltlich dasselbe wie vorher (nichts erfinden, keine neuen Zahlen,
+Namen oder Fakten), ist höchstens vier Wörter länger als vorher, höchstens 18 Wörter lang, echtes Deutsch mit Umlauten, Zahlen
+ausgeschrieben. Satz 1 und 2 (der Einstieg) und der letzte Satz bleiben unverändert.
+Antworte nur mit JSON: {"edits": [{"i": Satznummer (ab 1), "text": "neuer Satz", "why": "rehook|finte"}]} – leere Liste, wenn alles passt."""
+
+
+def loop_pass(js, topic):
+    """Rehooks und eine Finte: lässt die Text-KI einzelne Sätze umformulieren (Inhalt bleibt, Bilder passen weiter) und übernimmt
+    nur Änderungen, die die Prüfung bestehen."""
+    import json as _json
+    sc = [s for s in js.get("scenes", []) if isinstance(s, dict)]
+    if len(sc) < 6:
+        return js
+    user = (f"Thema: {topic}\nTitel: {js.get('title')}\n"
+            + "\n".join(f"Satz {i + 1}: {_json.dumps(str(s.get('text') or ''), ensure_ascii=False)}" for i, s in enumerate(sc)))
+    out, _ = ai.chat_json(LOOP, user, 0.6)
+    edits = (out or {}).get("edits") if isinstance(out, dict) else None
+    done = []
+    for e in (edits or [])[:5]:
+        if not isinstance(e, dict) or not isinstance(e.get("i"), int):
+            continue
+        i = e["i"] - 1
+        new = " ".join(str(e.get("text") or "").split())
+        if not (2 <= i < len(sc) - 1) or not new:
+            continue
+        old = str(sc[i].get("text") or "")
+        n_new, n_old = len(new.split()), len(old.split())
+        if n_new > 18 or n_new > n_old + 4 or n_new < 3 or _foreign(new) or any(c in new for c in "{}[]<>()") \
+                or re.search(r"noch nicht alles|bleib dran|folg (mir|für)", new, re.I):
+            continue
+        stem = lambda t: {w_[:5] for w_ in re.findall(r"[a-zäöüß]{4,}", t.lower())}   # noqa: E731
+        if stem(old) and len(stem(old) & stem(new)) / len(stem(old)) < 0.5:   # die Information des alten Satzes muss bleiben
+            continue
+        nums_old = set(re.findall(r"\d+", old))
+        if set(re.findall(r"\d+", new)) - nums_old:     # keine neuen Zahlen
+            continue
+        sc[i]["text"] = new
+        done.append(f"{i + 1} ({e.get('why') or '?'})")
+    if done:
+        ai.log("Spannungsbogen: Sätze " + ", ".join(done) + " umformuliert (Rehook/Finte)")
+    return js
+
+
 META = """Du bist Korrektor für ein deutsches Kurzvideo. Prüfe NUR Rechtschreibung und Wortwahl von Titel, Titelbild-Text und Suchbegriffen:
 verstümmelte, erfundene oder falsch geschriebene Wörter („Macks“ statt „Macken“, „körpersucken“ statt „körperzucken“), falsche Groß- und
 Kleinschreibung (Adjektive im Titel klein: „3 sinnlose Gehirn-Macken“), fehlende Umlaute. Aussage, Länge und Stil bleiben gleich; nichts
@@ -1096,6 +1151,11 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             js = sharpen_hook(js, topic)
         except Exception as e:  # noqa: BLE001
             ai.log(f"Einstieg nicht geschärft ({e})")
+    if cfg("loop_pass") is not False:
+        try:
+            js = loop_pass(js, topic)
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Spannungsbogen nicht geprüft ({e})")
     if cfg("proofread") is not False:
         try:
             js = proofread(js, topic)

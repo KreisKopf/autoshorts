@@ -166,7 +166,9 @@ Wörter, z. B. „Drei Tier-Superkräfte, die eigentlich unmöglich sind.“; be
 Schild (`tag`). `stage._opening`: im ersten Bild reagiert die Hauptfigur sichtbar; die Kamera ruckt kräftig ins Bild (`opener`), Musik und
 ein Auftakt-Ton sind ab der ersten Sekunde da. `stage._cold_open`: zeigt das erste Bild nur Menschen, die dastehen, kommt dort schon das
 stärkste Bild aus den ersten zwei Dritteln (Vorgriff, `_scene_punch`). Schluss ohne Aufforderung, als Schleife zurück zum ersten Satz;
-die Frage an die Zuschauer steht in der Beschreibung. Der Sprecher wird für die Mindestlänge höchstens um 4 % verlangsamt.
+die Frage an die Zuschauer steht in der Beschreibung. Spannungsbogen (`writer.loop_pass`, nach dem Einstieg): nach jeder Auflösung bzw.
+jedem Listenpunkt ein Rehook (neue konkrete Frage), genau eine ehrliche Finte („Du denkst … Falsch – …“); die Text-KI formuliert höchstens fünf
+Sätze um, übernommen wird nur, was die Information des alten Satzes behält (≥ 50 % der Inhaltswörter), keine neuen Zahlen, Satz 1/2 und Schluss bleiben. Der Sprecher wird für die Mindestlänge höchstens um 4 % verlangsamt.
 
 ## Zahlen und Kanal-Analyse
 - TikTok-Follower ohne eigene TikTok-Anmeldung (Upload über Zernio): `uploaders.tiktok_followers_fallback` – erst Zernio-Kontodaten,

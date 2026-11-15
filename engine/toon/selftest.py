@@ -500,6 +500,21 @@ def main():
         from .. import render as rnd
         assert "hblur" not in rnd.TOON_TRANSITIONS and "cut" in rnd.TOON_TRANSITIONS
     check("Bewegung und Schnitt", _motion)
+    def _loop():                                                 # Rehook/Finte: nur Umformulierungen, die den Inhalt behalten
+        from .. import writer
+        js = {"title": "Schatz", "scenes": [{"text": t} for t in ["Eins.", "Zwei.", "Soldaten versenken Kisten im See.", "Das Gerücht vom Gold entsteht.",
+              "Taucher holen die Kisten hoch.", "Darin liegt kein Gold, sondern Falschgeld.", "Es sollte die Wirtschaft der Feinde zerstören.", "Ende."]]}
+        old_chat = writer.ai.chat_json
+        writer.ai.chat_json = lambda *a, **k: ({"edits": [{"i": 6, "text": "Gold? Falsch – darin liegt Falschgeld.", "why": "finte"},
+                                                          {"i": 7, "text": "Nur wozu?", "why": "rehook"}, {"i": 5, "text": "Taucher holen 500 Kisten hoch.", "why": "x"},
+                                                          {"i": 1, "text": "Anders.", "why": "x"}]}, "t")
+        try:
+            out = writer.loop_pass(js, "Schatz")
+        finally:
+            writer.ai.chat_json = old_chat
+        t = [x["text"] for x in out["scenes"]]
+        assert t[5].startswith("Gold? Falsch") and t[6].startswith("Es sollte") and "500" not in t[4] and t[0] == "Eins.", t
+    check("Spannungsbogen (Rehook/Finte)", _loop)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern
