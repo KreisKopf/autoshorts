@@ -1,5 +1,5 @@
 {
- "updated": 1794740085.9433231,
+ "updated": 1794741890.9032102,
  "enough": true,
  "counted": 12,
  "total": 14,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1614,
+   "avg_views": 1616,
    "avg_likes": 65.0,
-   "like_rate": 4.03,
-   "avg_score": 2589
+   "like_rate": 4.02,
+   "avg_score": 2591
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1668,
+   "avg_views": 1671,
    "avg_likes": 39.1,
-   "like_rate": 2.35,
-   "avg_score": 2259
+   "like_rate": 2.34,
+   "avg_score": 2262
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1276,
-   "avg_likes": 43.0,
-   "like_rate": 3.37,
-   "avg_score": 1921
+   "avg_views": 1286,
+   "avg_likes": 44.0,
+   "like_rate": 3.42,
+   "avg_score": 1946
   },
   {
    "slug": "fakten",
@@ -48,12 +48,13 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.06,
-  "comedy": 1.2
+  "comedy": 1.2,
+  "musik": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1614 Aufrufe, 4.03 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1616 Aufrufe, 4.02 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2416 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2421 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -72,11 +73,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2150,
+   "views": 2165,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3065
+   "score": 3080
   },
   {
    "id": 84,
@@ -92,21 +93,21 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1614,
+   "views": 1616,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2589
+   "score": 2591
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 1971,
+   "views": 1974,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2571
+   "score": 2574
   }
  ],
  "flop": [
