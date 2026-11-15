@@ -3648,7 +3648,7 @@
   "id": 103,
   "category": "comedy",
   "topic": "Ich wollte wie im Mittelalter leben und mein Kühlschrank hat mich verklagt – Ich-Geschichte, männlicher Erzähler (Figur du, gender m), mindestens 22 kurze Sätze. Satz 1 nennt drei Lifehacks aus dem Mittelalter (Jahr 1348), Satz 2 ist der Cliffhanger: der letzte Trick riecht so schlimm, dass der Nachbar die Polizei ruft. Genau drei Hacks in dieser Reihenfolge: Nummer eins Zähne schrubben mit Salbeiblättern, danach sind die Zähne komplett grün. Nummer zwei Haare waschen mit Holzasche aus dem Kamin, danach sind die Haare hart wie Beton. Nummer drei Knoblauch in die Schuhe gegen Krankheiten, der Gestank ist so schlimm, dass die Nachbarskatze wegrennt und der Nachbar die Polizei ruft (löst den Cliffhanger ein). Running Gag: Nach jedem Hack reagiert der Kühlschrank beleidigt (Figur mit Kennung kuehlschrank, kind fridge, steht in der Küche, kein Roboter). Am Ende schickt der Kühlschrank eine Abmahnung und fordert dreitausend Goldmünzen Schmerzensgeld, Schlusspointe als ganzer Satz, kein abgebrochener Schlusssatz. Keine erfundenen Zahlen außer dreitausend Goldmünzen, kein Hund, keine Viren, keine Marken. Grafiken und Einblendungen nur mit Wörtern, die der Satz selbst sagt. Titelbild-Text: LEBEN WIE 1348",
-  "status": "rendered",
+  "status": "published",
   "created": 1794758712.3048754,
   "title": "Ich lebte wie 1348 und mein Kühlschrank hat mich verklagt",
   "description": "Ich habe drei Lifehacks aus dem Mittelalter getestet!\nKnoblauch in den Schuhen bringt nicht nur Gesundheit, sondern auch Nachbarn zur Weißglut.\nWürdest du drei Tage ohne Deodorant und Zähneputzen überleben?",
@@ -3684,7 +3684,13 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af9e4c096af248a9f6cbc9e",
+  "yt_status": "Zernio: published",
+  "yt_id": "wKvF6yjpNEU",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af9e4c096af248a9f6cbc9e",
+  "error": null
  },
  {
   "id": 104,
