@@ -303,6 +303,29 @@ def main():
 
     check("Ein-Tier-Video (Fangschreckenkrebs)", _one_animal)
 
+    def _household():                                            # Alltags-Geschichte: Kühlschrank als Figur, Haustier aus dem Satz, Brief in der Hand
+        cast_h = {"du": {"shirt": "grau", "gender": "m"}, "kuehlschrank": {"kind": "robot"}}
+        T = [("Mein Kühlschrank fand das gar nicht komisch.", "kitchen", [{"id": "kuehlschrank", "say": "NEIN."}], ["fridge"], "insert"),
+             ("Sogar die Nachbarskatze ist rückwärts gerannt.", "hallway", [{"id": "du", "action": "point"}], [], ""),
+             ("Er hat mir eine Abmahnung geschickt.", "hallway", [{"id": "du", "action": "shocked", "hold": "radio"}], [], ""),
+             ("Ich musste mich bei ihm entschuldigen.", "kitchen", [{"id": "du", "action": "sad"}, {"id": "kuehlschrank"}], ["fridge"], ""),
+             ("Meine Zähne waren danach komplett grün.", "livingroom", [{"id": "du", "action": "shocked"}], [], "")]
+        scs = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "shot": sh_} for t_, pl_, a_, pr_, sh_ in T],
+                           [(n_ * 3, n_ * 3 + 3) for n_ in range(len(T))], "Mein Haushalt hat mich verklagt", "comedy", "")
+        assert scs[0].get("shot") != "insert" and scs[0]["actors"][0].get("kind") == "fridge", "Kühlschrank-Figur wird nicht zum Kühlschrank mit Gesicht"
+        assert not any((q.get("type") if isinstance(q, dict) else q) == "fridge" for sc in (scs[0], scs[3]) for q in sc.get("props") or []), "zweiter Kühlschrank neben der Figur"
+        assert any(a.get("kind") == "cat" for a in scs[1]["actors"]), "Katze aus dem Satz fehlt"
+        assert scs[2]["actors"][0].get("hold") == "letter", "Abmahnung: kein Brief in der Hand"
+        assert scs[4]["actors"][0].get("teeth") == "grün", "grüne Zähne fehlen"
+        for sc in scs:
+            frame(sc, cast_h)
+        assert stage.balance_cast({"du": {"gender": "m"}}, 2, [{"text": "Ich wollte Strom sparen."}, {"text": "Mein Hund hat mich enterbt."}, {"text": "Ich hatte Blasen."}])["du"].get("gender") == "m", \
+            "Ich-Geschichte: Figur wechselt das Geschlecht"
+        for em_ in ("", "angry", "sad", "scared"):
+            for ac_ in ("idle", "point", "shake", "walk"):
+                extras.creature("fridge", 0.7, 1, 0.5, em_, 1.0, ac_)
+    check("Alltags-Geschichte (Kühlschrank als Figur, Haustier, Brief)", _household)
+
     def _sea():                                                  # Meerestiere: das genannte Tier ist die Figur, allein und unter Wasser
         T = [("Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.", "livingroom", [{"id": "du", "action": "shocked", "hold": "phone"}], ["computer"], "close"),
              ("Der Pistolenkrebs knallt seine Schere zu.", "underwater", [], ["explosion"], "event"),

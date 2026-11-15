@@ -216,6 +216,17 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Menschen-Sätze werden auch erkannt, wenn das Drehbuch dort das Tier hinstellt („Menschen haben drei Arten von Farbrezeptoren“, „schneller als ein
   Wimpernschlag“ – `SEA_PEOPLE_RE`): Dann steht die Hauptfigur im Bild.
 
+- Alltags-Geschichten mit Dingen als Figur (Prüfung 15.11.2026, „Ich lebte wie 1348“ – `stage._household`, Schlussdurchgang in `direct`): Heißt eine Figur
+  „kuehlschrank“ (`FRIDGE_ID_RE`), ist sie das Wesen `fridge` (`extras.creature`: Kühlschrank mit Gesicht, Armen, Beinen; wütend/zeigend hebt er den Arm) –
+  kein Roboter neben einem Kühlschrank, kein zweiter Kühlschrank als Requisite, keine gesichtslose Großaufnahme. Nennt der Satz Katze oder Hund (`PET_RE`) und
+  steht kein Tier im Bild, kommt es dazu; „gerannt/flieht“ lässt es aus dem Bild laufen. Abmahnung, Brief, Einschreiben (`LETTER_RE`): die Figur hält den
+  Umschlag `letter` (`extras.HELD`); ein Radio in der Hand, von dem der Satz nicht spricht, entfällt. „Zähne … grün/gelb/schwarz“ (`TEETH_RE`): die Figur zeigt
+  verfärbte Zähne in Großaufnahme (`rig`: `pose.teeth`). „Schrubben/putzen/reiben mit <kleines Ding>“ (`SCRUB_RE`): das Ding liegt in der Hand. Plakette
+  (`badge`), die kein einziges Wort des Satzes aufgreift, entfällt – der Satz bekommt ein echtes Bild. Ich-Geschichten: `balance_cast` lässt die Figur, wie das
+  Drehbuch sie besetzt (sie ist die erzählende Stimme). Großaufnahme steht höher (`CLOSE_FOOT`), damit die Untertitel nicht über dem Gesicht liegen. Zustands-Zeile
+  oben rechts wird nicht mehr mitten im Wort gekappt („KLAGE EINGER“): bis 20 Zeichen in kleinerer Schrift, sonst am Wortende gekürzt. Bibliothek: `salbeiblatt`.
+  Selftest: `_household`.
+
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
   rückwärts gebaut (echte Wurfparabel zwischen zwei Tönen, die Scheibe liegt so, dass sie die Richtungsänderung erklärt) – deshalb sitzt

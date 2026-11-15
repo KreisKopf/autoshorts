@@ -193,6 +193,8 @@ def sanitize(sc):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
             if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
                 c["look"] = {k: v for k, v in a["look"].items() if k in ("shirt", "hair", "hat", "glasses", "skin", "hair_color", "gender", "size") and isinstance(v, (str, bool, int, float))}
+            if isinstance(a.get("teeth"), str) and a["teeth"].lower() in TEETH_COLORS:
+                c["teeth"] = a["teeth"].lower()
             say = a.get("say")
             c["say"] = "".join(ch for ch in say if ch not in "{}<>\\").strip()[:16] if isinstance(say, str) else ""
             for k in ("pos", "to"):
@@ -242,6 +244,8 @@ def _prepare(scene, cast):
         kind = str(a.get("kind") or spec.get("kind") or "").lower()
         if re.search(r"gehirn|hirn|brain", aid.lower()) and kind in ("", "agent", "robot", "cell"):
             kind = "brain"                                # „gehirn_bot“, „dein_gehirn“: das Gehirn selbst als Figur, kein oranges KI-Kästchen
+        if re.search(FRIDGE_ID_RE, aid.lower()) and kind in ("", "agent", "robot"):
+            kind = "fridge"                               # „kuehlschrank“ als Figur: der Kühlschrank selbst mit Gesicht – kein Roboter neben einem Kühlschrank
         x0 = _x(a.get("pos"), default_x[i])
         x1 = _x(a.get("to"), x0) if a.get("to") else x0
         action = str(a.get("action") or "idle").lower()
@@ -252,7 +256,8 @@ def _prepare(scene, cast):
         actors.append({"look": rig.Look.from_spec(spec, aid, list(cast).index(aid) if aid in cast else None), "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "hero": bool(a.get("hero")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
-                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing")})
+                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"),
+                       "teeth": TEETH_COLORS.get(str(a.get("teeth") or "").lower())})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
         for b in actors[:i]:
             if abs(a["x1"] - b["x1"]) < 200:
@@ -287,6 +292,8 @@ def _prepare(scene, cast):
         if isinstance(p, dict) and str(scene.get("shot") or "") != "insert" and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in PLACE_HAS.get(place, ()):
             continue                                              # steht an diesem Ort schon
+        if isinstance(p, dict) and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "fridge" and any(q["kind"] == "fridge" for q in actors):
+            continue                                              # der Kühlschrank ist selbst die Figur: kein zweiter daneben
         if isinstance(p, dict) and place != "underwater" and str(scene.get("shot") or "") != "insert" and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "submersible":
             continue                                              # ein Tauchboot schwebt nur unter Wasser frei im Bild – nicht am Himmel, nicht im Zimmer
@@ -787,9 +794,13 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 action, tt = ("fall", a_hit) if a_hit is not None else ("float", t)
             pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"],
                                   _gest_at(a.get("gplan"), t) if action in ("talk", "idle") and not a.get("hold") else None, shape)
+            if a.get("teeth"):                                # verfärbte Zähne zeigen: Mund bleibt offen
+                pose.teeth = a["teeth"]
+                pose.mouth = max(pose.mouth, 0.75)
+                pose.shape = "e"
             if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake") and not pose.lying:
                 small_h = a["hold"].startswith("prop:") and (extras.REAL_M.get(a["hold"][5:]) or extras.SIZES.get(a["hold"][5:], (9,))[0]) <= 0.3
-                pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle") or small_h else (8, 4)   # Kleines (Apfel, Kuchen) hält man vor sich, nicht an der Hüfte
+                pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle", "letter") or small_h else (8, 4)   # Kleines (Apfel, Kuchen) hält man vor sich, nicht an der Hüfte
                 if a["hold"] in ("umbrella", "sign"):
                     pose.arm_r, pose.fore_r = 40, 100
             if 0 <= t - move_t < 0.18 and arrived:           # kleines Abfedern beim Ankommen
@@ -849,7 +860,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
 
 CLOSE_BG = 660         # Großaufnahme: Breite des Kulissen-Ausschnitts (Zoom 1,6) …
 CLOSE_ZOOM = 2.6       # … die Figur selbst wird 2,6-mal so groß gezeichnet (scharf, nicht hochgerechnet) …
-CLOSE_FOOT = H + 230   # … und steht unterhalb des Bildrands: Kopf und Oberkörper füllen das Bild
+CLOSE_FOOT = H + 110   # … und steht unterhalb des Bildrands: Kopf und Oberkörper füllen das Bild
 
 
 _ONES = {"null": 0, "ein": 1, "eine": 1, "einen": 1, "einem": 1, "einer": 1, "eins": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6,
@@ -1122,6 +1133,10 @@ def direct(scenes, times, topic="", style="", look=""):
         g_c = sc.get("graphic")
         if isinstance(g_c, dict) and str(g_c.get("type") or "").lower() == "question" and "?" not in str(sc.get("text") or "") and str(g_c.get("text") or "").strip():
             g_c["type"] = "badge"                         # großes Fragezeichen über einem Satz, der nichts fragt („Tauchen ist streng verboten“): als Plakette zeigen
+        if isinstance(g_c, dict) and str(g_c.get("type") or "").lower() == "badge" and str(sc.get("shot") or "") == "graphic":
+            stems_c = [w_[:5] for w_ in _re0.findall(r"[a-zäöüß]{4,}", (str(g_c.get("text") or "") + " " + str(g_c.get("kicker") or "")).lower())]
+            if stems_c and not any(st_ in low_c0 for st_ in stems_c):
+                sc["graphic"], sc["shot"] = None, ""      # Plakette ohne ein einziges Wort aus dem Satz („KÜHLSCHRANK STREIKT“ zum Nachbarn mit der Polizei): der Satz bekommt ein echtes Bild
         ov_c = sc.get("overlay")
         if isinstance(ov_c, dict) and str(ov_c.get("type") or "") == "choice" and "?" not in str(sc.get("text") or "") and not _re0.search(r"\boder\b", str(sc.get("text") or "").lower()):
             sc["overlay"] = None                          # Auswahl „A/B“ an einem Satz, der gar keine Frage stellt
@@ -2119,6 +2134,76 @@ def direct(scenes, times, topic="", style="", look=""):
         g_n = sc.get("graphic") if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) else None
         if g_n and str(g_n.get("label") or "").strip().lower() and str(g_n.get("label") or "").strip().lower() == str(g_n.get("value") or "").strip().lower():
             g_n["label"] = ""                             # Unterzeile wiederholt nur die Zahl („80 KM/H“ unter „80 KM/H“)
+    _household(scenes)
+    return scenes
+
+
+# Alltags-Geschichten (Prüfung 15.11.2026, „Ich lebte wie 1348“): Haushaltsgerät als Figur, Haustier aus dem Satz, Brief in der Hand
+FRIDGE_ID_RE = r"k(?:ü|ue|u)hlschrank|fridge|gefrierschrank"
+PET_RE = ((r"katze|kater\b|kätzchen", "cat"), (r"\bhund(?:e|es|en|chen)?\b|welpe", "dog"))
+PET_FLEE_RE = r"gerannt|rennt|rannte|flücht|flieh|floh\b|haut ab|abgehauen|weggelaufen|läuft weg|lief weg|versteckt"
+LETTER_RE = r"abmahnung|\bbrief\b|\bbriefe\b|einschreiben|\bmahnung|umschlag|kündigungsschreiben|\bpost vom\b|\bvorladung|\bbescheid\b|strafzettel"
+RADIO_RE = r"radio|funk|durchsage|sender|empfang|lautsprecher"
+TEETH_RE = r"zähne\w*\b[^.!?]{0,50}\b(grün|gelb|schwarz|braun|blau)|\b(grün|gelb|schwarz|braun|blau)e[nr]? zähne"
+TEETH_COLORS = {"grün": (96, 190, 90), "gelb": (236, 208, 80), "schwarz": (58, 56, 62), "braun": (150, 104, 66), "blau": (90, 150, 230)}
+SCRUB_RE = r"schrubb|\bputz(?:t|e|en|st|te)\b|\breib(?:t|e|en|st)\b|\bkau(?:t|e|en|st)\b"
+
+
+def _household(scenes):
+    """Schlussdurchgang: (1) Heißt eine Figur „kuehlschrank“, ist sie der Kühlschrank mit Gesicht – ohne zweiten Kühlschrank daneben und nicht als
+    gesichtslose Großaufnahme. (2) Nennt der Satz Katze oder Hund und steht kein Tier im Bild, kommt es dazu (läuft weg, wenn der Satz das sagt).
+    (3) Abmahnung, Brief, Einschreiben: die Figur hält einen Umschlag – kein Radio, von dem niemand spricht."""
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        shot = str(sc.get("shot") or "")
+        fridge = [a for a in acts if re.search(FRIDGE_ID_RE, str(a.get("id") or "").lower()) and str(a.get("kind") or "").lower() in ("", "agent", "robot", "fridge")]
+        for a in fridge:
+            a["kind"] = "fridge"
+            if a.get("hold"):
+                a["hold"] = ""
+        if fridge:
+            sc["props"] = [p for p in (sc.get("props") or []) if extras.PROP_ALIASES.get(str((p.get("type") if isinstance(p, dict) else p) or "").lower(),
+                                                                                         str((p.get("type") if isinstance(p, dict) else p) or "").lower()) != "fridge"]
+            if shot in ("insert", "close"):
+                sc["shot"] = shot = ""
+        for a in acts:                                    # Radio in der Hand, obwohl niemand von Funk oder Radio spricht
+            if str(a.get("hold") or "").lower() == "radio" and not re.search(RADIO_RE, low):
+                a["hold"] = ""
+        if re.search(LETTER_RE, low) and shot not in ("graphic", "insert"):
+            who = next((a for a in acts if not a.get("kind") and not a.get("hold")), None)
+            if who is not None and not any(str(a.get("hold") or "") == "letter" for a in acts):
+                who["hold"] = "letter"
+                if str(who.get("action") or "").lower() in ("shocked", "scared", "run", "jump", "wave", "dance"):
+                    who["action"] = "talk"                # der Umschlag bleibt vor der Brust sichtbar (das Gefühl zeigt das Gesicht)
+        m_t = re.search(TEETH_RE, low)
+        if m_t and shot not in ("graphic", "insert"):     # „meine Zähne waren komplett grün“: die Figur zeigt die verfärbten Zähne
+            who_t = next((a for a in acts if not a.get("kind")), None)
+            if who_t is not None:
+                who_t["teeth"] = m_t.group(1) or m_t.group(2)
+                if len(acts) == 1 and not sc.get("props") and not isinstance(sc.get("overlay"), dict):
+                    sc["shot"] = shot = "close"
+        if re.search(SCRUB_RE, low) and shot not in ("graphic", "insert", "event"):   # „Zähne schrubben mit Salbeiblättern“: das genannte kleine Ding in der Hand
+            thing_s = next((str(x) for x in [k for pat, k in _lib_props() + TEXT_PROPS if re.search(pat, low)] if extras.held_key(x).startswith("prop:")), "")
+            who_s = next((a for a in acts if not a.get("kind") and not a.get("hold")), None)
+            if thing_s and who_s is not None:
+                who_s["hold"] = thing_s
+                sc["props"] = [p for p in (sc.get("props") or []) if (p.get("type") if isinstance(p, dict) else p) != thing_s]
+        pet = next((k for pat, k in PET_RE if re.search(pat, low)), None)
+        if pet and shot not in ("graphic", "insert", "event") and len(acts) < 2 and not any(a.get("kind") for a in acts) and "actors" in sc \
+                and places.resolve(backdrop(sc)) not in MAPS + ("underwater", "space", "highsky"):
+            left = any(_x(a.get("to") or a.get("pos"), 540) > 600 for a in acts)
+            flee = bool(re.search(PET_FLEE_RE, low))
+            sc["actors"] = acts + [{"id": "_haustier", "kind": pet, "action": "walk" if flee else "idle", "emotion": "scared" if flee else "",
+                                    "pos": 300 if left else 780, "to": ("offleft" if left else "offright") if flee else None,
+                                    "speaks": False, "emote": "", "say": "", "hold": "", "facing": ""}]
+            if shot == "close":
+                sc["shot"] = ""
+            for a in acts:                                # die Hauptfigur macht dem Tier Platz
+                if not left and _x(a.get("to") or a.get("pos"), 540) > 450:
+                    a["pos"], a["to"] = "left", "left"
     return scenes
 
 
@@ -3094,11 +3179,14 @@ FEM_LOOKS = ({"shirt": "lila", "hair": "ponytail", "hair_color": "blond", "gende
              {"shirt": "gelb", "hair": "long", "hair_color": "schwarz", "skin": "mittel", "gender": "w"})
 
 
-def balance_cast(cast, seed=0):
+def balance_cast(cast, seed=0, scenes=None):
     """Mehr Frauen im Bild: Ist die Hauptfigur „du“ (der Zuschauer selbst) ohne Frauen in der Besetzung, wird sie bei jedem zweiten
     Video eine Frau. Benannte Figuren („Tom“) und „ich“ (die Stimme erzählt selbst) bleiben, wie das Drehbuch sie meint;
     Nebenfiguren ohne Besetzung sind über GROUP_LOOKS ohnehin gemischt."""
     if not isinstance(cast, dict) or seed % 2:
+        return cast
+    me = sum(1 for sc in (scenes or []) if isinstance(sc, dict) and re.search(r"\b(ich|mein\w*|mir|mich)\b", str(sc.get("text") or "").lower()))
+    if scenes and me >= max(3, len(scenes) // 3):         # Ich-Geschichte: die Figur IST die erzählende Stimme – sie bleibt, wie das Drehbuch sie besetzt hat
         return cast
     humans = [k for k, v in cast.items() if isinstance(v, dict) and not v.get("kind")]
     if any(rig.Look.from_spec(cast[k]).fem for k in humans) or "du" not in humans:

@@ -148,12 +148,15 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
             elif cur and n_sc - cur_i > 2 and not any(x.partition(":")[0].strip().upper() == cur.partition(":")[0].strip().upper() for x in stats[n_sc:] if x):
                 cur = ""                       # eine einzelne Angabe („WIND: RUHIG“) gilt zwei Sätze weiter – nicht bis zum Schluss über Absturz und Jubel
             lab, _, val = str(cur or "").replace("{", "").replace("}", "").replace("\\", "").upper().partition(":")
-            lab, val = (lab.strip()[:14], val.strip()[:12]) if val.strip() else ("", lab.strip()[:12])
+            lab, val = (lab.strip()[:14], val.strip()) if val.strip() else ("", lab.strip())
+            if len(val) > 20:                  # zu lang: am Wortende kürzen, nie mitten im Wort („KLAGE EINGER“)
+                val = val[:21].rsplit(" ", 1)[0].rstrip(" ·|,–-:")[:20]
+            fs_val = 70 if len(val) <= 12 else 52
             if val:
                 bad = val.startswith("!") or re.search(r"STEHT|AUS\b|TOT|WEG\b|STOPP|KEIN|ALARM|GEFAHR|LEER|OFFLINE|VERLOREN|DEFEKT", val)
                 col = "&H005A46FF" if bad else "&H003FD2FF"
                 head = ("{\\fs34\\c&H00FFFFFF&}" + lab + "\\N") if lab else ""
-                lines.append(f"Dialogue: 3,{_ts(s)},{_ts(e)},Cnt,,0,0,0,,{head}{{\\fs70\\c{col}&}}{val.lstrip('!')}")
+                lines.append(f"Dialogue: 3,{_ts(s)},{_ts(e)},Cnt,,0,0,0,,{head}{{\\fs{fs_val}\\c{col}&}}{val.lstrip('!')}")
     # Countdown oben rechts: läuft sichtbar herunter, wird zum Ende hin rot
     if countdown and countdown.get("seconds"):
         start_v = max(10, int(countdown["seconds"]))

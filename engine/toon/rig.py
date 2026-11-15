@@ -414,9 +414,16 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             mw, mh = 24 * u, 8 * u + pose.mouth * 16 * u
         d.rounded_rectangle((mx - mw - 3 * u, my - mh / 2 - 3 * u, mx + mw + 3 * u, my + mh / 2 + 3 * u), min(mw, mh / 2 + 3 * u), fill=INK)
         d.rounded_rectangle((mx - mw, my - mh / 2, mx + mw, my + mh / 2), min(mw, mh / 2), fill=(96, 30, 44))
-        if mh > 16 * u:
+        tint = getattr(pose, "teeth", None)                # verfärbte Zähne („meine Zähne waren komplett grün“): obere und untere Reihe deutlich sichtbar
+        if tint and mh > 12 * u:
+            d.rounded_rectangle((mx - mw * 0.8, my - mh / 2, mx + mw * 0.8, my - mh / 2 + 10 * u), 3 * u, fill=tuple(tint))
+            d.rounded_rectangle((mx - mw * 0.66, my + mh / 2 - 8 * u, mx + mw * 0.66, my + mh / 2), 3 * u, fill=tuple(tint))
+            for q in (-0.4, 0.0, 0.4):
+                d.line((mx + mw * q, my - mh / 2, mx + mw * q, my - mh / 2 + 10 * u), fill=_dark(tuple(tint), 0.35), width=max(1, int(2 * u)))
+        elif mh > 16 * u:
             d.rounded_rectangle((mx - mw * 0.72, my - mh / 2, mx + mw * 0.72, my - mh / 2 + 7 * u), 3 * u, fill=(255, 255, 255))
-            d.ellipse((mx - mw * 0.6, my + mh * 0.08, mx + mw * 0.6, my + mh * 0.62), fill=(238, 112, 118))
+            if not tint:
+                d.ellipse((mx - mw * 0.6, my + mh * 0.08, mx + mw * 0.6, my + mh * 0.62), fill=(238, 112, 118))
     elif pose.smile < -0.2:
         d.arc((mx - 18 * u, my - 2 * u, mx + 18 * u, my + 24 * u), 200, 340, fill=INK, width=max(2, int(7 * u)))
     else:

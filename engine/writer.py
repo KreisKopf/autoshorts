@@ -149,6 +149,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             Besetze Frauen und Männer etwa gleich oft – auch die Hauptfigur „du“ ist in ungefähr jedem zweiten Video eine Frau
             (z. B. {"du": {"shirt": "lila", "hair": "ponytail", "hair_color": "blond", "gender": "w"}}); in Gruppen immer gemischt.
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
+  Haushaltsgerät als Figur mit eigenem Willen: "kind": fridge (Kühlschrank mit Gesicht und Armen; Kennung z. B. "kuehlschrank") – nicht robot; keinen zweiten Kühlschrank als Requisite daneben stellen
   Meerestiere: shrimp (Pistolenkrebs, Garnele, Krebs – die Knallschere schnappt zu), mantis (Fangschreckenkrebs – schlägt mit der Keule), jelly (Qualle),
   axolotl (rosa Schwanzlurch mit Kiemenästen) · überall: tardigrade (Bärtierchen).
   Wildtiere an Land und in der Luft: cheetah (Gepard – action "run" = Galopp), eagle (Adler, fliegt), flea (Floh – action "jump" = springt hoch).

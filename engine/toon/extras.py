@@ -1521,7 +1521,7 @@ LAKE_KINDS = ("crate", "crates", "cashcrate", "goldbars", "logs", "crates_sink",
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
-        "map": "map", "karte": "map", "radio": "radio"}
+        "map": "map", "karte": "map", "radio": "radio", "letter": "letter", "brief": "letter", "umschlag": "letter"}
 _nat = {}
 
 
@@ -1636,6 +1636,11 @@ def draw_held(layer, kind, x, y, facing, t, k=1.0, night=False):
     elif kind == "map":
         d.polygon([(x - 70 * k, y - 60 * k), (x + 70 * k, y - 76 * k), (x + 70 * k, y + 20 * k), (x - 70 * k, y + 36 * k)], fill=(244, 232, 196), outline=INK, width=5)
         d.line((x - 40 * k, y - 20 * k, x, y - 40 * k, x + 40 * k, y - 10 * k), fill=(214, 70, 60), width=int(6 * k), joint="curve")
+    elif kind == "letter":                                 # Brief/Abmahnung: Umschlag mit rotem Siegel
+        box = (x - 62 * k, y - 66 * k, x + 62 * k, y + 16 * k)
+        d.rounded_rectangle(box, 6 * k, fill=(250, 246, 232), outline=INK, width=5)
+        d.line((box[0], box[1], x, y - 18 * k, box[2], box[1]), fill=INK, width=max(3, int(5 * k)), joint="curve")
+        d.ellipse((x - 15 * k, y - 32 * k, x + 15 * k, y - 2 * k), fill=(214, 60, 60), outline=INK, width=max(2, int(4 * k)))
     elif kind == "radio":
         d.rounded_rectangle((x - 50 * k, y - 50 * k, x + 50 * k, y + 20 * k), 8 * k, fill=(90, 96, 110), outline=INK, width=5)
         d.ellipse((x - 36 * k, y - 36 * k, x + 4 * k, y + 4 * k), fill=(40, 40, 46))
@@ -2280,6 +2285,36 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         cheek(-82, hy + 36, 16)
         cheek(94, hy + 36, 16)
         mouthf(6, hy + 54, 14)
+    elif kind in ("fridge", "kühlschrank"):                                          # Haushaltsgerät als Figur: Kühlschrank mit Gesicht, Armen und kurzen Beinen
+        col = (236, 240, 244)
+        sway = math.sin(t * 2.2) * 4
+        hop = abs(math.sin(t * 5)) * 10 if mood == "angry" or action in ("shake", "point") else 0
+        y0 = -hop
+        for lx in (-64, 30):                                                         # kurze Beine mit Schuhen
+            rr(lx, y0 - 44, lx + 30, y0 - 12, 6, (120, 128, 142), shade=0.2)
+            rr(lx - 8, y0 - 22, lx + 46, y0, 9, (70, 76, 92), shade=0.15)
+        av = math.sin(t * (9 if mood == "angry" or action in ("shake", "point") else 3)) * 12
+        stroke([(-100, y0 - 250), (-136, y0 - 200 + av * 0.5), (-126, y0 - 150)], 18, (176, 184, 198))   # Arm hinten
+        rr(-104, y0 - 470, 104, y0 - 38, 22, col)                                    # Gehäuse
+        d.line((*P(-104, y0 - 318), *P(104, y0 - 318)), fill=INK, width=max(2, int(7 * k)))             # Fuge zwischen Gefrierfach und Tür
+        rr(66, y0 - 444, 82, y0 - 348, 6, (150, 158, 172), shade=0)                  # Griffe
+        rr(66, y0 - 288, 82, y0 - 150, 6, (150, 158, 172), shade=0)
+        fy_ = y0 - 392 + sway * 0.3                                                  # Gesicht auf dem Gefrierfach
+        for s in (-1, 1):
+            eye(s * 36 - 6, fy_, 21)
+            brow(s * 36 - 6, fy_ - 34, 22, -s)
+            cheek(s * 66 - 6, fy_ + 26, 13)
+        mouthf(-6, fy_ + 34, 22)
+        if mood == "angry":
+            d.arc(B(-28, fy_ + 30, 16, fy_ + 54), 200, 340, fill=INK, width=max(2, int(6 * k)))
+        if action in ("point", "shake") or mood == "angry":                          # Arm vorn: erhoben (schimpft / zeigt)
+            stroke([(100, y0 - 250), (146, y0 - 290 - av), (176, y0 - 330 - av)], 18, (196, 204, 216))
+            ell(162, y0 - 350 - av, 192, y0 - 320 - av, (236, 240, 244), shade=0)
+        else:
+            stroke([(100, y0 - 250), (136, y0 - 200 - av * 0.5), (128, y0 - 150)], 18, (196, 204, 216))
+            ell(114, y0 - 162, 142, y0 - 134, (236, 240, 244), shade=0)
+        for i_, (mx_, my_, mc_) in enumerate(((-60, -250, (240, 90, 80)), (-30, -206, (250, 200, 70)), (-66, -168, (90, 170, 240)))):   # Magnete an der Tür
+            rr(mx_, y0 + my_, mx_ + 24, y0 + my_ + 18, 4, mc_, shade=0)
     elif kind in ("robot", "roboter"):
         col = (176, 186, 202)
         for lx in (-52, 22):
@@ -2949,4 +2984,4 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge")
