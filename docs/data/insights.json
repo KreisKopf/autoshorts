@@ -1,5 +1,5 @@
 {
- "updated": 1794783176.9225085,
+ "updated": 1794785389.7144701,
  "enough": true,
  "counted": 14,
  "total": 17,
@@ -9,37 +9,37 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1600,
-   "avg_likes": 51.5,
-   "like_rate": 3.22,
-   "avg_score": 2372
+   "avg_views": 1606,
+   "avg_likes": 51.0,
+   "like_rate": 3.18,
+   "avg_score": 2370
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1698,
+   "avg_views": 1700,
    "avg_likes": 39.9,
    "like_rate": 2.35,
-   "avg_score": 2300
+   "avg_score": 2302
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1491,
+   "avg_views": 1494,
    "avg_likes": 47.0,
    "like_rate": 3.15,
-   "avg_score": 2196
+   "avg_score": 2199
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1517,
+   "avg_views": 1519,
    "avg_likes": 37.0,
    "like_rate": 2.44,
-   "avg_score": 2072
+   "avg_score": 2074
   },
   {
    "slug": "fakten",
@@ -63,9 +63,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1600 Aufrufe, 3.22 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1606 Aufrufe, 3.18 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2416 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2418 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -84,21 +84,21 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2206,
+   "views": 2216,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3121
+   "score": 3131
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1993,
+   "views": 1997,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2968
+   "score": 2972
   },
   {
    "id": 80,
