@@ -1050,7 +1050,39 @@ def main():
             assert places.background("underwater") is not None
         finally:
             places.ICE[0] = False
+        T2 = [("Wenn die Ostsee zufriert, stecken Schiffe im Eis fest.", "icesea", [], ["ship"]),
+              ("Und am Ende marschiert eine ganze Armee zu Fuß über das Eis.", "icesea", [{"id": "du", "action": "walk"}], []),
+              ("Du könntest zu Fuß von Deutschland direkt nach Dänemark und Schweden laufen.", "germany", [{"id": "du", "action": "walk"}], []),
+              ("Du denkst, das ist nur Science-Fiction? Falsch, das ist schon so passiert.", "germany", [{"id": "du", "action": "walk"}], [])]
+        s2 = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "mood": "tense"} for t_, pl_, a_, pr_ in T2], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T2))],
+                          "Was wäre, wenn die Ostsee plötzlich komplett zufriert?", "whatif")
+        assert not s2[1].get("actors") and s2[1].get("crowd") == "walk", f"Armee auf dem Eis: {s2[1].get('actors')} {s2[1].get('crowd')}"
+        assert s2[2].get("shot") == "graphic" and "denmark" in str((s2[2].get("graphic") or {}).get("value")), f"Länderkarte: {s2[2].get('shot')} {s2[2].get('graphic')}"
+        assert places.resolve(stage.backdrop(s2[3])) not in stage.MAPS and s2[3].get("actors"), f"Karte ohne Land im Satz: {s2[3].get('place')}"
+        for sc_ in s2:
+            assert frame(sc_, {"du": {}}) is not None
+        from .. import writer as _w
+        fy = _w.fix_years({"scenes": [{"text": "Im Winter neunzehnhunderteinundachtzig war die Ostsee fast zu.", "overlay": {"type": "tag", "text": "WINTER 1981"}}]},
+                          "Ostsee – Vorgaben: 1658 Armee, 1987 fast zugefroren. Keine anderen Jahreszahlen.")
+        assert "neunzehnhundertsiebenundachtzig" in fy["scenes"][0]["text"] and fy["scenes"][0]["overlay"]["text"] == "WINTER 1987", fy
     check("Zugefrorenes Meer: Eisfläche, Schiff im Eis, Eisdecke, Atemloch", _ice)
+
+    def _animals():                                              # Tiere aus dem Satz stehen im Bild; im „Tiere sprechen“-Video bewegen sie den Mund
+        T = [("Kühe fordern freie Weidezeiten und protestieren auf den Wiesen.", "farm", []),
+             ("Niemand isst ein Schnitzel, wenn das Schwein fragt.", "kitchen", [{"id": "du", "action": "shocked", "speaks": True}]),
+             ("Nach einem Monat kooperieren Forscher mit Schimpansen.", "lab", [{"id": "du", "action": "walk"}]),
+             ("Bis auf eine winzige Mücke, die dir sagt, dass sie dich liebt.", "bedroom", [{"id": "du", "action": "shocked"}]),
+             ("Da hast du noch einmal Schwein gehabt.", "livingroom", [{"id": "du"}])]
+        sd = stage.direct([{"text": t_, "place": pl_, "actors": a_} for t_, pl_, a_ in T], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))],
+                          "Was wäre, wenn alle Tiere plötzlich sprechen könnten?", "whatif")
+        kinds = [[str(a_.get("kind") or "") for a_ in sc_.get("actors") or []] for sc_ in sd]
+        assert kinds[0] == ["cow"] * 3, f"Kühe: {kinds[0]}"
+        assert kinds[1] == ["", "pig"] and kinds[2] == ["", "chimp"] and kinds[3] == ["", "mosquito"], f"Tier neben dem Menschen: {kinds[1:4]}"
+        assert "pig" not in kinds[4], f"Redewendung: {kinds[4]}"
+        assert [a_ for a_ in sd[1]["actors"] if a_.get("kind")][0].get("speaks"), "sprechendes Tier bewegt den Mund nicht"
+        for sc_ in sd:
+            assert frame(sc_, {"du": {}}) is not None
+    check("Tiere aus dem Satz im Bild (Kuh, Schwein, Schimpanse, Mücke)", _animals)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

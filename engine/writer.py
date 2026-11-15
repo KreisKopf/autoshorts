@@ -1043,6 +1043,72 @@ def strip_foreign(js):
     return conv(js)
 
 
+_Y_UNITS = ["", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn",
+            "sechzehn", "siebzehn", "achtzehn", "neunzehn"]
+_Y_TENS = {2: "zwanzig", 3: "dreißig", 4: "vierzig", 5: "fünfzig", 6: "sechzig", 7: "siebzig", 8: "achtzig", 9: "neunzig"}
+
+
+def year_words(y):
+    """Jahreszahl, wie man sie spricht: 1987 → „neunzehnhundertsiebenundachtzig“, 2024 → „zweitausendvierundzwanzig“."""
+    y = int(y)
+    r = y % 100
+    rest = "" if r == 0 else ("eins" if r == 1 else _Y_UNITS[r]) if r < 20 else (_Y_UNITS[r % 10] + "und" if r % 10 else "") + _Y_TENS[r // 10]
+    if 2000 <= y <= 2099:
+        return "zweitausend" + rest
+    return _Y_UNITS[y // 100] + "hundert" + rest
+
+
+def fix_years(js, topic):
+    """Gibt das Thema geprüfte Jahreszahlen vor und verlangt „keine anderen Jahreszahlen“, dann stimmt jede Jahreszahl im Drehbuch damit überein:
+    Eine abweichende Jahreszahl desselben Jahrhunderts ist ein Schreibfehler der Text-KI („neunzehnhunderteinundachtzig“ statt 1987) und wird
+    im Sprechertext und in den Einblendungen auf die vorgegebene gesetzt."""
+    low = str(topic or "").lower()
+    if not re.search(r"keine (?:anderen|weiteren|sonstigen) (?:jahres)?zahlen|nur diese (?:jahres)?zahlen", low):
+        return js
+    years = sorted({int(m) for m in re.findall(r"(?<![\d.,])(1[0-9]{3}|20[0-9]{2})(?![\d.,])", low)})
+    if not years:
+        return js
+    ok_words = {year_words(y) for y in years}
+
+    def right(cent):                                      # die eine vorgegebene Jahreszahl dieses Jahrhunderts
+        c = [y for y in years if y // 100 == cent]
+        return c[0] if len(c) == 1 else None
+
+    def fix_words(m):
+        w = m.group(0)
+        if w.lower() in ok_words:
+            return w
+        head = re.match(r"(?i)(zweitausend|" + "|".join(sorted((u for u in _Y_UNITS[11:]), key=len, reverse=True)) + r")(?:hundert)?", w)
+        cent = 20 if head and head.group(1).lower() == "zweitausend" else (_Y_UNITS.index(head.group(1).lower()) if head else None)
+        y = right(cent) if cent else None
+        if y is None:
+            return w
+        ai.log(f"Jahreszahl korrigiert: {w} → {year_words(y)} (Vorgabe {y})")
+        return year_words(y)
+
+    def fix_digits(m):
+        d_ = int(m.group(0))
+        y = None if d_ in years else right(d_ // 100)
+        return str(y) if y else m.group(0)
+
+    pat_w = r"(?i)\b(?:(?:elf|zwölf|dreizehn|vierzehn|fünfzehn|sechzehn|siebzehn|achtzehn|neunzehn)hundert[a-zäöüß]*|zweitausend[a-zäöüß]+)\b"
+    pat_d = r"(?<![\d.,])(?:1[0-9]{3}|20[0-9]{2})(?![\d.,]|\s*(?:km|meter|euro|grad|prozent|kilo|tonnen|menschen|leute|jahre))"
+    for sc in js.get("scenes", []):
+        if not isinstance(sc, dict):
+            continue
+        if isinstance(sc.get("text"), str):
+            sc["text"] = re.sub(pat_d, fix_digits, re.sub(pat_w, fix_words, sc["text"]))
+        for box in (sc.get("overlay"), sc.get("graphic")):
+            if isinstance(box, dict):
+                for k, v in list(box.items()):
+                    if isinstance(v, str):
+                        box[k] = re.sub(pat_d, fix_digits, v)
+        for k in ("hud", "status"):
+            if isinstance(sc.get(k), str):
+                sc[k] = re.sub(pat_d, fix_digits, sc[k])
+    return js
+
+
 def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
     from .state import STATE
@@ -1138,6 +1204,10 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
     if any(_foreign(str(s_.get("text") or "")) for s_ in js.get("scenes", []) if isinstance(s_, dict)):
         raise ai.ProviderError("Drehbuch enthält verstümmelte Wörter (fremde Schriftzeichen im Sprechertext)")
     js = strip_foreign(js)
+    try:
+        js = fix_years(js, topic)                        # geprüfte Jahreszahlen aus den Vorgaben gelten (Schreibfehler „1981“ statt 1987)
+    except Exception as e:  # noqa: BLE001
+        ai.log(f"Jahreszahlen nicht geprüft ({e})")
     try:
         js = fix_umlauts(js)
         found = sorted({m.group(1) for sc_ in js.get("scenes", []) if isinstance(sc_, dict) for m in _BRAND_RE.finditer(str(sc_.get("text") or ""))}

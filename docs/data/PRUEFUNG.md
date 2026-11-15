@@ -45,6 +45,8 @@ Repo: `QuatratKopf/autoshorts`, Branch `main`. Antworten und Berichte auf Deutsc
    Neue Fassung wieder komplett prüfen. Höchstens 3 Neubauten.
    Thema für den Neubau: zuerst der Kern in einem kurzen Satz, dann nach einem Gedankenstrich die Vorgaben (welche Punkte, geprüfte Zahlen,
    verbotene Wörter, Titelbild-Text). Nur der Kern vor dem Gedankenstrich bestimmt das „Ding des Themas“ (`stage.topic_head`).
+   Geprüfte Jahreszahlen als Ziffern nennen und „Keine anderen Jahreszahlen“ dazuschreiben – dann berichtigt `writer.fix_years` Schreibfehler der
+   Text-KI (1981 statt 1987). Genug Stoff vorgeben (acht bis zehn Punkte): Bei zu wenig Stoff füllt die Text-KI mit leeren Sätzen auf die Länge auf.
 6. Passt alles → hochladen: `-f 'inputs[action]=upload' -f 'inputs[video_id]=<id>'`, Lauf abwarten, in `videos.json` prüfen, dass
    `status` = `published` ist.
 7. Nach 3 Neubauten immer noch grobe Fehler (falscher Inhalt, Unsinn im Bild): NICHT hochladen, letzte Fassung verwerfen und berichten,

@@ -228,9 +228,17 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   „minus zwanzig Grad“ lässt die Säule unter null fallen. Schluss: `writer.polish` beendet einen Schlusssatz, der im Gedankenstrich hängen bleibt, mit Punkt;
   die Drehbuch-Vorgabe verlangt einen vollständigen letzten Satz.
 - Neue Wesen (`extras.creature`, Größen in `HERO_SIZE`/`CREATURE_SIZE`): `dolphin` (Delfin/Schweinswal, schwimmt), `cow` (Kuh), `pig` (Schwein), `chimp`
-  (Schimpanse, sitzt aufrecht), `mosquito` (Mücke), `fly` (Fliege). Die Text-KI darf sie besetzen (`writer`: "kind"); eine eigene Regie-Regel, die sie beim
-  bloßen Nennen ins Bild holt (wie `PET_RE` für Katze/Hund), fehlt noch – gebraucht für „Was wäre, wenn Tiere sprechen könnten?“ (Kühe protestieren, das
-  Schwein fragt, Schimpansen im Labor, die Mücke am Schluss).
+  (Schimpanse, sitzt aufrecht), `mosquito` (Mücke), `fly` (Fliege). Die Text-KI darf sie besetzen (`writer`: "kind"). `stage._named_animals`
+  (Schlussdurchgang, `NAMED_ANIMALS`): Nennt der Satz Kuh/Rind, Schwein, Schimpanse/Affe, Mücke, Fliege, Spinne, Katze oder Hund und steht noch kein Tier im
+  Bild, kommt es dazu – neben dem Menschen (der rückt nach links), in der Mehrzahl ohne Menschen-Satz als Dreiergruppe in normaler Größe. Redewendungen
+  („Schwein gehabt“, `ANIMAL_IDIOM_RE`) zählen nicht. Spricht das Thema von sprechenden Tieren (`TALKING_RE`), bewegt das Tier den Mund, der Mensch hört zu.
+  Selftest: `_animals`.
+- Karten nur bei Ländern (`stage._map_sense`): Ort `germany` (Leuchtpunkt-Karte) mit zwei oder mehr Ländern im Satz („von Deutschland nach Dänemark und
+  Schweden“) wird zur Europakarte mit leuchtenden Ländern (`graphic: map`); eine Karte zu einem Satz ohne Land/Welt („Du denkst, das ist Science-Fiction?“)
+  entfällt – die Figur steht in Großaufnahme am Ort der Szene davor. Armee/Soldaten auf dem Eis (`ICE_ARMY_RE`): viele Leute ziehen übers Eis, nicht eine Figur.
+  Auf der Eisfläche am Tag gibt es kein Halbdunkel mit Lichtkegel (angespannt/traurig) – es macht aus Weiß Grau.
+- Geprüfte Jahreszahlen (`writer.fix_years`): Nennt das Thema Jahreszahlen und verlangt „Keine anderen Jahreszahlen“, wird eine abweichende Jahreszahl
+  desselben Jahrhunderts im Sprechertext (ausgeschrieben, `year_words`) und in Einblendungen auf die vorgegebene gesetzt („neunzehnhunderteinundachtzig“ → 1987).
 - Alltags-Geschichten mit Dingen als Figur (Prüfung 15.11.2026, „Ich lebte wie 1348“ – `stage._household`, Schlussdurchgang in `direct`): Heißt eine Figur
   „kuehlschrank“ (`FRIDGE_ID_RE`), ist sie das Wesen `fridge` (`extras.creature`: Kühlschrank mit Gesicht, Armen, Beinen; wütend/zeigend hebt er den Arm) –
   kein Roboter neben einem Kühlschrank, kein zweiter Kühlschrank als Requisite, keine gesichtslose Großaufnahme. Nennt der Satz Katze oder Hund (`PET_RE`) und

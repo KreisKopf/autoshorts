@@ -2147,8 +2147,106 @@ def direct(scenes, times, topic="", style="", look=""):
         g_n = sc.get("graphic") if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) else None
         if g_n and str(g_n.get("label") or "").strip().lower() and str(g_n.get("label") or "").strip().lower() == str(g_n.get("value") or "").strip().lower():
             g_n["label"] = ""                             # Unterzeile wiederholt nur die Zahl („80 KM/H“ unter „80 KM/H“)
+    _map_sense(scenes)
     _ice_story(scenes, topic)
+    _named_animals(scenes, topic)
     _household(scenes)
+    return scenes
+
+
+# Tiere, die der Satz nennt, stehen im Bild (Kühe protestieren, das Schwein fragt, Schimpansen im Labor, die Mücke am Ohr) – wie PET_RE für Katze und Hund.
+NAMED_ANIMALS = ((r"\bkuh\b|\bkühen?\b|\brind(?:er|ern|es)?\b|\bkalb\b|\bkälber", "cow", r"kühe|rinder|kälber"),
+                 (r"\bschwein(?:e|en|s)?\b|\bferkel", "pig", r"\bschweinen?\b|ferkel\b"),
+                 (r"schimpanse|\baffen?\b|menschenaffe|gorilla", "chimp", r"schimpansen|\baffen\b|gorillas"),
+                 (r"\bmücken?\b|stechmücke|moskito", "mosquito", r"mücken|moskitos"),
+                 (r"\b(?:eine|die|jede|der|einer) fliege\b|stubenfliege", "fly", r"$^"),
+                 (r"spinne", "spider", r"spinnen"), (r"katze|kater\b|kätzchen", "cat", r"katzen"), (r"\bhund(?:e|es|en|chen)?\b|welpe", "dog", r"\bhunde[n]?\b|welpen"))
+ANIMAL_IDIOM_RE = (r"schwein gehabt|armes schwein|kein schwein|schweinehund|sparschwein|glücksschwein|schweineteuer|affenhitze|affenzahn|laust der affe|heilige kuh|"
+                   r"melkkuh|kuhhandel|hundemüde|hundeelend|katzensprung|katzenwäsche|\bkater\b.{0,20}(?:alkohol|party|getrunken)|spinnst|spinnen die")
+TALKING_RE = r"tiere?n?\b.{0,50}\b(?:sprechen|reden|sprache|sprächen)|sprechende[nrs]? tiere?"
+
+
+def _named_animals(scenes, topic):
+    talking = bool(re.search(TALKING_RE, str(topic or "").lower()))
+    for sc in scenes:
+        if not isinstance(sc, dict) or "actors" not in sc:
+            continue
+        shot = str(sc.get("shot") or "")
+        rp = places.resolve(backdrop(sc))
+        low = str(sc.get("text") or "").lower()
+        if shot in ("graphic", "insert") or rp in MAPS + ("underwater", "space", "highsky") or re.search(ANIMAL_IDIOM_RE, low):
+            continue
+        hit = next(((k, pl) for pat, k, pl in NAMED_ANIMALS if re.search(pat, low)), None)
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if talking:                                       # die Tiere reden: Wer als Tier im Bild steht, bewegt den Mund – der Mensch hört zu
+            beasts = [a for a in acts if a.get("kind")]
+            for a in beasts[:1]:
+                a["speaks"] = True
+            if beasts:
+                for a in acts:
+                    if not a.get("kind"):
+                        a["speaks"] = False
+        if not hit or any(str(a.get("kind") or "").lower() == hit[0] for a in acts) or any(a.get("kind") for a in acts):
+            continue
+        kind, plural = hit
+        humans = [a for a in acts if not a.get("kind")][:1]
+        emo = MOOD_EMOTION.get(str(sc.get("mood") or ""), "")
+        base = {"kind": kind, "action": "talk" if talking else "idle", "emotion": emo, "emote": "", "say": "", "hold": "", "facing": ""}
+        if re.search(plural, low) and (not humans or not re.search(HUMAN_RE, low)):   # Mehrzahl, und der Satz handelt nicht von Menschen: eine kleine Gruppe
+            sc["actors"] = [dict(base, id=f"_tier{j}", pos=x, hero=False, speaks=bool(talking and j == 1)) for j, x in enumerate((200, 540, 880))]   # in normaler Größe: drei große Kühe stünden ineinander
+            sc["crowd"] = ""
+        else:
+            for h in humans:
+                h["pos"], h["speaks"] = 300, False if talking else h.get("speaks")
+                h.pop("to", None)
+                if str(h.get("action") or "") in ("walk", "run"):
+                    h["action"] = "idle"
+            sc["actors"] = humans + [dict(base, id="_tier", pos=760 if humans else "center", hero=True, speaks=bool(talking))]
+        if shot in ("close", "event"):
+            sc["shot"] = ""
+    return scenes
+
+
+# Karten nur, wo der Satz von Ländern spricht: Die Deutschlandkarte mit Leuchtpunkten erklärt weder „von Deutschland nach Dänemark und Schweden“
+# (dafür leuchten die Länder auf der Europakarte auf) noch „Du denkst, das ist Science-Fiction?“ (dort steht die Figur am Ort der Szene davor).
+MAP_WORLD_RE = r"\berde\b|planet|weltweit|\bwelt\b|global|kontinent|länder|international|überall|menschheit|ozean|\bmeere?\b"
+
+
+def _map_sense(scenes):
+    last, main_id = None, "du"
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        for a in (sc.get("actors") or []):
+            if isinstance(a, dict) and not a.get("kind") and not str(a.get("id") or "").startswith("_"):
+                main_id = str(a.get("id") or main_id)
+                break
+        rp = places.resolve(backdrop(sc))
+        gfx = str(sc.get("shot") or "") == "graphic" and graphics.clean(sc.get("graphic"))
+        if gfx:
+            continue
+        if rp not in MAPS:
+            if rp not in ("underwater", "space", "highsky", "plain"):
+                last = (sc.get("place"), sc.get("backdrop"))
+            continue
+        low = str(sc.get("text") or "").lower()
+        regions = list(dict.fromkeys(v for k, v in graphics.REGION_WORDS.items() if k in low))
+        if rp == "germany" and len(regions) >= 2:         # mehrere Länder im Satz: sie leuchten auf der Europakarte auf
+            g = graphics.clean({"type": "map", "value": ",".join(regions[:4]), "text": "ZU FUSS" if re.search(r"zu fuß|laufen|wandern|spazier", low) else ""})
+            if g:
+                sc.update(graphic=g, shot="graphic", overlay=None)
+                continue
+        if re.search(GEO_RE, low) or (rp == "worldmap" and re.search(MAP_WORLD_RE, low)):
+            continue
+        place, bd = last or ("livingroom", None)          # kein Land, keine Welt im Satz: die Figur steht dort, wo die Geschichte gerade spielt
+        humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")][:1] or \
+            [{"id": main_id, "action": "think", "emotion": "", "emote": "?" if "?" in str(sc.get("text") or "") else "", "pos": "center", "speaks": False}]
+        for h in humans:
+            h.pop("to", None)
+            h["pos"] = "center"
+            if str(h.get("action") or "") in ("walk", "run", "idle", ""):
+                h["action"] = "think" if "?" in str(sc.get("text") or "") or re.search(r"\bdenkst\b|\bglaubst\b", low) else "talk"
+        sc.update(place=place, backdrop=dict(bd) if isinstance(bd, dict) else None, actors=humans, props=[], shot="close")
     return scenes
 
 
@@ -2167,6 +2265,7 @@ ICE_ON_RE = r"\b(?:auf|über) (?:dem|das|der) (?:\w+ )?(?:eis|eisfläche|eisdeck
 ICE_LAND_RE = r"küste|\bdorf|dörfer|\bstadt\b|städte|\bhäuser|\bstrand|\bufer\b|an land\b|festland"
 ICE_PEOPLE_RE = r"reisende|menschen|leute|händler|soldaten|armee|truppen|\bheer\b|marschier|schlittschuh|wirtsh|gasth|\bmarkt|\bbuden|spaziergänger|familien"
 ICE_COAST = {"sky": "", "ground": "snow", "elements": ["village", "packice"]}
+ICE_ARMY_RE = r"armee|soldaten|truppen|\bheer\b|marschier|regiment"
 
 
 def _ice_story(scenes, topic):
@@ -2224,8 +2323,14 @@ def _ice_story(scenes, topic):
             sc["actors"], sc["crowd"] = [], ""
             if shot in ("insert", "close", "event"):
                 sc["shot"] = ""                           # ganz im Bild, nicht vergrößert angeschnitten
+        elif not coast and re.search(ICE_ARMY_RE, low):   # „eine ganze Armee marschiert über das Eis“: viele Leute ziehen übers Eis – nicht eine einzelne Figur
+            sc["actors"], sc["crowd"] = [], "walk"
+            if shot in ("close", "insert"):
+                sc["shot"] = ""
         elif not coast and not [a for a in acts if not a.get("kind")] and re.search(ICE_PEOPLE_RE, low) and re.search(ICE_ON_RE, low):
             sc["crowd"] = "cheer" if str(sc.get("crowd") or "") == "cheer" else "walk"   # „auf dem Eis wurden Wirtshäuser aufgebaut“: Leute sind auf dem Eis unterwegs
+        if not coast and str(sc.get("mood") or "") in ("tense", "sad") and str(sc.get("time") or "day").lower() not in ("night", "nacht"):
+            sc["mood"] = "calm"                           # Halbdunkel mit Lichtkegel macht die weiße Eisfläche am hellen Tag zu grauem Matsch
         sc["props"] = props
     return scenes
 
