@@ -1,5 +1,5 @@
 {
- "last_category": "tiere",
+ "last_category": "comedy",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -13,7 +13,8 @@
   "2026-11-14 13:00",
   "2026-11-14 18:00",
   "2026-11-14 21:00",
-  "2026-11-15 13:00"
+  "2026-11-15 13:00",
+  "2026-11-15 18:00"
  ],
  "used_queue": [
   "qkv0cbgez",
@@ -23,20 +24,20 @@
   "qqprosnb9"
  ],
  "last_stats": 1794754061.9022307,
- "next_id": 102,
+ "next_id": 103,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.446,
+ "voice_wps": 2.636,
  "last_trends": 1794748677.2575746,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
-  "hero": "mantis",
-  "palette": 2,
-  "video": 100
+  "hero": "",
+  "palette": 3,
+  "video": 102
  },
  "cat_credit": {
   "fakten": 2.9800000000000004,

@@ -3599,5 +3599,48 @@
   "thumb": true,
   "look": "musik",
   "mp4": true
+ },
+ {
+  "id": 102,
+  "category": "comedy",
+  "topic": "Ich wollte wie im Mittelalter leben und mein Haushalt hat mich verklagt: Die skurrilsten Lifehacks von 1348",
+  "status": "review",
+  "created": 1794755369.0030494,
+  "title": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
+  "description": "Ich habe mein Leben auf 1348 umgestellt und alles ist völlig eskaliert!\nIch testete die skurrilsten Mittelalter-Lifehacks im Alltag.\nWürdest du lieber im Mittelalter leben oder heute?",
+  "hashtags": [
+   "#shorts",
+   "#comedy",
+   "#lifehacks",
+   "#mittelalter",
+   "#geschichten",
+   "#viral",
+   "#lustig"
+  ],
+  "tags": [
+   "mittelalter lifehacks",
+   "leben wie 1348",
+   "haushalt 1348",
+   "skurrile hacks",
+   "geschichte comedy",
+   "alltag mittelalter",
+   "ich versuchte wie 1348 zu leben"
+  ],
+  "thumb_text": "LIFEHACKS ESKALIERT",
+  "missing": [
+   "salbeiblatt"
+  ],
+  "cover_ms": 66426,
+  "duration": 66.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-15 18:00",
+  "review_at": 1794755653.5577645
  }
 ]
