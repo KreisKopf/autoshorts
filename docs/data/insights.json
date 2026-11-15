@@ -1,5 +1,5 @@
 {
- "updated": 1794759975.4858813,
+ "updated": 1794761112.697795,
  "enough": true,
  "counted": 14,
  "total": 15,
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1264,
-   "avg_likes": 33.0,
-   "like_rate": 2.61,
-   "avg_score": 1759
+   "avg_views": 1312,
+   "avg_likes": 34.0,
+   "like_rate": 2.59,
+   "avg_score": 1822
   },
   {
    "slug": "fakten",
@@ -52,7 +52,7 @@
   }
  ],
  "weights": {
-  "fakten": 0.71,
+  "fakten": 0.7,
   "storys": 1.07,
   "mysterien": 1.2,
   "tiere": 1.2,
@@ -63,7 +63,7 @@
  "advice": [
   "Stärkste Kategorie: 🤯 What If (Ø 1692 Aufrufe, 2.36 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1023 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2357 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2362 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
