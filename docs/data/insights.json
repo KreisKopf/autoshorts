@@ -1,5 +1,5 @@
 {
- "updated": 1794725445.276108,
+ "updated": 1794727248.3335755,
  "enough": true,
  "counted": 11,
  "total": 14,
@@ -18,19 +18,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 7,
-   "avg_views": 1629,
+   "avg_views": 1631,
    "avg_likes": 40.7,
    "like_rate": 2.5,
-   "avg_score": 2244
+   "avg_score": 2246
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1228,
+   "avg_views": 1231,
    "avg_likes": 39.0,
-   "like_rate": 3.18,
-   "avg_score": 1813
+   "like_rate": 3.17,
+   "avg_score": 1816
   },
   {
    "slug": "fakten",
@@ -53,7 +53,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1603 Aufrufe, 4.05 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2409 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2411 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -82,11 +82,11 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1874,
+   "views": 1888,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2849
+   "score": 2863
   },
   {
    "id": 62,
