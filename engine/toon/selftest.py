@@ -317,6 +317,14 @@ def main():
         assert any(a.get("kind") == "cat" for a in scs[1]["actors"]), "Katze aus dem Satz fehlt"
         assert scs[2]["actors"][0].get("hold") == "letter", "Abmahnung: kein Brief in der Hand"
         assert scs[4]["actors"][0].get("teeth") == "grün", "grüne Zähne fehlen"
+        sc2 = stage.direct([{"text": "Mein Kühlschrank klagt mich an.", "place": "kitchen", "actors": [{"id": "du"}, {"id": "kuehlschrank"}]},
+                            {"text": "Nummer eins: Zähneputzen ohne Zahnpasta.", "place": "bathroom", "actors": [{"id": "du"}], "props": ["fridge"]},
+                            {"text": "Mein Gebiss ist danach komplett leuchtend grün.", "place": "bathroom", "actors": [{"id": "du", "action": "shocked"}]}],
+                           [(0, 3), (3, 6), (6, 9)], "Mein Kühlschrank hat mich verklagt", "comedy", "")
+        assert not any((q.get("type") if isinstance(q, dict) else q) == "fridge" for q in sc2[1].get("props") or []), "gesichtsloser Kühlschrank im Bad, obwohl er eine Figur ist"
+        assert sc2[2]["actors"][0].get("teeth") == "grün", "grünes Gebiss fehlt"
+        from .. import writer as _w
+        assert _w.polish({"title": "Ich lebte wie 1348", "scenes": [{"text": "Ich lebte wie im Mittelalter."}], "thumbnail": {"text": "LEBEN WIE 1348"}})["thumbnail"]["text"] == "LEBEN WIE 1348", "Titelbild-Text verliert die Zahl aus dem Titel"
         for sc in scs:
             frame(sc, cast_h)
         assert stage.balance_cast({"du": {"gender": "m"}}, 2, [{"text": "Ich wollte Strom sparen."}, {"text": "Mein Hund hat mich enterbt."}, {"text": "Ich hatte Blasen."}])["du"].get("gender") == "m", \

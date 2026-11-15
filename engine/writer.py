@@ -512,7 +512,7 @@ def polish(js):
         th["text"] = _DENGLISH_RE.sub(lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), th["text"])
         try:                                             # Zahl im Titelbild, die im Video niemand sagt („NEUNZIG MELONEN“ bei neunundneunzig): Zahl weg
             from .toon import stage as _st
-            said = " ".join(str(s.get("text") or "") for s in js.get("scenes", []) if isinstance(s, dict))
+            said = " ".join(str(s.get("text") or "") for s in js.get("scenes", []) if isinstance(s, dict)) + " " + str(js.get("title") or "")   # eine Zahl aus dem Titel („1348“) darf bleiben
             keep = []
             for w in th["text"].split():
                 k = w.lower().strip(".,;:!?")
@@ -520,8 +520,8 @@ def polish(js):
                 if n is not None and not re.search(r"(?<![a-zäöüß])" + re.escape(k) + r"(?![a-zäöüß])", said.lower()) and not _st.spoken_number(n, said):
                     continue
                 keep.append(w)
-            if keep and len(keep) < len(th["text"].split()):
-                th["text"] = " ".join(keep)
+            if keep and len(keep) < len(th["text"].split()) and not re.search(r"(?i)\b(wie|als|in|im|mit|von|vor|nach|für|um|ab|bis|und|oder|der|die|das|ein|eine)$", " ".join(keep).strip(" .,;:!?")):
+                th["text"] = " ".join(keep)               # nie ein Rest, der auf Verhältnis- oder Bindewort endet („LEBEN WIE“)
         except Exception:  # noqa: BLE001
             pass
     return js

@@ -226,6 +226,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Drehbuch sie besetzt (sie ist die erzählende Stimme). Großaufnahme steht höher (`CLOSE_FOOT`), damit die Untertitel nicht über dem Gesicht liegen. Zustands-Zeile
   oben rechts wird nicht mehr mitten im Wort gekappt („KLAGE EINGER“): bis 20 Zeichen in kleinerer Schrift, sonst am Wortende gekürzt. Bibliothek: `salbeiblatt`.
   Selftest: `_household`.
+  Ist der Kühlschrank eine Figur der Geschichte, steht er nirgends mehr als gesichtsloses „Ding des Themas“ (Bad, Flur) und kommt mit Gesicht aufs Titelbild.
+  Auch „Gebiss … grün“ färbt die Zähne. Titelbild-Text: Eine Zahl, die im Titel steht („1348“), bleibt; nach dem Streichen einer Zahl bleibt nie ein Rest, der auf
+  „WIE“, „MIT“, „DER“ … endet (`writer.polish`).
 
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten

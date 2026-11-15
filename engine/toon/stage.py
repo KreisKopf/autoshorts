@@ -2144,7 +2144,7 @@ PET_RE = ((r"katze|kater\b|kätzchen", "cat"), (r"\bhund(?:e|es|en|chen)?\b|welp
 PET_FLEE_RE = r"gerannt|rennt|rannte|flücht|flieh|floh\b|haut ab|abgehauen|weggelaufen|läuft weg|lief weg|versteckt"
 LETTER_RE = r"abmahnung|\bbrief\b|\bbriefe\b|einschreiben|\bmahnung|umschlag|kündigungsschreiben|\bpost vom\b|\bvorladung|\bbescheid\b|strafzettel"
 RADIO_RE = r"radio|funk|durchsage|sender|empfang|lautsprecher"
-TEETH_RE = r"zähne\w*\b[^.!?]{0,50}\b(grün|gelb|schwarz|braun|blau)|\b(grün|gelb|schwarz|braun|blau)e[nr]? zähne"
+TEETH_RE = r"(?:zähne\w*|zahn|gebiss|lächeln)\b[^.!?]{0,60}\b(grün|gelb|schwarz|braun|blau)|\b(grün|gelb|schwarz|braun|blau)e[nrs]? (?:zähne|gebiss|lächeln)"
 TEETH_COLORS = {"grün": (96, 190, 90), "gelb": (236, 208, 80), "schwarz": (58, 56, 62), "braun": (150, 104, 66), "blau": (90, 150, 230)}
 SCRUB_RE = r"schrubb|\bputz(?:t|e|en|st|te)\b|\breib(?:t|e|en|st)\b|\bkau(?:t|e|en|st)\b"
 
@@ -2153,12 +2153,24 @@ def _household(scenes):
     """Schlussdurchgang: (1) Heißt eine Figur „kuehlschrank“, ist sie der Kühlschrank mit Gesicht – ohne zweiten Kühlschrank daneben und nicht als
     gesichtslose Großaufnahme. (2) Nennt der Satz Katze oder Hund und steht kein Tier im Bild, kommt es dazu (läuft weg, wenn der Satz das sagt).
     (3) Abmahnung, Brief, Einschreiben: die Figur hält einen Umschlag – kein Radio, von dem niemand spricht."""
+    fridge_char = any(re.search(FRIDGE_ID_RE, str(a.get("id") or "").lower()) for sc in scenes if isinstance(sc, dict)
+                      for a in (sc.get("actors") or []) if isinstance(a, dict))
     for sc in scenes:
         if not isinstance(sc, dict):
             continue
         low = str(sc.get("text") or "").lower()
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         shot = str(sc.get("shot") or "")
+        _pk = [extras.PROP_ALIASES.get(str((p.get("type") if isinstance(p, dict) else p) or "").lower(), str((p.get("type") if isinstance(p, dict) else p) or "").lower())
+               for p in (sc.get("props") or [])]
+        if fridge_char and shot == "insert" and _pk and all(k_ == "fridge" for k_ in _pk):   # Großaufnahme des Geräts ohne Gesicht: stattdessen die Figur selbst
+            sc["shot"] = shot = ""
+            if re.search(r"kühlschrank", low) and not any(re.search(FRIDGE_ID_RE, str(a.get("id") or "").lower()) for a in acts):
+                sc["actors"] = acts = [a for a in acts if not a.get("kind")][:1] + [{"id": "kuehlschrank", "kind": "fridge", "action": "idle", "emotion": "angry", "pos": "right",
+                                                                                 "speaks": False, "emote": "", "say": "", "hold": "", "facing": ""}]
+        if fridge_char and shot != "insert" and isinstance(sc.get("props"), list):   # der Kühlschrank ist eine Figur der Geschichte: kein gesichtsloser Kühlschrank als „Ding des Themas“ im Bad oder Flur
+            sc["props"] = [p for p in sc["props"] if extras.PROP_ALIASES.get(str((p.get("type") if isinstance(p, dict) else p) or "").lower(),
+                                                                             str((p.get("type") if isinstance(p, dict) else p) or "").lower()) != "fridge"]
         fridge = [a for a in acts if re.search(FRIDGE_ID_RE, str(a.get("id") or "").lower()) and str(a.get("kind") or "").lower() in ("", "agent", "robot", "fridge")]
         for a in fridge:
             a["kind"] = "fridge"
@@ -3678,6 +3690,8 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     hk = str(spec.get("hero_kind") or "").lower()
     if hk in extras.CREATURES and (_sea_named(low) == hk or any(k_ == hk and _re.search(pat, low) for pat, k_ in TOPIC_CREATURES + ANY_CREATURES)):
         keys = []                                         # das Thema nennt das Tier: Es gehört aufs Titelbild, kein Gegenstand aus dem Text
+    if hk == "fridge":
+        keys = []                                         # der Kühlschrank ist eine Figur der Geschichte: mit Gesicht aufs Titelbild, nicht als Gerät
     for k in keys:
         if k in extras.PROPS:
             lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
