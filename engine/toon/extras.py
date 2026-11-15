@@ -2985,3 +2985,231 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
 
 
 CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge")
+
+
+# ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)
+
+STEEL, STEEL_D, RED, BLUE_T, BLACK_R = (176, 182, 192), (120, 126, 138), (222, 70, 58), (60, 110, 200), (46, 46, 52)
+ENG_BLOCK, ENG_BANK = (104, 110, 124), (124, 130, 144)
+
+
+def _engine(d, cx, base, s=1.0, swing=0.0):
+    """V-Motor (V8): Motorblock mit zwei schrägen Zylinderbänken, rote Ventildeckel, Riemen vorn, Ölwanne unten."""
+    k = s
+    r_ = _rotp((cx, base - 160 * k), swing)
+
+    def R(pts):
+        return [r_(p) for p in pts]
+    _poly(d, R([(cx - 120 * k, base - 30 * k), (cx + 120 * k, base - 30 * k), (cx + 100 * k, base), (cx - 100 * k, base)]), (70, 74, 84))      # Ölwanne
+    _poly(d, R([(cx - 130 * k, base - 170 * k), (cx + 130 * k, base - 170 * k), (cx + 120 * k, base - 30 * k), (cx - 120 * k, base - 30 * k)]), ENG_BLOCK)  # Block (dunkler Guss: hebt sich von grauen Wänden ab)
+    for sg in (-1, 1):                                                       # Zylinderbänke (V-Form) mit roten Ventildeckeln
+        bank = [(cx + sg * 20 * k, base - 170 * k), (cx + sg * 150 * k, base - 250 * k), (cx + sg * 200 * k, base - 215 * k), (cx + sg * 110 * k, base - 140 * k)]
+        _poly(d, R(bank), ENG_BANK)
+        cover = [(cx + sg * 60 * k, base - 225 * k), (cx + sg * 155 * k, base - 282 * k), (cx + sg * 190 * k, base - 258 * k), (cx + sg * 95 * k, base - 202 * k)]
+        _poly(d, R(cover), RED)
+        for j in range(4):                                                   # Zündkabel (blau)
+            p0 = (cx + sg * (78 + j * 26) * k, base - (232 + j * 14) * k)
+            d.line((*r_(p0), *r_((p0[0] + sg * 6 * k, p0[1] - 30 * k))), fill=BLUE_T, width=max(3, int(7 * k)))
+    im = [(cx - 60 * k, base - 170 * k), (cx + 60 * k, base - 170 * k), (cx + 46 * k, base - 230 * k), (cx - 46 * k, base - 230 * k)]
+    _poly(d, R(im), (186, 190, 198))                                         # Ansaugbrücke zwischen den Bänken
+    for px_, py_, pr in ((0, -70, 40), (78, -120, 22), (-80, -122, 20)):     # Riemenscheiben (hell, Nabe dunkel)
+        c = r_((cx + px_ * k, base + py_ * k))
+        d.ellipse((c[0] - pr * k, c[1] - pr * k, c[0] + pr * k, c[1] + pr * k), fill=(200, 204, 212), outline=INK, width=max(3, int(6 * k)))
+        q = pr * 0.35
+        d.ellipse((c[0] - q * k, c[1] - q * k, c[0] + q * k, c[1] + q * k), fill=(90, 94, 104))
+    pts = [r_((cx + px_ * k, base + py_ * k)) for px_, py_ in ((-40, -70), (-80, -142), (78, -142), (40, -70))]
+    d.line(pts, fill=(40, 40, 46), width=max(3, int(6 * k)))                 # Keilriemen
+
+
+def p_engine(d, x, t, s=1.0):
+    """V8-Motor am Boden (auf einer kleinen Palette)."""
+    _r(d, (x - 150, GROUND - 26, x + 150, GROUND), (178, 132, 86), 6)
+    _engine(d, x, GROUND - 26)
+
+
+def p_enginestand(d, x, t, s=1.0):
+    """Motor auf dem roten Montageständer (wie in der Werkstatt)."""
+    _r(d, (x - 16, GROUND - 330, x + 16, GROUND - 20), RED, 6)
+    _r(d, (x - 170, GROUND - 26, x + 170, GROUND), RED, 8)
+    _r(d, (x - 60, GROUND - 52, x + 60, GROUND - 22), RED, 6)
+    _engine(d, x, GROUND - 330, 0.9)
+
+
+def _crane(d, x, top_y=None):
+    """Roter Motorkran: Fuß mit Rollen, Säule, Ausleger nach rechts; gibt den Hakenpunkt zurück."""
+    base = GROUND
+    _r(d, (x - 240, base - 34, x + 120, base - 10), RED, 8)                  # Fußgestell
+    for wx in (x - 220, x + 100):
+        _o(d, (wx - 20, base - 24, wx + 20, base + 6), BLACK_R)
+    _r(d, (x - 180, base - 560, x - 150, base - 30), RED, 6)                 # Säule
+    arm = [(x - 200, base - 560), (x + 300, base - 610), (x + 300, base - 580), (x - 200, base - 528)]
+    _poly(d, arm, RED)                                                       # Ausleger
+    _poly(d, [(x - 165, base - 330), (x + 60, base - 560), (x + 80, base - 548), (x - 150, base - 300)], (190, 60, 52), shade=0)   # Hydraulik
+    hook = (x + 285, base - 590)
+    return hook
+
+
+def p_crane(d, x, t, s=1.0):
+    """Motorkran (Werkstattkran) mit Kette – ohne Last."""
+    hx, hy = _crane(d, x)
+    d.line((hx, hy, hx, hy + 120), fill=(70, 70, 76), width=6)
+    d.arc((hx - 18, hy + 110, hx + 18, hy + 146), 0, 220, fill=INK, width=8)
+
+
+def p_enginehoist(d, x, t, s=1.0):
+    """Motorkran hebt einen V8 – der Motor schwingt leicht und senkt sich langsam (zum Einbauen)."""
+    hx, hy = _crane(d, x - 285)                                              # Haken (und Motor) in der Bildmitte des Dings
+    drop = min(120, 40 * t)                                                  # senkt sich langsam ab
+    swing = 4 * math.sin(t * 2.2)
+    eng_top = hy + 170 + drop
+    for sg in (-1, 1):                                                       # zwei Ketten zum Motor
+        d.line((hx, hy, hx + sg * 90 + swing * 2, eng_top - 30), fill=(70, 70, 76), width=6)
+    _engine(d, hx + swing * 2, eng_top + 262, 0.95, swing)
+
+
+def p_tire(d, x, t, s=1.0):
+    """Autoreifen mit Felge."""
+    cy = GROUND - 150
+    _o(d, (x - 150, cy - 150, x + 150, cy + 150), BLACK_R)
+    for a in range(0, 360, 30):                                              # Profil
+        c, s_ = math.cos(math.radians(a)), math.sin(math.radians(a))
+        d.line((x + c * 132, cy + s_ * 132, x + c * 148, cy + s_ * 148), fill=(20, 20, 24), width=8)
+    _o(d, (x - 86, cy - 86, x + 86, cy + 86), STEEL)                         # Felge
+    for a in range(0, 360, 72):
+        c, s_ = math.cos(math.radians(a)), math.sin(math.radians(a))
+        d.line((x + c * 22, cy + s_ * 22, x + c * 78, cy + s_ * 78), fill=STEEL_D, width=14)
+    _o(d, (x - 22, cy - 22, x + 22, cy + 22), STEEL_D)
+
+
+def p_tires(d, x, t, s=1.0):
+    """Reifenstapel (vier liegende Reifen)."""
+    for i in range(4):
+        y = GROUND - 70 - i * 74
+        _r(d, (x - 150, y - 36, x + 150, y + 36), BLACK_R, 30)
+        d.line((x - 120, y, x + 120, y), fill=(30, 30, 34), width=6)
+
+
+def p_radiator(d, x, t, s=1.0):
+    """Kühler: Rahmen mit Lamellen und Einfüllstutzen."""
+    _r(d, (x - 200, GROUND - 320, x + 200, GROUND - 20), (90, 96, 108), 8)
+    for xx in range(int(x - 180), int(x + 180), 16):
+        d.line((xx, GROUND - 300, xx, GROUND - 40), fill=(150, 156, 168), width=6)
+    _r(d, (x + 120, GROUND - 360, x + 170, GROUND - 316), STEEL, 6)
+    _r(d, (x - 70, GROUND - 20, x - 40, GROUND), (70, 72, 80), 4)
+    _r(d, (x + 40, GROUND - 20, x + 70, GROUND), (70, 72, 80), 4)
+
+
+def p_gearbox(d, x, t, s=1.0):
+    """Getriebe: blaues Gehäuse, Glocke zum Motor, Schaltstange oben."""
+    _poly(d, [(x - 220, GROUND - 240), (x - 80, GROUND - 260), (x - 80, GROUND - 20), (x - 220, GROUND - 40)], (60, 100, 190))   # Kupplungsglocke
+    _r(d, (x - 90, GROUND - 220, x + 200, GROUND - 30), (70, 120, 210), 40)
+    for xx in (x - 20, x + 50, x + 120):                                     # Rippen
+        d.line((xx, GROUND - 200, xx, GROUND - 50), fill=(50, 90, 170), width=8)
+    _r(d, (x + 60, GROUND - 330, x + 80, GROUND - 210), STEEL, 4)           # Schaltstange
+    _o(d, (x + 44, GROUND - 370, x + 96, GROUND - 318), BLACK_R)
+
+
+def p_toolbox(d, x, t, s=1.0):
+    """Roter Werkzeugwagen mit Schubladen."""
+    _r(d, (x - 170, GROUND - 400, x + 170, GROUND - 30), RED, 12)
+    for i in range(5):
+        y = GROUND - 380 + i * 68
+        _r(d, (x - 150, y, x + 150, y + 54), (236, 92, 78), 6)
+        _r(d, (x - 50, y + 20, x + 50, y + 32), STEEL, 4, shade=False)
+    for wx in (x - 140, x + 140):
+        _o(d, (wx - 22, GROUND - 40, wx + 22, GROUND + 4), BLACK_R)
+
+
+def p_wrench(d, x, t, s=1.0):
+    """Großer Schraubenschlüssel (liegt schräg am Boden)."""
+    r_ = _rotp((x, GROUND - 60), -20)
+    _poly(d, [r_(p) for p in ((x - 170, GROUND - 76), (x + 140, GROUND - 76), (x + 140, GROUND - 46), (x - 170, GROUND - 46))], STEEL)
+    for ex, sg in ((x + 170, 1), (x - 200, -1)):                             # Maulschlüssel-Köpfe (offen nach außen)
+        c = r_((ex, GROUND - 61))
+        a0 = (-20 if sg > 0 else 160) + 40
+        for col, w in ((INK, 40), (STEEL, 26)):
+            d.arc((c[0] - 44, c[1] - 44, c[0] + 44, c[1] + 44), a0, a0 + 280, fill=col, width=w)
+
+
+def p_speedometer(d, x, t, s=1.0):
+    """Tacho auf einem Ständer: Zeiger steigt mit der Zeit (Beschleunigung)."""
+    cy = GROUND - 330
+    _r(d, (x - 12, cy + 120, x + 12, GROUND - 10), (70, 72, 80), 4)
+    _r(d, (x - 90, GROUND - 24, x + 90, GROUND), (70, 72, 80), 6)
+    _o(d, (x - 170, cy - 170, x + 170, cy + 170), (40, 44, 52), shade=False)
+    d.ellipse((x - 150, cy - 150, x + 150, cy + 150), fill=(250, 250, 246), outline=INK, width=5)
+    for i in range(11):                                                      # Skala 0–300
+        a = math.radians(150 + i * 24)
+        d.line((x + math.cos(a) * 118, cy + math.sin(a) * 118, x + math.cos(a) * 140, cy + math.sin(a) * 140), fill=INK, width=6 if i % 2 == 0 else 3)
+    for i in range(8, 11):                                                   # roter Bereich
+        a0 = 150 + i * 24
+        d.arc((x - 140, cy - 140, x + 140, cy + 140), a0 - 12, a0 + 12, fill=RED, width=10)
+    val = min(1.0, 0.1 + t * 0.22)
+    a = math.radians(150 + val * 240)
+    d.line((x, cy, x + math.cos(a) * 120, cy + math.sin(a) * 120), fill=RED, width=10)
+    _o(d, (x - 18, cy - 18, x + 18, cy + 18), INK, shade=False)
+
+
+def p_scale(d, x, t, s=1.0):
+    """Balkenwaage: neigt sich langsam zur schwereren Seite (rechts)."""
+    tilt = 10 * min(1.0, t / 1.2)
+    _r(d, (x - 120, GROUND - 26, x + 120, GROUND), (130, 96, 70), 6)
+    _poly(d, [(x - 40, GROUND - 26), (x + 40, GROUND - 26), (x, GROUND - 120)], (160, 118, 82))
+    r_ = _rotp((x, GROUND - 130), tilt)
+    _poly(d, [r_(p) for p in ((x - 240, GROUND - 140), (x + 240, GROUND - 140), (x + 240, GROUND - 120), (x - 240, GROUND - 120))], (190, 140, 96))
+    for sg in (-1, 1):
+        px_, py_ = r_((x + sg * 210, GROUND - 140))
+        _r(d, (px_ - 80, py_ - 22, px_ + 80, py_), (200, 200, 206), 6)
+        if sg < 0:                                                           # links ein kleines Gewicht …
+            _r(d, (px_ - 34, py_ - 70, px_ + 34, py_ - 20), (110, 112, 120), 6)
+        else:                                                                # … rechts ein großes, schweres
+            _poly(d, [(px_ - 70, py_ - 22), (px_ + 70, py_ - 22), (px_ + 50, py_ - 140), (px_ - 50, py_ - 140)], (70, 72, 80))
+            _r(d, (px_ - 20, py_ - 170, px_ + 20, py_ - 136), (70, 72, 80), 8)
+
+
+def p_piston(d, x, t, s=1.0):
+    """Kolben mit Pleuelstange – bewegt sich auf und ab."""
+    lift = 30 * math.sin(t * 6)
+    top = GROUND - 330 - lift
+    _r(d, (x - 30, top + 110, x + 30, GROUND - 60), STEEL_D, 10)             # Pleuel
+    _o(d, (x - 60, GROUND - 120, x + 60, GROUND - 10), STEEL_D)
+    _r(d, (x - 110, top, x + 110, top + 140), STEEL, 18)                     # Kolben
+    for yy in (top + 22, top + 42, top + 62):
+        d.line((x - 106, yy, x + 106, yy), fill=(90, 94, 104), width=5)
+
+
+def p_carlift(d, x, t, s=1.0):
+    """Hebebühne: zwei rote Säulen mit Tragarmen (ohne Auto)."""
+    for sx in (x - 330, x + 330):
+        _r(d, (sx - 34, GROUND - 620, sx + 34, GROUND), RED, 8)
+        _r(d, (sx - 60, GROUND - 24, sx + 60, GROUND), (90, 94, 104), 6)
+    lift = min(180, 70 * t)
+    for sx, sg in ((x - 330, 1), (x + 330, -1)):
+        _r(d, (min(sx, sx + sg * 200), GROUND - 140 - lift, max(sx, sx + sg * 200), GROUND - 116 - lift), (240, 200, 60), 6)
+
+
+def p_oilcan(d, x, t, s=1.0):
+    """Ölkanne mit Ausgießer."""
+    _r(d, (x - 90, GROUND - 230, x + 90, GROUND), (240, 190, 50), 16)
+    _r(d, (x - 50, GROUND - 270, x + 20, GROUND - 228), (200, 150, 40), 8)
+    _poly(d, [(x + 70, GROUND - 200), (x + 190, GROUND - 300), (x + 204, GROUND - 286), (x + 90, GROUND - 170)], (200, 150, 40))
+    _r(d, (x - 66, GROUND - 160, x + 66, GROUND - 80), (40, 40, 44), 8, shade=False)
+
+
+PROPS.update({"engine": p_engine, "enginestand": p_enginestand, "crane": p_crane, "enginehoist": p_enginehoist, "tire": p_tire, "tires": p_tires,
+              "radiator": p_radiator, "gearbox": p_gearbox, "toolbox": p_toolbox, "wrench": p_wrench, "speedometer": p_speedometer,
+              "scale": p_scale, "piston": p_piston, "carlift": p_carlift, "oilcan": p_oilcan})
+PROP_ALIASES.update({"motor": "engine", "motoren": "engine", "v8": "engine", "v8-motor": "engine", "v12": "engine", "w12": "engine", "w16": "engine",
+                     "verbrenner": "engine", "automotor": "engine", "motorblock": "engine", "triebwerk": "engine",
+                     "motorständer": "enginestand", "montageständer": "enginestand",
+                     "kran": "crane", "motorkran": "crane", "werkstattkran": "crane", "flaschenzug": "crane",
+                     "einbauen": "enginehoist", "motoreinbau": "enginehoist", "motortausch": "enginehoist",
+                     "reifen": "tire", "rad": "tire", "räder": "tire", "felge": "tire", "felgen": "tire", "reifenstapel": "tires", "winterreifen": "tires",
+                     "kühler": "radiator", "wasserkühler": "radiator", "getriebe": "gearbox", "schaltgetriebe": "gearbox", "sechsgang-getriebe": "gearbox",
+                     "werkzeug": "toolbox", "werkzeugkasten": "toolbox", "werkzeugwagen": "toolbox", "schraubenschlüssel": "wrench", "schraubenschluessel": "wrench",
+                     "tacho": "speedometer", "tachometer": "speedometer", "geschwindigkeit": "speedometer", "höchstgeschwindigkeit": "speedometer",
+                     "waage": "scale", "gewicht": "scale", "kolben": "piston", "zylinder": "piston", "hebebühne": "carlift", "öl": "oilcan", "motoröl": "oilcan",
+                     "ölkanne": "oilcan"})
+SIZES.update({"engine": (0.9, 1255), "enginestand": (1.6, 1255), "crane": (2.3, 1255), "enginehoist": (2.3, 1255), "tire": (0.7, 1260), "tires": (1.2, 1255),
+              "radiator": (0.75, 1255), "gearbox": (0.7, 1258), "toolbox": (1.1, 1255), "wrench": (0.3, 1262), "speedometer": (1.1, 1255),
+              "scale": (0.9, 1255), "piston": (0.6, 1260), "carlift": (2.2, 1250), "oilcan": (0.5, 1262)})

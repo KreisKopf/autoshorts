@@ -969,6 +969,26 @@ def main():
     check("Ballonflucht: Ballon am Boden, am Himmel, im Gebüsch", _balloon)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))
+    def _garage():                                               # Werkstatt-Video: Ort, Motor am Kran, Auto drinnen, Teile aus dem Satz
+        from PIL import Image
+        assert places.resolve("Werkstatt") == "garage" and places.resolve("workshop") == "garage", "Werkstatt landet nicht in der Garage"
+        scs = stage.direct([{"text": "Was passiert, wenn man einen V8-Motor in einen Kleinwagen baut?", "place": "garage", "actors": [{"id": "du"}], "props": ["car"]},
+                            {"text": "Zuerst hebt der Motorkran den alten Motor aus dem Auto.", "place": "werkstatt", "actors": [{"id": "du", "action": "point"}], "props": ["enginehoist"]},
+                            {"text": "Das alte Getriebe hält die Kraft niemals aus.", "place": "garage", "actors": [{"id": "du"}]},
+                            {"text": "Von 0 auf 100 in unter vier Sekunden.", "place": "garage", "actors": [{"id": "du"}]}],
+                           [(k * 3.0, k * 3.0 + 3.0) for k in range(4)], "V8 im Kleinwagen", "technik")
+        kinds = [[extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc_.get("props") or []) if isinstance(q, dict)] for sc_ in scs]
+        assert "car" in kinds[0], f"Auto fehlt in der Werkstatt: {kinds[0]}"
+        assert "enginehoist" in kinds[1] and "engine" not in kinds[1], f"Motor doppelt am Kran: {kinds[1]}"
+        for sc_ in scs:
+            assert frame(sc_) is not None
+        for k in ("engine", "enginestand", "crane", "enginehoist", "tire", "tires", "radiator", "gearbox", "toolbox", "wrench", "speedometer",
+                  "scale", "piston", "carlift", "oilcan"):
+            for t_ in (0.0, 1.0, 5.0):
+                lay = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+                extras.draw_prop(lay, k, 540, t_)
+                assert lay.getbbox(), f"{k} zeichnet nichts"
+    check("Werkstatt: Motor, Kran, Auto, Getriebe, Tacho", _garage)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

@@ -605,6 +605,50 @@ def office(night):
     return p.vignette()
 
 
+def garage(night):
+    """Autowerkstatt: graue Wände, Leuchtstoffröhren, Lochwand mit Werkzeug, Regal, Reifenstapel, Betonboden mit Ölfleck."""
+    p = P(night)
+    p.room((178, 184, 192), (132, 134, 138), stripe=False, panel=False)
+    p.rect((0, 960, W, 1000), (240, 196, 60), o=0)                              # gelb-schwarzer Warnstreifen
+    for x in range(-40, W, 80):
+        p.poly([(x, 1000), (x + 40, 960), (x + 70, 960), (x + 30, 1000)], (40, 40, 44), o=0)
+    for x0 in (90, 600):                                                        # Leuchtstoffröhren an der Decke
+        p.rect((x0, 300, x0 + 390, 330), (250, 252, 240), r=12, o=5, glow=True)
+        p.lamp_glow(x0 + 195, 330, 360)
+    p.rect((80, 470, 560, 860), (196, 160, 110), r=6)                           # Lochwand
+    for yy in range(500, 850, 40):
+        for xx in range(110, 540, 40):
+            p.oval((xx - 4, yy - 4, xx + 4, yy + 4), (120, 92, 60), o=0)
+    p.rect((130, 520, 150, 700), (200, 60, 50), r=4, o=4)                       # Hammer
+    p.rect((104, 510, 176, 540), (110, 112, 120), r=4, o=4)
+    for i, h in enumerate((150, 190, 230, 270)):                                # Schraubenschlüssel der Größe nach
+        x = 220 + i * 46
+        p.rect((x, 520, x + 16, 520 + h), (176, 182, 192), r=6, o=4)
+        p.oval((x - 12, 504, x + 28, 544), (176, 182, 192), o=4)
+    p.rect((420, 520, 450, 640), (240, 190, 50), r=8, o=4)                      # Schraubendreher
+    p.rect((428, 640, 442, 760), (176, 182, 192), o=3)
+    p.oval((470, 700, 540, 770), (60, 110, 200), o=4)                           # Klebeband-Rolle
+    p.rect((660, 450, 1040, 470), (110, 112, 120), r=4)                         # Regal mit Kanistern & Dosen
+    p.rect((660, 640, 1040, 660), (110, 112, 120), r=4)
+    for x, col in ((690, (222, 70, 58)), (780, (60, 110, 200)), (870, (240, 190, 50)), (960, (70, 160, 90))):
+        p.rect((x, 370, x + 70, 450), col, r=8, o=5)
+        p.rect((x + 4, 560, x + 66, 640), _mix(col, 0.15, (255, 255, 255)), r=6, o=5)
+    p.rect((660, 470, 676, 940), (110, 112, 120), o=4)
+    p.rect((1024, 470, 1040, 940), (110, 112, 120), o=4)
+    y0 = GROUND - 40                                                            # Betonboden statt Dielen: Platten in Perspektive
+    p.rect((-10, GROUND - 78, W + 10, GROUND - 40), (96, 98, 104), o=5)
+    p.grad((0, y0, W, H), (156, 158, 160), (104, 106, 110))
+    seam = p.c((92, 94, 98))
+    for i in range(-6, 8):
+        p.d.line((W / 2 + i * 180, y0, W / 2 + i * 520, H), fill=seam, width=4)
+    for y in (GROUND + 70, GROUND + 260, GROUND + 560):
+        p.d.line((0, y, W, y), fill=seam, width=4)
+    p.d.line((0, y0, W, y0), fill=INK, width=5)
+    p.oval((330, 1430, 760, 1520), (88, 88, 94), o=0)                           # Ölfleck am Boden
+    p.oval((700, 1500, 790, 1530), (88, 88, 94), o=0)
+    return p.vignette()
+
+
 def beach(night):
     p = P(night)
     p.sky(GROUND - 200)
@@ -1824,9 +1868,10 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema, "highsky": highsky}
+          "serverroom": serverroom, "cinema": cinema, "highsky": highsky, "garage": garage}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
-ALIASES = {"asphalt": "street", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
+ALIASES = {"asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
+           "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
            "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "livingroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
            "küche": "kitchen", "büro": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",

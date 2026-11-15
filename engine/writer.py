@@ -174,6 +174,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space,
            germany (Deutschlandkarte), worldmap (Weltkugel), hallway (Flur mit Türen: Hotel, Wohnhaus), attic (Dachboden),
            serverroom (Rechenzentrum mit Serverschränken – für Internet, Cloud, KI, Rechenleistung)
+           garage (Autowerkstatt mit Werkzeugwand – für Autos, Motoren, Tuning, Umbauten, Reparaturen)
            draußen: headquarters (Büroturm einer großen Firma in der Stadt – für Konzerne, Firmensitze; ohne Logo), street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
            gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde)
            (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
@@ -196,6 +197,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   money, cans (Konserven), canister, candle, generator, tent, fire, streetlamp, trafficlight, rocket, sprout,
                   door, clock, pile (wachsender Haufen: Zucker, Salz, Schnee), sandpile, trash, faucet (Wasserhahn), glass, barrel,
                   solarpanel, cctv (Überwachungskamera am Mast)
+           Werkstatt/Technik: engine (V8-Motor), enginehoist (Motorkran hebt Motor – Ein-/Ausbau), enginestand (Motor auf Montageständer),
+                  crane (Motorkran leer), tire, tires (Reifenstapel), radiator (Kühler), gearbox (Getriebe), piston (Kolben, bewegt sich),
+                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan
            Himmel/Natur (Schaubilder, groß): drone (Drohne mit Kamera), plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
