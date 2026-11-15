@@ -1,720 +1,4 @@
 {
- "2026-11-14 13:00": {
-  "category": "whatif",
-  "topic": "Die wissenschaftliche Rekonstruktion eines spurlosen Flugzeugabsturzes",
-  "trend": null,
-  "script": {
-   "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
-   "description": "Erlebe Schritt für Schritt, wie Ermittler ein Flugzeug im Ozean finden.\nDie Physik zeigt dir, wie Wracks aus der Tiefsee geborgen werden.\nSchreibst du im Flugzeug lieber Nachrichten oder schläfst du?",
-   "hashtags": [
-    "#shorts",
-    "#flugzeug",
-    "#wissenschaft",
-    "#physik",
-    "#whatif",
-    "#technik",
-    "#wissen",
-    "#abenteuer"
-   ],
-   "tags": [
-    "flugzeugabsturz",
-    "flugschreiber",
-    "blackbox",
-    "ozean",
-    "wissenschaft",
-    "physik",
-    "spurlos verschwunden",
-    "rekonstruktion",
-    "what if"
-   ],
-   "thumbnail": {
-    "image": "Dramatic wide shot of an ocean floor at night, glowing sonar waves sweeping over deep dark water, high contrast blue and black tones, copy space on top",
-    "text": "SPURLOS VERSCHWUNDEN?"
-   },
-   "wishes": [
-    "sonar"
-   ],
-   "toon": true,
-   "cast": {
-    "held": {
-     "shirt": "orange",
-     "hat": "",
-     "hair": "dunkelbraun",
-     "hair_color": "dunkelbraun",
-     "glasses": false,
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein Flugzeug fliegt ruhig am Nachthimmel und verschwindet plötzlich auf dem Radar.",
-     "text": "Ein Passagierflugzeug verschwindet mitten über dem Ozean spurlos vom Radar.",
-     "image": "Airplane flying calmly at night sky, glowing radar ring in background",
-     "who": [],
-     "place": "space",
-     "backdrop": {
-      "sky": "night",
-      "ground": "water",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "",
-     "props": [
-      "plane"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Radar"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "SIGNAL VERLOREN"
-     },
-     "who_desc": "",
-     "place_desc": "space",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Hauptdarsteller schaut schockiert auf einen leeren Bildschirm im Labor.",
-     "text": "Erst ein winziges Signal aus dem Weltall verrät die spätere Absturzstelle.",
-     "image": "Main character staring in shock at a blank computer screen in a dark room",
-     "who": [
-      "held"
-     ],
-     "place": "lab",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Alarm"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "5 SEKUNDEN"
-     },
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Weltkarte zeigt, wie Satellitensignale über dem Atlantik abbrechen.",
-     "text": "Aber moderne Satelliten empfangen selbst nach dem Abbruch noch stumme Pings.",
-     "image": "World map glowing with satellite orbit lines and pulsing signal dots",
-     "who": [],
-     "place": "worldmap",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "satellite"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "map",
-      "text": "SATELLITEN-PING",
-      "value": "germany,uk"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Pings"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Grafik berechnet die letzte bekannte Position auf dem Meer.",
-     "text": "Also berechnen Physiker aus der Signal-Laufzeit kreisförmige Streifen auf dem Ozean.",
-     "image": "Graphic showing circular distance rings on an oceanic map",
-     "who": [],
-     "place": "worldmap",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "1",
-      "label": "LAUFZEIT-MESSUNG"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Streifen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Rettungsschiff fährt bei starkem Wellengang durch die Nacht.",
-     "text": "Nach wenigen Stunden starten Schiffe und Flugzeuge eine gigantische Suchaktion.",
-     "image": "Ship navigating rough dark ocean waters under cloudy night sky",
-     "who": [],
-     "place": "ocean",
-     "backdrop": {
-      "sky": "storm",
-      "ground": "water",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "wind",
-     "props": [
-      "ship"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "pan_left",
-     "sfx": "whoosh",
-     "highlight": [
-      "Suchaktion"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "STUNDEN SPÄTER"
-     },
-     "who_desc": "",
-     "place_desc": "underwater",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Grafik zählt die riesige Suchfläche in Quadratkilometern auf.",
-     "text": "Das Problem: Ein einziges Suchgebiet kann so groß wie ganz Deutschland sein.",
-     "image": "Graphic overlay showing Germany shape comparing to vast ocean area",
-     "who": [],
-     "place": "germany",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "SUCHGEBIET",
-      "value": "357.000",
-      "label": "QUADRATKILOMETER"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Deutschland"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Unter Wasser am Meeresgrund liegt die Blackbox und sendet akustische Signale.",
-     "text": "Am Meeresboden sendet die Blackbox dreißig Tage lang ultraschallsignale aus.",
-     "image": "Deep ocean floor with a glowing black box pulsing acoustic soundwaves",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "dark",
-      "ground": "water",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "",
-     "props": [
-      "box"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "dreißig Tage"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "BATTERIE",
-      "value": 30,
-      "unit": "TAGE"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Kalender zaehlt die Tage von 1 bis 30 herunter.",
-     "text": "Nach einem Monat schrumpft die Chance gewaltig, weil die Batterie endgültig stirbt.",
-     "image": "Calendar month page turning fast with days crossing out",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "sad",
-     "shot": "graphic",
-     "graphic": {
-      "type": "days",
-      "text": "BATTERIE-LAUFZEIT",
-      "value": "30",
-      "sub": "30",
-      "label": "SIGNAL EINGESTELLT"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "stirbt"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Tiefsee-Roboter schwimmt durch die dunkle Abgrund-Zone des Ozeans.",
-     "text": "Jetzt helfen nur noch Spezial-Tauchboote mit Hochfrequenz-Sonar in viertausend Metern Tiefe.",
-     "image": "Underwater robot with bright headlights exploring deep abyss floor",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "dark",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "",
-     "props": [
-      "sonar"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "viertausend"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": 2
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Grafik zeigt den extremen Druck in der Tiefsee.",
-     "text": "Dort unten herrscht ein Druck wie vierhundert Atmosphären auf deinem Kopf.",
-     "image": "Graphic displaying extreme water pressure arrows on a human silhouette",
-     "who": [
-      "held"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "held",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "vierhundert"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "400 BAR DRUCK"
-     },
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Wrackteil schwimmt auf der Meeresoberfläche und wird von Strömungen getrieben.",
-     "text": "Meeresströmungen treiben Trümmerteile über Hunderte Kilometer hinweg auseinander.",
-     "image": "Plane debris floating on open water surface with ocean current arrows",
-     "who": [],
-     "place": "ocean",
-     "backdrop": {
-      "sky": "day",
-      "ground": "water",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "box"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Strömungen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "underwater",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Meeresbiologen untersuchen Muscheln an einem gefundenen Flugzeugteil.",
-     "text": "Forscher nutzen sogar Muscheln auf Treibgut, um den genauen Drift-Weg nachzuvollziehen.",
-     "image": "Scientific microscope zooming in on barnacles attached to metallic debris",
-     "who": [
-      "held"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "mikroskop"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "Muscheln"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "BIOLOGISCHE SPUR"
-     },
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Zeitleiste zeigt zwei Jahre vergehende Zeit an.",
-     "text": "Trotzdem vergehen bei schwierigen Suchen manchmal mehrere Jahre bis zum Fund.",
-     "image": "Timeline graphic advancing rapidly over two whole years",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "sad",
-     "shot": "graphic",
-     "graphic": {
-      "type": "timer",
-      "value": "2 JAHRE",
-      "kicker": "SUCHDAUER"
-     },
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "mehrere Jahre"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Flugzeugwrack wird am Meeresgrund von Scheinwerfern beleuchtet.",
-     "text": "Erst wenn das Wrack liegt, wird jedes einzelne Bauteil wie ein Puzzle zusammengesetzt.",
-     "image": "Submarine spotlight illuminating airplane wreckage underwater",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "dark",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "",
-     "props": [
-      "plane"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Puzzle"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Im Labor analysiert der Hauptdarsteller speicherdaten der Blackbox.",
-     "text": "Der Flugdatenschreiber verrät den Ermittlern schließlich Tempo, Höhe und Triebwerksdruck.",
-     "image": "Main character reading data charts on a computer screen in a high tech lab",
-     "who": [
-      "held"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "actors": [
-      {
-       "id": "held",
-       "action": "think",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Flugdatenschreiber"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "DATEN",
-      "text": "Tempo, Höhe, Druck"
-     },
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Computervisualisierung zeigt den Flugverlauf kurz vor dem Absturz.",
-     "text": "So lässt sich selbst Jahre später der exakte Hergang Sekunde für Sekunde nachstellen.",
-     "image": "3D flight path trajectory simulation screen showing exact flight line",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "chart",
-      "kicker": "FLUGKURVE",
-      "value": "100%",
-      "label": "REKONSTRUIERT"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "nachstellen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Statistik über die Sicherheit von Passagierflugzeugen leuchtet grün auf.",
-     "text": "Egal wie spurlos: Flugzeuge hinterlassen am Ende immer physikalische Spuren im Ozean.",
-     "image": "Green glowing checkmark graphic over a clean radar screen background",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "graphic",
-     "graphic": {
-      "type": "badge",
-      "kicker": "PHYSIK",
-      "text": "SPUREN DA"
-     },
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Spuren"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GELÖST",
-      "color": "green"
-     },
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Hauptdarsteller schaut den Zuschauer direkt an und lächelt entspannt.",
-     "text": "Fliegen bleibt wissenschaftlich bewiesen die sicherste Reiseart der ganzen Welt.",
-     "image": "Main character in orange shirt smiling confidently at the camera",
-     "who": [
-      "held"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "held",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "sicherste"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Flugzeug fliegt bei Sonnenuntergang dem Horizont entgegen.",
-     "text": "Hättest du Vertrauen in die Technik tief unten im Ozean? Folg für mehr!",
-     "image": "Passenger plane flying into a bright orange sunset sky",
-     "who": [],
-     "place": "space",
-     "backdrop": {
-      "sky": "sunset",
-      "ground": "water",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "plane"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "event",
-     "camera": "zoom_out",
-     "sfx": "whoosh",
-     "highlight": [
-      "Folg"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Voll Vertrauen",
-      "b": "Lieber Bahn fahren"
-     },
-     "who_desc": "",
-     "place_desc": "space",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "needs": [
-   "sonar",
-   "blackbox",
-   "wrack"
-  ],
-  "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
-  "created": 1794593987.3390517
- },
  "2026-11-14 18:00": {
   "category": "storys",
   "topic": "Der spektakulärste Gefängnisausbruch aller Zeiten: Wie zwei Männer mit einem selbstgebauten Heißluftballon über die DDR-Grenze flohen",
@@ -3128,5 +2412,833 @@
   ],
   "title": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich",
   "created": 1794680506.4394143
+ },
+ "2026-11-15 18:00": {
+  "category": "comedy",
+  "topic": "Ich wollte wie im Mittelalter leben und mein Haushalt hat mich verklagt: Die skurrilsten Lifehacks von 1348",
+  "trend": null,
+  "script": {
+   "title": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
+   "description": "Ich habe mein Leben auf 1348 umgestellt und alles ist völlig eskaliert!\nIch testete die skurrilsten Mittelalter-Lifehacks im Alltag.\nWürdest du lieber im Mittelalter leben oder heute?",
+   "hashtags": [
+    "#shorts",
+    "#comedy",
+    "#lifehacks",
+    "#mittelalter",
+    "#geschichten",
+    "#viral",
+    "#lustig"
+   ],
+   "tags": [
+    "mittelalter lifehacks",
+    "leben wie 1348",
+    "haushalt 1348",
+    "skurrile hacks",
+    "geschichte comedy",
+    "alltag mittelalter",
+    "ich versuchte wie 1348 zu leben"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young male toon with broad absurd panic, wearing medieval rags, trying to put live frogs into his mouth to wash teeth, medieval room background, dynamic angle, bold composition",
+    "text": "LIFEHACKS ESKALIERT"
+   },
+   "wishes": [
+    "knoblauch",
+    "kessel"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grau",
+     "hat": "",
+     "hair": "kurz",
+     "hair_color": "dunkelbraun",
+     "gender": "m",
+     "skin": "hell",
+     "glasses": false
+    },
+    "kuehlschrank": {
+     "kind": "robot"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Der Hauptdarsteller steht verängstigt da, während Schuhe voll Knoblauch um ihn herum liegen.",
+     "text": "Drei Lifehacks aus dem Mittelalter, die mein Leben komplett ruiniert haben.",
+     "image": "Young man in medieval room looking terrified surrounded by shoes filled with garlic cloves",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "schuh",
+      "knoblauch"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "sfx": "whoosh",
+     "camera": "zoom_in",
+     "highlight": [
+      "ruiniert"
+     ],
+     "status": "EXPERIMENT: TAG 1",
+     "overlay": {
+      "type": "card",
+      "text": "JAHR 1348"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": ""
+    },
+    {
+     "see": "Eine Notizkarte erklärt die Regel zur Pestepidemie.",
+     "text": "Und der letzte Trick riecht so schlimm, dass mein Nachbar die Polizei rief.",
+     "image": "Graphic overlay showing strike symbol",
+     "who": [],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "sfx": "pop",
+     "camera": "still",
+     "highlight": [
+      "Streik"
+     ],
+     "graphic": {
+      "type": "badge",
+      "kicker": "WARNUNG",
+      "text": "KÜHLSCHRANK STREIKT"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Hauptdarsteller stoppt sein Smartphone auf Tag 1.",
+     "text": "Ich wollte Strom sparen und mein Leben historisch korrekt gestalten.",
+     "image": "Young man putting phone in a wooden box",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "sfx": "none",
+     "camera": "still",
+     "highlight": [
+      "historisch"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "TAG 1"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Punkt eins: Schuhe voller Knoblauch zum Viren-Schutz.",
+     "text": "Nummer eins: Gegen Krankheiten stopft man laut Mittelalter Knoblauch in die Schuhe.",
+     "image": "Young man stuffing garlic into his shoes",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "schuh",
+      "knoblauch"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "knoblauch"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "sfx": "ding",
+     "camera": "pan_right",
+     "highlight": [
+      "Knoblauch"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "HACK #1",
+      "text": "Knoblauch in die Schuhe"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Er geht gebückt wegen Blasen an den Füßen.",
+     "text": "Ergebnis: Ich hatte dreiundfünfzig Blasen und mein Hund hat mich enterbt.",
+     "image": "Young man walking painfully with garlic in shoes",
+     "who": [
+      "du"
+     ],
+     "place": "flur",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "left",
+       "to": "right",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "sfx": "none",
+     "camera": "still",
+     "highlight": [
+      "dreiundfünfzig"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "BLASEN AN FÜSSEN",
+      "value": 53
+     },
+     "who_desc": "",
+     "place_desc": "hallway",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Höhepunkt des Rennens mit Gestank.",
+     "text": "Der Gestank war so hart, dass sogar die Nachbarskatze rückwärts gerannt ist.",
+     "image": "Cat walking backwards in panic away from main character",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "left",
+       "to": "left",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "sfx": "whoosh",
+     "camera": "zoom_out",
+     "highlight": [
+      "rückwärts"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Kühlschrank blickt böse.",
+     "text": "Mein Kühlschrank fand das gar nicht komisch und brummte beleidigt.",
+     "image": "Fridge character looking annoyed in kitchen",
+     "who": [
+      "kuehlschrank"
+     ],
+     "place": "kueche",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "fridge"
+     ],
+     "actors": [
+      {
+       "id": "kuehlschrank",
+       "action": "idle",
+       "emotion": "angry",
+       "emote": "anger",
+       "pos": "center",
+       "to": "center",
+       "speaks": false,
+       "say": "NEIN."
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "sfx": "none",
+     "camera": "still",
+     "highlight": [
+      "beleidigt"
+     ],
+     "status": "KÜHLSCHRANK: STREIKT",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "kitchen",
+     "hud": ""
+    },
+    {
+     "see": "Nummer zwei: Haare waschen mit Asche.",
+     "text": "Nummer zwei: Haare waschen mit alter Holzasche aus dem Kamin.",
+     "image": "Young man pouring ash onto his head",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "kessel"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "sfx": "pop",
+     "camera": "zoom_in",
+     "highlight": [
+      "Holzasche"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "HACK #2",
+      "text": "Asche-Shampoo"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik vergleicht Shampoo mit Asche.",
+     "text": "Chemisches Shampoo gab es schließlich nicht.",
+     "image": "Graphic compare between modern shampoo and medieval ash bucket",
+     "who": [],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "sfx": "none",
+     "camera": "still",
+     "highlight": [
+      "Chemisches"
+     ],
+     "graphic": {
+      "type": "compare",
+      "left": "SHAMPOO",
+      "right": "ASCHE",
+      "value": "100%",
+      "sub": "0%"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Er steht da mit betonierten grauen Haaren.",
+     "text": "Meine Haare waren danach hart wie Beton.",
+     "image": "Young man touching hard grey hair in shock",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "sfx": "boom",
+     "camera": "shake",
+     "highlight": [
+      "Beton"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "BETON-HAAR",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Kühlschrank brummt erneut lauter.",
+     "text": "Mein Kühlschrank schüttelte nur den Kopf und fror meine Milch ein.",
+     "image": "Fridge character freezing milk box angrily",
+     "who": [
+      "kuehlschrank"
+     ],
+     "place": "kueche",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "fridge"
+     ],
+     "actors": [
+      {
+       "id": "kuehlschrank",
+       "action": "shake",
+       "emotion": "angry",
+       "emote": "anger",
+       "pos": "center",
+       "to": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "sfx": "none",
+     "camera": "still",
+     "highlight": [
+      "Kopf"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "kitchen",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nummer drei: Zähne putzen mit Salbeiblättern.",
+     "text": "Nummer drei: Zähne schrubben mit frischen Salbeiblättern.",
+     "image": "Young man rubbing leaf against teeth",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "sfx": "ding",
+     "camera": "pan_left",
+     "highlight": [
+      "Salbeiblättern"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "HACK #3",
+      "text": "Salbei-Zahnbürste"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gebiss leuchtet grün statt weiß.",
+     "text": "Klingt gesund, aber meine Zähne waren danach komplett grün.",
+     "image": "Close up of young man showing green glowing teeth",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "sweat",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "sfx": "none",
+     "camera": "still",
+     "highlight": [
+      "grün"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Kühlschrank steht mit einem Anwalts-Koffer da.",
+     "text": "Da hat mein Kühlschrank endgültig die Schnauze voll gehabt.",
+     "image": "Fridge character holding briefcase looking furious",
+     "who": [
+      "kuehlschrank"
+     ],
+     "place": "kueche",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "fridge"
+     ],
+     "actors": [
+      {
+       "id": "kuehlschrank",
+       "action": "point",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": false,
+       "hold": "bag"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "sfx": "boom",
+     "camera": "shake",
+     "highlight": [
+      "Schnauze"
+     ],
+     "status": "STATUS: KLAGE EINGEREICHT",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "kitchen",
+     "hud": ""
+    },
+    {
+     "see": "Postbote bringt einen gelben Umschlag.",
+     "text": "Er hat mir eine Abmahnung wegen artfremder Haltung geschickt.",
+     "image": "Young man reading an official court letter in panic",
+     "who": [
+      "du"
+     ],
+     "place": "flur",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "radio"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "sfx": "pop",
+     "camera": "still",
+     "highlight": [
+      "Abmahnung"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "POST VOM ANWALT"
+     },
+     "who_desc": "",
+     "place_desc": "hallway",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Gerichtsakteflut im Zimmer.",
+     "text": "Jetzt fordert er dreitausend Goldmünzen Schmerzensgeld.",
+     "image": "Graphic map of court demands",
+     "who": [],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "sfx": "none",
+     "camera": "still",
+     "highlight": [
+      "dreitausend"
+     ],
+     "graphic": {
+      "type": "number",
+      "kicker": "FORDERUNG",
+      "value": "3.000",
+      "label": "GOLDMÜNZEN"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Hauptdarsteller kniet flehend vor der Waschmaschine und dem Kühlschrank.",
+     "text": "Ich musste mich bei all meinen Elektrogeräten schriftlich entschuldigen.",
+     "image": "Young man kneeling with apology letter in front of fridge and tv",
+     "who": [
+      "du",
+      "kuehlschrank"
+     ],
+     "place": "kueche",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "fridge",
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sad",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "left",
+       "to": "left",
+       "speaks": true
+      },
+      {
+       "id": "kuehlschrank",
+       "action": "idle",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "right",
+       "to": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "sad",
+     "shot": "wide",
+     "sfx": "none",
+     "camera": "zoom_in",
+     "highlight": [
+      "entschuldigen"
+     ],
+     "overlay": null,
+     "who_desc": "; ",
+     "place_desc": "kitchen",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Er gibt dem Kühlschrank ein Eis zur Versöhnung.",
+     "text": "Sonst sperrt mich das Smart-Home heute Nacht im Bad ein.",
+     "image": "Young man carefully handing ice cream to fridge character",
+     "who": [
+      "du",
+      "kuehlschrank"
+     ],
+     "place": "kueche",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "fridge"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      },
+      {
+       "id": "kuehlschrank",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "to": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "sfx": "tick",
+     "camera": "still",
+     "highlight": [
+      "einsperren"
+     ],
+     "overlay": null,
+     "who_desc": "; ",
+     "place_desc": "kitchen",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nahtloser Übergang zum Anfang.",
+     "text": "Und das waren die...",
+     "image": "Young man looking shocked into camera pointing back",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "sfx": "whoosh",
+     "camera": "still",
+     "highlight": [
+      "waren"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Moderne Welt",
+      "b": "Mittelalter 1348"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "TAG 1 · 1348-EXPERIMENT",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "knoblauch",
+   "kessel",
+   "kamin",
+   "salbeiblatt"
+  ],
+  "title": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
+  "created": 1794738100.2622569
  }
 }

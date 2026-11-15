@@ -1,5 +1,5 @@
 {
- "last_category": "tiere",
+ "last_category": "comedy",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -22,7 +22,7 @@
   "qnqm93yzl",
   "qqprosnb9"
  ],
- "last_stats": 1794736258.7051501,
+ "last_stats": 1794738107.2808828,
  "next_id": 98,
  "connected": {
   "youtube": {
@@ -39,11 +39,11 @@
   "video": 97
  },
  "cat_credit": {
-  "fakten": 2.2800000000000002,
-  "storys": -3.009999999999999,
-  "mysterien": -3.0599999999999996,
-  "tiere": -3.04,
-  "whatif": 3.23,
-  "comedy": 3.5999999999999996
+  "fakten": 2.9800000000000004,
+  "storys": -1.809999999999999,
+  "mysterien": -1.8599999999999997,
+  "tiere": -1.84,
+  "whatif": 4.29,
+  "comedy": -1.7599999999999998
  }
 }

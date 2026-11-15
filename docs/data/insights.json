@@ -1,5 +1,5 @@
 {
- "updated": 1794736258.708497,
+ "updated": 1794738107.2808945,
  "enough": true,
  "counted": 12,
  "total": 14,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1604,
+   "avg_views": 1608,
    "avg_likes": 65.0,
-   "like_rate": 4.05,
-   "avg_score": 2579
+   "like_rate": 4.04,
+   "avg_score": 2583
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1662,
+   "avg_views": 1668,
    "avg_likes": 39.1,
    "like_rate": 2.35,
-   "avg_score": 2253
+   "avg_score": 2258
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1263,
+   "avg_views": 1270,
    "avg_likes": 43.0,
-   "like_rate": 3.4,
-   "avg_score": 1908
+   "like_rate": 3.39,
+   "avg_score": 1915
   },
   {
    "slug": "fakten",
@@ -51,9 +51,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1604 Aufrufe, 4.05 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1608 Aufrufe, 4.04 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2409 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2415 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,41 +62,41 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2533,
+   "views": 2535,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3373
+   "score": 3375
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2156,
+   "views": 2160,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3071
+   "score": 3075
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1985,
+   "views": 1986,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2960
+   "score": 2961
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1604,
+   "views": 1608,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2579
+   "score": 2583
   },
   {
    "id": 80,
