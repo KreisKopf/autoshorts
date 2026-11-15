@@ -371,9 +371,6 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         d.polygon(pts, fill=INK)                           # Pony: schräg gekämmte Strähnen mit Umriss
         d.polygon([(x, y - (o * 0.9 if 0 < i < len(pts) - 1 else 0)) for i, (x, y) in enumerate(pts)], fill=hair)
         d.chord(hb, 180, 360, fill=hair)
-        if fem and look.hair in ("long", "bob"):           # Strähnen rahmen das Gesicht: schmal, schmiegen sich an den Kopf, laufen spitz aus
-            for side in (-1, 1):
-                _face_lock(d, hc, rx, ry, k, side, hair if side == f else hair_d, o, 1.12 if look.hair == "long" else 1.0)
         d.arc((hc[0] - rx * 0.6 + 18 * k * f, hc[1] - ry * 0.96, hc[0] + rx * 0.6 + 18 * k * f, hc[1] - ry * 0.2), 208, 300, fill=hair_l, width=max(2, int(9 * k)))
     u = k * 0.84
     # Gesicht (leicht in Blickrichtung versetzt)
