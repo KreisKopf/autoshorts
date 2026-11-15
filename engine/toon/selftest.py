@@ -287,6 +287,15 @@ def main():
         assert len(js["scenes"]) == 9, "abgebrochener Schlusssatz bleibt stehen"
         assert scs[2]["actors"][0].get("action") not in ("walk", "run") and not scs[2]["actors"][0].get("to"), "Großaufnahme läuft durchs Zimmer"
         assert stage.poster_hero("Der Schlag des Fangschreckenkrebses", scs, None, ["mantis"]) == "mantis", "Titelbild ohne das Tier des Themas"
+        sh = stage.direct([{"text": "Drei Fakten über den Fangschreckenkrebs.", "place": "underwater", "actors": [{"id": "krebs"}]},
+                           {"text": "Das ist etwa fünfzigmal schneller als ein Wimpernschlag.", "place": "underwater", "actors": [{"id": "du"}]},
+                           {"text": "Menschen haben drei Arten von Farbrezeptoren im Auge.", "place": "underwater", "actors": []},
+                           {"text": "Der Fangschreckenkrebs besitzt dagegen bis zu sechzehn.", "place": "underwater", "actors": [{"id": "krebs"}]}],
+                          [(n_ * 3, n_ * 3 + 3) for n_ in range(4)], "Der Fangschreckenkrebs und sein Schlag")
+        for n_ in (1, 2):
+            assert [a.get("kind") or "" for a in sh[n_].get("actors") or []] == [""] and places.resolve(stage.backdrop(sh[n_])) != "underwater", f"Menschen-Satz {n_} zeigt das Tier"
+            frame(sh[n_], {"du": {"shirt": "blau"}})
+        assert [a.get("kind") for a in sh[3].get("actors") or []] == ["mantis"], "Tier-Satz nach Menschen-Satz"
         sp = stage.direct([{"text": "Drei Fakten über den Fangschreckenkrebs.", "place": "underwater", "actors": [{"id": "krebs"}]},
                            {"text": "Eine Art Sprungfeder im Arm liefert die Kraft.", "place": "underwater", "actors": [{"id": "krebs"}],
                             "overlay": {"type": "note", "title": "MECHANISMUS", "text": "Sprungfeder"}}], [(0, 3), (3, 6)], "Der Fangschreckenkrebs")

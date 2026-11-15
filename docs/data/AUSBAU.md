@@ -213,6 +213,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   stehen sich gegenüber (Tier 400, Ding 860); ein Notizzettel/eine Liste über einer solchen Szene entfällt (schob den Krebs an den Rand). Der Menschen-Satz
   bleibt eine Großaufnahme (Figur läuft nicht durchs Zimmer). `writer.polish` streicht einen abgebrochenen Schlusssatz („Und genau deshalb –“); die Unterzeile
   einer Zahl-Grafik, die nur die Zahl wiederholt, entfällt.
+  Menschen-Sätze werden auch erkannt, wenn das Drehbuch dort das Tier hinstellt („Menschen haben drei Arten von Farbrezeptoren“, „schneller als ein
+  Wimpernschlag“ – `SEA_PEOPLE_RE`): Dann steht die Hauptfigur im Bild.
 
 ## Musik-Kugel (Video-Art `musik`, alle zwei Tage)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten

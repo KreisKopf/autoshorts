@@ -1420,6 +1420,10 @@ def direct(scenes, times, topic="", style="", look=""):
         # Tier-Video, das Drehbuch stellt bei einem Satz über Menschen („ein menschlicher Wimpernschlag“, „Menschen haben drei Farbrezeptoren“,
         # „Forscher halten ihn …“) einen Menschen unter Wasser: Der Satz spielt mit dem Menschen an Land – das Tier wäre zum x-ten Mal dasselbe Bild.
         hum_s = [a for a in acts if not a.get("kind") and not _re0.search(SEA_ID_RE, str(a.get("id") or "").lower())]
+        if under0 and not hum_s and not sea_now and not any_now and not gfx_s and not sc.get("_deep") and _SEA_DEF[0] and shot_s != "insert" \
+                and _re0.search(SEA_PEOPLE_RE, txt0) and not _re0.search(DIVER_TEXT_RE, txt0):
+            hum_s = [{"id": "du", "action": "talk", "speaks": False, "emotion": "", "emote": "", "say": "", "hold": "", "kind": ""}]
+            sc["actors"] = acts = hum_s                    # „Menschen haben drei Farbrezeptoren“: ein Mensch im Bild, nicht zum x-ten Mal der Krebs
         if under0 and not sea_now and not any_now and not gfx_s and not sc.get("_deep") and (sea_last or _SEA_DEF[0]) and hum_s and len(hum_s) == len(acts) \
                 and _re0.search(SEA_HUMAN_RE, txt0) and not _re0.search(DIVER_TEXT_RE, txt0) and shot_s != "insert":
             lab_s = bool(_re0.search(r"forsch|wissenschaft|labor|\bbecken|aquari|zoo", txt0))
@@ -2352,7 +2356,8 @@ DEEP_PING_RE = r"send|signal|\bping|ortung|ultraschall|funk|piep|batterie"
 DEEP_THING_RE = SUB_RE + "|" + DEEP_WRECK_RE + "|" + DEEP_BOX_RE
 SEA_TARGETS = ("rock", "lib_glasscheibe", "lib_tresor", "ship", "box", "barrel", "ice", "lib_sprungfeder", "cavitation")
 SEA_ID_RE = r"krebs|garnele|qualle|shrimp|jelly|axolotl|lurch|fisch|tier|meer|tauch|diver|mantis|fangschreck"
-SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\bdir\b|\bdich\b"
+SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\bdir\b|\bdich\b|wimpernschlag|blinzel|augenzwinkern"
+SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
 LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
