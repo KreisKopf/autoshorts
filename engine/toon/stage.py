@@ -769,6 +769,9 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                                   ("shocked" if a["action"] in ("shocked", "scared") else ""), scale * 0.9 * ksz, a["action"])
             if res:
                 im, fx, fy, fly = res
+                if not (moving and not arrived) and not close:   # nie über den Bildrand hinaus (große Tiere als Hauptfigur sind breit)
+                    lo, hi = 30 + fx, W - 30 - (im.width - fx)
+                    x = (lo + hi) / 2 if lo > hi else min(max(x, lo), hi)
                 if not fly:
                     _shadow(frame, int(x), gy, int(120 * scale * ksz))
                 frame.paste(im, (int(x - fx), int(gy - fy - hop * ksz - a_lift)), im)
@@ -3364,7 +3367,15 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
            "fx": (lead["x1"] if lead else (props[0][1] if props else 540)),
            "punch": None if (shot == "close" or moving or ov_tall or ov_kind in ("counter", "bar", "thermo") or place in MAPS or not (actors or props)) else _punch_time(scene, words, t0, dur)}
     if actors and shot != "close" and not ov_tall and place not in MAPS and not scene.get("float") and str(scene.get("shot") or "") != "event":
+        for a_w in actors:                                              # Tiere: echte Breite ins Bild nehmen und nicht an den Rand stellen
+            if a_w["kind"] and a_w["x0"] == a_w["x1"]:
+                ksz_w = 1.0 if a_w.get("giant") else HERO_SIZE.get(a_w["kind"], 0.8) if a_w.get("hero") else CREATURE_SIZE.get(a_w["kind"], 1.0)
+                r_w = extras.creature(a_w["kind"], 0.0, 1, 0.0, "", scale * 0.9 * ksz_w)
+                if r_w:
+                    a_w["_hw"] = r_w[0].width / 2 + 40
+                    a_w["x0"] = a_w["x1"] = min(max(a_w["x1"], a_w["_hw"]), W - a_w["_hw"]) if a_w["_hw"] * 2 < W else 540.0
         xs = [a["x1"] for a in actors] + [a["x0"] for a in actors if -100 < a["x0"] < W + 100]
+        xs += [a["x1"] + sg * a["_hw"] for a in actors if a.get("_hw") for sg in (-1, 1)]
         xs += [x for k, x in props if extras.prop_fit(k) and 0 <= x <= W]   # auch der Gegenstand, von dem der Satz spricht, bleibt ganz im Bild
         for a_l in actors:                                              # lange Tiere (Krebs samt Schere/Keule) ganz im Bild lassen
             if a_l.get("kind") in LONG_KINDS:
