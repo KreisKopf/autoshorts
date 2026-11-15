@@ -1,5 +1,5 @@
 {
- "updated": 1794759476.864148,
+ "updated": 1794759975.4858813,
  "enough": true,
  "counted": 14,
  "total": 15,
@@ -18,10 +18,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1523,
+   "avg_views": 1528,
    "avg_likes": 50.0,
-   "like_rate": 3.28,
-   "avg_score": 2273
+   "like_rate": 3.27,
+   "avg_score": 2278
   },
   {
    "slug": "comedy",
@@ -36,23 +36,23 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1283,
+   "avg_views": 1264,
    "avg_likes": 33.0,
-   "like_rate": 2.57,
-   "avg_score": 1778
+   "like_rate": 2.61,
+   "avg_score": 1759
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1022,
+   "avg_views": 1023,
    "avg_likes": 30.5,
    "like_rate": 2.98,
-   "avg_score": 1495
+   "avg_score": 1496
   }
  ],
  "weights": {
-  "fakten": 0.7,
+  "fakten": 0.71,
   "storys": 1.07,
   "mysterien": 1.2,
   "tiere": 1.2,
@@ -62,8 +62,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤯 What If (Ø 1692 Aufrufe, 2.36 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2358 zu 704 Punkte)."
+  "Schwächste Kategorie: 💡 Fakten (Ø 1023 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2357 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -82,11 +82,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2179,
+   "views": 2182,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3094
+   "score": 3097
   },
   {
    "id": 84,
@@ -102,21 +102,21 @@
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2109,
+   "views": 2111,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2799
+   "score": 2801
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1631,
+   "views": 1635,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2606
+   "score": 2610
   }
  ],
  "flop": [
