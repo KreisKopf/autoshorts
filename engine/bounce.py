@@ -574,6 +574,55 @@ def fetch_user_song(song, work):
     return {**song, "file": str(Path(work) / song["asset"])}
 
 
+CC_QUERIES = ["remix", "electronic remix", "edm", "trap beat", "phonk", "house", "dubstep", "future bass", "dance remix", "synthwave",
+              "chill remix", "drum and bass"]
+
+
+def cc_track(used, work):
+    """Freier Remix/Track von ccMixter oder Jamendo (über Openverse): nur CC0 oder CC BY – „nicht kommerziell“ (NC) und
+    „keine Bearbeitung“ (ND) sind ausgeschlossen. CC BY verlangt Namensnennung: sie steht in credit und kommt in die Beschreibung."""
+    import requests
+    ua = {"User-Agent": "AutoShorts/1.0 (open source shorts generator)"}
+    qs = CC_QUERIES[:]
+    random.shuffle(qs)
+    for q in qs[:5]:
+        try:
+            r = requests.get("https://api.openverse.org/v1/audio/", headers=ua, timeout=30,
+                             params={"q": q, "license": "cc0,by", "category": "music", "source": "jamendo,ccmixter", "page_size": 20})
+            if r.status_code != 200:
+                log(f"Openverse „{q}“: HTTP {r.status_code}")
+                continue
+            res = r.json().get("results", [])
+        except Exception as e:  # noqa: BLE001
+            log(f"Openverse „{q}“: {str(e)[:100]}")
+            continue
+        random.shuffle(res)
+        for it in res:
+            lic = str(it.get("license") or "").lower()
+            dur = (it.get("duration") or 0) / 1000
+            aid = "cc:" + str(it.get("id"))
+            if lic not in ("cc0", "by") or aid in used or not it.get("url") or not (50 <= dur <= 480) or (it.get("filesize") or 0) > 25_000_000:
+                continue
+            dest = Path(work) / ("cc_" + str(it["id"])[:8] + "." + (str(it.get("filetype") or "mp3").lower()[:4] or "mp3"))
+            try:
+                with requests.get(it["url"], headers=ua, timeout=90, stream=True) as d:
+                    d.raise_for_status()
+                    with open(dest, "wb") as f:
+                        for chunk in d.iter_content(65536):
+                            f.write(chunk)
+            except Exception as e:  # noqa: BLE001
+                log(f"Download {it.get('title')}: {str(e)[:100]}")
+                continue
+            title = str(it.get("title") or "Track").strip()[:80]
+            creator = str(it.get("creator") or "unbekannt").strip()[:60]
+            lic_txt = "CC0" if lic == "cc0" else f"CC BY {it.get('license_version') or ''}".strip()
+            link = it.get("foreign_landing_url") or it.get("url")
+            log(f"Freier Track: „{title}“ von {creator} ({lic_txt}, {it.get('source')})")
+            return {"file": str(dest), "name": title, "who": creator, "asset": aid,
+                    "credit": f"Musik: „{title}“ von {creator} – {lic_txt} – {link}", "license": lic_txt}
+    raise RuntimeError("Kein passender freier Track gefunden")
+
+
 def pick_song(used):
     """Melodie, die am längsten nicht dran war."""
     order = list(SONGS)
@@ -593,6 +642,13 @@ def meta(song):
                 f"Auflösung am Ende: {SONGS[song['remix']][0]} ({who}).\n"
                 "Welches Lied soll als Nächstes einen Remix bekommen? Schreib es in die Kommentare!")
         return title, desc, ["#musik", "#remix", f"#{style.lower().replace(' ', '').replace('-', '')}", "#satisfying", "#erkennstdudaslied", "#shorts"], name
+    if isinstance(song, dict) and song.get("credit"):    # freier Track (ccMixter/Jamendo): Namensnennung ist Pflicht
+        title = random.choice(["Diese Kugel spielt den ganzen Beat 🎧", "Jede Scheibe ein Beat – wie lange schaust du zu? 🎧",
+                               "Kugel trifft jeden Beat 🔥", "Satisfying: Jede Scheibe ein Ton 🎶"])
+        desc = ("Jede Glasscheibe ist ein Ton – die Kugel spielt den ganzen Track mit. 🎧\n"
+                f"{song['credit']}\n"
+                "Welche Musik soll die Kugel als Nächstes spielen? Schreib es in die Kommentare!")
+        return title, desc, ["#musik", "#remix", "#beat", "#satisfying", "#oddlysatisfying", "#shorts"], song["name"]
     name, who = (song.get("name"), song.get("who") or "") if isinstance(song, dict) else SONGS[song][:2]
     titles = ["Erkennst du dieses Lied? 🎵", "Diese Kugel spielt ein Lied, das jeder kennt", "Jede Scheibe ein Ton – welches Lied ist das?",
               "Nach drei Tönen weißt du es 🎶"]

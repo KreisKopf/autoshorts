@@ -611,6 +611,8 @@ def main():
             for stl in remix.STYLES:
                 h3, tot3 = remix.build(bounce.SONGS["ode_freude"], remix.KEYS["ode_freude"], stl, Path(tmp) / f"{stl}.wav", seed=1)
                 assert len(h3) >= 60 and all(a[0] < b[0] for a, b in zip(h3, h3[1:])) and (Path(tmp) / f"{stl}.wav").stat().st_size > 100000, stl
+        t_c, d_c, tags_c, n_c = bounce.meta({"credit": "Musik: „X“ von Y – CC BY 4.0 – https://ccmixter.org/x", "name": "X", "who": "Y"})
+        assert "CC BY 4.0" in d_c and "ccmixter" in d_c                 # Namensnennung steht in der Beschreibung
         t_r, d_r, tags_r, n_r = bounce.meta({"remix": "bergkoenig", "style": "phonk"})
         assert "Phonk" in n_r and "Bergkönig" in d_r and "#remix" in tags_r
         title, desc, tags, name = bounce.meta("ode_freude")

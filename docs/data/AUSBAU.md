@@ -232,5 +232,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
 - Remixe (`engine/remix.py`): ohne eigene Lieder wird automatisch eine bekannte gemeinfreie Melodie als moderner Track produziert
   (Stile `STYLES`: Phonk, Trap, EDM, Lo-Fi, Sped Up – im Wechsel): Schlagzeug, 808/Bass, Akkorde je Takt aus der Melodie (`harmonize`), Lead
   spielt die Melodie, jeder Melodie-Ton ist ein Aufprall. Neue Melodie: Eintrag in `bounce.SONGS` UND Tonart/Takt in `remix.KEYS`.
+- Freie Tracks (`bounce.cc_track`): ccMixter/Jamendo über Openverse, nur CC0 und CC BY (kein NC/ND); die Namensnennung (`credit`) kommt in die
+  Beschreibung und ans Videoende. `make_bounce` wechselt ohne eigene Lieder zwischen Remix und freiem Track (`STATE["bounce_src"]`);
+  Thema „cc“ oder „remix“ im Studio erzwingt die Quelle.
 - Kategorie mit `every_days: 2` und `special: "bounce"`: `main.pick` nimmt sie, sobald zwei Tage seit der letzten um sind (`STATE["last_musik"]`),
   sonst nie; `make_bounce` rendert ohne Drehbuch und Sprecher und lädt hoch wie jedes Video.

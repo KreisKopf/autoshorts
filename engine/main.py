@@ -307,7 +307,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         if rm:
             cat, topic, source = rm
     if cat.get("special") == "bounce":
-        return make_bounce(cat, upload)
+        return make_bounce(cat, upload, (topic or "").strip().lower() or None)
     STATE["last_category"] = cat["slug"]
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
@@ -514,36 +514,46 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
     return v
 
 
-def make_bounce(cat, upload=True):
-    """Musik-Kugel: gemeinfreie Melodie wählen, Kugel-Video rendern (eigener Ton, kein Sprecher), wie jedes Video hochladen."""
+def make_bounce(cat, upload=True, force=None):
+    """Musik-Kugel: eigene Lieder zuerst; sonst im Wechsel ein Remix einer bekannten gemeinfreien Melodie oder ein freier Track
+    (ccMixter/Jamendo, CC0/CC BY mit Namensnennung). force = "remix" | "cc" erzwingt die Quelle (z. B. Thema im Studio)."""
     from . import bounce
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
     used = STATE.setdefault("bounce_songs", [])
-    own = bounce.user_songs()                             # eigene Lieder aus der App haben Vorrang (das am längsten nicht gespielte)
+    work = WORK / f"v{vid}"
+    shutil.rmtree(work, ignore_errors=True)
+    work.mkdir(parents=True)
+    own = bounce.user_songs() if force not in ("remix", "cc") else []   # eigene Lieder aus der App haben Vorrang
+    song = None
     if own:
         song = sorted(own, key=lambda x: used.index(x["asset"]) if x["asset"] in used else -1)[0]
-    else:                                                 # automatisch: bekannte Melodie als moderner Remix (Stil im Wechsel)
-        from . import remix
-        mel = bounce.pick_song(used)
-        styles = list(remix.STYLES)
-        last_st = STATE.get("bounce_styles", [])
-        style = sorted(styles, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
-        song = {"remix": mel, "style": style, "asset": mel}
-        STATE["bounce_styles"] = (last_st + [style])[-10:]
+    else:
+        src = force if force in ("remix", "cc") else ("cc" if STATE.get("bounce_src") == "remix" else "remix")
+        if src == "cc":
+            try:
+                song = bounce.cc_track(used, work)
+            except Exception as e:  # noqa: BLE001
+                log(f"Freier Track nicht verfügbar ({e}) – nehme einen Remix")
+        STATE["bounce_src"] = "cc" if song else "remix"
+        if not song:                                      # bekannte Melodie als moderner Remix (Stil im Wechsel)
+            from . import remix
+            mel = bounce.pick_song(used)
+            last_st = STATE.get("bounce_styles", [])
+            style = sorted(remix.STYLES, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
+            song = {"remix": mel, "style": style, "asset": mel}
+            STATE["bounce_styles"] = (last_st + [style])[-10:]
     title, desc, tags, name = bounce.meta(song)
     v = {"id": vid, "category": cat["slug"], "topic": f"Musik-Kugel: {name}", "status": "rendering", "created": time.time(),
          "title": title, "description": desc, "hashtags": tags, "tags": ["musik", "melodie", name.lower(), "satisfying"], "thumb_text": "ERKENNST DU ES?"}
     VIDEOS.append(v)
-    work = WORK / f"v{vid}"
-    shutil.rmtree(work, ignore_errors=True)
-    work.mkdir(parents=True)
     final = OUT / f"{vid}.mp4"
     log(f"Kategorie: {cat['emoji']} {cat['name']} · Melodie: {name}")
     try:
-        if isinstance(song, dict) and not song.get("remix"):
+        if isinstance(song, dict) and not song.get("remix") and not song.get("credit"):
             song = bounce.fetch_user_song(song, work)
-        dur, thumb = bounce.render(song, final, seed=vid, work=work)
+        top = "Die Kugel spielt den Beat" if isinstance(song, dict) and song.get("credit") else "Erkennst du das Lied?"
+        dur, thumb = bounce.render(song, final, seed=vid, work=work, title_top=top)
         cover = OUT / f"{vid}-cover.jpg"
         Image.open(thumb).save(cover, quality=92)
         Image.open(thumb).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
