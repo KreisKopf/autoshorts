@@ -14,13 +14,15 @@ SR = 44100
 # Tonart und Taktart je Melodie: (Grundton 0=C … 11=H, "dur"/"moll", Schläge pro Takt)
 KEYS = {"fuer_elise": (9, "moll", 3), "ode_freude": (0, "dur", 4), "bergkoenig": (11, "moll", 4), "korobeiniki": (9, "moll", 4),
         "jingle_bells": (0, "dur", 4), "nachtmusik": (7, "dur", 4), "funkel": (0, "dur", 4), "wiegenlied": (0, "dur", 3),
-        "greensleeves": (9, "moll", 3), "saints": (0, "dur", 4), "auld_lang_syne": (5, "dur", 4)}
+        "greensleeves": (9, "moll", 3), "saints": (0, "dur", 4), "auld_lang_syne": (5, "dur", 4),
+        "bella_ciao": (9, "moll", 4), "cucaracha": (5, "dur", 4)}
 
 STYLES = {
     "phonk": {"name": "Phonk", "tempo": 1.18, "shift": 0, "lead": "cowbell", "drums": "phonk", "bass": "808", "pad": False},
     "trap": {"name": "Trap", "tempo": 1.0, "shift": 0, "lead": "pluck", "drums": "trap", "bass": "808", "pad": True},
     "edm": {"name": "EDM", "tempo": 1.12, "shift": 0, "lead": "saw", "drums": "house", "bass": "offbeat", "pad": True},
     "lofi": {"name": "Lo-Fi", "tempo": 0.86, "shift": 0, "lead": "keys", "drums": "lofi", "bass": "sub", "pad": True},
+    "pop": {"name": "Pop", "tempo": 1.08, "shift": 0, "lead": "pluck", "drums": "dance", "bass": "offbeat", "pad": True},
     "spedup": {"name": "Sped Up", "tempo": 1.28, "shift": 3, "lead": "bell", "drums": "pop", "bass": "sub", "pad": True},
 }
 
@@ -30,6 +32,7 @@ DRUMS = {   # Schlagzeug je Takt (in Schlägen): kick, snare, hat (Abstand), ope
     "house": {"kick": (0, 1, 2, 3), "snare": (1, 3), "hat": None, "open": (0.5, 1.5, 2.5, 3.5)},
     "lofi": {"kick": (0, 1.75, 2.5), "snare": (1, 3), "hat": 0.5, "swing": 0.08},
     "pop": {"kick": (0, 2, 2.5), "snare": (1, 3), "hat": 0.5},
+    "dance": {"kick": (0, 1, 2, 3), "snare": (1, 3), "hat": 0.5, "open": (1.5, 3.5)},   # Radio-Pop: gerader Kick, Klatscher auf 2 und 4
 }
 
 

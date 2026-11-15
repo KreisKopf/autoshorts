@@ -543,6 +543,8 @@ def make_bounce(cat, upload=True, force=None):
             mel = bounce.pick_song(used)
             last_st = STATE.get("bounce_styles", [])
             style = sorted(remix.STYLES, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
+            if not last_st or last_st[-1] != "pop":       # jedes zweite Video im Pop-Stil (kommt am besten an)
+                style = "pop"
             song = {"remix": mel, "style": style, "asset": mel}
             STATE["bounce_styles"] = (last_st + [style])[-10:]
     title, desc, tags, name = bounce.meta(song)

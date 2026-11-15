@@ -101,6 +101,15 @@ SONGS = {
     "auld_lang_syne": ("Auld Lang Syne (Nehmt Abschied, Brüder)", "schottisches Volkslied", 100, _seq(
         "C4:1 F4:1.5 F4:.5 F4:1 A4:1 G4:1.5 F4:.5 G4:1 A4:1 F4:1.5 F4:.5 A4:1 C5:1 D5:3 D5:1 C5:1.5 A4:.5 A4:1 F4:1 "
         "G4:1.5 F4:.5 G4:1 A4:1 F4:1.5 D4:.5 D4:1 C4:1 F4:3")),
+    "bella_ciao": ("Bella Ciao", "italienisches Volkslied", 120, _seq(
+        "E4:.5 A4:.5 B4:.5 C5:.5 A4:2 E4:.5 A4:.5 B4:.5 C5:.5 A4:2 "
+        "E4:.5 A4:.5 B4:.5 C5:1 B4:.5 A4:.5 C5:1 B4:.5 A4:.5 E5:1 E5:1 E5:1 r:.5 "
+        "D5:.5 E5:.5 F5:.5 F5:2 F5:.5 E5:.5 D5:.5 F5:.5 E5:2 E5:.5 D5:.5 C5:.5 B4:1 E5:1 C5:1 B4:1 A4:2")),
+    "cucaracha": ("La Cucaracha", "mexikanisches Volkslied", 140, _seq(
+        "C4:.5 C4:.5 C4:.5 F4:1 A4:1.5 C4:.5 C4:.5 C4:.5 F4:1 A4:1.5 r:.5 "
+        "F4:.5 F4:.5 E4:.5 E4:.5 D4:.5 D4:.5 C4:2 r:.5 "
+        "C4:.5 C4:.5 C4:.5 E4:1 G4:1.5 C4:.5 C4:.5 C4:.5 E4:1 G4:1.5 r:.5 "
+        "C5:.5 D5:.5 C5:.5 A#4:.5 A4:.5 G4:.5 F4:2")),
 }
 
 
@@ -560,7 +569,7 @@ def _launcher(d, start, t, td):
             d.ellipse((sx - r, sy - r, sx + r, sy + r), outline=(255, 255, 255, int(120 * glow)), width=3)
 
 
-def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=True, work: Path = None):
+def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=False, work: Path = None):
     """Ganzes Video rendern (Bild + Ton). Gibt (Dauer, Pfad zum Vorschaubild) zurück. work = Ordner für Zwischendateien."""
     work = Path(work) if work else out.parent
     if isinstance(song, dict) and song.get("remix"):     # Remix einer gemeinfreien Melodie: {"remix": Melodie, "style": Stil}
@@ -760,7 +769,8 @@ def pick_song(used):
 
 
 def meta(song):
-    """Titel, Beschreibung, Hashtags fürs Hochladen (Name des Lieds erst in der Beschreibung – im Video wird geraten)."""
+    """Titel, Beschreibung, Hashtags fürs Hochladen. Der Name des Lieds steht weder im Video noch in der Beschreibung: geraten wird
+    in den Kommentaren (bringt Kommentare und Wiederholungen)."""
     if isinstance(song, dict) and song.get("remix"):
         from . import remix
         style = remix.STYLES[song["style"]]["name"]
@@ -768,8 +778,7 @@ def meta(song):
         title = random.choice([f"Bekanntes Lied als {style}-Remix – erkennst du es? 🎵", f"Dieses Lied kennt jeder – aber als {style} 🔥",
                                f"Jede Scheibe ein Ton: {style}-Remix eines Klassikers"])
         desc = (f"Ein Lied, das jeder kennt – als {style}-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\n"
-                f"Auflösung am Ende: {SONGS[song['remix']][0]} ({who}).\n"
-                "Welches Lied soll als Nächstes einen Remix bekommen? Schreib es in die Kommentare!")
+                "Schreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!")
         return title, desc, ["#musik", "#remix", f"#{style.lower().replace(' ', '').replace('-', '')}", "#satisfying", "#erkennstdudaslied", "#shorts"], name
     if isinstance(song, dict) and song.get("credit"):    # freier Track (ccMixter/Jamendo): Namensnennung ist Pflicht
         title = random.choice(["Diese Kugel spielt den ganzen Beat 🎧", "Jede Scheibe ein Beat – wie lange schaust du zu? 🎧",
@@ -783,7 +792,6 @@ def meta(song):
               "Nach drei Tönen weißt du es 🎶"]
     title = random.choice(titles)
     desc = (f"Jede Glasscheibe ist ein Ton – erkennst du das Lied, bevor die Kugel fertig ist? 🎵\n"
-            f"Auflösung am Ende: {name}" + (f" ({who})" if who else "") + ".\n"
-            "Wie viele Töne hast du gebraucht? Schreib es in die Kommentare!")
+            "Welches Lied ist es – und wie viele Töne hast du gebraucht? Schreib es in die Kommentare!")
     tags = ["#musik", "#melodie", "#satisfying", "#erkennstdudaslied", "#klassik", "#shorts"]
     return title, desc, tags, name

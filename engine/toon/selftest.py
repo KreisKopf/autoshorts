@@ -671,9 +671,9 @@ def main():
         t_c, d_c, tags_c, n_c = bounce.meta({"credit": "Musik: „X“ von Y – CC BY 4.0 – https://ccmixter.org/x", "name": "X", "who": "Y"})
         assert "CC BY 4.0" in d_c and "ccmixter" in d_c                 # Namensnennung steht in der Beschreibung
         t_r, d_r, tags_r, n_r = bounce.meta({"remix": "bergkoenig", "style": "phonk"})
-        assert "Phonk" in n_r and "Bergkönig" in d_r and "#remix" in tags_r
+        assert "Phonk" in n_r and "Bergkönig" not in d_r and "#remix" in tags_r   # Lösung wird in den Kommentaren geraten, nicht verraten
         title, desc, tags, name = bounce.meta("ode_freude")
-        assert name in desc and title and "#musik" in tags
+        assert name not in desc and "Kommentare" in desc and title and "#musik" in tags
     check("Musik-Kugel", _bounce)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
