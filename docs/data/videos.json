@@ -3480,7 +3480,7 @@
   "id": 99,
   "category": "tiere",
   "topic": "Der Fangschreckenkrebs und sein unglaublicher Schlag – wahre Tierfakten, in eigenen Worten spannend und locker erzählt: etwa achtzehn kurze Sätze, höchstens zwölf Wörter je Satz, jeder Satz ein neues Bild. Der erste Satz nennt den Fangschreckenkrebs und kündigt drei Fakten an. Der zweite Satz ist der Cliffhanger: Am Ende zerbricht er sogar Glas. Danach der Reihe nach diese geprüften Fakten (Stichpunkte, nicht wörtlich abschreiben): er ist nur etwa so lang wie eine Hand und lebt in warmen Korallenriffen; Fakt eins, der Schlag: seine zwei Keulen schnellen mit rund achtzig Kilometern pro Stunde nach vorn; der Schlag dauert weniger als drei Millisekunden, etwa fünfzigmal schneller als ein menschlicher Wimpernschlag; Muskeln allein schaffen das nicht, er spannt eine Art Sprungfeder im Arm und lässt sie los; damit knackt er die harten Schalen von Schnecken und Muscheln; Fakt zwei, die Dampfblase: der Schlag ist so schnell, dass vor der Keule eine Dampfblase entsteht; wenn diese Blase kollabiert, wird es für einen Augenblick mehrere tausend Grad heiß und es blitzt kurz auf; die Druckwelle trifft die Beute ein zweites Mal, selbst wenn die Keule verfehlt; Fakt drei, die Augen: Menschen haben drei Arten von Farbrezeptoren, er hat bis zu sechzehn; er sieht ultraviolettes und polarisiertes Licht; Auflösung zum Schluss: normales Aquarienglas kann er zerbrechen; Forscher halten ihn deshalb in Becken aus dickem Kunststoff; Taucher nennen ihn Daumenspalter, weil sein Schlag Finger schwer verletzen kann. Danach genau ein Schlusssatz: All das steckt in einem Tier, das kaum größer ist als eine Hand (in eigenen Worten). Keine weiteren Sätze, nichts über Muskelkraft, Rekorde, Jäger oder Meeresgrund. Einzige Zahlen: drei Fakten, achtzig Kilometer pro Stunde, drei Millisekunden, fünfzigmal, drei und sechzehn Farbrezeptoren. Keine anderen Zahlen, keine Temperatur als Zahl, kein Panzerglas, kein Vergleich mit einer Pistolenkugel, nicht tödlichstes Tier, nicht das Wort Krabbe, keine Wörter wie Punch, one-shot, Cheat-Code, krass. Bildplan: Ort fast immer underwater mit der Figur krebs (kind mantis); bei den Sätzen über den menschlichen Wimpernschlag und über die menschlichen Farbrezeptoren steht nur die Figur du im Bild; beim Satz über die Forscher Ort lab mit der Figur du; beim Satz über die Taucher nur eine Figur taucher (kind diver). Höchstens zwei Grafiken: die Zahl 80 KM/H und ein Vergleich MENSCH 3 gegen KREBS 16, nur an dem Satz, der beide Zahlen nennt. Der letzte Satz ist ein vollständiger neuer Satz, wiederholt nicht den ersten und enthält keine Aufforderung. Titel nennt den Fangschreckenkrebs, ohne das Wort tödlich. Titelbild-Text: SCHNELLER ALS DEIN AUGE. Beschreibung: Der Fangschreckenkrebs schlägt mit rund 80 km/h zu – so schnell, dass das Wasser vor seiner Keule verdampft. Dazu sieht er Farben, die wir uns nicht vorstellen können. Welcher der drei Fakten überrascht dich am meisten?",
-  "status": "rendered",
+  "status": "published",
   "created": 1794741108.0877109,
   "title": "Der Schlag des Fangschreckenkrebses",
   "description": "Der Fangschreckenkrebs schlägt mit rund 80 km/h zu – so schnell, dass das Wasser vor seiner Keule verdampft.\nDazu sieht er Farben, die du dir gar nicht vorstellen kannst.\nWelcher der drei Fakten überrascht dich am meisten?",
@@ -3515,7 +3515,13 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af99c939756739c744237db",
+  "yt_status": "Zernio: published",
+  "yt_id": "YZk3HJB_7S4",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af99c939756739c744237db",
+  "error": null
  },
  {
   "id": 100,
