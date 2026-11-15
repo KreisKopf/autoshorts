@@ -520,7 +520,11 @@ def make_bounce(cat, upload=True):
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
     used = STATE.setdefault("bounce_songs", [])
-    song = bounce.pick_song(used)
+    own = bounce.user_songs()                             # eigene Lieder aus der App haben Vorrang (das am längsten nicht gespielte)
+    if own:
+        song = sorted(own, key=lambda x: used.index(x["asset"]) if x["asset"] in used else -1)[0]
+    else:
+        song = bounce.pick_song(used)
     title, desc, tags, name = bounce.meta(song)
     v = {"id": vid, "category": cat["slug"], "topic": f"Musik-Kugel: {name}", "status": "rendering", "created": time.time(),
          "title": title, "description": desc, "hashtags": tags, "tags": ["musik", "melodie", name.lower(), "satisfying"], "thumb_text": "ERKENNST DU ES?"}
@@ -531,14 +535,16 @@ def make_bounce(cat, upload=True):
     final = OUT / f"{vid}.mp4"
     log(f"Kategorie: {cat['emoji']} {cat['name']} · Melodie: {name}")
     try:
+        if isinstance(song, dict):
+            song = bounce.fetch_user_song(song, work)
         dur, thumb = bounce.render(song, final, seed=vid, work=work)
         cover = OUT / f"{vid}-cover.jpg"
         Image.open(thumb).save(cover, quality=92)
         Image.open(thumb).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
         v.update(status="rendered", duration=round(dur, 1), providers={"text": "Melodie", "voice": "eigener Ton"}, thumb=True, look="musik")
         v["mp4"] = publish_mp4([final, cover])
-        used.append(song)
-        STATE["bounce_songs"] = used[-20:]
+        used.append(song["asset"] if isinstance(song, dict) else song)
+        STATE["bounce_songs"] = used[-40:]
         STATE["last_" + cat["slug"]] = time.time()
         log(f"Video {vid} fertig")
     except Exception as e:

@@ -222,5 +222,12 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   jeder Aufprall exakt auf dem Ton. Ton selbst erzeugt (Glockenspiel + Glasklirren + Hall), oben „Erkennst du das Lied?“, am Ende die Auflösung.
 - NUR gemeinfreie Melodien in `SONGS` (Komponist seit über 70 Jahren tot oder Volkslied) – Chart-Songs sind auch nachgespielt geschützt.
   Neue Melodie: Eintrag `slug: (Name, Komponist, Tempo, _seq("E5:.25 D#5:.25 …"))`, Dauer in Schlägen, `r` = Pause.
+- Physik (`path`): an jedem Ton ein echter Abprall (`_reflect`: Einfallswinkel = Ausfallswinkel, Schwung 0,86–1,08; nur wenn ein
+  langer Ton sonst unerreichbar ist, federt die Scheibe stärker, `SPRINGY`). Gesucht wird mit Rückwärtssuche (geht einen Ton zurück, wenn es
+  nicht weitergeht). Pausen über `MAX_AIR` bekommen stille Zwischen-Aufpralle (`with_ghosts`). `appear_times`: eine Scheibe erscheint erst,
+  wenn die Kugel nicht mehr durch ihren Platz fliegt.
+- Eigene Lieder: App → „Musik-Kugel: eigene Lieder“ lädt Audiodateien ins Release `songs` (Name „Künstler - Titel.mp3“). Sie haben Vorrang
+  (das am längsten nicht gespielte); `song_hits` nimmt die lautesten 40 s (Refrain) und findet die Einsätze (Spektral-Fluss), `file_song`
+  mischt den Original-Ton mit leisem Glasklirren. Rechte an den Liedern liegen beim Nutzer – die Engine lädt keine Lieder selbst aus dem Netz.
 - Kategorie mit `every_days: 2` und `special: "bounce"`: `main.pick` nimmt sie, sobald zwei Tage seit der letzten um sind (`STATE["last_musik"]`),
   sonst nie; `make_bounce` rendert ohne Drehbuch und Sprecher und lädt hoch wie jedes Video.

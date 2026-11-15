@@ -587,6 +587,24 @@ def main():
                 assert (Path(tmp) / "b.mp4").stat().st_size > 10000 and thumb.exists()
         finally:
             bounce.SONGS.pop("_test", None)
+        hits, _t = bounce.notes("fuer_elise")               # echter Abprall: Bewegung entlang der Scheibe bleibt erhalten
+        segs, start = bounce.path(bounce.with_ghosts(hits), 4)
+        for sg in segs[:-1]:
+            nx, ny = sg["n"]
+            vi, vo = sg["v_in"], sg["v_out"]
+            ti = (vi[0] - (vi[0] * nx + vi[1] * ny) * nx, vi[1] - (vi[0] * nx + vi[1] * ny) * ny)
+            to = (vo[0] - (vo[0] * nx + vo[1] * ny) * nx, vo[1] - (vo[0] * nx + vo[1] * ny) * ny)
+            assert math.hypot(ti[0] - to[0], ti[1] - to[1]) < 1.0 and vi[0] * nx + vi[1] * ny < 0
+        ap = bounce.appear_times(segs, start)
+        assert all(a < sg["t"] for a, sg in zip(ap, segs))
+        with tempfile.TemporaryDirectory() as tmp:            # Lied-Modus: Einsätze in einer Aufnahme finden
+            src = Path(tmp) / "src.wav"
+            h2, tot2 = bounce.notes("bergkoenig", start=0.0)
+            bounce.audio(h2, tot2, src, 1)
+            st, ln, found = bounce.song_hits(src, length=20)
+            real = [t for t, _ in h2 if st <= t <= st + ln]
+            good = sum(1 for t, _ in found if min(abs(st + t - r) for r in real) < 0.04)
+            assert good >= 0.9 * len(found) and len(found) >= 0.8 * len(real), (good, len(found), len(real))
         title, desc, tags, name = bounce.meta("ode_freude")
         assert name in desc and title and "#musik" in tags
     check("Musik-Kugel", _bounce)

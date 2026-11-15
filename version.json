@@ -1,6 +1,6 @@
 {
-  "version": "1.8.0",
-  "file": "releases/AutoShorts-1.8.0.cmd",
-  "sha256": "3b023bcf2963f04a83538ab3b47b04e8383b9aae5ad5216fc1f408b70fa5327e",
-  "notes": "Video nachbauen: neuer Knopf „Als Nächstes einplanen“ – der Link kommt in die Warteschlange und wird beim nächsten Termin nachgebaut"
+  "version": "1.9.0",
+  "file": "releases/AutoShorts-1.9.0.cmd",
+  "sha256": "453387cd376b3a49437e4f2037514d787ab5f881c4192b1fa1b237d0c5b2d07f",
+  "notes": "Musik-Kugel: eigene Lieder hochladen (Studio) – die Kugel springt auf die Töne und Beats im Refrain"
 }

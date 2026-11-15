@@ -937,6 +937,12 @@ function viewStudio() {
       <button class="btn" id="rmQueue" style="padding:11px 20px" title="Kommt beim nächsten Video-Termin als Erstes dran">${icon(I.cal)}Als Nächstes einplanen</button></div></div>
     <p class="hint" id="rmState" hidden></p>
   </section>
+  <section class="panel in" style="--i:1" id="songBox">
+    <div class="section-h"><div><h2>🎵 Musik-Kugel: eigene Lieder</h2><p class="hint">Lade Lieder hoch, die die Kugel spielen soll. Die Engine findet selbst die Töne und Beats im Refrain und lässt die Kugel genau darauf abprallen. Ohne eigene Lieder nimmt sie bekannte gemeinfreie Melodien. Name der Datei am besten „Künstler - Titel.mp3“ – das ist die Auflösung am Ende. Achtung: Bei Chart-Liedern liegen die Rechte bei den Labels; YouTube und TikTok können die Einnahmen an sie geben, den Ton stummschalten oder das Video sperren.</p></div></div>
+    <div class="make"><label>Lied (MP3, M4A, WAV, bis 30 MB)<input type="file" id="sgFile" accept="audio/*,.mp3,.m4a,.wav,.ogg,.aac,.flac"></label>
+      <button class="btn accent" id="sgUp" style="padding:11px 20px">${icon(I.plus)}Hochladen</button></div>
+    <div id="sgList" class="hint">Lade Liste …</div>
+  </section>
   <section class="panel in" style="--i:1" id="trendBox">
     <div class="section-h"><div><h2>Was gerade gut läuft</h2><p class="hint" id="tHint"></p></div>
       <div class="inline"><div class="seg" id="tSeg">${["Andere Kanäle", "Alle Trends", "TikTok", "Reddit", "Google", "Wikipedia"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
@@ -983,6 +989,17 @@ function viewStudio() {
       $("#rmFile").value = ""; $("#rmLink").value = ""; PENDING = {label: "Video wird nachgebaut", at: Date.now()}; banner(); setTimeout(pollRuns, 4000);
     } catch (e) { st.textContent = ""; st.hidden = true; toast(e.message, true); }
     b.disabled = false; };
+  loadSongs();
+  $("#sgUp").onclick = async () => { const f = $("#sgFile").files[0], b = $("#sgUp");
+    if (!f) return toast("Bitte zuerst eine Audiodatei wählen.", true);
+    if (f.size > 30e6) return toast("Die Datei ist größer als 30 MB.", true);
+    b.disabled = true; toast(`Lade „${f.name}“ hoch …`);
+    try {
+      const r = await fetch(`/api/song?name=${encodeURIComponent(f.name)}`, {method: "POST", headers: {"Content-Type": f.type || "audio/mpeg", "X-AS": "1"}, body: f});
+      const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || `Fehler ${r.status}`);
+      toast("Lied hochgeladen – die Musik-Kugel spielt es demnächst."); $("#sgFile").value = ""; loadSongs();
+    } catch (e) { toast(e.message, true); }
+    b.disabled = false; };
   $("#rmQueue").onclick = async () => { const link = $("#rmLink").value.trim(), b = $("#rmQueue"), st = $("#rmState");
     if (!link) return toast("Bitte zuerst einen Link von TikTok oder YouTube einfügen.", true);
     if (!/(tiktok\.com|youtube\.com|youtu\.be)\//i.test(link)) return toast("Der Link muss von TikTok oder YouTube sein.", true);
@@ -1000,6 +1017,17 @@ function viewStudio() {
     b.disabled = false; $("#rmGo").disabled = false; };
   $("#qadd").onclick = () => { const t = $("#qtext").value.split("\n").map(s => s.trim()).filter(Boolean); if (!t.length) return toast("Bitte mindestens ein Thema eingeben.", true);
     const now = Date.now() / 1000; t.forEach((x, i) => CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: $("#qcat").value, text: x.slice(0, 300), created: now + i})); persist("Themen eingeplant", $("#qadd")); };
+}
+async function loadSongs() {
+  const box = $("#sgList"); if (!box) return;
+  try {
+    const rel = await gh("GET", "/releases/tags/songs");
+    const list = (rel.assets || []).filter(a => /\.(mp3|m4a|wav|ogg|aac|flac)$/i.test(a.name));
+    box.innerHTML = list.length ? list.map(a => `<div class="qrow"><div>🎵 ${esc(a.name.replace(/\.[^.]+$/, "").replace(/[._]/g, " "))} <span class="chip mute">${(a.size / 1e6).toFixed(1)} MB</span></div><button class="ibtn" data-delsong="${a.id}" aria-label="Lied entfernen">${icon(I.x)}</button></div>`).join("")
+      : `<div class="empty">Noch keine eigenen Lieder – die Kugel spielt gemeinfreie Melodien.</div>`;
+    box.querySelectorAll("[data-delsong]").forEach(b => b.onclick = async () => {
+      try { await gh("DELETE", "/releases/assets/" + b.dataset.delsong); toast("Lied entfernt"); loadSongs(); } catch (e) { toast(e.message, true); } });
+  } catch (e) { box.innerHTML = `<div class="empty">Noch keine eigenen Lieder – die Kugel spielt gemeinfreie Melodien.</div>`; }
 }
 let TSRC = "Andere Kanäle", TCAT = "", TOPIC_TREND = null;
 function nicheItems() { return ((TRENDS.niche || {}).items || []).map(t => ({...t, source: "Kanäle"})); }

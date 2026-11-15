@@ -913,6 +913,51 @@ def _inbox_upload(data, ctype, ext):
 LINK_RE = re.compile(r"^https?://(?:(?:www|m|vm|vt)\.)?(?:youtube\.com/(?:shorts/|watch\?v=)|youtu\.be/|tiktok\.com/)[^\s\"'<>]{1,300}$", re.I)
 
 
+SONG_MAX = 30_000_000          # Lied für die Musik-Kugel höchstens 30 MB
+
+
+def _songs_release():
+    """Release „songs“ (eigene Lieder für die Musik-Kugel) holen oder anlegen; gibt seine ID zurück."""
+    s_, b_ = gh("GET", repo_path("/releases/tags/songs"))
+    if s_ == 200:
+        return json.loads(b_)["id"]
+    rel = gh_json("POST", "/releases", {"tag_name": "songs", "name": "Lieder für die Musik-Kugel", "prerelease": True,
+                                        "body": "Eigene Lieder aus der App. Die Musik-Kugel nimmt jeweils das, das am längsten nicht dran war. "
+                                                "Dateiname „Künstler - Titel.mp3“ = Auflösung am Ende des Videos."})
+    return rel["id"]
+
+
+@route("POST", r"/api/song")
+def song_upload(h):
+    """Lied für die Musik-Kugel annehmen und in das Release „songs“ legen (Datei roh im Körper, Name als ?name=)."""
+    q = urllib.parse.parse_qs(urllib.parse.urlsplit(h.path).query)
+    n = int(h.headers.get("Content-Length") or 0)
+    if n <= 0 or n > SONG_MAX:
+        raise ValueError("Die Datei ist leer oder größer als 30 MB.")
+    raw = (q.get("name") or ["lied.mp3"])[0]
+    stem, _, ext = raw.rpartition(".")
+    ext = ext.lower() if ext.lower() in ("mp3", "m4a", "wav", "ogg", "aac", "flac") else "mp3"
+    stem = re.sub(r"[^A-Za-z0-9ÄÖÜäöüß() ._-]", "", stem or raw).strip(" ._-")[:90] or "Lied"
+    name = re.sub(r"\s+", ".", stem) + "." + ext          # GitHub mag keine Leerzeichen im Dateinamen
+    data = h.rfile.read(n)
+    rid = _songs_release()
+    hd = {"Accept": "application/vnd.github+json", "Authorization": "Bearer " + SET.get("token", ""),
+          "Content-Type": h.headers.get("Content-Type") or "audio/mpeg", "User-Agent": UA, "X-GitHub-Api-Version": "2022-11-28"}
+    url = f"https://uploads.github.com/repos/{SET['owner']}/{SET['repo']}/releases/{rid}/assets?name={urllib.parse.quote(name)}"
+    req = urllib.request.Request(url, data=data, method="POST", headers=hd)
+    try:
+        with urllib.request.urlopen(req, timeout=600) as r:
+            st = r.status
+    except urllib.error.HTTPError as e:
+        st = e.code
+    if st == 422:
+        raise ValueError("Ein Lied mit diesem Namen gibt es schon.")
+    if st not in (200, 201):
+        raise ValueError(f"Hochladen zu GitHub fehlgeschlagen ({st}).")
+    log(f"Lied für die Musik-Kugel hochgeladen: {name}")
+    h._send(200, {"ok": True, "name": name})
+
+
 @route("POST", r"/api/remake/link")
 def remake_link(h):
     """TikTok-/YouTube-Link nachbauen: hier auf dem PC herunterladen (klappt von zu Hause zuverlässiger als auf GitHub) und in den

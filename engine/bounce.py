@@ -96,60 +96,227 @@ def notes(song, start=0.9):
     return out, t + 0.6
 
 
+# ------------------------------------------------------------------ eigenes Lied (aus der App hochgeladen)
+
+def _decode(path, sr=22050, start=0.0, dur=None):
+    args = ["ffmpeg", "-v", "error", "-ss", f"{start:.2f}", "-i", str(path)] + (["-t", f"{dur:.2f}"] if dur else []) + \
+           ["-ac", "1", "-ar", str(sr), "-f", "f32le", "-"]
+    raw = subprocess.run(args, capture_output=True, check=True).stdout
+    return np.frombuffer(raw, dtype=np.float32).copy()
+
+
+def song_hits(path, length=40.0):
+    """Töne und Beats in einem Lied finden: den mitreißendsten Abschnitt (meist der Refrain: lauteste {length} s) und darin die
+    deutlichen Einsätze (Spektral-Fluss mit beweglicher Schwelle). Gibt (Startzeit im Lied, Dauer, [(Zeit, Tonhöhe)]) zurück."""
+    sr = 11025
+    y = _decode(path, sr)
+    if len(y) < sr * 8:
+        raise RuntimeError("Lied zu kurz")
+    total = len(y) / sr
+    length = min(length, total - 1)
+    hop = int(sr * 0.5)                                  # lautester Abschnitt (Refrain) – nicht ganz am Anfang oder Ende
+    rms = np.sqrt(np.convolve(y ** 2, np.ones(hop) / hop, mode="valid")[::hop])
+    win = int(length / 0.5)
+    best, best_e = 0.0, -1.0
+    for k in range(int(len(rms) * 0.12), max(int(len(rms) * 0.12) + 1, len(rms) - win)):
+        e_ = float(np.mean(rms[k:k + win]))
+        if e_ > best_e:
+            best, best_e = k * 0.5, e_
+    seg = y[int(best * sr): int((best + length) * sr)]
+    n_fft, hp = 1024, 128
+    frames = np.lib.stride_tricks.sliding_window_view(seg, n_fft)[::hp] * np.hanning(n_fft)
+    mag = np.abs(np.fft.rfft(frames, axis=1))
+    logm = np.log1p(mag * 10)
+    flux = np.maximum(0, np.diff(logm, axis=0)).sum(axis=1)
+    flux = (flux - flux.mean()) / (flux.std() + 1e-6)
+    med = np.array([np.median(flux[max(0, i - 24): i + 24]) for i in range(len(flux))])
+    dt = hp / sr
+    peaks = [i for i in range(1, len(flux) - 1) if flux[i] > flux[i - 1] and flux[i] >= flux[i + 1] and flux[i] > med[i] + 0.9]
+    peaks.sort(key=lambda i: -flux[i])
+    chosen = []
+    for i in peaks:                                      # stärkste Einsätze zuerst, mindestens 0,17 s Abstand, höchstens ~4 pro Sekunde
+        tt = (i + 1) * dt + 0.67 * n_fft / sr             # Versatz des Analysefensters (gemessen: Einsatz liegt im hinteren Fensterteil)
+        if all(abs(tt - c) >= 0.17 for c, _ in chosen):
+            band = mag[i + 1][int(180 * n_fft / sr): int(1800 * n_fft / sr)]
+            f = (np.argmax(band) + int(180 * n_fft / sr)) * sr / n_fft
+            chosen.append((tt, int(round(69 + 12 * math.log2(max(f, 30) / 440)))))
+        if len(chosen) >= length * 4:
+            break
+    chosen.sort()
+    return best, length, chosen
+
+
+def file_song(path, work, lead=0.9):
+    """Eigenes Lied vorbereiten: Abschnitt schneiden (weich ein/aus), Töne finden, leises Glasklirren auf jeden Aufprall legen."""
+    start, length, found = song_hits(path)
+    hits = [(round(t + lead, 4), m) for t, m in found]
+    total = lead + length + 0.6
+    clip = Path(work) / "song_clip.wav"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{start:.2f}", "-t", f"{length:.2f}", "-i", str(path),
+                    "-af", f"afade=t=in:d=0.4,afade=t=out:st={length - 1.5:.2f}:d=1.5,adelay={int(lead * 1000)}|{int(lead * 1000)},"
+                           f"apad=pad_dur=0.6,loudnorm=I=-14:TP=-1.5", "-ac", "2", "-ar", str(SR), str(clip)], check=True)
+    tink = Path(work) / "tink.wav"
+    audio(hits, total, tink, 1)
+    out = Path(work) / "bounce.wav"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(clip), "-i", str(tink), "-filter_complex",
+                    "[1:a]volume=0.18[t];[0:a][t]amix=inputs=2:duration=first:normalize=0", str(out)], check=True)
+    return hits, total, out
+
+
 # ------------------------------------------------------------------ Flugweg
 
+RESTITUTION = (0.86, 1.08)       # wie viel Schwung ein Abprall behält (Glas federt leicht nach)
+SPRINGY = (1.0, 2.0)             # nur wenn ein langer Ton sonst nicht erreichbar ist: federnde Scheibe (Winkel bleibt echt)
+
+
+def _reflect(v, n, e):
+    """Echter Abprall: die Geschwindigkeit senkrecht zur Scheibe dreht um (mal e), die entlang der Scheibe bleibt."""
+    vn = v[0] * n[0] + v[1] * n[1]
+    return (v[0] - (1 + e) * vn * n[0], v[1] - (1 + e) * vn * n[1])
+
+
+def _fly(p, v, dt):
+    return (p[0] + v[0] * dt, p[1] + v[1] * dt + 0.5 * G * dt * dt), (v[0], v[1] + G * dt)
+
+
+def _ok_target(q, v, dt):
+    """Landet die Kugel im Feld und fliegt dabei nicht oben aus dem Bild?"""
+    x0, y0, x1, y1 = BOX
+    if not (x0 <= q[0] <= x1 and y0 <= q[1] <= y1):
+        return False
+    if v[1] < 0:                                         # steigt: der Scheitelpunkt darf nicht oben aus dem Bild (über den Titel) fliegen
+        p_y = q[1] - v[1] * dt - 0.5 * G * dt * dt
+        if p_y - v[1] ** 2 / (2 * G) < 380:
+            return False
+    return True
+
+
+def _candidates(p, v_in, t, dn, rnd, recent):
+    """Mögliche echte Abpraller an diesem Punkt, beste zuerst (erst normale, dann federnde Scheiben)."""
+    x0, y0, x1, y1 = BOX
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    sp_in = math.hypot(*v_in)
+    a_in = math.atan2(-v_in[1], -v_in[0])                # Richtung, aus der die Kugel kommt
+    out = []
+    for e_rng in (RESTITUTION, SPRINGY):
+        cands = []
+        for _ in range(200):
+            ang = a_in + rnd.uniform(-1.45, 1.45)        # Normale zeigt zur Kugel hin (sonst kein Aufprall)
+            n = (math.cos(ang), math.sin(ang))
+            if n[0] * v_in[0] + n[1] * v_in[1] > -0.15 * sp_in:
+                continue
+            vo = _reflect(v_in, n, rnd.uniform(*e_rng))
+            q, v_next = _fly(p, vo, dn)
+            if not _ok_target(q, vo, dn):
+                continue
+            sp = math.hypot(*vo)
+            sc = max(0, sp - 2700) * 3 + max(0, 500 - sp) * 2
+            sc += (abs(q[0] - cx) / (x1 - x0) + abs(q[1] - cy) / (y1 - y0)) * 120          # lieber in der Mitte bleiben
+            sc += max(0, 130 - math.hypot(q[0] - p[0], q[1] - p[1])) * 30                 # nächste Scheibe nicht direkt daneben
+            sc += sum(max(0, 170 - math.hypot(q[0] - r[0], q[1] - r[1])) * 8 for rt, r in recent if t - rt < SHOW_AHEAD + 0.4)
+            cands.append((sc, n, vo, q, v_next))
+        out += sorted(cands, key=lambda c: c[0])[:14]
+    return out
+
+
+MAX_AIR = 1.35                   # länger kann die Kugel nicht fliegen, ohne oben aus dem Bild zu steigen (Schwerkraft)
+
+
+def with_ghosts(hits):
+    """Lange Pausen (Haltetöne, Pausen, ruhige Stellen im Lied): stille Zwischen-Aufpralle einfügen (Tonhöhe None = kein Ton),
+    damit die Kugel nie physikalisch unmöglich lange in der Luft hängt."""
+    out = []
+    for k, (t, m) in enumerate(hits):
+        out.append((t, m))
+        if k + 1 < len(hits):
+            gap = hits[k + 1][0] - t
+            n = int(gap / MAX_AIR)
+            for j in range(1, n + 1):
+                out.append((round(t + gap * j / (n + 1), 4), None))
+    return out
+
+
 def path(hits, seed=0):
-    """Aufprallpunkte und Geschwindigkeiten: zwischen zwei Tönen eine echte Wurfparabel, am Aufprall eine Scheibe, deren Lage die
-    Richtungsänderung erklärt. Gibt [{t, p, v_in, v_out, n}] und die Startposition zurück."""
+    """Flugweg mit echter Physik: zwischen zwei Tönen eine Wurfparabel, an jedem Ton ein echter Abprall an einer Scheibe
+    (Einfallswinkel = Ausfallswinkel, etwas Schwungverlust; nur wo ein langer Ton es verlangt, federt die Scheibe stärker).
+    Gesucht wird je Ton die Neigung der Scheibe, mit der die Kugel genau zum nächsten Ton wieder auf eine Scheibe trifft – im Bild,
+    nicht zu schnell, nicht auf anderen Scheiben. Findet sich keine, geht die Suche einen Ton zurück und probiert dort eine andere.
+    Gibt [{t, p, v_in, v_out, n}] und die Startposition zurück."""
     rnd = random.Random(seed)
     x0, y0, x1, y1 = BOX
-    start = (540.0 + rnd.uniform(-120, 120), y0 - 60.0)
-    t_prev, p, v = 0.0, start, (0.0, 0.0)
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    start = (cx + rnd.uniform(-120, 120), y0 - 60.0)
+    p0, v0 = _fly(start, (0.0, 0.0), hits[0][0])
+    N = len(hits)
+    stack = []                                           # je Ton: {p, v_in, cands, idx}
+    steps = 0
+    i = 0
+    while i < N:
+        steps += 1
+        if i == len(stack):
+            p, v_in = (p0, v0) if i == 0 else (stack[i - 1]["cands"][stack[i - 1]["idx"]][3], stack[i - 1]["cands"][stack[i - 1]["idx"]][4])
+            dn = max(0.05, (hits[i + 1][0] - hits[i][0]) if i + 1 < N else 0.7)
+            recent = [(hits[k][0], stack[k]["p"]) for k in range(max(0, i - 14), i)]
+            stack.append({"p": p, "v_in": v_in, "dn": dn, "cands": _candidates(p, v_in, hits[i][0], dn, rnd, recent), "idx": 0})
+        fr = stack[i]
+        if fr["idx"] < len(fr["cands"]) or i == 0 or steps > 6000:
+            if fr["idx"] >= len(fr["cands"]):            # Notfall (praktisch nie): Ziel in der Mitte, Abprall nur ungefähr
+                p, v_in, dn = fr["p"], fr["v_in"], fr["dn"]
+                q = (cx + rnd.uniform(-150, 150), cy + rnd.uniform(-150, 150))
+                vo = ((q[0] - p[0]) / dn, (q[1] - p[1] - 0.5 * G * dn * dn) / dn)
+                dv = (vo[0] - v_in[0], vo[1] - v_in[1])
+                ln = math.hypot(*dv) or 1.0
+                fr["cands"].append((0, (dv[0] / ln, dv[1] / ln), vo, q, (vo[0], vo[1] + G * dn)))
+                fr["idx"] = len(fr["cands"]) - 1
+            i += 1
+            continue
+        stack.pop()                                      # keine Möglichkeit mehr: einen Ton zurück, dort die nächste Neigung probieren
+        i -= 1
+        stack[i]["idx"] += 1
+        del stack[i + 1:]
     out = []
-    recent = []
-    for i, (t, _m) in enumerate(hits):
-        dt = max(0.05, t - t_prev)
-        if i == 0:                                       # erster Ton: aus der Ruhe fallen
-            p_hit = (p[0] + v[0] * dt, p[1] + v[1] * dt + 0.5 * G * dt * dt)
-            v_in = (v[0], v[1] + G * dt)
-        else:
-            p_hit, v_in = p, v
-        # nächstes Ziel suchen: im Feld, nicht auf alten Scheiben, gleich schnell wie vorher (sieht nach echtem Abprall aus)
-        nxt = hits[i + 1][0] if i + 1 < len(hits) else t + 0.6
-        dn = max(0.05, nxt - t)
-        reach = 90 + 1100 * min(dn, 0.7)
-        best, best_s = None, 1e18
-        sp_in = math.hypot(*v_in)
-        for _ in range(140):
-            tx = p_hit[0] + rnd.uniform(-1, 1) * reach
-            ty = p_hit[1] + rnd.uniform(-0.8, 0.6) * reach
-            if not (x0 <= tx <= x1 and y0 <= ty <= y1):     # außerhalb: verwerfen statt an den Rand ziehen (sonst Scheiben übereinander)
-                continue
-            vo = ((tx - p_hit[0]) / dn, (ty - p_hit[1] - 0.5 * G * dn * dn) / dn)
-            sp = math.hypot(*vo)
-            dv = (vo[0] - v_in[0], vo[1] - v_in[1])
-            if math.hypot(*dv) < 120:                     # kaum Richtungswechsel: keine sichtbare Scheibe möglich
-                continue
-            # Scheitelpunkt der Parabel darf nicht über den Bildrand fliegen
-            apex_y = p_hit[1] - (vo[1] ** 2) / (2 * G) if vo[1] < 0 else p_hit[1]
-            s = abs(sp - sp_in) * (0.6 if i else 0.2) + max(0, 400 - apex_y) * 8 + max(0, sp - 2600) * 2
-            s += max(0, 130 - math.hypot(tx - p_hit[0], ty - p_hit[1])) * 40   # nächste Scheibe nicht direkt neben der letzten
-            s += sum(max(0, 170 - math.hypot(tx - q[0], ty - q[1])) * 8 for qt, q in recent if t - qt < SHOW_AHEAD + 0.4)   # Scheiben, die gleichzeitig zu sehen sind, überlappen nicht
-            if s < best_s:
-                best, best_s = (tx, ty, vo), s
-        if best is None:
-            tx, ty = 540.0, (y0 + y1) / 2
-            best = (tx, ty, ((tx - p_hit[0]) / dn, (ty - p_hit[1] - 0.5 * G * dn * dn) / dn))
-        v_out = best[2]
-        dvx, dvy = v_out[0] - v_in[0], v_out[1] - v_in[1]
-        ln = math.hypot(dvx, dvy) or 1.0
-        n = (dvx / ln, dvy / ln)                          # Flächennormale der Scheibe (zeigt dahin, wohin die Kugel abprallt)
-        out.append({"t": t, "p": p_hit, "v_in": v_in, "v_out": v_out, "n": n})
-        recent.append((t, p_hit))
-        p = (best[0], best[1])
-        v = (v_out[0], v_out[1] + G * dn)
-        t_prev = t
+    for k, fr in enumerate(stack):
+        _sc, n, vo, _q, _vn = fr["cands"][fr["idx"]]
+        out.append({"t": hits[k][0], "p": fr["p"], "v_in": fr["v_in"], "v_out": vo, "n": n})
     return out, start
+
+
+def _can_continue(p, v_in, hits, j, rnd):
+    dn = max(0.05, (hits[j + 1][0] - hits[j][0]) if j + 1 < len(hits) else 0.7)
+    sp_in = math.hypot(*v_in)
+    a_in = math.atan2(-v_in[1], -v_in[0])
+    for k in range(80):
+        ang = a_in + rnd.uniform(-1.35, 1.35)
+        n = (math.cos(ang), math.sin(ang))
+        if n[0] * v_in[0] + n[1] * v_in[1] > -0.15 * sp_in:
+            continue
+        vo = _reflect(v_in, n, rnd.uniform(*(RESTITUTION if k < 50 else SPRINGY)))
+        q, _v = _fly(p, vo, dn)
+        if _ok_target(q, vo, dn):
+            return True
+    return False
+
+
+def appear_times(segs, start):
+    """Wann darf jede Scheibe erscheinen? Spätestens SHOW_AHEAD vor ihrem Ton – aber erst, wenn die Kugel nicht mehr durch ihren
+    Platz fliegt (sonst flöge sie sichtbar durch eine Scheibe hindurch)."""
+    out = []
+    reach = BALL_R + PANE_W / 2 + 6
+    for j, s in enumerate(segs):
+        nx, ny = s["n"]
+        c = (s["p"][0] - nx * (BALL_R + PANE_W / 2), s["p"][1] - ny * (BALL_R + PANE_W / 2))
+        ux, uy = -ny, nx                                  # Richtung entlang der Scheibe
+        appear = s["t"] - SHOW_AHEAD
+        tt = max(0.0, appear)
+        while tt < s["t"] - 0.04:
+            bx, by = ball_at(tt, segs, start)
+            dx, dy = bx - c[0], by - c[1]
+            along = max(-PANE_LEN / 2, min(PANE_LEN / 2, dx * ux + dy * uy))
+            if math.hypot(dx - along * ux, dy - along * uy) < reach:
+                appear = tt + 0.05
+            tt += 1 / 120
+        out.append(min(appear, s["t"] - 0.08))
+    return out
 
 
 def ball_at(t, segs, start):
@@ -179,6 +346,8 @@ def audio(hits, total, out: Path, seed=0):
     L = int(1.6 * SR)
     tt = np.arange(L) / SR
     for t, m in hits:
+        if m is None:                                    # stiller Zwischen-Aufprall: kein Ton
+            continue
         f = _freq(m)
         note = (np.sin(2 * np.pi * f * tt) * np.exp(-tt * 3.2) * 0.62
                 + np.sin(2 * np.pi * 2 * f * tt) * np.exp(-tt * 6.0) * 0.22
@@ -254,24 +423,30 @@ def _text_center(d, y, text, size, fill):
 
 def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=True, work: Path = None):
     """Ganzes Video rendern (Bild + Ton). Gibt (Dauer, Pfad zum Vorschaubild) zurück. work = Ordner für Zwischendateien."""
-    name, who, _bpm, _seq_ = SONGS[song]
-    hits, total = notes(song)
+    work = Path(work) if work else out.parent
+    if isinstance(song, dict):                           # eigenes Lied: {"file", "name", "who"}
+        name, who = song.get("name") or "?", song.get("who") or ""
+        hits, total, wav = file_song(song["file"], work)
+    else:
+        name, who, _bpm, _seq_ = SONGS[song]
+        hits, total = notes(song)
+        wav = work / "bounce.wav"
+        audio(hits, total, wav, seed)
+    hits = with_ghosts(hits)
     segs, start = path(hits, seed)
     rnd = random.Random(seed)
     hue0 = rnd.random()
-    work = Path(work) if work else out.parent
-    wav = work / "bounce.wav"
-    audio(hits, total, wav, seed)
     bg = _background(seed)
     panes = []
+    appears = appear_times(segs, start)
     for i, s in enumerate(segs):
         nx, ny = s["n"]
         cx, cy = s["p"][0] - nx * (BALL_R + PANE_W / 2), s["p"][1] - ny * (BALL_R + PANE_W / 2)
         ang = math.atan2(ny, nx) + math.pi / 2           # Scheibe liegt quer zur Normale
-        col = _hue_col(hue0 + 0.75 * i / max(1, len(segs)) + (hits[i][1] % 12) * 0.004)
+        col = _hue_col(hue0 + 0.75 * i / max(1, len(segs)) + ((hits[i][1] or 0) % 12) * 0.004)
         shards = [(rnd.uniform(-1, 1), rnd.uniform(-1, 1), rnd.uniform(-260, 260), rnd.uniform(-420, -60), rnd.uniform(-9, 9), rnd.uniform(10, 26))
                   for _ in range(7)]
-        panes.append({"t": s["t"], "c": (cx, cy), "a": ang, "col": col, "shards": shards, "v": s["v_out"]})
+        panes.append({"t": s["t"], "c": (cx, cy), "a": ang, "col": col, "shards": shards, "v": s["v_out"], "show": s["t"] - appears[i]})
     n_frames = int(total * FPS)
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
                            "-r", str(FPS), "-i", "-", "-i", str(wav), "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
@@ -290,8 +465,8 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Tr
                 dtp = pn["t"] - t
                 cx, cy = pn["c"]
                 ca, sa = math.cos(pn["a"]), math.sin(pn["a"])
-                if 0 < dtp <= SHOW_AHEAD:                # Scheibe wartet (blendet ein)
-                    k = min(1.0, (SHOW_AHEAD - dtp) / 0.35)
+                if 0 < dtp <= pn["show"]:                # Scheibe wartet (blendet ein – erst wenn die Kugel nicht mehr durchfliegt)
+                    k = min(1.0, (pn["show"] - dtp) / 0.2)
                     hl = PANE_LEN / 2 * (0.6 + 0.4 * k)
                     pts = []
                     for sx, sy in ((-hl, -PANE_W / 2), (hl, -PANE_W / 2), (hl, PANE_W / 2), (-hl, PANE_W / 2)):
@@ -342,6 +517,31 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Tr
     return total, thumb
 
 
+def user_songs():
+    """Eigene Lieder aus dem Release „songs“ (in der App hochgeladen): [{"asset", "name", "who"}]. Dateiname „Künstler - Titel.mp3“."""
+    import json
+    import re
+    try:
+        r = subprocess.run(["gh", "release", "view", "songs", "--json", "assets"], capture_output=True, text=True, timeout=60)
+        assets = json.loads(r.stdout or "{}").get("assets") or [] if r.returncode == 0 else []
+    except Exception:  # noqa: BLE001
+        return []
+    out = []
+    for a in assets:
+        nm = str(a.get("name") or "")
+        if not re.search(r"\.(mp3|m4a|wav|ogg|aac|flac)$", nm, re.I):
+            continue
+        stem = re.sub(r"\.[^.]+$", "", nm).replace(".", " ").replace("_", " ").strip()
+        who, _, title = stem.partition(" - ") if " - " in stem else ("", "", stem)
+        out.append({"asset": nm, "name": (title or stem).strip(), "who": who.strip()})
+    return out
+
+
+def fetch_user_song(song, work):
+    subprocess.run(["gh", "release", "download", "songs", "-p", song["asset"], "-D", str(work), "--clobber"], check=True, capture_output=True, timeout=300)
+    return {**song, "file": str(Path(work) / song["asset"])}
+
+
 def pick_song(used):
     """Melodie, die am längsten nicht dran war."""
     order = list(SONGS)
@@ -351,12 +551,12 @@ def pick_song(used):
 
 def meta(song):
     """Titel, Beschreibung, Hashtags fürs Hochladen (Name des Lieds erst in der Beschreibung – im Video wird geraten)."""
-    name, who, _b, _s = SONGS[song]
+    name, who = (song.get("name"), song.get("who") or "") if isinstance(song, dict) else SONGS[song][:2]
     titles = ["Erkennst du dieses Lied? 🎵", "Diese Kugel spielt ein Lied, das jeder kennt", "Jede Scheibe ein Ton – welches Lied ist das?",
               "Nach drei Tönen weißt du es 🎶"]
     title = random.choice(titles)
     desc = (f"Jede Glasscheibe ist ein Ton – erkennst du das Lied, bevor die Kugel fertig ist? 🎵\n"
-            f"Auflösung am Ende: {name} ({who}).\n"
+            f"Auflösung am Ende: {name}" + (f" ({who})" if who else "") + ".\n"
             "Wie viele Töne hast du gebraucht? Schreib es in die Kommentare!")
     tags = ["#musik", "#melodie", "#satisfying", "#erkennstdudaslied", "#klassik", "#shorts"]
     return title, desc, tags, name
