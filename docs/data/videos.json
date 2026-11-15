@@ -3881,5 +3881,50 @@
   "status": "error",
   "created": 1794769945.554747,
   "error": "Kein Bildplan zu bekommen (Text-KI nicht erreichbar) – Video wird nicht gebaut"
+ },
+ {
+  "id": 109,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Ostsee plötzlich komplett zufriert? – Vorgaben: Neun Punkte in dieser Reihenfolge, jeder Punkt ein bis zwei Sätze, keine Füllsätze: (1) Containerschiffe und Fähren stecken im Eis fest, die Häfen stehen still. (2) Die Ostsee friert leichter zu als die Nordsee, weil ihr Wasser viel weniger Salz enthält. (3) Unter dem Eis wird für die Fische der Sauerstoff knapp. (4) Schweinswale, die einzigen Wale der Ostsee (nicht Delfine sagen), müssen zum Atmen auftauchen und brauchen Atemlöcher im Eis. (5) Du könntest zu Fuß von Deutschland nach Dänemark und Schweden laufen. (6) An der Küste wird es kälter, weil das Meer im Winter nicht mehr wärmt. (7) Finte: Klingt nach Science-Fiction, ist aber schon passiert: Im Winter 1658 marschierte eine schwedische Armee über das Eis der Ostsee nach Dänemark. (8) Im Winter 1987 war die Ostsee zuletzt fast komplett zugefroren. (9) Pointe als letzter Satz: Ganz im Norden friert die Ostsee bis heute jeden Winter zu. Keine anderen Jahreszahlen, keine erfundenen Zahlen (keine Sekunden-, Grad-, Meter- oder Prozentangaben), kein Bärtierchen, keine Wirtshäuser, keine Heizkosten, kein Klimawandel, kein Ausblick in die Zukunft, kein „Wer weiß“, das Wort „eisern“ nicht verwenden. Der Einstieg verspricht nur, was das Video einlöst. Letzter Satz: vollständiger Satz, kein Gedankenstrich am Ende. Ort der Eis-Szenen: icesea. Titelbild-Text: OSTSEE ZUGEFROREN",
+  "status": "rendered",
+  "created": 1794770575.8210566,
+  "title": "Was wäre, wenn die Ostsee plötzlich zufriert?",
+  "description": "Was passiert, wenn die Ostsee komplett zufriert?\nGehe das frostige Szenario Schritt für Schritt durch.\nTraust du dich, über das dicke Eis zu laufen?",
+  "hashtags": [
+   "#shorts",
+   "#ostsee",
+   "#eis",
+   "#wissenschaft",
+   "#experiment",
+   "#viral",
+   "#foryou"
+  ],
+  "tags": [
+   "ostsee",
+   "eis",
+   "zugefroren",
+   "winter",
+   "schiff",
+   "fische",
+   "schweinswal",
+   "dänemark",
+   "schweden",
+   "kälte",
+   "geschichte"
+  ],
+  "thumb_text": "OSTSEE ZUGEFROREN",
+  "missing": [
+   "hafen"
+  ],
+  "cover_ms": 70320,
+  "duration": 70.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
