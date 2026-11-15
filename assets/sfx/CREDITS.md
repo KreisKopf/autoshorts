@@ -3,6 +3,15 @@
 Alle Klänge sind frei nutzbar (MIT bzw. CC0/Public Domain). Automatisch erstellt.
 
 - Soundeffekte: earshot (Leon Lin) (MIT) https://github.com/Leonxlnx/earshot
+- Musik (spannend): Cinematic Dramatic Buildup von BurghRecords (CC0 1.0) https://freesound.org/people/BurghRecords/sounds/456102
+- Musik (spannend): Atmosphere Entry.wav von DeVern (CC0 1.0) https://freesound.org/people/DeVern/sounds/385078
+- Musik (spannend): Wide Cinematic Ambiet for Tension Effect von The-Sacha-Rush (CC0 1.0) https://freesound.org/people/The-Sacha-Rush/sounds/493741
+- Musik (dunkel): Dark Ambient backgrounding 001 von steaq (CC0 1.0) https://freesound.org/people/steaq/sounds/238251
+- Musik (dunkel): Dark Ambient 1 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415891
+- Musik (dunkel): Dark Ambient 2 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415890
+- Musik (hell): Blues Impro von kasa90 (CC0 1.0) https://freesound.org/people/kasa90/sounds/162184
+- Musik (hell): Stepper - Piano Music with drums and a cow von supervanz (CC0 1.0) https://freesound.org/people/supervanz/sounds/434164
+- Musik (hell): Jazzy café ambience.wav von dersinnsspace (CC0 1.0) https://freesound.org/people/dersinnsspace/sounds/421647
 - Geräusch rain: Soft Rain Ambience edlarez vsnr.wav von visionear (CC0 1.0) https://freesound.org/people/visionear/sounds/573335
 - Geräusch rain: light rain ambience von seth-m (CC0 1.0) https://freesound.org/people/seth-m/sounds/270349
 - Geräusch storm: Thunderstorm with heavy rain2.wav von Audeption (CC0 1.0) https://freesound.org/people/Audeption/sounds/425173
@@ -29,12 +38,6 @@ Alle Klänge sind frei nutzbar (MIT bzw. CC0/Public Domain). Automatisch erstell
 - Geräusch underwater: Deep Sea Ambience von jhumbucker (CC0 1.0) https://freesound.org/people/jhumbucker/sounds/193822
 - Geräusch cave: Dripping water von Electroviolence (CC0 1.0) https://freesound.org/people/Electroviolence/sounds/234554
 - Geräusch cave: Dark Dungeon Ambience von Kinoton (CC0 1.0) https://freesound.org/people/Kinoton/sounds/516566
-- Musik (spannend): Cinematic Dramatic Buildup von BurghRecords (CC0 1.0) https://freesound.org/people/BurghRecords/sounds/456102
-- Musik (spannend): Atmosphere Entry.wav von DeVern (CC0 1.0) https://freesound.org/people/DeVern/sounds/385078
-- Musik (spannend): Wide Cinematic Ambiet for Tension Effect von The-Sacha-Rush (CC0 1.0) https://freesound.org/people/The-Sacha-Rush/sounds/493741
-- Musik (dunkel): Dark Ambient backgrounding 001 von steaq (CC0 1.0) https://freesound.org/people/steaq/sounds/238251
-- Musik (dunkel): Dark Ambient 1 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415891
-- Musik (dunkel): Dark Ambient 2 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415890
-- Musik (hell): Blues Impro von kasa90 (CC0 1.0) https://freesound.org/people/kasa90/sounds/162184
-- Musik (hell): Stepper - Piano Music with drums and a cow von supervanz (CC0 1.0) https://freesound.org/people/supervanz/sounds/434164
-- Musik (hell): Jazzy café ambience.wav von dersinnsspace (CC0 1.0) https://freesound.org/people/dersinnsspace/sounds/421647
+- Musik (gutelaune): Arcade Aroma von Touda (CC0 1.0) https://freesound.org/people/Touda/sounds/614130
+- Musik (gutelaune): Positive Weekend von Antenalosmusic (CC0 1.0) https://freesound.org/people/Antenalosmusic/sounds/713065
+- Musik (gutelaune): Game music melody von MaoDin204 (CC0 1.0) https://freesound.org/people/MaoDin204/sounds/721776
