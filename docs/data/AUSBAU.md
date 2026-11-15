@@ -206,6 +206,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Dinge neben dem groß gezeichneten Tier sind mindestens 300 px hoch (`_PROP_MIN`), Blitz, Glasscheibe und Feder stehen auch bei dunkler Stimmung im Licht (`GLOWS`).
   Küchendampf (`steam`) gibt es unter Wasser nicht. „Mehrere tausend Grad“ ergibt keinen Zähler „1.000 GRAD“ (`find_figure`). `writer.polish` streicht den
   Schlusssatz auch dann, wenn er den ersten mit Vorspann wiederholt („Und hier kommen drei Fakten …“). Selbsttest: `_one_animal`.
+  Zielt das Tier auf ein Ding (Glas, Dampfblase, Feder), schwimmt es nicht aus dem Bild (`_vary_repeats` lässt solche Szenen in Ruhe). Eine Figur „taucher“
+  bleibt in einem Satz über Taucher ein Taucher und wird nicht zum Krebs. Titelbild (`stage.poster`): Nennt der Kern des Themas das Tier, steht das Tier auf dem
+  Titelbild – Gegenstände werden nur noch im Kern des Themas gesucht, nicht in den Vorgaben dahinter („kein Panzerglas“ ergab eine Glasscheibe als Motiv).
 
 ## Musik-Kugel (Video-Art `musik`, alle zwei Tage)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten

@@ -1450,6 +1450,12 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) != "glass"]   # Aquarium statt Trinkglas
         if places.resolve(backdrop(sc)) == "underwater":          # unter Wasser schwimmen Meerestiere, keine Menschen
             sea_k = None if any_now else sea_now or (sea_last if not _re0.search(r"\bfisch|\bhai", txt0) else None)
+            div_s = [a for a in acts if _re0.search(DIVER_ID_RE, str(a.get("id") or "").lower()) or str(a.get("kind") or "").lower() == "diver"]
+            if div_s and not sea_now and _re0.search(DIVER_TEXT_RE, txt0):
+                for a in div_s:                           # „Taucher nennen ihn Daumenspalter“: Die Figur „taucher“ bleibt ein Taucher und wird nicht zum Krebs
+                    a["kind"] = "diver"
+                sc["actors"] = acts = div_s[:1]
+                sea_k = None
             for a in acts:
                 aid_s = str(a.get("id") or "").lower()
                 own_s = _sea_named(aid_s.replace("_", " ")) or (None if sea_last else _sea_kind(aid_s.replace("_", " "), True))   # die Kennung nennt das Tier („qualle“, „fangschrecke“): das gilt vor dem Folgesatz-Tier; ein bloßes „krebs“ meint das Tier von eben
@@ -2016,6 +2022,9 @@ def direct(scenes, times, topic="", style="", look=""):
                     flip_t = sea_thing == add_t           # zweimal hintereinander dasselbe Ding: das Bild steht gespiegelt
                     sc["props"] = [{"type": add_t, "pos": (330 if flip_t else 670) if add_t == "cavitation" else (220 if flip_t else 860)}]
                     seas[0].update(pos=(700 if flip_t else 380) if add_t == "cavitation" else (680 if flip_t else 400), facing="left" if flip_t else "right")
+                    seas[0].pop("to", None)
+                    if str(seas[0].get("action") or "") in ("walk", "run"):
+                        seas[0]["action"] = "idle"
                     sea_thing = None if flip_t else add_t
                     sc["_near"] = add_t != "cavitation"
                 else:
@@ -2663,6 +2672,8 @@ def _vary_repeats(scenes):
         sc, prev = scenes[i], scenes[i - 1]
         if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert") or sc.get("float") or _look_sig(sc) != _look_sig(prev):
             continue
+        if sc.get("_sea") and sc.get("props"):
+            continue                                      # das Tier zielt auf ein Ding (Glas, Dampfblase, Feder): es schwimmt nicht davon weg
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         crit = [a for a in acts if a.get("kind")]
         humans = [a for a in acts if not a.get("kind")]
@@ -3527,10 +3538,13 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     hero = None
     kind = str(spec.get("kind") or "").lower()
     cast_kind = next((str(v.get("kind")).lower() for v in (cast or {}).values() if isinstance(v, dict) and v.get("kind")), "")
-    low = str(topic or "").lower()
+    low = topic_head(topic).lower()                      # nur der Kern des Themas – in den Vorgaben dahinter steht auch, was NICHT vorkommen soll („kein Panzerglas“)
     keys = [extras.PROP_ALIASES.get(str(p.get("type") if isinstance(p, dict) else p).lower(), str(p.get("type") if isinstance(p, dict) else p).lower())
             for p in (spec.get("props") or [])]
     keys += [k for pat, k in _lib_props() + TEXT_PROPS if _re.search(pat, low)]
+    hk = str(spec.get("hero_kind") or "").lower()
+    if hk in extras.CREATURES and (_sea_named(low) == hk or any(k_ == hk and _re.search(pat, low) for pat, k_ in TOPIC_CREATURES + ANY_CREATURES)):
+        keys = []                                         # das Thema nennt das Tier: Es gehört aufs Titelbild, kein Gegenstand aus dem Text
     for k in keys:
         if k in extras.PROPS:
             lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
