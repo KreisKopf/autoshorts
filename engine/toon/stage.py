@@ -1244,6 +1244,8 @@ def direct(scenes, times, topic="", style="", look=""):
                 g0.pop("label", None)
         if ov_c and str(ov_c.get("type") or "") == "counter" and not spoken_number(ov_c.get("value"), sc["text"]):
             sc["overlay"] = None                          # Zahl in der Einblendung, die der Sprecher gar nicht nennt: weg damit
+        if ov_c and str(ov_c.get("type") or "") == "bar" and not spoken_number(ov_c.get("value"), sc["text"]):
+            sc["overlay"] = ov_c = None                   # Füllstand „SAUERSTOFF 15 %“ zu einem Satz ohne Zahl: die Prozentzahl ist erfunden
         if ov_c and str(ov_c.get("type") or "") == "thermo" and (not spoken_number(ov_c.get("value"), sc["text"])
                                                                   or not -90 <= (graphics._num(str(ov_c.get("value"))) or 0) <= 120):
             sc["overlay"] = ov_c = None                   # Thermometer mit einer Zahl, die niemand sagt (44000 statt 4500), oder jenseits der Skala

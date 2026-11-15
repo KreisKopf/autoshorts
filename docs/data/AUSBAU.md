@@ -244,6 +244,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
 - Doppelt erzähltes Drehbuch (`writer.repeat_trouble`, nach Video 109): Stehen zwei oder mehr Aussagen fast wortgleich doppelt im Drehbuch (die Text-KI
   schreibt die Vorgaben ab und erzählt dann alles noch einmal, der Schlusssatz steht mitten im Video), lässt `write_script` es bis zu zweimal neu schreiben
   und baut sonst kein Video. `fix_years` läuft nach Lektorat und Spannungsbogen noch einmal.
+- Füllstand (`bar`) aus dem Drehbuch mit einer Zahl, die der Sprecher nicht nennt („SAUERSTOFF 15 %“ zu „der Sauerstoff wird knapp“), entfällt – wie schon
+  Zähler und Thermometer mit ungesagter Zahl. Selftest: `_ice`.
 - Geprüfte Jahreszahlen (`writer.fix_years`): Nennt das Thema Jahreszahlen und verlangt „Keine anderen Jahreszahlen“, wird eine abweichende Jahreszahl
   desselben Jahrhunderts im Sprechertext (ausgeschrieben, `year_words`) und in Einblendungen auf die vorgegebene gesetzt („neunzehnhunderteinundachtzig“ → 1987).
 - Alltags-Geschichten mit Dingen als Figur (Prüfung 15.11.2026, „Ich lebte wie 1348“ – `stage._household`, Schlussdurchgang in `direct`): Heißt eine Figur

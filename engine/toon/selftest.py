@@ -1012,6 +1012,7 @@ def main():
                 assert lay.getbbox(), f"{k} zeichnet nichts"
     check("Werkstatt: Motor, Kran, Auto, Getriebe, Tacho", _garage)
 
+    from ..writer import repeat_trouble as _w_rep
     def _ice():                                                  # zugefrorenes Meer: Eisfläche statt Wellen/Gebirge, Schiff im Eis, Eisdecke über dem Wasser, Atemloch
         from PIL import Image
         sea_bd = {"sky": "day", "ground": "snow", "elements": ["sea"]}
@@ -1061,6 +1062,19 @@ def main():
         assert places.resolve(stage.backdrop(s2[3])) not in stage.MAPS and s2[3].get("actors"), f"Karte ohne Land im Satz: {s2[3].get('place')}"
         for sc_ in s2:
             assert frame(sc_, {"du": {}}) is not None
+        s3 = stage.direct([{"text": "Wenn die Ostsee zufriert, stecken Schiffe im Eis fest.", "place": "icesea", "props": ["ship"]},
+                           {"text": "Unter dem Eis wird für die Fische der Sauerstoff knapp.", "place": "underwater", "overlay": {"type": "bar", "label": "SAUERSTOFF", "value": 15}},
+                           {"text": "Nur noch fünfzehn Prozent Sauerstoff bleiben den Fischen.", "place": "underwater", "overlay": {"type": "bar", "label": "SAUERSTOFF", "value": 15}},
+                           {"text": "Und auch in der moderneren Geschichte gab es einen solchen Rekordwinter.", "place": "icesea", "shot": "event"},
+                           {"text": "Schweinswale sind die einzigen Wale hier und müssen regelmäßig atmen.", "place": "icesea", "shot": "event"}],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(5)], "Was wäre, wenn die Ostsee plötzlich komplett zufriert?", "whatif")
+        assert not (isinstance(s3[1].get("overlay"), dict) and s3[1]["overlay"].get("type") == "bar"), f"Füllstand mit erfundener Zahl: {s3[1].get('overlay')}"
+        assert isinstance(s3[2].get("overlay"), dict) and s3[2]["overlay"].get("type") == "bar", f"gesprochener Füllstand fehlt: {s3[2].get('overlay')}"
+        assert s3[3].get("actors") and not s3[3].get("crowd"), f"leere Eisfläche: {s3[3].get('actors')} {s3[3].get('crowd')}"
+        assert [str(q.get("type")) for q in s3[4].get("props") or []] == ["icehole"], f"Schweinswal ohne Atemloch: {s3[4].get('props')}"
+        assert _w_rep({"scenes": [{"text": t_} for t_ in ("Die Ostsee friert leichter zu als die Nordsee, weil ihr Wasser weniger Salz enthält.", "Unter dem Eis wird der Sauerstoff knapp.",
+                                                          "Die Ostsee friert viel leichter zu als die Nordsee.", "Ganz im Norden friert die Ostsee jeden Winter zu.",
+                                                          "Ganz im Norden friert die Ostsee bis heute jeden Winter zu.")]}), "doppeltes Drehbuch nicht erkannt"
         from .. import writer as _w
         fy = _w.fix_years({"scenes": [{"text": "Im Winter neunzehnhunderteinundachtzig war die Ostsee fast zu.", "overlay": {"type": "tag", "text": "WINTER 1981"}}]},
                           "Ostsee – Vorgaben: 1658 Armee, 1987 fast zugefroren. Keine anderen Jahreszahlen.")
