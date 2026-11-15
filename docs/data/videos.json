@@ -3778,5 +3778,54 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Schwächer als 103: Frauenfigur zur Männerstimme, Tür mitten in der Küche, erfundene Temperatur, matte Schlusspointe"
+ },
+ {
+  "id": 106,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Ostsee plötzlich komplett zufriert?",
+  "status": "review",
+  "created": 1794766182.458029,
+  "trend": {
+   "title": "delfine",
+   "source": "Google Trends"
+  },
+  "title": "Was passiert, wenn die Ostsee komplett zufriert?",
+  "description": "Was passiert, wenn die gesamte Ostsee zu Eis wird?\nVon eingefrorenen Schiffen bis hin zu geretteten Delfinen: Wir spielen das extremste Eis-Szenario durch.\nWürdest du dich trauen, über die gefrorene Ostsee zu laufen?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#ostsee",
+   "#wissen",
+   "#delfin",
+   "#wissenschaft",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "ostsee zufrieren",
+   "what if deutsch",
+   "delfin ostsee",
+   "ostsee eis",
+   "klimawandel",
+   "wissenschaft einfach erklärt",
+   "meer friert ein"
+  ],
+  "thumb_text": "OSTSEE ZUGEFROREN",
+  "missing": [
+   "eisscholle",
+   "eisschicht"
+  ],
+  "cover_ms": 84529,
+  "duration": 84.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-15 21:00",
+  "review_at": 1794766577.7189934
  }
 ]
