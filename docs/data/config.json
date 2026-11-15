@@ -177,28 +177,10 @@
  ],
  "queue": [
   {
-   "id": "q14gkcy2d",
-   "category": "whatif",
-   "text": "Was passieren würde, wenn man die Biologie zweier Tiere kreuzen könnte",
-   "created": 1794487504.525
-  },
-  {
-   "id": "qnm3oz96h",
-   "category": "whatif",
-   "text": "Wenn physische Spielregeln plötzlich in der Realität gelten würden",
-   "created": 1794487507.594
-  },
-  {
-   "id": "qnqm93yzl",
-   "category": "whatif",
-   "text": "Ein kleiner Akt der Menschlichkeit, der die Welt für einen Moment rettet",
-   "created": 1794487509.754
-  },
-  {
-   "id": "qqprosnb9",
-   "category": "whatif",
-   "text": "Die wissenschaftliche Rekonstruktion eines spurlosen Flugzeugabsturzes",
-   "created": 1794487565.114
+   "id": "qaxmu4ql2",
+   "category": "fakten",
+   "text": "5 faszinierende Dinge, die dein Gehirn tut, während du schläfst",
+   "created": 1794769403.756
   }
  ]
 }
