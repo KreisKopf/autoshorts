@@ -282,6 +282,15 @@ def main():
         from .. import writer
         writer.polish(js)
         assert len(js["scenes"]) == 9, "Schlusssatz wiederholt den ersten (mit Vorspann)"
+        js["scenes"].append({"text": "Und genau deshalb –"})
+        writer.polish(js)
+        assert len(js["scenes"]) == 9, "abgebrochener Schlusssatz bleibt stehen"
+        assert scs[2]["actors"][0].get("action") not in ("walk", "run") and not scs[2]["actors"][0].get("to"), "Großaufnahme läuft durchs Zimmer"
+        assert stage.poster_hero("Der Schlag des Fangschreckenkrebses", scs, None, ["mantis"]) == "mantis", "Titelbild ohne das Tier des Themas"
+        sp = stage.direct([{"text": "Drei Fakten über den Fangschreckenkrebs.", "place": "underwater", "actors": [{"id": "krebs"}]},
+                           {"text": "Eine Art Sprungfeder im Arm liefert die Kraft.", "place": "underwater", "actors": [{"id": "krebs"}],
+                            "overlay": {"type": "note", "title": "MECHANISMUS", "text": "Sprungfeder"}}], [(0, 3), (3, 6)], "Der Fangschreckenkrebs")
+        assert not sp[1].get("overlay") or "lib_sprungfeder" not in extras.PROPS, "Notizzettel schiebt den Krebs von der Feder weg"
 
     check("Ein-Tier-Video (Fangschreckenkrebs)", _one_animal)
 

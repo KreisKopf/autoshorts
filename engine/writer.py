@@ -474,6 +474,11 @@ def polish(js):
         if w_a and len(w_b) >= 4 and (len(w_a & w_b) / max(len(w_a), len(w_b)) >= 0.8 or        # auch mit Vorspann („Und hier kommen drei Fakten …“)
                                       (len(w_a) >= 5 and len(w_a & w_b) / len(w_a) >= 0.8 and len(w_b) <= len(w_a) + 5)):
             js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
+    scs_p = [x for x in js.get("scenes") or [] if isinstance(x, dict)]
+    if len(scs_p) >= 8:                                   # abgebrochener Schluss als „Schleife“ („Und genau deshalb –“): ein halber Satz am Ende wirkt wie ein Fehler
+        t_l = str(scs_p[-1].get("text") or "").strip()
+        if _re_p.search(r"(?:[–—-]|\.\.\.|…)\s*$", t_l) and len(t_l.split()) <= 6:
+            js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
     for k in ("title", "description"):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])

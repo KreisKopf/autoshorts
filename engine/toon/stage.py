@@ -2028,6 +2028,8 @@ def direct(scenes, times, topic="", style="", look=""):
                     seas[0].pop("to", None)
                     if str(seas[0].get("action") or "") in ("walk", "run"):
                         seas[0]["action"] = "idle"
+                    if str((sc.get("overlay") or {}).get("type") or "") in TALL_OV:
+                        sc["overlay"] = None              # Notizzettel/Liste schöbe das Tier an den Rand, weg von dem Ding – das Bild zeigt es selbst
                     sea_thing = None if flip_t else add_t
                     sc["_near"] = add_t != "cavitation"
                 else:
@@ -2038,6 +2040,18 @@ def direct(scenes, times, topic="", style="", look=""):
             sea_thing = None
         sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and extras.PROP_ALIASES.get(       # nur, worauf das Tier zielt (Stein, Scheibe) –
             str(q.get("type")).lower(), str(q.get("type")).lower()) in SEA_TARGETS][:1]                                # keine Explosion, Flutwelle, gelernten Notbehelfe
+        tg_s = [q for q in (sc.get("props") or []) if isinstance(q, dict) and _key_s(q) in SEA_TARGETS]
+        if tg_s and sc.get("shot") not in ("graphic", "insert"):          # das Tier und sein Ziel stehen sich gegenüber, beide ganz im Bild
+            if str((sc.get("overlay") or {}).get("type") or "") in TALL_OV:
+                sc["overlay"] = None                      # Notizzettel/Liste schöbe das Tier an den Rand, weg von dem Ding – das Bild zeigt es selbst
+            if not isinstance(seas[0].get("pos"), (int, float)):
+                seas[0].update(pos=400, facing="right")
+                tg_s[0]["pos"] = 860
+            seas[0].pop("to", None)
+            if str(seas[0].get("action") or "") in ("walk", "run"):
+                seas[0]["action"] = "idle"
+            if _key_s(tg_s[0]) == "lib_sprungfeder":
+                sc["_near"] = True
         same_s = sea_run[1] + 1 if sea_run[0] == seas[0]["kind"] else 0
         sea_run = (seas[0]["kind"], same_s)
         if not sc["props"]:                               # mehrere Sätze über dasselbe Tier: jedes Mal anders im Bild (Mitte, links, rechts mit Blick zurück)
@@ -2089,6 +2103,18 @@ def direct(scenes, times, topic="", style="", look=""):
     _divers(scenes)
     _lake_story(scenes, topic, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
                                      if isinstance(a, dict) and not a.get("kind") and not str(a.get("id") or "").startswith("_")), "du"))
+    for sc in scenes:                                     # Menschen-Satz im Tier-Video: bleibt die Großaufnahme des Gesichts – die Figur läuft nicht durchs Zimmer
+        if isinstance(sc, dict) and sc.get("_land") and sc.get("shot") == "close":
+            for a in [a for a in (sc.get("actors") or []) if isinstance(a, dict)][:1]:
+                a.pop("to", None)
+                a.update(pos="center", emote="")
+                if str(a.get("action") or "") in ("walk", "run", "sit", "sleep", "fall", "float", "jump", "idle", ""):
+                    a["action"] = "shocked" if _re0.search(r"schneller|unglaublich|unfassbar|\bkaum\b", str(sc.get("text") or "").lower()) else "talk"
+            sc["actors"] = [a for a in (sc.get("actors") or []) if isinstance(a, dict)][:1]
+            sc["props"], sc["crowd"] = [], ""
+        g_n = sc.get("graphic") if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) else None
+        if g_n and str(g_n.get("label") or "").strip().lower() and str(g_n.get("label") or "").strip().lower() == str(g_n.get("value") or "").strip().lower():
+            g_n["label"] = ""                             # Unterzeile wiederholt nur die Zahl („80 KM/H“ unter „80 KM/H“)
     return scenes
 
 
@@ -3495,6 +3521,9 @@ def poster_hero(topic, scenes, cast=None, avoid=()):
                 counts[k] = counts.get(k, 0) + 1
     ranked = [k for k in named if k in extras.CREATURES] + sorted(counts, key=lambda k: -counts[k])
     ranked = list(dict.fromkeys(ranked))
+    named = [k for k in named if k in extras.CREATURES]
+    if named:
+        return named[0]                                   # das Tier, das Titel/Thema nennen, gehört immer aufs Titelbild – auch wenn es beim letzten Video (einer verworfenen Fassung) schon dort war
     fresh = [k for k in ranked if k not in avoid]
     return (fresh or ranked or [""])[0]
 

@@ -209,6 +209,10 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Zielt das Tier auf ein Ding (Glas, Dampfblase, Feder), schwimmt es nicht aus dem Bild (`_vary_repeats` lässt solche Szenen in Ruhe). Eine Figur „taucher“
   bleibt in einem Satz über Taucher ein Taucher und wird nicht zum Krebs. Titelbild (`stage.poster`): Nennt der Kern des Themas das Tier, steht das Tier auf dem
   Titelbild – Gegenstände werden nur noch im Kern des Themas gesucht, nicht in den Vorgaben dahinter („kein Panzerglas“ ergab eine Glasscheibe als Motiv).
+  `poster_hero`: Das Tier, das Titel/Thema nennen, steht immer auf dem Titelbild – auch wenn es beim letzten (verworfenen) Bau schon dort war. Tier und Ziel
+  stehen sich gegenüber (Tier 400, Ding 860); ein Notizzettel/eine Liste über einer solchen Szene entfällt (schob den Krebs an den Rand). Der Menschen-Satz
+  bleibt eine Großaufnahme (Figur läuft nicht durchs Zimmer). `writer.polish` streicht einen abgebrochenen Schlusssatz („Und genau deshalb –“); die Unterzeile
+  einer Zahl-Grafik, die nur die Zahl wiederholt, entfällt.
 
 ## Musik-Kugel (Video-Art `musik`, alle zwei Tage)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
