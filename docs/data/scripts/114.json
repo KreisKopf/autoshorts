@@ -1,0 +1,556 @@
+{
+ "title": "Was wäre, wenn dein Browserverlauf deine Zukunft bestimmt?",
+ "scenes": [
+  {
+   "text": "Dein kompletter Browserverlauf wird plötzlich grausame Realität.",
+   "see": "Dein Browserverlauf wird im Wohnzimmer Realität.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Und der letzte Suchverlauf entscheidet über Leben und Tod.",
+   "see": "Der Suchverlauf entscheidet über Leben und Tod.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "scared",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Um drei Uhr nachts suchst du nach Wegen, reich zu werden.",
+   "see": "Du suchst nachts nach Wegen, reich zu werden.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Der Algorithmus schickt dir sofort einen Sack voller Bargeld vorbei.",
+   "see": "Ein Sack voller Bargeld fliegt ins Zimmer.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy"
+  },
+  {
+   "text": "Doch direkt danach suchst du nach den Symptomen einer seltenen Tropenkrankheit.",
+   "see": "Du suchst nach Symptomen einer Tropenkrankheit.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Zack liegst du plötzlich mit seltsamen Flecken im kalten Tropenwald.",
+   "see": "Du liegst mit Flecken im kalten Tropenwald.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "soil",
+    "elements": [
+     "palms"
+    ]
+   },
+   "time": "day",
+   "weather": "rain",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "scary"
+  },
+  {
+   "text": "Weil du gestern zehn Stunden Katzenvideos geschaut hast, passiert etwas Verrücktes.",
+   "see": "Du hast zehn Stunden Katzenvideos geschaut.",
+   "place": "livingroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 300
+    },
+    {
+     "kind": "cat",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "id": "_tier",
+     "pos": 760,
+     "hero": true,
+     "speaks": false
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein Wohnzimmer verwandelt sich in ein riesiges Katzenparadies mit Millionen Tieren.",
+   "see": "Dein Wohnzimmer wird zum Katzenparadies.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 300
+    },
+    {
+     "kind": "cat",
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "id": "_tier",
+     "pos": 760,
+     "hero": true,
+     "speaks": false
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Du denkst, du kannst das einfach löschen.",
+   "see": "Du denkst, du kannst das einfach löschen.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Falsch gedacht, denn selbst die geheimste Suche wird jetzt Realität.",
+   "see": "Selbst die geheimste Suche wird Realität.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Jede verirrte Suchanfrage wird zu einer physischen Wand aus Problemen.",
+   "see": "Jede Suche wird zu einer Wand aus Problemen.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Wer dreimal nach einem Flug zum Mond sucht, landet direkt im All.",
+   "see": "Wer nach einem Flug zum Mond sucht, landet im All.",
+   "place": "moon",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "rocket"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Ohne Raumanzug, ohne Sauerstoff, nur mit deinem Smartphone in der Hand.",
+   "see": "Ohne Raumanzug, nur mit dem Smartphone.",
+   "place": "moon",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dein Akku zeigt noch genau vier Prozent.",
+   "see": "Dein Akku zeigt noch vier Prozent.",
+   "place": "moon",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Wenn das Handy ausgeht, bleibst du für immer im digitalen Niemandsland.",
+   "see": "Wenn das Handy ausgeht, bleibst du im Niemandsland.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "sad"
+  },
+  {
+   "text": "Schnell tippst du noch ein letztes Rezept ein.",
+   "see": "Schnell tippst du noch ein letztes Rezept ein.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ein riesiger Pfannkuchen fliegt durch die Galaxie und fängt dich auf.",
+   "see": "Ein riesiger Pfannkuchen fliegt durch die Galaxie.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "kuchen"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy"
+  },
+  {
+   "text": "Glück gehabt, aber was machst du heute Nacht im Netz?",
+   "see": "Glück gehabt, aber was machst du heute Nacht?",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Stell dir vor, dein ganzer Browserverlauf wird plötzlich wahr.",
+   "see": "Stell dir vor, dein Browserverlauf wird wahr.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  }
+ ]
+}
