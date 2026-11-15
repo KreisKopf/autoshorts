@@ -1,5 +1,5 @@
 {
- "updated": 1794780891.7898827,
+ "updated": 1794783176.9225085,
  "enough": true,
  "counted": 14,
  "total": 17,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1576,
+   "avg_views": 1600,
    "avg_likes": 51.5,
-   "like_rate": 3.27,
-   "avg_score": 2348
+   "like_rate": 3.22,
+   "avg_score": 2372
   },
   {
    "slug": "whatif",
@@ -27,19 +27,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1405,
+   "avg_views": 1491,
    "avg_likes": 47.0,
-   "like_rate": 3.35,
-   "avg_score": 2110
+   "like_rate": 3.15,
+   "avg_score": 2196
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1497,
-   "avg_likes": 36.0,
-   "like_rate": 2.4,
-   "avg_score": 2037
+   "avg_views": 1517,
+   "avg_likes": 37.0,
+   "like_rate": 2.44,
+   "avg_score": 2072
   },
   {
    "slug": "fakten",
@@ -56,16 +56,16 @@
   "storys": 1.09,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.07,
+  "whatif": 1.06,
   "comedy": 1.2,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1576 Aufrufe, 3.27 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1600 Aufrufe, 3.22 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2402 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2416 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
