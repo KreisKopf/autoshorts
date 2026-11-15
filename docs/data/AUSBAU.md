@@ -184,3 +184,8 @@ die Frage an die Zuschauer steht in der Beschreibung. Der Sprecher wird für die
   (`scene["_sfx"]`: Dinge springen ins Bild → pop, Schreck → hit, Schnitt im Satz → swish/shutter, Geste „shock“ → hit …) und aus
   Einblendungen (stamp → stamp, tag → shutter, thermo/bar → tick). Ohne Bibliothek bleiben die alten ffmpeg-Klänge.
 - Skills für Claude-Sitzungen liegen in `.claude/skills/` (earshot: Ton „hören“ und prüfen; real-sfx: Ton-Design echter Aufnahmen).
+
+- Ausbau 15.11.2026: Bibliothek von Hand neu gezeichnet: `pistole` (schlichte Pistole ohne Vorbild-Modell), `sprungfeder`, `geländewagen`, `lüftungsschacht`,
+  `schweißbrenner`, `usb-stick`. Die vorläufige Zeichnung `tuer` ist entfernt – die eingebaute Tür (`door`) kennt jetzt auch „tuer“, „Türe“, „Türen“,
+  „Haustür“. Die vorläufige Krabbe `krebs` ist entfernt: ein bloßes „Krebs“ ist im Meer der Krebs als Figur (`stage._sea_kind`), sonst die Krankheit –
+  als Bibliotheks-Gegenstand stünde bei jedem Satz über die Krankheit eine rote Krabbe im Bild. `main.known_thing` kennt „Krebs“ deshalb fest.

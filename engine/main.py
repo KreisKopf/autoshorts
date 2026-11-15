@@ -144,7 +144,7 @@ def known_thing(word):
     pool = (set(extras.PROPS) | set(extras.PROP_ALIASES) | set(extras.HELD) | set(extras.CREATURES) | set(places.PLACES) | set(places.ALIASES)
             | set(places.OUTDOOR_SPECS) | set(places.EL_ALIASES) | set(places.BACK) | set(places.MID) | set(places.FRONT_EL)
             | {"mensch", "menschen", "leute", "person", "personen", "figur", "mann", "frau", "kind", "kinder", "menge", "familie",
-               "katze", "hund", "spinne", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
+               "katze", "hund", "spinne", "krebs", "krebse", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
                "wespe", "gehirn", "hirn", "himmel", "boden", "licht", "dunkelheit", "nacht", "regen", "schnee", "sturm", "wind", "nebel", "erdbeben", "hitze"})
     forms = {w, w.rstrip("n"), w.rstrip("en"), w.rstrip("e"), w.rstrip("s"), w + "e", w + "n", w + "en"}
     if forms & pool:

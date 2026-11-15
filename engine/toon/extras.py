@@ -1259,7 +1259,7 @@ PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning,
          "drone": p_drone, "cctv": p_cctv, "door": p_door, "clock": p_clock, "pile": p_pile, "sandpile": p_sandpile, "trash": p_trash, "faucet": p_faucet,
          "glass": p_glass, "barrel": p_barrel, "solarpanel": p_solarpanel,
          "fridge": p_fridge, "tent": p_tent, "streetlamp": p_streetlamp, "plane": p_plane, "satellite": p_satellite, "ship": p_ship, "aquarium": p_aquarium}
-PROP_ALIASES = {"krankenwagen": "ambulance", "rettungswagen": "ambulance", "notarzt": "ambulance", "polizeiauto": "police", "streifenwagen": "police", "polizei": "police", "police car": "police",
+PROP_ALIASES = {"tuer": "door", "türe": "door", "türen": "door", "haustür": "door", "zimmertür": "door", "krankenwagen": "ambulance", "rettungswagen": "ambulance", "notarzt": "ambulance", "polizeiauto": "police", "streifenwagen": "police", "polizei": "police", "police car": "police",
                 "baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
                 "laptop": "computer", "geld": "money", "rakete": "rocket", "asteroid": "meteor", "erde": "earth", "sonne": "sun",
                 "mond": "moon", "wolke": "cloud", "gewitterwolke": "stormcloud", "regenwolke": "stormcloud", "tsunami": "wave", "blitz": "lightning", "erdbeben": "crack", "earthquake": "crack", "riss": "crack",
