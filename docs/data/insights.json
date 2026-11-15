@@ -1,5 +1,5 @@
 {
- "updated": 1794767079.997927,
+ "updated": 1794768854.1598206,
  "enough": true,
  "counted": 14,
  "total": 16,
@@ -9,43 +9,43 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1546,
-   "avg_likes": 50.5,
-   "like_rate": 3.27,
-   "avg_score": 2303
+   "avg_views": 1558,
+   "avg_likes": 51.5,
+   "like_rate": 3.3,
+   "avg_score": 2331
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1694,
+   "avg_views": 1693,
    "avg_likes": 39.9,
-   "like_rate": 2.35,
-   "avg_score": 2296
+   "like_rate": 2.36,
+   "avg_score": 2295
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1405,
+   "avg_views": 1399,
    "avg_likes": 47.0,
-   "like_rate": 3.35,
-   "avg_score": 2110
+   "like_rate": 3.36,
+   "avg_score": 2104
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1375,
-   "avg_likes": 34.0,
-   "like_rate": 2.47,
-   "avg_score": 1885
+   "avg_views": 1402,
+   "avg_likes": 35.0,
+   "like_rate": 2.5,
+   "avg_score": 1927
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1024,
+   "avg_views": 1023,
    "avg_likes": 30.5,
    "like_rate": 2.98,
    "avg_score": 1496
@@ -53,7 +53,7 @@
  ],
  "weights": {
   "fakten": 0.7,
-  "storys": 1.08,
+  "storys": 1.09,
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
@@ -61,9 +61,9 @@
   "musik": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1546 Aufrufe, 3.27 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2380 zu 704 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1558 Aufrufe, 3.3 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 1023 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2386 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -82,11 +82,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2191,
+   "views": 2182,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3106
+   "score": 3097
   },
   {
    "id": 84,
@@ -102,21 +102,21 @@
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2114,
+   "views": 2111,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2804
+   "score": 2801
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1641,
+   "views": 1635,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2616
+   "score": 2610
   }
  ],
  "flop": [
