@@ -1011,6 +1011,46 @@ def main():
                 extras.draw_prop(lay, k, 540, t_)
                 assert lay.getbbox(), f"{k} zeichnet nichts"
     check("Werkstatt: Motor, Kran, Auto, Getriebe, Tacho", _garage)
+
+    def _ice():                                                  # zugefrorenes Meer: Eisfläche statt Wellen/Gebirge, Schiff im Eis, Eisdecke über dem Wasser, Atemloch
+        from PIL import Image
+        sea_bd = {"sky": "day", "ground": "snow", "elements": ["sea"]}
+        T = [("Wenn die Ostsee schlagartig komplett zufriert.", "beach", [], ["ship"], "event", sea_bd, None),
+             ("Riesige Containerschiffe stecken sofort bombenfest.", "snow", [], ["ship", "ice"], "event", sea_bd, None),
+             ("Fische geraten unter dem Eis in Atemnot.", "underwater", [{"id": "ecky"}], ["ice"], "event", None, None),
+             ("Nur Delfine finden an Atemlöchern noch Sauerstoff.", "snow", [], ["ice"], "event", sea_bd, None),
+             ("Nach drei Tagen wächst die Eisschicht auf mehrere Meter an.", "snow", [{"id": "du"}], [], "", None, None),
+             ("An den Küsten sinken die Temperaturen um über fünfzehn Grad.", "snow", [], ["house"], "", sea_bd, {"type": "thermo", "value": 15}),
+             ("Es fällt weniger Regen und die Dürregefahr steigt.", "fields", [], ["crack"], "event", {"sky": "day", "ground": "dry", "elements": ["fields"]}, None),
+             ("Du denkst, das sei unmöglich.", "livingroom", [{"id": "du"}], [], "", None, None),
+             ("Damals wurden auf dem Eis sogar Wirtshäuser für Reisende aufgebaut.", "snow", [], ["house"], "event", sea_bd, None)]
+        sd = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "shot": sh_, "time": "day", "backdrop": bd_, "overlay": o_} for t_, pl_, a_, pr_, sh_, bd_, o_ in T],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Was wäre, wenn die Ostsee plötzlich komplett zufriert?", "whatif")
+        keys = [[extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in sc_.get("props") or [] if isinstance(q, dict)] for sc_ in sd]
+        rp = [places.resolve(stage.backdrop(sc_)) for sc_ in sd]
+        assert rp[0] == rp[1] == rp[4] == rp[8] == "icesea", f"Eisfläche: {rp}"
+        assert "ship_ice" in keys[0] and "ship_ice" in keys[1] and "ship" not in keys[1] and "ice" not in keys[1], f"Schiff im Eis: {keys[:2]}"
+        assert rp[2] == "underwater" and sd[2].get("_ice") and "ice" not in keys[2] and sd[2].get("actors"), f"unter dem Eis: {rp[2]} {keys[2]} {sd[2].get('actors')}"
+        assert keys[3] == ["icehole"] and not sd[3].get("actors"), f"Atemloch: {keys[3]}"
+        assert not (isinstance(sd[5].get("overlay"), dict) and sd[5]["overlay"].get("type") == "thermo"), f"Thermometer bei „um fünfzehn Grad“: {sd[5].get('overlay')}"
+        assert rp[6] != "icesea" and rp[7] == "livingroom", f"Acker/Zimmer auf dem Eis: {rp[6]} {rp[7]}"
+        for sc_ in sd:
+            assert frame(sc_, {"du": {}, "ecky": {"kind": "fish"}}) is not None
+        plain = stage.direct([{"text": "Im Winter liegt Schnee auf dem Berg.", "place": "snow", "actors": [{"id": "du"}]},
+                              {"text": "Ein Schiff fährt über das Meer.", "place": "beach", "props": ["ship"], "backdrop": {"ground": "water", "elements": ["sea"]}}],
+                             [(0, 4), (4, 8)], "Winter in den Bergen", "fakten")
+        assert all(places.resolve(stage.backdrop(sc_)) != "icesea" for sc_ in plain), "Eisfläche ohne zugefrorenes Meer"
+        for k_ in ("ship_ice", "icehole"):
+            for t_ in (0.0, 1.0, 5.0):
+                lay = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+                extras.draw_prop(lay, k_, 540, t_)
+                assert lay.getbbox(), f"{k_} zeichnet nichts"
+        places.ICE[0] = True
+        try:
+            assert places.background("underwater") is not None
+        finally:
+            places.ICE[0] = False
+    check("Zugefrorenes Meer: Eisfläche, Schiff im Eis, Eisdecke, Atemloch", _ice)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

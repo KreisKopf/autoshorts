@@ -1352,6 +1352,69 @@ PROP_ALIASES = {"tuer": "door", "türe": "door", "türen": "door", "haustür": "
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
 SKY = ("drone", "earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
+def p_ship_ice(d, x, t, s=1.0):
+    """Großes Containerschiff, im Eis eingefroren (nur von der Regie gesetzt – zugefrorenes Meer): liegt leicht schief, bewegt sich nicht,
+    rundum aufgeschobene Eisschollen am Rumpf."""
+    y = FAR + 150
+    a = math.radians(-4)
+
+    def R(px_, py_):
+        return x + px_ * math.cos(a) - py_ * math.sin(a), y + px_ * math.sin(a) + py_ * math.cos(a)
+
+    _poly(d, [R(-400, -150), R(420, -150), R(350, 10), R(-350, 10)], (52, 66, 104))                       # Rumpf
+    d.polygon([R(-392, -40), R(380, -40), R(350, 10), R(-350, 10)], fill=(170, 60, 54))                     # Unterwasseranstrich
+    d.line((*R(-398, -112), *R(404, -112)), fill=(236, 238, 244), width=9)
+    _poly(d, [R(-380, -330), R(-250, -330), R(-250, -150), R(-380, -150)], (240, 240, 244))                # Brücke
+    for i in range(3):
+        d.rectangle((*R(-366 + i * 40, -310), *R(-340 + i * 40, -288)), fill=(120, 190, 240), outline=INK, width=3)
+    _poly(d, [R(-340, -400), R(-296, -400), R(-296, -330), R(-340, -330)], (214, 70, 60))                  # Schornstein
+    cols = ((214, 90, 60), (70, 130, 200), (240, 190, 70), (90, 170, 120), (150, 110, 190))
+    for row in range(3):                                                                                    # Containerstapel
+        for i in range(6 - row):
+            x0 = -220 + i * 100 + row * 50
+            _poly(d, [R(x0, -150 - row * 56 - 56), R(x0 + 96, -150 - row * 56 - 56), R(x0 + 96, -150 - row * 56), R(x0, -150 - row * 56)], cols[(i + row * 2) % 5], 5)
+    for fx, w, h in ((-380, 120, 90), (-210, 150, 60), (-30, 130, 104), (150, 160, 70), (330, 130, 96), (-460, 90, 50), (450, 100, 56)):   # Schollen, die sich am Rumpf auftürmen
+        _poly(d, [(x + fx - w / 2, y + 40), (x + fx - w * 0.2, y + 40 - h), (x + fx + w * 0.3, y + 40 - h * 0.6), (x + fx + w / 2, y + 40)], (226, 242, 252), 5)
+    for fx in (-300, -60, 220):                                                                            # Eiszapfen an der Bordwand
+        d.polygon([R(fx, -112), R(fx + 22, -112), R(fx + 11, -60)], fill=(226, 242, 252), outline=INK)
+
+
+def p_icehole(d, x, t, s=1.0):
+    """Atemloch in der Eisdecke (nur von der Regie gesetzt): dunkles Wasser mit gezackter Eiskante, ein Delfin taucht zum Luftholen auf."""
+    y = GROUND + 6
+    rim = [(x + math.cos(math.radians(a_)) * (300 + (26 if i % 2 else 0)), y + math.sin(math.radians(a_)) * (86 + (10 if i % 2 else 0))) for i, a_ in enumerate(range(0, 360, 20))]
+    d.polygon(rim, fill=(236, 246, 252), outline=INK, width=O)
+    d.ellipse((x - 250, y - 62, x + 250, y + 62), fill=(24, 70, 110), outline=INK, width=6)
+    d.ellipse((x - 236, y - 40, x + 236, y + 62), fill=(34, 96, 146))
+    up = (math.sin(t * 1.6) * 0.5 + 0.5) * 60                                                               # taucht auf und ab
+    col, belly = (112, 142, 172), (236, 242, 248)
+    top = y - 270 - up
+    d.rounded_rectangle((x + 40, top + 96, x + 214, top + 150), 27, fill=INK)                               # Schnabel
+    d.rounded_rectangle((x + 46, top + 102, x + 208, top + 144), 21, fill=col)
+    d.line((x + 110, top + 128, x + 204, top + 126), fill=INK, width=5)
+    d.ellipse((x - 118, top - 8, x + 118, y + 58), fill=INK)                                               # Kopf und Rumpf ragen aus dem Wasser
+    d.ellipse((x - 110, top, x + 110, y + 50), fill=_dk(col))
+    d.ellipse((x - 100, top + 4, x + 110, y + 44), fill=col)
+    d.ellipse((x - 10, top + 120, x + 104, y + 46), fill=belly)                                            # heller Bauch
+    d.rounded_rectangle((x + 46, top + 102, x + 150, top + 144), 21, fill=col)                              # Schnabelansatz ohne Naht
+    d.arc((x + 60, top + 96, x + 150, top + 150), 20, 110, fill=INK, width=5)                               # Lächeln
+    d.ellipse((x + 30, top + 54, x + 66, top + 90), fill=(255, 255, 255), outline=INK, width=4)
+    d.ellipse((x + 44, top + 64, x + 60, top + 80), fill=INK)
+    d.ellipse((x + 50, top + 66, x + 56, top + 72), fill=(255, 255, 255))
+    d.ellipse((x + 4, top + 104, x + 34, top + 122), fill=(255, 120, 130, 110))                             # Wangenrot
+    d.ellipse((x - 22, top + 2, x + 8, top + 18), fill=(40, 60, 90))                                        # Blasloch
+    d.chord((x - 236, y - 40, x + 236, y + 62), 0, 180, fill=(34, 96, 146))                                 # Wasser vor dem Tier
+    for i in range(5):                                                                                      # Atemwolke
+        ph = (t * 0.9 + i / 5) % 1
+        r = 14 + ph * 34
+        d.ellipse((x - 8 + (i - 2) * 16 * ph - r, top - 30 - ph * 150 - r, x - 8 + (i - 2) * 16 * ph + r, top - 30 - ph * 150 + r), fill=(240, 248, 255, int(190 * (1 - ph))))
+    d.arc((x - 250, y - 62, x + 250, y + 62), 20, 160, fill=(200, 232, 250), width=8)                       # Wasserkante vor dem Tier
+    for wx in (-150, 150):
+        d.arc((x + wx - 60, y + 6, x + wx + 60, y + 36), 180, 360, fill=(200, 232, 250), width=6)
+
+
+PROPS["ship_ice"] = p_ship_ice                             # eingefrorenes Containerschiff (nur von der Regie gesetzt)
+PROPS["icehole"] = p_icehole                               # Atemloch im Eis mit Delfin (nur von der Regie gesetzt)
 PROPS["debris"] = p_debris                                 # Treibgut auf dem Meer (nur von der Regie gesetzt)
 PROPS["tank"] = p_tank                                     # Forschungsbecken mit Krebs (nur von der Regie gesetzt)
 PROPS["cavitation"] = p_cavitation                         # Kavitationsblase vor der Keule (nur von der Regie gesetzt)
@@ -2978,13 +3041,151 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         if air and lift > 60:                                                    # Sprungstriche unter dem Tier
             for lx in (-80, -30, 20):
                 d.line((*P(lx, gyl + 40), *P(lx, gyl + 40 + min(90, lift * 0.4))), fill=(255, 255, 255, 170), width=max(2, int(7 * k)))
+    elif kind in ("dolphin", "delfin", "schweinswal", "tümmler", "porpoise"):       # Delfin/Schweinswal: grauer Rücken, heller Bauch, Rückenfinne, Schnabel – schwimmt
+        fly = True
+        by = -330 + bob * 2
+        wag = math.sin(t * 6) * 22
+        col, belly = (112, 142, 172), (236, 242, 248)
+        poly([(-150, by + 4), (-236, by - 78 + wag), (-212, by + 6 + wag * 0.6), (-244, by + 70 + wag), (-146, by + 20)], _dark(col, 0.08))   # Fluke
+        poly([(-30, by - 66), (-6, by - 160), (64, by - 62)], col)                    # Rückenfinne
+        xs = [-176 + i * 21 for i in range(18)]
+        top = [(x, by - 80 * math.sqrt(max(0.0, 1 - ((x - 4) / 184) ** 2)) ** 0.8) for x in xs]
+        bot = [(x, by + 68 * math.sqrt(max(0.0, 1 - ((x - 4) / 184) ** 2)) ** 0.8) for x in xs]
+        d.polygon([P(*q) for q in top + bot[::-1]], fill=_dark(col, 0.2), outline=INK, width=o)
+        d.polygon([P(x + 10, y + 4) for x, y in top[1:]] + [P(x + 10, by + 12) for x, _ in top[:0:-1]], fill=col)
+        d.polygon([P(x, by + 20 + (y - by - 20) * 0.95) for x, y in bot[2:]] + [P(xs[-1], by + 20), P(xs[2], by + 20)], fill=belly)
+        jaw = mouth * 16
+        poly([(150, by - 6), (232, by + 12), (150, by + 30)], col, shade=0)           # Schnabel oben
+        poly([(150, by + 22), (222, by + 22 + jaw), (150, by + 44 + jaw * 0.5)], belly, shade=0)   # Unterkiefer
+        ell(96, by - 60, 176, by + 52, col, shade=0, line=False)                      # Stirn (Melone) deckt den Ansatz
+        d.arc(B(120, by + 6, 190, by + 44), 20, 120, fill=INK, width=max(2, int(5 * k)))   # Lächeln
+        poly([(30, by + 30), (-30, by + 112), (84, by + 46)], _dark(col, 0.1))        # Brustflosse
+        eye(120, by - 16, 14)
+        brow(120, by - 40, 13, 1)
+        cheek(98, by + 14, 12)
+    elif kind in ("cow", "kuh", "pig", "schwein"):                                  # Hoftiere: Kuh (gefleckt, Hörner, Euter) und Schwein (rosa, Rüsselscheibe, Ringelschwanz)
+        cow = kind in ("cow", "kuh")
+        col = (246, 244, 238) if cow else (246, 170, 176)
+        dk = (52, 46, 50) if cow else _dark(col, 0.22)
+        pink = (246, 176, 180) if cow else (250, 196, 200)
+        top, bot, leg = (-268, -96, 104) if cow else (-206, -52, 62)
+        wag = math.sin(t * 5) * 16
+        if cow:
+            stroke([(-160, -220), (-196, -190), (-200 + wag, -120)], 12, _dark(col, 0.2))
+            ell(-216 + wag, -128, -186 + wag, -84, dk, shade=0)                     # Schwanzquaste
+        else:
+            stroke([(-146, -150), (-176, -160), (-182, -186 + wag * 0.3), (-164, -192), (-160, -172)], 9, _dark(col, 0.1))   # Ringelschwanz
+        for lx in (-112, 52):                                                       # Beine auf der abgewandten Seite
+            rr(lx, -leg, lx + 34, 0, 12, _dark(col, 0.2), shade=0)
+            rr(lx - 2, -20, lx + 36, 0, 8, dk if cow else _dark(col, 0.4), shade=0)
+        if cow:
+            ell(-52, -128, 16, -66, pink, shade=0.15)                               # Euter
+        ell(-166, top, 132, bot, col)
+        if cow:                                                                     # Flecken, genau im Körper
+            for a, b in ((-120, -66), (-10, 52)):
+                band(-166, top, 132, bot, a, b, dk)
+            ell(-150, top + 40, -90, top + 110, col, shade=0, line=False)
+            ell(14, top + 96, 70, bot - 4, col, shade=0, line=False)
+            ell(-64, top + 10, -6, top + 62, col, shade=0, line=False)
+            d.ellipse(B(-166, top, 132, bot), outline=INK, width=o)
+        else:
+            ell(-80, -120, 60, -58, _light(col, 0.4), shade=0, line=False)
+        for lx in (-86, 82):
+            rr(lx, -leg, lx + 36, 0, 12, col, shade=0.25)
+            rr(lx - 2, -20, lx + 38, 0, 8, dk if cow else _dark(col, 0.4), shade=0)
+        hx, hy = (118, top - 34 + bob * 0.5) if cow else (104, -214 + bob * 0.5)
+        if cow:
+            for ex in (-1, 1):                                                      # Hörner und Ohren
+                poly([(hx + ex * 44, hy - 66), (hx + ex * 62, hy - 124), (hx + ex * 22, hy - 78)], (240, 226, 190), shade=0)
+                ell(hx + ex * 84 - 30, hy - 56, hx + ex * 84 + 30, hy - 18, dk if ex < 0 else col, shade=0)
+            ell(hx - 80, hy - 84, hx + 80, hy + 70, col)
+            d.chord(B(hx - 80, hy - 84, hx + 80, hy + 70), 150, 262, fill=dk)       # dunkler Fleck über einem Auge
+            d.ellipse(B(hx - 80, hy - 84, hx + 80, hy + 70), outline=INK, width=o)
+            ell(hx - 50, hy + 4, hx + 96, hy + 92, pink, shade=0.1)                 # Maul
+            for nx in (hx + 4, hx + 50):
+                ell(nx - 9, hy + 26, nx + 9, hy + 44, _dark(pink, 0.45), shade=0, line=False)
+            mouthf(hx + 26, hy + 64, 20)
+            eye(hx - 22, hy - 26, 16)
+            eye(hx + 44, hy - 26, 16)
+            brow(hx - 22, hy - 54, 15, 1)
+            brow(hx + 44, hy - 54, 15, -1)
+        else:
+            for ex in (-1, 1):
+                ox = hx + ex * 52
+                poly([(ox - 30, hy - 50), (ox + ex * 26, hy - 122), (ox + 34, hy - 56)], col if ex > 0 else _dark(col, 0.2), shade=0)
+            ell(hx - 92, hy - 84, hx + 92, hy + 80, col)
+            ell(hx + 2, hy - 4, hx + 96, hy + 58, pink, shade=0.1)                  # Rüsselscheibe
+            for nx in (hx + 34, hx + 66):
+                ell(nx - 8, hy + 14, nx + 8, hy + 40, _dark(col, 0.45), shade=0, line=False)
+            mouthf(hx + 44, hy + 66, 16)
+            eye(hx - 8, hy - 30, 16)
+            eye(hx + 58, hy - 30, 16)
+            brow(hx - 8, hy - 58, 15, 1)
+            brow(hx + 58, hy - 58, 15, -1)
+            cheek(hx - 40, hy + 22, 16)
+    elif kind in ("chimp", "schimpanse", "affe", "monkey"):                          # Schimpanse: sitzt aufrecht, lange Arme, helles Gesicht, runde Ohren
+        col, face = (92, 66, 50), (226, 184, 150)
+        wv = math.sin(t * 3) * 10
+        for lx in (-84, 36):                                                        # angewinkelte Beine mit Füßen
+            ell(lx, -86, lx + 70, -6, _dark(col, 0.12) if lx < 0 else col)
+            ell(lx + 30, -30, lx + 96, 4, face, shade=0.15)
+        stroke([(-62, -250), (-112, -170), (-104, -70)], 30, _dark(col, 0.18))      # Arm hinten
+        ell(-122, -80, -84, -44, face, shade=0)
+        rr(-84, -290, 84, -40, 70, col)
+        ell(-46, -220, 50, -70, _light(col, 0.22), shade=0, line=False)             # hellerer Bauch
+        stroke([(64, -250), (112, -200 - wv), (100, -300 - wv)] if action in ("point", "talk", "shake") or mouth > 0.1 else [(64, -250), (116, -170), (108, -70)], 30, col)
+        hand = (100, -300 - wv) if action in ("point", "talk", "shake") or mouth > 0.1 else (108, -70)
+        ell(hand[0] - 20, hand[1] - 22, hand[0] + 20, hand[1] + 18, face, shade=0)
+        hx, hy = 8, -372 + bob * 0.5
+        for ex in (-1, 1):                                                          # runde Ohren
+            ell(hx + ex * 104 - 30, hy - 40, hx + ex * 104 + 30, hy + 24, face, shade=0.15)
+        ell(hx - 104, hy - 98, hx + 104, hy + 92, col)
+        ell(hx - 66, hy - 52, hx + 20, hy + 20, face, shade=0, line=False)          # Gesicht: zwei Augenfelder und die Schnauze
+        ell(hx - 6, hy - 52, hx + 80, hy + 20, face, shade=0, line=False)
+        ell(hx - 62, hy - 6, hx + 78, hy + 86, face, shade=0.1)
+        for nx in (hx - 2, hx + 18):
+            ell(nx - 5, hy + 16, nx + 5, hy + 28, _dark(face, 0.5), shade=0, line=False)
+        mouthf(hx + 8, hy + 56, 26)
+        eye(hx - 24, hy - 20, 16)
+        eye(hx + 40, hy - 20, 16)
+        brow(hx - 24, hy - 48, 15, 1)
+        brow(hx + 40, hy - 48, 15, -1)
+    elif kind in ("mosquito", "mücke", "muecke", "stechmücke", "fly", "fliege"):     # Mücke: schlank, lange Beine, langer Stechrüssel; Fliege: gedrungen, rote Augen
+        fly = True
+        fli = kind in ("fly", "fliege")
+        by = -360 + bob * 2.5 + math.sin(t * 6) * 14
+        fl = math.sin(t * 40) * 16
+        col = (70, 76, 92) if fli else (132, 124, 118)
+        for sx in (-50, -4):                                                        # Flügel
+            d.ellipse(B(sx - 96, by - 128 - fl, sx + 30, by - 30), fill=(220, 240, 255, 190), outline=INK, width=max(2, int(4 * k)))
+        for i, lx in enumerate((-40, -8, 26)):                                      # lange, geknickte Beine
+            sw = math.sin(t * 6 + i) * 6
+            stroke([(lx, by + 26), (lx - 26 + sw, by + 80), (lx - 10 + sw, by + (104 if fli else 150))], 5, _dark(col, 0.4))
+        ab = (-178, by - 34, -6, by + 38) if not fli else (-150, by - 54, 0, by + 56)
+        ell(*ab, col)
+        for a in ((-150, -112, -74) if not fli else (-110, -60)):
+            band(*ab, a, a + 14, _dark(col, 0.45))
+        d.ellipse(B(*ab), outline=INK, width=o)
+        ell(-30, by - 48, 56, by + 42, _dark(col, 0.15), shade=0.12)                # Brust
+        hx = 92
+        ell(hx - 50, by - 56, hx + 50, by + 44, _light(col, 0.18))                  # Kopf
+        if not fli:
+            stroke([(hx + 38, by + 16), (hx + 110, by + 62), (hx + 150, by + 96)], 7, _dark(col, 0.5))   # Stechrüssel
+        for s in (0, 18):                                                           # Fühler
+            stroke([(hx - 6 + s, by - 48), (hx + 8 + s, by - 96), (hx + 30 + s, by - 108)], 5, _dark(col, 0.5))
+        eye(hx - 2, by - 12, 15)
+        eye(hx + 34, by - 12, 15)
+        brow(hx - 2, by - 38, 13, 1)
+        brow(hx + 34, by - 38, 13, -1)
+        cheek(hx - 28, by + 16, 11)
+        mouthf(hx + 12, by + 24, 10)
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)

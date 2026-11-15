@@ -32,7 +32,8 @@ Regeln für die Sprechertexte:
      hintereinander („und dann … und außerdem …“). Der Zuschauer soll bei jedem Satz wissen wollen, was als Nächstes passiert.
   3. Höhepunkt in der Mitte: die verblüffendste Zahl, der größte Schreck oder der beste Witz – danach kurz Luft holen lassen.
   4. Schluss löst das Versprechen aus dem Hook ein (Auflösung, Pointe) – kurz, ohne Zusammenfassung und ohne Aufforderung.
-     Der letzte Satz endet so, dass der erste Satz direkt danach wieder passt (Schleife: „… und genau deshalb –“ → Satz 1).
+     Der letzte Satz ist ein VOLLSTÄNDIGER Satz mit Punkt, nach dem der erste Satz wieder passt (Schleife) – nie ein abgebrochener
+     Halbsatz, nie ein Gedankenstrich oder „…“ am Ende, kein Füllsatz wie „Und genau deshalb fasziniert dich die Frage …“.
 - LISTEN („Drei Dinge, die …“): genau so viele Punkte wie im ersten Satz angekündigt, höchstens fünf. Jeder Punkt bekommt zwei bis
   vier Sätze: was passiert, warum, welche Folge oder welcher Witz daraus entsteht. Niemals zehn oder zwanzig Punkte mit je einem Satz
   herunterzählen. Nur der erste Satz eines Punkts darf mit „Nummer zwei“/„Zweitens“ beginnen – nicht jeder Satz mit „Erster …:“, „Zweiter …:“.
@@ -148,7 +149,11 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
             Besetze Frauen und Männer etwa gleich oft – auch die Hauptfigur „du“ ist in ungefähr jedem zweiten Video eine Frau
             (z. B. {"du": {"shirt": "lila", "hair": "ponytail", "hair_color": "blond", "gender": "w"}}); in Gruppen immer gemischt.
-  Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
+  Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp, cow (Kuh, Rind), pig (Schwein),
+  chimp (Schimpanse, Affe), mosquito (Mücke), fly (Fliege), dolphin (Delfin, Schweinswal – schwimmt, nur am Ort underwater).
+  Sprechen Tiere in der Geschichte, bekommt jedes sprechende Tier "speaks": true und ein kurzes "say" (Sprechblase).
+  Zugefrorenes Meer („Ostsee friert zu“): Ort "icesea" (Eisfläche bis zum Horizont) – nicht snow (Gebirge), nicht beach; kein Eisberg ("ice")
+  als Zeichen für die Eisdecke. Schiffe im Eis, das Atemloch der Delfine und die Eisdecke unter Wasser zeichnet die Regie von selbst.
   Haushaltsgerät als Figur mit eigenem Willen: "kind": fridge (Kühlschrank mit Gesicht und Armen; Kennung z. B. "kuehlschrank") – nicht robot; keinen zweiten Kühlschrank als Requisite daneben stellen
   Meerestiere: shrimp (Pistolenkrebs, Garnele, Krebs – die Knallschere schnappt zu), mantis (Fangschreckenkrebs – schlägt mit der Keule), jelly (Qualle),
   axolotl (rosa Schwanzlurch mit Kiemenästen) · überall: tardigrade (Bärtierchen).
@@ -484,6 +489,8 @@ def polish(js):
         t_l = str(scs_p[-1].get("text") or "").strip()
         if _re_p.search(r"(?:[–—-]|\.\.\.|…)\s*$", t_l) and len(t_l.split()) <= 6:
             js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
+        elif _re_p.search(r"(?:[–—-]|\.\.\.|…)\s*$", t_l):        # längerer Schlusssatz, der im Gedankenstrich hängen bleibt: als ganzer Satz mit Punkt beenden
+            scs_p[-1]["text"] = _re_p.sub(r"[\s,;:]*(?:[–—-]|\.\.\.|…)\s*$", "", t_l).rstrip(" ,;:") + "."
     for k in ("title", "description"):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])

@@ -791,6 +791,37 @@ def underwater(night):
     return p.vignette()
 
 
+def underice(night=False):
+    """Unter der Eisdecke eines zugefrorenen Meeres (Regie: stage._ice_story): oben die dicke Eisschicht mit zerklüfteter Unterseite,
+    darunter dämmriges, kaltes Wasser – das Eis liegt oben, nicht als Eisberg am Grund."""
+    p = P(False)
+    p.grad((0, 0, W, H), (46, 112, 150), (8, 30, 58), raw=True)
+    p.veil((W / 2 - 520, 120, W / 2 + 520, 900), (150, 214, 236), 46, 180)                  # fahles Licht, das durchs Eis fällt
+    p.d.ellipse((-200, GROUND - 60, W + 200, H + 400), fill=(74, 92, 104), outline=INK, width=O)   # dunkler Grund
+    rnd = random.Random(31)
+    for sx in (150, 420, 900):                                                           # etwas Seegras
+        for k in range(3):
+            pts = [(sx + k * 30 + math.sin(i * 0.9) * 18, GROUND - 40 - i * 40) for i in range(5)]
+            p.line(pts, (38, 96, 88), 12)
+    low = [(-20, 0), (-20, 372)]                                                         # Eisdecke: glatte Oberkante außerhalb, zerklüftete Unterseite
+    x = -20
+    while x < W + 20:
+        x += rnd.randint(70, 150)
+        low.append((x, rnd.randint(330, 430)))
+    low += [(W + 20, 372), (W + 20, 0)]
+    p.poly(low, (214, 238, 252), o=7)
+    hi = [(xx, yy - 46 if 0 < xx < W else yy) for xx, yy in low[1:-1]]
+    p.d.polygon([(-20, 0)] + hi + [(W + 20, 0)], fill=(240, 250, 255))
+    for _ in range(9):                                                                   # Risse und eingeschlossene Luftblasen im Eis
+        x0, y0 = rnd.randint(30, W - 30), rnd.randint(40, 240)
+        p.d.line((x0, y0, x0 + rnd.randint(-70, 70), y0 + rnd.randint(40, 90)), fill=(166, 206, 236), width=6)
+    for _ in range(14):
+        x0, y0, r = rnd.randint(20, W - 20), rnd.randint(250, 330), rnd.randint(8, 20)
+        p.d.ellipse((x0 - r * 1.6, y0 - r * 0.6, x0 + r * 1.6, y0 + r * 0.6), outline=(250, 254, 255), width=4)    # Luft, die unter dem Eis hängen bleibt
+    p.fade((0, 380, W, 620), (214, 240, 252), 70, 0)
+    return p.vignette()
+
+
 def lakebed(night=True):
     """Grund eines tiefen Bergsees (Regie: Schatzsuche im See): grünschwarzes Süßwasser, steile Felswände, Schlick und versunkene
     Baumstämme – keine Korallen, keine Röhrenwürmer, kein rauchender Schlot wie in der Tiefsee."""
@@ -821,6 +852,7 @@ def lakebed(night=True):
     return p.vignette()
 
 
+ICE = [False]              # die Regie (stage._prepare) schaltet um: „underwater“ liegt dann unter einer Eisdecke (zugefrorenes Meer)
 LAKE = [False]             # die Regie (stage._prepare) schaltet um: „underwater“ ist dann der Grund eines Sees statt des Meeres
 
 
@@ -1027,6 +1059,35 @@ def _el_glacier(p, rnd):
     p.poly([(-40, BASE), (60, BASE - 380), (300, BASE - 460), (520, BASE - 330), (760, BASE - 520), (1000, BASE - 400), (W + 40, BASE - 440), (W + 40, BASE)], (206, 232, 250))
     for x in (200, 470, 830):
         p.line((x, BASE - 300, x + 30, BASE - 60), p.c((150, 200, 235)), 6)
+
+
+def _el_packice(p, rnd):
+    """Zugefrorenes Meer bis zum Horizont: helle Eisfläche mit aufgeschobenen Schollen (Presseisrücken) statt Wellen."""
+    p.d.rectangle((0, BASE - 220, W, BASE), fill=p.c((196, 224, 244)))
+    for y, n in ((BASE - 196, 9), (BASE - 130, 7), (BASE - 60, 5)):                  # Reihen gekippter Schollen, nach vorn größer
+        k = 0.5 + (y - (BASE - 196)) / 136 * 0.7
+        for i in range(n):
+            x = (i + 0.5) * W / n + rnd.randint(-40, 40)
+            w, h = rnd.randint(60, 120) * k, rnd.randint(30, 70) * k
+            p.poly([(x - w, y + 20 * k), (x - w * 0.3, y - h), (x + w * 0.5, y - h * 0.5), (x + w, y + 20 * k)], (226, 242, 252), o=4)
+            p.d.polygon([(x - w * 0.3, y - h), (x + w * 0.5, y - h * 0.5), (x + w, y + 20 * k), (x + w * 0.2, y + 20 * k)], fill=p.c((176, 210, 238)))
+    p.d.line((0, BASE - 220, W, BASE - 220), fill=INK, width=5)
+
+
+def _fg_icecracks(p, rnd):
+    """Risse und Schollenkanten in der Eisdecke, dazu Glanzstreifen – die Fläche liest sich als Eis, nicht als Schnee."""
+    for _ in range(9):
+        x, y = rnd.randint(40, W - 40), rnd.randint(BASE + 50, H - 320)
+        k = depth(y)
+        pts = [(x, y)]
+        for _k in range(4):
+            x, y = x + rnd.randint(-150, 150) * k, y + rnd.randint(8, 34) * k
+            pts.append((x, y))
+        p.d.line(pts, fill=p.c((120, 170, 214)), width=max(3, int(7 * k)), joint="curve")
+    for _ in range(10):                                                              # Glanz: kurze helle Schrägstriche
+        x, y = rnd.randint(0, W), rnd.randint(BASE + 40, H - 300)
+        k = depth(y)
+        p.d.line((x, y, x + 120 * k, y - 26 * k), fill=p.c((246, 252, 255)), width=max(3, int(8 * k)))
 
 
 def _fg_fields(p, rnd):
@@ -1358,9 +1419,9 @@ MID = {"tower": _mid_tower, "church": _mid_church, "forest": _mid_forest, "trees
 
 BACK = {"mountains": _el_mountains, "hills": _el_hills, "dunes": _el_dunes, "forest": _el_forest, "trees": _el_trees,
         "deadtrees": _el_deadtrees, "city": _el_city, "village": _el_village, "ruins": _el_ruins, "factory": _el_factory,
-        "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier}
+        "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier, "packice": _el_packice}
 FRONT_EL = {"fields": _fg_fields, "river": _fg_river, "dryriver": _fg_dryriver, "lake": _fg_lake, "cracks": _fg_cracks,
-            "rocks": _fg_rocks, "flowers": _fg_flowers, "asphalt": _fg_asphalt}
+            "rocks": _fg_rocks, "flowers": _fg_flowers, "asphalt": _fg_asphalt, "icecracks": _fg_icecracks}
 EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald": "forest", "bäume": "trees", "stadt": "city",
               "dorf": "village", "ruinen": "ruins", "fabrik": "factory", "bauernhof": "farm", "meer": "sea", "gletscher": "glacier",
               "felder": "fields", "feld": "fields", "fluss": "river", "see": "lake", "risse": "cracks", "steine": "rocks", "asphaltdecke": "asphalt",
@@ -1370,7 +1431,9 @@ EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald"
               "windräder": "windturbines", "windrad": "windturbines", "tankstelle": "gasstation", "kraftwerk": "powerplant",
               "atomkraftwerk": "powerplant", "brücke": "bridge", "zelte": "camp", "lager": "camp", "friedhof": "graves", "gräber": "graves",
               "skyline": "city", "hochhaus": "tower", "wolkenkratzer": "tower", "firmenzentrale": "tower", "zentrale": "tower", "konzern": "tower",
-              "büroturm": "tower", "skyscraper": "tower", "headquarters": "tower", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
+              "büroturm": "tower", "skyscraper": "tower", "headquarters": "tower", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees",
+              "packeis": "packice", "meereis": "packice", "eisdecke": "packice", "eisfläche": "packice", "eisrisse": "icecracks",
+              "eisscholle": "packice", "eisschollen": "packice", "eisschicht": "packice", "eispanzer": "packice", "treibeis": "packice"}
 
 
 MID_ORDER = ("tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
@@ -1381,7 +1444,7 @@ def norm_spec(spec):
     els = [EL_ALIASES.get(str(e).lower().strip(), str(e).lower().strip()) for e in (spec.get("elements") or [])][:6]
     ground = str(spec.get("ground") or "").lower()
     if ground not in GROUNDS:
-        ground = ("sand" if ("dunes" in els or "palms" in els or "cactus" in els) else "snow" if "glacier" in els
+        ground = ("sand" if ("dunes" in els or "palms" in els or "cactus" in els) else "ice" if "packice" in els else "snow" if "glacier" in els
                   else "road" if any(e in els for e in ("city", "ruins", "street", "gasstation")) else "soil" if "fields" in els else "grass")
     if "asphalt" in els:
         ground = "road"                                           # aufgerissener Asphalt liegt immer auf einer Fahrbahn
@@ -1404,7 +1467,7 @@ def compose(spec: dict, night=False):
     rnd = random.Random(sum(ord(c) for c in ",".join(els)) % 1000 + 3)
     if "street" in els and "city" not in els and "ruins" not in els:
         els = els + ["city"]
-    for name in ["sea", "glacier", "mountains", "hills", "dunes", "city", "ruins", "factory", "forest", "village", "farm"]:
+    for name in ["sea", "packice", "glacier", "mountains", "hills", "dunes", "city", "ruins", "factory", "forest", "village", "farm"]:
         if name in els:
             BACK[name](p, rnd)
     if ("trees" in els or "deadtrees" in els) and not any(e in els for e in ("mountains", "hills", "dunes", "city", "forest", "sea", "glacier")):
@@ -1449,7 +1512,7 @@ def compose(spec: dict, night=False):
         for _ in range(14):
             x, y = rnd.randint(0, W), rnd.randint(BASE + 40, H - 260)
             p.d.ellipse((x, y, x + rnd.randint(80, 220), y + rnd.randint(16, 40)), fill=(250, 130, 40))
-    for name in ("fields", "river", "dryriver", "lake", "cracks", "rocks", "flowers", "asphalt"):
+    for name in ("fields", "river", "dryriver", "lake", "cracks", "rocks", "flowers", "asphalt", "icecracks"):
         if name in els:
             FRONT_EL[name](p, rnd)
     hz = getattr(p, "haze_col", (60, 64, 120) if p.night else (206, 222, 250))
@@ -1489,6 +1552,7 @@ OUTDOOR_SPECS = {
     "fields": {"ground": "soil", "elements": ["fields", "hills", "windturbines"]},
     "landfill": {"ground": "soil", "sky": "haze", "elements": ["hills", "factory"]},
     "headquarters": {"ground": "road", "elements": ["city", "tower"]},
+    "icesea": {"ground": "ice", "elements": ["packice", "icecracks"]},        # zugefrorenes Meer (Regie: stage._ice_story)
 }
 
 
@@ -1889,6 +1953,7 @@ ALIASES = {"asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage"
            "server room": "serverroom", "server": "serverroom", "datenzentrum": "serverroom",
            "firmenzentrale": "headquarters", "konzernzentrale": "headquarters", "hauptsitz": "headquarters", "firmensitz": "headquarters",
            "wolkenkratzer": "headquarters", "hochhaus": "headquarters", "konzern": "headquarters", "firma": "headquarters", "hq": "headquarters",
+           "eismeer": "icesea", "packeis": "icesea", "meereis": "icesea", "eisfläche": "icesea", "eisdecke": "icesea", "zugefrorenes meer": "icesea", "frozen sea": "icesea",
            "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon"}
 
 
@@ -1941,8 +2006,10 @@ def background(place, night=False, dark=False):
         key = resolve(place)
         if key == "underwater" and LAKE[0]:
             key = "lakebed"
+        elif key == "underwater" and ICE[0]:
+            key = "underice"
         if (key, bool(night), bool(dark)) not in _cache:
-            _cache[(key, bool(night), bool(dark))] = (lakebed if key == "lakebed" else PLACES[key])(bool(night)).convert("RGB")
+            _cache[(key, bool(night), bool(dark))] = (lakebed if key == "lakebed" else underice if key == "underice" else PLACES[key])(bool(night)).convert("RGB")
         _masks["last"] = None
         return _cache[(key, bool(night), bool(dark))]
     finally:

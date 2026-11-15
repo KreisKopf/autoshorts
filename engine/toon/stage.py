@@ -212,6 +212,7 @@ def _prepare(scene, cast):
     cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
     _PROP_MIN[0] = 300 if scene.get("_near") else MIN_PROP_PX
+    places.ICE[0] = bool(scene.get("_ice"))               # zugefrorenes Meer: „unter Wasser“ liegt unter der Eisdecke
     places.LAKE[0] = bool(scene.get("_lake"))             # Schatzsuche im See: „unter Wasser“ ist der Seegrund, nicht das Meer
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
     ov = scene.get("overlay") if isinstance(scene.get("overlay"), dict) else {}
@@ -501,7 +502,7 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
             _shadow(frame, int(x), int(gy), int(cut.width * 0.42))
         frame.paste(cut, (int(px0), int(py0)), cut)
         return
-    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse", "ship", "debris", "logs", "crates_sink"):
+    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse", "ship", "debris", "logs", "crates_sink", "ship_ice", "icehole"):
         extras.draw_prop(frame, kind, x, t)
         return
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -1246,6 +1247,14 @@ def direct(scenes, times, topic="", style="", look=""):
         if ov_c and str(ov_c.get("type") or "") == "thermo" and (not spoken_number(ov_c.get("value"), sc["text"])
                                                                   or not -90 <= (graphics._num(str(ov_c.get("value"))) or 0) <= 120):
             sc["overlay"] = ov_c = None                   # Thermometer mit einer Zahl, die niemand sagt (44000 statt 4500), oder jenseits der Skala
+        if ov_c and str(ov_c.get("type") or "") == "thermo":
+            low_th = str(sc.get("text") or "").lower()
+            down_th = bool(_re0.search(r"\bs[ia]nk|gesunken|\bf[aä]ll|gefallen|stürz|kälter|kühler|kühlt|weniger grad", low_th))
+            v_th = graphics._num(str(ov_c.get("value"))) or 0
+            if _re0.search(r"\bum (?:über |fast |rund |etwa |mehr als |bis zu |ganze )?\S+ grad|grad (?:mehr|wärmer|kälter|weniger|kühler)", low_th):
+                sc["overlay"] = ov_c = {"type": "card", "text": f"{abs(v_th):g}".replace(".", ",") + (" GRAD KÄLTER" if down_th else " GRAD WÄRMER")}   # „sinken um fünfzehn Grad“ ist ein Unterschied, kein Stand: kein Thermometer, das auf plus 15 °C steigt
+            elif v_th > 0 and _re0.search(r"minus\s+\S+\s+grad|unter null|unter den gefrierpunkt", low_th):
+                ov_c["value"] = -abs(v_th)                # „minus zwanzig Grad“: die Säule fällt unter null
         if g0 and g0.get("type") == "compare" and graphics._num(g0.get("value")) is not None \
                 and graphics._num(g0.get("value")) == graphics._num(g0.get("sub")):
             sc["graphic"] = g0 = {"type": "number", "kicker": str(g0.get("left") or ""), "value": str(g0.get("value")),   # „Vergleich“ mit zweimal derselben
@@ -2138,7 +2147,86 @@ def direct(scenes, times, topic="", style="", look=""):
         g_n = sc.get("graphic") if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) else None
         if g_n and str(g_n.get("label") or "").strip().lower() and str(g_n.get("label") or "").strip().lower() == str(g_n.get("value") or "").strip().lower():
             g_n["label"] = ""                             # Unterzeile wiederholt nur die Zahl („80 KM/H“ unter „80 KM/H“)
+    _ice_story(scenes, topic)
     _household(scenes)
+    return scenes
+
+
+# Zugefrorenes Meer („Was wäre, wenn die Ostsee zufriert?“): Die Geschichte spielt auf einer Eisfläche bis zum Horizont – kein offenes Wasser mit
+# Wellen, kein Hochgebirge, kein einzelner Eisberg als „Eis“. Schiffe stecken im Eis fest, unter Wasser liegt die Eisdecke oben, Delfine/Schweinswale
+# atmen an einem Loch im Eis.
+FROZEN_RE = (r"zufrier|zugefror|zufror|zufrör|einfrier|eingefror|vereis|eisdecke|eisfläche|eisschicht|eispanzer|meereis|packeis|treibeis|"
+             r"\b(?:auf|über|unter) (?:dem|das|der|einer|dickem|dünnem) (?:\w+ )?eis\b|\b(?:aufs|übers) eis\b")
+FROZEN_SEA_RE = r"ostsee|nordsee|\bmeer(?:es|e)?\b|\bozean|\bbodden|\bförde|\bhaff\b|bodensee|polarmeer|eismeer|atlantik|pazifik|\bhafen|schiffsverkehr|schifffahrt"
+ICE_SHIP_RE = r"schiff|frachter|\bfähre|tanker|container|kutter|eisbrecher|schifffahrt"
+ICE_WHALE_RE = r"delfin|delphin|schweinswal|tümmler|\bwale?n?\b|meeressäuger|säugetier"
+ICE_HOLE_RE = r"atemloch|atemlöcher|eisloch|eislöcher|loch im eis|löcher im eis|luft holen|luft schnappen|zum atmen|auftauchen|sauerstoff"
+ICE_UNDER_RE = (r"unter (?:dem|der|einer|das) (?:\w+ )?(?:eis|eisdecke|eisschicht|eisfläche)\b|unter wasser|\bfische?n?\b|meeresbewohner|gasaustausch|"
+                r"wassersäule|meeresgrund|meeresboden|\balgen\b|plankton")
+ICE_ON_RE = r"\b(?:auf|über) (?:dem|das|der) (?:\w+ )?(?:eis|eisfläche|eisdecke)\b|\b(?:aufs|übers) eis\b"
+ICE_LAND_RE = r"küste|\bdorf|dörfer|\bstadt\b|städte|\bhäuser|\bstrand|\bufer\b|an land\b|festland"
+ICE_PEOPLE_RE = r"reisende|menschen|leute|händler|soldaten|armee|truppen|\bheer\b|marschier|schlittschuh|wirtsh|gasth|\bmarkt|\bbuden|spaziergänger|familien"
+ICE_COAST = {"sky": "", "ground": "snow", "elements": ["village", "packice"]}
+
+
+def _ice_story(scenes, topic):
+    low_t = str(topic or "").lower()
+    texts = [str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict)]
+    n_ice = sum(1 for t_ in texts if re.search(FROZEN_RE, t_))
+    sea = bool(re.search(FROZEN_SEA_RE, low_t)) or any(re.search(FROZEN_SEA_RE, t_) for t_ in texts)
+    if not sea or not ((re.search(FROZEN_RE, low_t) and n_ice >= 1) or n_ice >= 3):
+        return scenes
+    _key = lambda q: extras.PROP_ALIASES.get(str((q.get("type") if isinstance(q, dict) else q) or "").lower(), str((q.get("type") if isinstance(q, dict) else q) or "").lower())   # noqa: E731
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        shot = str(sc.get("shot") or "")
+        if shot == "graphic" and graphics.clean(sc.get("graphic")):
+            continue
+        rp = places.resolve(backdrop(sc))
+        if rp in MAPS or rp in ("space", "highsky") or (rp not in places.OUTDOOR and rp != "underwater"):
+            continue                                      # Karten und Innenräume bleiben, wie sie sind
+        low = str(sc.get("text") or "").lower()
+        spec = places.spec_of(backdrop(sc)) or {}
+        if not (rp in ("underwater", "beach", "snow", "lake", "icesea") or str(spec.get("ground") or "") in ("water", "ice", "snow")
+                or set(spec.get("elements") or []) & {"sea", "glacier", "packice"} or re.search(FROZEN_RE, low) or re.search(FROZEN_SEA_RE, low)
+                or any(str(a.get("kind") or "").lower() == "tardigrade" for a in (sc.get("actors") or []) if isinstance(a, dict))):
+            continue                                      # Dürre auf dem Acker, Stadt, Wald: nicht jede Außenszene liegt auf dem Eis
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        props = [q for q in (sc.get("props") or []) if isinstance(q, dict)]
+        whale = bool(re.search(ICE_WHALE_RE, low))
+        if whale and re.search(ICE_HOLE_RE, low):         # das Atemloch: ein Delfin taucht in einem Loch in der Eisdecke auf
+            sc.update(place="icesea", backdrop=None, props=[{"type": "icehole", "pos": 540}], actors=[], crowd="", shot="")
+            continue
+        if rp == "underwater" or (re.search(ICE_UNDER_RE, low) and not re.search(ICE_ON_RE, low)):
+            keep = [a for a in acts if str(a.get("kind") or "").lower() in ("fish", "shark", "dolphin", "jelly", "shrimp", "mantis", "axolotl", "tardigrade", "diver")]
+            emo = MOOD_EMOTION.get(str(sc.get("mood") or ""), "") or "worried"
+            if whale:
+                keep = [{"id": "_delfin", "kind": "dolphin", "hero": True, "action": "idle", "emotion": emo, "pos": "center", "speaks": False, "emote": "", "say": "", "hold": "", "facing": "right"}]
+            elif not keep:                                # kein leeres Wasser: ein Fisch unter dem Eis
+                keep = [{"id": "_fisch", "kind": "fish", "action": "idle", "emotion": emo, "pos": "center", "speaks": False, "emote": "", "say": "", "hold": "", "facing": "right"}]
+            sc.update(place="underwater", backdrop=None, time="day", weather="", _ice=True, actors=keep, crowd="",
+                      props=[q for q in props if _key(q) in extras.WATER_KINDS])   # das Eis liegt als Decke oben – kein Eisberg am Meeresgrund, kein Schiff im Wasser
+            if shot in ("insert", "close"):
+                sc["shot"] = ""
+            if str(sc.get("mood") or "") in ("scary", "tense", "sad", "panic"):
+                sc["mood"] = "calm"                       # das Halbdunkel verschluckte die Eisdecke – die Not zeigt das Gesicht des Tiers
+            continue
+        coast = bool(re.search(ICE_LAND_RE, low)) and not re.search(ICE_ON_RE, low) and not re.search(ICE_SHIP_RE, low)
+        if coast:
+            if rp not in ("village", "street", "church"):
+                sc.update(place="village", backdrop=dict(ICE_COAST))   # verschneites Küstendorf, dahinter das zugefrorene Meer
+        else:
+            sc.update(place="icesea", backdrop=None)
+        props = [q for q in props if _key(q) not in ("wave", "debris", "flood") and (_key(q) != "ice" or re.search(r"eisberg", low))]
+        if any(_key(q) == "ship" for q in props) or (re.search(ICE_SHIP_RE, low) and not coast):
+            props = [q for q in props if _key(q) in extras.SKY][:1] + [{"type": "ship_ice", "pos": 540}]   # das Schiff steckt fest – es fährt nicht auf offenen Wellen
+            sc["actors"], sc["crowd"] = [], ""
+            if shot in ("insert", "close", "event"):
+                sc["shot"] = ""                           # ganz im Bild, nicht vergrößert angeschnitten
+        elif not coast and not [a for a in acts if not a.get("kind")] and re.search(ICE_PEOPLE_RE, low) and re.search(ICE_ON_RE, low):
+            sc["crowd"] = "cheer" if str(sc.get("crowd") or "") == "cheer" else "walk"   # „auf dem Eis wurden Wirtshäuser aufgebaut“: Leute sind auf dem Eis unterwegs
+        sc["props"] = props
     return scenes
 
 
@@ -2472,7 +2560,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -2515,7 +2603,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -3028,7 +3116,7 @@ def _auto_explain(scenes):
             except (TypeError, ValueError):
                 v = None
             if v is not None and fig["unit"] == "GRAD" and -90 <= v <= 120 \
-                    and not _re.search(r"grad (?:celsius )?(?:mehr|wärmer|kälter|weniger)|grad (?:steig|sink|fäll)|um \S+ grad", low):
+                    and not _re.search(r"grad (?:celsius )?(?:mehr|wärmer|kälter|weniger)|grad (?:steig|sink|fäll)|\bum (?:\w+ ){1,3}grad", low):
                 if _re.search(r"minus\s+\S+\s+grad|-\s?\d+\s*grad|unter null", low):
                     v = -abs(v)
                 sc["overlay"] = {"type": "thermo", "value": v}
@@ -3292,10 +3380,10 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
-CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
+CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
                 "classroom", "restaurant", "church")
 CROWD_ELEMENTS = ("city", "village", "street", "houses")
 
@@ -3711,6 +3799,8 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
             for p in (spec.get("props") or [])]
     keys += [k for pat, k in _lib_props() + TEXT_PROPS if _re.search(pat, low)]
     hk = str(spec.get("hero_kind") or "").lower()
+    if _re.search(FROZEN_RE, low) and _re.search(FROZEN_SEA_RE, low):
+        keys, hk = ["ship_ice"], ""                       # zugefrorenes Meer: das eingefrorene Schiff aufs Titelbild – nicht der Fisch aus einer Nebenszene
     if hk in extras.CREATURES and (_sea_named(low) == hk or any(k_ == hk and _re.search(pat, low) for pat, k_ in TOPIC_CREATURES + ANY_CREATURES)):
         keys = []                                         # das Thema nennt das Tier: Es gehört aufs Titelbild, kein Gegenstand aus dem Text
     if hk == "fridge":

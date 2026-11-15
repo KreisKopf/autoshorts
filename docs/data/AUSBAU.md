@@ -216,6 +216,21 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Menschen-Sätze werden auch erkannt, wenn das Drehbuch dort das Tier hinstellt („Menschen haben drei Arten von Farbrezeptoren“, „schneller als ein
   Wimpernschlag“ – `SEA_PEOPLE_RE`): Dann steht die Hauptfigur im Bild.
 
+- Zugefrorenes Meer (Prüfung 15.11.2026, „Was wäre, wenn die Ostsee zufriert?“ – `stage._ice_story`, Schlussdurchgang in `direct`; greift, wenn Thema oder
+  Sätze von Zufrieren/Eisdecke sprechen (`FROZEN_RE`) und ein Meer genannt ist (`FROZEN_SEA_RE`)): Ort `icesea` (`places.OUTDOOR_SPECS`: Boden `ice`, Elemente
+  `packice` = aufgeschobene Schollen bis zum Horizont, `icecracks` = Risse und Glanz) statt offener Wellen, Palmenstrand oder Hochgebirge (`snow`). Der einzelne
+  Eisberg (`ice`) steht nur noch, wenn der Satz „Eisberg“ sagt. Schiffe stecken fest: Requisite `ship_ice` (Containerschiff schief im Eis, Schollen am Rumpf) statt
+  des fahrenden Dampfers. Unter Wasser (`ICE_UNDER_RE` oder Ort `underwater`): `scene["_ice"]` → `places.underice` (Eisdecke oben, dämmriges Wasser) – kein
+  Eisberg am Meeresgrund, kein Tiefsee-Schwarz; ohne Tier schwimmt ein Fisch. Delfin/Schweinswal + Atemloch/Sauerstoff: Requisite `icehole` (Loch im Eis, der
+  Delfin taucht auf und atmet aus); sonst unter Wasser das Wesen `dolphin`. Küsten-Sätze (`ICE_LAND_RE`) zeigen ein verschneites Dorf vor dem Packeis (`ICE_COAST`),
+  „auf dem Eis“ mit Reisenden/Soldaten/Wirtshäusern bekommt Leute aufs Eis. Dürre-, Zimmer- und Karten-Szenen bleiben, wie sie sind. Selftest: `_ice`.
+  Thermometer: „sinken um fünfzehn Grad“ ist ein Unterschied, kein Stand – kein Thermometer, das auf +15 °C steigt (Zahl bleibt als Tafel/Zähler);
+  „minus zwanzig Grad“ lässt die Säule unter null fallen. Schluss: `writer.polish` beendet einen Schlusssatz, der im Gedankenstrich hängen bleibt, mit Punkt;
+  die Drehbuch-Vorgabe verlangt einen vollständigen letzten Satz.
+- Neue Wesen (`extras.creature`, Größen in `HERO_SIZE`/`CREATURE_SIZE`): `dolphin` (Delfin/Schweinswal, schwimmt), `cow` (Kuh), `pig` (Schwein), `chimp`
+  (Schimpanse, sitzt aufrecht), `mosquito` (Mücke), `fly` (Fliege). Die Text-KI darf sie besetzen (`writer`: "kind"); eine eigene Regie-Regel, die sie beim
+  bloßen Nennen ins Bild holt (wie `PET_RE` für Katze/Hund), fehlt noch – gebraucht für „Was wäre, wenn Tiere sprechen könnten?“ (Kühe protestieren, das
+  Schwein fragt, Schimpansen im Labor, die Mücke am Schluss).
 - Alltags-Geschichten mit Dingen als Figur (Prüfung 15.11.2026, „Ich lebte wie 1348“ – `stage._household`, Schlussdurchgang in `direct`): Heißt eine Figur
   „kuehlschrank“ (`FRIDGE_ID_RE`), ist sie das Wesen `fridge` (`extras.creature`: Kühlschrank mit Gesicht, Armen, Beinen; wütend/zeigend hebt er den Arm) –
   kein Roboter neben einem Kühlschrank, kein zweiter Kühlschrank als Requisite, keine gesichtslose Großaufnahme. Nennt der Satz Katze oder Hund (`PET_RE`) und
