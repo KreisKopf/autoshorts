@@ -1,5 +1,5 @@
 {
- "updated": 1794750469.347599,
+ "updated": 1794752270.01393,
  "enough": true,
  "counted": 13,
  "total": 15,
@@ -9,28 +9,28 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1672,
-   "avg_likes": 40.0,
-   "like_rate": 2.39,
-   "avg_score": 2276
+   "avg_views": 1685,
+   "avg_likes": 39.9,
+   "like_rate": 2.37,
+   "avg_score": 2287
   },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1454,
-   "avg_likes": 48.5,
-   "like_rate": 3.33,
-   "avg_score": 2182
+   "avg_views": 1474,
+   "avg_likes": 49.0,
+   "like_rate": 3.32,
+   "avg_score": 2209
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1271,
-   "avg_likes": 44.0,
-   "like_rate": 3.46,
-   "avg_score": 1931
+   "avg_views": 1315,
+   "avg_likes": 45.0,
+   "like_rate": 3.42,
+   "avg_score": 1990
   },
   {
    "slug": "fakten",
@@ -39,22 +39,22 @@
    "avg_views": 1022,
    "avg_likes": 30.5,
    "like_rate": 2.98,
-   "avg_score": 1494
+   "avg_score": 1495
   }
  ],
  "weights": {
-  "fakten": 0.71,
-  "storys": 1.03,
+  "fakten": 0.7,
+  "storys": 1.04,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.08,
+  "whatif": 1.07,
   "comedy": 1.2,
   "musik": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤯 What If (Ø 1672 Aufrufe, 2.39 % Likes).",
+  "Stärkste Kategorie: 🤯 What If (Ø 1685 Aufrufe, 2.37 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2371 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2390 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -63,11 +63,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2535,
+   "views": 2538,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3375
+   "score": 3378
   },
   {
    "id": 77,
@@ -83,31 +83,31 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1987,
+   "views": 1992,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2962
+   "score": 2967
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 1982,
-   "likes": 47,
+   "views": 2079,
+   "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2687
+   "score": 2769
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1608,
+   "views": 1631,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2583
+   "score": 2606
   }
  ],
  "flop": [
