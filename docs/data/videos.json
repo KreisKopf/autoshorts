@@ -3833,7 +3833,7 @@
   "id": 107,
   "category": "whatif",
   "topic": "Was wäre, wenn die Ostsee plötzlich komplett zufriert? – Vorgaben: Reihenfolge der Folgen: Containerschiffe stecken im Eis fest; unter dem Eis wird für die Fische der Sauerstoff knapp; Schweinswale (die einzigen Wale der Ostsee – nicht Delfine sagen) brauchen Atemlöcher im Eis; man könnte zu Fuß übers Eis von Deutschland nach Dänemark und Schweden laufen; an der Küste wird es deutlich kälter. Auflösung am Schluss mit geprüften Fakten: Im Winter 1658 marschierte eine schwedische Armee über das Eis der zugefrorenen Ostsee nach Dänemark, und im Winter 1987 war die Ostsee zuletzt fast komplett zugefroren. Keine anderen Jahreszahlen, keine erfundenen Zahlen (keine Sekunden-, Grad-, Meter- oder Prozentangaben), kein Bärtierchen, keine Wirtshäuser, keine Heizkosten, kein Klimawandel. Der Einstieg verspricht nur, was das Video einlöst. Letzter Satz: vollständiger Satz mit Pointe, kein Gedankenstrich am Ende. Ort der Eis-Szenen: icesea. Titelbild-Text: OSTSEE ZUGEFROREN",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794768147.274504,
   "title": "Was wäre, wenn die Ostsee plötzlich komplett zufriert?",
   "description": "Was passiert, wenn die Ostsee zufriert?\nErlebe das eisige Gedankenspiel bis zur Fußüberquerung.\nWürdest du auch nach Schweden laufen?",
@@ -3871,6 +3871,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Falsche Jahreszahl im Sprechertext (1981 statt 1987), sieben Füllsaetze am Schluss, Deutschlandkarte mit Leuchtpunkten statt Laenderkarte und zum Science-Fiction-Satz, einzelne Figur statt Armee auf dem Eis"
  }
 ]
