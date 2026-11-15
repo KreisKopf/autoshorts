@@ -136,27 +136,76 @@ def song_hits(path, length=40.0):
         if e_ > best_e:
             best, best_e = k * 0.5, e_
     seg = y[int(best * sr): int((best + length) * sr)]
-    n_fft, hp = 1024, 128
+    chosen = melody_onsets(seg, sr, max_rate=4.0)
+    return best, length, chosen
+
+
+def _median_filter(a, size, axis):
+    """Gleitender Median (nur numpy) entlang einer Achse – für die Trennung von Tönen (waagerecht) und Schlägen (senkrecht)."""
+    pad = size // 2
+    a2 = np.moveaxis(a, axis, -1)
+    p = np.pad(a2, [(0, 0)] * (a2.ndim - 1) + [(pad, pad)], mode="edge")
+    out = np.median(np.lib.stride_tricks.sliding_window_view(p, size, axis=-1), axis=-1)
+    return np.moveaxis(out, -1, axis)
+
+
+HK, TH, FL = [5], [0.8], [20]                       # Ton-Glättung (Frames), Einsatz-Schwelle, Leiseste 20 % zählen nicht – an Remixen gemessen
+LOCAL_FLUX, PITCH_CHANGE = [False], [False]             # gemessen an Remixen mit bekannten Tönen: so am genauesten
+
+
+def melody_onsets(seg, sr, max_rate=4.0, lo=220.0, hi=2000.0):
+    """Einsätze der MELODIE (nicht des Schlagzeugs): Das Spektrogramm wird in Töne (waagerechte Linien) und Schläge (senkrechte
+    Striche) getrennt (HPSS per Median); nur der Ton-Anteil im Melodiebereich zählt. Ein neuer Ton = Energiesprung im Ton-Anteil
+    ODER die führende Tonhöhe springt auf einen anderen Halbton und bleibt dort. Gibt [(Zeit, midi)] zurück."""
+    n_fft, hp = 2048, 256
+    if len(seg) < n_fft * 4:
+        return []
     frames = np.lib.stride_tricks.sliding_window_view(seg, n_fft)[::hp] * np.hanning(n_fft)
-    mag = np.abs(np.fft.rfft(frames, axis=1))
-    logm = np.log1p(mag * 10)
-    flux = np.maximum(0, np.diff(logm, axis=0)).sum(axis=1)
-    flux = (flux - flux.mean()) / (flux.std() + 1e-6)
-    med = np.array([np.median(flux[max(0, i - 24): i + 24]) for i in range(len(flux))])
+    mag = np.abs(np.fft.rfft(frames, axis=1)).astype(np.float32)
+    k0, k1 = int(lo * n_fft / sr), int(hi * n_fft / sr)
+    band = mag[:, k0:k1]
+    harm = _median_filter(band, HK[0], 0)                 # über die Zeit glätten: bleibt, was klingt (Ton)
+    perc = _median_filter(band, 17, 1)                   # über die Frequenz glätten: bleibt, was knallt (Schlag)
+    h = band * (harm ** 2 / (harm ** 2 + perc ** 2 + 1e-9))
     dt = hp / sr
-    peaks = [i for i in range(1, len(flux) - 1) if flux[i] > flux[i - 1] and flux[i] >= flux[i + 1] and flux[i] > med[i] + 0.9]
-    peaks.sort(key=lambda i: -flux[i])
+    off = 0.5 * n_fft / sr + 0.04                        # Einsatz: Fenstermitte + Anschwellen des Tons (an Remixen mit bekannten Tönen gemessen)
+    energy = h.sum(axis=1)
+    floor = np.percentile(energy, FL[0])
+    peak_bin = np.argmax(h, axis=1) + k0
+    freq = peak_bin * sr / n_fft
+    midi = np.round(69 + 12 * np.log2(np.maximum(freq, 30) / 440)).astype(int)
+    logh = np.log1p(h * 10)
+    dif = np.maximum(0, np.diff(logh, axis=0))
+    if LOCAL_FLUX[0]:                                    # nur rund um die führende Tonhöhe: Akkordwechsel im Hintergrund zählen nicht
+        pb = np.argmax(h, axis=1)
+        idx = np.minimum(len(pb) - 1, np.arange(len(dif)) + 2)
+        cols = np.arange(h.shape[1])[None, :]
+        near = np.abs(cols - pb[idx][:, None]) <= np.maximum(2, pb[idx][:, None] * 0.06)
+        flux = (dif * near).sum(axis=1)
+    else:
+        flux = dif.sum(axis=1)
+    flux = (flux - flux.mean()) / (flux.std() + 1e-6)
+    med = np.array([np.median(flux[max(0, i - 20): i + 20]) for i in range(len(flux))])
+    cand = {}
+    for i in range(1, len(flux) - 1):                    # Energiesprung im Ton-Anteil
+        if flux[i] > flux[i - 1] and flux[i] >= flux[i + 1] and flux[i] > med[i] + TH[0] and energy[min(len(energy) - 1, i + 2)] > floor:
+            cand[i + 1] = float(flux[i])
+    hold = 3 if PITCH_CHANGE[0] else 10 ** 6             # Tonhöhenwechsel ohne neuen Anschlag (gebundene Melodie)
+    for i in range(1, max(1, len(midi) - hold)):
+        if energy[i] > floor and midi[i] != midi[i - 1] and all(midi[i + j] == midi[i] for j in range(hold)) \
+                and all(abs(i - c) > 3 for c in cand):
+            cand[i] = 0.5
+    order = sorted(cand, key=lambda i: -cand[i])
     chosen = []
-    for i in peaks:                                      # stärkste Einsätze zuerst, mindestens 0,17 s Abstand, höchstens ~4 pro Sekunde
-        tt = (i + 1) * dt + 0.67 * n_fft / sr             # Versatz des Analysefensters (gemessen: Einsatz liegt im hinteren Fensterteil)
-        if all(abs(tt - c) >= 0.17 for c, _ in chosen):
-            band = mag[i + 1][int(180 * n_fft / sr): int(1800 * n_fft / sr)]
-            f = (np.argmax(band) + int(180 * n_fft / sr)) * sr / n_fft
-            chosen.append((tt, int(round(69 + 12 * math.log2(max(f, 30) / 440)))))
-        if len(chosen) >= length * 4:
+    for i in order:                                      # stärkste zuerst, mindestens 0,13 s Abstand, höchstens max_rate pro Sekunde
+        tt = i * dt + off
+        if all(abs(tt - c) >= 0.13 for c, _ in chosen):
+            j = min(len(midi) - 1, i + 2)
+            chosen.append((round(tt, 4), int(midi[j])))
+        if len(chosen) >= len(seg) / sr * max_rate:
             break
     chosen.sort()
-    return best, length, chosen
+    return chosen
 
 
 def file_song(path, work, lead=0.9):
@@ -578,8 +627,21 @@ CC_QUERIES = ["remix", "electronic remix", "edm", "trap beat", "phonk", "house",
               "chill remix", "drum and bass"]
 
 
+VOCAL_RE = r"vocal|voice|\bvox\b|sing|singer|sung|song ?writer|lyric|\brap\b|rapper|\bmc\b|spoken|choir|chant|acapella|a cappella|feat\.?|\bft\.|featuring|gesang|stimme"
+
+
+def instrumental(it):
+    """Nur Tracks, die ausdrücklich instrumental sind (Schlagwort) und nirgends Gesang, Rap oder Sprache erwähnen."""
+    import re
+    tags = [str((t or {}).get("name") or "").lower() for t in (it.get("tags") or []) if isinstance(t, dict)]
+    text = " ".join([str(it.get("title") or ""), str(it.get("description") or "")] + tags).lower()
+    if re.search(VOCAL_RE, text):
+        return False
+    return any("instrumental" in t for t in tags) or "instrumental" in str(it.get("title") or "").lower()
+
+
 def cc_track(used, work):
-    """Freier Remix/Track von ccMixter oder Jamendo (über Openverse): nur CC0 oder CC BY – „nicht kommerziell“ (NC) und
+    """Freier INSTRUMENTAL-Track von ccMixter oder Jamendo (über Openverse): nur CC0 oder CC BY – „nicht kommerziell“ (NC) und
     „keine Bearbeitung“ (ND) sind ausgeschlossen. CC BY verlangt Namensnennung: sie steht in credit und kommt in die Beschreibung."""
     import requests
     ua = {"User-Agent": "AutoShorts/1.0 (open source shorts generator)"}
@@ -588,7 +650,7 @@ def cc_track(used, work):
     for q in qs[:5]:
         try:
             r = requests.get("https://api.openverse.org/v1/audio/", headers=ua, timeout=30,
-                             params={"q": q, "license": "cc0,by", "category": "music", "source": "jamendo,ccmixter", "page_size": 20})
+                             params={"q": f"instrumental {q}", "license": "cc0,by", "category": "music", "source": "jamendo,ccmixter", "page_size": 20})
             if r.status_code != 200:
                 log(f"Openverse „{q}“: HTTP {r.status_code}")
                 continue
@@ -602,6 +664,8 @@ def cc_track(used, work):
             dur = (it.get("duration") or 0) / 1000
             aid = "cc:" + str(it.get("id"))
             if lic not in ("cc0", "by") or aid in used or not it.get("url") or not (50 <= dur <= 480) or (it.get("filesize") or 0) > 25_000_000:
+                continue
+            if not instrumental(it):                     # nur reine Melodie: kein Gesang, kein Rap, keine Sprache
                 continue
             dest = Path(work) / ("cc_" + str(it["id"])[:8] + "." + (str(it.get("filetype") or "mp3").lower()[:4] or "mp3"))
             try:

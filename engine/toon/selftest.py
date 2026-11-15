@@ -637,6 +637,17 @@ def main():
             good = sum(1 for t, _ in found if min(abs(st + t - r) for r in real) < 0.04)
             assert good >= 0.9 * len(found) and len(found) >= 0.8 * len(real), (good, len(found), len(real))
         from .. import remix                              # Remix: jeder Stil ergibt einen Track, Töne liegen in der Melodie-Reihenfolge
+        with tempfile.TemporaryDirectory() as tmp:            # Melodie statt Schlagzeug: in einem Remix mit Beat trifft die Kugel die Melodietöne
+            for stl in ("trap", "edm"):
+                wav_m = Path(tmp) / f"m_{stl}.wav"
+                h4, _t4 = remix.build(bounce.SONGS["korobeiniki"], remix.KEYS["korobeiniki"], stl, wav_m, seed=1)
+                f4 = bounce.melody_onsets(bounce._decode(wav_m, 11025), 11025, max_rate=6)
+                true4 = [t for t, _ in h4]
+                prec = sum(1 for t, _ in f4 if min(abs(t - u) for u in true4) < 0.05) / max(1, len(f4))
+                rec = sum(1 for u in true4 if any(abs(t - u) < 0.05 for t, _ in f4)) / len(true4)
+                assert prec >= 0.6 and rec >= 0.8, (stl, round(prec, 2), round(rec, 2))
+        assert not bounce.instrumental({"title": "I Insist (Remix)", "tags": [{"name": "rap"}, {"name": "instrumental"}]})
+        assert bounce.instrumental({"title": "Night Drive", "tags": [{"name": "instrumental"}]}) and not bounce.instrumental({"title": "x", "tags": []})
         assert set(bounce.SONGS) <= set(remix.KEYS)
         with tempfile.TemporaryDirectory() as tmp:
             for stl in remix.STYLES:

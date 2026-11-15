@@ -515,8 +515,8 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
 
 
 def make_bounce(cat, upload=True, force=None):
-    """Musik-Kugel: eigene Lieder zuerst; sonst im Wechsel ein Remix einer bekannten gemeinfreien Melodie oder ein freier Track
-    (ccMixter/Jamendo, CC0/CC BY mit Namensnennung). force = "remix" | "cc" erzwingt die Quelle (z. B. Thema im Studio)."""
+    """Musik-Kugel: eigene Lieder zuerst; sonst ein Remix einer bekannten gemeinfreien Melodie (kein Gesang, die Kugel trifft
+    genau die Melodietöne). force = "cc" holt ausnahmsweise einen freien Instrumental-Track (ccMixter/Jamendo, CC0/CC BY)."""
     from . import bounce
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
@@ -529,7 +529,7 @@ def make_bounce(cat, upload=True, force=None):
     if own:
         song = sorted(own, key=lambda x: used.index(x["asset"]) if x["asset"] in used else -1)[0]
     else:
-        src = force if force in ("remix", "cc") else ("cc" if STATE.get("bounce_src") == "remix" else "remix")
+        src = force if force in ("remix", "cc") else "remix"   # automatisch nur Remixe: reine Melodie, jeder Aufprall ist exakt ein Melodieton
         if src == "cc":
             try:
                 song = bounce.cc_track(used, work)
