@@ -3828,5 +3828,49 @@
   "slot": "2026-11-15 21:00",
   "review_at": 1794766577.7189934,
   "error": "Bei der Prüfung verworfen: Eis als einzelner Eisberg statt Eisdecke (auch am Meeresgrund), Schiff fährt auf offenen Wellen, kein Delfin am Atemloch, Hochgebirge statt Ostsee, Thermometer steigt auf +15 °C, ungeprüfte Jahreszahl 1685, abgebrochener Schlusssatz, Goldfisch auf dem Titelbild"
+ },
+ {
+  "id": 107,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Ostsee plötzlich komplett zufriert? – Vorgaben: Reihenfolge der Folgen: Containerschiffe stecken im Eis fest; unter dem Eis wird für die Fische der Sauerstoff knapp; Schweinswale (die einzigen Wale der Ostsee – nicht Delfine sagen) brauchen Atemlöcher im Eis; man könnte zu Fuß übers Eis von Deutschland nach Dänemark und Schweden laufen; an der Küste wird es deutlich kälter. Auflösung am Schluss mit geprüften Fakten: Im Winter 1658 marschierte eine schwedische Armee über das Eis der zugefrorenen Ostsee nach Dänemark, und im Winter 1987 war die Ostsee zuletzt fast komplett zugefroren. Keine anderen Jahreszahlen, keine erfundenen Zahlen (keine Sekunden-, Grad-, Meter- oder Prozentangaben), kein Bärtierchen, keine Wirtshäuser, keine Heizkosten, kein Klimawandel. Der Einstieg verspricht nur, was das Video einlöst. Letzter Satz: vollständiger Satz mit Pointe, kein Gedankenstrich am Ende. Ort der Eis-Szenen: icesea. Titelbild-Text: OSTSEE ZUGEFROREN",
+  "status": "rendered",
+  "created": 1794768147.274504,
+  "title": "Was wäre, wenn die Ostsee plötzlich komplett zufriert?",
+  "description": "Was passiert, wenn die Ostsee zufriert?\nErlebe das eisige Gedankenspiel bis zur Fußüberquerung.\nWürdest du auch nach Schweden laufen?",
+  "hashtags": [
+   "#shorts",
+   "#ostsee",
+   "#eis",
+   "#winter",
+   "#experiment",
+   "#physik",
+   "#fy",
+   "#viral"
+  ],
+  "tags": [
+   "ostsee zugefroren",
+   "was wäre wenn",
+   "eiszeit",
+   "schifffahrt",
+   "schweinswale",
+   "ostsee",
+   "fakten",
+   "physik",
+   "experiment"
+  ],
+  "thumb_text": "OSTSEE ZUGEFROREN",
+  "missing": [
+   "armee"
+  ],
+  "cover_ms": 96599,
+  "duration": 96.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

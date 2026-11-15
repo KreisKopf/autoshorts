@@ -1,0 +1,338 @@
+{
+ "title": "Was wäre, wenn die Ostsee plötzlich komplett zufriert?",
+ "scenes": [
+  {
+   "text": "Wenn die Ostsee plötzlich komplett zufriert, stecken riesige Containerschiffe im Eis fest.",
+   "see": "Containerschiffe stecken im dichten Eis der Ostsee fest",
+   "place": "icesea",
+   "time": "day",
+   "weather": "snow",
+   "props": [
+    {
+     "type": "ship_ice",
+     "pos": 540
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "EISIG"
+   }
+  },
+  {
+   "text": "Und am Ende marschiert eine ganze Armee zu Fuß über das Eis.",
+   "see": "Eine schwedische Armee marschiert zu Fuß über das Eis",
+   "place": "icesea",
+   "time": "day",
+   "weather": "wind",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Unter der eisernen Decke wird für alle Fische augenblicklich der Sauerstoff extrem knapp.",
+   "see": "Unter der dicken Eisdecke wird es für Fische eng",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Schweinswale als einzige Wale der Region brauchen jetzt dringend freie Atemlöcher im Eis.",
+   "see": "Schweinswale brauchen freie Atemlöcher im dicken Eis",
+   "place": "icesea",
+   "time": "day",
+   "props": [
+    {
+     "type": "icehole",
+     "pos": 540
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "EINZIGE WALE"
+   }
+  },
+  {
+   "text": "Plötzlich verwandelt sich das Meer in eine riesige weiße Autobahn aus purem Eis.",
+   "see": "Das Meer wird zu einer weißen Autobahn aus purem Eis",
+   "place": "icesea",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du könntest jetzt theoretisch zu Fuß von Deutschland direkt nach Dänemark und Schweden laufen.",
+   "see": "Man läuft zu Fuß von Deutschland nach Schweden",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "An den Küsten sinken die Temperaturen drastisch ab und ein eisiger Wind fegt über das Land.",
+   "see": "An der Küste fegt ein eisiger Wind über das Land",
+   "place": "village",
+   "backdrop": {
+    "sky": "",
+    "ground": "snow",
+    "elements": [
+     "village",
+     "packice"
+    ]
+   },
+   "time": "day",
+   "weather": "wind",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du denkst, das ist nur Science-Fiction? Falsch, das ist historisch tatsächlich schon so passiert.",
+   "see": "Eine historische Karte zeigt das eingefrorene Meer",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Im bitterkalten Winter des Jahres sechzehnhundertachtundfünfzig marschierte eine komplette schwedische Armee über das Eis.",
+   "see": "Die schwedische Armee marschiert im Jahr 1658 über das Eis",
+   "place": "icesea",
+   "time": "day",
+   "weather": "snow",
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "WINTER 1658"
+   }
+  },
+  {
+   "text": "Sie zogen damals direkt nach Dänemark, weil das gefrorene Meer ihnen den Weg freigab.",
+   "see": "Soldaten ziehen direkt nach Dänemark über das gefrorene Meer",
+   "place": "icesea",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Und warum war das nicht das letzte Mal, dass dieses seltene Naturwunder stattfand?",
+   "see": "Ein großes Fragezeichen steht für das seltene Naturwunder",
+   "place": "street",
+   "time": "day",
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Im extrem kalten Winter neunzehnhunderteinundachtzig war die Ostsee zuletzt fast komplett zugefroren.",
+   "see": "Grafik zeigt das Jahr 1987 als die Ostsee komplett zufror",
+   "place": "icesea",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Seitdem hat die Natur dieses eisige Spektakel nie wieder in diesem Ausmaß gezeigt.",
+   "see": "Die Natur zeigt dieses eisige Spektakel seitdem nicht mehr",
+   "place": "icesea",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Wer weiß, wann die Kälte zurückkehrt und der Ozean sich wieder in festes Eis verwandelt.",
+   "see": "Der Ozean verwandelt sich vielleicht wieder in festes Eis",
+   "place": "icesea",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Vielleicht schon beim nächsten Wintereinbruch, wenn die Temperaturen wieder rasant in den Keller stürzen.",
+   "see": "Temperaturen stürzen beim nächsten Wintereinbruch in den Keller",
+   "place": "icesea",
+   "time": "night",
+   "weather": "storm",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Bis dahin bleibt die Ostsee zum Glück flüssig und die Schiffe kommen sicher an.",
+   "see": "Die Ostsee bleibt flüssig und Schiffe kommen sicher an",
+   "place": "icesea",
+   "time": "day",
+   "props": [
+    {
+     "type": "ship_ice",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Doch genau diese eisige Stille zeigt, wie schnell sich unser Planet verändern kann.",
+   "see": "Die eisige Stille zeigt die schnelle Veränderung unseres Planeten",
+   "place": "icesea",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Ein einziger extremer Winter reicht aus, um diese gewaltige Wassermasse komplett zu stoppen.",
+   "see": "Ein extremer Winter stoppt die gewaltige Wassermasse komplett",
+   "place": "icesea",
+   "time": "day",
+   "weather": "snow",
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Und so fängt alles wieder von vorne an, wenn die Ostsee plötzlich komplett zufriert.",
+   "see": "Die Ostsee friert plötzlich wieder komplett zu",
+   "place": "icesea",
+   "time": "night",
+   "weather": "storm",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  }
+ ]
+}
