@@ -1,5 +1,5 @@
 {
- "updated": 1794729047.6315331,
+ "updated": 1794730846.3181527,
  "enough": true,
  "counted": 12,
  "total": 14,
@@ -18,19 +18,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1638,
-   "avg_likes": 39.0,
-   "like_rate": 2.38,
-   "avg_score": 2227
+   "avg_views": 1635,
+   "avg_likes": 38.8,
+   "like_rate": 2.37,
+   "avg_score": 2220
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1231,
-   "avg_likes": 39.0,
-   "like_rate": 3.17,
-   "avg_score": 1816
+   "avg_views": 1235,
+   "avg_likes": 41.0,
+   "like_rate": 3.32,
+   "avg_score": 1850
   },
   {
    "slug": "fakten",
@@ -53,7 +53,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1603 Aufrufe, 4.05 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2379 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2377 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,31 +62,31 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2533,
+   "views": 2535,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3373
+   "score": 3375
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2149,
+   "views": 2153,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3064
+   "score": 3068
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 1902,
-   "likes": 65,
+   "views": 1873,
+   "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 2877
+   "score": 2803
   },
   {
    "id": 62,
