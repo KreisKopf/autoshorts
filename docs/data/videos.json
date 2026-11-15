@@ -4016,5 +4016,46 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7708488974695714081?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 112,
+  "category": "vergleich",
+  "topic": "Dönerladen gegen Burgerladen – wer verdient mehr?",
+  "status": "rendered",
+  "created": 1794779753.0529554,
+  "title": "Dönerladen gegen Burgerladen: Wer verdient wirklich mehr?",
+  "description": "Döner oder Burger: Welcher Laden macht mehr Gewinn?\nWer verdient am Ende des Monats mehr nach allen Kosten?\nFinde heraus, wer das Duell gewinnt!",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#doener",
+   "#burger",
+   "#geld",
+   "#business",
+   "#vergleich"
+  ],
+  "tags": [
+   "dönerladen gewinn",
+   "burgerladen umsatz",
+   "wer verdient mehr",
+   "döner gegen burger",
+   "business vergleich",
+   "finanzen gen z"
+  ],
+  "thumb_text": "WER WIRD REICHER?",
+  "missing": [
+   "miete"
+  ],
+  "cover_ms": 72850,
+  "duration": 72.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

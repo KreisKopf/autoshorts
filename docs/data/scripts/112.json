@@ -1,0 +1,563 @@
+{
+ "title": "Dönerladen gegen Burgerladen: Wer verdient wirklich mehr?",
+ "scenes": [
+  {
+   "text": "Ein Dönerladen tritt gegen eine gigantische Burgerkette an.",
+   "see": "Mehmet und Till stehen sich auf der Straße gegenüber mit einblendetem Versustext.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "till",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "graphic": {
+    "type": "versus",
+    "kicker": "GEWINN-DUELL",
+    "left": "DÖNER",
+    "right": "BURGER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Der Gewinner macht trotz viel kleinerer Preise deutlich mehr Gewinn am Ende des Monats.",
+   "see": "Ein Versprechen, dass der Burger-Gigant riesig aussieht, aber der Döner überrascht.",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "street"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "döner"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mehmet",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "döner",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "till",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "GEHEIMER VORTEIL"
+   }
+  },
+  {
+   "text": "Mehmet nimmt pro Döner sieben Euro fünfzig von seinen Kunden.",
+   "see": "Mehmet verkauft in seinem Laden einen Döner für sieben Euro fünfzig.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    },
+    {
+     "type": "lib_doener"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mehmet",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "money",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 7,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Nach Abzügen bleiben ihm genau vier Euro Gewinn, aber reicht das gegen Tills Burger?",
+   "see": "Der Abzug für Fleisch, Brot und Gemüse wird berechnet.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "happy",
+   "crowd": "cheer",
+   "graphic": {
+    "type": "number",
+    "kicker": "REINGEWINN MEHMET",
+    "value": "4,00 €",
+    "label": "PRO DÖNER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Till verlangt für sein Smash-Burger-Menü stolze vierzehn Euro.",
+   "see": "Till verkauft stylische Smash Burger in seinem modernen Laden.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "till",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "14,00 € PRO MENÜ"
+   }
+  },
+  {
+   "text": "Till legt jede Gurke einzeln mit der Pinzette auf das Bio-Brötchen.",
+   "see": "Till verfeinert jeden Burger penibel mit einer Pinzette.",
+   "place": "restaurant",
+   "time": "day",
+   "actors": [
+    {
+     "id": "till",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "MAROTTE: PINZETTE"
+   }
+  },
+  {
+   "text": "Durch teures Bio-Fleisch und Branding bleiben ihm sechs Euro pro Menü.",
+   "see": "Nach Abzug der teuren Zutaten bleibt Till ein Reingewinn.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "kicker": "REINGEWINN TILL",
+    "value": "6,00 €",
+    "label": "PRO MENÜ",
+    "dark": false
+   }
+  },
+  {
+   "text": "Pro Kopf führt Till also mit zwei Euro mehr Gewinn, doch wer bedient mehr Kunden?",
+   "see": "Vergleichsbalken der Gewinne pro Verkauf wird eingeblendet.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "insert",
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 2,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Aber wie schnell schaffen die beiden eigentlich eine Bestellung?",
+   "see": "Offene Frage, ob Till diesen Vorsprung auch behalten kann.",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "street"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mehmet",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "till",
+     "speaks": false,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "NEUE FRAGE: SPEED?"
+   }
+  },
+  {
+   "text": "Mehmet braucht für einen Döner genau neunzig Sekunden.",
+   "see": "Mehmet macht in Rekordzeit einen Döner fertig.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    },
+    {
+     "type": "lib_doener"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "value": "90",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Till muss das Fleisch braten und braucht acht Minuten.",
+   "see": "Till braucht wegen dem Grillen deutlich länger.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "card",
+    "text": "8 MINUTEN"
+   }
+  },
+  {
+   "text": "Mehmet schafft so dreihundert Kunden an einem einzigen Tag.",
+   "see": "Lange Schlange vor Mehmets Dönerbude.",
+   "place": "restaurant",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mehmet",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "counter",
+    "label": "KUNDEN PRO TAG",
+    "value": 300,
+    "unit": "LEUTE",
+    "sub": "MEHMET DÖNER"
+   }
+  },
+  {
+   "text": "Till kommt wegen der Zubereitungszeit nur auf achtzig Kunden.",
+   "see": "Kleinere Schlange in Tills Burgerladen.",
+   "place": "restaurant",
+   "time": "day",
+   "actors": [
+    {
+     "id": "till",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad",
+   "crowd": "worried",
+   "overlay": {
+    "type": "counter",
+    "label": "KUNDEN PRO TAG",
+    "value": 80,
+    "unit": "LEUTE",
+    "sub": "TILL BURGER"
+   }
+  },
+  {
+   "text": "Mehmet zieht monatlich neuntausend Euro Reingewinn und freut sich über einen guten Schnitt.",
+   "see": "Mehmet zeigt stolz seine neue Luxusuhr am Handgelenk.",
+   "place": "restaurant",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mehmet",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 9000,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Du denkst, Till holt durch die teuren Preise auf? Falsch gedacht!",
+   "see": "Finntaucht überraschend auf: Tills hohe Miete bricht ihm das Genick.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "till",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Haken: Seine Hipster-Miete in der Innenstadt frisst fast alles wieder auf.",
+   "see": "Der Haken wird enthüllt: Tills Innenstadtmiete frisst alles auf.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "till",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Ihm bleiben am Ende nur viertausendachthundert Euro netto übrig.",
+   "see": "Am Ende bleibt Till nur ein kleiner Betrag übrig.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "till",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "money",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Der Döner-Chef gewinnt dieses Duell durch pure Masse und Geschwindigkeit eindeutig.",
+   "see": "Stempel GEWINNER knallt über Mehmets Gesicht.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "döner"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mehmet",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "döner",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "stamp",
+    "text": "GEWINNER",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Masse schlägt eben Klasse, wenn man wissen will:",
+   "see": "Pointe, die nahtlos in die erste Szene zurückführt.",
+   "place": "classroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mehmet",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "MASSE STATT KLASSE"
+   }
+  }
+ ]
+}
