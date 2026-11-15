@@ -2258,7 +2258,7 @@ FROZEN_RE = (r"zufrier|zugefror|zufror|zufrör|einfrier|eingefror|vereis|eisdeck
 FROZEN_SEA_RE = r"ostsee|nordsee|\bmeer(?:es|e)?\b|\bozean|\bbodden|\bförde|\bhaff\b|bodensee|polarmeer|eismeer|atlantik|pazifik|\bhafen|schiffsverkehr|schifffahrt"
 ICE_SHIP_RE = r"schiff|frachter|\bfähre|tanker|container|kutter|eisbrecher|schifffahrt"
 ICE_WHALE_RE = r"delfin|delphin|schweinswal|tümmler|\bwale?n?\b|meeressäuger|säugetier"
-ICE_HOLE_RE = r"atemloch|atemlöcher|eisloch|eislöcher|loch im eis|löcher im eis|luft holen|luft schnappen|zum atmen|auftauchen|sauerstoff"
+ICE_HOLE_RE = r"atemloch|atemlöcher|eisloch|eislöcher|loch im eis|löcher im eis|luft holen|luft schnappen|\batme[nt]\b|zum atmen|auftauch|taucht .{0,30}auf|sauerstoff"
 ICE_UNDER_RE = (r"unter (?:dem|der|einer|das) (?:\w+ )?(?:eis|eisdecke|eisschicht|eisfläche)\b|unter wasser|\bfische?n?\b|meeresbewohner|gasaustausch|"
                 r"wassersäule|meeresgrund|meeresboden|\balgen\b|plankton")
 ICE_ON_RE = r"\b(?:auf|über) (?:dem|das|der) (?:\w+ )?(?:eis|eisfläche|eisdecke)\b|\b(?:aufs|übers) eis\b"
@@ -2276,6 +2276,8 @@ def _ice_story(scenes, topic):
     if not sea or not ((re.search(FROZEN_RE, low_t) and n_ice >= 1) or n_ice >= 3):
         return scenes
     _key = lambda q: extras.PROP_ALIASES.get(str((q.get("type") if isinstance(q, dict) else q) or "").lower(), str((q.get("type") if isinstance(q, dict) else q) or "").lower())   # noqa: E731
+    main_i = next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                   if isinstance(a, dict) and not a.get("kind") and not str(a.get("id") or "").startswith("_")), "du")
     for sc in scenes:
         if not isinstance(sc, dict):
             continue
@@ -2294,7 +2296,7 @@ def _ice_story(scenes, topic):
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         props = [q for q in (sc.get("props") or []) if isinstance(q, dict)]
         whale = bool(re.search(ICE_WHALE_RE, low))
-        if whale and re.search(ICE_HOLE_RE, low):         # das Atemloch: ein Delfin taucht in einem Loch in der Eisdecke auf
+        if whale and (re.search(ICE_HOLE_RE, low) or (rp != "underwater" and not re.search(ICE_UNDER_RE, low))):   # das Atemloch: ein Delfin/Schweinswal taucht in einem Loch in der Eisdecke auf
             sc.update(place="icesea", backdrop=None, props=[{"type": "icehole", "pos": 540}], actors=[], crowd="", shot="")
             continue
         if rp == "underwater" or (re.search(ICE_UNDER_RE, low) and not re.search(ICE_ON_RE, low)):
@@ -2332,6 +2334,12 @@ def _ice_story(scenes, topic):
         if not coast and str(sc.get("mood") or "") in ("tense", "sad") and str(sc.get("time") or "day").lower() not in ("night", "nacht"):
             sc["mood"] = "calm"                           # Halbdunkel mit Lichtkegel macht die weiße Eisfläche am hellen Tag zu grauem Matsch
         sc["props"] = props
+        if not coast and sc.get("crowd") and not re.search(ICE_PEOPLE_RE + r"|" + ICE_ARMY_RE + r"|zu fuß|\blaufen\b|spazier|wander", low):
+            sc["crowd"] = ""                              # Passanten schlendern nicht durch jede Eis-Szene – nur, wenn der Satz von Leuten auf dem Eis spricht
+        if not props and not sc.get("actors") and not sc.get("crowd") and shot != "insert":
+            sc["actors"] = [{"id": main_i, "action": "look_around", "emotion": "", "emote": "", "pos": "center", "speaks": False, "say": "", "hold": "", "facing": ""}]   # keine leere Eisfläche: die Hauptfigur steht staunend auf dem Eis
+            if shot == "event":
+                sc["shot"] = ""
     return scenes
 
 

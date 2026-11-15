@@ -567,6 +567,19 @@ def list_trouble(js):
     return None
 
 
+def repeat_trouble(js):
+    """Erzählt das Drehbuch dasselbe mehrmals? (Die Text-KI schreibt manchmal erst die Vorgaben ab und erzählt dann alles noch einmal –
+    der Schlusssatz steht dann mitten im Video.) Meldet es als kurzen Satz für die Text-KI, sonst None."""
+    texts = [str(s.get("text") or "") for s in js.get("scenes", []) if isinstance(s, dict)]
+    stems = [{w[:6] for w in re.findall(r"[a-zäöüß]{4,}", t.lower())} for t in texts]
+    pairs = [(i, j) for i in range(len(texts)) for j in range(i + 1, len(texts))
+             if len(stems[i]) >= 4 and len(stems[j]) >= 4 and len(stems[i] & stems[j]) / min(len(stems[i]), len(stems[j])) >= 0.75]
+    if len(pairs) >= 2:
+        i, j = pairs[0]
+        return f"{len(pairs)} Aussagen kommen doppelt vor, z. B. Satz {i + 1} und Satz {j + 1} („{texts[i][:60]}“)."
+    return None
+
+
 def spoken_words(js):
     return sum(len(str(x.get("text", "")).split()) for x in js.get("scenes", []) if isinstance(x, dict))
 
@@ -1187,6 +1200,23 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             break
     if list_trouble(js) and not str(list_trouble(js)).startswith("Der Einstieg"):
         raise ai.ProviderError("Drehbuch ist eine Strichliste (" + str(list_trouble(js)) + ") – Video wird nicht gebaut")
+    for attempt in range(2):                             # dasselbe zweimal erzählt (Vorgaben abgeschrieben und dann noch einmal ausgeführt): neu schreiben lassen
+        rep = repeat_trouble(js)
+        if not rep:
+            break
+        ai.log(f"Drehbuch wiederholt sich ({rep}) – lasse es neu schreiben")
+        try:
+            js2, provider = ai.chat_json(SYSTEM, user + "\n\nACHTUNG: Dein letzter Entwurf erzählte dasselbe mehrmals. " + rep
+                                         + " Schreibe das Drehbuch neu, gleich lang: Jeder Gedanke kommt genau einmal vor, in einer klaren Reihenfolge "
+                                         "vom Hook bis zur Pointe; der Schlusssatz steht nur am Ende. Schreibe Vorgaben aus dem Thema nicht wörtlich ab.", 0.8)
+            n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
+            if n2 >= words * 0.75:
+                js, n_words = js2, n2
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Neu schreiben nicht möglich ({e})")
+            break
+    if repeat_trouble(js):
+        raise ai.ProviderError("Drehbuch erzählt dasselbe mehrmals (" + str(repeat_trouble(js)) + ") – Video wird nicht gebaut")
     for attempt in range(2):                             # fremde Schriftzeichen mitten im Wort: das Drehbuch ist verdorben → neu schreiben lassen
         bad = foreign_in(js)
         if not bad:
@@ -1255,6 +1285,10 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             ai.log(f"Schlusskorrektur nicht möglich ({e})")
     try:
         js = polish(js)
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        js = fix_years(js, topic)                        # noch einmal nach Lektorat und Spannungsbogen: die dürfen keine andere Jahreszahl hineinschreiben
     except Exception:  # noqa: BLE001
         pass
     if toon and not has_storyboard(js):

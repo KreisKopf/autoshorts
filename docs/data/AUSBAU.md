@@ -237,6 +237,13 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Schweden“) wird zur Europakarte mit leuchtenden Ländern (`graphic: map`); eine Karte zu einem Satz ohne Land/Welt („Du denkst, das ist Science-Fiction?“)
   entfällt – die Figur steht in Großaufnahme am Ort der Szene davor. Armee/Soldaten auf dem Eis (`ICE_ARMY_RE`): viele Leute ziehen übers Eis, nicht eine Figur.
   Auf der Eisfläche am Tag gibt es kein Halbdunkel mit Lichtkegel (angespannt/traurig) – es macht aus Weiß Grau.
+- Keine leere Eisfläche (`stage._ice_story`, nach Video 110 – dort zeigte ein Drittel des Videos nur Eis mit einem Schild): Hat eine Eis-Szene am Ende weder
+  Figur noch Requisite noch Leute, steht die Hauptfigur staunend auf dem Eis. Passanten laufen nur übers Eis, wenn der Satz von Leuten, Armee oder „zu Fuß“
+  spricht (sonst füllte die Regie jede leere Eis-Szene mit Spaziergängern). Schweinswal/Delfin in einem Satz, der nicht unter Wasser spielt, zeigt immer das
+  Atemloch `icehole` – auch ohne das Wort „Atemloch“ („müssen regelmäßig atmen“).
+- Doppelt erzähltes Drehbuch (`writer.repeat_trouble`, nach Video 109): Stehen zwei oder mehr Aussagen fast wortgleich doppelt im Drehbuch (die Text-KI
+  schreibt die Vorgaben ab und erzählt dann alles noch einmal, der Schlusssatz steht mitten im Video), lässt `write_script` es bis zu zweimal neu schreiben
+  und baut sonst kein Video. `fix_years` läuft nach Lektorat und Spannungsbogen noch einmal.
 - Geprüfte Jahreszahlen (`writer.fix_years`): Nennt das Thema Jahreszahlen und verlangt „Keine anderen Jahreszahlen“, wird eine abweichende Jahreszahl
   desselben Jahrhunderts im Sprechertext (ausgeschrieben, `year_words`) und in Einblendungen auf die vorgegebene gesetzt („neunzehnhunderteinundachtzig“ → 1987).
 - Alltags-Geschichten mit Dingen als Figur (Prüfung 15.11.2026, „Ich lebte wie 1348“ – `stage._household`, Schlussdurchgang in `direct`): Heißt eine Figur
