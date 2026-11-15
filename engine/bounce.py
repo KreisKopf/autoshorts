@@ -23,7 +23,19 @@ G = 2600.0                       # Schwerkraft (px/s²)
 BOX = (150, 520, 930, 1580)      # Bereich, in dem die Kugel springt (x0, y0, x1, y1)
 BALL_R = 22
 PANE_LEN, PANE_W = 118, 18
-SHOW_AHEAD = 2.6                 # so lange vor dem Aufprall erscheint eine Scheibe (s)
+SHOW_AHEAD = 5.0                 # so lange vor dem Aufprall steht eine Scheibe schon da (s) – der Flugweg hält ihren Platz frei
+STRICT_STEPS = 6000
+GRAZE = 0.3                     # Kugel trifft die Scheibe nicht zu flach (sonst streift sie vorher deren Ende)
+AHEAD_N = 12                     # höchstens so viele Scheiben stehen gleichzeitig da (bei schnellen Melodien wird es sonst unübersichtlich)
+
+
+def appear_at(times, j):
+    """Ab wann steht die Scheibe j da: SHOW_AHEAD vor ihrem Ton, aber erst wenn die Scheibe AHEAD_N davor zersprungen ist;
+    die ersten stehen ab Bild 1 da."""
+    a = max(0.0, times[j] - SHOW_AHEAD)
+    return max(a, times[j - AHEAD_N]) if j >= AHEAD_N else a
+FALL = 0.55                      # die Kugel liegt am Anfang auf einer Startklappe; so lange fällt sie bis zum ersten Ton (s)
+CLEAR = PANE_LEN / 2 + PANE_W / 2 + BALL_R + 14   # so weit bleibt die Kugel von Scheiben weg, die schon dastehen
 
 # Melodien: (Name, Komponist/Herkunft, Tempo in Schlägen pro Minute, [(MIDI-Ton oder None für Pause, Dauer in Schlägen), ...])
 _C = {"C": 0, "C#": 1, "D": 2, "D#": 3, "E": 4, "F": 5, "F#": 6, "G": 7, "G#": 8, "A": 9, "A#": 10, "B": 11}
@@ -253,7 +265,7 @@ def _ok_target(q, v, dt):
     return True
 
 
-def _candidates(p, v_in, t, dn, rnd, recent):
+def _candidates(p, v_in, t, dn, rnd, recent, trail=(), strict=False, t_show=None):
     """Mögliche echte Abpraller an diesem Punkt, beste zuerst (erst normale, dann federnde Scheiben)."""
     x0, y0, x1, y1 = BOX
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
@@ -265,7 +277,7 @@ def _candidates(p, v_in, t, dn, rnd, recent):
         for _ in range(200):
             ang = a_in + rnd.uniform(-1.45, 1.45)        # Normale zeigt zur Kugel hin (sonst kein Aufprall)
             n = (math.cos(ang), math.sin(ang))
-            if n[0] * v_in[0] + n[1] * v_in[1] > -0.15 * sp_in:
+            if n[0] * v_in[0] + n[1] * v_in[1] > -GRAZE * sp_in:
                 continue
             vo = _reflect(v_in, n, rnd.uniform(*e_rng))
             q, v_next = _fly(p, vo, dn)
@@ -276,6 +288,16 @@ def _candidates(p, v_in, t, dn, rnd, recent):
             sc += (abs(q[0] - cx) / (x1 - x0) + abs(q[1] - cy) / (y1 - y0)) * 120          # lieber in der Mitte bleiben
             sc += max(0, 130 - math.hypot(q[0] - p[0], q[1] - p[1])) * 30                 # nächste Scheibe nicht direkt daneben
             sc += sum(max(0, 170 - math.hypot(q[0] - r[0], q[1] - r[1])) * 8 for rt, r in recent if t - rt < SHOW_AHEAD + 0.4)
+            t_show = t + dn - SHOW_AHEAD if t_show is None else t_show   # ab da steht die Scheibe für den nächsten Ton schon da:
+            clash = sum(1 for tt, bx, by in trail if tt >= t_show and math.hypot(q[0] - bx, q[1] - by) < CLEAR)
+            k_s = 1                                      # … die Kugel darf vorher nicht durch ihren Platz fliegen (auch nicht auf dem Weg dorthin)
+            while k_s * 0.012 < dn - 0.18:
+                fx, fy = p[0] + vo[0] * k_s * 0.012, p[1] + vo[1] * k_s * 0.012 + 0.5 * G * (k_s * 0.012) ** 2
+                clash += math.hypot(q[0] - fx, q[1] - fy) < CLEAR
+                k_s += 1
+            if clash and strict:
+                continue                                 # streng: lieber einen Ton zurückgehen und dort anders abprallen
+            sc += clash * 4000
             cands.append((sc, n, vo, q, v_next))
         out += sorted(cands, key=lambda c: c[0])[:14]
     return out
@@ -308,7 +330,7 @@ def path(hits, seed=0):
     x0, y0, x1, y1 = BOX
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     start = (cx + rnd.uniform(-120, 120), y0 - 60.0)
-    p0, v0 = _fly(start, (0.0, 0.0), hits[0][0])
+    p0, v0 = _fly(start, (0.0, 0.0), min(FALL, hits[0][0]))
     N = len(hits)
     stack = []                                           # je Ton: {p, v_in, cands, idx}
     steps = 0
@@ -319,7 +341,21 @@ def path(hits, seed=0):
             p, v_in = (p0, v0) if i == 0 else (stack[i - 1]["cands"][stack[i - 1]["idx"]][3], stack[i - 1]["cands"][stack[i - 1]["idx"]][4])
             dn = max(0.05, (hits[i + 1][0] - hits[i][0]) if i + 1 < N else 0.7)
             recent = [(hits[k][0], stack[k]["p"]) for k in range(max(0, i - 14), i)]
-            stack.append({"p": p, "v_in": v_in, "dn": dn, "cands": _candidates(p, v_in, hits[i][0], dn, rnd, recent), "idx": 0})
+            trail = []                                   # bisheriger Flugweg der letzten SHOW_AHEAD Sekunden (Zeit, x, y)
+            times = [h[0] for h in hits]
+            t_lo = appear_at(times, i + 1) if i + 1 < N else hits[i][0]
+            for k in range(i - 1, -1, -1):
+                if hits[k + 1][0] < t_lo:
+                    break
+                fk = stack[k]
+                vo_k = fk["cands"][fk["idx"]][2]
+                n_k = max(1, int(fk["dn"] / 0.012))
+                trail += [(hits[k][0] + fk["dn"] * j / n_k, fk["p"][0] + vo_k[0] * fk["dn"] * j / n_k,
+                           fk["p"][1] + vo_k[1] * fk["dn"] * j / n_k + 0.5 * G * (fk["dn"] * j / n_k) ** 2) for j in range(n_k)]
+            if hits[0][0] >= t_lo:                       # der Fall von der Startklappe
+                f0 = min(FALL, hits[0][0])
+                trail += [(hits[0][0] - f0 + f0 * j / 10, start[0], start[1] + 0.5 * G * (f0 * j / 10) ** 2) for j in range(10)]
+            stack.append({"p": p, "v_in": v_in, "dn": dn, "cands": _candidates(p, v_in, hits[i][0], dn, rnd, recent, trail, steps < STRICT_STEPS, t_lo), "idx": 0})
         fr = stack[i]
         if fr["idx"] < len(fr["cands"]) or i == 0 or steps > 6000:
             if fr["idx"] >= len(fr["cands"]):            # Notfall (praktisch nie): Ziel in der Mitte, Abprall nur ungefähr
@@ -350,7 +386,7 @@ def _can_continue(p, v_in, hits, j, rnd):
     for k in range(80):
         ang = a_in + rnd.uniform(-1.35, 1.35)
         n = (math.cos(ang), math.sin(ang))
-        if n[0] * v_in[0] + n[1] * v_in[1] > -0.15 * sp_in:
+        if n[0] * v_in[0] + n[1] * v_in[1] > -GRAZE * sp_in:
             continue
         vo = _reflect(v_in, n, rnd.uniform(*(RESTITUTION if k < 50 else SPRINGY)))
         q, _v = _fly(p, vo, dn)
@@ -368,8 +404,8 @@ def appear_times(segs, start):
         nx, ny = s["n"]
         c = (s["p"][0] - nx * (BALL_R + PANE_W / 2), s["p"][1] - ny * (BALL_R + PANE_W / 2))
         ux, uy = -ny, nx                                  # Richtung entlang der Scheibe
-        appear = s["t"] - SHOW_AHEAD
-        tt = max(0.0, appear)
+        appear = appear_at([g["t"] for g in segs], j)
+        tt = appear
         while tt < s["t"] - 0.04:
             bx, by = ball_at(tt, segs, start)
             dx, dy = bx - c[0], by - c[1]
@@ -383,8 +419,9 @@ def appear_times(segs, start):
 
 def ball_at(t, segs, start):
     """Position der Kugel zur Zeit t."""
-    if not segs or t <= segs[0]["t"]:
-        return (start[0], start[1] + 0.5 * G * t * t)
+    if not segs or t <= segs[0]["t"]:                    # liegt auf der Startklappe, bis sie aufgeht; dann freier Fall
+        td = (segs[0]["t"] - min(FALL, segs[0]["t"])) if segs else 0.0
+        return (start[0], start[1] + 0.5 * G * max(0.0, t - td) ** 2)
     prev = segs[0]
     for s in segs[1:]:
         if t < s["t"]:
@@ -496,6 +533,33 @@ def _text_center(d, y, text, size, fill):
     return len(lines)
 
 
+def _launcher(d, start, t, td):
+    """Startklappe: kleine Glas-Halterung, auf der die Kugel am Anfang liegt. Bei td klappt der Boden nach unten auf,
+    danach blendet die Halterung aus (die Kugel soll später nicht durch sie hindurchfliegen)."""
+    fade = 1.0 if t < td + 0.35 else max(0.0, 1 - (t - td - 0.35) / 0.5)
+    if fade <= 0:
+        return
+    a = int(255 * fade)
+    sx, sy = start
+    floor = sy + BALL_R + 4
+    col = (200, 210, 235)
+    for side in (-1, 1):                                 # Seitenwände
+        x = sx + side * (BALL_R + 12)
+        d.rounded_rectangle((x - 5, sy - BALL_R - 26, x + 5, floor + 6), 4, fill=col + (int(a * 0.85),))
+    open_ = 0.0 if t < td else min(1.0, (t - td) / 0.12)   # Boden klappt nach unten weg (Scharnier links)
+    ang = math.radians(90 * open_)
+    hx, hy = sx - BALL_R - 12, floor
+    ln = 2 * (BALL_R + 12)
+    ex, ey = hx + ln * math.cos(ang), hy + ln * math.sin(ang)
+    d.line((hx, hy, ex, ey), fill=col + (a,), width=9)
+    d.ellipse((hx - 6, hy - 6, hx + 6, hy + 6), fill=(255, 255, 255, a))
+    if t < td:                                           # kurz vor dem Öffnen: kleines Aufleuchten als Ankündigung
+        glow = max(0.0, 1 - (td - t) / 0.4)
+        if glow > 0:
+            r = BALL_R + 10 + 14 * glow
+            d.ellipse((sx - r, sy - r, sx + r, sy + r), outline=(255, 255, 255, int(120 * glow)), width=3)
+
+
 def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=True, work: Path = None):
     """Ganzes Video rendern (Bild + Ton). Gibt (Dauer, Pfad zum Vorschaubild) zurück. work = Ordner für Zwischendateien."""
     work = Path(work) if work else out.parent
@@ -547,7 +611,7 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Tr
                 cx, cy = pn["c"]
                 ca, sa = math.cos(pn["a"]), math.sin(pn["a"])
                 if 0 < dtp <= pn["show"]:                # Scheibe wartet (blendet ein – erst wenn die Kugel nicht mehr durchfliegt)
-                    k = min(1.0, (pn["show"] - dtp) / 0.2)
+                    k = 1.0 if pn["t"] - pn["show"] <= 0.01 else min(1.0, (pn["show"] - dtp) / 0.35)   # ab Bild 1 schon da
                     hl = PANE_LEN / 2 * (0.6 + 0.4 * k)
                     pts = []
                     for sx, sy in ((-hl, -PANE_W / 2), (hl, -PANE_W / 2), (hl, PANE_W / 2), (-hl, PANE_W / 2)):
@@ -569,6 +633,7 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Tr
                         ang = rot * age
                         tri = [(sx_ + rr * math.cos(ang + q), sy_ + rr * math.sin(ang + q)) for q in (0, 2.3, 4.1)]
                         d.polygon(tri, fill=pn["col"] + (int(230 * (1 - age / 0.9)),))
+            _launcher(d, start, t, segs[0]["t"] - min(FALL, segs[0]["t"]) if segs else 0.0)
             bx, by = ball_at(t, segs, start)
             trail.append((bx, by))
             trail = trail[-8:]

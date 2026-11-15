@@ -639,6 +639,10 @@ def main():
             assert math.hypot(ti[0] - to[0], ti[1] - to[1]) < 1.0 and vi[0] * nx + vi[1] * ny < 0
         ap = bounce.appear_times(segs, start)
         assert all(a < sg["t"] for a, sg in zip(ap, segs))
+        tt_ = [sg["t"] for sg in segs]                    # Scheiben stehen schon lange vorher da (nicht kurz vor dem Aufprall)
+        assert sum(1 for j, a in enumerate(ap) if a <= bounce.appear_at(tt_, j) + 0.001) >= 0.95 * len(segs)
+        assert all(a <= 0.001 for a in ap[:3]), ap[:3]      # die ersten Scheiben sind ab Bild 1 da
+        assert bounce.ball_at(0.0, segs, start) == start and bounce.ball_at(0.2, segs, start) == start   # Kugel liegt erst auf der Startklappe
         with tempfile.TemporaryDirectory() as tmp:            # Lied-Modus: Einsätze in einer Aufnahme finden
             src = Path(tmp) / "src.wav"
             h2, tot2 = bounce.notes("bergkoenig", start=0.0)
