@@ -3783,7 +3783,7 @@
   "id": 106,
   "category": "whatif",
   "topic": "Was wäre, wenn die Ostsee plötzlich komplett zufriert?",
-  "status": "review",
+  "status": "discarded",
   "created": 1794766182.458029,
   "trend": {
    "title": "delfine",
@@ -3826,6 +3826,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-15 21:00",
-  "review_at": 1794766577.7189934
+  "review_at": 1794766577.7189934,
+  "error": "Bei der Prüfung verworfen: Eis als einzelner Eisberg statt Eisdecke (auch am Meeresgrund), Schiff fährt auf offenen Wellen, kein Delfin am Atemloch, Hochgebirge statt Ostsee, Thermometer steigt auf +15 °C, ungeprüfte Jahreszahl 1685, abgebrochener Schlusssatz, Goldfisch auf dem Titelbild"
  }
 ]
