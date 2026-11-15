@@ -81,7 +81,7 @@ def pick(category_slug=None, topic=None):
     for sp in [c for c in CONFIG["categories"] if c.get("enabled") and c.get("every_days")]:   # z. B. Musik-Kugel alle zwei Tage
         last = float(STATE.get("last_" + sp["slug"]) or 0)
         if time.time() - last >= float(sp["every_days"]) * 86400 - 3 * 3600:
-            log(f"{sp['emoji']} {sp['name']} ist wieder dran (alle {sp['every_days']} Tage)")
+            log(f"{sp['emoji']} {sp['name']} ist wieder dran (" + ("einmal am Tag" if float(sp["every_days"]) == 1 else f"alle {sp['every_days']} Tage") + ")")
             return sp, None, None, None
     cats = [c for c in CONFIG["categories"] if c.get("enabled") and not c.get("every_days")]
     if not cats:

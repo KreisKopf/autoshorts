@@ -216,7 +216,7 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Menschen-Sätze werden auch erkannt, wenn das Drehbuch dort das Tier hinstellt („Menschen haben drei Arten von Farbrezeptoren“, „schneller als ein
   Wimpernschlag“ – `SEA_PEOPLE_RE`): Dann steht die Hauptfigur im Bild.
 
-## Musik-Kugel (Video-Art `musik`, alle zwei Tage)
+## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
   rückwärts gebaut (echte Wurfparabel zwischen zwei Tönen, die Scheibe liegt so, dass sie die Richtungsänderung erklärt) – deshalb sitzt
   jeder Aufprall exakt auf dem Ton. Ton selbst erzeugt (Glockenspiel + Glasklirren + Hall), oben „Erkennst du das Lied?“, am Ende die Auflösung.
@@ -235,5 +235,5 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
 - Freie Tracks (`bounce.cc_track`): ccMixter/Jamendo über Openverse, nur CC0 und CC BY (kein NC/ND); die Namensnennung (`credit`) kommt in die
   Beschreibung und ans Videoende. `make_bounce` wechselt ohne eigene Lieder zwischen Remix und freiem Track (`STATE["bounce_src"]`);
   Thema „cc“ oder „remix“ im Studio erzwingt die Quelle.
-- Kategorie mit `every_days: 2` und `special: "bounce"`: `main.pick` nimmt sie, sobald zwei Tage seit der letzten um sind (`STATE["last_musik"]`),
+- Kategorie mit `every_days: 1` und `special: "bounce"`: `main.pick` nimmt sie, sobald ein Tag seit der letzten um ist (`STATE["last_musik"]`),
   sonst nie; `make_bounce` rendert ohne Drehbuch und Sprecher und lädt hoch wie jedes Video.

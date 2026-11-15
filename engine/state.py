@@ -106,9 +106,9 @@ PRESET_CATEGORIES = [
          image_mood="bright warm colors, expressive faces, cozy desk and room settings, funny reactions",
          voice="de-DE-FlorianMultilingualNeural", voice_rate="+8%", voice_pitch="+0Hz",
          voice_instructions="Trocken, leicht genervt und selbstironisch, wie jemand, der seine eigene Geschichte nicht fassen kann."),
-    dict(slug="musik", name="Musik-Kugel", emoji="🎵", every_days=2, special="bounce",
+    dict(slug="musik", name="Musik-Kugel", emoji="🎵", every_days=1, special="bounce",
          description="Eine Kugel springt durch Glasscheiben – jeder Aufprall ist ein Ton einer bekannten, gemeinfreien Melodie. "
-                     "Ohne Sprecher, alle zwei Tage.",
+                     "Ohne Sprecher, einmal am Tag.",
          script_style="", image_mood="", voice="", voice_rate="+0%", voice_pitch="+0Hz", voice_instructions=""),
     dict(slug="whatif", name="What If", emoji="🤯",
          description="Was wäre wenn …? Verrückte Gedankenexperimente, wissenschaftlich durchgespielt.",
