@@ -1,5 +1,5 @@
 {
- "updated": 1794734445.3060145,
+ "updated": 1794736258.708497,
  "enough": true,
  "counted": 12,
  "total": 14,
@@ -18,19 +18,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1658,
+   "avg_views": 1662,
    "avg_likes": 39.1,
-   "like_rate": 2.36,
-   "avg_score": 2248
+   "like_rate": 2.35,
+   "avg_score": 2253
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 1252,
+   "avg_views": 1263,
    "avg_likes": 43.0,
-   "like_rate": 3.43,
-   "avg_score": 1897
+   "like_rate": 3.4,
+   "avg_score": 1908
   },
   {
    "slug": "fakten",
@@ -53,7 +53,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1604 Aufrufe, 4.05 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1022 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2404 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2409 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
