@@ -3740,7 +3740,7 @@
   "id": 105,
   "category": "comedy",
   "topic": "Ich wollte wie im Mittelalter leben und mein Kühlschrank hat mich verklagt – Ich-Geschichte, männlicher Erzähler (Figur du, gender m), 19 bis 21 kurze Sätze, alles spielt in der Wohnung (Küche, Bad, Flur), nie draußen. Satz 1: Ich lebte wie im Mittelalter und mein Kühlschrank hat mich verklagt. Satz 2 ist der Cliffhanger: der letzte Trick riecht so schlimm, dass die Polizei kommt. Genau drei Hacks in dieser Reihenfolge: Nummer eins Zähne schrubben mit Salbeiblättern, danach sind meine Zähne komplett grün. Nummer zwei Haare waschen mit Holzasche aus dem Kamin, danach sind meine Haare hart wie Beton. Nummer drei Knoblauch in die Schuhe gegen Krankheiten, der Gestank ist so schlimm, dass die Nachbarskatze wegrennt und der Nachbar mit der Polizei droht. Running Gag: Nach Hack eins und zwei reagiert der Kühlschrank beleidigt (Figur mit Kennung kuehlschrank, kind fridge, steht in der Küche neben der Figur du). Einzige Finte: Du denkst, der Nachbar hat die Polizei gerufen. Falsch, es war mein eigener Kühlschrank. Danach schickt der Kühlschrank einen Brief mit einer Abmahnung wegen Geruchsbelästigung und fordert dreitausend Goldmünzen Schmerzensgeld; trockene Schlusspointe als ganzer Satz. Verboten: weitere Zahlen oder Zeitangaben (keine Minuten, keine Sekunden), Chemie-Erklärungen, ein Fazit oder Ratschlag, E-Mail, Hund, Viren, Marken, das Wort Falsch mehr als einmal. Einblendungen nur mit Wörtern, die der Satz selbst sagt; keine Handy-Einblendung, keine Vergleichs-Grafik. Titelbild-Text: LEBEN WIE 1348",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794761248.1485548,
   "title": "Ich lebte im Mittelalter und mein Kühlschrank hat geklagt",
   "description": "Du willst wie im Mittelalter leben?\nPlötzlich verklagt dich dein Kühlschrank.\nWohnst du lieber modern oder alt?",
@@ -3773,6 +3773,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Schwächer als 103: Frauenfigur zur Männerstimme, Tür mitten in der Küche, erfundene Temperatur, matte Schlusspointe"
  }
 ]
