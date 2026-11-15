@@ -58,6 +58,11 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   den Wörtern: Frage → Schultern hoch, nie/kein → Kopfschütteln, riesig/Millionen → Arme weit, plötzlich/gefährlich → Hände an den Kopf,
   vielleicht/warum → Hand ans Kinn, leider → traurig, toll/endlich → Freude, ja/genau → Nicken, ich/du nur beim Selbst-Sprechen;
   dazwischen mindestens `GAP` Sekunden ruhige Grundhaltung. Neue Gesten: Eintrag in `rig.GESTURES` und Wörter in `stage.CUES`.
+- Bewegung und Schnitt: Jede Szene hat eine echte Kamerafahrt (`_camera`, `move`: push, pull, pan_l, pan_r im Wechsel). Übergänge sind
+  meist harte Schnitte (`render.TOON_TRANSITIONS`, „cut“), dazwischen ein Wisch – keine Unschärfe-Blende. Ruhige Szenen ohne Schnitt
+  höchstens `CALM_MAX` Sekunden; geht kein Insert oder keine Großaufnahme, schneidet `_cut_plan` auf den Gegenschnitt („flip“: gespiegelt,
+  näher, andere Fahrt). Großaufnahmen nur bei einer Figur; bei Tieren zielt sie auf den Kopf. `_vary_repeats`: gleiches Bild wie die
+  Szene davor → Wesen bewegt sich durchs Bild, Seiten gespiegelt oder Großaufnahme. Wesen ohne Bewegung treiben sanft hin und her.
 - Himmels-Dinge (Sonne, Mond, Wolken) rücken in der Regie selbst an eine Stelle mit freiem Himmel (`stage._open_sky_x`) – nicht hinter Bäume.
 - Grafik-Einschübe (`number`, `question`, `badge`, `round`, `versus`, `score`, `compare`, `share`, `timer`, `calendar`) rendert
   HyperFrames als HTML/GSAP-Animation (`engine/hyper.py`); fehlt HyperFrames oder scheitert es, zeichnet `graphics.py` sie wie bisher.

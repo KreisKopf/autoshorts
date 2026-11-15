@@ -474,6 +474,32 @@ def main():
         assert stage.balance_cast({"du": {"shirt": "blau"}}, 5)["du"] == {"shirt": "blau"}
         assert stage.balance_cast({"ich": {}}, 4) == {"ich": {}}
     check("Frauenfiguren", _women)
+    def _motion():                                               # Kamera fährt sichtbar, lange Szenen schneiden, gleiche Bilder werden variiert
+        import tempfile
+        from pathlib import Path
+        fr = frame({"place": "park", "actors": [{"id": "du"}]})
+        for mv in ("push", "pull", "pan_l", "pan_r"):
+            a = stage._camera(fr.convert("RGB"), 0.0, 4.0, {"move": mv, "tight": True})
+            b = stage._camera(fr.convert("RGB"), 3.9, 4.0, {"move": mv, "tight": True})
+            assert a.size == (1080, 1920) and a.tobytes() != b.tobytes(), mv
+        cam = {"punch": None}
+        cut, kind, _ = stage._cut_plan({"text": "Mutige Taucher tauchen hinab."}, "", None, False, False, "underwater",
+                                       [{"action": "idle", "kind": "diver", "say": "", "hold": ""}], [], 7.0, cam, 2)
+        assert cut is not None, "lange ruhige Szene muss schneiden"
+        cut2, kind2, _ = stage._cut_plan({"text": "Zwei warten."}, "", None, False, False, "park",
+                                         [{"action": "idle", "kind": "", "say": "", "hold": ""}, {"action": "idle", "kind": "", "say": "", "hold": ""}],
+                                         [], 4.0, {"punch": None}, 0)
+        assert kind2 == "flip", kind2                              # zwei Personen: Gegenschnitt statt angeschnittener Großaufnahme
+        scs = [{"place": "park", "actors": [{"id": "rex", "kind": "dog", "action": "idle"}]}, {"place": "park", "actors": [{"id": "rex", "kind": "dog", "action": "idle"}]},
+               {"place": "park", "actors": [{"id": "rex", "kind": "dog", "action": "idle"}]}]
+        stage._vary_repeats(scs)
+        sig = [stage._look_sig(x) for x in scs]
+        assert sig[0] != sig[1] and sig[1] != sig[2], sig
+        with tempfile.TemporaryDirectory() as tmp:
+            stage.render_scene({"text": "Zwei warten lange.", "place": "park", "actors": [{"id": "a"}, {"id": "b"}]}, {}, 4.0, Path(tmp) / "f.mp4", index=0)
+        from .. import render as rnd
+        assert "hblur" not in rnd.TOON_TRANSITIONS and "cut" in rnd.TOON_TRANSITIONS
+    check("Bewegung und Schnitt", _motion)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

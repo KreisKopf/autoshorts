@@ -326,7 +326,10 @@ def pick_music(slug):
 # ---------------------------------------------------------------- Zusammenbau
 
 TRANSITIONS = ("fade", "slideleft", "fade", "smoothup", "fade", "slideright", "circleopen")
-TOON_TRANSITIONS = ("hblur", "slideleft", "zoomin", "smoothup", "hblur", "slideright", "smoothleft", "zoomin", "smoothright")   # schnell und mit Zug – kein müdes Überblenden
+# Meist harte Schnitte (der Kamera-Ruck der neuen Szene gibt den Schwung), dazwischen ein schneller Wisch – kein Überblenden,
+# keine Unschärfe-Blende (hblur erzeugte ein flaches, leeres Zwischenbild)
+TOON_TRANSITIONS = ("cut", "slideleft", "cut", "cut", "zoomin", "cut", "slideright", "cut", "cut", "smoothup")
+CUT_XF = 0.04
 
 
 def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=0.10, cover=None, sfx_volume=0.35, slug=""):
@@ -357,7 +360,9 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
     for k in range(1, n):
         tr = "slideleft" if scenes[k].get("sfx") == "whoosh" else (TOON_TRANSITIONS[k % len(TOON_TRANSITIONS)] if is_toon else TRANSITIONS[k % len(TRANSITIONS)])
         off = sum(durs[:k])
-        fc.append(f"[{prev}][{k}:v]xfade=transition={tr}:duration={XF}:offset={off:.3f}[x{k}]")
+        d_x = CUT_XF if tr == "cut" else XF
+        tr = "fade" if tr == "cut" else tr
+        fc.append(f"[{prev}][{k}:v]xfade=transition={tr}:duration={d_x}:offset={off:.3f}[x{k}]")
         prev = f"x{k}"
     total = sum(durs)
     cover_ms = None

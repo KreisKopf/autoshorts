@@ -356,6 +356,14 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             r0 = hr * (0.27 + 0.04 * (i % 2))
             d.ellipse((bx - r0, by - r0, bx + r0, by + r0), fill=hair)
             d.arc((bx - r0 * 0.5, by - r0 * 0.5, bx + r0 * 0.5, by + r0 * 0.5), 200, 290, fill=hair_l, width=max(2, int(4 * k)))
+    elif hairy and fem:                                   # Frauen: Deckhaar und Pony als EINE weiche Form – läuft an den Schläfen spitz aus, keine Kanten
+        sw = [(0.93, 0.12), (0.78, -0.1), (0.4, -0.12), (-0.05, -0.36), (-0.5, -0.5), (-0.82, -0.3), (-0.95, 0.06)]
+        if f < 0:                                          # Welle fällt auf der Seite, in die die Figur blickt
+            sw = [(-x, y) for x, y in sw][::-1]
+        crown = [_ell(hc, rx * 1.05, ry * 1.07, a) for a in range(160, 381, 10)]       # von der linken Schläfe über den Kopf nach rechts
+        bangs = [(hc[0] + x * rx, hc[1] + y * ry) for x, y in sw]
+        d.polygon(crown + bangs, fill=hair, outline=INK, width=max(2, int(o)))
+        d.arc((hc[0] - rx * 0.6 + 18 * k * f, hc[1] - ry * 0.96, hc[0] + rx * 0.6 + 18 * k * f, hc[1] - ry * 0.2), 208, 300, fill=hair_l, width=max(2, int(9 * k)))
     elif hairy:                                           # Deckhaar mit Pony und Glanz
         hb = (hc[0] - rx - 4 * k, hc[1] - ry - 10 * k, hc[0] + rx + 4 * k, hc[1] + 10 * k)
         d.chord((hb[0] - o * 0.7, hb[1] - o * 0.7, hb[2] + o * 0.7, hb[3] + o * 0.7), 180, 360, fill=INK)
@@ -363,11 +371,6 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         pts = [(hc[0] - rx - 4 * k, top_y), (hc[0] - rx * 0.99, hc[1] - ry * 0.12), (hc[0] - rx * 0.74, hc[1] - ry * 0.40),
                (hc[0] - rx * 0.30 * f, hc[1] - ry * 0.27), (hc[0] + rx * 0.22 * f, hc[1] - ry * 0.44), (hc[0] + rx * 0.72, hc[1] - ry * 0.31),
                (hc[0] + rx * 0.99, hc[1] - ry * 0.12), (hc[0] + rx + 4 * k, top_y)]
-        if fem:                                            # Pony für Frauen: weicher Seitenscheitel, eine Welle fällt in die Stirn
-            sw = [(-1.0, -0.02), (-0.82, -0.34), (-0.5, -0.5), (-0.05, -0.36), (0.4, -0.12), (0.78, -0.1), (0.98, 0.05)]
-            if f < 0:                                      # Welle fällt auf der Seite, in die die Figur blickt
-                sw = [(-x, y) for x, y in sw][::-1]
-            pts = [(hc[0] - rx - 4 * k, top_y)] + [(hc[0] + x * rx, hc[1] + y * ry) for x, y in sw] + [(hc[0] + rx + 4 * k, top_y)]
         d.polygon(pts, fill=INK)                           # Pony: schräg gekämmte Strähnen mit Umriss
         d.polygon([(x, y - (o * 0.9 if 0 < i < len(pts) - 1 else 0)) for i, (x, y) in enumerate(pts)], fill=hair)
         d.chord(hb, 180, 360, fill=hair)

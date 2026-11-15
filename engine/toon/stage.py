@@ -713,7 +713,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     if close:              # Großaufnahme: Kulisse vergrößert und leicht unscharf (Tiefenschärfe), die Figur scharf und groß davor
         lead = next((a for a in actors if a["speaks"]), actors[0])
         hw = CLOSE_BG / 2
-        c_x = max(hw, min(W - hw, lead["x1"]))
+        c_off = ((110 if lead["x1"] < 600 else -110) if lead["kind"] else 0)   # Tier: der Kopf (vorn) kommt in die Bildmitte, nicht der Bauch
+        c_x = max(hw, min(W - hw, lead["x1"] + c_off))
         top = places.GROUND - 780
         frame = frame.crop((int(c_x - hw), top, int(c_x + hw), top + int(CLOSE_BG * H / W))).resize((W, H), Image.BILINEAR)
         frame = frame.filter(ImageFilter.GaussianBlur(3))
@@ -730,7 +731,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         arrived = moving and t >= move_t
         x = a["x1"] if arrived else (a["x0"] + (a["x1"] - a["x0"]) * _ease(t / move_t) if moving else a["x0"])
         if close:                                      # die Hauptfigur steht mittig, andere im selben Abstand daneben
-            x = 540 + (x - lead["x1"]) * W / CLOSE_BG
+            x = 540 + (x - lead["x1"] - c_off) * W / CLOSE_BG
         xs_now.append(x)
         mouth, shape = _mouth(t0 + t, words) if a["speaks"] and a.get("lips", True) else (0.0, "a")
         if moving and not arrived:
@@ -751,6 +752,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             a_lift += 150 * scale                                                             # der Taucher schwebt über Kisten und Stämmen, nicht darin
         landed = a_hit if a_hit is not None and (landed is None or a_hit > landed) else landed
         head_y = gy - 505 * scale
+        if a["kind"] and not (moving and not arrived) and not close:   # Wesen steht nie ganz still: treibt/tappt sanft hin und her
+            x += 34 * math.sin(t * 0.9 + a["seed"])
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
             ksz = 1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)   # Tiere in echter Größe – als Hauptfigur des Videos groß
@@ -2559,6 +2562,45 @@ def _balloon_story(scenes, topic=""):
                 first_sc.pop(k, None)
 
 
+def _look_sig(sc):
+    """Was man in einer Szene sieht (Ort, Figuren/Wesen, Dinge, Einstellung) – gleich = für den Zuschauer dasselbe Bild."""
+    if not isinstance(sc, dict):
+        return None
+    acts = tuple(sorted(str(a.get("kind") or a.get("id") or "") + ":" + str(a.get("action") or "") for a in (sc.get("actors") or []) if isinstance(a, dict)))
+    props = tuple(sorted(str(p.get("type") if isinstance(p, dict) else p) for p in (sc.get("props") or [])))
+    return (str(places.resolve(backdrop(sc))), acts, props, str(sc.get("shot") or ""), str((sc.get("graphic") or {}).get("type") if isinstance(sc.get("graphic"), dict) else ""))
+
+
+def _vary_repeats(scenes):
+    """Nie zweimal dasselbe Bild hintereinander: Gleicht eine Szene der vorigen, bekommt sie eine andere Einstellung – das Wesen
+    schwimmt/läuft durchs Bild, die Seite wird gespiegelt, oder die Figur kommt groß. Dazu eine andere Kamerafahrt."""
+    turn = 0
+    for i in range(1, len(scenes)):
+        sc, prev = scenes[i], scenes[i - 1]
+        if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert") or sc.get("float") or _look_sig(sc) != _look_sig(prev):
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        crit = [a for a in acts if a.get("kind")]
+        humans = [a for a in acts if not a.get("kind")]
+        turn += 1
+        if crit and not any(a.get("to") for a in crit) and turn % 2:          # Wesen bewegt sich durchs Bild
+            a = crit[0]
+            side = "left" if str(a.get("pos") or "center") in ("right", "rechts") or i % 2 else "right"
+            a["pos"], a["to"] = side, ("right" if side == "left" else "left")
+            a["action"] = "walk"
+        elif len(humans) == 1 and not sc.get("props") and turn % 3 == 2 and not humans[0].get("to"):
+            sc["shot"] = "close"                                               # Großaufnahme der Figur
+        else:                                                                  # gespiegelt: Figuren und Dinge wechseln die Seite
+            for a in acts:
+                p = str(a.get("pos") or "")
+                a["pos"] = {"left": "right", "right": "left", "links": "rechts", "rechts": "links"}.get(p, "left" if i % 2 else "right")
+                a["facing"] = "left" if a["pos"] in ("right", "rechts") else "right"
+            for p in sc.get("props") or []:
+                if isinstance(p, dict) and isinstance(p.get("pos"), (int, float)):
+                    p["pos"] = W - p["pos"]
+        sc["cam_move"] = ("pan_l", "push", "pan_r", "pull")[turn % 4]
+
+
 def _scene_punch(sc):
     """Wie viel passiert im Bild einer Szene? (Dinge, Tiere, Schwerelosigkeit, Ereignis-Einstellung, Wetter, starke Handlung)"""
     if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert") or places.resolve(backdrop(sc)) in MAPS:
@@ -3116,8 +3158,18 @@ def _camera(frame, t, dur, cam):
     """Lebendige Kamera für jede Szene: etwas näher an den Figuren, langsame Fahrt, ein kurzer Ruck beim Schnitt und – wenn
     das Schlüsselwort fällt – ein schneller Sprung auf die Hauptfigur (wie in geschnittenen Kurzvideos)."""
     k = t / max(dur, 0.1)
-    z = (1.0 if cam.get("flat") else cam.get("zt", TIGHT_Z) if cam.get("tight") else 1.06) + 0.035 * (k if cam.get("drift", 1) > 0 else 1 - k)
+    e_m = k * k * (3 - 2 * k)                             # weiche Kamerafahrt über die ganze Szene (langsam an, langsam aus)
+    move = cam.get("move") or ("push" if cam.get("drift", 1) > 0 else "pull")
+    z = (1.0 if cam.get("flat") else cam.get("zt", TIGHT_Z) if cam.get("tight") else 1.06)
+    if move == "push":
+        z += (0.06 if cam.get("flat") else 0.1) * e_m
+    elif move == "pull":
+        z += (0.06 if cam.get("flat") else 0.1) * (1 - e_m)
+    else:                                                 # Schwenk: braucht etwas Zoom, damit seitlich Platz ist
+        z += 0.07
     ax, ay = 540.0, (TIGHT_AY if cam.get("tight") else 1010.0)
+    if move in ("pan_r", "pan_l"):
+        ax += (1 if move == "pan_r" else -1) * 260 * (e_m - 0.5)
     if cam.get("tight"):                                  # nah dran: Figuren füllen das Bild, der leere Boden unten fällt weg
         ax += (float(cam.get("fx", 540)) - 540) * 0.6
     pt = cam.get("punch")
@@ -3149,6 +3201,7 @@ def _punch_time(scene, words, t0, dur):
     return dur * 0.5 if dur >= 3.2 else None
 
 
+CALM_MAX = 4.5       # eine ruhige Szene ohne Schnitt höchstens so lang (s); länger steht sonst dasselbe Bild zu lange
 CUT_MIN = 2.6        # ab dieser Szenenlänge (s) wird mitten im Satz geschnitten – wie in den Vorbild-Shorts etwa alle 1,8 Sekunden ein neues Bild
 
 
@@ -3166,14 +3219,17 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
     """Zweites Bild innerhalb einer Szene: beim Schlüsselwort (sonst zur Mitte) harter Schnitt auf den genannten Gegenstand groß
     („insert“) oder auf die Großaufnahme der Hauptfigur bzw. des Tiers („close“). Jede dritte Szene bleibt ruhig ohne Schnitt.
     Gibt (Schnittzeit oder None, Art, Gegenstände) zurück und schaltet den Kamerasprung ab, wenn geschnitten wird."""
-    if special or shot or moving or ov_tall or scene.get("float") or dur < CUT_MIN or place in MAPS or index % 3 == 2 \
+    calm = index % 3 == 2 and dur < CALM_MAX                # ruhige Szene ohne Schnitt – aber nie länger als CALM_MAX Sekunden dasselbe Bild
+    if special or shot or moving or ov_tall or scene.get("float") or dur < CUT_MIN or place in MAPS or calm \
             or str(scene.get("shot") or "") in ("event", "insert", "graphic", "close") or scene.get("_balloon") or scene.get("_no_cut"):
         return None, "", []
     low = str(scene.get("text") or "").lower()
     named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL
              and extras.PROP_ALIASES.get(k, k) not in PLACE_HAS.get(place, ()) and _said_prop(k, low)]
     down = any(a.get("action") in ("fall", "sleep", "sit", "float") or a.get("kind") in LONG_KINDS for a in actors)      # liegt, sitzt oder schwebt jemand, schneidet die Großaufnahme ihn an
-    kind = "insert" if named and index % 2 == 0 else "close" if 0 < len(actors) <= 2 and not down else "insert" if named else ""   # Gruppen nicht anschneiden
+    kind = "insert" if named and index % 2 == 0 else "close" if len(actors) == 1 and not down else "insert" if named else ""   # zwei und mehr nicht anschneiden
+    if not kind and not any(a.get("say") or a.get("hold") in ("sign",) for a in actors):
+        kind = "flip"                                     # Gegenschnitt: dieselbe Szene von der anderen Seite, andere Kamerafahrt
     if not kind:
         return None, "", []
     pt = cam.get("punch")
@@ -3240,7 +3296,10 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if scene.get("_balloon") and isinstance(scene.get("overlay"), dict):
         cam["punch"] = None                                                 # kein Sprung ins Bild: der Ballon wüchse sonst unter das Schild
     cam["opener"] = index == 0
-    cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"], "opener": index == 0}
+    cam["move"] = scene.get("cam_move") or ("push", "pan_r", "pull", "pan_l", "push", "pull")[index % 6]
+    if moving or str(scene.get("shot") or "") == "close":
+        cam["move"] = "push" if index % 2 else "pull"     # wer durchs Bild läuft oder groß im Bild ist: kein zusätzlicher Schwenk
+    cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"], "opener": index == 0, "move": "push" if index % 2 else "pull"}
     cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall, place, actors, props, dur, cam, index)
     sfx = []                                  # Ton-Ereignisse dieser Szene (Sekunden ab Szenenbeginn) für render.py / sound.py
     if not (gfx or ins):
@@ -3285,6 +3344,15 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 continue
             if cut_t is not None and t >= cut_t:            # Schnitt mitten im Satz: auf das genannte Ding oder die Großaufnahme der Figur
                 tc = t - cut_t
+                if cut_kind == "flip":                      # Gegenschnitt: gespiegelt, näher dran, andere Fahrt
+                    frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", "", big, fx_opt)
+                    frame = frame.transpose(Image.FLIP_LEFT_RIGHT)
+                    cam2 = dict(cam, fx=W - float(cam.get("fx", 540)), punch=None, opener=False, zt=min(1.55, float(cam.get("zt", TIGHT_Z)) + 0.15),
+                                tight=True, move="pan_l" if cam.get("dir", 1) > 0 else "pan_r")
+                    if still is not None and fidx == min(n_frames - 1, FPS):
+                        frame.save(still, quality=92)
+                    ff.stdin.write(_camera(frame.convert("RGB"), tc, dur - cut_t, cam2).tobytes())
+                    continue
                 frame = (_insert_frame(named[:1], tc, dur - cut_t, mood_s, bool(has_ov), neon_look) if cut_kind == "insert"
                          else _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", "close", big, fx_opt))
                 if still is not None and fidx == min(n_frames - 1, FPS):
