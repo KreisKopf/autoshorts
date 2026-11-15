@@ -1,0 +1,487 @@
+{
+ "title": "Der Schlag des Fangschreckenkrebses",
+ "scenes": [
+  {
+   "text": "Drei verrückte Fakten über den Fangschreckenkrebs.",
+   "see": "Ein farbenfroher Fangschreckenkrebs im Riff kündigt drei irre Fakten an.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "3 UNGLAUBLICHE FAKTEN"
+   }
+  },
+  {
+   "text": "Am Ende zerbricht er mit diesem Hieb sogar dickes Glas.",
+   "see": "Der Krebs holt aus und schlägt gegen das Aquarienglas.",
+   "place": "underwater",
+   "time": "day",
+   "props": [
+    {
+     "type": "glasscheibe",
+     "pos": 860
+    }
+   ],
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 400,
+     "hero": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "GLAS ZERBRICHT",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Dabei ist das bunte Tier kaum länger als deine flache Hand.",
+   "see": "Der Krebs krabbelt friedlich im warmen Korallenriff.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "left",
+     "say": "",
+     "pos": 680,
+     "hero": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "KORALLENRIFF"
+   }
+  },
+  {
+   "text": "Fakt eins: Seine beiden Keulen schießen extrem schnell nach vorn.",
+   "see": "Der Krebs schnellt mit seinen Keulen extrem schnell nach vorne.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "FAKT 1"
+   }
+  },
+  {
+   "text": "Sie erreichen eine Geschwindigkeit von rund achtzig Kilometern pro Stunde.",
+   "see": "Ein Tacho zeigt die Geschwindigkeit von achtzig Kilometern pro Stunde.",
+   "place": "underwater",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "GESCHWINDIGKEIT",
+    "value": "80 KM/H",
+    "label": "80 KM/H",
+    "dark": false
+   }
+  },
+  {
+   "text": "Der gesamte Schlag dauert weniger als drei Millisekunden.",
+   "see": "Eine Stoppuhr misst drei Millisekunden.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "3 MILLISEKUNDEN"
+   }
+  },
+  {
+   "text": "Das ist fünfzigmal schneller als ein menschlicher Wimpernschlag.",
+   "see": "Die Figur du blinzelt überrascht in die Kamera.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Eine Art biologische Sprungfeder im Arm liefert diese gewaltige Kraft.",
+   "see": "Eine mechanische Sprungfeder spannt sich im Arm des Krebses.",
+   "place": "underwater",
+   "time": "day",
+   "props": [
+    {
+     "type": "sprungfeder",
+     "pos": 860
+    }
+   ],
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "right",
+     "hero": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "MECHANISMUS",
+    "text": "Biologische Sprungfeder"
+   }
+  },
+  {
+   "text": "Damit knackt er Muscheln, aber was passiert dabei überraschend im Wasser?",
+   "see": "Der Krebs knackt spielend leicht eine harte Muschel.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Fakt zwei: Das Wasser vor der Keule verdampft im Schlag.",
+   "see": "Vor der Keule bildet sich eine glühende Dampfblase unter Wasser.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "angry",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "FAKT 2"
+   }
+  },
+  {
+   "text": "Wenn die Blase kollabiert, entsteht extremer Druck und kurzes Licht.",
+   "see": "Die Blase implodiert mit einem hellen Lichtblitz.",
+   "place": "underwater",
+   "time": "day",
+   "props": [
+    {
+     "type": "cavitation",
+     "pos": 670
+    }
+   ],
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried",
+     "hero": true,
+     "pos": 380
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Diese Druckwelle trifft die Beute dennoch, aber wie gut sieht dieser Jäger eigentlich?",
+   "see": "Eine Druckwelle breitet sich aus und erwischt das Ziel.",
+   "place": "underwater",
+   "time": "day",
+   "props": [
+    {
+     "type": "cavitation",
+     "pos": 330
+    }
+   ],
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "left",
+     "say": "",
+     "pos": 700,
+     "hero": true
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Fakt drei: Menschen besitzen drei Arten von Farbrezeptoren.",
+   "see": "Vergleichsgrafik zeigt 3 menschliche gegen 16 Farbrezeptoren des Krebses.",
+   "place": "underwater",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "MENSCH",
+    "value": "3",
+    "label": ""
+   }
+  },
+  {
+   "text": "Der Krebs nutzt bis zu sechzehn und sieht ultraviolettes Licht.",
+   "see": "Die Augen des Krebses bewegen sich unabhängig voneinander.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 400,
+     "hero": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "16 REZEPTOREN"
+   }
+  },
+  {
+   "text": "Normales Aquarienglas hält seinen Wuchtstößen oft nicht stand.",
+   "see": "Der Krebs schlägt im Aquarium und bringt normales Glas zum Springen.",
+   "place": "underwater",
+   "time": "day",
+   "props": [
+    {
+     "type": "glasscheibe",
+     "pos": 860
+    }
+   ],
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 400,
+     "hero": true
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Forscher halten ihn deshalb nur in Becken aus dickem Kunststoff.",
+   "see": "Die Figur du steht als Forscherin überrascht vor einem Kunststoffbecken.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "tank",
+     "pos": 760
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 300
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "LABOR-REGEL",
+    "text": "Nur Kunststoffbecken"
+   }
+  },
+  {
+   "text": "Taucher nennen den kleinen Bewohner erschrocken sogar Daumenspalter.",
+   "see": "Ein Taucher unter Wasser weicht erschrocken zurück.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "taucher",
+     "kind": "diver",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "",
+     "hero": true,
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "DAUMENSPALTER"
+   }
+  },
+  {
+   "text": "Diese geballte Ladung Naturwunder steckt in einem winzigen Meeresbewohner.",
+   "see": "Der Krebs schwimmt stolz im Wasser und präsentiert sich.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Und genau deshalb –",
+   "see": "Der Krebs blickt neugierig nach oben, bereit für die nächste Runde.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 400,
+     "hero": true
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
