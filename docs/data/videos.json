@@ -3691,9 +3691,9 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6af9e4c096af248a9f6cbc9e",
   "error": null,
-  "yt_thumb_at": 1794762249.4283652,
-  "yt_thumb_tries": 1,
-  "yt_thumb": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+  "yt_thumb_at": 1794762609.1631396,
+  "yt_thumb_tries": 2,
+  "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
  },
  {
   "id": 104,
