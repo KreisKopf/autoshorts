@@ -1,0 +1,498 @@
+{
+ "title": "Mittelalter-Lifehacks zerstören mein Leben",
+ "scenes": [
+  {
+   "text": "Drei verrückte Lifehacks aus dem Jahr dreizehnhundertachtundvierzig.",
+   "see": "Der Hauptdarsteller steht aufgeregt in der Küche und kündigt drei Mittelalter-Lifehacks an.",
+   "place": "flur",
+   "time": "day",
+   "props": [
+    {
+     "type": "knoblauch"
+    },
+    {
+     "type": "schuh"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "schuh",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "3 LIFEHACKS"
+   }
+  },
+  {
+   "text": "Aber der letzte Trick stinkt so brutal, dass die Polizei anrückt.",
+   "see": "Ein bedrohlicher Blick auf den Knoblauch-Schuh, während ein Polizeiauto-Symbol blitzt.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "emotion": "worried",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "POLIZEI-ALARM"
+   }
+  },
+  {
+   "text": "Nummer eins: Zähne schrubben mit frischen Salbeiblättern für strahlendes Mittelalter-Lächeln.",
+   "see": "Der Hauptdarsteller rubbelt sich im Bad mit einem grünen Salbeiblatt gründlich die Zähne.",
+   "place": "bad",
+   "time": "day",
+   "props": [
+    {
+     "type": "salbeiblatt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "salbeiblatt",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "TRICK 1"
+   }
+  },
+  {
+   "text": "Fünf Minuten später sind meine Zähne komplett grün, warum schmeckt das so eklig?",
+   "see": "Der Hauptdarsteller schaut schockiert in den Spiegel, seine Zähne sind knallgrün.",
+   "place": "bad",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "teeth": "grün"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 5,
+    "unit": "MINUTEN"
+   }
+  },
+  {
+   "text": "Mein Kühlschrank brummt beleidigt und verweigert die Kühlung für mein Abendessen.",
+   "see": "Der Kühlschrank in der Küche zieht angewidert die Augenbrauen hoch.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "speaks": false,
+     "action": "shake",
+     "emotion": "angry",
+     "emote": "anger",
+     "kind": "fridge",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nummer zwei: Haare waschen mit echter Holzasche direkt aus dem Kamin.",
+   "see": "Der Hauptdarsteller greift in den Kamin und holt schwarze Holzasche heraus.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "kamin"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "TRICK 2"
+   }
+  },
+  {
+   "text": "Damit sparte man damals teure Seife und reinigte die Kopfhaut gründlich.",
+   "see": "Der Hauptdarsteller reibt sich Asche in die feuchten Haare über dem Waschbecken.",
+   "place": "bad",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Aber meine Haare werden in zwei Sekunden hart wie Beton, hält das für immer?",
+   "see": "Der Hauptdarsteller greift sich an die Haare, die steinhart festgefroren wirken.",
+   "place": "bad",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "BETON-HAARE"
+   }
+  },
+  {
+   "text": "Der Kühlschrank piept schrill und klappt seine Fächer wütend zu.",
+   "see": "Der Kühlschrank schüttelt wütend seine Tür und knallt sie zu.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "speaks": false,
+     "action": "shake",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "fridge",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Asche bildet mit Fett zwar Lauge, aber ohne Wasser wird es Steinpflaster.",
+   "see": "Grafik zeigt das Duell von moderner Seife gegen alte Holzasche.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "",
+     "kind": "fridge"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "versus",
+    "kicker": "CHEMIE",
+    "left": "SEIFE",
+    "right": "ASCHE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nummer drei: Frischen Knoblauch in die Schuhe stecken gegen fiese Krankheiten.",
+   "see": "Der Hauptdarsteller stoppt viel Knoblauch in seinen linken Schuh.",
+   "place": "flur",
+   "time": "day",
+   "props": [
+    {
+     "type": "knoblauch"
+    },
+    {
+     "type": "schuh"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "schuh",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "TRICK 3"
+   }
+  },
+  {
+   "text": "Der Gestank ist so extrem, dass die Nachbarskatze sofort das Weite sucht.",
+   "see": "Eine kleine Katze springt in vollem Galopp aus dem Flurfenster.",
+   "place": "flur",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Mein Nachbar vermutet einen Chemieunfall und ruft die Polizei, wer rettet mich jetzt?",
+   "see": "Ein besorgter Nachbar steht im Flur und wählt die Notrufnummer auf dem Handy.",
+   "place": "flur",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "phone",
+    "title": "NOTRUF",
+    "items": [
+     "Nachbar: Bei uns stinkt es giftig!",
+     "Polizei: Wegen fahren los."
+    ]
+   }
+  },
+  {
+   "text": "Der Kühlschrank rückt ab und schickt mir per Mail eine offizielle Abmahnung.",
+   "see": "Der Kühlschrank wandert eigenständig zwei Schritte rückwärts Richtung Tür.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "fridge",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "left"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Er fordert exakt dreitausend Goldmünzen Schmerzensgeld wegen unzumutbarer Geruchsbelästigung in der Küche.",
+   "see": "Eine Forderungskarte zeigt die Summer von 3000 Goldmünzen.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried",
+     "kind": "fridge"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "SCHMERZENSGELD",
+    "value": "3.000",
+    "label": "GOLDMÜNZEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Du denkst, alte Hausmittel sparen Geld und machen dich gesund? Falsch, mein Kühlschrank verklagt mich.",
+   "see": "Der Hauptdarsteller schüttelt mit grünen Zähnen und Aschehaaren verzweifelt den Kopf.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "FAZIT",
+    "text": "Lieber moderne Seife nutzen!"
+   }
+  },
+  {
+   "text": "Falsch, am Ende steht die Polizei vor der Tür und deine Möbel klagen.",
+   "see": "Der Hauptdarsteller blickt auf den fertigen Gerichtsbeschluss auf dem Küchentisch.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_schrank"
+    },
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Mein Anwalt prüft jetzt, ob Kühlschränke überhaupt vor Gericht zugelassen sind.",
+   "see": "Der Hauptdarsteller zeigt grinsend auf seinen Kühlschrank, der den Kopf verdreht.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "kuehlschrank",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "kind": "fridge",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Und genau deshalb teste ich nie wieder solche verrückten Mittelalter-Tricks.",
+   "see": "Der Hauptdarsteller blickt direkt in die Kamera für die nahtlose Video-Schleife.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  }
+ ]
+}

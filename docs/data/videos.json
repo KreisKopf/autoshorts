@@ -3685,5 +3685,48 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 104,
+  "category": "comedy",
+  "topic": "Ich wollte wie im Mittelalter leben und mein Kühlschrank hat mich verklagt – Ich-Geschichte, männlicher Erzähler (Figur du, gender m), mindestens 22 kurze Sätze. Satz 1 nennt drei Lifehacks aus dem Mittelalter (Jahr 1348), Satz 2 ist der Cliffhanger: der letzte Trick riecht so schlimm, dass der Nachbar die Polizei ruft. Genau drei Hacks in dieser Reihenfolge: Nummer eins Zähne schrubben mit Salbeiblättern, danach sind die Zähne komplett grün. Nummer zwei Haare waschen mit Holzasche aus dem Kamin, danach sind die Haare hart wie Beton. Nummer drei Knoblauch in die Schuhe gegen Krankheiten, der Gestank ist so schlimm, dass die Nachbarskatze wegrennt und der Nachbar die Polizei ruft (löst den Cliffhanger ein). Running Gag: Nach jedem Hack reagiert der Kühlschrank beleidigt (Figur mit Kennung kuehlschrank, kind fridge, steht in der Küche, kein Roboter). Am Ende schickt der Kühlschrank eine Abmahnung und fordert dreitausend Goldmünzen Schmerzensgeld, Schlusspointe als ganzer Satz, kein abgebrochener Schlusssatz. Keine erfundenen Zahlen außer dreitausend Goldmünzen, kein Hund, keine Viren, keine Marken. Grafiken und Einblendungen nur mit Wörtern, die der Satz selbst sagt. Titelbild-Text: LEBEN WIE 1348",
+  "status": "rendered",
+  "created": 1794760616.1608732,
+  "title": "Mittelalter-Lifehacks zerstören mein Leben",
+  "description": "Ich wollte 3 Mittelalter-Lifehacks aus 1348 testen\nErst sahen meine Zähne aus wie Algen, dann versteinerten meine Haare und am Ende rückte die Polizei an.\nWürdest du diese Mittelalter-Tricks im Alltag testen?",
+  "hashtags": [
+   "#shorts",
+   "#lifehacks",
+   "#mittelalter",
+   "#comedy",
+   "#fail",
+   "#storytime",
+   "#lustig",
+   "#viral"
+  ],
+  "tags": [
+   "mittelalter",
+   "Lifehacks",
+   "comedy",
+   "fail",
+   "kühlschrank",
+   "geschichte",
+   "1348",
+   "alltagstest",
+   "polizei",
+   "lustige story"
+  ],
+  "thumb_text": "LEBEN WIE 1348",
+  "missing": null,
+  "cover_ms": 86350,
+  "duration": 86.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
