@@ -624,6 +624,7 @@ def new_topic(cat: dict) -> str:
             + _niche(cat)
             + (("\nDas Thema MUSS genau in dieses Format passen. So sehen passende Themen aus (nur Beispiele, nicht wiederholen): "
                 + "; ".join(str(x) for x in cat["topic_examples"][:8])) if cat.get("topic_examples") else "")
+            + (f"\nRegeln für das Thema: {cat['topic_rules']}" if cat.get("topic_rules") else "")
             + '\nAntworte als JSON: {"topic": "…"}')
     js, _ = ai.chat_json("Du bist Redakteur für virale deutsche Kurzvideos. Antworte nur mit JSON.", user, 1.0)
     topic = str(js.get("topic", "")).strip()
