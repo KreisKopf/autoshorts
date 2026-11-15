@@ -3394,5 +3394,45 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7708119359641734433?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 97,
+  "category": "tiere",
+  "topic": "Der Fangschreckenkrebs: Das Tier mit dem stärksten Punch im Universum, das dich wortwörtlich one-shotted",
+  "status": "review",
+  "created": 1794737419.5811563,
+  "title": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich",
+  "description": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich\nEin winziger Krebs schlägt so schnell zu wie eine Pistolenkugel. Kannst du den Punch in Zeitlupe überhaupt erkennen?\nSchnelligkeit oder pure Muskelkraft?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#wissenschaft",
+   "#fangschreckenkrebs",
+   "#nature",
+   "#viral"
+  ],
+  "tags": [
+   "fangschreckenkrebs",
+   "stärkster punch",
+   "tierreichfakten",
+   "meerestiere",
+   "zeitlupe punch",
+   "biologie",
+   "spannende tierfakten"
+  ],
+  "thumb_text": "TÖDLICHER ALS PISTOLE",
+  "missing": null,
+  "cover_ms": 72927,
+  "duration": 72.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-15 13:00",
+  "review_at": 1794737938.330597
  }
 ]

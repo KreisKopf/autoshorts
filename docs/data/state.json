@@ -1,5 +1,5 @@
 {
- "last_category": "mysterien",
+ "last_category": "tiere",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -12,7 +12,8 @@
   "2026-11-13 21:00",
   "2026-11-14 13:00",
   "2026-11-14 18:00",
-  "2026-11-14 21:00"
+  "2026-11-14 21:00",
+  "2026-11-15 13:00"
  ],
  "used_queue": [
   "qkv0cbgez",
@@ -22,20 +23,20 @@
   "qqprosnb9"
  ],
  "last_stats": 1794736258.7051501,
- "next_id": 97,
+ "next_id": 98,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.485,
+ "voice_wps": 2.457,
  "last_trends": 1794736258.7094424,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
-  "hero": "diver",
-  "palette": 1,
-  "video": 96
+  "hero": "mantis",
+  "palette": 3,
+  "video": 97
  },
  "cat_credit": {
   "fakten": 2.2800000000000002,
