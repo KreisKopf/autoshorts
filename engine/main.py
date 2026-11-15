@@ -415,13 +415,18 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             if not script.get("cast"):
                 script["cast"] = {"du": {}}
             script["cast"] = stage.balance_cast(script["cast"], v["id"], scenes)   # „du“ ist in jedem zweiten Video eine Frau
-            if str(cat.get("caption_style") or "") == "word":   # Motivation: das große Wort in der Mitte ist die Einblendung – keine Schilder, Karten, Grafiken dahinter
+            word_caps = str(cat.get("caption_style") or "") == "word"   # Motivation: das große Wort ist die Einblendung – keine Schilder, Karten, Grafiken
+
+            def _no_overlays(graphics=True):
                 for sc_w in scenes:
-                    if isinstance(sc_w, dict):
+                    if word_caps and isinstance(sc_w, dict):
                         sc_w["overlay"] = None
-                        if sc_w.get("shot") == "graphic":
+                        if graphics and sc_w.get("shot") == "graphic":
                             sc_w["shot"], sc_w["graphic"] = "", None
+                        sc_w["hud"], sc_w["status"] = None, None
+            _no_overlays()
             stage.direct(scenes, times, f"{stage.topic_head(v.get('topic'))} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
+            _no_overlays(False)                           # auch Schilder, die die Regie selbst ergänzt hat (ihre Grafiken füllen sonst leere Szenen)
             kick = " ".join(str(script.get("thumb") or "").split())[:28]
             if kick and str(cat.get("caption_style") or "") != "word" and scenes and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic" and \
                     str((scenes[0].get("overlay") or {}).get("type") or "tag") == "tag":

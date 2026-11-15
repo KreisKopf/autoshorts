@@ -185,7 +185,17 @@
    "voice_rate": "+10%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Locker, schnell und frech wie ein Kumpel, der vorrechnet; bei Pointen kurz trocken.",
-   "enabled": true
+   "enabled": true,
+   "topic_examples": [
+    "Barbershop gegen Friseursalon – wer verdient mehr?",
+    "Dönerladen gegen Burgerkette",
+    "Lkw-Fahrer gegen Paketbote",
+    "Spätkauf gegen Supermarkt",
+    "Fahrlehrer gegen Pilot",
+    "Tattoo-Studio gegen Nagelstudio",
+    "Imbiss am Bahnhof gegen Foodtruck"
+   ],
+   "trends": false
   },
   {
    "slug": "motivation",
@@ -193,15 +203,24 @@
    "emoji": "🔥",
    "description": "Kurze Motivationsrede: ein großes Wort nach dem anderen, schnelle Schnitte, Gute-Laune-Musik.",
    "script_style": "Motivationsrede direkt an 'du', wie ein Coach, der dich wachrüttelt. Kurze, rhythmische Sätze (3 bis 8 Wörter), Wiederholungen als Stilmittel ('Nicht morgen. Nicht nächste Woche. Jetzt.'). Aufbau: Hook, der trifft ('Du bist nicht faul. Du bist abgelenkt.'), dann das Problem aus dem Alltag (Handy, Scrollen bis drei Uhr nachts, Ausreden, Angst vor dem ersten Schritt), dann der Wendepunkt mit einem starken Bild oder Vergleich, dann konkrete kleine Schritte, Ende mit einem Satz zum Merken und 'Speicher dir das für die harten Tage.' Keine Zitate echter Personen, keine Versprechen von Reichtum. BILDER: Jede Szene ist kurz (ein Satz, höchstens 2–3 Sekunden) und zeigt eine eigene, klare Situation zum Satz: jemand liegt nachts mit Handy im Bett, rennt los, steht am Berg, trainiert, lernt am Schreibtisch, steht vor einer Tür, feiert. Viel Bewegung, Orte wechseln ständig, keine Einblendungen und keine Grafiken – der Text erscheint als großes Wort in der Bildmitte.",
-   "image_mood": "vibrant purple and violet night palette, neon glow, cinematic flat illustration, dynamic poses",
+   "image_mood": "vibrant purple, violet and warm orange colors, bright cinematic flat illustration, dynamic poses",
    "voice": "de-DE-ConradNeural",
    "voice_rate": "+4%",
    "voice_pitch": "-2Hz",
    "voice_instructions": "Kraftvoll, warm und eindringlich wie ein Motivations-Coach; Pausen nach starken Sätzen.",
-   "look": "neon",
    "caption_style": "word",
    "music_volume": 0.24,
-   "enabled": true
+   "enabled": true,
+   "topic_examples": [
+    "Warum du nicht faul bist, sondern abgelenkt",
+    "Der Tag, an dem du aufhörst, auf Motivation zu warten",
+    "Du vergleichst dich zu viel",
+    "Niemand kommt, um dich zu retten – und das ist gut so",
+    "Disziplin schlägt Talent",
+    "Fang an, bevor du bereit bist",
+    "Was in einem Jahr anders ist, wenn du heute anfängst"
+   ],
+   "trends": false
   }
  ],
  "queue": [
