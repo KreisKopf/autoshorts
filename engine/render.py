@@ -97,7 +97,7 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
                 continue
             end = flat[i + 1][1] if i + 1 < len(flat) else e0 + 0.5
             end = min(max(end, s0 + 0.08), e0 + 0.7)
-            fs = min(200, int(1000 / max(1, 0.5 * len(c))))   # lange Wörter kleiner, nie über den Rand
+            fs = min(250, int(960 / max(1, 0.45 * len(c))))   # groß wie im Vorbild; lange Wörter kleiner, nie über den Rand
             col = r"{\c&H0066F2C8&}" if is_key(w, s0) or i % 5 == 3 else ""   # Schlüsselwörter grün-gelb wie im Vorbild
             lines.append(f"Dialogue: 1,{_ts(s0)},{_ts(end)},Big,,0,0,0,,{{\\fs{fs}}}{big}{col}{c}")
         chunks = []

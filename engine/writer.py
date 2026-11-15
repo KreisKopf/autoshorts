@@ -620,7 +620,7 @@ def new_topic(cat: dict) -> str:
             "und bei dieser Zielgruppe auf TikTok funktioniert (Thema, über das man in der Bubble redet, oder das man sofort teilen will).\n"
             "Diese Themen gab es schon (nicht wiederholen, auch nicht sehr ähnlich):\n- "
             + ("\n- ".join(past) if past else "(noch keine)")
-            + _insight(cat)
+            + ("" if cat.get("topic_examples") else _insight(cat))   # eigenes Format: die Kanal-Hits (meist „Was wäre, wenn …“) würden es verbiegen
             + _niche(cat)
             + (("\nDas Thema MUSS genau in dieses Format passen. So sehen passende Themen aus (nur Beispiele, nicht wiederholen): "
                 + "; ".join(str(x) for x in cat["topic_examples"][:8])) if cat.get("topic_examples") else "")
