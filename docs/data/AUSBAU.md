@@ -229,5 +229,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
 - Eigene Lieder: App → „Musik-Kugel: eigene Lieder“ lädt Audiodateien ins Release `songs` (Name „Künstler - Titel.mp3“). Sie haben Vorrang
   (das am längsten nicht gespielte); `song_hits` nimmt die lautesten 40 s (Refrain) und findet die Einsätze (Spektral-Fluss), `file_song`
   mischt den Original-Ton mit leisem Glasklirren. Rechte an den Liedern liegen beim Nutzer – die Engine lädt keine Lieder selbst aus dem Netz.
+- Remixe (`engine/remix.py`): ohne eigene Lieder wird automatisch eine bekannte gemeinfreie Melodie als moderner Track produziert
+  (Stile `STYLES`: Phonk, Trap, EDM, Lo-Fi, Sped Up – im Wechsel): Schlagzeug, 808/Bass, Akkorde je Takt aus der Melodie (`harmonize`), Lead
+  spielt die Melodie, jeder Melodie-Ton ist ein Aufprall. Neue Melodie: Eintrag in `bounce.SONGS` UND Tonart/Takt in `remix.KEYS`.
 - Kategorie mit `every_days: 2` und `special: "bounce"`: `main.pick` nimmt sie, sobald zwei Tage seit der letzten um sind (`STATE["last_musik"]`),
   sonst nie; `make_bounce` rendert ohne Drehbuch und Sprecher und lädt hoch wie jedes Video.

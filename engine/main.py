@@ -523,8 +523,14 @@ def make_bounce(cat, upload=True):
     own = bounce.user_songs()                             # eigene Lieder aus der App haben Vorrang (das am längsten nicht gespielte)
     if own:
         song = sorted(own, key=lambda x: used.index(x["asset"]) if x["asset"] in used else -1)[0]
-    else:
-        song = bounce.pick_song(used)
+    else:                                                 # automatisch: bekannte Melodie als moderner Remix (Stil im Wechsel)
+        from . import remix
+        mel = bounce.pick_song(used)
+        styles = list(remix.STYLES)
+        last_st = STATE.get("bounce_styles", [])
+        style = sorted(styles, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
+        song = {"remix": mel, "style": style, "asset": mel}
+        STATE["bounce_styles"] = (last_st + [style])[-10:]
     title, desc, tags, name = bounce.meta(song)
     v = {"id": vid, "category": cat["slug"], "topic": f"Musik-Kugel: {name}", "status": "rendering", "created": time.time(),
          "title": title, "description": desc, "hashtags": tags, "tags": ["musik", "melodie", name.lower(), "satisfying"], "thumb_text": "ERKENNST DU ES?"}
@@ -535,7 +541,7 @@ def make_bounce(cat, upload=True):
     final = OUT / f"{vid}.mp4"
     log(f"Kategorie: {cat['emoji']} {cat['name']} · Melodie: {name}")
     try:
-        if isinstance(song, dict):
+        if isinstance(song, dict) and not song.get("remix"):
             song = bounce.fetch_user_song(song, work)
         dur, thumb = bounce.render(song, final, seed=vid, work=work)
         cover = OUT / f"{vid}-cover.jpg"

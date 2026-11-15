@@ -605,6 +605,14 @@ def main():
             real = [t for t, _ in h2 if st <= t <= st + ln]
             good = sum(1 for t, _ in found if min(abs(st + t - r) for r in real) < 0.04)
             assert good >= 0.9 * len(found) and len(found) >= 0.8 * len(real), (good, len(found), len(real))
+        from .. import remix                              # Remix: jeder Stil ergibt einen Track, Töne liegen in der Melodie-Reihenfolge
+        assert set(bounce.SONGS) <= set(remix.KEYS)
+        with tempfile.TemporaryDirectory() as tmp:
+            for stl in remix.STYLES:
+                h3, tot3 = remix.build(bounce.SONGS["ode_freude"], remix.KEYS["ode_freude"], stl, Path(tmp) / f"{stl}.wav", seed=1)
+                assert len(h3) >= 60 and all(a[0] < b[0] for a, b in zip(h3, h3[1:])) and (Path(tmp) / f"{stl}.wav").stat().st_size > 100000, stl
+        t_r, d_r, tags_r, n_r = bounce.meta({"remix": "bergkoenig", "style": "phonk"})
+        assert "Phonk" in n_r and "Bergkönig" in d_r and "#remix" in tags_r
         title, desc, tags, name = bounce.meta("ode_freude")
         assert name in desc and title and "#musik" in tags
     check("Musik-Kugel", _bounce)

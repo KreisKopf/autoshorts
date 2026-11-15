@@ -76,6 +76,19 @@ SONGS = {
     "funkel": ("Morgen kommt der Weihnachtsmann / Twinkle Twinkle", "französisches Volkslied", 120, _seq(
         "C5:1 C5:1 G5:1 G5:1 A5:1 A5:1 G5:2 F5:1 F5:1 E5:1 E5:1 D5:1 D5:1 C5:2 G5:1 G5:1 F5:1 F5:1 E5:1 E5:1 D5:2 "
         "G5:1 G5:1 F5:1 F5:1 E5:1 E5:1 D5:2 C5:1 C5:1 G5:1 G5:1 A5:1 A5:1 G5:2 F5:1 F5:1 E5:1 E5:1 D5:1 D5:1 C5:2")),
+    "wiegenlied": ("Guten Abend, gut' Nacht (Wiegenlied)", "Johannes Brahms", 100, _seq(
+        "E4:.5 E4:.5 G4:2 E4:.5 E4:.5 G4:2 E4:.5 G4:.5 C5:1 B4:1.5 A4:.5 A4:1 G4:1 D4:.5 E4:.5 F4:1 D4:1 D4:.5 E4:.5 F4:2 "
+        "D4:.5 F4:.5 B4:.5 A4:.5 G4:1 B4:1 C5:2 C4:.5 C4:.5 C5:2 A4:.5 F4:.5 G4:2 E4:.5 C4:.5 F4:1 G4:1 A4:1 G4:2 "
+        "C4:.5 C4:.5 C5:2 A4:.5 F4:.5 G4:2 E4:.5 C4:.5 F4:1 E4:1 D4:1 C4:3")),
+    "greensleeves": ("Greensleeves", "englisches Volkslied", 112, _seq(
+        "A4:1 C5:2 D5:1 E5:1.5 F5:.5 E5:1 D5:2 B4:1 G4:1.5 A4:.5 B4:1 C5:2 A4:1 A4:1.5 G#4:.5 A4:1 B4:2 G#4:1 E4:2 "
+        "A4:1 C5:2 D5:1 E5:1.5 F5:.5 E5:1 D5:2 B4:1 G4:1.5 A4:.5 B4:1 C5:1.5 B4:.5 A4:1 G#4:1.5 F#4:.5 G#4:1 A4:3")),
+    "saints": ("When the Saints Go Marching In", "Gospel (traditionell)", 150, _seq(
+        "C4:1 E4:1 F4:1 G4:4 r:1 C4:1 E4:1 F4:1 G4:4 r:1 C4:1 E4:1 F4:1 G4:2 E4:2 C4:2 E4:2 D4:4 r:1 "
+        "E4:1 E4:1 D4:1 C4:3 C4:1 E4:2 G4:2 G4:1 F4:3 r:1 E4:1 F4:1 G4:1 E4:2 C4:2 D4:2 C4:4")),
+    "auld_lang_syne": ("Auld Lang Syne (Nehmt Abschied, Brüder)", "schottisches Volkslied", 100, _seq(
+        "C4:1 F4:1.5 F4:.5 F4:1 A4:1 G4:1.5 F4:.5 G4:1 A4:1 F4:1.5 F4:.5 A4:1 C5:1 D5:3 D5:1 C5:1.5 A4:.5 A4:1 F4:1 "
+        "G4:1.5 F4:.5 G4:1 A4:1 F4:1.5 D4:.5 D4:1 C4:1 F4:3")),
 }
 
 
@@ -415,16 +428,35 @@ def _font(size):
 
 
 def _text_center(d, y, text, size, fill):
+    """Text mittig – wird kleiner und notfalls zweizeilig, damit er nie über den Bildrand läuft."""
+    max_w = W - 90
+    lines = [text]
     f = _font(size)
-    w = d.textlength(text, font=f)
-    d.text(((W - w) / 2 + 3, y + 3), text, font=f, fill=(0, 0, 0))
-    d.text(((W - w) / 2, y), text, font=f, fill=fill)
+    while d.textlength(text, font=f) > max_w and size > 44:
+        size -= 4
+        f = _font(size)
+    if d.textlength(text, font=f) > max_w:              # immer noch zu breit: an einem Leerzeichen nahe der Mitte umbrechen
+        words = text.split()
+        best = min(range(1, len(words)), key=lambda k: abs(len(" ".join(words[:k])) - len(" ".join(words[k:]))), default=1)
+        lines = [" ".join(words[:best]), " ".join(words[best:])]
+    for k, ln in enumerate(lines):
+        w = d.textlength(ln, font=f)
+        yy = y + k * int(size * 1.15) - (int(size * 0.55) if len(lines) > 1 else 0)
+        d.text(((W - w) / 2 + 3, yy + 3), ln, font=f, fill=(0, 0, 0))
+        d.text(((W - w) / 2, yy), ln, font=f, fill=fill)
+    return len(lines)
 
 
 def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=True, work: Path = None):
     """Ganzes Video rendern (Bild + Ton). Gibt (Dauer, Pfad zum Vorschaubild) zurück. work = Ordner für Zwischendateien."""
     work = Path(work) if work else out.parent
-    if isinstance(song, dict):                           # eigenes Lied: {"file", "name", "who"}
+    if isinstance(song, dict) and song.get("remix"):     # Remix einer gemeinfreien Melodie: {"remix": Melodie, "style": Stil}
+        from . import remix
+        base = SONGS[song["remix"]]
+        name, who = f"{base[0]} – {remix.STYLES[song['style']]['name']} Remix", base[1]
+        wav = work / "bounce.wav"
+        hits, total = remix.build(base, remix.KEYS[song["remix"]], song["style"], wav, seed=seed)
+    elif isinstance(song, dict):                         # eigenes Lied: {"file", "name", "who"}
         name, who = song.get("name") or "?", song.get("who") or ""
         hits, total, wav = file_song(song["file"], work)
     else:
@@ -499,8 +531,8 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Tr
             d = ImageDraw.Draw(fr)
             d.ellipse((bx - BALL_R, by - BALL_R, bx + BALL_R, by + BALL_R), fill=(250, 250, 245))
             if reveal and t > total - 3.2:               # Auflösung am Ende
-                _text_center(d, 180, name, 64, (255, 230, 120))
-                _text_center(d, 262, who, 40, (220, 220, 230))
+                n_l = _text_center(d, 180, name, 64, (255, 230, 120))
+                _text_center(d, 262 + (40 if n_l > 1 else 0), who, 40, (220, 220, 230))
             else:
                 _text_center(d, 180, title_top, 64, (255, 255, 255))
                 _text_center(d, 262, "Jede Scheibe ist ein Ton", 40, (200, 200, 215))
@@ -551,6 +583,16 @@ def pick_song(used):
 
 def meta(song):
     """Titel, Beschreibung, Hashtags fürs Hochladen (Name des Lieds erst in der Beschreibung – im Video wird geraten)."""
+    if isinstance(song, dict) and song.get("remix"):
+        from . import remix
+        style = remix.STYLES[song["style"]]["name"]
+        name, who = f"{SONGS[song['remix']][0]} ({style} Remix)", SONGS[song["remix"]][1]
+        title = random.choice([f"Bekanntes Lied als {style}-Remix – erkennst du es? 🎵", f"Dieses Lied kennt jeder – aber als {style} 🔥",
+                               f"Jede Scheibe ein Ton: {style}-Remix eines Klassikers"])
+        desc = (f"Ein Lied, das jeder kennt – als {style}-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\n"
+                f"Auflösung am Ende: {SONGS[song['remix']][0]} ({who}).\n"
+                "Welches Lied soll als Nächstes einen Remix bekommen? Schreib es in die Kommentare!")
+        return title, desc, ["#musik", "#remix", f"#{style.lower().replace(' ', '').replace('-', '')}", "#satisfying", "#erkennstdudaslied", "#shorts"], name
     name, who = (song.get("name"), song.get("who") or "") if isinstance(song, dict) else SONGS[song][:2]
     titles = ["Erkennst du dieses Lied? 🎵", "Diese Kugel spielt ein Lied, das jeder kennt", "Jede Scheibe ein Ton – welches Lied ist das?",
               "Nach drei Tönen weißt du es 🎶"]
