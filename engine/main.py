@@ -415,9 +415,15 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             if not script.get("cast"):
                 script["cast"] = {"du": {}}
             script["cast"] = stage.balance_cast(script["cast"], v["id"], scenes)   # „du“ ist in jedem zweiten Video eine Frau
+            if str(cat.get("caption_style") or "") == "word":   # Motivation: das große Wort in der Mitte ist die Einblendung – keine Schilder, Karten, Grafiken dahinter
+                for sc_w in scenes:
+                    if isinstance(sc_w, dict):
+                        sc_w["overlay"] = None
+                        if sc_w.get("shot") == "graphic":
+                            sc_w["shot"], sc_w["graphic"] = "", None
             stage.direct(scenes, times, f"{stage.topic_head(v.get('topic'))} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
             kick = " ".join(str(script.get("thumb") or "").split())[:28]
-            if kick and scenes and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic" and \
+            if kick and str(cat.get("caption_style") or "") != "word" and scenes and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic" and \
                     str((scenes[0].get("overlay") or {}).get("type") or "tag") == "tag":
                 scenes[0]["overlay"] = {"type": "tag", "text": kick}   # erstes Bild: Thema als Schild („3 TIER-SUPERKRÄFTE“)
             try:                                          # Bildplan aufheben: so lässt sich später nachsehen, warum eine Szene so aussah
@@ -489,9 +495,9 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         ass = work / "subs.ass"
         render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")),
                          script.get("hud"), script.get("countdown"), 480 if toon else 560,
-                         cfg("caption_style") or "impact")
+                         cat.get("caption_style") or cfg("caption_style") or "impact")   # Motivation: ein großes Wort in der Mitte
         v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
-                                      float(cfg("music_volume") or 0.1), cover,
+                                      float(cat.get("music_volume") or cfg("music_volume") or 0.1), cover,   # Motivation: Musik deutlich hörbar
                                       float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35), cat["slug"])
         Image.open(cover or (work / "img00.jpg")).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
         v.update(status="rendered", duration=round(total + 0.35, 1), providers=used, thumb=True,

@@ -55,6 +55,7 @@ def _clean(w, lower):
 def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, margin=560, style="impact"):
     """style "impact": schmale, fette GROSSBUCHSTABEN mit orangem Schlüsselwort (wie in viralen Erklärvideos);
     "classic": runde Schrift, wahlweise klein geschrieben."""
+    word_mode = str(style or "").lower() == "word"       # Motivation: EIN großes Wort mitten im Bild, Schnitt für Schnitt
     impact = str(style or "impact").lower() != "classic"
     karaoke = True
     cap_font = "Anton" if impact and (Path(str(FONTS_DIR)) / "Anton-Regular.ttf").exists() else FONT
@@ -87,6 +88,19 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
 
     pop = r"{\fscx72\fscy72\t(0,90,\fscx108\fscy108)\t(90,170,\fscx100\fscy100)}"
     lines = []
+    if word_mode:
+        big = r"{\fscx60\fscy60\t(0,70,\fscx112\fscy112)\t(70,150,\fscx100\fscy100)}"
+        flat = [(w, s0, e0) for ch in chunks for (w, s0, e0) in ch]
+        for i, (w, s0, e0) in enumerate(flat):
+            c = _clean(w, False).upper()
+            if not c:
+                continue
+            end = flat[i + 1][1] if i + 1 < len(flat) else e0 + 0.5
+            end = min(max(end, s0 + 0.08), e0 + 0.7)
+            fs = min(200, int(1000 / max(1, 0.5 * len(c))))   # lange Wörter kleiner, nie über den Rand
+            col = r"{\c&H0066F2C8&}" if is_key(w, s0) or i % 5 == 3 else ""   # Schlüsselwörter grün-gelb wie im Vorbild
+            lines.append(f"Dialogue: 1,{_ts(s0)},{_ts(end)},Big,,0,0,0,,{{\\fs{fs}}}{big}{col}{c}")
+        chunks = []
     for i, ch in enumerate(chunks):
         start = ch[0][1]
         end = chunks[i + 1][0][1] if i + 1 < len(chunks) else ch[-1][2] + 0.4
@@ -180,6 +194,7 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Cap,{cap_font},{(124 if cap_font == "Anton" else 96) if impact else (86 if lower else 92)},&H00FFFFFF,&H00FFFFFF,&H00141414,&H96000000,{0 if cap_font == "Anton" else -1},0,0,0,100,100,{2 if impact else (0 if lower else 2)},0,1,{6 if impact else 8},{5 if impact else 4},2,60,60,{margin},1
+Style: Big,{cap_font},200,&H00FFFFFF,&H00FFFFFF,&H00241430,&H96000000,0,0,0,0,100,100,3,0,1,9,6,5,40,40,0,1
 Style: Hud,{FONT},54,&H00FFFFFF,&H00FFFFFF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,5,2,7,60,60,190,1
 Style: Cnt,{FONT},76,&H003FD2FF,&H003FD2FF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,6,2,9,60,60,170,1
 
@@ -318,7 +333,7 @@ def synth_music(work: Path, slug: str):
 def pick_music(slug):
     """Eigene Musik der Video-Art (music/<art>/), sonst freie Musik passender Stimmung (music/stimmung/…), sonst music/."""
     from .sound import MOOD_OF
-    for d in (MUSIC_DIR / slug, MUSIC_DIR / "stimmung" / MOOD_OF.get(slug, "hell"), MUSIC_DIR):
+    for d in (MUSIC_DIR / slug, MUSIC_DIR / "stimmung" / MOOD_OF.get(slug, "hell"), MUSIC_DIR / "stimmung" / "hell", MUSIC_DIR):
         if d.is_dir():
             files = [p for p in d.iterdir() if p.suffix.lower() in (".mp3", ".m4a", ".wav", ".ogg")]
             if files:

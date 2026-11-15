@@ -28,6 +28,8 @@ QUERIES = {
     "storys": ["wahre geschichte", "unglaubliche wahre geschichte"],
     "lustig": ["lustige geschichte animation"],
     "comedy": ["lustige animation", "ich habe mir"],
+    "vergleich": ["wer verdient mehr", "wie viel verdient ein"],
+    "motivation": ["motivation deutsch", "motivation speech animation"],
 }
 
 

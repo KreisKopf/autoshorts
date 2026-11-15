@@ -71,9 +71,11 @@ MUSIC = {
     "spannend": ["suspense cinematic", "tension ambient", "cinematic documentary"],
     "dunkel": ["dark ambient", "horror ambience music"],
     "hell": ["upbeat acoustic loop", "cheerful piano loop", "happy background music", "positive corporate"],
+    "gutelaune": ["upbeat happy pop", "feel good upbeat", "uplifting motivational", "energetic upbeat summer", "happy ukulele upbeat"],
 }
 MOOD_OF = {"whatif": "spannend", "mysterien": "spannend", "storys": "spannend", "grusel": "dunkel",
-           "fakten": "hell", "tiere": "hell", "lustig": "hell", "comedy": "hell"}
+           "fakten": "hell", "tiere": "hell", "lustig": "hell", "comedy": "hell",
+           "vergleich": "hell", "motivation": "gutelaune"}
 # Keine bekannten Lieder (auch wenn jemand sie als CC0 hochgeladen hat: die Komposition ist meist geschützt → Content-ID)
 NOT_MUSIC = re.compile(r"birthday|rainbow|cover|remix|karaoke|feat\.|song|lied|theme from|soundtrack|ost\b|tribute|melody of|"
                        r"jingle bells|christmas|weihnacht|national anthem|hymne|vocal|singing|voice", re.I)

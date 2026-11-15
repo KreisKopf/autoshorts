@@ -1015,6 +1015,20 @@ def main():
                 extras.draw_prop(lay, k, 540, t_)
                 assert lay.getbbox(), f"{k} zeichnet nichts"
     check("Werkstatt: Motor, Kran, Auto, Getriebe, Tacho", _garage)
+    def _word_caps():                                            # Motivation: ein großes Wort nach dem anderen in der Bildmitte
+        import tempfile
+        from pathlib import Path
+        from .. import render
+        with tempfile.TemporaryDirectory() as tmp:
+            f = Path(tmp) / "w.ass"
+            render.build_ass([("Du", 0.0, 0.3), ("bist", 0.3, 0.6), ("unaufhaltsam!", 0.6, 1.4)], [{"highlight": ["unaufhaltsam"]}], [(0, 1.6)], f, style="word")
+            big = [ln for ln in f.read_text(encoding="utf-8").splitlines() if ln.startswith("Dialogue") and ",Big," in ln]
+            assert len(big) == 3 and big[2].endswith("UNAUFHALTSAM") and "\\fs" in big[2], big
+            assert not [ln for ln in f.read_text(encoding="utf-8").splitlines() if ",Cap," in ln and ln.startswith("Dialogue")]
+        import json
+        cats = {c["slug"]: c for c in json.loads((Path(__file__).resolve().parents[2] / "docs" / "data" / "config.json").read_text(encoding="utf-8"))["categories"]}
+        assert cats["motivation"]["enabled"] and cats["motivation"]["caption_style"] == "word" and cats["vergleich"]["enabled"]
+    check("Motivation: Wort für Wort, Rubriken da", _word_caps)
 
     from ..writer import repeat_trouble as _w_rep
     def _ice():                                                  # zugefrorenes Meer: Eisfläche statt Wellen/Gebirge, Schiff im Eis, Eisdecke über dem Wasser, Atemloch
