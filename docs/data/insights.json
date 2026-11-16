@@ -1,5 +1,5 @@
 {
- "updated": 1794836782.4095795,
+ "updated": 1794837158.1880722,
  "enough": true,
  "counted": 16,
  "total": 18,
@@ -9,46 +9,46 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1630,
-   "avg_likes": 52.5,
-   "like_rate": 3.22,
-   "avg_score": 2418
+   "avg_views": 1628,
+   "avg_likes": 51.5,
+   "like_rate": 3.16,
+   "avg_score": 2400
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1708,
+   "avg_views": 1714,
    "avg_likes": 40.5,
-   "like_rate": 2.37,
-   "avg_score": 2319
+   "like_rate": 2.36,
+   "avg_score": 2325
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1655,
+   "avg_views": 1656,
    "avg_likes": 42.0,
    "like_rate": 2.54,
-   "avg_score": 2285
+   "avg_score": 2286
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1540,
+   "avg_views": 1542,
    "avg_likes": 39.5,
    "like_rate": 2.56,
-   "avg_score": 2133
+   "avg_score": 2134
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1381,
+   "avg_views": 1380,
    "avg_likes": 24.0,
    "like_rate": 1.74,
-   "avg_score": 1771
+   "avg_score": 1770
   },
   {
    "slug": "fakten",
@@ -72,9 +72,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1630 Aufrufe, 3.22 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1628 Aufrufe, 3.16 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2378 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2379 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,21 +93,21 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2222,
+   "views": 2224,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3137
+   "score": 3139
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2002,
+   "views": 2004,
    "likes": 66,
    "comments": 0,
    "shares": 0,
-   "score": 2992
+   "score": 2994
   },
   {
    "id": 80,
