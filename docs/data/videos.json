@@ -4493,7 +4493,7 @@
   "id": 123,
   "category": "fakten",
   "topic": "5 Dinge, die dein Gehirn tut, während du schläfst – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und in dieser Reihenfolge erzählen, als Liste mit genau fünf Punkten (Erstens bis Fünftens), zu jedem Punkt zwei bis drei ganze Sätze, insgesamt rund 210 Wörter: Erstens Putzen: im Tiefschlaf spült Hirnwasser zwischen den Nervenzellen die Abfallstoffe des Tages weg, die Zwischenräume werden dafür im Schlaf weiter, Forscher haben das zuerst bei Mäusen gezeigt; Zweitens Aufräumen: das Gehirn spielt den Tag noch einmal durch, Wichtiges wie gelernte Vokabeln wandert ins Langzeitgedächtnis, Unwichtiges wie das Mittagessen verblasst; Drittens Lähmen: in der Traumphase schaltet der Hirnstamm fast alle Muskeln ab, nur Augen und Atmung arbeiten weiter, damit du deine Träume nicht nachspielst und aus dem Bett fällst; dann die Finte: Du denkst, dein Gehirn ruht sich nachts aus, falsch, in der Traumphase ist es fast so aktiv wie im Wachzustand; Viertens Verknüpfen: nach dem Lernen entstehen im Schlaf neue Verbindungen zwischen Nervenzellen, deshalb klappt das Geübte am nächsten Tag besser; Fünftens Gefühle verarbeiten: in der Traumphase ist das Stresshormon Noradrenalin fast abgeschaltet, das Gehirn geht belastende Erlebnisse noch einmal durch, am Morgen fühlen sie sich weniger schlimm an, eine Nacht darüber schlafen hilft also wirklich; Schluss: wer zu wenig schläft, merkt es sofort an Konzentration, Gedächtnis und Laune. Keine erfundenen Zahlen, keine Gigabyte, keine Prozent- oder Mengenangaben, keine Jahreszahlen; nicht behaupten, das Gehirn wachse im Schlaf oder koche über; das Wort Schlafparalyse nicht verwenden. Einblendungen nur auf Deutsch und nur mit Wörtern aus dem Satz. Bilder: schlafende Figur im Bett im Schlafzimmer bei Nacht, das Gehirn als eigene Figur, kein Büro, keine Passanten. Titel: 5 Dinge, die dein Gehirn tut, während du schläfst. Titelbild-Text: DEIN GEHIRN NACHTS",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794849062.2621229,
   "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
   "description": "Was treibt dein Kopf eigentlich mitten in der Nacht?\nDu schläfst tief, aber dein Gehirn arbeitet fleißig.\nWie viele Stunden schläfst du in der Regel?",
@@ -4530,7 +4530,8 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Einstieg auf einem Bauernhof, Märchenschloss im Schlafzimmer – Fassung 124 veröffentlicht"
  },
  {
   "id": 124,
