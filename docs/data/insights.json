@@ -1,7 +1,7 @@
 {
- "updated": 1794812879.2674963,
+ "updated": 1794814672.4115968,
  "enough": true,
- "counted": 14,
+ "counted": 15,
  "total": 17,
  "needed": 6,
  "categories": [
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1616,
+   "avg_views": 1618,
    "avg_likes": 51.0,
-   "like_rate": 3.16,
-   "avg_score": 2380
+   "like_rate": 3.15,
+   "avg_score": 2382
   },
   {
    "slug": "whatif",
@@ -36,10 +36,19 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1594,
+   "avg_views": 1591,
    "avg_likes": 39.0,
    "like_rate": 2.45,
-   "avg_score": 2179
+   "avg_score": 2176
+  },
+  {
+   "slug": "tiere",
+   "name": "🐾 Tierwelt",
+   "n": 1,
+   "avg_views": 1347,
+   "avg_likes": 24.0,
+   "like_rate": 1.78,
+   "avg_score": 1707
   },
   {
    "slug": "fakten",
@@ -52,20 +61,20 @@
   }
  ],
  "weights": {
-  "fakten": 0.68,
-  "storys": 1.09,
+  "fakten": 0.69,
+  "storys": 1.11,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.06,
+  "whatif": 1.07,
   "comedy": 1.2,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1616 Aufrufe, 3.16 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1618 Aufrufe, 3.15 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2429 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2374 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -126,11 +135,11 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1125,
+   "views": 1124,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1410
+   "score": 1409
   },
   {
    "id": 58,
