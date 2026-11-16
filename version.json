@@ -1,6 +1,6 @@
 {
-  "version": "1.14.6",
-  "file": "releases/AutoShorts-1.14.6.cmd",
-  "sha256": "e4048e47c84e72f0371f3ef1616214724ca825af3ee9d8343562175b656864f1",
-  "notes": "Hängende GitHub-Aufträge: eigene Hintergrund-Abrufe werden nach 20 Min. automatisch abgebrochen, Banner erklärt es"
+  "version": "1.14.7",
+  "file": "releases/AutoShorts-1.14.7.cmd",
+  "sha256": "7aca00a02e3b2162b8c458d321b1a5517610d117230deeb830bc9e143527e865",
+  "notes": "Geister-Aufträge bei GitHub (Abbruch angenommen, bleiben trotzdem stehen) werden nicht mehr endlos angezeigt"
 }

@@ -511,13 +511,17 @@ async function tick() {
   QUIET_AT = now; if (action === "auto") TICK_AT = now;
   try { await gh("POST", "/actions/workflows/autoshorts.yml/dispatches", {ref: "main", inputs: {action}}); setTimeout(pollRuns, 5000); } catch (e) {}
 }
-const isLive = r => r.status !== "completed" && !isQuiet(r) && (r.event !== "schedule" || Date.now() - new Date(r.run_started_at || r.created_at) > 90000);
+// Geister-Aufträge: GitHub nimmt den Abbruch an, lässt sie aber in der Warteschlange stehen (räumt sie erst nach bis zu 24 h weg).
+// Sie blockieren nichts – also nach einem Abbruch-Versuch (3 Min.) oder nach 60 Min. Warten nicht mehr anzeigen.
+const CANCEL_AT = {};
+const isGhost = r => r.status === "queued" && (Date.now() - new Date(r.created_at) > 60 * 60000 || (CANCEL_AT[r.id] && Date.now() - CANCEL_AT[r.id] > 3 * 60000));
+const isLive = r => r.status !== "completed" && !isGhost(r) && !isQuiet(r) && (r.event !== "schedule" || Date.now() - new Date(r.run_started_at || r.created_at) > 90000);
 async function pollRuns() {
   clearTimeout(runTimer);
   try { const j = await gh("GET", "/actions/workflows/autoshorts.yml/runs?per_page=10"); RUNS = j.workflow_runs || []; } catch (e) {}
   for (const r of RUNS) if (r.event === "workflow_dispatch" && /^(stats|auto)\b|^AutoShorts$/.test((r.display_title || "").trim())) { const c = new Date(r.created_at).getTime(); if (QUIET_AT && c > QUIET_AT - 10000 && c < QUIET_AT + 150000) QUIET.add(r.id); }
   for (const r of RUNS) if (isStuck(r) && (isQuiet(r) || /^(stats|auto)\b|^AutoShorts$/.test((r.display_title || "").trim())) && !CANCELING.has(r.id)) {
-    CANCELING.add(r.id); gh("POST", `/actions/runs/${r.id}/cancel`).catch(() => gh("POST", `/actions/runs/${r.id}/force-cancel`).catch(() => {}));   // eigener Hintergrund-Abruf hängt: still abbrechen
+    CANCELING.add(r.id); CANCEL_AT[r.id] = Date.now(); gh("POST", `/actions/runs/${r.id}/cancel`).catch(() => gh("POST", `/actions/runs/${r.id}/force-cancel`).catch(() => {}));   // eigener Hintergrund-Abruf hängt: still abbrechen
   }
   const quietNow = RUNS.some(r => isQuiet(r) && r.status !== "completed" && !isStuck(r));
   if (quietWas && !quietNow) { await loadData(); if (!$("#dayDrw") && !$(".modal-bg") && !DIRTY) render(); }   // stille Läufe: Zahlen ohne Hinweis nachladen
@@ -538,7 +542,7 @@ async function pollRuns() {
 async function cancelRun(id, quiet) {
   if (!id) { CANCEL_NEXT = Date.now(); PENDING = null; banner(); toast("Wird abgebrochen, sobald GitHub den Auftrag angelegt hat …"); setTimeout(pollRuns, 3000); return; }
   if (!quiet && !confirm("Diesen Auftrag wirklich abbrechen? Das angefangene Video wird verworfen.")) return;
-  CANCELING.add(id); banner();
+  CANCELING.add(id); CANCEL_AT[id] = CANCEL_AT[id] || Date.now(); banner();
   try { await gh("POST", `/actions/runs/${id}/cancel`); toast("Auftrag wird abgebrochen …"); }
   catch (e) {
     try { await gh("POST", `/actions/runs/${id}/force-cancel`); toast("Auftrag wird abgebrochen …"); }
