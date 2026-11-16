@@ -4453,7 +4453,7 @@
   "id": 122,
   "category": "fakten",
   "topic": "5 Dinge, die dein Gehirn tut, während du schläfst – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und in dieser Reihenfolge erzählen, als Liste mit genau fünf Punkten (Erstens bis Fünftens): Erstens Putzen: im Tiefschlaf spült Hirnwasser zwischen den Nervenzellen die Abfallstoffe des Tages weg, die Zwischenräume werden dafür im Schlaf weiter, Forscher haben das zuerst bei Mäusen gezeigt; Zweitens Aufräumen: das Gehirn spielt den Tag noch einmal durch, Wichtiges wie gelernte Vokabeln wandert ins Langzeitgedächtnis, Unwichtiges wie das Mittagessen verblasst; Drittens Lähmen: in der Traumphase schaltet der Hirnstamm fast alle Muskeln ab, nur Augen und Atmung arbeiten weiter, damit du deine Träume nicht nachspielst und aus dem Bett fällst; dann die Finte: Du denkst, dein Gehirn ruht sich nachts aus, falsch, in der Traumphase ist es fast so aktiv wie im Wachzustand; Viertens Verknüpfen: nach dem Lernen entstehen im Schlaf neue Verbindungen zwischen Nervenzellen, deshalb klappt das Geübte am nächsten Tag besser; Fünftens Gefühle verarbeiten: in der Traumphase ist das Stresshormon Noradrenalin fast abgeschaltet, das Gehirn geht belastende Erlebnisse noch einmal durch, am Morgen fühlen sie sich weniger schlimm an, eine Nacht darüber schlafen hilft also wirklich; Schluss: wer zu wenig schläft, merkt es sofort an Konzentration, Gedächtnis und Laune. Keine erfundenen Zahlen, keine Gigabyte, keine Prozent- oder Mengenangaben, keine Jahreszahlen; nicht behaupten, das Gehirn wachse im Schlaf oder koche über; das Wort Schlafparalyse nicht verwenden. Einblendungen nur auf Deutsch und nur mit Wörtern aus dem Satz. Bilder: schlafende Figur im Bett im Schlafzimmer bei Nacht, das Gehirn als eigene Figur, kein Büro, keine Passanten. Titelbild-Text: DEIN GEHIRN NACHTS",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794844183.1415615,
   "title": "5 Dinge, die dein Gehirn schläft",
   "description": "Was treibt dein Gehirn eigentlich die ganze Nacht?\nErfahre die überraschenden Geheimnisse deines Schlafs.\nSchläfst du mehr oder weniger als acht Stunden?",
@@ -4486,6 +4486,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Titel verstümmelt („die dein Gehirn schläft“), Schlafende liegt im Wohnzimmer auf dem Boden, zwei Szenen als Ersatzfassung, Titelbild-Text über dem Gehirn"
  }
 ]
