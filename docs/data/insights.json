@@ -1,5 +1,5 @@
 {
- "updated": 1794827221.6519415,
+ "updated": 1794829209.5682185,
  "enough": true,
  "counted": 15,
  "total": 17,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1626,
+   "avg_views": 1628,
    "avg_likes": 51.5,
-   "like_rate": 3.17,
-   "avg_score": 2398
+   "like_rate": 3.16,
+   "avg_score": 2400
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1706,
+   "avg_views": 1708,
    "avg_likes": 40.2,
    "like_rate": 2.36,
-   "avg_score": 2313
+   "avg_score": 2315
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1642,
+   "avg_views": 1644,
    "avg_likes": 40.0,
-   "like_rate": 2.44,
-   "avg_score": 2242
+   "like_rate": 2.43,
+   "avg_score": 2244
   },
   {
    "slug": "comedy",
@@ -72,9 +72,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1626 Aufrufe, 3.17 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1628 Aufrufe, 3.16 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2390 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2391 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -103,21 +103,21 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2000,
+   "views": 2002,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2975
+   "score": 2977
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2118,
+   "views": 2119,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2808
+   "score": 2809
   },
   {
    "id": 62,
