@@ -645,8 +645,9 @@ function head(animate) {
   $("#pTitle").innerHTML = title.split(/(\s+)/).map((w, i) => /^\s+$/.test(w) ? w : `<span class="w" style="--w:${i / 2}${animate ? "" : ";animation:none"}">${esc(w)}</span>`).join("");
   $("#pSub").textContent = sub;
   const con = ST.connected || {}, nr = nextRun();
+  const dot = p => platOk(p) ? "ok" : "bad", tip = p => platOk(p) === "zernio" ? ` title="über Zernio – letzter Upload ok"` : "";
   $("#status").innerHTML = `<span class="pill"><span class="dot ${S_("autopilot") ? "ok" : "warn"}"></span>${S_("autopilot") ? "Autopilot" + (nr ? " · " + nr.toLocaleString("de-DE", {weekday: "short", hour: "2-digit", minute: "2-digit"}) : "") : "Autopilot aus"}</span>
-    <span class="pill"><span class="dot ${con.youtube ? "ok" : "bad"}"></span>YouTube</span><span class="pill"><span class="dot ${con.tiktok ? "ok" : "bad"}"></span>TikTok</span>`;
+    <span class="pill"${tip("youtube")}><span class="dot ${dot("youtube")}"></span>YouTube</span><span class="pill"${tip("tiktok")}><span class="dot ${dot("tiktok")}"></span>TikTok</span>`;
 }
 function dashLine() {
   if (!CFG) return "Lade Daten …";
@@ -670,6 +671,15 @@ function render(animate) {
 }
 async function refreshAll() { await Promise.all([loadData(), loadSecrets(), api("/api/state").then(s => S = s)]); render(); pollRuns(); }
 
+/* Ist eine Plattform einsatzbereit? Direkt verbunden – oder (Upload über Zernio) der letzte Upload dorthin hat geklappt. */
+function platOk(p) {
+  if ((ST.connected || {})[p]) return true;
+  if (S_("upload_via") !== "zernio" || S_(p + "_enabled") === false) return false;
+  const last = (VIDS || []).filter(v => v.status === "published").sort((a, b) => (b.created || 0) - (a.created || 0))[0];
+  if (!last) return "zernio";
+  const st = String((p === "youtube" ? last.yt_status || (last.yt_id ? "published" : "") : last.tt_status) || "").toLowerCase();
+  return /publish|public|ok|hochgeladen/.test(st) ? "zernio" : false;
+}
 const LITE = () => S && S.edition === "lite";   // Kanal-App zum Weitergeben: nur das Nötigste einstellbar
 // Was die Kanal-App einstellen darf – legt der Admin je Zugang fest (Admin-Tab). Die Admin-App darf alles.
 const PERMS = [["zeitplan", "Autopilot & Upload-Zeiten", true], ["kanal", "Kanal-Profil", true], ["plattform", "YouTube & TikTok verbinden", true],
@@ -1396,7 +1406,7 @@ function viewSettings() {
     <div class="row"><label for="f_audience">Zielgruppe<small>Für wen die Videos sind. Danach wählt die KI Trends und Themen aus und passt Sprache und Ton an.</small></label><textarea id="f_audience" data-k="audience" rows="3">${esc(S_("audience"))}</textarea></div>
     ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Titelbild aus der Animations-Engine mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
     ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
-  ${!can("plattform") ? "" : sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
+  ${!can("plattform") ? "" : sec("plattform", I.plug, "Plattformen", `YouTube ${platOk("youtube") === "zernio" ? "über Zernio" : platOk("youtube") ? "verbunden" : "nicht verbunden"} · TikTok ${platOk("tiktok") === "zernio" ? "über Zernio" : platOk("tiktok") ? "verbunden" : "nicht verbunden"}`, platOk("youtube") && platOk("tiktok") ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
     ${fld("tiktok_handle", "Dein TikTok-Name", "Zum Beispiel @wissenswert. Damit zeigt das Dashboard Follower, Likes und Aufrufe live (jede Minute, direkt vom öffentlichen Profil) – auch wenn du über Zernio hochlädst.", 'placeholder="@deinname" maxlength="40"')}
     ${fld("youtube_handle", "Dein YouTube-Kanal", "Zum Beispiel @wissenswert. Nur nötig, wenn YouTube hier nicht verbunden ist (z. B. Upload über Zernio): dann kommen Abos und Aufrufe live von der öffentlichen Kanalseite. Mit Verbindung holt die App alles direkt von YouTube, inklusive Likes.", 'placeholder="@deinkanal" maxlength="60"')}
     ${sel("upload_via", "Hochladen über", "Zernio lädt über seine eigenen, von YouTube und TikTok zugelassenen Apps hoch: Konten auf zernio.com verbinden, API-Key unten bei den Zugangsdaten speichern. Die eigenen Verbindungen darunter werden dann nicht gebraucht.", [["direct", "Eigene Google- und TikTok-App"], ["zernio", "Zernio (ein API-Key für beide)"]])}

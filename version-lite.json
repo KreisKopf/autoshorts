@@ -1,6 +1,6 @@
 {
-  "version": "1.14.4",
-  "file": "releases/AutoShorts-Kanal-1.14.4.cmd",
-  "sha256": "2835bca7868885eefcac1536b55a7f1a86019620dfda848c88b94e85ea813d75",
-  "notes": "Backup: Verbindungstest erkennt ein falsches Script (z. B. das einer anderen App)"
+  "version": "1.14.5",
+  "file": "releases/AutoShorts-Kanal-1.14.5.cmd",
+  "sha256": "bea7cd3cbaa776daac926737505c614a11a300f3ef39f344e48007f29b4ee260",
+  "notes": "TikTok/YouTube-Anzeige: bei Upload über Zernio grün, wenn der letzte Upload geklappt hat"
 }
