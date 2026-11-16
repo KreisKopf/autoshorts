@@ -1,6 +1,6 @@
 {
-  "version": "1.14.0",
-  "file": "releases/AutoShorts-1.14.0.cmd",
-  "sha256": "0bd3f5cde4b11cb15a65e26f3b8e844f6c318d0b4775d361564fa9fff199d909",
-  "notes": "Backup: automatisch verschlüsselt in Google Drive (per Script-Link), Wiederherstellen auf neuem PC"
+  "version": "1.14.1",
+  "file": "releases/AutoShorts-1.14.1.cmd",
+  "sha256": "86b2eedcafa890a622db16bb7106a2d3cd799400048e4865359acef3abcf247b",
+  "notes": "Backup: klare Fehlermeldungen (404, Anmeldung, /dev-Link), Anmeldeseite zählt nicht mehr als Erfolg"
 }

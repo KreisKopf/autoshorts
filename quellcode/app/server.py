@@ -524,13 +524,23 @@ def upload_backup(force=False):
                 code, txt = r.status, r.read(200_000).decode("utf-8", "replace")
         except urllib.error.HTTPError as e:
             code, txt = e.code, e.read(2000).decode("utf-8", "replace")
+        if code == 404:
+            raise ValueError("Fehler 404 – Google findet unter diesem Link kein Script. Prüfe: 1) Es ist die Web-App-Adresse mit /exec am Ende "
+                             "(nicht /dev), 2) Bereitstellen → Bereitstellungen verwalten → Web-App, Zugriff „Jeder“, 3) Nach Änderungen am Script "
+                             "eine NEUE Version bereitstellen und den Link neu kopieren.")
+        if code in (401, 403):
+            raise ValueError(f"Fehler {code} – das Script verlangt eine Anmeldung. Bei der Bereitstellung als Web-App den Zugriff auf „Jeder“ stellen.")
         if code >= 400:
             raise ValueError(f"Der Backup-Link antwortet mit Fehler {code}.")
         try:
             js = json.loads(txt)
         except ValueError:
             js = None
-        if isinstance(js, dict) and js.get("ok") is False:
+        if not isinstance(js, dict):                      # z. B. Google-Anmeldeseite oder „Funktion doPost nicht gefunden“ – das ist KEIN Erfolg
+            hint = "das Script verlangt eine Anmeldung (Zugriff auf „Jeder“ stellen)" if re.search(r"accounts\.google|ServiceLogin|signin", txt, re.I) \
+                else "dem Script fehlt die Funktion doPost" if re.search(r"doPost", txt) else "kein {\"ok\": true} zurückgegeben"
+            raise ValueError(f"Das Script hat nicht wie erwartet geantwortet: {hint}. Die Script-Vorlage unten macht es richtig.")
+        if js.get("ok") is not True:
             raise ValueError("Das Backup-Script meldet: " + str(js.get("error") or "Fehler")[:200])
         SET.update(backup_last=time.time(), backup_error="", backup_last_name=name, backup_last_size=len(blob))
         save_set()
@@ -741,6 +751,8 @@ def backup_set(h):
     url = str(b.get("url") or "").strip()
     if url and not re.match(r"^https://[^\s\"'<>]{8,2000}$", url):
         raise ValueError("Der Backup-Link muss eine https://-Adresse sein.")
+    if re.search(r"script\.google\.com/.*/dev(\?|$)", url):
+        raise ValueError("Das ist der Test-Link (/dev) – der funktioniert nur im eigenen Browser. Bitte die Web-App-Adresse mit /exec am Ende nehmen.")
     SET["backup_url"] = url
     if b.get("secret") is not None and str(b.get("secret")).strip():
         SET["backup_secret"] = str(b["secret"]).strip()[:200]
