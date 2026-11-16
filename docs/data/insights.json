@@ -1,5 +1,5 @@
 {
- "updated": 1794818772.1481204,
+ "updated": 1794821102.8920634,
  "enough": true,
  "counted": 15,
  "total": 17,
@@ -19,9 +19,9 @@
    "name": "🤯 What If",
    "n": 8,
    "avg_views": 1702,
-   "avg_likes": 39.9,
-   "like_rate": 2.34,
-   "avg_score": 2304
+   "avg_likes": 40.0,
+   "like_rate": 2.35,
+   "avg_score": 2306
   },
   {
    "slug": "comedy",
@@ -36,19 +36,19 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1591,
+   "avg_views": 1594,
    "avg_likes": 39.0,
    "like_rate": 2.45,
-   "avg_score": 2176
+   "avg_score": 2179
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1346,
-   "avg_likes": 24.0,
-   "like_rate": 1.78,
-   "avg_score": 1736
+   "avg_views": 1347,
+   "avg_likes": 23.0,
+   "like_rate": 1.71,
+   "avg_score": 1722
   },
   {
    "slug": "fakten",
@@ -93,11 +93,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2222,
+   "views": 2221,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3137
+   "score": 3136
   },
   {
    "id": 84,
