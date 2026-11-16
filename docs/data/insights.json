@@ -1,5 +1,5 @@
 {
- "updated": 1794836421.0212183,
+ "updated": 1794836782.4095795,
  "enough": true,
  "counted": 16,
  "total": 18,
@@ -9,46 +9,46 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1628,
+   "avg_views": 1630,
    "avg_likes": 52.5,
    "like_rate": 3.22,
-   "avg_score": 2416
+   "avg_score": 2418
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1710,
+   "avg_views": 1708,
    "avg_likes": 40.5,
    "like_rate": 2.37,
-   "avg_score": 2321
+   "avg_score": 2319
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1654,
+   "avg_views": 1655,
    "avg_likes": 42.0,
    "like_rate": 2.54,
-   "avg_score": 2284
+   "avg_score": 2285
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
    "avg_views": 1540,
-   "avg_likes": 39.0,
-   "like_rate": 2.53,
-   "avg_score": 2124
+   "avg_likes": 39.5,
+   "like_rate": 2.56,
+   "avg_score": 2133
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1378,
+   "avg_views": 1381,
    "avg_likes": 24.0,
    "like_rate": 1.74,
-   "avg_score": 1768
+   "avg_score": 1771
   },
   {
    "slug": "fakten",
@@ -72,9 +72,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1628 Aufrufe, 3.22 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1630 Aufrufe, 3.22 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2377 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2378 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
