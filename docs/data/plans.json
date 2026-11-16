@@ -1,832 +1,4 @@
 {
- "2026-11-15 18:00": {
-  "category": "comedy",
-  "topic": "Ich wollte wie im Mittelalter leben und mein Haushalt hat mich verklagt: Die skurrilsten Lifehacks von 1348",
-  "trend": null,
-  "script": {
-   "title": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
-   "description": "Ich habe mein Leben auf 1348 umgestellt und alles ist völlig eskaliert!\nIch testete die skurrilsten Mittelalter-Lifehacks im Alltag.\nWürdest du lieber im Mittelalter leben oder heute?",
-   "hashtags": [
-    "#shorts",
-    "#comedy",
-    "#lifehacks",
-    "#mittelalter",
-    "#geschichten",
-    "#viral",
-    "#lustig"
-   ],
-   "tags": [
-    "mittelalter lifehacks",
-    "leben wie 1348",
-    "haushalt 1348",
-    "skurrile hacks",
-    "geschichte comedy",
-    "alltag mittelalter",
-    "ich versuchte wie 1348 zu leben"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a young male toon with broad absurd panic, wearing medieval rags, trying to put live frogs into his mouth to wash teeth, medieval room background, dynamic angle, bold composition",
-    "text": "LIFEHACKS ESKALIERT"
-   },
-   "wishes": [
-    "knoblauch",
-    "kessel"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grau",
-     "hat": "",
-     "hair": "kurz",
-     "hair_color": "dunkelbraun",
-     "gender": "m",
-     "skin": "hell",
-     "glasses": false
-    },
-    "kuehlschrank": {
-     "kind": "robot"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Der Hauptdarsteller steht verängstigt da, während Schuhe voll Knoblauch um ihn herum liegen.",
-     "text": "Drei Lifehacks aus dem Mittelalter, die mein Leben komplett ruiniert haben.",
-     "image": "Young man in medieval room looking terrified surrounded by shoes filled with garlic cloves",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "schuh",
-      "knoblauch"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "sfx": "whoosh",
-     "camera": "zoom_in",
-     "highlight": [
-      "ruiniert"
-     ],
-     "status": "EXPERIMENT: TAG 1",
-     "overlay": {
-      "type": "card",
-      "text": "JAHR 1348"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": ""
-    },
-    {
-     "see": "Eine Notizkarte erklärt die Regel zur Pestepidemie.",
-     "text": "Und der letzte Trick riecht so schlimm, dass mein Nachbar die Polizei rief.",
-     "image": "Graphic overlay showing strike symbol",
-     "who": [],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "sfx": "pop",
-     "camera": "still",
-     "highlight": [
-      "Streik"
-     ],
-     "graphic": {
-      "type": "badge",
-      "kicker": "WARNUNG",
-      "text": "KÜHLSCHRANK STREIKT"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Hauptdarsteller stoppt sein Smartphone auf Tag 1.",
-     "text": "Ich wollte Strom sparen und mein Leben historisch korrekt gestalten.",
-     "image": "Young man putting phone in a wooden box",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "box"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "sfx": "none",
-     "camera": "still",
-     "highlight": [
-      "historisch"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "TAG 1"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Punkt eins: Schuhe voller Knoblauch zum Viren-Schutz.",
-     "text": "Nummer eins: Gegen Krankheiten stopft man laut Mittelalter Knoblauch in die Schuhe.",
-     "image": "Young man stuffing garlic into his shoes",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "schuh",
-      "knoblauch"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "knoblauch"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "sfx": "ding",
-     "camera": "pan_right",
-     "highlight": [
-      "Knoblauch"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "HACK #1",
-      "text": "Knoblauch in die Schuhe"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Er geht gebückt wegen Blasen an den Füßen.",
-     "text": "Ergebnis: Ich hatte dreiundfünfzig Blasen und mein Hund hat mich enterbt.",
-     "image": "Young man walking painfully with garlic in shoes",
-     "who": [
-      "du"
-     ],
-     "place": "flur",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "sad",
-       "emote": "sweat",
-       "pos": "left",
-       "to": "right",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "sfx": "none",
-     "camera": "still",
-     "highlight": [
-      "dreiundfünfzig"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "BLASEN AN FÜSSEN",
-      "value": 53
-     },
-     "who_desc": "",
-     "place_desc": "hallway",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Höhepunkt des Rennens mit Gestank.",
-     "text": "Der Gestank war so hart, dass sogar die Nachbarskatze rückwärts gerannt ist.",
-     "image": "Cat walking backwards in panic away from main character",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "left",
-       "to": "left",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "sfx": "whoosh",
-     "camera": "zoom_out",
-     "highlight": [
-      "rückwärts"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Kühlschrank blickt böse.",
-     "text": "Mein Kühlschrank fand das gar nicht komisch und brummte beleidigt.",
-     "image": "Fridge character looking annoyed in kitchen",
-     "who": [
-      "kuehlschrank"
-     ],
-     "place": "kueche",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "fridge"
-     ],
-     "actors": [
-      {
-       "id": "kuehlschrank",
-       "action": "idle",
-       "emotion": "angry",
-       "emote": "anger",
-       "pos": "center",
-       "to": "center",
-       "speaks": false,
-       "say": "NEIN."
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "sfx": "none",
-     "camera": "still",
-     "highlight": [
-      "beleidigt"
-     ],
-     "status": "KÜHLSCHRANK: STREIKT",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "kitchen",
-     "hud": ""
-    },
-    {
-     "see": "Nummer zwei: Haare waschen mit Asche.",
-     "text": "Nummer zwei: Haare waschen mit alter Holzasche aus dem Kamin.",
-     "image": "Young man pouring ash onto his head",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "kessel"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "sfx": "pop",
-     "camera": "zoom_in",
-     "highlight": [
-      "Holzasche"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "HACK #2",
-      "text": "Asche-Shampoo"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik vergleicht Shampoo mit Asche.",
-     "text": "Chemisches Shampoo gab es schließlich nicht.",
-     "image": "Graphic compare between modern shampoo and medieval ash bucket",
-     "who": [],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "sfx": "none",
-     "camera": "still",
-     "highlight": [
-      "Chemisches"
-     ],
-     "graphic": {
-      "type": "compare",
-      "left": "SHAMPOO",
-      "right": "ASCHE",
-      "value": "100%",
-      "sub": "0%"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Er steht da mit betonierten grauen Haaren.",
-     "text": "Meine Haare waren danach hart wie Beton.",
-     "image": "Young man touching hard grey hair in shock",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "sfx": "boom",
-     "camera": "shake",
-     "highlight": [
-      "Beton"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "BETON-HAAR",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Kühlschrank brummt erneut lauter.",
-     "text": "Mein Kühlschrank schüttelte nur den Kopf und fror meine Milch ein.",
-     "image": "Fridge character freezing milk box angrily",
-     "who": [
-      "kuehlschrank"
-     ],
-     "place": "kueche",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "fridge"
-     ],
-     "actors": [
-      {
-       "id": "kuehlschrank",
-       "action": "shake",
-       "emotion": "angry",
-       "emote": "anger",
-       "pos": "center",
-       "to": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "sfx": "none",
-     "camera": "still",
-     "highlight": [
-      "Kopf"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "kitchen",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nummer drei: Zähne putzen mit Salbeiblättern.",
-     "text": "Nummer drei: Zähne schrubben mit frischen Salbeiblättern.",
-     "image": "Young man rubbing leaf against teeth",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "sfx": "ding",
-     "camera": "pan_left",
-     "highlight": [
-      "Salbeiblättern"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "HACK #3",
-      "text": "Salbei-Zahnbürste"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gebiss leuchtet grün statt weiß.",
-     "text": "Klingt gesund, aber meine Zähne waren danach komplett grün.",
-     "image": "Close up of young man showing green glowing teeth",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "sweat",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "sfx": "none",
-     "camera": "still",
-     "highlight": [
-      "grün"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Kühlschrank steht mit einem Anwalts-Koffer da.",
-     "text": "Da hat mein Kühlschrank endgültig die Schnauze voll gehabt.",
-     "image": "Fridge character holding briefcase looking furious",
-     "who": [
-      "kuehlschrank"
-     ],
-     "place": "kueche",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "fridge"
-     ],
-     "actors": [
-      {
-       "id": "kuehlschrank",
-       "action": "point",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": false,
-       "hold": "bag"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "sfx": "boom",
-     "camera": "shake",
-     "highlight": [
-      "Schnauze"
-     ],
-     "status": "STATUS: KLAGE EINGEREICHT",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "kitchen",
-     "hud": ""
-    },
-    {
-     "see": "Postbote bringt einen gelben Umschlag.",
-     "text": "Er hat mir eine Abmahnung wegen artfremder Haltung geschickt.",
-     "image": "Young man reading an official court letter in panic",
-     "who": [
-      "du"
-     ],
-     "place": "flur",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "radio"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "sfx": "pop",
-     "camera": "still",
-     "highlight": [
-      "Abmahnung"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "POST VOM ANWALT"
-     },
-     "who_desc": "",
-     "place_desc": "hallway",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Gerichtsakteflut im Zimmer.",
-     "text": "Jetzt fordert er dreitausend Goldmünzen Schmerzensgeld.",
-     "image": "Graphic map of court demands",
-     "who": [],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "sfx": "none",
-     "camera": "still",
-     "highlight": [
-      "dreitausend"
-     ],
-     "graphic": {
-      "type": "number",
-      "kicker": "FORDERUNG",
-      "value": "3.000",
-      "label": "GOLDMÜNZEN"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Hauptdarsteller kniet flehend vor der Waschmaschine und dem Kühlschrank.",
-     "text": "Ich musste mich bei all meinen Elektrogeräten schriftlich entschuldigen.",
-     "image": "Young man kneeling with apology letter in front of fridge and tv",
-     "who": [
-      "du",
-      "kuehlschrank"
-     ],
-     "place": "kueche",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "fridge",
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sad",
-       "emotion": "sad",
-       "emote": "sweat",
-       "pos": "left",
-       "to": "left",
-       "speaks": true
-      },
-      {
-       "id": "kuehlschrank",
-       "action": "idle",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "right",
-       "to": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "sad",
-     "shot": "wide",
-     "sfx": "none",
-     "camera": "zoom_in",
-     "highlight": [
-      "entschuldigen"
-     ],
-     "overlay": null,
-     "who_desc": "; ",
-     "place_desc": "kitchen",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Er gibt dem Kühlschrank ein Eis zur Versöhnung.",
-     "text": "Sonst sperrt mich das Smart-Home heute Nacht im Bad ein.",
-     "image": "Young man carefully handing ice cream to fridge character",
-     "who": [
-      "du",
-      "kuehlschrank"
-     ],
-     "place": "kueche",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "fridge"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "left",
-       "to": "center",
-       "speaks": true
-      },
-      {
-       "id": "kuehlschrank",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "right",
-       "to": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "sfx": "tick",
-     "camera": "still",
-     "highlight": [
-      "einsperren"
-     ],
-     "overlay": null,
-     "who_desc": "; ",
-     "place_desc": "kitchen",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nahtloser Übergang zum Anfang.",
-     "text": "Und das waren die...",
-     "image": "Young man looking shocked into camera pointing back",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "sfx": "whoosh",
-     "camera": "still",
-     "highlight": [
-      "waren"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Moderne Welt",
-      "b": "Mittelalter 1348"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "TAG 1 · 1348-EXPERIMENT",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "knoblauch",
-   "kessel",
-   "kamin",
-   "salbeiblatt"
-  ],
-  "title": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
-  "created": 1794738100.2622569
- },
  "2026-11-15 21:00": {
   "category": "whatif",
   "topic": "Was wäre, wenn alle Tiere auf der Erde plötzlich sprechen könnten?",
@@ -3006,5 +2178,732 @@
   ],
   "title": "5 verrückte Dinge, die dein Gehirn nachts tut",
   "created": 1794824463.0611856
+ },
+ "2026-11-16 21:00": {
+  "category": "fakten",
+  "topic": "Was passiert im Körper, wenn du plötzlich erschrickst?",
+  "trend": null,
+  "script": {
+   "title": "Schreckreflex: Was passiert in 1 Sekunde im Körper?",
+   "description": "Was passiert in deinem Körper, wenn du dich richtig erschrickst?\nEin überraschendes Zusammenspiel aus Gehirn, Hormonen und Muskeln blitzschnell erklärt.\nWürdest du eher kämpfen oder weglaufen?",
+   "hashtags": [
+    "#shorts",
+    "#fakten",
+    "#wissen",
+    "#biologie",
+    "#körper",
+    "#gesundheit",
+    "#viral"
+   ],
+   "tags": [
+    "Schreckreflex",
+    "was passiert bei schreck",
+    "körperreaktion",
+    "Adrenalinrausch",
+    "Gehirnfunktion",
+    "biologie fakten",
+    "wissenschaft einfach"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person with wide open eyes and an exaggerated shocked expression, dark background with glowing red stress lines, bold contrast, huge space on top for text",
+    "text": "SCHRECK IN 1 SEKUNDE",
+    "place": "bedroom",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "herz"
+    ],
+    "weather": ""
+   },
+   "wishes": [
+    "herz",
+    "muskel",
+    "auge"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "ponytail",
+     "hair_color": "blond",
+     "gender": "w",
+     "skin": "hell"
+    },
+    "gehirn": {
+     "kind": "brain"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein gruseliges Geräusch erschreckt dich nachts im Zimmer.",
+     "text": "Dieser eine Reflex kann dir in Sekundenschnelle das Leben retten.",
+     "image": "A young woman sitting in a dark bedroom at night, suddenly looking shocked at a shadow.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Reflex",
+      "Leben"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "SCHRECK-REFLEX"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Highlight ist das Herz, das sofort losrasen will.",
+     "text": "Doch was danach in deinem Körper passiert, ist ein echter Ausnahmezustand.",
+     "image": "An animated pink brain cartoon character wildly pulling levers in a panic room.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "backdrop": null,
+     "props": [
+      "herz"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "close",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "ohne dich"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik zeigt eine Sekunde Herzschlag.",
+     "text": "Es dauert eine Zehntelsekunde, bis das Gehirn Alarm schlägt und reagiert.",
+     "image": "A graphical pulse line jumping up sharply with glowing red effects.",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "0,1",
+      "label": "ZEHNTELSEKUNDE"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Zehntelsekunde"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Amygdala feuert Signale ab.",
+     "text": "Deine Amygdala, die Notfallzentrale im Kopf, scannt ständig deine Umgebung.",
+     "image": "Brain character wearing radar goggles looking around intently.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Amygdala"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NOTFALLZENTRALE"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein großes Auge weitet sich im Zoom.",
+     "text": "Sieht oder hört sie eine Bedrohung, zuckst du blitzschnell zusammen.",
+     "image": "An insert shot of a gigantic eye opening wide in shock.",
+     "who": [],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [
+      "auge"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "insert",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Bedrohung"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Adrenalin wird ausgeschüttet.",
+     "text": "Aber wie verteilt sich diese Panik so schnell im ganzen Blut?",
+     "image": "Graphic card showing adrenaline chemical wave.",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "question",
+      "text": "WIE SCHNELL?"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Panik",
+      "Blut"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Nebennieren schießen Hormone raus.",
+     "text": "Deine Nebennieren pumpen sofort ordentlich Adrenalin in deine Adern.",
+     "image": "Graphic counter showing adrenaline level spiking up.",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "HORMONSCHUB",
+      "value": "100 %",
+      "label": "ADRENALIN"
+     },
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Adrenalin"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Herz fängt heftig an zu schlagen.",
+     "text": "Dein Puls schnellt hoch wie bei einem Hundertmeter-Sprint.",
+     "image": "An insert of a glowing red cartoon heart beating rapidly.",
+     "who": [],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [
+      "herz"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "insert",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Puls"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "180 BPM"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Pupillen werden riesig.",
+     "text": "Deine Pupillen werden riesig, damit maximal viel Licht hineinfällt.",
+     "image": "The character looking straight into the camera with ultra wide pupils.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Pupillen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Muskeln spannen sich extrem an.",
+     "text": "Gleichzeitig wird deine Verdauung komplett gestoppt, um Energie zu sparen.",
+     "image": "An animated muscle prop glowing with orange energy lines.",
+     "who": [],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [
+      "muskel"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "insert",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Verdauung gestoppt"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "PAUSE",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Gänsehaut bildet sich auf den Armen.",
+     "text": "Du bekommst Gänsehaut, weil sich deine feinen Haarbalgmuskeln zusammenziehen.",
+     "image": "Close-up diagram of goosebumps forming on human skin.",
+     "who": [],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "insert",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Gänsehaut"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst wie erstarrt im Zimmer.",
+     "text": "Du denkst, dass du in diesem Moment sofort losrennst, aber stimmt das wirklich?",
+     "image": "The main character standing completely frozen in the middle of the room.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "losrennst"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Finte: Du erstarrst tatsächlich erst mal kurz.",
+     "text": "Falsch: Dein Körper erstarrt meistens für Millisekunden zur Salzsäule.",
+     "image": "The character turns literally into a stone statue expression for a funny second.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "pan_left",
+     "sfx": "pop",
+     "highlight": [
+      "Salzsäule"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "FREEZE-EFFEKT"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Vergleich der zwei Optionen Wegrennen oder Kämpfen.",
+     "text": "Das verschafft deinem Hirn Zeit für die Entscheidung: Kämpfen oder Flüchten?",
+     "image": "A versus graphic comparing fighting against running away.",
+     "who": [],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "versus",
+      "left": "KÄMPFEN",
+      "right": "FLÜCHTEN",
+      "kicker": "DEINE WAHL"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kämpfen",
+      "Flüchten"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schreckst wegen eines Handys auf.",
+     "text": "Meistens war die vermeintliche Bedrohung aber nur deine herabstürzende Handyhülle.",
+     "image": "A smartphone lying on the floor, character pointing at it awkwardly.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "sweat",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Handyhülle"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein lustiger Zähler mit den gesparten Kalorien.",
+     "text": "Trotzdem hast du gerade etwa zwei Kalorien rein durch Panik verbrannt.",
+     "image": "Graphic counter showing 2 calories burned.",
+     "who": [],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "PANIK-WORKOUT",
+      "value": "2",
+      "label": "KALORIEN VERBRANNT"
+     },
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "zwei Kalorien"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du entspannst dich wieder im Bett.",
+     "text": "Das war im Grunde ein kostenloses Mini-Workout auf dem Sofa.",
+     "image": "The character relaxing on the bed with a relieved smile.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Mini-Workout"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn wischt sich erleichtert den Schweiß ab.",
+     "text": "Dein System fährt langsam wieder herunter und beruhigt den Herzschlag.",
+     "image": "The brain character wiping its brow with relief in the lab.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "sweat",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "herunter"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ALLES SICHER"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Überleitung zurück zum allerersten Satz für die perfekte Schleife.",
+     "text": "Und genau deshalb ist klar:",
+     "image": "The room darkens again slightly, character looks up attentively.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "time": "night",
+     "weather": "",
+     "backdrop": null,
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "klar"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "nebenniere"
+  ],
+  "title": "Schreckreflex: Was passiert in 1 Sekunde im Körper?",
+  "created": 1794844128.3940234
  }
 }
