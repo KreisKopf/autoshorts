@@ -1,0 +1,18 @@
+{
+ "version": 1,
+ "defaults": {
+  "zeitplan": true,
+  "kanal": true,
+  "plattform": true,
+  "videos": true,
+  "nachbauen": true,
+  "rubriken": true,
+  "rubriken_bearbeiten": false,
+  "laenge": false,
+  "trends": false,
+  "ki": false,
+  "stil": false,
+  "zahlen": false
+ },
+ "access": []
+}

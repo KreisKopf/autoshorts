@@ -38,6 +38,8 @@ os.makedirs(DATA, exist_ok=True)
 DEFAULT_OWNER, DEFAULT_REPO = ("QuatratKopf", "autoshorts") if EDITION == "admin" else ("", "autoshorts")   # Kanal-App: eigene Kopie eintragen
 UPDATE_URL = "https://raw.githubusercontent.com/QuatratKopf/autoshorts/main/" + ("version.json" if EDITION == "admin" else "version-lite.json")
 REDIRECT = f"http://127.0.0.1:{PORT}/oauth/"
+# Zugänge: Liste liegt im Repository des Admins (nur Prüfsummen der Codes, Ablaufdatum, Rechte) – die Kanal-App prüft dagegen
+ACCESS_URL = "https://raw.githubusercontent.com/QuatratKopf/autoshorts/main/docs/admin/access.json"
 UA = f"AutoShorts/{APP_VERSION}"
 SECRET_NAMES = ["GEMINI_API_KEY", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN", "OPENAI_API_KEY",
                 "ELEVENLABS_API_KEY", "GOOGLE_CLIENT_SECRET", "TIKTOK_CLIENT_SECRET", "ZERNIO_API_KEY"]
@@ -244,6 +246,48 @@ def _vtuple(v):
         return tuple(int(x) for x in str(v).split("."))
     except ValueError:
         return (0,)
+
+
+def access_hash(code):
+    return hashlib.sha256(("autoshorts|" + str(code or "").strip().upper()).encode()).hexdigest()
+
+
+ACCESS = {"at": 0, "res": None}
+
+
+def check_access(code=None, force=False):
+    """Kanal-App: Ist der Zugangscode (noch) gültig? Gibt {"ok", "reason", "name", "expires", "perms", "id"} zurück.
+    Die Admin-App braucht keinen Code."""
+    if EDITION == "admin":
+        return {"ok": True, "admin": True}
+    code = (code or SET.get("access_code") or "").strip()
+    if not code:
+        return {"ok": False, "reason": "code"}
+    if not force and code == SET.get("access_code") and ACCESS["res"] and time.time() - ACCESS["at"] < 600:
+        return ACCESS["res"]
+    try:
+        data = json.loads(_fetch(ACCESS_URL, 2_000_000).decode("utf-8"))
+    except Exception:  # noqa: BLE001 – offline: ein zuletzt gültiger Zugang gilt noch 3 Tage weiter
+        last = SET.get("access_last") or {}
+        if code == SET.get("access_code") and last.get("ok") and time.time() - float(SET.get("access_last_at") or 0) < 3 * 86400 \
+                and (not last.get("expires") or time.time() < float(last["expires"])):
+            return last
+        return {"ok": False, "reason": "offline"}
+    h = access_hash(code)
+    e = next((x for x in data.get("access", []) if isinstance(x, dict) and x.get("hash") == h), None)
+    if not e:
+        res = {"ok": False, "reason": "gelöscht"}
+    elif e.get("expires") and time.time() > float(e["expires"]):
+        res = {"ok": False, "reason": "abgelaufen", "name": e.get("name", ""), "expires": e.get("expires")}
+    else:
+        res = {"ok": True, "id": e.get("id"), "name": e.get("name", ""), "expires": e.get("expires"),
+               "perms": {**(data.get("defaults") or {}), **(e.get("perms") or {})}}
+    if code == SET.get("access_code"):
+        ACCESS.update(at=time.time(), res=res)
+        if res["ok"]:
+            SET.update(access_last=res, access_last_at=time.time())
+            save_set()
+    return res
 
 
 def _fetch(url, limit=10_000_000):
@@ -581,10 +625,28 @@ def version(h):
 @route("GET", r"/api/state")
 def state(h):
     h._send(200, {
-        "version": APP_VERSION, "edition": EDITION, "platform": sys.platform, "launcher": LAUNCHER, "data": DATA,
+        "version": APP_VERSION, "edition": EDITION, "access": check_access(), "platform": sys.platform, "launcher": LAUNCHER, "data": DATA,
         "connected": bool(SET.get("token")), "owner": SET["owner"], "repo": SET["repo"],
         "local_secrets": {k: bool(v) for k, v in SET.get("client_secrets", {}).items()},
         "auto_update": bool(SET.get("auto_update")), "update": UPDATE, "redirect": REDIRECT})
+
+
+@route("GET", r"/api/access")
+def access_get(h):
+    h._send(200, check_access(force=True))
+
+
+@route("POST", r"/api/access")
+def access_set(h):
+    code = str(h._json().get("code") or "").strip()
+    res = check_access(code, force=True)
+    if res["ok"]:
+        SET["access_code"] = code
+        ACCESS.update(at=time.time(), res=res)
+        SET.update(access_last=res, access_last_at=time.time())
+        save_set()
+        log(f"Zugang bestätigt: {res.get('name')}")
+    h._send(200, res)
 
 
 @route("POST", r"/api/github")
@@ -623,6 +685,8 @@ def gh_proxy(h):
         raise ValueError("Ungültiger Pfad")
     if path.startswith("/actions/secrets") and method != "GET":
         raise ValueError("Secrets bitte über die App-Funktion setzen")
+    if EDITION == "lite" and not check_access()["ok"]:
+        raise ValueError("Dein Zugang ist nicht (mehr) gültig – bitte beim Admin melden.")
     s, body = gh(method, repo_path(path), b.get("body"), raw=bool(b.get("raw")))
     txt = body.decode("utf-8", "replace") if body else ""
     try:

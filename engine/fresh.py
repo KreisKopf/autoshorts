@@ -42,6 +42,9 @@ def reset(confirm: str):
             shutil.rmtree(d)
         d.mkdir(parents=True, exist_ok=True)
         (d / ".gitkeep").write_text("", encoding="utf-8")
+    adm = ROOT / "docs" / "admin"                         # Zugangsliste des Admins gehört nicht in eine Kopie
+    if adm.is_dir():
+        shutil.rmtree(adm)
     tok = ROOT / "tokens"
     for f in tok.glob("*.enc") if tok.is_dir() else []:
         f.unlink()

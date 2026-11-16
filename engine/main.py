@@ -652,6 +652,14 @@ def main(argv=None):
     a = ap.parse_args(argv)
     failed = False
     try:
+        if a.action in ("auto", "make", "review_make", "remake", "upload", "prepare", "learn"):
+            from . import access
+            why = access.blocked()                      # Kopie ohne gültigen Zugang: keine Videos (Zahlen holen geht weiter)
+            if why and a.action != "auto":
+                raise SystemExit(f"{why} – keine Videos")
+            if why:
+                log(f"{why} – der Autopilot macht keine Videos")
+                CONFIG["settings"]["autopilot"] = False   # nur für diesen Lauf (wird nicht gespeichert)
         if a.action == "auto":
             up = update_slot(CONFIG, STATE)
             if up:                                      # Kopie: eine Stunde vor dem Termin den neuesten Motor aus dem Original holen

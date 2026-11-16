@@ -442,7 +442,7 @@ let S = null;                                   // App (lokal)
 let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []}, INS = {};   // Daten aus dem Repository
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
-if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
+if (!["dashboard", "kalender", "studio", "einstellungen", "admin"].includes(TAB)) TAB = "dashboard";
 const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_optimize: true, stats_live: 5, look: "cartoon", stats_minutes: 30, plan_ahead: true, hold_missing: true, auto_learn: true, upload_via: "direct", min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
@@ -598,8 +598,9 @@ const trendChip = v => v.trend ? `<span class="chip acc" title="${esc(v.trend.so
 const mp4 = v => `https://github.com/${S.owner}/${S.repo}/releases/download/videos/${v.id}.mp4`;
 
 /* ═════════════════ Gerüst ═════════════════ */
-const NAV = [["dashboard", "Dashboard", I.dash, "Start"], ["kalender", "Kalender", I.cal, "Kalender"], ["studio", "Studio", I.studio, "Studio"], ["einstellungen", "Einstellungen", I.gear, "Mehr"]];
-const PAGES = {kalender: ["Kalender", "Jeder Tag auf einen Blick. Tippe auf einen Tag für die Details."], studio: ["Studio", "Video-Art wählen, Thema vorgeben, sofort erstellen."], einstellungen: ["Einstellungen", "Zeitplan, Plattformen, KI-Anbieter und App."]};
+const NAV_ALL = [["dashboard", "Dashboard", I.dash, "Start"], ["kalender", "Kalender", I.cal, "Kalender"], ["studio", "Studio", I.studio, "Studio"], ["einstellungen", "Einstellungen", I.gear, "Mehr"], ["admin", "Admin", I.key, "Admin"]];
+let NAV = NAV_ALL;
+const PAGES = {admin: ["Admin", "Zugänge für andere Leute: erstellen, befristen, löschen – und festlegen, was ihre App einstellen darf."], kalender: ["Kalender", "Jeder Tag auf einen Blick. Tippe auf einen Tag für die Details."], studio: ["Studio", "Video-Art wählen, Thema vorgeben, sofort erstellen."], einstellungen: ["Einstellungen", "Zeitplan, Plattformen, KI-Anbieter und App."]};
 const greet = () => { const h = new Date().getHours(); return h < 5 ? "Gute Nacht" : h < 11 ? "Guten Morgen" : h < 18 ? "Guten Tag" : "Guten Abend"; };
 const theme = () => document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 function setTheme(t, ev) {
@@ -617,6 +618,7 @@ function navInd() {
   ind.style.left = cur.offsetLeft + "px"; ind.style.width = cur.offsetWidth + "px"; ind.style.opacity = 1;
 }
 function shell() {
+  NAV = LITE() ? NAV_ALL.filter(n => n[0] !== "admin") : NAV_ALL;
   $("#app").innerHTML = `
   <header class="top"><div class="wrap bar">
     <div class="brand"><img src="/icon.svg" alt=""><span>AutoShorts</span></div>
@@ -653,18 +655,118 @@ function dashLine() {
   return `Nächstes Video ${nr ? nr.toLocaleString("de-DE", {weekday: "long", hour: "2-digit", minute: "2-digit"}) + " Uhr" : "bald"}${n ? ": " + n.c.emoji + " " + n.c.name : ""}.`;
 }
 function render(animate) {
+  NAV = LITE() ? NAV_ALL.filter(n => n[0] !== "admin") : NAV_ALL;
+  if (LITE() && !(S.access && S.access.ok)) return renderAccess();
+  if (TAB === "admin" && LITE()) TAB = "dashboard";
   if (!S.connected) return renderSetup();
   if (!$(".nav")) shell();
   document.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-current", b.dataset.tab === TAB));
   navInd(); head(animate); banner();
   if (!CFG) { $("#main").innerHTML = `<div class="empty">${LOADERR ? esc(LOADERR) : "Lade Daten …"}</div>`; return; }
   DAYS = null;
-  ({dashboard: viewDash, kalender: viewCal, studio: viewStudio, einstellungen: viewSettings})[TAB]();
+  ({dashboard: viewDash, kalender: viewCal, studio: viewStudio, einstellungen: viewSettings, admin: viewAdmin})[TAB]();
+  syncAccessId();
   if (!animate) document.querySelectorAll("#main .in").forEach(e => e.style.animation = "none");
 }
 async function refreshAll() { await Promise.all([loadData(), loadSecrets(), api("/api/state").then(s => S = s)]); render(); pollRuns(); }
 
 const LITE = () => S && S.edition === "lite";   // Kanal-App zum Weitergeben: nur das Nötigste einstellbar
+// Was die Kanal-App einstellen darf – legt der Admin je Zugang fest (Admin-Tab). Die Admin-App darf alles.
+const PERMS = [["zeitplan", "Autopilot & Upload-Zeiten", true], ["kanal", "Kanal-Profil", true], ["plattform", "YouTube & TikTok verbinden", true],
+  ["videos", "Videos selbst erstellen", true], ["nachbauen", "Videos nachbauen", true], ["rubriken", "Video-Arten an- und ausschalten", true],
+  ["rubriken_bearbeiten", "Video-Arten bearbeiten & neu anlegen", false], ["laenge", "Video-Länge", false], ["trends", "Trends & Thumbnail", false],
+  ["ki", "KI-Anbieter & Stimme", false], ["stil", "Video-Stil (Look, Untertitel, Musik)", false], ["zahlen", "Abruf der Zahlen", false]];
+const can = k => !LITE() || !!(S.access && S.access.perms && S.access.perms[k]);
+/* ═════════════════ Zugang (Kanal-App) ═════════════════ */
+function renderAccess() {
+  const a = S.access || {}, why = {abgelaufen: `Dein Zugang${a.name ? " „" + esc(a.name) + "“" : ""} ist abgelaufen.`, "gelöscht": "Dieser Zugangscode gilt nicht (mehr).",
+    offline: "Der Zugang kann gerade nicht geprüft werden – bist du online?"}[a.reason] || "";
+  $("#app").innerHTML = `<div class="wrap login"><div class="panel in">
+    <h1><img src="/icon.svg" alt="">AutoShorts</h1>
+    ${why ? `<p class="hint neg" style="font-size:14px">${why} Melde dich beim Admin, der dir die App gegeben hat.</p>` : ""}
+    <p class="hint" style="font-size:14px">Gib den Zugangscode ein, den du zusammen mit dem Download-Link bekommen hast.</p>
+    <input id="acc" autocomplete="off" placeholder="z. B. AS-7K2M-Q9XP" style="text-transform:uppercase">
+    <button class="btn primary" id="accGo" style="padding:12px">Freischalten</button></div></div>`;
+  $("#acc").focus();
+  const go_ = async () => { const b = $("#accGo"); b.disabled = true;
+    try { const r = await api("/api/access", {code: $("#acc").value});
+      if (!r.ok) { S.access = r; renderAccess(); return toast(r.reason === "abgelaufen" ? "Dieser Zugang ist abgelaufen." : r.reason === "offline" ? "Keine Verbindung." : "Code ungültig.", true); }
+      S = await api("/api/state"); $("#app").innerHTML = ""; toast(`Freigeschaltet${r.name ? ": " + r.name : ""}`);
+      if (!S.connected) return renderSetup(); shell(); render(true); await Promise.all([loadData(), loadSecrets()]); render(true); pollRuns(); }
+    catch (e) { toast(e.message, true); b.disabled = false; } };
+  $("#accGo").onclick = go_; $("#acc").onkeydown = e => { if (e.key === "Enter") go_(); };
+}
+let ACC_SYNCED = false;
+function syncAccessId() {   // die Kopie merkt sich ihren Zugang – ihr Motor prüft ihn vor jedem Video
+  if (!LITE() || ACC_SYNCED || !CFG || !S.access || !S.access.ok || !S.access.id) return;
+  ACC_SYNCED = true;
+  if (CFG.settings.access_id !== S.access.id) { CFG.settings.access_id = S.access.id; saveConfig("Zugang").catch(() => { ACC_SYNCED = false; }); }
+}
+
+/* ═════════════════ Admin: Zugänge ═════════════════ */
+const ACC_PATH = "/contents/docs/admin/access.json";
+let ACC = null, ACC_SHA = null, ACC_NEW = null;
+async function loadAccess() {
+  try { const j = await gh("GET", ACC_PATH + "?ref=main"); ACC_SHA = j.sha; ACC = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g, ""))))); }
+  catch (e) { if (/404|Not Found/i.test(e.message)) { ACC = {version: 1, defaults: {}, access: []}; ACC_SHA = null; } else throw e; }
+  ACC.access = ACC.access || []; ACC.defaults = ACC.defaults || {};
+}
+async function saveAccess(msg) {
+  const body = {message: "Admin: " + msg, content: b64utf8(JSON.stringify(ACC, null, 1)), branch: "main"};
+  if (ACC_SHA) body.sha = ACC_SHA;
+  const j = await gh("PUT", ACC_PATH, body); ACC_SHA = j.content && j.content.sha;
+}
+async function sha256hex(t) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join(""); }
+function newCode() { const a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", r = crypto.getRandomValues(new Uint8Array(8)); const c = [...r].map(x => a[x % a.length]).join(""); return `AS-${c.slice(0, 4)}-${c.slice(4)}`; }
+const DL_LINK = () => `https://github.com/${S.owner}/${S.repo}/raw/main/AutoShorts-Kanal.cmd`;
+const fmtDate = t => new Date(t * 1000).toLocaleDateString("de-DE", {day: "numeric", month: "short", year: "numeric"});
+function accStatus(e) {
+  if (!e.expires) return '<span class="chip good">aktiv · unbegrenzt</span>';
+  const d = (e.expires - Date.now() / 1000) / 86400;
+  return d <= 0 ? '<span class="chip mute">abgelaufen</span>' : d < 3 ? `<span class="chip warn">läuft in ${Math.ceil(d)} Tag${Math.ceil(d) > 1 ? "en" : ""} ab</span>` : `<span class="chip good">aktiv bis ${fmtDate(e.expires)}</span>`;
+}
+const permBoxes = (pre, perms) => `<div class="grid2" style="gap:6px 18px">${PERMS.map(([k, l, d]) => `<label class="check"><input type="checkbox" data-${pre}="${k}" ${(perms && k in perms ? perms[k] : d) ? "checked" : ""}> ${l}</label>`).join("")}</div>`;
+async function viewAdmin() {
+  if (ACC === null) { $("#main").innerHTML = `<div class="empty">Lade Zugänge …</div>`; try { await loadAccess(); } catch (e) { $("#main").innerHTML = `<div class="empty">${esc(e.message)}</div>`; return; } if (TAB !== "admin") return; }
+  const list = ACC.access.slice().sort((a, b) => (b.created || 0) - (a.created || 0));
+  $("#main").innerHTML = `
+  ${ACC_NEW ? `<section class="panel in" style="border:2px solid var(--good, #2a9d5b)"><div class="section-h"><div><h2>Zugang „${esc(ACC_NEW.name)}“ erstellt</h2><p class="hint">Den Code siehst du nur jetzt – kopier die Nachricht und schick sie weiter.</p></div></div>
+    <textarea id="accMsg" rows="9" readonly style="width:100%">Hier ist deine AutoShorts-App:\n${DL_LINK()}\n(Datei herunterladen, in einen festen Ordner legen, doppelklicken)\n\nZugangscode: ${ACC_NEW.code}\n${ACC_NEW.expires ? "Gültig bis " + fmtDate(ACC_NEW.expires) : "Unbegrenzt gültig"}\n\nVorher: github.com/${esc(S.owner)}/${esc(S.repo)}/fork – eigene Kopie anlegen.</textarea>
+    <div class="inline" style="margin-top:8px"><button class="btn primary" id="accCopy">Nachricht kopieren</button><button class="btn" id="accDone">Fertig</button></div></section>` : ""}
+  <section class="panel in"><div class="section-h"><div><h2>Neuer Zugang</h2><p class="hint">Für jede Person einen eigenen Zugang. Sie bekommt den Download-Link zur Kanal-App und einen Code. Läuft der Zugang ab oder löschst du ihn, sperrt sich ihre App und ihr Motor macht keine Videos mehr.</p></div></div>
+    <div class="make"><label>Name<input id="anName" maxlength="40" placeholder="z. B. Max"></label>
+      <label>Gültig für<select id="anDur"><option value="1">1 Tag</option><option value="7">7 Tage</option><option value="30" selected>30 Tage</option><option value="90">90 Tage</option><option value="365">1 Jahr</option><option value="0">unbegrenzt</option></select></label></div>
+    <div class="lbl" style="margin-top:12px">Das darf die App einstellen</div>${permBoxes("np", ACC.defaults)}
+    <div class="inline" style="margin-top:12px"><button class="btn accent" id="anGo">${icon(I.plus)}Zugang erstellen</button></div></section>
+  <section class="panel in" style="--i:1"><div class="section-h"><div><h2>Zugänge (${list.length})</h2><p class="hint">Download-Link der Kanal-App: <a href="${DL_LINK()}" target="_blank" rel="noopener">${esc(DL_LINK())}</a></p></div></div>
+    ${list.length ? list.map(e => `<details class="set-sec" style="margin-bottom:8px"><summary><span class="s-t"><b>${esc(e.name || "ohne Namen")}</b><span class="hint">erstellt ${e.created ? fmtDate(e.created) : "–"} · ${PERMS.filter(([k, , d]) => (e.perms && k in e.perms ? e.perms[k] : d)).length} von ${PERMS.length} Rechten</span></span><span class="s-chip">${accStatus(e)}</span></summary>
+      <div class="set-b">${permBoxes("ep-" + e.id, e.perms)}
+        <div class="inline" style="margin-top:10px;flex-wrap:wrap"><button class="btn sm primary" data-asave="${e.id}">Rechte speichern</button>
+          <select data-adur="${e.id}" aria-label="Verlängern um"><option value="7">+7 Tage</option><option value="30" selected>+30 Tage</option><option value="90">+90 Tage</option><option value="365">+1 Jahr</option><option value="0">unbegrenzt</option></select>
+          <button class="btn sm" data-aext="${e.id}">Verlängern</button><button class="btn sm danger" data-adel="${e.id}">Zugang löschen</button></div></div></details>`).join("") : `<div class="empty">Noch keine Zugänge.</div>`}</section>
+  <section class="panel in" style="--i:2"><div class="section-h"><div><h2>Standard-Rechte</h2><p class="hint">So sind die Häkchen bei neuen Zugängen vorbelegt.</p></div></div>
+    ${permBoxes("dp", ACC.defaults)}<div class="inline" style="margin-top:10px"><button class="btn sm primary" id="dpSave">Standard speichern</button></div></section>`;
+  const perms = attr => Object.fromEntries([...document.querySelectorAll(`[data-${attr}]`)].map(x => [x.getAttribute(`data-${attr}`), x.checked]));
+  const busy = async (b, fn) => { b.disabled = true; try { await fn(); } catch (e) { toast(e.message, true); ACC = null; } b.disabled = false; viewAdmin(); };
+  if ($("#accCopy")) $("#accCopy").onclick = () => { navigator.clipboard.writeText($("#accMsg").value).then(() => toast("Kopiert"), () => { $("#accMsg").select(); toast("Markiert – mit Strg+C kopieren"); }); };
+  if ($("#accDone")) $("#accDone").onclick = () => { ACC_NEW = null; viewAdmin(); };
+  $("#anGo").onclick = () => busy($("#anGo"), async () => {
+    const name = $("#anName").value.trim(); if (!name) throw new Error("Bitte einen Namen eintragen.");
+    const days = +$("#anDur").value, code = newCode(), now = Math.floor(Date.now() / 1000);
+    const e = {id: crypto.getRandomValues(new Uint32Array(1))[0].toString(36), name, hash: await sha256hex("autoshorts|" + code), created: now,
+      expires: days ? now + days * 86400 : 0, perms: perms("np")};
+    await loadAccess(); ACC.access.push(e); await saveAccess("Zugang " + name); ACC_NEW = {name, code, expires: e.expires}; toast("Zugang erstellt");
+  });
+  $("#dpSave").onclick = () => busy($("#dpSave"), async () => { const d = perms("dp"); await loadAccess(); ACC.defaults = d; await saveAccess("Standard-Rechte"); toast("Gespeichert"); });
+  document.querySelectorAll("[data-asave]").forEach(b => b.onclick = () => busy(b, async () => { const id = b.dataset.asave, p_ = perms("ep-" + id);
+    await loadAccess(); const e = ACC.access.find(x => x.id === id); if (!e) throw new Error("Zugang nicht mehr da."); e.perms = p_; await saveAccess("Rechte " + e.name); toast("Rechte gespeichert – gilt in ihrer App spätestens nach 10 Minuten"); }));
+  document.querySelectorAll("[data-aext]").forEach(b => b.onclick = () => busy(b, async () => { const id = b.dataset.aext, days = +document.querySelector(`[data-adur="${id}"]`).value;
+    await loadAccess(); const e = ACC.access.find(x => x.id === id); if (!e) throw new Error("Zugang nicht mehr da.");
+    const base = Math.max(Date.now() / 1000, e.expires || 0); e.expires = days ? Math.floor(base + days * 86400) : 0; await saveAccess("Verlängert " + e.name); toast("Verlängert"); }));
+  document.querySelectorAll("[data-adel]").forEach(b => b.onclick = () => armed(b, "Wirklich löschen? Nochmal tippen", () => busy(b, async () => { const id = b.dataset.adel;
+    await loadAccess(); const e = ACC.access.find(x => x.id === id); ACC.access = ACC.access.filter(x => x.id !== id); await saveAccess("Gelöscht " + (e ? e.name : id)); toast("Zugang gelöscht – ihre App sperrt sich"); })));
+}
+
 /* ═════════════════ Einrichtung (Verbinden mit GitHub) ═════════════════ */
 function renderSetup() {
   $("#app").innerHTML = `<div class="wrap login"><div class="panel in">
@@ -921,15 +1023,15 @@ function viewStudio() {
       <div class="cat ${c.enabled ? "" : "off"} ${SEL === c.slug ? "sel" : ""}" role="radio" tabindex="0" aria-checked="${SEL === c.slug}" data-slug="${esc(c.slug)}">
         <div class="cat-h"><span class="e" aria-hidden="true">${esc(c.emoji)}</span><span class="chip ${c.enabled ? "good" : "mute"}">${c.enabled ? "im Autopilot" : "pausiert"}</span></div>
         <h3>${esc(c.name)}</h3><p>${esc(c.description)}</p>
-        <div class="row2"><span class="chip mute">${counts[c.slug] || 0} Videos</span><button class="btn sm" type="button" data-tog="${i}">${c.enabled ? "Pausieren" : "In Autopilot"}</button>${LITE() ? "" : `<button class="btn sm" type="button" data-edit="${i}">Bearbeiten</button>`}</div>
+        <div class="row2"><span class="chip mute">${counts[c.slug] || 0} Videos</span>${can("rubriken") ? `<button class="btn sm" type="button" data-tog="${i}">${c.enabled ? "Pausieren" : "In Autopilot"}</button>` : ""}${!can("rubriken_bearbeiten") ? "" : `<button class="btn sm" type="button" data-edit="${i}">Bearbeiten</button>`}</div>
       </div>`).join("")}
-      ${LITE() ? "" : `<button class="cat" type="button" id="newCat" style="align-items:center;justify-content:center;border-style:dashed;box-shadow:none;min-height:150px"><span class="e">${icon(I.plus)}</span><b>Neue Video-Art</b><span class="hint">z. B. Weltraum oder Geschichte</span></button>`}
+      ${!can("rubriken_bearbeiten") ? "" : `<button class="cat" type="button" id="newCat" style="align-items:center;justify-content:center;border-style:dashed;box-shadow:none;min-height:150px"><span class="e">${icon(I.plus)}</span><b>Neue Video-Art</b><span class="hint">z. B. Weltraum oder Geschichte</span></button>`}
     </div>
-    <div class="make"><label>Thema (optional)<input id="topic" maxlength="300" placeholder="Leer lassen, dann sucht die KI ein Thema aus (bei Trend-Kategorien oft ein aktuelles)"><span class="hint" id="topicTrend" hidden></span></label>
+    <div class="make" ${can("videos") ? "" : "hidden"}><label>Thema (optional)<input id="topic" maxlength="300" placeholder="Leer lassen, dann sucht die KI ein Thema aus (bei Trend-Kategorien oft ein aktuelles)"><span class="hint" id="topicTrend" hidden></span></label>
       <label class="check"><input type="checkbox" id="upl" checked> direkt hochladen</label>
       <button class="btn accent" id="mk" style="padding:11px 20px">${icon(I.spark)}Video erstellen</button></div>
   </section>
-  <section class="panel in" style="--i:1" id="remakeBox">
+  <section class="panel in" style="--i:1" id="remakeBox" ${can("nachbauen") ? "" : "hidden"}>
     <div class="section-h"><div><h2>Video nachbauen</h2><p class="hint">Schick ein Video rein, das dir gefällt – als Link von TikTok oder YouTube oder als Datei. AutoShorts hört und schaut es an und baut daraus ein eigenes Video in unserem Stil – gleiche Idee und gleiches Tempo, aber eigene Worte, Figuren und Orte. Nimm nur Videos, die du als Vorlage nutzen darfst.</p></div></div>
     <div class="make"><label>Link von TikTok oder YouTube<input type="url" id="rmLink" placeholder="https://www.tiktok.com/@… oder https://youtube.com/shorts/…" autocomplete="off"></label>
       <label>oder Video-Datei (MP4, MOV oder WebM, bis 300 MB)<input type="file" id="rmFile" accept="video/mp4,video/quicktime,video/webm"></label>
@@ -939,7 +1041,7 @@ function viewStudio() {
       <button class="btn" id="rmQueue" style="padding:11px 20px" title="Kommt beim nächsten Video-Termin als Erstes dran">${icon(I.cal)}Als Nächstes einplanen</button></div></div>
     <p class="hint" id="rmState" hidden></p>
   </section>
-  <section class="panel in" style="--i:1" id="songBox">
+  <section class="panel in" style="--i:1" id="songBox" ${can("videos") ? "" : "hidden"}>
     <div class="section-h"><div><h2>🎵 Musik-Kugel: eigene Lieder</h2><p class="hint">Lade Lieder hoch, die die Kugel spielen soll. Die Engine findet selbst die Töne und Beats im Refrain und lässt die Kugel genau darauf abprallen. Ohne eigene Lieder nimmt sie bekannte gemeinfreie Melodien. Name der Datei am besten „Künstler - Titel.mp3“ – das ist die Auflösung am Ende. Achtung: Bei Chart-Liedern liegen die Rechte bei den Labels; YouTube und TikTok können die Einnahmen an sie geben, den Ton stummschalten oder das Video sperren.</p></div></div>
     <div class="make"><label>Lied (MP3, M4A, WAV, bis 30 MB)<input type="file" id="sgFile" accept="audio/*,.mp3,.m4a,.wav,.ogg,.aac,.flac"></label>
       <button class="btn accent" id="sgUp" style="padding:11px 20px">${icon(I.plus)}Hochladen</button></div>
@@ -1139,20 +1241,20 @@ function viewSettings() {
       <div class="inline" style="flex-wrap:nowrap"><input type="password" autocomplete="off" id="sv2_${secName}" placeholder="${S.local_secrets[p] ? "✓ hinterlegt" : "einfügen"}"><button class="btn sm primary" type="button" data-secret2="${secName}">Speichern</button></div></div>`;
   };
   $("#main").innerHTML = `<div class="settings-wrap">
-  ${sec("zeit", I.clock, "Zeitplan", `${S_("autopilot") ? "Autopilot an · " + esc(S_("upload_times")) + " Uhr" : "Autopilot aus"} · ${S_("target_seconds")} Sekunden`, S_("autopilot") ? '<span class="chip good">an</span>' : '<span class="chip warn">aus</span>', `
-    ${tgl("autopilot", "Autopilot", "Jeden Tag automatisch ein Video erstellen und hochladen. Läuft auf GitHub, auch wenn dieser PC aus ist.")}
-    ${fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
-    ${LITE() ? "" : fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}
-    ${LITE() ? "" : sel("stats_minutes", "Zahlen der Videos holen", "Aufrufe, Likes und Kommentare. GitHub startet geplante Läufe manchmal einige Minuten verspätet.", [["30", "alle 30 Minuten"], ["60", "stündlich"], ["180", "alle 3 Stunden"]])}
-    ${LITE() ? "" : sel("stats_live", "Live-Zahlen", "Solange die App offen im Vordergrund ist, holt sie die Zahlen selbst in kurzen Abständen. Ein Abruf dauert etwa eine Minute.", [["2", "alle 2 Minuten"], ["5", "alle 5 Minuten"], ["10", "alle 10 Minuten"], ["0", "aus"]])}
-    ${LITE() ? "" : fld("min_seconds", "Mindest-Länge in Sekunden", "Kürzer wird kein Video: Das Drehbuch wird verlängert, notfalls spricht der Erzähler etwas ruhiger. 0 = aus.", 'type="number" min="0" max="170"')}`)}
-  ${LITE() ? "" : sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
+  ${!(can("zeitplan") || can("laenge") || can("zahlen")) ? "" : sec("zeit", I.clock, "Zeitplan", `${S_("autopilot") ? "Autopilot an · " + esc(S_("upload_times")) + " Uhr" : "Autopilot aus"} · ${S_("target_seconds")} Sekunden`, S_("autopilot") ? '<span class="chip good">an</span>' : '<span class="chip warn">aus</span>', `
+    ${!can("zeitplan") ? "" : tgl("autopilot", "Autopilot", "Jeden Tag automatisch ein Video erstellen und hochladen. Läuft auf GitHub, auch wenn dieser PC aus ist.")}
+    ${!can("zeitplan") ? "" : fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
+    ${!can("laenge") ? "" : fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}
+    ${!can("zahlen") ? "" : sel("stats_minutes", "Zahlen der Videos holen", "Aufrufe, Likes und Kommentare. GitHub startet geplante Läufe manchmal einige Minuten verspätet.", [["30", "alle 30 Minuten"], ["60", "stündlich"], ["180", "alle 3 Stunden"]])}
+    ${!can("zahlen") ? "" : sel("stats_live", "Live-Zahlen", "Solange die App offen im Vordergrund ist, holt sie die Zahlen selbst in kurzen Abständen. Ein Abruf dauert etwa eine Minute.", [["2", "alle 2 Minuten"], ["5", "alle 5 Minuten"], ["10", "alle 10 Minuten"], ["0", "aus"]])}
+    ${!can("laenge") ? "" : fld("min_seconds", "Mindest-Länge in Sekunden", "Kürzer wird kein Video: Das Drehbuch wird verlängert, notfalls spricht der Erzähler etwas ruhiger. 0 = aus.", 'type="number" min="0" max="170"')}`)}
+  ${!can("trends") ? "" : sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
     ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
     ${sel("trend_regions", "Trends aus", "Woher die Trends kommen. US-Trends schwappen oft ein paar Tage später nach Deutschland – ideal, um früh dran zu sein.", [["US,DE", "USA und Deutschland"], ["DE,US", "Vor allem Deutschland, dazu USA"], ["DE", "Nur Deutschland"], ["US", "Nur USA"], ["US,DE,GB", "USA, Deutschland und UK"]])}
     <div class="row"><label for="f_audience">Zielgruppe<small>Für wen die Videos sind. Danach wählt die KI Trends und Themen aus und passt Sprache und Ton an.</small></label><textarea id="f_audience" data-k="audience" rows="3">${esc(S_("audience"))}</textarea></div>
     ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Titelbild aus der Animations-Engine mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
     ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
-  ${sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
+  ${!can("plattform") ? "" : sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
     ${fld("tiktok_handle", "Dein TikTok-Name", "Zum Beispiel @wissenswert. Damit zeigt das Dashboard Follower, Likes und Aufrufe live (jede Minute, direkt vom öffentlichen Profil) – auch wenn du über Zernio hochlädst.", 'placeholder="@deinname" maxlength="40"')}
     ${fld("youtube_handle", "Dein YouTube-Kanal", "Zum Beispiel @wissenswert. Nur nötig, wenn YouTube hier nicht verbunden ist (z. B. Upload über Zernio): dann kommen Abos und Aufrufe live von der öffentlichen Kanalseite. Mit Verbindung holt die App alles direkt von YouTube, inklusive Likes.", 'placeholder="@deinkanal" maxlength="60"')}
     ${sel("upload_via", "Hochladen über", "Zernio lädt über seine eigenen, von YouTube und TikTok zugelassenen Apps hoch: Konten auf zernio.com verbinden, API-Key unten bei den Zugangsdaten speichern. Die eigenen Verbindungen darunter werden dann nicht gebraucht.", [["direct", "Eigene Google- und TikTok-App"], ["zernio", "Zernio (ein API-Key für beide)"]])}
@@ -1169,7 +1271,7 @@ function viewSettings() {
     ${sel("tiktok_privacy", "Sichtbarkeit", "Ohne TikTok-Prüfung ist nur „Nur ich“ erlaubt.", [["PUBLIC_TO_EVERYONE", "Öffentlich (nach Prüfung)"], ["MUTUAL_FOLLOW_FRIENDS", "Freunde"], ["FOLLOWER_OF_CREATOR", "Follower"], ["SELF_ONLY", "Nur ich"]])}
     <div class="sep"></div>
     ${tgl("ai_label", "Als KI-generiert kennzeichnen", "TikTok „AI-generated“ und YouTube „Synthetische Inhalte“.")}`)}
-  ${LITE() ? "" : sec("ki", I.spark, "Skript & Stimme", `Skript ${S_("text_provider")} · Stimme ${{gemini: "Gemini-Erzähler", edge: "Edge", openai: "OpenAI", elevenlabs: "ElevenLabs"}[S_("tts_provider")] || S_("tts_provider")} · Bild: eigene Animation`, c ? `<span class="chip warn">≈ ${c.toFixed(2).replace(".", ",")} $ / Video</span>` : '<span class="chip good">gratis</span>', `
+  ${!can("ki") ? "" : sec("ki", I.spark, "Skript & Stimme", `Skript ${S_("text_provider")} · Stimme ${{gemini: "Gemini-Erzähler", edge: "Edge", openai: "OpenAI", elevenlabs: "ElevenLabs"}[S_("tts_provider")] || S_("tts_provider")} · Bild: eigene Animation`, c ? `<span class="chip warn">≈ ${c.toFixed(2).replace(".", ",")} $ / Video</span>` : '<span class="chip good">gratis</span>', `
     <p class="hint">Bild und Animation macht die eingebaute AutoShorts-Engine: Figuren, Orte, Requisiten und Titelbild entstehen ohne Bild-KI und kosten nichts. Die KI schreibt nur das Drehbuch und spricht den Text.</p>
     <div class="lbl">Skript</div>${radio("text_provider", [["gemini", "Google Gemini", "Kostenlos · gute Texte"], ["pollinations", "Pollinations", "Kostenlos ohne Anmeldung · einfacher"], ["openai", "OpenAI · Premium", "≈ 0,3 Cent pro Video"]])}
     <div class="lbl">Stimme</div>${radio("tts_provider", [["gemini", "Gemini-Erzähler", "Kostenlos · natürliche, flüssige Erzählerstimme"], ["edge", "Microsoft Edge-Stimmen", "Kostenlos · Ersatz, klingt mehr nach Computer"], ["openai", "OpenAI · Premium", "≈ 2 Cent pro Video"], ["elevenlabs", "ElevenLabs · Premium", "Beste Stimmen · Abo ab ca. 5 $"]])}
@@ -1179,7 +1281,7 @@ function viewSettings() {
     <div class="sep"></div>
     ${fld("gemini_model", "Gemini-Modell")}${fld("openai_text_model", "OpenAI Text-Modell")}
     ${fld("openai_tts_model", "OpenAI Stimm-Modell")}${fld("openai_voice", "OpenAI Stimme", "z. B. ash, coral, onyx, sage")}${fld("elevenlabs_voice_id", "ElevenLabs Voice-ID")}`)}
-  ${LITE() ? "" : sec("stil", I.brush, "Video-Stil", "Eigene Animation · Untertitel, Soundeffekte, Musik", "", `
+  ${!can("stil") ? "" : sec("stil", I.brush, "Video-Stil", "Eigene Animation · Untertitel, Soundeffekte, Musik", "", `
     <p class="hint">Alle Videos entstehen mit der AutoShorts-Engine: niedliche Cartoon-Figuren und Tiere, feste Orte und ein Landschafts-Baukasten (Wald, Fluss, Felder, Berge, Meer …), Requisiten, Wetter und animierte Einblendungen. Welche Figuren und Orte vorkommen, entscheidet das Drehbuch je Video.</p>
     ${tgl("plan_ahead", "Videos einen Tag vorher vorbereiten", "Thema und Drehbuch stehen schon am Vortag fest. Was der Engine dafür fehlt, wird über Nacht nachgebaut – bevor das Video entsteht.")}
     ${tgl("hold_missing", "Nur hochladen, wenn nichts fehlt", "Fehlt der Engine für ein Video noch etwas, wird es erstellt, aber nicht hochgeladen. Du siehst es dann in der Liste und kannst es von Hand hochladen.")}
@@ -1191,12 +1293,12 @@ function viewSettings() {
     ${fld("music_volume", "Musik-Lautstärke", "0 bis 0,3. Musik-Dateien legst du im Repository in den Ordner music/.")}`)}
   ${sec("keys", I.key, "Zugangsdaten", "Schlüssel werden verschlüsselt in GitHub gespeichert", missing ? `<span class="chip warn">${missing} fehlen</span>` : SECRETS === "err" ? '<span class="chip mute">?</span>' : '<span class="chip good">vollständig</span>', `
     <p class="hint">Eintragen und auf „Speichern“ tippen. Die App verschlüsselt den Schlüssel und legt ihn direkt in deinem Repository ab; man kann ihn danach nicht mehr auslesen.</p>
-    ${SECRET_LIST.filter(([n]) => !LITE() || ["GEMINI_API_KEY", "GOOGLE_CLIENT_SECRET", "TIKTOK_CLIENT_SECRET", "ZERNIO_API_KEY"].includes(n)).map(([n, l, h, u]) => { const has = hasSecret(n), loc = n === "GOOGLE_CLIENT_SECRET" ? S.local_secrets.youtube : n === "TIKTOK_CLIENT_SECRET" ? S.local_secrets.tiktok : null;
+    ${SECRET_LIST.filter(([n]) => can("ki") || ["GEMINI_API_KEY", "GOOGLE_CLIENT_SECRET", "TIKTOK_CLIENT_SECRET", "ZERNIO_API_KEY"].includes(n)).map(([n, l, h, u]) => { const has = hasSecret(n), loc = n === "GOOGLE_CLIENT_SECRET" ? S.local_secrets.youtube : n === "TIKTOK_CLIENT_SECRET" ? S.local_secrets.tiktok : null;
       return `<div class="sec-row"><div><b>${l}</b><small>${h} · <a href="${u}" target="_blank" rel="noopener">holen ↗</a></small></div>
         <input type="password" autocomplete="off" id="sv_${n}" placeholder="${has ? "hinterlegt – zum Ändern neu eintragen" : "einfügen"}">
         <div class="inline">${has === true ? `<span class="chip good">✓</span>` : has === false ? `<span class="chip mute">fehlt</span>` : ""}${loc === false && has ? `<span class="chip warn" title="Für das Verbinden auf diesem PC noch einmal eintragen">PC</span>` : ""}<button class="btn sm primary" data-secret="${n}">Speichern</button></div></div>`; }).join("")}
     ${SECRETS === "err" ? `<p class="hint neg">Die App kann nicht sehen, welche Schlüssel hinterlegt sind: Dem GitHub-Zugangsschlüssel fehlt die Berechtigung „Secrets“.</p>` : ""}`)}
-  ${sec("kanal", I.spark, "Kanal-Profil", S_("channel_name") ? esc(S_("channel_name")) + (S_("channel_focus") ? " · " + esc(S_("channel_focus")) : "") : "Name, Themen-Schwerpunkt, eigenes Merkmal", S_("channel_seed") ? `<span class="chip good">eigenes Merkmal</span>` : "", `
+  ${!can("kanal") ? "" : sec("kanal", I.spark, "Kanal-Profil", S_("channel_name") ? esc(S_("channel_name")) + (S_("channel_focus") ? " · " + esc(S_("channel_focus")) : "") : "Name, Themen-Schwerpunkt, eigenes Merkmal", S_("channel_seed") ? `<span class="chip good">eigenes Merkmal</span>` : "", `
     <p class="hint">Nutzen mehrere Leute AutoShorts, sorgt das Kanal-Profil dafür, dass jeder Kanal andere Videos bekommt: eigener Themen-Schwerpunkt, eigene Hauptfigur, eigene Reihenfolge bei Melodien und Remix-Stilen und jede Woche andere Themen-Blickwinkel.</p>
     ${fld("channel_name", "Kanal-Name", "Nur zur Übersicht in der App.", 'placeholder="z. B. Wissen in 60 Sekunden" maxlength="60"')}
     <div class="row"><label for="f_channel_focus">Themen-Schwerpunkt<small>Worum es auf diesem Kanal vor allem gehen soll, z. B. „Sport und Fitness“, „Essen und Kochen“ oder „Geschichte“. Leer = alles.</small></label><textarea id="f_channel_focus" data-k="channel_focus" rows="2" maxlength="200">${esc(S_("channel_focus"))}</textarea></div>
@@ -1349,6 +1451,8 @@ async function startupUpdatePrompt() {
 /* ═════════════════ Start ═════════════════ */
 (async function start() {
   try { S = await api("/api/state"); } catch (e) { $("#app").innerHTML = `<div class="login"><div class="panel"><h2>AutoShorts antwortet nicht</h2><p class="hint">${esc(e.message)}</p></div></div>`; return; }
+  if (LITE() && !(S.access && S.access.ok)) return renderAccess();
+  if (LITE()) setInterval(async () => { try { const a = await api("/api/access"); const was = S.access && S.access.ok; S.access = a; if (was && !a.ok) render(); } catch (e) {} }, 30 * 60000);
   if (!S.connected) return renderSetup();
   shell(); render(true);
   await Promise.all([loadData(), loadSecrets()]);

@@ -1,6 +1,6 @@
 {
-  "version": "1.11.0",
-  "file": "releases/AutoShorts-Kanal-1.11.0.cmd",
-  "sha256": "7e65c4df60d7b546a858940ca177d6f46c0b0cacac320c425a5cd4cb5bca333b",
-  "notes": "Zwei Apps: Admin-App (alles) und Kanal-App zum Weitergeben (nur das Nötigste); Motor-Update eine Stunde vor jedem Video"
+  "version": "1.12.0",
+  "file": "releases/AutoShorts-Kanal-1.12.0.cmd",
+  "sha256": "8368e4b768ef71c8994e95e0e9709ef8c04c09b1e2815c23ca0a94ba518fa1df",
+  "notes": "Admin-Tab: Zugänge mit Laufzeit erstellen, verlängern, löschen; Rechte je Zugang; Kanal-App mit Zugangscode"
 }
