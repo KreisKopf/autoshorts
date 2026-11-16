@@ -45,7 +45,10 @@ def _r(d, box, col, r=10, w=O, shade=True):
     x0, y0, x1, y1 = box = _box(box)
     bw, bh = x1 - x0, y1 - y0
     if not shade or min(bw, bh) < 18 or col == INK:
-        d.rounded_rectangle(box, r, fill=col, outline=INK, width=w)
+        if min(bw, bh) < 3:                               # winziges Teil (Glühbirnen-Sockel, während das Zeichen ins Bild springt): nichts zu zeichnen – Pillow wirft sonst „x1 must be greater than or equal to x0“ und die ganze Szene fiel auf die Ersatzfassung zurück
+            return
+        w = max(1, min(int(w), int(min(bw, bh) / 2) - 1)) if min(bw, bh) < 18 else w
+        d.rounded_rectangle(box, max(0, min(r, bw / 2 - 1, bh / 2 - 1)), fill=col, outline=INK, width=w)
         return
     r = max(0, min(r, bw / 2 - 1, bh / 2 - 1))
     d.rounded_rectangle(box, r, fill=_dk(col), outline=INK, width=w)

@@ -481,6 +481,22 @@ def fix_label_typos(label, sentence):
 _DANGLING = "sobald|wenn|weil|dass|falls|bis|bevor|nachdem|während|obwohl|damit|sodass|indem|ob|als|wie|und|oder|aber|denn|sondern|doch"   # Wörter, auf die kein Satz endet
 
 
+def given_meta(js, topic):
+    """Vorgaben „Titel: …“ und „Titelbild-Text: …“ im Thema gelten wörtlich – die Text-KI hat sie sonst frei umgeschrieben
+    (Prüfung 16.11.2026: aus „5 Dinge, die dein Gehirn tut, während du schläfst“ wurde der Titel „5 Dinge, die dein Gehirn schläft“).
+    Der Wert reicht bis zum nächsten Punkt, Strichpunkt oder Zeilenende."""
+    t = str(topic or "")
+    m_t = re.search(r"(?<![A-Za-zÄÖÜäöüß-])Titel:\s*([^.;\n]{8,95})", t)
+    if m_t and not _BRAND_RE.search(m_t.group(1)):
+        js["title"] = fix_eszett(m_t.group(1).strip().strip("„“\"' "))
+    m_b = re.search(r"Titelbild-Text:\s*([^.;\n]{3,40})", t)
+    if m_b and len(m_b.group(1).split()) <= 5 and not _BRAND_RE.search(m_b.group(1)):
+        th = js.get("thumbnail") if isinstance(js.get("thumbnail"), dict) else {}
+        th["text"] = m_b.group(1).strip().strip("„“\"' ").upper()
+        js["thumbnail"] = th
+    return js
+
+
 def polish(js):
     """Letzter Schliff ohne Text-KI: ß in Sprechertext, Titel und Beschreibung; englische Wörter in Einblendungen und Grafiken
     („GEHIRN-EFFECT“) werden deutsch."""
@@ -1331,6 +1347,10 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             ai.log(f"Regie-Prüfung nicht möglich ({e}) – nehme den Bildplan, wie er ist")
     try:
         js = polish(js)                                  # noch einmal: Bildplan und Regie-Prüfung können neue Einblendungen gebracht haben
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        js = given_meta(js, topic)                       # ausdrücklich vorgegebener Titel/Titelbild-Text (Neubau nach der Prüfung) gilt wörtlich
     except Exception:  # noqa: BLE001
         pass
     sc = [s for s in js.get("scenes", []) if isinstance(s, dict) and str(s.get("text", "")).strip()]

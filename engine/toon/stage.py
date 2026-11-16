@@ -786,6 +786,9 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 im, fx, fy, fly = res
                 if not (moving and not arrived) and not close:   # nie über den Bildrand hinaus (große Tiere als Hauptfigur sind breit)
                     lo, hi = 30 + fx, W - 30 - (im.width - fx)
+                    if a["kind"] == "brain" and im.getbbox():           # das Gehirn nach seinem sichtbaren Umriss begrenzen (die Zeichenfläche ist viel breiter): so kann es rechts neben dem Bett stehen
+                        bb_ = im.getbbox()
+                        lo, hi = 30 + fx - bb_[0], W - 30 - (bb_[2] - fx)
                     x = (lo + hi) / 2 if lo > hi else min(max(x, lo), hi)
                 if not fly:
                     _shadow(frame, int(x), gy, int(120 * scale * ksz))
@@ -2229,6 +2232,7 @@ def _sleep_story(scenes, topic):
         return
     ids = [str(a.get("id") or "") for sc in scenes if isinstance(sc, dict) for a in sc.get("actors") or [] if isinstance(a, dict) and a.get("id")]
     lead = max(set(ids), key=ids.count) if ids else "du"
+    human = next((i_ for i_ in ("du", "ich") if i_ in ids), "")
     for sc in scenes:
         if not isinstance(sc, dict):
             continue
@@ -2238,6 +2242,19 @@ def _sleep_story(scenes, topic):
         elif str(sc.get("time") or "") == "night" and re.search(r"wachst (?:\w+ ){0,3}auf|aufwachst|wecker klingelt", low) and not re.search(NIGHT_RE, low):
             sc["time"] = "day"                            # Aufwachen am Morgen: hell
         rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        shot_s = str(sc.get("shot") or "")
+        acts_s = [a for a in sc.get("actors") or [] if isinstance(a, dict)]
+        if rp == "livingroom" and shot_s not in ("graphic", "insert") and not re.search(r"sofa|couch|wohnzimmer|fernseh", low):
+            sc["place"], sc["backdrop"], rp = "bedroom", None, "bedroom"   # ein Schlaf-Video spielt im Schlafzimmer, nicht im Wohnzimmer (dort lag die Schlafende vor dem Sofa auf dem Boden)
+        brainy = lambda a: bool(re.search(r"gehirn|hirn|brain", (str(a.get("id") or "") + " " + str(a.get("kind") or "")).lower()))   # noqa: E731
+        if rp == "bedroom" and str(sc.get("time") or "") == "night" and acts_s and all(brainy(a) for a in acts_s) and human \
+                and shot_s not in ("close", "insert", "graphic") and not re.search(WAKE_RE, low):
+            for a in acts_s:                              # das Gehirn arbeitet, während der Mensch schläft: die Schlafende liegt im Bett, das Gehirn steht rechts daneben
+                moving_s = str(a.get("action") or "") in ("walk", "run") or (a.get("to") and a.get("to") != a.get("pos"))
+                a["pos"], a["to"] = ("offright" if moving_s else 830), 830   # rechts neben dem Bett (das Bett endet bei places.BED_END), die Schlafende bleibt sichtbar
+            if shot_s == "event":
+                sc["shot"] = ""
+            sc["actors"] = [{"id": human, "action": "sleep", "emotion": "", "emote": "", "pos": "left", "to": "left", "speaks": False}] + acts_s   # die Schlafende zuerst: Bett und Decke liegen hinter dem Gehirn
         if str(sc.get("time") or "") == "night" and rp in PUBLIC_INDOOR and str(sc.get("crowd") or "") in ("walk", "cheer") and not re.search(PEOPLE_RE, low):
             sc["crowd"] = ""
             if not [a for a in sc.get("actors") or [] if isinstance(a, dict)] and str(sc.get("shot") or "") not in ("insert", "graphic"):
@@ -4140,7 +4157,8 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     if hero is not None:
         if side < 0:
             hero = hero.transpose(Image.FLIP_LEFT_RIGHT)
-        sticker(hero, 700, 640, 540 + 100 * side, 930, -6 * side)
+        n_txt = len(str(spec.get("text") or "").split())  # zwei Wörter stehen in zwei, drei und mehr in drei Zeilen: das Motiv rückt tiefer und wird etwas kleiner (der Text lag sonst über dem Kopf des Gehirns)
+        sticker(hero, 700, 560 if n_txt >= 3 else 600 if n_txt == 2 else 640, 540 + 100 * side, 1170 if n_txt >= 3 else 1050 if n_txt == 2 else 930, -6 * side)
         frame.paste(fig, (int(540 - 290 * side - fx), int(2330 - fy)), fig)
     else:
         frame.paste(fig, (int(540 - fx), int(2200 - fy)), fig)

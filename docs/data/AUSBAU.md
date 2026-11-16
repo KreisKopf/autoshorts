@@ -329,3 +329,10 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   zugedeckt (Decke hebt sich mit dem Atem) – vorher lag sie steif obenauf, die Beine ragten übers Bettende. Die Kamera nimmt das ganze Bett
   (`BED_SPAN`), kein Gegenschnitt (er schnitt die Liegende am Rand ab). `poster_hero`: Nennt das Thema das Gehirn und spielt die Gehirn-Figur
   in mindestens drei Szenen mit, steht sie auf dem Titelbild. Selbsttest: `_sleep`.
+  Nach dem 1. Neubau (Video 122 verworfen): `stage._sleep_story` verlegt Wohnzimmer-Szenen eines Schlaf-Videos ins Schlafzimmer (die Schlafende lag
+  vor dem Sofa auf dem Boden); steht dort nachts nur die Gehirn-Figur, liegt die Hauptfigur schlafend im Bett und das Gehirn steht rechts daneben
+  (das Gehirn wird in `_frame` nach seinem sichtbaren Umriss begrenzt, nicht nach der breiten Zeichenfläche). `extras._r`: ein winziges Rechteck
+  (Glühbirnen-Sockel, während das Zeichen ins Bild springt) wirft keinen Fehler mehr – zwei Szenen fielen deshalb auf die Ersatzfassung mit der
+  falschen Figur zurück. `writer.given_meta`: „Titel: …“ und „Titelbild-Text: …“ im Thema gelten wörtlich (die Text-KI machte aus dem Thema den
+  Titel „5 Dinge, die dein Gehirn schläft“; das Lektorat war wegen überlasteter Text-KI ausgefallen). Titelbild (`stage.poster`): Bei zwei oder
+  drei Textzeilen rückt das Motiv tiefer und wird kleiner – der Text lag über dem Kopf des Gehirns.

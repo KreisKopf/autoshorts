@@ -403,6 +403,19 @@ def main():
         keep = stage.direct([{"text": "Das ist der Cliffhanger der Serie.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}], "overlay": {"type": "tag", "text": "CLIFFHANGER"}}],
                             [(0, 4)], "Serien", "fakten", "")
         assert (keep[0].get("overlay") or {}).get("text") == "CLIFFHANGER", "gesprochenes Wort darf als Schild bleiben"
+        s2 = stage.direct([{"text": "Erstens: Putzen.", "place": "zimmer", "time": "night", "actors": [{"id": "gehirn", "action": "point", "emote": "idea"}]},
+                           {"text": "Damit du deine Träume nicht nachspielst, schaltet das Gehirn fast alle Muskeln stumm.", "place": "zimmer", "time": "night", "actors": [{"id": "du", "action": "sleep"}]}],
+                          [(0, 4), (4, 8)], "5 Dinge, die dein Gehirn tut, während du schläfst", "fakten", "")
+        assert all(places.resolve(stage.backdrop(sc_)) == "bedroom" for sc_ in s2), "Schlaf-Video spielt im Wohnzimmer (Schlafende läge vor dem Sofa am Boden)"
+        ids2 = [(a_.get("id"), a_.get("action")) for a_ in s2[0].get("actors") or []]
+        assert ids2 and ids2[0] == ("du", "sleep") and ids2[-1][0] == "gehirn", f"Gehirn arbeitet, aber niemand schläft im Bett: {ids2}"
+        for t_ in (0.02, 0.1, 0.3, 1.5):                         # Glühbirne springt ins Bild: der winzige Sockel darf die Szene nicht abbrechen
+            frame(dict(s2[0], actors=[dict(a_) for a_ in s2[0]["actors"]]), cast_s, t_)
+        from .. import writer as _w_s
+        gm = _w_s.given_meta({"title": "5 Dinge, die dein Gehirn schläft", "thumbnail": {"text": "X"}},
+                             "Schlaf – Vorgaben: kurz. Titel: 5 Dinge, die dein Gehirn nachts für dich erledigt. Titelbild-Text: DEIN GEHIRN NACHTS")
+        assert gm["title"] == "5 Dinge, die dein Gehirn nachts für dich erledigt" and gm["thumbnail"]["text"] == "DEIN GEHIRN NACHTS", f"vorgegebener Titel nicht übernommen: {gm}"
+        assert _w_s.given_meta({"title": "A"}, "Thema ohne Vorgabe. Titelbild-Text fehlt")["title"] == "A"
         assert stage.poster_hero("5 verrückte Dinge, die dein Gehirn nachts tut", ss + ss, cast_s) == "brain", "Gehirn-Thema ohne Gehirn auf dem Titelbild"
         assert stage.poster_hero("Warum du bei Musik Gänsehaut bekommst", ss + ss, cast_s) != "brain", "Gehirn auf dem Titelbild eines anderen Themas"
         for tm_ in ("night", "day"):                             # Schlafende liegt zugedeckt im Bett: über dem Bettende ragen keine Füße in die Luft
