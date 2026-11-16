@@ -4226,5 +4226,48 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 117,
+  "category": "fakten",
+  "topic": "Warum du Gänsehaut bekommst, wenn dein Lieblingssong droppt: Was dein Gehirn in genau 0,5 Sekunden mit Dopamin anstellt",
+  "status": "review",
+  "created": 1794823836.3051822,
+  "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+  "description": "Warum kriegst du bei Musik Gänsehaut?\nDein Gehirn schüttet Dopamin aus.\nHörst du Lieder lieber laut?",
+  "hashtags": [
+   "#shorts",
+   "#musik",
+   "#wissenschaft",
+   "#fakten",
+   "#gehirn",
+   "#dopamin",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "gänsehaut musik",
+   "dopamin gehirn",
+   "warum gänsehaut bei musik",
+   "bass drop gehirn",
+   "musik fakten",
+   "psychologie musik",
+   "gehirn dopamin kick",
+   "musik im kopf"
+  ],
+  "thumb_text": "DOPAMIN-EXPLOSION IM GEHIRN",
+  "missing": null,
+  "cover_ms": 89257,
+  "duration": 89.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-16 13:00",
+  "review_at": 1794824340.4537077
  }
 ]

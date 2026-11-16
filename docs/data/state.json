@@ -1,5 +1,5 @@
 {
- "last_category": "motivation",
+ "last_category": "fakten",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -15,7 +15,8 @@
   "2026-11-14 21:00",
   "2026-11-15 13:00",
   "2026-11-15 18:00",
-  "2026-11-15 21:00"
+  "2026-11-15 21:00",
+  "2026-11-16 13:00"
  ],
  "used_queue": [
   "qkv0cbgez",
@@ -25,20 +26,20 @@
   "qqprosnb9"
  ],
  "last_stats": 1794823013.7449017,
- "next_id": 117,
+ "next_id": 118,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.618,
+ "voice_wps": 2.593,
  "last_trends": 1794812879.2684102,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
-  "palette": 1,
-  "video": 116
+  "palette": 3,
+  "video": 117
  },
  "cat_credit": {
   "fakten": -2.079999999999999,

@@ -1,0 +1,507 @@
+{
+ "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+ "scenes": [
+  {
+   "text": "Dein Gehirn löst deine Musik-Gänsehaut in nur einer halben Sekunde aus.",
+   "see": "Ein Mädchen mit Kopfhörern lauscht gespannt der Musik in ihrem Zimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    },
+    {
+     "type": "goosebumps"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "MUSIK-KICK"
+   }
+  },
+  {
+   "text": "Und das Erstaunliche passiert bereits kurz vor dem eigentlichen Bassdrop.",
+   "see": "Das Gehirn taucht als Figur auf und rechnet aufmerksam mit einer Stoppuhr.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_bassbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "clock",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm"
+  },
+  {
+   "text": "Schon eine halbe Sekunde vor dem Bassdrop passiert etwas völlig Verrücktes im Kopf.",
+   "see": "Das Mädchen wartet gespannt auf den Beat und schaut auf den Lautsprecher.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_bassbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "0,5 SEKUNDEN"
+   }
+  },
+  {
+   "text": "Messungen zeigen, dass das Belohnungszentrum schon in der Erwartung komplett hochfährt.",
+   "see": "Eine Puls-Grafik zeigt die Vorfreude des Gehirns in einer Sekunde.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "pulse",
+    "value": "0,5",
+    "label": "SEKUNDEN VOR DEM DROP",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dein Körper schüttet Dopamin aus, aber betrifft das wirklich jede Musikrichtung?",
+   "see": "Das Gehirn feuert im Labor freudig Neurotransmitter wie ein DJ ab.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Du denkst vielleicht, dass nur traurige Lieder diesen Gänsehaut-Effekt bei dir auslösen.",
+   "see": "Das Mädchen zuckt zusammen und spürt ein Kribbeln am Arm.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "goosebumps"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Falsch, denn extrem energetische Beats erzeugen im Gehirn exakt dieselbe biochemische Reaktion.",
+   "see": "Ein Stempel zeigt, dass diese Vermutung völlig falsch ist.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "music",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Aber warum zieht sich deine Haut dann eigentlich so zusammen wie bei Frost?",
+   "see": "Das Gehirn steht verdutzt vor einem Diagramm zum Stresshormon.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "question",
+    "text": "WARUM?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Es ist ein uralter Überlebensreflex aus der Steinzeit gegen plötzliche Gefahren.",
+   "see": "Grafik-Frage nach der echten Ursache im Muskelgewebe.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "badge",
+    "text": "ÜBERLEBENSREFLEX?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wenn die Musik sich überraschend verändert, meldet dein Nervensystem ganz kurz ein Bedrohungssignal.",
+   "see": "Das Mädchen zittert wie bei Kälte im Zimmer und schaut entsetzt.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "ALARM-SIGNAL"
+   }
+  },
+  {
+   "text": "Winzige Muskeln an deinen Haarwurzeln spannen sich schlagartig an, doch was schaltet das Signal ab?",
+   "see": "Eine Notiz zeigt die Regel zum Muskelkrampf der Haarbalgmuskeln.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "goosebumps"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "MUSKEL-REFLEX",
+    "text": "Haarbalgmuskeln spannen sich extrem an"
+   }
+  },
+  {
+   "text": "Doch direkt danach erkennt dein Denkorgan, dass gar keine reale Gefahr droht.",
+   "see": "Das Gehirn lacht aufgeregt und winkt Entwarnung im Labor.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dieser schnelle Wechsel von Schreck zu Sicherheit löst die Dopamin-Explosion aus, aber trifft das jeden?",
+   "see": "Vergleichs-Balken zeigen die Messung von Musik-Gänsehaut im Vergleich zu Essen.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "action": "walk",
+     "pos": "left",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Ein echter Lieblingssong aktiviert dein Gehirn genau wie gutes Essen oder Achterbahnfahren.",
+   "see": "Das Mädchen tanzt begeistert durch ihr Zimmer mit aufgedrehtem Handy.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "REINES GLÜCK"
+   }
+  },
+  {
+   "text": "Nicht jeder Mensch spürt dieses Gefühl gleich stark, doch woran liegt dieser individuelle Unterschied?",
+   "see": "Ein Podest zeigt die Körperstellen, die am meisten Gänsehaut bekommen.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "podium",
+    "kicker": "KÖRPER",
+    "text": "ARME",
+    "left": "NACKEN",
+    "right": "RÜCKEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wer dieses Kribbeln kennt, besitzt nachweislich dichtere Nervenverbindungen im Gehirn.",
+   "see": "Das Gehirn präsentiert stolz eine Erfolgs-Plakette für besondere Vernetzung.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "VIP-GEHIRN",
+    "text": "DICHTERE NERVEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das bedeutet, dass deine Hörrinde extrem stark mit deinen Emotionen verknüpft ist.",
+   "see": "Das Mädchen zeigt auf ihre Arme und schüttelt ungläubig den Kopf.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Du erlebst Töne also buchstäblich intensiver als viele andere Menschen.",
+   "see": "Das Gehirn schaltet zufrieden die Musik-Anlage im Labor an.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "SUPER-HÖRER"
+   }
+  },
+  {
+   "text": "Und genau aus diesem Grund passiert das jedes Mal wieder, sobald.",
+   "see": "Das Mädchen drückt wieder auf Play am Handy und macht sich für den nächsten Kick bereit.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}
