@@ -1,0 +1,521 @@
+{
+ "title": "Warum Musik dir wirklich Gänsehaut verpasst",
+ "scenes": [
+  {
+   "text": "Manche Songs treffen dich so hart, dass dir plötzlich Gänsehaut kommt.",
+   "see": "Du sitzt im Zimmer mit Kopfhörern und wirst plötzlich von einer Musikwelle völlig überrascht.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "GÄNSEHAUT"
+   }
+  },
+  {
+   "text": "Der Grund dafür liegt tief in deinem Gehirn und verblüfft selbst Forscher.",
+   "see": "Ein riesiger Subwoofer vibriert stark im Zimmer.",
+   "place": "lab",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Gänsehaut entsteht meistens genau dann, wenn der Song dich vollkommen überrascht.",
+   "see": "Grafik einer Hautschicht, auf der sich Haare aufrichten.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "goosebumps"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "ÜBERRASCHUNG"
+   }
+  },
+  {
+   "text": "Zum Beispiel durch eine neue Stimme, eine plötzliche Pause oder wenn der Bass kickt.",
+   "see": "Du hörst gebannt zu, wie der Bass einsetzt.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "bassbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "In diesem Moment ziehen sich winzige Muskeln zusammen, aber warum reagiert dein Körper so?",
+   "see": "Grafik der Haut, winzige Muskeln ziehen sich sichtbar zusammen.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "muskel"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "HAARWURZELN"
+   }
+  },
+  {
+   "text": "Das ist ein alter Reflex von deinen behaarten Vorfahren.",
+   "see": "Ein Affe plustert sich auf einem Ast auf.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees",
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Aufgestelltes Fell hat damals wärmer gehalten und Gegnern gegenüber viel größer gewirkt.",
+   "see": "Eine Figur friert im kalten Wind.",
+   "place": "snow",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "snow",
+    "elements": [
+     "mountains"
+    ]
+   },
+   "time": "day",
+   "weather": "wind",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SCHUTZREFLEX"
+   }
+  },
+  {
+   "text": "Dein unwillkürliches Nervensystem steuert das völlig automatisch, genau wie bei Eiskälte.",
+   "see": "Das Gehirn als Figur drückt erschrocken auf ein Warnschild.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "herz"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Aber im Kopf passiert bei guter Musik noch etwas völlig Erstaunliches.",
+   "see": "Bewegte Grafik eines Gehirns mit aufleuchtenden Botenstoffen.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "text": "WAS PASSIERT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Hirnscans zeigen, dass das Gehirn dabei massenhaft Dopamin ausschüttet.",
+   "see": "Das Gehirn tanzt freudig mit einem Stück Kuchen.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "kuchen",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": null
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "DOPAMIN-RAUSCH"
+   }
+  },
+  {
+   "text": "Das ist genau derselbe Belohnungsstoff wie beim Essen, doch wann setzt dieser Rausch ein?",
+   "see": "Vergleichs-Balken zwischen Essen und Musik.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "döner"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Schon kurz vor der besten Stelle steigt dein Dopamin spürbar an.",
+   "see": "Du wartest mit Spannung und geschlossenen Augen auf den Dropp.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "idea",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "VORFREUDE"
+   }
+  },
+  {
+   "text": "Dein Gehirn erwartet den Beat, und am absoluten Höhepunkt folgt der zweite Schub.",
+   "see": "Ein Zeiger schnellt nach oben auf Anschlag.",
+   "place": "livingroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Du denkst, Musik bringt nur Freude – Falsch, sie versetzt dich kurz in Panik.",
+   "see": "Du machst ein überraschtes Gesicht, während rote Alarmlichter blinken.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Forscher vermuten, dass die plötzliche Wende der Musik im Gehirn kurz wie ein Alarm wirkt.",
+   "see": "Das Gehirn schaut neugierig auf eine akustische Welle.",
+   "place": "lab",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "quote",
+    "title": "FORSCHER VERMUTEN",
+    "text": "…dass die plötzliche Wende der Musik im Gehirn kurz wie ein Alarm wirkt."
+   }
+  },
+  {
+   "text": "Die blitzschnelle Erleichterung danach fühlt sich für dich dann extrem gut an.",
+   "see": "Du entspannst dich völlig und lächelst Erleichtert.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "lightning"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Das funktioniert übrigens bei traurigen Songs genau so gut wie bei wilden Party-Hits.",
+   "see": "Zwei Symbole für traurige und fröhliche Musik auf einem Podium.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy",
+   "graphic": {
+    "type": "versus",
+    "kicker": "EFFEKT",
+    "left": "TRAURIG",
+    "right": "PARTY",
+    "dark": false
+   }
+  },
+  {
+   "text": "Bei Menschen mit Musik-Gänsehaut ist die Hörrinde nämlich viel stärker mit den Gefühlszentren verdrahtet.",
+   "see": "Eine Gehirn-Grafik zeigt dichte Verbindungsleitungen.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "lehrbuch"
+    },
+    {
+     "type": "goosebumps"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "GEHIRN-FAKT",
+    "text": "Stärkere Nervenverbindung"
+   }
+  },
+  {
+   "text": "Aber nicht jeder Mensch spürt dieses Gefühl überhaupt.",
+   "see": "Du setzt die Kopfhörer wieder auf und schließt die Augen für den nächsten Song.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  }
+ ]
+}
