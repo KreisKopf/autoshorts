@@ -120,7 +120,9 @@ FORMAT = """Gib JSON in genau diesem Format zurück:
      "overlay": null}
   ]
 }
-Einblendungen (overlay) – nutze sie in etwa jeder zweiten Szene, passend zum Inhalt, sonst null:
+Einblendungen (overlay) – nutze sie in etwa jeder zweiten Szene, passend zum Inhalt, sonst null. Texte immer auf Deutsch und aus dem Inhalt
+des Satzes; NIE Regie-Wörter aus dieser Anleitung als Einblendung ("CLIFFHANGER", "REHOOK", "HOOK", "FINTE", "FAZIT") und keine Zahl, die
+der Sprecher nicht sagt:
 - {"type": "card", "text": "1–3 WÖRTER"}  große Infokarte: Zahl, Fakt, Warnung (z. B. "VIERMAL HELLER", "-80 °C")
 - {"type": "tag", "text": "HEILIGABEND"}  kleines Schild, das Ort, Zeit oder das Ding der Szene benennt (1–3 Wörter, z. B. "AUGUST 1914",
   "DER GRUND", "100 METER", "POST AUS DER HEIMAT") – gern alle 2–3 Szenen, wenn keine andere Einblendung passt

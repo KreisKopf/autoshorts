@@ -327,6 +327,9 @@ class P:
 
 # ------------------------------------------------------------------ Orte
 
+BED_END, BLANKET = 770, (96, 132, 220)                    # Fußende des Betts und Farbe der Decke (stage._frame deckt die Schlafende damit zu)
+
+
 def bedroom(night):
     p = P(night)
     p.room((190, 208, 236), (196, 140, 92))
@@ -336,10 +339,10 @@ def bedroom(night):
     p.d.arc((150, 560, 330, 700), 200, 340, fill=p.c((230, 150, 70)), width=10)
     p.books(90, 800, 430, seed=9)                                              # Wandbrett
     p.rug((420, GROUND + 10, 1000, GROUND + 180), (226, 170, 120))
-    p.rect((40, 1010, 520, 1250), (150, 96, 60), r=14)                         # Bett
+    p.rect((40, 1010, BED_END, 1250), (150, 96, 60), r=14)                     # Bett – so lang, dass eine liegende Figur samt Füßen hineinpasst
     p.rect((30, 880, 110, 1250), (130, 80, 48), r=14)
-    p.rect((70, 1040, 520, 1190), (96, 132, 220), r=30)
-    p.d.rounded_rectangle((250, 1052, 508, 1100), 20, fill=p.c((120, 156, 236)))             # Lichtkante der Decke
+    p.rect((70, 1040, BED_END, 1190), BLANKET, r=30)
+    p.d.rounded_rectangle((250, 1052, BED_END - 12, 1100), 20, fill=p.c((120, 156, 236)))    # Lichtkante der Decke
     p.rect((240, 1040, 300, 1190), (236, 240, 250), r=10, o=5)                 # umgeschlagene Decke
     p.rect((90, 980, 250, 1070), (250, 250, 246), r=30)
     p.rect((820, 1050, 1020, 1250), (150, 96, 60), r=10)                       # Nachttisch

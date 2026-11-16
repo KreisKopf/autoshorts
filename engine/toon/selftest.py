@@ -383,6 +383,38 @@ def main():
     check("Alltags-Geschichte (Kühlschrank als Figur, Haustier, Brief)", _household)
     check("Musik-Video (Kopfhörer, Gänsehaut-Schaubild, Lautsprecher) und Hafen", _music)
 
+    def _sleep():                                                # Schlaf-Video (Prüfung 16.11.2026, Video 121): keine Regie-Wörter im Bild, Nacht bleibt Nacht, keine Passanten im Büro, Schlafende zugedeckt im Bett
+        cast_s = {"du": {"shirt": "blau", "hair": "curly", "gender": "w"}, "gehirn": {"kind": "brain"}}
+        T = [("Fünf verrückte Dinge, die dein Gehirn nachts heimlich tut.", "bedroom", [{"id": "du", "action": "sleep"}], {"type": "card", "text": "5 GEHIRN-FAKTEN"}),
+             ("Und Nummer fünf rettet dich jeden Tag vor dem absoluten Chaos.", "bedroom", [{"id": "gehirn", "action": "dance"}], {"type": "tag", "text": "CLIFFHANGER"}),
+             ("Zweitens: Es löscht unnötige Erinnerungen wie eine volle Festplatte.", "office", [], None),
+             ("Was du mittags gegessen hast, fliegt raus, aber Vokabeln werden fest gespeichert.", "bedroom", [{"id": "gehirn", "action": "point"}],
+              {"type": "checklist", "title": "NIGHT SHIFT", "items": [["Mittagessen", False], ["Vokabeln", True]]}),
+             ("Aber was passiert mit deinen Gefühlen nach einem richtig schlechten Tag?", "bedroom", [{"id": "du", "action": "think"}], {"type": "card", "text": "REHOOK"}),
+             ("Am nächsten Morgen wachst du erholt auf.", "bedroom", [{"id": "du", "action": "idle"}], None)]
+        ss = stage.direct([{"text": t_, "place": pl_, "time": "night", "actors": a_, "overlay": o_} for t_, pl_, a_, o_ in T],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "5 faszinierende Dinge, die dein Gehirn tut, während du schläfst", "fakten", "")
+        shown = " ".join(str((sc_.get(k_) or {}).get(f_) or "") for sc_ in ss for k_ in ("overlay", "graphic") if isinstance(sc_.get(k_), dict) for f_ in ("text", "title", "kicker"))
+        import re as _re_s
+        assert not _re_s.search(r"CLIFFHANGER|REHOOK|NIGHT SHIFT", shown.upper()), f"Regie-Wort oder englischer Titel im Bild: {shown}"
+        assert not ss[2].get("crowd"), f"Passanten nachts im Büro: {ss[2].get('crowd')}"
+        assert ss[3].get("time") == "night", "„mittags gegessen“ macht aus der Nacht einen Tag"
+        assert ss[5].get("time") == "day", "Aufwachen am Morgen spielt nicht am Tag"
+        keep = stage.direct([{"text": "Das ist der Cliffhanger der Serie.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}], "overlay": {"type": "tag", "text": "CLIFFHANGER"}}],
+                            [(0, 4)], "Serien", "fakten", "")
+        assert (keep[0].get("overlay") or {}).get("text") == "CLIFFHANGER", "gesprochenes Wort darf als Schild bleiben"
+        assert stage.poster_hero("5 verrückte Dinge, die dein Gehirn nachts tut", ss + ss, cast_s) == "brain", "Gehirn-Thema ohne Gehirn auf dem Titelbild"
+        assert stage.poster_hero("Warum du bei Musik Gänsehaut bekommst", ss + ss, cast_s) != "brain", "Gehirn auf dem Titelbild eines anderen Themas"
+        for tm_ in ("night", "day"):                             # Schlafende liegt zugedeckt im Bett: über dem Bettende ragen keine Füße in die Luft
+            fr = frame({"text": "Du schläfst tief.", "place": "bedroom", "time": tm_, "actors": [{"id": "du", "action": "sleep", "pos": "center"}]}, cast_s, 1.3).convert("RGB")
+            bare = frame({"text": "Leer.", "place": "bedroom", "time": tm_, "actors": [], "shot": "event"}, cast_s, 1.3).convert("RGB")
+            from PIL import ImageChops as _IC
+            box_ = _IC.difference(fr.crop((places.BED_END + 6, 880, 1080, 1260)), bare.crop((places.BED_END + 6, 880, 1080, 1260))).getbbox()
+            assert tm_ == "night" or box_ is None, f"Schlafende ragt übers Bettende hinaus ({tm_}): {box_}"   # nachts unterscheidet sich das Licht (Lichtkegel), deshalb nur am Tag vergleichen
+            px = fr.getpixel((560, 1100))
+            assert px[2] > px[0], f"keine Decke über der Schlafenden ({tm_}): {px}"
+    check("Schlaf-Video (keine Regie-Wörter, Nacht bleibt, Schlafende zugedeckt)", _sleep)
+
     def _sea():                                                  # Meerestiere: das genannte Tier ist die Figur, allein und unter Wasser
         T = [("Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.", "livingroom", [{"id": "du", "action": "shocked", "hold": "phone"}], ["computer"], "close"),
              ("Der Pistolenkrebs knallt seine Schere zu.", "underwater", [], ["explosion"], "event"),

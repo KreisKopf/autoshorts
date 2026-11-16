@@ -826,12 +826,22 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                                      fill=(214, 90, 80) if not night else (120, 70, 86), outline=INK, width=6)
             im, fx, fy = rig.draw(a["look"], pose, facing, scale, ss=1 if close else None)
             if pose.lying and in_bed and not close and action == "sleep":    # im Schlafzimmer liegt die schlafende Figur im Bett – wer umfällt, liegt am Boden
-                x, gy = 300, places.GROUND - 150
+                x, gy = 300, places.GROUND - 108             # Kopf auf dem Kissen, Körper auf der Matratze (nicht darüber)
             elif pose.lying:                                   # sonst liegt sie auf dem Boden auf, nicht darüber
                 fy -= 62 * scale
-            _shadow(frame, int(x), gy, int(72 * scale * (1 - min(0.5, max(0, pose.lift + a_lift) / 400))))
+            if not (pose.lying and in_bed and not close and action == "sleep"):   # im Bett kein Bodenschatten (er lag als Fleck auf der Decke)
+                _shadow(frame, int(x), gy, int(72 * scale * (1 - min(0.5, max(0, pose.lift + a_lift) / 400))))
             gy0, gy = gy, gy - int(a_lift)
             frame.paste(im, (int(x - fx), int(gy - fy)), im)
+            if pose.lying and in_bed and not close and action == "sleep":    # zugedeckt: die Decke liegt über Bauch und Beinen – niemand liegt steif obenauf, keine Füße ragen übers Bettende
+                d_b = ImageDraw.Draw(frame)
+                col_b = places.BLANKET if not night else places._mix(places.BLANKET, 0.5, (22, 26, 66))
+                lit_b = (120, 156, 236) if not night else places._mix((120, 156, 236), 0.5, (22, 26, 66))
+                fold_b = (236, 240, 250) if not night else places._mix((236, 240, 250), 0.5, (22, 26, 66))
+                br_b = 6 * math.sin(t * 1.6)                             # die Decke hebt und senkt sich mit dem Atem
+                d_b.rounded_rectangle((360, 968 - br_b, places.BED_END, 1190), 34, fill=col_b, outline=INK, width=6)
+                d_b.rounded_rectangle((420, 982 - br_b, places.BED_END - 14, 1026 - br_b), 20, fill=lit_b)
+                d_b.rounded_rectangle((340, 964 - br_b, 400, 1190), 12, fill=fold_b, outline=INK, width=5)
             if a.get("hold") and not pose.lying and "hand" in pose.extra:
                 hx, hy = pose.extra["hand"]
                 if a["hold"].startswith("prop:"):
@@ -1161,6 +1171,22 @@ def direct(scenes, times, topic="", style="", look=""):
             if hit_q < 2:                                 # Siegertreppchen mit Plätzen, die niemand nennt („ARME, NACKEN, RÜCKEN“ zur Frage, warum es nicht jeder spürt): erfunden – der Satz bekommt ein echtes Bild
                 sc["graphic"] = None
                 sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
+        for key_m in ("overlay", "graphic"):              # Regie-Wort der Drehbuch-Anleitung als Einblendung („CLIFFHANGER“, „REHOOK“): hat im Bild nichts zu suchen
+            box_m = sc.get(key_m)
+            if isinstance(box_m, dict):
+                shown_m = " ".join(str(box_m.get(k_m) or "") for k_m in ("text", "title", "kicker", "label")).upper()
+                if _re0.search(META_LABEL_RE, shown_m) and not _re0.search(META_LABEL_RE, low_c0.upper()):
+                    if str(box_m.get("type") or "") in ("card", "tag", "stamp", "badge", "note") or key_m == "graphic":
+                        sc[key_m] = None
+                        if key_m == "graphic" and sc.get("shot") == "graphic":
+                            sc["shot"] = ""
+                    else:
+                        for k_m in ("title", "kicker", "label"):
+                            if isinstance(box_m.get(k_m), str) and _re0.search(META_LABEL_RE, box_m[k_m].upper()):
+                                box_m[k_m] = ""
+        if isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") in ("checklist", "note") \
+                and isinstance(sc["overlay"].get("title"), str) and _re0.search(ENGLISH_TITLE_RE, sc["overlay"]["title"].upper()):
+            sc["overlay"]["title"] = "CHECKLISTE" if sc["overlay"]["type"] == "checklist" else ""   # englischer Titel („NIGHT SHIFT“) in einem deutschen Video
         ov_c = sc.get("overlay")
         if isinstance(ov_c, dict) and str(ov_c.get("type") or "") == "choice" and "?" not in str(sc.get("text") or "") and not _re0.search(r"\boder\b", str(sc.get("text") or "").lower()):
             sc["overlay"] = None                          # Auswahl „A/B“ an einem Satz, der gar keine Frage stellt
@@ -2176,6 +2202,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _named_animals(scenes, topic)
     _household(scenes)
     _music(scenes, topic)
+    _sleep_story(scenes, topic)
     for i_n in range(1, len(scenes)):                     # eben stand das Ding schon groß allein im Bild: der nächste Satz schneidet nicht noch einmal darauf (neun Sekunden derselbe Lautsprecher)
         sc_n, pv_n = scenes[i_n], scenes[i_n - 1]
         if isinstance(sc_n, dict) and isinstance(pv_n, dict) and str(pv_n.get("shot") or "") == "insert":
@@ -2183,6 +2210,38 @@ def direct(scenes, times, topic="", style="", look=""):
             if keys_n & {str(q.get("type") if isinstance(q, dict) else q) for q in sc_n.get("props") or []}:
                 sc_n["_no_insert"] = True
     return scenes
+
+
+# Regie-Wörter aus der Drehbuch-Anleitung, die die Text-KI manchmal als Einblendung ausgibt (Prüfung 16.11.2026, Video 121: Schild „CLIFFHANGER“, Karte „REHOOK“)
+META_LABEL_RE = r"\b(?:CLIFFHANGER|RE-?HOOK|HOOK|FINTE|LOOP|PAYOFF|PUNCHLINE|CALL TO ACTION|CTA|OUTRO|INTRO|TWIST|TEASER|ÜBERLEITUNG|SCHLEIFE)\b"
+ENGLISH_TITLE_RE = r"\b(?:NIGHT|SHIFT|BRAIN|SLEEP|FACTS?|TO-?DO|TODAY|DAY|LIST|RULES?|TIPS|LEVEL UP|MODE)\b"
+# Schlaf-Videos (Prüfung 16.11.2026, „5 Dinge, die dein Gehirn nachts tut“)
+SLEEP_TOPIC_RE = r"schlaf|schläf|\btraum|träum|\bnachts\b|in der nacht|einschl[aä]f"
+WAKE_RE = r"aufwach|wachst (?:\w+ ){0,3}auf|wecker|am nächsten morgen|am morgen\b|\bmorgens\b|nächsten tag|tagsüber|ausgeschlafen|sonnenaufgang"
+PEOPLE_RE = r"\bleute|\bmenschen\b|kolleg|mitarbeiter|angestellte|kunden|passant|\balle\b|\bjeder\b|millionen|team\b"
+
+
+def _sleep_story(scenes, topic):
+    """Schlussdurchgang für Videos über Schlaf und Nacht: (1) Ein Satz, der nebenbei eine Tageszeit nennt („was du mittags gegessen hast“),
+    bleibt Nacht – Tag wird es nur, wenn jemand aufwacht oder der Morgen kommt. (2) Nachts laufen keine Passanten durch Büro, Labor oder
+    Klassenzimmer, wenn der Satz nicht von Leuten spricht; steht dann niemand im Bild, kommt die Figur des Videos dazu und zeigt auf das Ding."""
+    if not re.search(SLEEP_TOPIC_RE, topic_head(topic).lower()):
+        return
+    ids = [str(a.get("id") or "") for sc in scenes if isinstance(sc, dict) for a in sc.get("actors") or [] if isinstance(a, dict) and a.get("id")]
+    lead = max(set(ids), key=ids.count) if ids else "du"
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        if str(sc.get("time") or "") == "day" and re.search(DAY_RE, low) and not re.search(WAKE_RE, low):
+            sc["time"] = "night"
+        elif str(sc.get("time") or "") == "night" and re.search(r"wachst (?:\w+ ){0,3}auf|aufwachst|wecker klingelt", low) and not re.search(NIGHT_RE, low):
+            sc["time"] = "day"                            # Aufwachen am Morgen: hell
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        if str(sc.get("time") or "") == "night" and rp in PUBLIC_INDOOR and str(sc.get("crowd") or "") in ("walk", "cheer") and not re.search(PEOPLE_RE, low):
+            sc["crowd"] = ""
+            if not [a for a in sc.get("actors") or [] if isinstance(a, dict)] and str(sc.get("shot") or "") not in ("insert", "graphic"):
+                sc["actors"] = [{"id": lead, "action": "point", "emotion": "", "emote": "", "pos": "left", "to": "left", "speaks": False}]
 
 
 # Musik-Videos (Ausbau 16.11.2026, „Warum du bei Musik Gänsehaut bekommst“): Kopfhörer auf dem Kopf, Gänsehaut als Schaubild
@@ -3791,6 +3850,9 @@ def _said_prop(kind, low):
     return any(re.search(r"(?<![a-zäöüß])" + re.escape(w), low) for w in words if len(w) >= 3)
 
 
+BED_SPAN = (60, 700)                                      # Kamera-Stützpunkte für die Schlafende im Bett (weit genug für Kopf am Kissen bis Fußende, die Kamera bleibt halbnah)
+
+
 def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, cam, index):
     """Zweites Bild innerhalb einer Szene: beim Schlüsselwort (sonst zur Mitte) harter Schnitt auf den genannten Gegenstand groß
     („insert“) oder auf die Großaufnahme der Hauptfigur bzw. des Tiers („close“). Jede dritte Szene bleibt ruhig ohne Schnitt.
@@ -3873,6 +3935,9 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
             if a_l.get("action") in ("fall", "sleep"):
                 xs += [a_l["x1"] - 200, a_l["x1"] + 60]
                 cam["punch"] = None                                         # kein Sprung auf den Kopf – der läge dann am Bildrand
+                if a_l.get("action") == "sleep" and place == "bedroom":    # im Bett liegt die Figur fest bei x=300 (Kopf links am Kissen), egal wo sie laut Drehbuch steht: Bett samt Kopf im Bild
+                    xs = [x_s for x_s in xs if x_s not in (a_l["x1"], a_l["x0"], a_l["x1"] - 200, a_l["x1"] + 60)] + [BED_SPAN[0], BED_SPAN[1]]
+                    scene["_no_cut"] = True                                 # kein Gegenschnitt: gespiegelt und näher schnitt er die Liegende am Rand ab
         for k_b, x_b in props:                                          # Ballon am Boden (Stoffberg, Gondel): ganz im Bild lassen, kein Sprung auf den Kopf
             if extras.PROP_ALIASES.get(k_b, k_b) in extras.BALLOON_KINDS:
                 xs += [max(210, x_b - 260), min(W - 210, x_b + 190)]
@@ -3974,6 +4039,12 @@ def poster_hero(topic, scenes, cast=None, avoid=()):
             if k in extras.CREATURES:
                 counts[k] = counts.get(k, 0) + 1
     counts = {k: n for k, n in counts.items() if n >= 3 or n * 4 >= len(scenes or [])}  # ein Wesen, das nur in ein, zwei Szenen vorkommt (der Affe für „behaarte Vorfahren“ im Musik-Video), ist nicht das Gesicht des Videos
+    if _re.search(r"gehirn|\bhirn", topic_head(low)):     # Thema „dein Gehirn“ und das Gehirn spielt als Figur mit (Art steht nur in der Besetzung): es gehört aufs Titelbild, nicht die Zuschauer-Figur
+        brain_ids = {str(i_) for i_, c_ in (cast or {}).items() if isinstance(c_, dict) and str(c_.get("kind") or "").lower() == "brain"}
+        n_brain = sum(1 for sc in scenes or [] if isinstance(sc, dict)
+                      and any(isinstance(a, dict) and (str(a.get("id") or "") in brain_ids or str(a.get("kind") or "").lower() == "brain") for a in sc.get("actors") or []))
+        if n_brain >= 3:
+            return "brain"
     ranked = [k for k in named if k in extras.CREATURES] + sorted(counts, key=lambda k: -counts[k])
     ranked = list(dict.fromkeys(ranked))
     named = [k for k in named if k in extras.CREATURES]

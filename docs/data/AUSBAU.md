@@ -318,3 +318,14 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   kein `event`). `poster_hero`: Ein Wesen, das nur in ein, zwei Szenen eines langen Videos vorkommt, kommt nicht aufs Titelbild.
   Nach Video 120: „gesteuert“ ist nicht „teuer“ (kein Geldstapel), „der Spiegel im Kopf steigt“ ist kein Badezimmer; für Körperteile
   (Haar, Haut, Kopf …) wird nichts gelernt (`main.NO_THINGS`), der gelernte Haarschopf ist aus `shapes.json` entfernt.
+
+- Prüfung 16.11.2026, 18-Uhr-Termin (Schlaf-Video „5 Dinge, die dein Gehirn tut, während du schläfst“, Video 121 verworfen):
+  Regie-Wörter der Drehbuch-Anleitung als Einblendung („CLIFFHANGER“, „REHOOK“, „HOOK“, „FINTE“ … – `stage.META_LABEL_RE`) entfallen, wenn der Satz
+  das Wort nicht selbst sagt; englische Listentitel („NIGHT SHIFT“, `ENGLISH_TITLE_RE`) werden zu „CHECKLISTE“. `writer`: Einblendungen nur deutsch,
+  aus dem Satz, ohne ungesagte Zahl. Schlussdurchgang `stage._sleep_story` (Kern des Themas nennt Schlaf/Traum/nachts – `SLEEP_TOPIC_RE`): eine
+  nebenbei genannte Tageszeit („was du mittags gegessen hast“) macht aus der Nacht keinen Tag, nur Aufwachen/Wecker (`WAKE_RE`); nachts laufen
+  keine Passanten durch Büro/Labor, wenn der Satz nicht von Leuten spricht – stattdessen zeigt die Figur des Videos auf das Ding.
+  Schlafende im Bett (`stage._frame`, `places.bedroom`): Das Bett ist länger (`places.BED_END`), die Figur liegt auf Kissen und Matratze und ist
+  zugedeckt (Decke hebt sich mit dem Atem) – vorher lag sie steif obenauf, die Beine ragten übers Bettende. Die Kamera nimmt das ganze Bett
+  (`BED_SPAN`), kein Gegenschnitt (er schnitt die Liegende am Rand ab). `poster_hero`: Nennt das Thema das Gehirn und spielt die Gehirn-Figur
+  in mindestens drei Szenen mit, steht sie auf dem Titelbild. Selbsttest: `_sleep`.
