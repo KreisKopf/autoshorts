@@ -1,5 +1,5 @@
 {
- "updated": 1794830974.9092016,
+ "updated": 1794833242.9579093,
  "enough": true,
  "counted": 16,
  "total": 18,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1628,
-   "avg_likes": 52.0,
-   "like_rate": 3.19,
-   "avg_score": 2408
+   "avg_views": 1630,
+   "avg_likes": 52.5,
+   "like_rate": 3.22,
+   "avg_score": 2418
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1709,
-   "avg_likes": 40.4,
-   "like_rate": 2.36,
-   "avg_score": 2318
+   "avg_views": 1708,
+   "avg_likes": 40.5,
+   "like_rate": 2.37,
+   "avg_score": 2319
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1642,
-   "avg_likes": 40.0,
-   "like_rate": 2.44,
-   "avg_score": 2242
+   "avg_views": 1651,
+   "avg_likes": 41.0,
+   "like_rate": 2.48,
+   "avg_score": 2266
   },
   {
    "slug": "comedy",
@@ -45,10 +45,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1367,
-   "avg_likes": 23.0,
-   "like_rate": 1.68,
-   "avg_score": 1742
+   "avg_views": 1376,
+   "avg_likes": 24.0,
+   "like_rate": 1.74,
+   "avg_score": 1766
   },
   {
    "slug": "fakten",
@@ -62,7 +62,7 @@
  ],
  "weights": {
   "fakten": 0.69,
-  "storys": 1.11,
+  "storys": 1.12,
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
@@ -72,9 +72,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1628 Aufrufe, 3.19 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1630 Aufrufe, 3.22 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2368 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2374 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -103,11 +103,11 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2000,
-   "likes": 65,
+   "views": 2002,
+   "likes": 66,
    "comments": 0,
    "shares": 0,
-   "score": 2975
+   "score": 2992
   },
   {
    "id": 80,
