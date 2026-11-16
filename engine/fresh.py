@@ -71,8 +71,22 @@ def update_engine():
     if repo.lower() == ORIGINAL:
         log("Das ist das Original – der Motor ist schon aktuell")
         return 0
+    shapes_f = DATA / "shapes.json"
+    try:                                                  # was diese Kopie selbst gelernt hat (fehlende Gegenstände nachgezeichnet)
+        own = json.loads(shapes_f.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        own = {}
     subprocess.run(["git", "fetch", "-q", "--depth", "1", UPSTREAM, "main"], cwd=ROOT, check=True, timeout=300)
     subprocess.run(["git", "checkout", "FETCH_HEAD", "--", *ENGINE_PATHS], cwd=ROOT, check=True, timeout=120)
+    try:                                                  # zusammenführen statt überschreiben: Gelerntes der Kopie bleibt, Neues vom Original kommt dazu
+        merged = json.loads(shapes_f.read_text(encoding="utf-8"))
+        kept = {k: v for k, v in own.items() if k not in merged}
+        if kept and isinstance(merged, dict):
+            merged.update(kept)
+            save("shapes.json", merged)
+            log(f"Eigene gelernte Gegenstände behalten: {len(kept)}")
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        log(f"Gelernte Gegenstände nicht zusammengeführt ({e})")
     changed = subprocess.run(["git", "status", "--porcelain", "--", *ENGINE_PATHS], cwd=ROOT, capture_output=True, text=True).stdout.splitlines()
     log(f"Motor aus dem Original geholt: {len(changed)} Dateien neu oder geändert (Daten, Einstellungen und Videos bleiben)")
     return len(changed)
