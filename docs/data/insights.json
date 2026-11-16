@@ -1,5 +1,5 @@
 {
- "updated": 1794833242.9579093,
+ "updated": 1794833578.9057848,
  "enough": true,
  "counted": 16,
  "total": 18,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1630,
-   "avg_likes": 52.5,
-   "like_rate": 3.22,
-   "avg_score": 2418
+   "avg_views": 1628,
+   "avg_likes": 52.0,
+   "like_rate": 3.19,
+   "avg_score": 2408
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1708,
+   "avg_views": 1712,
    "avg_likes": 40.5,
    "like_rate": 2.37,
-   "avg_score": 2319
+   "avg_score": 2323
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1651,
+   "avg_views": 1648,
    "avg_likes": 41.0,
-   "like_rate": 2.48,
-   "avg_score": 2266
+   "like_rate": 2.49,
+   "avg_score": 2263
   },
   {
    "slug": "comedy",
@@ -45,10 +45,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1376,
+   "avg_views": 1374,
    "avg_likes": 24.0,
-   "like_rate": 1.74,
-   "avg_score": 1766
+   "like_rate": 1.75,
+   "avg_score": 1764
   },
   {
    "slug": "fakten",
@@ -62,7 +62,7 @@
  ],
  "weights": {
   "fakten": 0.69,
-  "storys": 1.12,
+  "storys": 1.11,
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
@@ -72,7 +72,7 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1630 Aufrufe, 3.22 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1628 Aufrufe, 3.19 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2374 zu 705 Punkte)."
  ],
@@ -103,11 +103,11 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2002,
+   "views": 2004,
    "likes": 66,
    "comments": 0,
    "shares": 0,
-   "score": 2992
+   "score": 2994
   },
   {
    "id": 80,
