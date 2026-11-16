@@ -1,680 +1,4 @@
 {
- "2026-11-15 21:00": {
-  "category": "whatif",
-  "topic": "Was wäre, wenn alle Tiere auf der Erde plötzlich sprechen könnten?",
-  "trend": null,
-  "script": {
-   "title": "Was passiert, wenn alle Tiere plötzlich sprechen könnten?",
-   "description": "Was würden Haustiere dir wohl als Erstes sagen\nEin normaler Tag wird zum Albtraum, weil jede Fliege mitredet\nWem würdest du am liebsten sofort den Mund verbieten",
-   "hashtags": [
-    "#shorts",
-    "#tiere",
-    "#whatif",
-    "#gedankenspiel",
-    "#funny",
-    "#foryou",
-    "#viral"
-   ],
-   "tags": [
-    "tiere sprechen",
-    "was wäre wenn",
-    "haustiere",
-    "hund und katze",
-    "tierfakten",
-    "gedankenspiel",
-    "lustige fakten",
-    "physik",
-    "biologie",
-    "wissenschaft"
-   ],
-   "thumbnail": {
-    "place": "livingroom",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "cat"
-    ],
-    "weather": "",
-    "image": "Close-up of a shocked human looking at a small cat speaking with a speech bubble, bright colors, high contrast",
-    "text": "TIERE SPRECHEN"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "long",
-     "hair_color": "braun",
-     "gender": "w",
-     "skin": "hell"
-    },
-    "katze": {
-     "kind": "cat"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Alle Tiere auf der Erde können plötzlich sprechen.",
-     "image": "A person looking shocked in a living room while a cat opens its mouth to speak.",
-     "who": [
-      "du"
-     ],
-     "place": "worldmap",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Tiere",
-      "sprechen"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "card",
-      "text": "ALLES ÄNDERT SICH"
-     },
-     "see": "Eine Weltkugel zeigt den gesamten Planeten",
-     "time": "day",
-     "props": [
-      "earth"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Deine Katze fordert sofort besseres Futter und entlarvt deine Geheimnisse.",
-     "image": "Global map showing millions of tiny talking symbols popping up everywhere.",
-     "who": [],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "erste Sekunde",
-      "Staunen"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du stehst im Wohnzimmer und schaust erschrocken deine Katze an",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "A cozy modern living room with a sofa, a coffee table, and a large window."
-    },
-    {
-     "text": "Deine eigene Katze mustert dich abfällig und fordert besseres Futter.",
-     "image": "A cat sitting on a table looking annoyed with a tiny speech bubble.",
-     "who": [
-      "du",
-      "katze"
-     ],
-     "place": "livingroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Katze",
-      "Futter"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Deine Katze sitzt auf dem Tisch und mustert dich abfällig",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "annoyed",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "; ",
-     "place_desc": "A cozy modern living room with a sofa, a coffee table, and a large window."
-    },
-    {
-     "text": "Nach einer Stunde bricht im Internet das absolute Chaos aus.",
-     "image": "Server room with flashing red warning lights and glowing screens.",
-     "who": [],
-     "place": "serverroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "eine Stunde",
-      "Chaos"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "counter",
-      "label": "MELDUNGEN",
-      "value": 4.8,
-      "unit": "MIO.",
-      "sub": "PRO SEKUNDE"
-     },
-     "see": "Das Rechenzentrum zeigt blinkende Server",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "panic",
-     "crowd": "panic",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Milliarden von Insekten beschweren sich lauthals über deinen Musikgeschmack.",
-     "image": "Close-up of tiny insects gathered near a window complaining loudly.",
-     "who": [],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Milliarden",
-      "Insekten"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "card",
-      "text": "MILLIARDEN STIMMEN"
-     },
-     "see": "Insekten fliegen im Park herum",
-     "time": "day",
-     "props": [
-      "box"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "annoyed",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "A cozy modern living room with a sofa, a coffee table, and a large window."
-    },
-    {
-     "text": "Nach einem Tag schließen die ersten Supermärkte wegen streikender Rinder.",
-     "image": "Supermarket exterior with empty shelves and worried shoppers outside.",
-     "who": [],
-     "place": "supermarket_empty",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "einem Tag",
-      "streikender Rinder"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "tag",
-      "text": "TAG 1"
-     },
-     "see": "Ein Supermarkt mit leeren Regalen",
-     "time": "day",
-     "props": [
-      "shelf"
-     ],
-     "actors": [],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "worried",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Kühe fordern freie Weidezeiten und protestieren lautstark auf den Wiesen.",
-     "image": "Cows standing in a field holding small protest signs with clover leaves.",
-     "who": [],
-     "place": "farm",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kühe",
-      "Klee"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "stamp",
-      "text": "PROTEST",
-      "color": "red"
-     },
-     "see": "Kühe stehen auf der Wiese und protestieren",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "fields",
-       "fence"
-      ]
-     },
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Du denkst, Hunde sind verständnisvolle Freunde – falsch, sie entpuppen sich als nervige Philosophen.",
-     "image": "A dog looking up with big happy eyes and a thought bubble about happiness.",
-     "who": [],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Hunde",
-      "Philosophen"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du sitzt im Sessel und greifst dir an den Kopf",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "A cozy modern living room with a sofa, a coffee table, and a large window."
-    },
-    {
-     "text": "Katzen hingegen starten eine weltweite Kampagne zur Weltherrschaft.",
-     "image": "A cat sitting on a high throne looking down with absolute authority.",
-     "who": [],
-     "place": "headquarters",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Katzen",
-      "Weltherrschaft"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Katzen versammeln sich auf der Straße",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Nach einer Woche sinkt der weltweite Fleischkonsum massiv ab.",
-     "image": "A chart showing a massive drop in meat consumption over seven days.",
-     "who": [],
-     "place": "office",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "eine Woche",
-      "neunzig Prozent"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "bar",
-      "label": "VERZICHT",
-      "value": 10
-     },
-     "see": "Ein Diagramm zeigt sinkenden Fleischkonsum",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Niemand isst ein Schnitzel, wenn das Schwein fragt – aber wer übernimmt nun die Wissenschaft?",
-     "image": "A person sitting at a dinner table looking guiltily at a plate.",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Schnitzel",
-      "Schwein"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "card",
-      "text": "SCHLECHTES GEWISSEN"
-     },
-     "see": "Du stehst in der Küche vor dem Kühlschrank",
-     "time": "day",
-     "props": [
-      "fridge"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Nach einem Monat kooperieren Forscher offiziell mit Schimpansen.",
-     "image": "Scientists in a modern laboratory talking to intelligent chimpanzees.",
-     "who": [],
-     "place": "lab",
-     "camera": "pan_left",
-     "sfx": "ding",
-     "highlight": [
-      "einem Monat",
-      "Forscher"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "tag",
-      "text": "MONAT 1"
-     },
-     "see": "Forscher arbeiten im Labor",
-     "time": "day",
-     "props": [
-      "computer"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Technologie macht Quantensprünge, weil Tiere uns völlig neue Blickwinkel verraten.",
-     "image": "Futuristic laboratory with glowing blueprints and scientific devices.",
-     "who": [],
-     "place": "serverroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Technologie",
-      "Blickwinkel"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Im Rechenzentrum leuchten Bildschirme auf",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Nach einem Jahr verstehen wir plötzlich viel mehr von der Tierwelt.",
-     "image": "A person walking in a city park surrounded by pigeons and crows talking.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "ein Jahr",
-      "Taubisch"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "card",
-      "text": "NEUE SICHT"
-     },
-     "see": "Du gehst entspannt durch den Park",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "crowd": "walk",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Spinnen nutzen ihre neue Stimme primär für psychische Folter im Schlafzimmer.",
-     "image": "A tiny spider in the corner of a bedroom with a speech bubble pointing down.",
-     "who": [],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Spinnen",
-      "Folter"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du liegst im Schlafzimmer im Bett",
-     "time": "night",
-     "props": [
-      "candle"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sleep",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "insert",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Nach fünf Jahren gibt es eigene Tierschutzparteien im Parlament.",
-     "image": "A dog standing behind a podium in a large political parliament hall.",
-     "who": [],
-     "place": "headquarters",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "fünf Jahren",
-      "Parlament"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "tag",
-      "text": "PARTEIEN"
-     },
-     "see": "Ein großes Regierungsgebäude von außen",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Menschen wandern nachts nur noch mit Ohrenstöpseln durch die Natur.",
-     "image": "A person walking through a dark forest wearing bright orange earplugs.",
-     "who": [
-      "du"
-     ],
-     "place": "forest",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Ohrenstöpseln",
-      "Natur"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Menschen gehen mit Ohrenstöpseln durch den Wald",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest",
-       "trees"
-      ]
-     },
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "crowd": "worried",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Am Ende herrscht perfekter Frieden auf dem gesamten Planeten.",
-     "image": "Peaceful landscape with diverse animals and humans sitting together happily.",
-     "who": [],
-     "place": "worldmap",
-     "camera": "zoom_out",
-     "sfx": "ding",
-     "highlight": [
-      "Ende",
-      "Frieden"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Die Weltkugel in friedlichem Sonnenlicht",
-     "time": "day",
-     "props": [
-      "sun"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Bis auf eine winzige Mücke, die dir genau jetzt sagt, dass sie dich liebt",
-     "image": "Close-up of a tiny smiling mosquito right next to the camera lens.",
-     "who": [],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Mücke",
-      "liebt"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "choice",
-      "a": "Zuhören",
-      "b": "Klatschen"
-     },
-     "see": "Du schaust nah heran auf eine kleine Mücke",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "surprised",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "schwein",
-   "mücke"
-  ],
-  "title": "Was passiert, wenn alle Tiere plötzlich sprechen könnten?",
-  "created": 1794755909.3713648
- },
  "2026-11-16 13:00": {
   "category": "fakten",
   "topic": "Warum du Gänsehaut bekommst, wenn dein Lieblingssong droppt: Was dein Gehirn in genau 0,5 Sekunden mit Dopamin anstellt",
@@ -2905,5 +2229,654 @@
   ],
   "title": "Schreckreflex: Was passiert in 1 Sekunde im Körper?",
   "created": 1794844128.3940234
+ },
+ "2026-11-17 13:00": {
+  "category": "fakten",
+  "topic": "Warum bekommen wir Gänsehaut? Die verblüffende biologische Ursache",
+  "trend": null,
+  "script": {
+   "title": "Warum bekommen wir Gänsehaut?",
+   "description": "Was passiert eigentlich in deinem Körper, wenn du plötzlich Gänsehaut bekommst?\nWir schauen uns die urzeitliche Ursache hinter diesem Reflex an.\nGänsehaut bei Kälte oder bei Musik?",
+   "hashtags": [
+    "#shorts",
+    "#foryou",
+    "#biologie",
+    "#fakten",
+    "#wissen",
+    "#body",
+    "#viral",
+    "#fyp"
+   ],
+   "tags": [
+    "gänsehaut",
+    "körper",
+    "biologie",
+    "reflex",
+    "evolution",
+    "haare",
+    "kälte",
+    "angst",
+    "wissen"
+   ],
+   "thumbnail": {
+    "place": "forest",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "goosebumps"
+    ],
+    "weather": "",
+    "image": "Close up of skin showing goosebumps rising with dramatic lighting, simple clean composition",
+    "text": "WARUM GÄNSEHAUT?"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "braun",
+     "gender": "w",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Drei Gründe für Gänsehaut, die dein Körper vor Millionen Jahren brauchte.",
+     "image": "Close up of arms showing goosebumps forming.",
+     "who": [
+      "du"
+     ],
+     "place": "forest",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Haut",
+      "Härchen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "DER REFLEX"
+     },
+     "see": "Du stehst im Wald und denkst über Gänsehaut nach",
+     "time": "day",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und der letzte zeigt dir, was wir von unseren Vorfahren geerbt haben.",
+     "image": "Character looking surprised at their own arm.",
+     "who": [
+      "du"
+     ],
+     "place": "forest",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kälte",
+      "Song"
+     ],
+     "overlay": null,
+     "see": "Du zeigst nach vorne und erklärst etwas",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Doch der wahre Grund liegt Millionen Jahre in unserer evolutionären Vergangenheit.",
+     "image": "Ancient savanna landscape with prehistoric human ancestors.",
+     "who": [],
+     "place": "forest",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Vergangenheit"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "MIO. JAHRE"
+     },
+     "see": "Du schaust nachdenklich in die Ferne",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "calm",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Unsere Vorfahren hatten noch ein sehr viel dichteres Fell am gesamten Körper.",
+     "image": "Close up of an animal with thick fur.",
+     "who": [],
+     "place": "forest",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Fell"
+     ],
+     "overlay": null,
+     "see": "Ein haariger Vorfahre im Urwald",
+     "time": "day",
+     "props": [
+      "chimp"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wenn damals Gefahr drohte oder die Temperatur drastisch sank, passierte etwas Faszinierendes.",
+     "image": "Prehistoric human shivering in the cold wind.",
+     "who": [],
+     "place": "forest",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Gefahr",
+      "Temperatur"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GEFAHR",
+      "color": "red"
+     },
+     "see": "Ein Sturm zieht auf im Wald",
+     "time": "day",
+     "weather": "storm",
+     "props": [
+      "lightning"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Winzige Muskeln an den Haarwurzeln zogen sich blitzschnell und ruckartig zusammen.",
+     "image": "Animation of muscle pulling a hair follicle upright.",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Muskeln",
+      "Haarwurzeln"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "MUSKELKRAFT"
+     },
+     "see": "Nahaufnahme von Muskeln an Haarwurzeln",
+     "time": "day",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dadurch stellte sich das Fell auf und schloss eine wärmende Luftschicht ein.",
+     "image": "Animal fur puffing up to trap warm air.",
+     "who": [],
+     "place": "forest",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Luftschicht"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ISOLATION"
+     },
+     "see": "Fell stellt sich auf und schützt vor Kälte",
+     "time": "day",
+     "weather": "snow",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das schützte effektiv vor eisiger Kälte und Frost im Winter.",
+     "image": "Snowflakes falling gently on thick fur.",
+     "who": [],
+     "place": "snow",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Kälte",
+      "Frost"
+     ],
+     "overlay": null,
+     "see": "Schnee fällt im winterlichen Wald",
+     "time": "day",
+     "weather": "snow",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Bei Bedrohung hatte dieser Reflex aber einen noch viel clevereren Zweck.",
+     "image": "Animal looking large and threatening with puffed fur.",
+     "who": [],
+     "place": "forest",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Bedrohung",
+      "Zweck"
+     ],
+     "overlay": null,
+     "see": "Bedrohung im Wald",
+     "time": "day",
+     "weather": "storm",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aufgestellt wirkten unsere Vorfahren dadurch plötzlich deutlich größer.",
+     "image": "Figure looking bigger with raised arms.",
+     "who": [
+      "du"
+     ],
+     "place": "forest",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "größer"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "GRÖSSER"
+     },
+     "see": "Aufgerichtetes Fell lässt Figur größer wirken",
+     "time": "day",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Angreifer wurden dadurch im letzten Moment eingeschüchtert und flüchteten sofort.",
+     "image": "Predator running away in fear.",
+     "who": [],
+     "place": "forest",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Angreifer",
+      "flüchteten"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FLUCHT",
+      "color": "orange"
+     },
+     "see": "Angreifer flüchtet im Wald",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Heute brauchen wir dieses dicke Fell rein biologisch eigentlich überhaupt nicht mehr.",
+     "image": "Character looking at smooth modern skin.",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Fell",
+      "biologisch"
+     ],
+     "overlay": null,
+     "see": "Du stehst entspannt im modernen Park",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Unsere Körper reagieren bei starker Emotion aber genau wie in der Urzeit.",
+     "image": "Brain glowing with emotion signals.",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Emotion",
+      "Jahren"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "DER URSPRUNG"
+     },
+     "see": "Du reagierst emotional im Park",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Ein guter Horrorfilm oder ein genialer Beat triggern exakt denselben alten Alarm.",
+     "image": "Character wearing headphones reacting with excitement.",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Horrorfilm",
+      "Beat"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "MUSIK & FILM"
+     },
+     "see": "Kopfhörer und Musik im Park",
+     "time": "day",
+     "props": [
+      "kopfhörer",
+      "bassbox"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Adrenalin durchströmt in Sekundenschnelle unseren gesamten Organismus.",
+     "image": "Pulsing energy wave through a body outline.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Adrenalin",
+      "Organismus"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ADRENALIN"
+     },
+     "see": "Adrenalin durchströmt den Körper",
+     "time": "day",
+     "props": [
+      "herz"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Deshalb spürst du diesen leichten Schauer bei Gänsehaut am ganzen Körper.",
+     "image": "Close up of arms showing goosebumps again.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Schauer",
+      "Gänsehaut"
+     ],
+     "overlay": null,
+     "see": "Du spürst den Schauer am ganzen Körper",
+     "time": "day",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wir tragen also ein echtes Urzeit-Relikt direkt unter unserer Haut.",
+     "image": "Character touching their arm thoughtfully.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Urzeit-Relikt",
+      "Haut"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "URZEIT",
+      "color": "green"
+     },
+     "see": "Ein Urzeit-Relikt unter der Haut",
+     "time": "day",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und genau deshalb zieht sich deine Haut zusammen und winzige Härchen stellen sich auf.",
+     "image": "Character smiling as goosebumps appear again in a loop.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Haut",
+      "Härchen"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Bei Kälte",
+      "b": "Bei Musik"
+     },
+     "see": "Haut zieht sich zusammen und Härchen stellen sich auf",
+     "time": "day",
+     "props": [
+      "goosebumps"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "fell",
+   "luftschicht",
+   "kälte",
+   "adrenalin"
+  ],
+  "title": "Warum bekommen wir Gänsehaut?",
+  "created": 1794853927.0196795
  }
 }
