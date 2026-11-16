@@ -1,5 +1,5 @@
 {
- "updated": 1794840026.2199125,
+ "updated": 1794840382.96357,
  "enough": true,
  "counted": 16,
  "total": 18,
@@ -27,28 +27,28 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1655,
+   "avg_views": 1658,
    "avg_likes": 42.0,
-   "like_rate": 2.54,
-   "avg_score": 2285
+   "like_rate": 2.53,
+   "avg_score": 2288
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1544,
-   "avg_likes": 40.0,
+   "avg_views": 1562,
+   "avg_likes": 40.5,
    "like_rate": 2.59,
-   "avg_score": 2144
+   "avg_score": 2169
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1381,
+   "avg_views": 1378,
    "avg_likes": 24.0,
    "like_rate": 1.74,
-   "avg_score": 1771
+   "avg_score": 1768
   },
   {
    "slug": "fakten",
@@ -66,7 +66,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
-  "comedy": 0.99,
+  "comedy": 1.0,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -74,7 +74,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1634 Aufrufe, 3.18 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2383 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2387 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,11 +93,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2222,
+   "views": 2223,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3137
+   "score": 3138
   },
   {
    "id": 84,
