@@ -1,5 +1,5 @@
 {
- "updated": 1794837502.653451,
+ "updated": 1794837859.1900523,
  "enough": true,
  "counted": 16,
  "total": 18,
@@ -36,19 +36,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1542,
+   "avg_views": 1543,
    "avg_likes": 39.5,
    "like_rate": 2.56,
-   "avg_score": 2135
+   "avg_score": 2136
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1374,
+   "avg_views": 1378,
    "avg_likes": 24.0,
-   "like_rate": 1.75,
-   "avg_score": 1764
+   "like_rate": 1.74,
+   "avg_score": 1768
   },
   {
    "slug": "fakten",
@@ -103,11 +103,11 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2004,
+   "views": 2002,
    "likes": 66,
    "comments": 0,
    "shares": 0,
-   "score": 2994
+   "score": 2992
   },
   {
    "id": 80,
