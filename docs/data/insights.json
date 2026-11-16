@@ -1,5 +1,5 @@
 {
- "updated": 1794866414.3039474,
+ "updated": 1794867375.7140605,
  "enough": true,
  "counted": 17,
  "total": 20,
@@ -27,10 +27,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1720,
+   "avg_views": 1718,
    "avg_likes": 40.6,
    "like_rate": 2.36,
-   "avg_score": 2333
+   "avg_score": 2332
   },
   {
    "slug": "comedy",
@@ -83,7 +83,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2396 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2395 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -102,11 +102,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2251,
+   "views": 2239,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3166
+   "score": 3154
   },
   {
    "id": 84,
