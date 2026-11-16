@@ -4407,5 +4407,45 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7708739015050071328?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 121,
+  "category": "fakten",
+  "topic": "5 faszinierende Dinge, die dein Gehirn tut, während du schläfst",
+  "status": "review",
+  "created": 1794841969.1366808,
+  "title": "5 verrückte Dinge, die dein Gehirn nachts tut",
+  "description": "Dein Gehirn ist nachts aktiver als du denkst!\nVon Selbstreinigung bis Lähmung: Das passiert in deinem Kopf, während du schläfst.\nWas war dein verrücktestes Traum-Erlebnis?",
+  "hashtags": [
+   "#shorts",
+   "#gehirn",
+   "#schlaf",
+   "#fakten",
+   "#wissen",
+   "#unterhaltung",
+   "#viral"
+  ],
+  "tags": [
+   "gehirn im schlaf",
+   "schlaffakten",
+   "schlafparalyse",
+   "biologie fakten",
+   "psychologie fakten",
+   "was passiert im schlaf"
+  ],
+  "thumb_text": "GEHIRN REINIGT SICH",
+  "missing": null,
+  "cover_ms": 74949,
+  "duration": 74.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-16 18:00",
+  "review_at": 1794842480.3479347
  }
 ]
