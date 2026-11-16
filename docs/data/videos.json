@@ -4231,7 +4231,7 @@
   "id": 117,
   "category": "fakten",
   "topic": "Warum du Gänsehaut bekommst, wenn dein Lieblingssong droppt: Was dein Gehirn in genau 0,5 Sekunden mit Dopamin anstellt",
-  "status": "review",
+  "status": "discarded",
   "created": 1794823836.3051822,
   "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
   "description": "Warum kriegst du bei Musik Gänsehaut?\nDein Gehirn schüttet Dopamin aus.\nHörst du Lieder lieber laut?",
@@ -4268,6 +4268,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-16 13:00",
-  "review_at": 1794824340.4537077
+  "review_at": 1794824340.4537077,
+  "error": "Bei der Prüfung verworfen: Prüfung: erfundene 0,5 Sekunden als Kernaussage, erfundenes Siegertreppchen, halber Schlusssatz"
  }
 ]
