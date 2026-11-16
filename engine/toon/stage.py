@@ -1145,6 +1145,22 @@ def direct(scenes, times, topic="", style="", look=""):
             stems_c = [w_[:5] for w_ in _re0.findall(r"[a-zäöüß]{4,}", (str(g_c.get("text") or "") + " " + str(g_c.get("kicker") or "")).lower())]
             if stems_c and not any(st_ in low_c0 for st_ in stems_c):
                 sc["graphic"], sc["shot"] = None, ""      # Plakette ohne ein einziges Wort aus dem Satz („KÜHLSCHRANK STREIKT“ zum Nachbarn mit der Polizei): der Satz bekommt ein echtes Bild
+        if isinstance(g_c, dict) and sc.get("graphic") and str(g_c.get("type") or "").lower() == "badge" and "?" not in str(sc.get("text") or ""):
+            for key_q in ("text", "kicker"):              # Plakette „ÜBERLEBENSREFLEX?“ über einem Satz, der es feststellt: ohne Fragezeichen
+                if isinstance(g_c.get(key_q), str) and g_c[key_q].rstrip().endswith("?"):
+                    g_c[key_q] = g_c[key_q].rstrip().rstrip("?").rstrip()
+        i_q = next(j_q for j_q, x_q in enumerate(scenes) if x_q is sc)
+        pv_q = scenes[i_q - 1] if i_q and isinstance(scenes[i_q - 1], dict) else {}
+        if isinstance(g_c, dict) and sc.get("graphic") and str(g_c.get("type") or "").lower() == "badge" and str(sc.get("shot") or "") == "graphic" \
+                and str(pv_q.get("shot") or "") == "graphic" and isinstance(pv_q.get("graphic"), dict) and [a_q for a_q in (sc.get("actors") or []) if isinstance(a_q, dict)]:
+            sc["graphic"], sc["shot"] = None, ""          # zwei Vollbild-Grafiken hintereinander (Fragezeichen, dann Plakette – neun Sekunden ohne Bild): die Plakette weicht dem Bild der Szene
+        if isinstance(g_c, dict) and sc.get("graphic") and str(g_c.get("type") or "").lower() == "podium":
+            near_q = " ".join(str(scenes[j_q].get("text") or "") for j_q in (i_q - 1, i_q, i_q + 1) if 0 <= j_q < len(scenes) and isinstance(scenes[j_q], dict)).lower()
+            hit_q = sum(1 for key_q in ("text", "left", "right")
+                        if any(w_[:5] in near_q for w_ in _re0.findall(r"[a-zäöüß]{3,}", str(g_c.get(key_q) or "").lower())))
+            if hit_q < 2:                                 # Siegertreppchen mit Plätzen, die niemand nennt („ARME, NACKEN, RÜCKEN“ zur Frage, warum es nicht jeder spürt): erfunden – der Satz bekommt ein echtes Bild
+                sc["graphic"] = None
+                sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
         ov_c = sc.get("overlay")
         if isinstance(ov_c, dict) and str(ov_c.get("type") or "") == "choice" and "?" not in str(sc.get("text") or "") and not _re0.search(r"\boder\b", str(sc.get("text") or "").lower()):
             sc["overlay"] = None                          # Auswahl „A/B“ an einem Satz, der gar keine Frage stellt
@@ -2160,6 +2176,12 @@ def direct(scenes, times, topic="", style="", look=""):
     _named_animals(scenes, topic)
     _household(scenes)
     _music(scenes, topic)
+    for i_n in range(1, len(scenes)):                     # eben stand das Ding schon groß allein im Bild: der nächste Satz schneidet nicht noch einmal darauf (neun Sekunden derselbe Lautsprecher)
+        sc_n, pv_n = scenes[i_n], scenes[i_n - 1]
+        if isinstance(sc_n, dict) and isinstance(pv_n, dict) and str(pv_n.get("shot") or "") == "insert":
+            keys_n = {str(q.get("type") if isinstance(q, dict) else q) for q in pv_n.get("props") or []}
+            if keys_n & {str(q.get("type") if isinstance(q, dict) else q) for q in sc_n.get("props") or []}:
+                sc_n["_no_insert"] = True
     return scenes
 
 
@@ -3735,6 +3757,8 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
     low = str(scene.get("text") or "").lower()
     named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL
              and extras.PROP_ALIASES.get(k, k) not in PLACE_HAS.get(place, ()) and _said_prop(k, low)]
+    if scene.get("_no_insert"):
+        named = []
     down = any(a.get("action") in ("fall", "sleep", "sit", "float") or a.get("kind") in LONG_KINDS for a in actors)      # liegt, sitzt oder schwebt jemand, schneidet die Großaufnahme ihn an
     kind = "insert" if named and index % 2 == 0 else "close" if len(actors) == 1 and not down else "insert" if named else ""   # zwei und mehr nicht anschneiden
     if not kind and not any(a.get("say") or a.get("hold") in ("sign",) for a in actors):

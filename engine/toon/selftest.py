@@ -1153,6 +1153,32 @@ def main():
         for sc_ in sd:
             assert frame(sc_, {"du": {}}) is not None
     check("Tiere aus dem Satz im Bild (Kuh, Schwein, Schimpanse, Mücke)", _animals)
+    def _pruef_1116():                                           # Prüfung 16.11.: halber Schlusssatz, erfundenes Siegertreppchen, Plakette mit Fragezeichen, zweimal derselbe Einschub
+        from .. import writer as _w
+        js = _w.polish({"title": "x", "scenes": [{"text": f"Satz Nummer {n_} erzählt etwas ganz anderes."} for n_ in range(8)]
+                        + [{"text": "Und genau aus diesem Grund passiert das jedes Mal wieder, sobald..."}]})
+        assert js["scenes"][-1]["text"] == "Und genau aus diesem Grund passiert das jedes Mal wieder.", js["scenes"][-1]["text"]
+        js = _w.polish({"title": "x", "scenes": [{"text": f"Satz Nummer {n_} erzählt etwas ganz anderes."} for n_ in range(8)] + [{"text": "Und das passiert, weil."}]})
+        assert len(js["scenes"]) == 8, js["scenes"][-1]
+        js = _w.polish({"title": "x", "scenes": [{"text": f"Satz Nummer {n_} erzählt etwas ganz anderes."} for n_ in range(8)] + [{"text": "Genau so fühlt sich das an, und zwar jedes Mal."}]})
+        assert js["scenes"][-1]["text"] == "Genau so fühlt sich das an, und zwar jedes Mal.", js["scenes"][-1]["text"]
+        sd = stage.direct([{"text": "Nicht jeder Mensch spürt dieses Gefühl gleich stark, doch woran liegt dieser Unterschied?", "place": "lab", "shot": "graphic",
+                            "graphic": {"type": "podium", "kicker": "KÖRPER", "text": "ARME", "left": "NACKEN", "right": "RÜCKEN"}, "actors": [{"id": "du"}]},
+                           {"text": "Es ist ein uralter Überlebensreflex aus der Steinzeit.", "place": "lab", "shot": "graphic", "graphic": {"type": "badge", "text": "ÜBERLEBENSREFLEX?"}},
+                           {"text": "Platz eins geht an die Arme, dann kommen Nacken und Rücken.", "place": "lab", "shot": "graphic",
+                            "graphic": {"type": "podium", "kicker": "KÖRPER", "text": "ARME", "left": "NACKEN", "right": "RÜCKEN"}}],
+                          [(0, 5), (5, 10), (10, 15)], "Warum du bei Musik Gänsehaut bekommst", "fakten")
+        assert not sd[0].get("graphic") and sd[0].get("shot") != "graphic", f"erfundenes Siegertreppchen bleibt: {sd[0].get('graphic')}"
+        assert not sd[1].get("graphic") or not str(sd[1]["graphic"].get("text")).endswith("?"), sd[1].get("graphic")
+        assert isinstance(sd[2].get("graphic"), dict) and sd[2]["graphic"].get("type") == "podium", f"genanntes Siegertreppchen fehlt: {sd[2].get('graphic')}"
+        sd = stage.direct([{"text": "Das passiert kurz vor dem Fernseher.", "place": "livingroom", "shot": "insert", "props": [{"type": "tv"}]},
+                           {"text": "Schon vor dem Fernseher passiert etwas Verrücktes im Kopf.", "place": "livingroom", "props": [{"type": "tv"}], "actors": [{"id": "du"}]}],
+                          [(0, 4), (4, 9)], "Fernsehen", "fakten")
+        if sd[0].get("shot") == "insert" and all(any((q_.get("type") if isinstance(q_, dict) else q_) == "tv" for q_ in sx_.get("props") or []) for sx_ in sd):
+            assert sd[1].get("_no_insert"), "zweimal hintereinander Einschub auf dasselbe Ding"
+        for sc_ in sd:
+            assert frame(sc_, {"du": {}}) is not None
+    check("Prüfung 16.11.: halber Schlusssatz, erfundenes Siegertreppchen, Plakette mit Fragezeichen", _pruef_1116)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

@@ -305,3 +305,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Thema „cc“ oder „remix“ im Studio erzwingt die Quelle.
 - Kategorie mit `every_days: 1` und `special: "bounce"`: `main.pick` nimmt sie, sobald ein Tag seit der letzten um ist (`STATE["last_musik"]`),
   sonst nie; `make_bounce` rendert ohne Drehbuch und Sprecher und lädt hoch wie jedes Video.
+
+- Prüfung 16.11.2026 (Gänsehaut-Video): `writer.polish` streicht am Schlusssatz einen angefangenen Nebensatz („… jedes Mal wieder, sobald.“ –
+  Liste `_DANGLING`). `stage.direct`: Siegertreppchen (`podium`) bleibt nur, wenn mindestens zwei der drei Plätze im Satz oder in den Nachbarsätzen
+  genannt werden; Plakette ohne Fragezeichen, wenn der Satz nichts fragt; folgt eine Plakette direkt auf eine andere Vollbild-Grafik, weicht sie
+  dem Bild der Szene; stand ein Ding eben als Einschub groß allein im Bild, schneidet der nächste Satz nicht noch einmal darauf (`_no_insert`).

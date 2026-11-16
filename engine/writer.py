@@ -476,6 +476,9 @@ def fix_label_typos(label, sentence):
     return re.sub(r"[A-Za-zÄÖÜäöüß]{6,}", rep, str(label))
 
 
+_DANGLING = "sobald|wenn|weil|dass|falls|bis|bevor|nachdem|während|obwohl|damit|sodass|indem|ob|als|wie|und|oder|aber|denn|sondern|doch"   # Wörter, auf die kein Satz endet
+
+
 def polish(js):
     """Letzter Schliff ohne Text-KI: ß in Sprechertext, Titel und Beschreibung; englische Wörter in Einblendungen und Grafiken
     („GEHIRN-EFFECT“) werden deutsch."""
@@ -493,6 +496,16 @@ def polish(js):
             js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
         elif _re_p.search(r"(?:[–—-]|\.\.\.|…)\s*$", t_l):        # längerer Schlusssatz, der im Gedankenstrich hängen bleibt: als ganzer Satz mit Punkt beenden
             scs_p[-1]["text"] = _re_p.sub(r"[\s,;:]*(?:[–—-]|\.\.\.|…)\s*$", "", t_l).rstrip(" ,;:") + "."
+    scs_p = [x for x in js.get("scenes") or [] if isinstance(x, dict)]
+    if len(scs_p) >= 8:                                   # Schlusssatz bricht nach einem Bindewort ab („… passiert das jedes Mal wieder, sobald.“): den angefangenen Nebensatz streichen
+        t_l = str(scs_p[-1].get("text") or "").strip()
+        m_l = _re_p.search(r"(?i)[\s,;:–—-]+(?:und |aber |doch )?(?:" + _DANGLING + r")\s*[.!]?\s*$", t_l)
+        if m_l:
+            rest_l = t_l[:m_l.start()].rstrip(" ,;:–—-")
+            if len(rest_l.split()) >= 4:
+                scs_p[-1]["text"] = rest_l + "."
+            else:
+                js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
     for k in ("title", "description"):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])
