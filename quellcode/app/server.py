@@ -26,6 +26,7 @@ from naclpure import decrypt, derive_key, encrypt, sealed_box  # noqa: E402
 from appshell import MANIFEST, SERVICE_WORKER, ensure_desktop_shortcut, icon_png, open_app_window, windowless_python  # noqa: E402,E501
 
 APP_VERSION = "dev"   # wird beim Bauen der Ein-Datei-Version gesetzt
+EDITION = "admin"     # admin = alles einstellbar · lite = Kanal-App zum Weitergeben (nur das Nötigste); wird beim Bauen gesetzt
 ROOT = os.path.dirname(os.path.abspath(__file__))
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("AS_PORT", "8791"))
@@ -34,8 +35,8 @@ LAUNCHER = os.environ.get("AS_LAUNCHER") or os.path.abspath(sys.argv[0])
 DATA = os.environ.get("AS_DATA", os.path.join(ROOT, "data"))
 os.makedirs(DATA, exist_ok=True)
 
-DEFAULT_OWNER, DEFAULT_REPO = "QuatratKopf", "autoshorts"
-UPDATE_URL = "https://raw.githubusercontent.com/QuatratKopf/autoshorts/main/version.json"
+DEFAULT_OWNER, DEFAULT_REPO = ("QuatratKopf", "autoshorts") if EDITION == "admin" else ("", "autoshorts")   # Kanal-App: eigene Kopie eintragen
+UPDATE_URL = "https://raw.githubusercontent.com/QuatratKopf/autoshorts/main/" + ("version.json" if EDITION == "admin" else "version-lite.json")
 REDIRECT = f"http://127.0.0.1:{PORT}/oauth/"
 UA = f"AutoShorts/{APP_VERSION}"
 SECRET_NAMES = ["GEMINI_API_KEY", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN", "OPENAI_API_KEY",
@@ -287,6 +288,9 @@ def _validate_build(data, sha=None):
     m = re.search(r'^APP_VERSION = "([0-9.]+)"', text, re.M)
     if not m or "INDEX_HTML = " not in text or not text.startswith("0<0# : ^"):
         raise ValueError("Das ist keine gültige AutoShorts-Datei.")
+    ed = re.search(r'^EDITION = "(\w+)"', text, re.M)
+    if ed and ed.group(1) != EDITION:
+        raise ValueError("Diese Datei ist eine andere App-Ausgabe (Admin/Kanal-App) und wurde nicht installiert.")
     compile(text, "AutoShorts.cmd", "exec")
     return m.group(1)
 
@@ -577,7 +581,7 @@ def version(h):
 @route("GET", r"/api/state")
 def state(h):
     h._send(200, {
-        "version": APP_VERSION, "platform": sys.platform, "launcher": LAUNCHER, "data": DATA,
+        "version": APP_VERSION, "edition": EDITION, "platform": sys.platform, "launcher": LAUNCHER, "data": DATA,
         "connected": bool(SET.get("token")), "owner": SET["owner"], "repo": SET["repo"],
         "local_secrets": {k: bool(v) for k, v in SET.get("client_secrets", {}).items()},
         "auto_update": bool(SET.get("auto_update")), "update": UPDATE, "redirect": REDIRECT})

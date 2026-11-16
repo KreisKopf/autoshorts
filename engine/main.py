@@ -17,8 +17,8 @@ import time
 from PIL import Image
 
 from . import ai, render, thumbnail, trends, uploaders, writer
-from .schedule import due_slot, plan_slot, review_slot, review_stale, stats_due
-from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, channel_rand, channel_seed, drop_token, log, save_all, video
+from .schedule import due_slot, plan_slot, review_slot, review_stale, stats_due, update_slot
+from .state import load, CONFIG, OUT, ROOT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, channel_rand, channel_seed, drop_token, log, save_all, video
 
 RELEASE = "videos"
 
@@ -652,6 +652,15 @@ def main(argv=None):
     failed = False
     try:
         if a.action == "auto":
+            up = update_slot(CONFIG, STATE)
+            if up:                                      # Kopie: eine Stunde vor dem Termin den neuesten Motor aus dem Original holen
+                STATE["engine_updated"] = up
+                try:
+                    from . import fresh
+                    if fresh.update_engine():
+                        (ROOT / ".engine_updated").write_text(up, encoding="utf-8")   # Zeichen für den Speicher-Schritt: Motor mit sichern
+                except Exception as e:  # noqa: BLE001 – ein fehlgeschlagenes Update darf kein Video verhindern
+                    log(f"Motor-Update vor {up} übersprungen ({e})")
             slot = due_slot(CONFIG, STATE)
             if slot:
                 STATE["done_slots"].append(slot)

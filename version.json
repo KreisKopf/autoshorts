@@ -1,6 +1,6 @@
 {
-  "version": "1.10.0",
-  "file": "releases/AutoShorts-1.10.0.cmd",
-  "sha256": "786384e76540f32a6a7bdddf83a40bc838ba56e528ccbc240eb44696cfe8350e",
-  "notes": "Kanal-Profil und App weitergeben: eigene Kopie neu einrichten, Motor aktualisieren, jeder Kanal bekommt andere Videos"
+  "version": "1.11.0",
+  "file": "releases/AutoShorts-1.11.0.cmd",
+  "sha256": "e576bc73184fe9771671055a57e33dcba912e0946c7d54b29731b29f34cd1e42",
+  "notes": "Zwei Apps: Admin-App (alles) und Kanal-App zum Weitergeben (nur das Nötigste); Motor-Update eine Stunde vor jedem Video"
 }

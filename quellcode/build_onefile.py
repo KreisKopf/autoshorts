@@ -2,7 +2,8 @@
 
     python3 quellcode/build_onefile.py 1.0.0 "Was ist neu"
 
-Legt ab:  AutoShorts.cmd (aktuelle Version), releases/AutoShorts-<version>.cmd, version.json
+Legt ab:  AutoShorts.cmd (Admin-App, aktuelle Version), releases/AutoShorts-<version>.cmd, version.json
+          AutoShorts-Kanal.cmd (Kanal-App zum Weitergeben, nur das Nötigste), releases/AutoShorts-Kanal-<version>.cmd, version-lite.json
 """
 import base64
 import hashlib
@@ -99,20 +100,24 @@ def main():
     server = server.replace('APP_VERSION = "dev"', f'APP_VERSION = "{version}"', 1)
     server = server.replace("INDEX_HTML = None", f"INDEX_HTML = {html!r}", 1).replace("ICON_SVG = None", f"ICON_SVG = {svg!r}", 1)
     assert f'APP_VERSION = "{version}"' in server and "INDEX_HTML = None" not in server and "ICON_SVG = None" not in server
+    assert 'EDITION = "admin"' in server
     consts = f"\nICON_PNG.update({pngs!r})\n"
-    out = HEADER + body + consts + server
     os.makedirs(os.path.join(ROOT, "releases"), exist_ok=True)
-    files = [os.path.join(ROOT, "AutoShorts.cmd"), os.path.join(ROOT, "releases", f"AutoShorts-{version}.cmd")]
-    for p in files:
-        with open(p, "w", encoding="utf-8", newline="\r\n") as f:
-            f.write(out)
-    with open(files[0], "rb") as f:
-        sha = hashlib.sha256(f.read()).hexdigest()
-    with open(os.path.join(ROOT, "version.json"), "w", encoding="utf-8") as f:
-        # eigene, nie wieder geänderte Datei je Version: GitHub kann keine veraltete Fassung ausliefern
-        json.dump({"version": version, "file": f"releases/AutoShorts-{version}.cmd", "sha256": sha, "notes": notes},
-                  f, ensure_ascii=False, indent=2)
-    print("gebaut:", files[0], os.path.getsize(files[0]), "Bytes · Version", version)
+    # Admin-App (alles einstellbar) und Kanal-App (zum Weitergeben, nur das Nötigste) – jede aktualisiert sich nur aus ihrer eigenen Datei
+    for edition, name, vfile in (("admin", "AutoShorts", "version.json"), ("lite", "AutoShorts-Kanal", "version-lite.json")):
+        srv = server.replace('EDITION = "admin"', f'EDITION = "{edition}"', 1)
+        out = HEADER + body + consts + srv
+        files = [os.path.join(ROOT, f"{name}.cmd"), os.path.join(ROOT, "releases", f"{name}-{version}.cmd")]
+        for p in files:
+            with open(p, "w", encoding="utf-8", newline="\r\n") as f:
+                f.write(out)
+        with open(files[0], "rb") as f:
+            sha = hashlib.sha256(f.read()).hexdigest()
+        with open(os.path.join(ROOT, vfile), "w", encoding="utf-8") as f:
+            # eigene, nie wieder geänderte Datei je Version: GitHub kann keine veraltete Fassung ausliefern
+            json.dump({"version": version, "file": f"releases/{name}-{version}.cmd", "sha256": sha, "notes": notes},
+                      f, ensure_ascii=False, indent=2)
+        print("gebaut:", files[0], os.path.getsize(files[0]), "Bytes · Version", version, "·", edition)
 
 
 if __name__ == "__main__":

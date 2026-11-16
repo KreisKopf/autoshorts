@@ -101,6 +101,30 @@ def review_stale(hours=3):
     return [v["id"] for v in vids if v.get("status") == "review" and time.time() - float(v.get("review_at") or 0) > hours * 3600]
 
 
+ORIGINAL = "quatratkopf/autoshorts"
+
+
+def update_slot(config=None, state=None, now=None, lead_min=75):
+    """Nur in einer Kopie (Fork): der nächste Upload-Termin, vor dem der Motor aus dem Original geholt werden soll – etwa eine
+    Stunde vorher (Läufe kommen alle 30 Minuten), einmal je Termin. Gibt '2026-11-16 18:00' oder None."""
+    repo = (os.environ.get("GITHUB_REPOSITORY") or "").strip().lower()
+    if not repo or repo == ORIGINAL:
+        return None
+    config = config if config is not None else _load("config.json")
+    state = state if state is not None else _load("state.json")
+    settings = config.get("settings", {})
+    if not settings.get("autopilot", True) or settings.get("auto_engine_update") is False:
+        return None
+    now = now or dt.datetime.now(TZ)
+    for day in (now.date(), now.date() + dt.timedelta(days=1)):
+        for h, m in parse_times(settings.get("upload_times", "18:00")):
+            slot = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=TZ)
+            sid = slot.strftime("%Y-%m-%d %H:%M")
+            if dt.timedelta(0) < slot - now <= dt.timedelta(minutes=lead_min) and state.get("engine_updated") != sid:
+                return sid
+    return None
+
+
 def plan_due():
     sid = plan_slot()
     return bool(sid) and sid not in _load("plans.json")
@@ -121,7 +145,7 @@ def main():
     action = (os.environ.get("IN_ACTION") or "auto").strip() or "auto"
     if action == "auto":
         slot = due_slot()
-        run, media = (1, 1) if slot else ((1, 0) if (stats_due() or plan_due() or review_stale()) else (0, 0))
+        run, media = (1, 1) if slot else ((1, 0) if (stats_due() or plan_due() or review_stale() or update_slot()) else (0, 0))
     else:
         run, media = 1, 1 if action in ("make", "review_make", "remake", "sounds") else 0
     print(f"run={run}")
