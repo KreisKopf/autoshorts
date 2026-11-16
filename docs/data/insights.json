@@ -1,8 +1,8 @@
 {
- "updated": 1794829209.5682185,
+ "updated": 1794830974.9092016,
  "enough": true,
- "counted": 15,
- "total": 17,
+ "counted": 16,
+ "total": 18,
  "needed": 6,
  "categories": [
   {
@@ -10,36 +10,36 @@
    "name": "🔥 Spannende Storys",
    "n": 2,
    "avg_views": 1628,
-   "avg_likes": 51.5,
-   "like_rate": 3.16,
-   "avg_score": 2400
+   "avg_likes": 52.0,
+   "like_rate": 3.19,
+   "avg_score": 2408
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1708,
-   "avg_likes": 40.2,
+   "avg_views": 1709,
+   "avg_likes": 40.4,
    "like_rate": 2.36,
-   "avg_score": 2315
+   "avg_score": 2318
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1644,
+   "avg_views": 1642,
    "avg_likes": 40.0,
-   "like_rate": 2.43,
-   "avg_score": 2244
+   "like_rate": 2.44,
+   "avg_score": 2242
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
-   "n": 1,
-   "avg_views": 1496,
-   "avg_likes": 47.0,
-   "like_rate": 3.14,
-   "avg_score": 2201
+   "n": 2,
+   "avg_views": 1540,
+   "avg_likes": 38.5,
+   "like_rate": 2.5,
+   "avg_score": 2117
   },
   {
    "slug": "tiere",
@@ -66,15 +66,15 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
-  "comedy": 1.2,
+  "comedy": 0.98,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1628 Aufrufe, 3.16 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1628 Aufrufe, 3.19 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2391 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2368 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -103,11 +103,11 @@
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2002,
+   "views": 2000,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2977
+   "score": 2975
   },
   {
    "id": 80,
