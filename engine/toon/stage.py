@@ -2230,6 +2230,19 @@ def _music(scenes, topic):
                     keep_g.append(q)
                 sc["props"], kinds = keep_g, [_key(q) for q in keep_g]
         goose_seen = goose_seen or "goosebumps" in kinds
+        hum_g = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind") and not re.search(r"gehirn|hirn|brain", str(a.get("id") or "").lower())]
+        if "goosebumps" in kinds and hum_g and str(sc.get("shot") or "") not in ("graphic", "insert"):
+            for a in hum_g:                               # die Figur steht links neben dem Schaubild und zeigt darauf – sie läuft nicht mitten durch die Tafel
+                a["pos"], a["facing"] = "left", "right"
+                a.pop("to", None)
+                if str(a.get("action") or "") in ("walk", "run", "jump", "dance", "idle", ""):
+                    a["action"] = "point"
+            sc["actors"] = [a for a in sc["actors"] if not isinstance(a, dict) or a in hum_g[:1] or a.get("kind") or a not in hum_g]
+            for q in sc["props"]:
+                if isinstance(q, dict) and _key(q) == "goosebumps":
+                    q["pos"] = 770
+            sc["shot"] = "" if str(sc.get("shot") or "") in ("event", "close") else sc.get("shot")
+            sc["_no_cut"] = True
         if "lib_muskel" in kinds and goose_seen and not re.search(r"\bmuskel|bizeps|oberarm", low):
             sc["props"] = [q for q in sc["props"] if _key(q) != "lib_muskel"]     # aus dem Haarbalg-Satz mitgenommener Oberarm (_carry_thing)
         if "goosebumps" in kinds and "lib_muskel" in kinds:
@@ -3960,6 +3973,7 @@ def poster_hero(topic, scenes, cast=None, avoid=()):
             k = str((a or {}).get("kind") or "").lower() if isinstance(a, dict) else ""
             if k in extras.CREATURES:
                 counts[k] = counts.get(k, 0) + 1
+    counts = {k: n for k, n in counts.items() if n >= 3 or n * 4 >= len(scenes or [])}  # ein Wesen, das nur in ein, zwei Szenen vorkommt (der Affe für „behaarte Vorfahren“ im Musik-Video), ist nicht das Gesicht des Videos
     ranked = [k for k in named if k in extras.CREATURES] + sorted(counts, key=lambda k: -counts[k])
     ranked = list(dict.fromkeys(ranked))
     named = [k for k in named if k in extras.CREATURES]

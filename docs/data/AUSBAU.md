@@ -314,3 +314,5 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Dunkelheit – `NIGHT_WHY_RE`), auf Tag. `_music`: „winzige Muskeln“ im Gänsehaut-Video sind das Schaubild `goosebumps`, kein Oberarm.
   `ANCESTOR_RE` („behaarte Vorfahren“, „aufgestelltes Fell“): ein Affe im Wald statt der Hauptfigur. „blitzschnell“ ist kein Blitz.
   Zitat-Karte (`overlays.quote`): lange Aussage in kleinerer Schrift auf vier Zeilen, nie mit Artikel am abgeschnittenen Ende.
+  Nach dem 2. Neubau: Steht das Schaubild `goosebumps` neben einer Figur, steht sie links davon und zeigt darauf (kein Laufen durch die Tafel,
+  kein `event`). `poster_hero`: Ein Wesen, das nur in ein, zwei Szenen eines langen Videos vorkommt, kommt nicht aufs Titelbild.

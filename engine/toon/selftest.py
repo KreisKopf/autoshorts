@@ -1198,6 +1198,12 @@ def main():
         assert sn[0].get("time") == "night", "genannte Nacht wird Tag"
         for sc_ in sd:
             assert frame(sc_, {"du": {}}) is not None
+        sg = stage.direct([{"text": "Winzige Muskeln an jeder einzelnen Haarwurzel ziehen sich in diesem Moment zusammen.", "place": "lab", "props": [{"type": "goosebumps"}],
+                            "shot": "event", "actors": [{"id": "du", "action": "walk"}]}], [(0, 4)], "Warum du bei Musik Gänsehaut bekommst", "fakten")
+        a_g = [a_ for a_ in sg[0].get("actors") or [] if not a_.get("kind")][0]
+        assert a_g.get("pos") == "left" and a_g.get("action") == "point" and sg[0].get("shot") != "event", f"Figur läuft durch das Schaubild: {a_g} {sg[0].get('shot')}"
+        assert frame(sg[0], {"du": {}}) is not None
+        assert stage.poster_hero("Warum du bei Musik Gänsehaut bekommst", [{"actors": [{"kind": "chimp"}]}] * 2 + [{"actors": [{"kind": "brain"}]}] * 5 + [{}] * 13, None, ["brain"]) == "brain", "Nebenfigur auf dem Titelbild"
         from .. import overlays as _ov
         assert _ov.quote("FORSCHER VERMUTEN", "…dass die plötzliche Wende der Musik im Gehirn kurz wie ein Alarm wirkt.") is not None
     check("Prüfung 16.11.: Nacht ohne Grund, Haarbalgmuskeln, Vorfahren, blitzschnell", _pruef_1116b)
