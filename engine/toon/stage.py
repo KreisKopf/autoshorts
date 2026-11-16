@@ -262,7 +262,7 @@ def _prepare(scene, cast):
             look_a = dataclasses.replace(look_a, hat="headphones")
         actors.append({"look": look_a, "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
-                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "hero": bool(a.get("hero")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
+                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed")), "hero": bool(a.get("hero")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"),
                        "teeth": TEETH_COLORS.get(str(a.get("teeth") or "").lower())})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
@@ -778,6 +778,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
             ksz = 1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)   # Tiere in echter Größe – als Hauptfigur des Videos groß
+            if a.get("small") and a["kind"] == "brain":
+                ksz *= 0.72                                # neben dem Bett: kleiner, damit die Schlafende sichtbar bleibt
             if close and a["kind"] == "brain":
                 ksz = 1.15                                 # Großaufnahme: das Gehirn füllt das Bild, wird aber nicht angeschnitten
             res = extras.creature(a["kind"], t + a["seed"], facing, mouth, a["emotion"] or
@@ -1174,6 +1176,9 @@ def direct(scenes, times, topic="", style="", look=""):
             if hit_q < 2:                                 # Siegertreppchen mit Plätzen, die niemand nennt („ARME, NACKEN, RÜCKEN“ zur Frage, warum es nicht jeder spürt): erfunden – der Satz bekommt ein echtes Bild
                 sc["graphic"] = None
                 sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
+        if isinstance(sc.get("backdrop"), dict) and str(sc.get("place") or "").strip() and places.resolve(sc.get("place")) in ROOMS \
+                and not _re0.search(OUTSIDE_RE, low_c0):
+            sc["backdrop"] = None                         # Ort „Zimmer“, dazu ein Landschafts-Baukasten (Bauernhof mit Feldern), von dem kein Satz spricht: der Raum gilt (Video 123 begann auf einem Bauernhof bei Nacht)
         for key_m in ("overlay", "graphic"):              # Regie-Wort der Drehbuch-Anleitung als Einblendung („CLIFFHANGER“, „REHOOK“): hat im Bild nichts zu suchen
             box_m = sc.get(key_m)
             if isinstance(box_m, dict):
@@ -2205,6 +2210,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _named_animals(scenes, topic)
     _household(scenes)
     _music(scenes, topic)
+    _indoor_sense(scenes)
     _sleep_story(scenes, topic)
     for i_n in range(1, len(scenes)):                     # eben stand das Ding schon groß allein im Bild: der nächste Satz schneidet nicht noch einmal darauf (neun Sekunden derselbe Lautsprecher)
         sc_n, pv_n = scenes[i_n], scenes[i_n - 1]
@@ -2213,6 +2219,34 @@ def direct(scenes, times, topic="", style="", look=""):
             if keys_n & {str(q.get("type") if isinstance(q, dict) else q) for q in sc_n.get("props") or []}:
                 sc_n["_no_insert"] = True
     return scenes
+
+
+ROOMS = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
+OUTSIDE_RE = r"bauernhof|\bhof\b|\bfeld|wiese|draußen|\bgarten|\bwald|strand|straße|\bstadt|\bdorf|\bpark\b|\bberg|\bmeer|\bsee\b|himmel|wüste|\bland\b"
+BODY_PROPS = ("auge", "augen", "ohr", "ohren", "nase", "zahn", "zähne", "finger")
+BIG_M = 4.0                                               # Bibliotheks-Dinge ab dieser echten Höhe (Schloss, Wasserturm, Gebäude, Achterbahn) stehen in keinem Zimmer
+
+
+def _indoor_sense(scenes):
+    """Schlussdurchgang: In einem Zimmer steht nichts Haushohes aus der Bibliothek. Die Text-KI stellt zu „schaltet die Muskeln ab“ ein „Schloss“
+    (gemeint: Vorhängeschloss) ins Schlafzimmer – gezeichnet wird das Märchenschloss neben dem Bett."""
+    for sc in scenes:
+        if not isinstance(sc, dict) or isinstance(backdrop(sc), dict) or places.resolve(backdrop(sc)) not in ROOMS:
+            continue
+        keep = []
+        has_human = any(isinstance(a, dict) and not a.get("kind") and not re.search(r"gehirn|hirn|brain", str(a.get("id") or "").lower()) for a in sc.get("actors") or [])
+        for q in sc.get("props") or []:
+            k = str((q.get("type") if isinstance(q, dict) else q) or "").lower()
+            if has_human and k.replace("lib_", "") in BODY_PROPS:
+                continue                                  # ein einzelnes Auge auf dem Nachttisch neben der Figur („nur Augen und Atmung arbeiten weiter“): die Figur hat selbst Augen
+            k = extras.PROP_ALIASES.get(k, k)
+            if max(float(extras.REAL_M.get(k, 0) or 0), float(extras.REAL_M.get("lib_" + k, 0) or 0)) >= BIG_M:
+                continue
+            keep.append(q)
+        if len(keep) != len(sc.get("props") or []):
+            sc["props"] = keep
+            if str(sc.get("shot") or "") == "insert" and not keep:
+                sc["shot"] = ""
 
 
 # Regie-Wörter aus der Drehbuch-Anleitung, die die Text-KI manchmal als Einblendung ausgibt (Prüfung 16.11.2026, Video 121: Schild „CLIFFHANGER“, Karte „REHOOK“)
@@ -2247,13 +2281,14 @@ def _sleep_story(scenes, topic):
         if rp == "livingroom" and shot_s not in ("graphic", "insert") and not re.search(r"sofa|couch|wohnzimmer|fernseh", low):
             sc["place"], sc["backdrop"], rp = "bedroom", None, "bedroom"   # ein Schlaf-Video spielt im Schlafzimmer, nicht im Wohnzimmer (dort lag die Schlafende vor dem Sofa auf dem Boden)
         brainy = lambda a: bool(re.search(r"gehirn|hirn|brain", (str(a.get("id") or "") + " " + str(a.get("kind") or "")).lower()))   # noqa: E731
-        if rp == "bedroom" and str(sc.get("time") or "") == "night" and acts_s and all(brainy(a) for a in acts_s) and human \
+        if rp == "bedroom" and str(sc.get("time") or "") == "night" and all(brainy(a) for a in acts_s) and human \
                 and shot_s not in ("close", "insert", "graphic") and not re.search(WAKE_RE, low):
             for a in acts_s:                              # das Gehirn arbeitet, während der Mensch schläft: die Schlafende liegt im Bett, das Gehirn steht rechts daneben
                 moving_s = str(a.get("action") or "") in ("walk", "run") or (a.get("to") and a.get("to") != a.get("pos"))
                 a["pos"], a["to"] = ("offright" if moving_s else 830), 830   # rechts neben dem Bett (das Bett endet bei places.BED_END), die Schlafende bleibt sichtbar
             if shot_s == "event":
                 sc["shot"] = ""
+            sc["_beside_bed"] = True
             sc["actors"] = [{"id": human, "action": "sleep", "emotion": "", "emote": "", "pos": "left", "to": "left", "speaks": False}] + acts_s   # die Schlafende zuerst: Bett und Decke liegen hinter dem Gehirn
         if str(sc.get("time") or "") == "night" and rp in PUBLIC_INDOOR and str(sc.get("crowd") or "") in ("walk", "cheer") and not re.search(PEOPLE_RE, low):
             sc["crowd"] = ""
@@ -3571,7 +3606,7 @@ HINTS = [
     (r"ausgetrocknet|dürre|vertrocknet|trocknen aus|staubtrocken", {"ground": "dry", "sky": "haze", "elements": ["deadtrees", "dryriver"]}),
     (r"\bfluss|flüsse|\bbach|strom fließt", {"elements": ["hills", "river"]}),
     (r"\bsee\b|\bseen\b|teich", {"elements": ["hills", "lake"]}),
-    (r"ernte|landwirt|bauern|\bfeld|felder|acker|getreide", {"elements": ["farm", "fields"]}),
+    (r"\bernte|missernte|weinernte|landwirt|bauern|\bfeld|felder|acker|getreide", {"elements": ["farm", "fields"]}),   # „ernte“ nur am Wortanfang: „Gelernte Vokabeln“ spielte auf dem Bauernhof
     (r"\bgarten|gärten|\bwiese|\brasen\b|käfer|insekten|maulwurf|regenwurm|schnecken", "park"),
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),

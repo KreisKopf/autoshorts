@@ -411,6 +411,14 @@ def main():
         assert ids2 and ids2[0] == ("du", "sleep") and ids2[-1][0] == "gehirn", f"Gehirn arbeitet, aber niemand schläft im Bett: {ids2}"
         for t_ in (0.02, 0.1, 0.3, 1.5):                         # Glühbirne springt ins Bild: der winzige Sockel darf die Szene nicht abbrechen
             frame(dict(s2[0], actors=[dict(a_) for a_ in s2[0]["actors"]]), cast_s, t_)
+        assert stage._hint("Gelernte Vokabeln wandern ins Langzeitgedächtnis.") is None or "farm" not in str(stage._hint("Gelernte Vokabeln wandern ins Langzeitgedächtnis.")), "„Gelernte“ spielt auf dem Bauernhof"
+        assert "farm" in str(stage._hint("Die Ernte fällt dieses Jahr aus.")), "Ernte ohne Bauernhof"
+        s3 = stage.direct([{"text": "Fünf geheime Dinge, die dein Gehirn nachts heimlich tut.", "place": "zimmer", "backdrop": {"elements": ["farm", "fields"]}, "time": "night",
+                            "props": [{"type": "schloss"}], "actors": [{"id": "du", "action": "sleep"}]},
+                           {"text": "Das Gehirn räumt auf.", "place": "bedroom", "time": "night", "actors": [{"id": "gehirn", "action": "point"}]}],
+                          [(0, 4), (4, 8)], "5 Dinge, die dein Gehirn tut, während du schläfst", "fakten", "")
+        assert places.resolve(stage.backdrop(s3[0])) == "bedroom", f"Zimmer mit Bauernhof-Kulisse: {stage.backdrop(s3[0])}"
+        assert not any("schloss" in str(q_).lower() for q_ in s3[0].get("props") or []), "Märchenschloss im Schlafzimmer"
         from .. import writer as _w_s
         gm = _w_s.given_meta({"title": "5 Dinge, die dein Gehirn schläft", "thumbnail": {"text": "X"}},
                              "Schlaf – Vorgaben: kurz. Titel: 5 Dinge, die dein Gehirn nachts für dich erledigt. Titelbild-Text: DEIN GEHIRN NACHTS")

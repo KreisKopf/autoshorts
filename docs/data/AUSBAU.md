@@ -336,3 +336,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   falschen Figur zurück. `writer.given_meta`: „Titel: …“ und „Titelbild-Text: …“ im Thema gelten wörtlich (die Text-KI machte aus dem Thema den
   Titel „5 Dinge, die dein Gehirn schläft“; das Lektorat war wegen überlasteter Text-KI ausgefallen). Titelbild (`stage.poster`): Bei zwei oder
   drei Textzeilen rückt das Motiv tiefer und wird kleiner – der Text lag über dem Kopf des Gehirns.
+  Nach dem 2. Neubau (Video 123 verworfen): Der Orts-Hinweis „ernte“ gilt nur am Wortanfang – „Gelernte Vokabeln“ spielte auf dem Bauernhof, und
+  als Vorgriff begann das Video dort. Nennt das Drehbuch einen Raum und dazu einen Landschafts-Baukasten, von dem kein Satz spricht, gilt der Raum
+  (`stage.ROOMS`, `OUTSIDE_RE`, Anfang von `direct`). `stage._indoor_sense`: Bibliotheks-Dinge ab 4 m echter Höhe (Schloss, Wasserturm, Gebäude)
+  stehen in keinem Zimmer – zu „schaltet die Muskeln ab“ stand sechs Sekunden ein Märchenschloss neben dem Bett (gemeint war ein Vorhängeschloss).
+  Im leeren Schlafzimmer eines Schlaf-Videos liegt nachts die Hauptfigur im Bett. `render.build_ass`: Eine Ecken-Zeile, die nur aus einer Uhrzeit
+  besteht und sich nie ändert („03:14 UHR“), entfällt.

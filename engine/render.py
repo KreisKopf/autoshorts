@@ -136,6 +136,8 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
     huds = {str(x).strip().upper() for x in [hud] + [sc.get("hud") for sc in scenes if isinstance(sc.get("hud"), str)] if str(x or "").strip()}
     if hud and len(huds) < 2 and not re.search(r"\d|·|\bTAG\b|\bUHR\b|\bNACHT\b|\bJAHR", str(hud).upper()):
         hud = None                             # eine Zeile, die sich nie ändert und weder Ort noch Zeit nennt („SUCHE GESTARTET“), sagt 90 Sekunden lang nichts
+    if hud and len(huds) < 2 and re.fullmatch(r"\s*\d{1,2}[:.]\d{2}(?:\s*UHR)?\s*", str(hud), flags=re.I):
+        hud = None                             # nur eine Uhrzeit („03:14 UHR“), die das ganze Video stehen bleibt
     if hud and len(huds) < 2:
         hud = re.sub(r"\s*[·|,–-]\s*\d{1,2}[:.]\d{2}(?:\s*UHR?\w*)?\s*$", "", str(hud), flags=re.I).strip() or None   # eine Uhrzeit, die 80 Sekunden lang stehen bleibt, stimmt für fast keine Szene – das Datum bleibt
     if hud:
