@@ -1350,7 +1350,7 @@ function catModal(i) {
     <label class="hint">Bild-Stimmung (Englisch)<textarea id="cmo" rows="2">${esc(c.image_mood)}</textarea></label>
     <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px"><select id="cv" aria-label="Stimme">${VOICES.map(([v, l]) => `<option value="${v}" ${c.voice === v ? "selected" : ""}>${l}</option>`).join("")}</select>
       <input id="cr" value="${esc(c.voice_rate || "+0%")}" aria-label="Tempo" title="Tempo"><input id="cp" value="${esc(c.voice_pitch || "+0Hz")}" aria-label="Tonhöhe" title="Tonhöhe"></div>
-    <input id="ci" value="${esc(c.voice_instructions || "")}" placeholder="Sprechweise für die OpenAI-Stimme (Premium)" aria-label="Sprechweise">
+    <input id="ci" value="${esc(c.voice_instructions || "")}" placeholder="Sprechweise des Erzählers (z. B. ruhig und geheimnisvoll)" aria-label="Sprechweise">
     <label class="check"><input type="checkbox" id="ctr" ${("trends" in c ? c.trends : ["fakten", "storys", "mysterien", "tiere"].includes(c.slug)) ? "checked" : ""}> Aktuelle Trends für diese Video-Art nutzen</label>
     <div class="actions"><button class="btn primary" id="cmS">Speichern</button>${i >= 0 ? `<button class="btn danger" id="cmD">Löschen</button>` : ""}<button class="btn" id="cmX">Abbrechen</button></div>
   </div></div>`);
@@ -1375,14 +1375,8 @@ const SECRET_LIST = [
   ["GEMINI_API_KEY", "Gemini API-Key", "Skript und Stimme · kostenlos", "https://aistudio.google.com/apikey"],
   ["GOOGLE_CLIENT_SECRET", "Google Client-Secret", "für YouTube", "https://console.cloud.google.com/apis/credentials"],
   ["TIKTOK_CLIENT_SECRET", "TikTok Client-Secret", "für TikTok", "https://developers.tiktok.com/apps"],
-  ["ZERNIO_API_KEY", "Zernio API-Key", "Upload über Zernio statt eigener Apps", "https://zernio.com"],
-  ["OPENAI_API_KEY", "OpenAI API-Key", "nur Premium", "https://platform.openai.com/api-keys"],
-  ["ELEVENLABS_API_KEY", "ElevenLabs API-Key", "nur Premium", "https://elevenlabs.io/app/settings/api-keys"]];
+  ["ZERNIO_API_KEY", "Zernio API-Key", "Upload über Zernio statt eigener Apps", "https://zernio.com"]];
 const hasSecret = n => SECRETS instanceof Set ? SECRETS.has(n) : null;
-function cost() {
-  const q = {low: .016, medium: .063, high: .25}[S_("openai_image_quality")] || .016, n = Math.max(6, Math.round((S_("target_seconds") || 70) / 5));
-  return ({openai: .003}[S_("text_provider")] || 0) + ({openai: .021, elevenlabs: .16}[S_("tts_provider")] || 0) ;
-}
 function sec(id, ic, title, sub, chip, body) {
   return `<details class="set-sec in" id="s-${id}" ${OPEN.has(id) ? "open" : ""}><summary><span class="s-ic">${icon(ic)}</span><span class="s-t"><b>${title}</b><span class="hint">${sub}</span></span><span class="s-chip">${chip || ""}</span></summary><div class="set-b">${body}</div></details>`;
 }
@@ -1391,7 +1385,7 @@ const fld = (k, label, help, attrs) => `<div class="row"><label for="f_${k}">${l
 const sel = (k, label, help, opts) => `<div class="row"><label for="f_${k}">${label}${help ? `<small>${help}</small>` : ""}</label><select id="f_${k}" data-k="${k}">${opts.map(([v, l]) => `<option value="${v}" ${String(S_(k)) === v ? "selected" : ""}>${l}</option>`).join("")}</select></div>`;
 const radio = (k, opts) => `<div class="prov">${opts.map(([v, b, s]) => `<label><input type="radio" name="${k}" data-k="${k}" value="${v}" ${S_(k) === v ? "checked" : ""}><span><b>${b}</b><small>${s}</small></span></label>`).join("")}</div>`;
 function viewSettings() {
-  const con = ST.connected || {}, c = cost(), U = S.update || {};
+  const con = ST.connected || {}, U = S.update || {};
   const updChip = U.available ? `<span class="chip warn">Version ${esc(U.version)} verfügbar</span>` : U.error && U.checked ? `<span class="chip bad">Prüfung fehlgeschlagen</span>` : `<span class="chip good">aktuell</span>`;
   const missing = ["GEMINI_API_KEY"].filter(n => hasSecret(n) === false).length;
   const platBlock = (p, name, idKey, secName, idLabel, help) => {
@@ -1436,16 +1430,14 @@ function viewSettings() {
     ${sel("tiktok_privacy", "Sichtbarkeit", "Ohne TikTok-Prüfung ist nur „Nur ich“ erlaubt.", [["PUBLIC_TO_EVERYONE", "Öffentlich (nach Prüfung)"], ["MUTUAL_FOLLOW_FRIENDS", "Freunde"], ["FOLLOWER_OF_CREATOR", "Follower"], ["SELF_ONLY", "Nur ich"]])}
     <div class="sep"></div>
     ${tgl("ai_label", "Als KI-generiert kennzeichnen", "TikTok „AI-generated“ und YouTube „Synthetische Inhalte“.")}`)}
-  ${!can("ki") ? "" : sec("ki", I.spark, "Skript & Stimme", `Skript ${S_("text_provider")} · Stimme ${{gemini: "Gemini-Erzähler", edge: "Edge", openai: "OpenAI", elevenlabs: "ElevenLabs"}[S_("tts_provider")] || S_("tts_provider")} · Bild: eigene Animation`, c ? `<span class="chip warn">≈ ${c.toFixed(2).replace(".", ",")} $ / Video</span>` : '<span class="chip good">gratis</span>', `
-    <p class="hint">Bild und Animation macht die eingebaute AutoShorts-Engine: Figuren, Orte, Requisiten und Titelbild entstehen ohne Bild-KI und kosten nichts. Die KI schreibt nur das Drehbuch und spricht den Text.</p>
-    <div class="lbl">Skript</div>${radio("text_provider", [["gemini", "Google Gemini", "Kostenlos · gute Texte"], ["pollinations", "Pollinations", "Kostenlos ohne Anmeldung · einfacher"], ["openai", "OpenAI · Premium", "≈ 0,3 Cent pro Video"]])}
-    <div class="lbl">Stimme</div>${radio("tts_provider", [["gemini", "Gemini-Erzähler", "Kostenlos · natürliche, flüssige Erzählerstimme"], ["edge", "Microsoft Edge-Stimmen", "Kostenlos · Ersatz, klingt mehr nach Computer"], ["openai", "OpenAI · Premium", "≈ 2 Cent pro Video"], ["elevenlabs", "ElevenLabs · Premium", "Beste Stimmen · Abo ab ca. 5 $"]])}
+  ${!can("ki") ? "" : sec("ki", I.spark, "Skript & Stimme", `Skript Google Gemini · Stimme ${{gemini: "Gemini-Erzähler", edge: "Microsoft Edge"}[S_("tts_provider")] || "Gemini-Erzähler"} · Bild: eigene Animation`, '<span class="chip good">gratis</span>', `
+    <p class="hint">Die KI schreibt das Drehbuch (Google Gemini) und spricht den Text. Bild und Animation macht die eingebaute AutoShorts-Engine – ohne Bild-KI, ohne Kosten. Ist Gemini einmal überlastet, springt automatisch ein kostenloser Ersatz ein.</p>
+    <div class="lbl">Stimme</div>${radio("tts_provider", [["gemini", "Gemini-Erzähler", "Kostenlos · natürliche, flüssige Erzählerstimme"], ["edge", "Microsoft Edge-Stimmen", "Kostenlos · klingt mehr nach Computer"]])}
     ${sel("gemini_voice", "Gemini-Stimme", "Leer = passend zur Video-Art.", [["", "Automatisch je Video-Art"], ["Charon", "Charon · ruhig, erklärend"], ["Algenib", "Algenib · tief, rau"], ["Enceladus", "Enceladus · leise, geheimnisvoll"], ["Puck", "Puck · fröhlich, frech"], ["Fenrir", "Fenrir · aufgeregt"], ["Orus", "Orus · fest, klar"], ["Kore", "Kore · weiblich, bestimmt"], ["Sulafat", "Sulafat · weiblich, warm"], ["Aoede", "Aoede · weiblich, locker"]])}
     ${fld("voice_speed", "Sprechtempo", "1 = normal · 0,94 = etwas langsamer · 1,06 = etwas schneller.")}
     <div class="row"><label for="f_voice_style">Sprechstil<small>So soll der Erzähler klingen. Gilt für alle Video-Arten.</small></label><textarea id="f_voice_style" data-k="voice_style" rows="2">${esc(S_("voice_style"))}</textarea></div>
     <div class="sep"></div>
-    ${fld("gemini_model", "Gemini-Modell")}${fld("openai_text_model", "OpenAI Text-Modell")}
-    ${fld("openai_tts_model", "OpenAI Stimm-Modell")}${fld("openai_voice", "OpenAI Stimme", "z. B. ash, coral, onyx, sage")}${fld("elevenlabs_voice_id", "ElevenLabs Voice-ID")}`)}
+    ${fld("gemini_model", "Gemini-Modell", "Nur ändern, wenn Google ein neues Modell herausbringt.")}`)}
   ${!can("stil") ? "" : sec("stil", I.brush, "Video-Stil", "Eigene Animation · Untertitel, Soundeffekte, Musik", "", `
     <p class="hint">Alle Videos entstehen mit der AutoShorts-Engine: niedliche Cartoon-Figuren und Tiere, feste Orte und ein Landschafts-Baukasten (Wald, Fluss, Felder, Berge, Meer …), Requisiten, Wetter und animierte Einblendungen. Welche Figuren und Orte vorkommen, entscheidet das Drehbuch je Video.</p>
     ${tgl("plan_ahead", "Videos einen Tag vorher vorbereiten", "Thema und Drehbuch stehen schon am Vortag fest. Was der Engine dafür fehlt, wird über Nacht nachgebaut – bevor das Video entsteht.")}

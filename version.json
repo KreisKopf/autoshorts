@@ -1,6 +1,6 @@
 {
-  "version": "1.14.8",
-  "file": "releases/AutoShorts-1.14.8.cmd",
-  "sha256": "0f8ee3e00442464e393d8e7049bc541b5356154c8814d6447c52149c5c50e6f4",
-  "notes": "Videos haben Vorrang: Live-Zahlen höchstens alle 15 Min., vor Video-Terminen gar nicht – kein Stau mehr auf GitHub"
+  "version": "1.15.0",
+  "file": "releases/AutoShorts-1.15.0.cmd",
+  "sha256": "440a72a2483f703536a0cc376039774c370ee0d034099272c0bee6f10bfe2529",
+  "notes": "Aufgeräumt: nicht mehr genutzte KI-Dienste (OpenAI, ElevenLabs, Pollinations-Auswahl, Kosten-Rechner) aus der App entfernt"
 }

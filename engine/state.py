@@ -272,6 +272,10 @@ for _c in CONFIG["categories"]:   # Sonder-Einstellungen einer Video-Art (Untert
     for _k in ("caption_style", "look", "music_volume", "special", "every_days", "topic_examples", "topic_rules", "trends"):
         if _p and _k in _p and _k not in _c:
             _c[_k] = _p[_k]
+if CONFIG["settings"].get("text_provider") not in ("gemini",):   # Premium-Dienste (OpenAI, Pollinations als Wahl) sind aus der App entfernt:
+    CONFIG["settings"]["text_provider"] = "gemini"                  # Gemini schreibt, der kostenlose Ersatz springt bei Ausfall von selbst ein
+if CONFIG["settings"].get("tts_provider") not in ("gemini", "edge"):   # OpenAI/ElevenLabs-Stimmen entfernt → Gemini-Erzähler
+    CONFIG["settings"]["tts_provider"] = "gemini"
 _have = {c.get("slug") for c in CONFIG["categories"]}
 for _p in PRESET_CATEGORIES:   # neue Video-Arten automatisch ergänzen (eingeschaltet)
     if _p["slug"] not in _have:
