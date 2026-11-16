@@ -4412,7 +4412,7 @@
   "id": 121,
   "category": "fakten",
   "topic": "5 faszinierende Dinge, die dein Gehirn tut, während du schläfst",
-  "status": "review",
+  "status": "discarded",
   "created": 1794841969.1366808,
   "title": "5 verrückte Dinge, die dein Gehirn nachts tut",
   "description": "Dein Gehirn ist nachts aktiver als du denkst!\nVon Selbstreinigung bis Lähmung: Das passiert in deinem Kopf, während du schläfst.\nWas war dein verrücktestes Traum-Erlebnis?",
@@ -4446,6 +4446,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-16 18:00",
-  "review_at": 1794842480.3479347
+  "review_at": 1794842480.3479347,
+  "error": "Bei der Prüfung verworfen: Prüfung: Regie-Wörter CLIFFHANGER/REHOOK im Bild, falsche Aussagen (Gehirn wächst, kocht über), Passanten nachts im Büro, Schlafende ragt übers Bett"
  }
 ]
