@@ -3572,7 +3572,7 @@
   "id": 101,
   "category": "musik",
   "topic": "Musik-Kugel: I Insist (J. Glaze Remix)",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794749992.588458,
   "title": "Jede Scheibe ein Beat – wie lange schaust du zu? 🎧",
   "description": "Jede Glasscheibe ist ein Ton – die Kugel spielt den ganzen Track mit. 🎧\nMusik: „I Insist (J. Glaze Remix)“ von Kellee Maize – CC BY 3.0 – https://www.jamendo.com/track/1161934\nWelche Musik soll die Kugel als Nächstes spielen? Schreib es in die Kommentare!",
@@ -3598,7 +3598,8 @@
   },
   "thumb": true,
   "look": "musik",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Musik-Kugel mit Gesang (Rap) – soll nur Melodie sein"
  },
  {
   "id": 102,
