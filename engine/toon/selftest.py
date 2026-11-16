@@ -424,6 +424,10 @@ def main():
                              "Schlaf – Vorgaben: kurz. Titel: 5 Dinge, die dein Gehirn nachts für dich erledigt. Titelbild-Text: DEIN GEHIRN NACHTS")
         assert gm["title"] == "5 Dinge, die dein Gehirn nachts für dich erledigt" and gm["thumbnail"]["text"] == "DEIN GEHIRN NACHTS", f"vorgegebener Titel nicht übernommen: {gm}"
         assert _w_s.given_meta({"title": "A"}, "Thema ohne Vorgabe. Titelbild-Text fehlt")["title"] == "A"
+        pl = _w_s.polish({"title": "T", "description": "D", "scenes": [{"text": f"Satz Nummer {n_} steht hier ganz."} for n_ in range(9)] + [{"text": "Und das sind genau die"}]})
+        assert len(pl["scenes"]) == 9, "Schlusssatz, der auf einem Artikel endet, bleibt stehen"
+        pl = _w_s.polish({"title": "T", "description": "D", "scenes": [{"text": f"Satz Nummer {n_} steht hier ganz."} for n_ in range(9)] + [{"text": "Und genau deshalb liebt dein Kopf das."}]})
+        assert len(pl["scenes"]) == 10, "vollständiger Schlusssatz gestrichen"
         assert stage.poster_hero("5 verrückte Dinge, die dein Gehirn nachts tut", ss + ss, cast_s) == "brain", "Gehirn-Thema ohne Gehirn auf dem Titelbild"
         assert stage.poster_hero("Warum du bei Musik Gänsehaut bekommst", ss + ss, cast_s) != "brain", "Gehirn auf dem Titelbild eines anderen Themas"
         for tm_ in ("night", "day"):                             # Schlafende liegt zugedeckt im Bett: über dem Bettende ragen keine Füße in die Luft

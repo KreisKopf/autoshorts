@@ -524,6 +524,11 @@ def polish(js):
                 scs_p[-1]["text"] = rest_l + "."
             else:
                 js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
+    scs_p = [x for x in js.get("scenes") or [] if isinstance(x, dict)]
+    if len(scs_p) >= 8:                                   # Schluss endet ohne Satzzeichen auf einem Artikel („Und das sind genau die“ – als Schleife zum ersten Satz gedacht): ein halber Satz am Ende wirkt wie ein Fehler
+        t_l = str(scs_p[-1].get("text") or "").strip()
+        if _re_p.search(r"(?i)\b(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|diese|dieser|dieses|diesen|deine|deiner|deinen|dein)\s*$", t_l) and len(t_l.split()) <= 8:
+            js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
     for k in ("title", "description"):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])

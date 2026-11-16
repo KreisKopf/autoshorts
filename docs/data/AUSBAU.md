@@ -342,3 +342,4 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   stehen in keinem Zimmer – zu „schaltet die Muskeln ab“ stand sechs Sekunden ein Märchenschloss neben dem Bett (gemeint war ein Vorhängeschloss).
   Im leeren Schlafzimmer eines Schlaf-Videos liegt nachts die Hauptfigur im Bett. `render.build_ass`: Eine Ecken-Zeile, die nur aus einer Uhrzeit
   besteht und sich nie ändert („03:14 UHR“), entfällt.
+  Nach Video 124 (veröffentlicht): `writer.polish` streicht einen Schlusssatz, der auf einem Artikel endet („Und das sind genau die“).
