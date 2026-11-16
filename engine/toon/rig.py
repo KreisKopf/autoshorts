@@ -117,7 +117,7 @@ class Look:
     shirt: tuple = COLORS["blau"]
     pants: tuple = (40, 40, 48)
     skin: tuple = SKINS["schwarz"]
-    hat: str = ""            # cap | helmet | bow | beanie | crown | ""
+    hat: str = ""            # cap | helmet | bow | beanie | crown | army | headphones | ""
     hat_color: tuple = COLORS["rot"]
     glasses: bool = False
     hair: str = ""           # long | bun | ponytail | bob | curly | "" (kurz)
@@ -467,6 +467,20 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             d.rounded_rectangle((hcx - rx * 1.04 - o, base - 8 * u - o, hcx + rx * 1.04 + o, base + 16 * u + o), 10 * u, fill=INK)
             d.rounded_rectangle((hcx - rx * 1.04, base - 8 * u, hcx + rx * 1.04, base + 16 * u), 9 * u, fill=_light(col, 0.2))
             _blob(d, (hcx - 22 * u, ty - 50 * u, hcx + 22 * u, ty - 6 * u), _light(col, 0.2), o * 0.8)
+    elif look.hat == "headphones":                         # Kopfhörer: Bügel über dem Kopf, Muscheln auf beiden Ohren (Musik-Videos, stage._music)
+        col = look.hat_color
+        bb = (hcx - rx * 1.07, ty - 20 * u, hcx + rx * 1.07, ty - 20 * u + 2 * (ry + 20 * u))
+        d.arc((bb[0] - o, bb[1] - o, bb[2] + o, bb[3] + o), 184, 356, fill=INK, width=max(3, int(22 * u + 2 * o)))
+        d.arc(bb, 186, 354, fill=(58, 64, 77), width=max(2, int(22 * u)))
+        d.arc((bb[0] + 5 * u, bb[1] + 5 * u, bb[2] - 5 * u, bb[3] - 5 * u), 238, 302, fill=(96, 104, 120), width=max(2, int(8 * u)))
+        cy_ = hc[1] + 8 * u
+        for sgn in (-1, 1):
+            cx_ = hcx + sgn * rx * 1.02
+            w_ = 25 * u if sgn == f else 21 * u            # die Muschel auf der zugewandten Seite ist etwas breiter
+            d.rounded_rectangle((cx_ - w_ - o, cy_ - 46 * u - o, cx_ + w_ + o, cy_ + 46 * u + o), 20 * u, fill=INK)
+            d.rounded_rectangle((cx_ - w_, cy_ - 46 * u, cx_ + w_, cy_ + 46 * u), 18 * u, fill=_dark(col, 0.22))
+            d.rounded_rectangle((cx_ - w_, cy_ - 46 * u, cx_ + w_ - 9 * u, cy_ + 36 * u), 18 * u, fill=col)
+            d.rounded_rectangle((cx_ - w_ + 7 * u, cy_ - 32 * u, cx_ - w_ + 14 * u, cy_ + 12 * u), 3 * u, fill=_light(col, 0.35))
     elif look.hat == "bow":
         bx, by = hcx - 56 * u * f, ty + 22 * u
         for sgn in (-1, 1):

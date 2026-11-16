@@ -917,7 +917,7 @@ def cave(night):
 
 GROUNDS = {"grass": (104, 180, 96), "sand": (240, 206, 132), "snow": (240, 246, 252), "road": (88, 90, 100),
            "rock": (140, 136, 140), "soil": (150, 104, 66), "dry": (206, 170, 110), "water": (60, 150, 220),
-           "ice": (210, 234, 248), "lava": (90, 50, 44), "moon": (124, 128, 144)}
+           "ice": (210, 234, 248), "lava": (90, 50, 44), "moon": (124, 128, 144), "quay": (178, 182, 192)}
 BASE = FAR               # Fußlinie der fernen Kulisse; davor liegt der Boden bis zu den Figuren
 
 
@@ -1072,6 +1072,58 @@ def _el_packice(p, rnd):
             p.poly([(x - w, y + 20 * k), (x - w * 0.3, y - h), (x + w * 0.5, y - h * 0.5), (x + w, y + 20 * k)], (226, 242, 252), o=4)
             p.d.polygon([(x - w * 0.3, y - h), (x + w * 0.5, y - h * 0.5), (x + w, y + 20 * k), (x + w * 0.2, y + 20 * k)], fill=p.c((176, 210, 238)))
     p.d.line((0, BASE - 220, W, BASE - 220), fill=INK, width=5)
+
+
+def _el_harbor(p, rnd):
+    """Hafen hinter dem Kai: Pier mit Containerstapeln und zwei Containerbrücken, daneben ein Frachter an der Kaimauer. Liegt auf dem
+    Wasserband von `sea` (offenes Hafenbecken) oder `packice` (zugefrorener Hafen – Regie: stage._ice_story)."""
+    cols = ((214, 84, 70), (60, 130, 196), (236, 180, 70), (84, 160, 120), (150, 110, 170), (230, 232, 238))
+    p.poly([(0, BASE - 226), (150, BASE - 262), (330, BASE - 240), (560, BASE - 268), (820, BASE - 244), (W, BASE - 258), (W, BASE - 216), (0, BASE - 216)],
+           (170, 186, 208), o=0)                                                                    # fernes Ufer mit Lagerhallen im Dunst
+    for hx, hw, hh in ((60, 150, 44), (600, 120, 36), (880, 170, 50)):
+        p.rect((hx, BASE - 262 - hh * 0.5, hx + hw, BASE - 218), (182, 196, 216), o=0)
+    # Frachter rechts an der Kaimauer
+    hull = [(470, BASE - 150), (1110, BASE - 150), (1110, BASE - 30), (540, BASE - 30), (500, BASE - 70)]
+    p.poly(hull, (52, 66, 104))
+    p.poly([(506, BASE - 62), (1110, BASE - 62), (1110, BASE - 30), (540, BASE - 30)], (170, 60, 54), o=0)
+    p.line((478, BASE - 118, 1106, BASE - 118), (236, 238, 244), 7)
+    for r_ in range(3):                                                                             # Container an Deck
+        for c_ in range(5 - (1 if r_ == 2 else 0)):
+            x0 = 520 + c_ * 78 + (30 if r_ == 2 else 0)
+            p.rect((x0, BASE - 196 - r_ * 44, x0 + 74, BASE - 152 - r_ * 44), cols[(c_ * 2 + r_ * 3) % len(cols)], r=3, o=4)
+    p.rect((930, BASE - 330, 1070, BASE - 150), (238, 240, 244), r=8)                               # Brücke am Heck
+    for wy in (BASE - 306, BASE - 262):
+        p.rect((946, wy, 1056, wy + 22), (255, 226, 120) if p.night and not p.dark else (96, 150, 200), r=4, o=3, glow=p.night)
+    p.rect((968, BASE - 392, 1022, BASE - 330), (214, 84, 70), r=6)                                 # Schornstein
+    p.rect((968, BASE - 372, 1022, BASE - 356), (40, 44, 54), o=0)
+    # Pier links mit Containerstapeln
+    p.rect((-20, BASE - 78, 452, BASE + 6), (176, 180, 190), r=4)
+    p.rect((-20, BASE - 78, 452, BASE - 62), (236, 196, 70), o=4)                                   # gelbe Kaikante
+    for r_ in range(3):
+        for c_ in range(4 - r_ // 2):
+            x0 = 14 + c_ * 92 + r_ * 12
+            col = cols[(c_ + r_ * 2) % len(cols)]
+            p.rect((x0, BASE - 124 - r_ * 46, x0 + 88, BASE - 78 - r_ * 46), col, r=3, o=5)
+            for k in range(1, 5):
+                p.line((x0 + k * 17.6, BASE - 118 - r_ * 46, x0 + k * 17.6, BASE - 84 - r_ * 46), _mix(col, 0.25, (20, 20, 40)), 3)
+    for cx, col in ((150, (226, 104, 60)), (346, (60, 120, 190))):                                  # Containerbrücken
+        top, boom = BASE - 560, BASE - 400
+        for lx in (-54, 54):
+            p.rect((cx + lx - 9, boom, cx + lx + 9, BASE - 74), col, o=5)
+        p.line((cx - 54, BASE - 180, cx + 54, BASE - 300), _mix(col, 0.25, (20, 20, 40)), 7)
+        p.line((cx + 54, BASE - 180, cx - 54, BASE - 300), _mix(col, 0.25, (20, 20, 40)), 7)
+        p.rect((cx - 66, BASE - 196, cx + 66, BASE - 176), col, o=5)
+        p.line((cx - 20, top, cx - 110, boom), INK, 5)                                              # Abspannung
+        p.line((cx + 20, top, cx + 250, boom), INK, 5)
+        p.poly([(cx - 26, boom), (cx, top), (cx + 26, boom)], col)                                  # Pylon
+        p.rect((cx - 124, boom - 4, cx + 268, boom + 22), col, r=4)                                 # Ausleger über dem Wasser
+        p.rect((cx - 46, boom - 44, cx + 36, boom), (238, 240, 244), r=6, o=5)                      # Maschinenhaus
+        tx = cx + 150 + (40 if cx < 200 else -30)
+        p.rect((tx - 20, boom + 22, tx + 20, boom + 40), (60, 64, 76), r=3, o=4)                    # Laufkatze mit Container am Seil
+        p.line((tx - 12, boom + 40, tx - 12, boom + 120), INK, 4)
+        p.line((tx + 12, boom + 40, tx + 12, boom + 120), INK, 4)
+        p.rect((tx - 40, boom + 120, tx + 40, boom + 162), cols[2 if cx < 200 else 0], r=3, o=5)
+        p.oval((cx - 7, top - 16, cx + 7, top - 2), (240, 80, 70), o=3, glow=True)
 
 
 def _fg_icecracks(p, rnd):
@@ -1419,7 +1471,7 @@ MID = {"tower": _mid_tower, "church": _mid_church, "forest": _mid_forest, "trees
 
 BACK = {"mountains": _el_mountains, "hills": _el_hills, "dunes": _el_dunes, "forest": _el_forest, "trees": _el_trees,
         "deadtrees": _el_deadtrees, "city": _el_city, "village": _el_village, "ruins": _el_ruins, "factory": _el_factory,
-        "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier, "packice": _el_packice}
+        "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier, "packice": _el_packice, "harbor": _el_harbor}
 FRONT_EL = {"fields": _fg_fields, "river": _fg_river, "dryriver": _fg_dryriver, "lake": _fg_lake, "cracks": _fg_cracks,
             "rocks": _fg_rocks, "flowers": _fg_flowers, "asphalt": _fg_asphalt, "icecracks": _fg_icecracks}
 EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald": "forest", "bäume": "trees", "stadt": "city",
@@ -1433,7 +1485,8 @@ EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald"
               "skyline": "city", "hochhaus": "tower", "wolkenkratzer": "tower", "firmenzentrale": "tower", "zentrale": "tower", "konzern": "tower",
               "büroturm": "tower", "skyscraper": "tower", "headquarters": "tower", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees",
               "packeis": "packice", "meereis": "packice", "eisdecke": "packice", "eisfläche": "packice", "eisrisse": "icecracks",
-              "eisscholle": "packice", "eisschollen": "packice", "eisschicht": "packice", "eispanzer": "packice", "treibeis": "packice"}
+              "eisscholle": "packice", "eisschollen": "packice", "eisschicht": "packice", "eispanzer": "packice", "treibeis": "packice",
+              "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenkräne": "harbor", "containerterminal": "harbor", "port": "harbor"}
 
 
 MID_ORDER = ("tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
@@ -1467,7 +1520,7 @@ def compose(spec: dict, night=False):
     rnd = random.Random(sum(ord(c) for c in ",".join(els)) % 1000 + 3)
     if "street" in els and "city" not in els and "ruins" not in els:
         els = els + ["city"]
-    for name in ["sea", "packice", "glacier", "mountains", "hills", "dunes", "city", "ruins", "factory", "forest", "village", "farm"]:
+    for name in ["sea", "packice", "glacier", "mountains", "hills", "dunes", "city", "ruins", "factory", "forest", "village", "farm", "harbor"]:
         if name in els:
             BACK[name](p, rnd)
     if ("trees" in els or "deadtrees" in els) and not any(e in els for e in ("mountains", "hills", "dunes", "city", "forest", "sea", "glacier")):
@@ -1508,6 +1561,17 @@ def compose(spec: dict, night=False):
             k = depth(y)
             for x in range(-60 + (y % 140), W, int(120 + 160 * k)):
                 p.d.arc((x, y, x + 110 * k + 30, y + 30 * k + 6), 180, 360, fill=p.c((200, 232, 250)), width=5)
+    elif ground == "quay":                                        # Kai: Betonplatten mit Fugen, gelbe Kante am Wasser, Poller, Schienen der Kräne
+        p.rect((-10, BASE, W + 10, BASE + 26), (236, 196, 70), o=4)
+        for i in range(-6, 13):
+            p.d.line((W / 2 + (i - 3) * 170, BASE + 26, W / 2 + (i - 3) * 330, H), fill=p.c((152, 156, 168)), width=4)
+        for y in (BASE + 110, BASE + 230, BASE + 400, BASE + 640):
+            p.d.line((0, y, W, y), fill=p.c((152, 156, 168)), width=4)
+        for y in (BASE + 62, BASE + 84):
+            p.d.line((0, y, W, y), fill=p.c((112, 116, 130)), width=5)
+        for bx in (120, 470, 820):
+            p.rect((bx - 20, BASE + 2, bx + 20, BASE + 40), (64, 68, 82), r=8, o=5)
+            p.rect((bx - 28, BASE - 6, bx + 28, BASE + 12), (84, 88, 104), r=8, o=5)
     elif ground == "lava":
         for _ in range(14):
             x, y = rnd.randint(0, W), rnd.randint(BASE + 40, H - 260)
@@ -1553,6 +1617,7 @@ OUTDOOR_SPECS = {
     "landfill": {"ground": "soil", "sky": "haze", "elements": ["hills", "factory"]},
     "headquarters": {"ground": "road", "elements": ["city", "tower"]},
     "icesea": {"ground": "ice", "elements": ["packice", "icecracks"]},        # zugefrorenes Meer (Regie: stage._ice_story)
+    "harbor": {"ground": "quay", "elements": ["sea", "harbor"]},              # Hafen: Kai, Containerbrücken, Frachter
 }
 
 
@@ -1954,7 +2019,9 @@ ALIASES = {"asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage"
            "firmenzentrale": "headquarters", "konzernzentrale": "headquarters", "hauptsitz": "headquarters", "firmensitz": "headquarters",
            "wolkenkratzer": "headquarters", "hochhaus": "headquarters", "konzern": "headquarters", "firma": "headquarters", "hq": "headquarters",
            "eismeer": "icesea", "packeis": "icesea", "meereis": "icesea", "eisfläche": "icesea", "eisdecke": "icesea", "zugefrorenes meer": "icesea", "frozen sea": "icesea",
-           "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon"}
+           "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon",
+           "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenbecken": "harbor", "frachthafen": "harbor", "seehafen": "harbor", "kai": "harbor",
+           "containerterminal": "harbor", "port": "harbor", "harbour": "harbor"}
 
 
 def resolve(place):

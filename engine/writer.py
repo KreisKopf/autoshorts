@@ -144,7 +144,7 @@ nennt, steht im Bild ("props").
 Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - "cast": Aussehen je Figur, z. B. {"mia": {"shirt": "blau", "hat": "", "hair": "long", "glasses": false, "skin": "weiß"},
                                    "rex": {"kind": "dino"}}
-  Menschen: shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown oder ""
+  Menschen: shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown, headphones (Kopfhörer auf dem Kopf – in Musik-Videos setzt die Regie sie von selbst auf) oder ""
             hair: long, bun, ponytail, bob, curly oder "" (kurz) · gender: "w" für Frauen (auch mit kurzem Haar) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
             (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
             Besetze Frauen und Männer etwa gleich oft – auch die Hauptfigur „du“ ist in ungefähr jedem zweiten Video eine Frau
@@ -181,13 +181,14 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            serverroom (Rechenzentrum mit Serverschränken – für Internet, Cloud, KI, Rechenleistung)
            garage (Autowerkstatt mit Werkzeugwand – für Autos, Motoren, Tuning, Umbauten, Reparaturen)
            draußen: headquarters (Büroturm einer großen Firma in der Stadt – für Konzerne, Firmensitze; ohne Logo), street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
-           gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde)
+           gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde),
+           harbor (Hafen: Kai mit Containerbrücken, Containerstapeln und Frachter – für Häfen, Schifffahrt, Handel, Lieferketten)
            (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
   "backdrop": für Landschaften draußen statt "place" – ein Baukasten, mit dem JEDE Umgebung passend gebaut wird:
-           {"sky": "day|night|sunset|storm|red|haze", "ground": "grass|sand|snow|road|rock|soil|dry|water|ice|lava",
+           {"sky": "day|night|sunset|storm|red|haze", "ground": "grass|sand|snow|road|rock|soil|dry|water|ice|lava|quay",
             "elements": [bis zu 4 aus: mountains, hills, dunes, forest, trees, deadtrees, palms, cactus, city (Skyline),
                          street (Häuserzeile), village, ruins, factory, powerplant, farm, gasstation, bridge, powerlines,
-                         windturbines, camp, graves, sea, glacier, fields, river, dryriver, lake, cracks, rocks, flowers,
+                         windturbines, camp, graves, sea, harbor (Kräne, Container, Frachter – zusammen mit sea, Boden "quay"), glacier, fields, river, dryriver, lake, cracks, rocks, flowers,
                          asphalt (aufgerissene Fahrbahn mit hochgedrückten Platten – für Asphalt, kaputte Straßen)]}
            Beispiele: Wald mit Fluss = {"elements": ["forest", "river"]} · Dürre = {"sky": "haze", "ground": "dry",
            "elements": ["deadtrees", "dryriver"]} · Bauernhof = {"elements": ["farm", "fields"]} · zerstörte Stadt =
@@ -209,6 +210,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
             die Sonne, sprout wächst zur Blume, volcano spuckt Lava)
+           Körper: goosebumps (Schautafel Gänsehaut: Hautschnitt, die Haarbalgmuskeln ziehen sich zusammen, die Haare richten sich auf)
            Tiefsee: submersible (Forschungs-Tauchboot mit Scheinwerfer und Sonar-Ringen – nur am Ort underwater). "place": "underwater" mit
            "time": "night" zeigt die dunkle Tiefsee (Schlick, Felsen, kein Sonnenlicht) – für Meeresboden, Wracks, Flugschreiber; dafür KEIN
            "backdrop" mit Meeresoberfläche angeben. Nennt der Satz Blackbox/Flugschreiber, Wrack oder Sonar/Tauchboot, stellt die Regie sie dort selbst hin.

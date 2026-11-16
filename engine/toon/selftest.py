@@ -303,6 +303,43 @@ def main():
 
     check("Ein-Tier-Video (Fangschreckenkrebs)", _one_animal)
 
+    def _music():                                                # Musik-Video: Kopfhörer auf dem Kopf, Gänsehaut-Schaubild, Lautsprecher beim Bassdrop; Hafen
+        cast_m = {"du": {"shirt": "lila", "hair": "ponytail"}, "gehirn": {"kind": "brain"}}
+        T = [("Dein Gehirn löst deine Musik-Gänsehaut in nur einer halben Sekunde aus.", "livingroom", [{"id": "du", "action": "dance", "hold": "phone"}]),
+             ("Schon eine halbe Sekunde vor dem Bassdrop passiert etwas völlig Verrücktes im Kopf.", "livingroom", [{"id": "du", "action": "shocked"}]),
+             ("Winzige Muskeln an deinen Haarwurzeln spannen sich schlagartig an.", "livingroom", [{"id": "du", "action": "look_around"}]),
+             ("Doch direkt danach erkennt dein Denkorgan, dass gar keine reale Gefahr droht.", "lab", [{"id": "gehirn", "action": "talk"}]),
+             ("Ein echter Lieblingssong aktiviert dein Gehirn genau wie gutes Essen oder Achterbahnfahren.", "livingroom", [{"id": "du", "action": "dance"}])]
+        sm = stage.direct([{"text": t_, "place": pl_, "actors": a_} for t_, pl_, a_ in T], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))],
+                          "Warum du Gänsehaut bekommst, wenn dein Lieblingssong droppt", "wissen", "")
+        km = [[extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in sc_.get("props") or [] if isinstance(q, dict)] for sc_ in sm]
+        for n_ in (0, 1, 2, 4):
+            assert any(a.get("wear") == "headphones" for a in sm[n_].get("actors") or []), f"Musik-Video: Figur ohne Kopfhörer in Szene {n_}"
+        assert not any(a.get("wear") for a in sm[3].get("actors") or []), "Gehirn-Figur trägt Kopfhörer"
+        assert "lib_bassbox" in km[1], f"Bassdrop ohne Lautsprecher: {km[1]}"
+        assert "goosebumps" in km[2] and "lib_muskel" not in km[2], f"Haarwurzeln: {km[2]}"
+        assert "lib_achterbahn" not in km[4], "Achterbahn steht im Wohnzimmer"
+        for sc_ in sm:
+            assert frame(sc_, cast_m) is not None
+        plain = stage.direct([{"text": "Ich wollte nur kurz Strom sparen.", "place": "livingroom", "actors": [{"id": "du"}]},
+                              {"text": "Dann setzte ich meine Kopfhörer auf.", "place": "livingroom", "actors": [{"id": "du"}]}], [(0, 4), (4, 8)], "Ich spare Strom", "comedy", "")
+        assert not any(a.get("wear") for a in plain[0]["actors"]) and plain[1]["actors"][0].get("wear") == "headphones", "Kopfhörer nur im Satz, der sie nennt"
+        for t_ in (0.2, 0.7, 1.5):
+            for sh_ in ("", "insert"):
+                frame({"place": "lab", "actors": [], "props": [{"type": "goosebumps"}], "shot": sh_}, cast_m, t=t_)
+        for hat_ in ("headphones",):
+            for hair_ in ("", "long", "curly", "bun"):
+                frame({"place": "livingroom", "shot": "close", "actors": [{"id": "du", "action": "talk"}]}, {"du": {"hat": hat_, "hair": hair_}})
+        assert stage._hint("Im Hamburger Hafen stapeln sich die Container.") == "harbor" and stage._hint("Dafür haftet niemand.") != "harbor", "Hafen-Hinweis"
+        from .. import main as _mn
+        assert places.resolve("Hafen") == "harbor" and all(_mn.known_thing(w_) for w_ in ("hafen", "kopfhörer", "bassbox", "muskel", "achterbahn")), "Hafen/Musik-Dinge unbekannt"
+        hi = stage.direct([{"text": "Die Ostsee ist komplett zugefroren.", "place": "beach", "actors": [{"id": "du"}]},
+                           {"text": "In den Häfen stecken die Frachter fest.", "place": "beach", "actors": [], "props": ["ship"]}],
+                          [(0, 4), (4, 8)], "Was wäre, wenn die Ostsee zufriert?", "whatif", "")
+        assert places.resolve(stage.backdrop(hi[1])) == "custom" and "harbor" in (hi[1].get("backdrop") or {}).get("elements", []) and \
+            not any(str(q.get("type")) in ("ship", "ship_ice") for q in hi[1].get("props") or []), f"zugefrorener Hafen: {hi[1].get('backdrop')} {hi[1].get('props')}"
+        assert frame(hi[1], cast_m) is not None
+
     def _household():                                            # Alltags-Geschichte: Kühlschrank als Figur, Haustier aus dem Satz, Brief in der Hand
         cast_h = {"du": {"shirt": "grau", "gender": "m"}, "kuehlschrank": {"kind": "robot"}}
         T = [("Mein Kühlschrank fand das gar nicht komisch.", "kitchen", [{"id": "kuehlschrank", "say": "NEIN."}], ["fridge"], "insert"),
@@ -344,6 +381,7 @@ def main():
             for ac_ in ("idle", "point", "shake", "walk"):
                 extras.creature("fridge", 0.7, 1, 0.5, em_, 1.0, ac_)
     check("Alltags-Geschichte (Kühlschrank als Figur, Haustier, Brief)", _household)
+    check("Musik-Video (Kopfhörer, Gänsehaut-Schaubild, Lautsprecher) und Hafen", _music)
 
     def _sea():                                                  # Meerestiere: das genannte Tier ist die Figur, allein und unter Wasser
         T = [("Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.", "livingroom", [{"id": "du", "action": "shocked", "hold": "phone"}], ["computer"], "close"),

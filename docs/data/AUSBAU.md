@@ -265,6 +265,25 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Ereignis-Einstellungen dazu. Ein Notizzettel ohne Nummern-Titel, dessen Text kein Wort des Satzes aufgreift („FAZIT: …“), entfällt. Schrubben/Putzen mit
   einem Ding in der Hand ist kein Ausschütteln (nichts rieselt heraus).
 
+- Ausbau 16.11.2026 (Musik-Video „Warum du bei Musik Gänsehaut bekommst“ und Hafen):
+  Bibliothek von Hand gezeichnet: `kopfhörer`, `bassbox` (Lautsprecher, pulsiert; erscheint auch bei „Bassdrop“, „Lautsprecher“, „Subwoofer“), `muskel`
+  (angespannter Oberarm), `achterbahn` (Hügel, Looping, Wagen; als Bild 14 m hoch, damit der Wagen oben nicht aus dem Bild ragt – steht nie im Zimmer,
+  beim Wort „Achterbahnfahren“ kann der Schnitt sie groß zeigen); neu gezeichnet statt der vorläufigen Fassung: `wecker` (ohne Alias „uhr“ – das ist die
+  eingebaute Wanduhr), `döner` (spitze Brottasche im Papier).
+  Kopfhörer auf dem Kopf (`rig`: `hat: "headphones"`, Farbe über `hat_color`): `stage._music` (Schlussdurchgang) setzt sie der Hauptfigur im ganzen Video
+  auf, wenn der Kern des Themas von Musik, Songs, Liedern, Playlist, Kopfhörern spricht (`MUSIC_TOPIC_RE`), sonst nur im Satz, der Kopfhörer nennt
+  (Feld `wear` an der Figur; Gehirn-/Kühlschrank-Figuren bekommen keine). Die Kopfhörer liegen dann nicht zusätzlich am Boden.
+  Requisite `goosebumps` (Schautafel: Hautschnitt, Haarbalgmuskeln ziehen sich zusammen, Haare richten sich auf, Haut wölbt sich): erscheint bei
+  Haarwurzel/Haarbalg/Härchen (`TEXT_PROPS`) und drinnen bei „Gänsehaut“ (`GOOSE_RE`, in `_music` – bewusst nicht als „Ding des Themas“ in jeder
+  zweiten Szene). Steht die Tafel im Video, bleibt der Oberarm-`muskel` nur in Sätzen, die Muskel/Bizeps nennen. Selbsttest: `_music`.
+  Ort `harbor` (`places.OUTDOOR_SPECS`: Boden `quay` = Betonkai mit gelber Kante, Pollern, Kranschienen; Element `harbor` = Pier mit Containerstapeln,
+  zwei Containerbrücken, Frachter an der Kaimauer, fernes Ufer). Wörter Hafen, Häfen, Kai, Containerterminal, Werft (`stage.HARBOR_RE`, `HINTS`;
+  „haftet“ zählt nicht). Im Hafenbecken laufen keine Wellen-Bögen (sie liefen über Pier und Schiff). Zugefrorenes Meer: Hafen-Sätze spielen am Kai vor
+  dem Eis (`ICE_HARBOR`: `packice` + `harbor`) – ohne zusätzliches Schiff im Eis, der Frachter liegt schon an der Mauer.
+  Noch offen (vorläufige Zeichnungen der Text-KI): kaffeebohne, tarantel, insekt, erdloch, schloss, keule, radar, kunststoffbecken, knoblauch, kessel,
+  kamin, pinzette, nachricht, zigarette. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus,
+  statistik, musik, kompass (davon sind nur polyp, knie und kompass greifbare Dinge).
+
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
   rückwärts gebaut (echte Wurfparabel zwischen zwei Tönen, die Scheibe liegt so, dass sie die Richtungsänderung erklärt) – deshalb sitzt

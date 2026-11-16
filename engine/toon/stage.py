@@ -195,6 +195,8 @@ def sanitize(sc):
                 c["look"] = {k: v for k, v in a["look"].items() if k in ("shirt", "hair", "hat", "glasses", "skin", "hair_color", "gender", "size") and isinstance(v, (str, bool, int, float))}
             if isinstance(a.get("teeth"), str) and a["teeth"].lower() in TEETH_COLORS:
                 c["teeth"] = a["teeth"].lower()
+            if str(a.get("wear") or "").lower() == "headphones":   # Kopfhörer auf dem Kopf (setzt die Regie: _music)
+                c["wear"] = "headphones"
             say = a.get("say")
             c["say"] = "".join(ch for ch in say if ch not in "{}<>\\").strip()[:16] if isinstance(say, str) else ""
             for k in ("pos", "to"):
@@ -254,7 +256,11 @@ def _prepare(scene, cast):
             action = "walk"
         if action in ("walk", "run") and x1 == x0:       # ohne Ziel: von außen hereinkommen
             x0 = -260 if x0 <= 540 else 1340
-        actors.append({"look": rig.Look.from_spec(spec, aid, list(cast).index(aid) if aid in cast else None), "kind": kind if kind in extras.CREATURES else "",
+        look_a = rig.Look.from_spec(spec, aid, list(cast).index(aid) if aid in cast else None)
+        if a.get("wear") == "headphones" and not look_a.hat and kind not in extras.CREATURES:
+            import dataclasses
+            look_a = dataclasses.replace(look_a, hat="headphones")
+        actors.append({"look": look_a, "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "hero": bool(a.get("hero")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"),
@@ -2153,6 +2159,46 @@ def direct(scenes, times, topic="", style="", look=""):
     _ice_story(scenes, topic)
     _named_animals(scenes, topic)
     _household(scenes)
+    _music(scenes, topic)
+    return scenes
+
+
+# Musik-Videos (Ausbau 16.11.2026, „Warum du bei Musik Gänsehaut bekommst“): Kopfhörer auf dem Kopf, Gänsehaut als Schaubild
+MUSIC_TOPIC_RE = r"\bmusik|\bsongs?\b|lieblingssong|lieblingslied|\blied(?:er|ern|es)?\b|playlist|kopfhörer|bassdrop|\bbeats?\b|ohrwurm|podcast|hörbuch"
+HEADPHONE_RE = r"kopfhörer|headset|ohrstöpsel|earbuds"
+GOOSE_RE = r"gänsehaut|haarwurzel|haarbalg|härchen|haare (?:\w+ ){0,3}(?:stell|richt)\w* sich"
+
+
+def _music(scenes, topic):
+    """Schlussdurchgang: (1) Handelt das Thema von Musik/Songs/Kopfhörern, trägt die Hauptfigur im ganzen Video Kopfhörer (`wear`, rig: hat
+    „headphones“) – sonst nur in Sätzen, die Kopfhörer nennen. Die Kopfhörer aus der Bibliothek liegen dann nicht zusätzlich am Boden.
+    (2) Steht das Gänsehaut-Schaubild im Bild (Haarwurzel, Haarbalg), entfällt der Oberarm-Muskel aus der Bibliothek daneben –
+    „winzige Muskeln an den Haarwurzeln“ meint die Haarbalgmuskeln im Schaubild."""
+    low_t = topic_head(topic).lower()
+    music = bool(re.search(MUSIC_TOPIC_RE, low_t))
+    goose_seen = False
+    _key = lambda q: extras.PROP_ALIASES.get(str((q.get("type") if isinstance(q, dict) else q) or "").lower(), str((q.get("type") if isinstance(q, dict) else q) or "").lower())   # noqa: E731
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        said = bool(re.search(HEADPHONE_RE, low))
+        if (music or said) and places.resolve(backdrop(sc)) not in ("underwater", "space"):
+            human = next((a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")
+                          and not re.search(r"gehirn|hirn|brain|" + FRIDGE_ID_RE, str(a.get("id") or "").lower())), None)
+            if human is not None:
+                human["wear"] = "headphones"
+                sc["props"] = [q for q in (sc.get("props") or []) if _key(q) != "lib_kopfhoerer"]
+        kinds = [_key(q) for q in (sc.get("props") or [])]
+        if re.search(GOOSE_RE, low) and "goosebumps" not in kinds and len(kinds) < 2 and str(sc.get("shot") or "") not in ("graphic", "close", "insert") \
+                and places.resolve(backdrop(sc)) not in places.OUTDOOR + ("underwater", "space") + tuple(MAPS):
+            sc["props"] = (sc.get("props") or []) + [{"type": "goosebumps"}]     # „Gänsehaut“: das Schaubild steht neben der Figur
+            kinds.append("goosebumps")
+        goose_seen = goose_seen or "goosebumps" in kinds
+        if "lib_muskel" in kinds and goose_seen and not re.search(r"\bmuskel|bizeps|oberarm", low):
+            sc["props"] = [q for q in sc["props"] if _key(q) != "lib_muskel"]     # aus dem Haarbalg-Satz mitgenommener Oberarm (_carry_thing)
+        if "goosebumps" in kinds and "lib_muskel" in kinds:
+            sc["props"] = [q for q in sc["props"] if _key(q) != "lib_muskel"]
     return scenes
 
 
@@ -2267,6 +2313,7 @@ ICE_ON_RE = r"\b(?:auf|über) (?:dem|das|der) (?:\w+ )?(?:eis|eisfläche|eisdeck
 ICE_LAND_RE = r"küste|\bdorf|dörfer|\bstadt\b|städte|\bhäuser|\bstrand|\bufer\b|an land\b|festland"
 ICE_PEOPLE_RE = r"reisende|menschen|leute|händler|soldaten|armee|truppen|\bheer\b|marschier|schlittschuh|wirtsh|gasth|\bmarkt|\bbuden|spaziergänger|familien"
 ICE_COAST = {"sky": "", "ground": "snow", "elements": ["village", "packice"]}
+ICE_HARBOR = {"sky": "", "ground": "quay", "elements": ["packice", "harbor"]}
 ICE_ARMY_RE = r"armee|soldaten|truppen|\bheer\b|marschier|regiment"
 
 
@@ -2316,7 +2363,12 @@ def _ice_story(scenes, topic):
                 sc["mood"] = "calm"                       # das Halbdunkel verschluckte die Eisdecke – die Not zeigt das Gesicht des Tiers
             continue
         coast = bool(re.search(ICE_LAND_RE, low)) and not re.search(ICE_ON_RE, low) and not re.search(ICE_SHIP_RE, low)
-        if coast:
+        harbor = bool(re.search(HARBOR_RE, low)) and not re.search(ICE_ON_RE, low)
+        if harbor:                                        # „die Häfen frieren zu“: Kai mit Kränen und Frachter, das Hafenbecken ist Eis
+            sc.update(place="harbor", backdrop=dict(ICE_HARBOR))
+            props = [q for q in props if _key(q) not in ("ship", "ship_ice")]   # der Frachter liegt schon an der Kaimauer
+            coast = True
+        elif coast:
             if rp not in ("village", "street", "church"):
                 sc.update(place="village", backdrop=dict(ICE_COAST))   # verschneites Küstendorf, dahinter das zugefrorene Meer
         else:
@@ -3343,6 +3395,7 @@ def backdrop(scene):
 
 
 # Wörter im Sprechertext → passender Hintergrund (greift nur, wenn das Drehbuch einen unpassenden Allerwelts-Ort nennt)
+HARBOR_RE = r"\bhafen(?!t)|\bhäfen|hafenbecken|hafenstadt|containerterminal|containerhafen|\bkai\b|kaimauer|\bwerft"    # „Hafen“, nicht „haften“
 HINTS = [
     (r"rechenzentr|serverfarm|serverraum|serverräume|\bserver\b|\bservern\b|rechenleistung|rechenpower|ki-modell|supercomputer|datenzentr|des (gesamten |ganzen )?internets|datenström", "serverroom"),
     (r"konzern|firmenzentrale|hauptsitz|hauptquartier|firmensitz|tech-gigant|tech-riese|techriese|wolkenkratzer|weltfirma|weltmarktführer|milliardenfirma|billionenfirma", "headquarters"),
@@ -3354,6 +3407,7 @@ HINTS = [
     (r"strommast|stromleitung|hochspannung", {"elements": ["powerlines", "hills"]}),
     (r"windrad|windräder|windkraft", {"elements": ["windturbines", "fields"]}),
     (r"bahnhof|\bzug\b|\bzüge|u-bahn|s-bahn|bahnsteig", "station"),
+    (HARBOR_RE, "harbor"),
     (r"friedhof|\bgrab\b|gräber", "graveyard"),
     (r"restaurant|café|kellner|\bdiner\b|burgerladen|imbiss|kneipe|pizzeria|gaststätte", "restaurant"),
     (r"badezimmer|dusche|badewanne|toilette|wasserhahn|leitungswasser", "bathroom"),
@@ -3491,14 +3545,14 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
               (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
               (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server|zock|gaming|videospiel|ballerspiel|\bgamer|\bpc\b|laptop", "computer"),
-              (r"pflanze[n]? wachs|keim|\bsaat", "sprout")]
+              (r"pflanze[n]? wachs|keim|\bsaat", "sprout"), (r"haarwurzel|haarbalg|härchen", "goosebumps")]   # „Gänsehaut“ selbst setzt stage._music (nicht als Ding des Themas in jeder zweiten Szene)
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
 CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
-CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
+CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
                 "classroom", "restaurant", "church")
 CROWD_ELEMENTS = ("city", "village", "street", "houses")
 

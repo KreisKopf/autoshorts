@@ -374,19 +374,23 @@
  },
  "kopfhörer": {
   "n": 1,
-  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle"
+  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+  "done": true
  },
  "bassbox": {
   "n": 1,
-  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle"
+  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+  "done": true
  },
  "muskel": {
   "n": 1,
-  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle"
+  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+  "done": true
  },
  "achterbahn": {
   "n": 1,
-  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle"
+  "last": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
+  "done": true
  },
  "armee": {
   "n": 1,
@@ -394,11 +398,13 @@
  },
  "hafen": {
   "n": 2,
-  "last": "Was passiert, wenn die Ostsee komplett zufriert?"
+  "last": "Was passiert, wenn die Ostsee komplett zufriert?",
+  "done": true
  },
  "döner": {
   "n": 1,
-  "last": "Dönerladen gegen Burgerladen: Wer verdient wirklich mehr?"
+  "last": "Dönerladen gegen Burgerladen: Wer verdient wirklich mehr?",
+  "done": true
  },
  "pinzette": {
   "n": 1,
@@ -434,6 +440,7 @@
  },
  "wecker": {
   "n": 1,
-  "last": "Du bist nicht müde: Hol dir deine Energie zurück!"
+  "last": "Du bist nicht müde: Hol dir deine Energie zurück!",
+  "done": true
  }
 }

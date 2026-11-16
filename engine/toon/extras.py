@@ -1432,6 +1432,58 @@ SKY += ("balloon", "balloon_out", "balloon_dark", "gondola", "searchlight")     
 BALLOON_KINDS = ("balloon", "balloon_out", "balloon_dark", "gondola_empty", "balloon_fill", "balloon_ground", "balloon_down", "gondola", "searchlight")
 
 
+def p_goosebumps(d, x, t, s=1.0):
+    """Gänsehaut als Schaubild: Hautschnitt mit drei Haaren. Die kleinen Haarbalgmuskeln (rot) ziehen sich zusammen, die Haare richten sich
+    auf und die Haut wölbt sich an jedem Haar zu einem Hügel (Wörter Gänsehaut, Haarwurzel, Haarbalg, Härchen – stage.GOOSE_RE)."""
+    e = max(0.0, min(1.0, (t - 0.55) / 0.35))
+    e = e * e * (3 - 2 * e)
+    tremble = math.sin(t * 22) * 1.6 * e                                                           # aufgerichtet zittern die Haare leicht
+    ys, bot = GROUND - 300, GROUND - 44
+    for lx in (-200, 200):                                                                         # Schautafel auf zwei Beinen: liest sich als Schaubild, nicht als Möbel
+        _r(d, (x + lx - 12, GROUND - 60, x + lx + 12, GROUND), (110, 118, 134), 5, 5)
+    _r(d, (x - 290, ys - 216, x + 290, bot + 26), (60, 110, 190), 30)
+    d.rounded_rectangle((x - 268, ys - 194, x + 268, bot + 4), 18, fill=(236, 244, 252), outline=INK, width=5)
+    _r(d, (x - 236, ys + 10, x + 236, bot), (244, 214, 150), 22)                                   # Fettgewebe (unten)
+    for i in range(7):
+        d.ellipse((x - 214 + i * 62, bot - 58 + (i % 2) * 10, x - 166 + i * 62, bot - 16 + (i % 2) * 10), fill=(250, 228, 176))
+    _r(d, (x - 236, ys + 6, x + 236, ys + 176), (240, 160, 150), 16)                                # Lederhaut
+    skin, skin_d = (240, 196, 164), (214, 160, 128)
+    top = [(x - 236, ys + 44), (x - 236, ys)]
+    for i in range(48):                                                                            # Oberhaut mit Hügeln an den Haaren
+        px_ = x - 236 + 472 * i / 47
+        bump = sum(math.exp(-((px_ - (x + hx)) / 34) ** 2) for hx in (-140, 0, 140)) * 20 * e
+        top.append((px_, ys - bump))
+    top += [(x + 236, ys), (x + 236, ys + 44)]
+    d.polygon(top, fill=skin_d, outline=INK, width=O)
+    d.polygon([(a, b + 5) for a, b in top[1:-1]] + [(x + 230, ys + 30), (x - 230, ys + 30)], fill=skin)
+    for hx in (-140, 0, 140):
+        ex, ey = x + hx, ys - 20 * e
+        a = math.radians(40 * (1 - e) + 4 * e + tremble)
+        ux, uy = math.sin(a), -math.cos(a)
+        tip = (ex + ux * 128, ey + uy * 128)
+        bulb = (ex - ux * 132, ey - uy * 132)
+        m1, m2 = (ex - ux * 100, ey - uy * 100), (ex + 74, ys + 38)                                   # Haarbalgmuskel: vom Haarbalg schräg hoch unter die Oberhaut
+        mw = int(15 + 11 * e)
+        mc = (226, 70 + int(20 * (1 - e)), 76)
+        d.line((*m1, *m2), fill=INK, width=mw + 10)
+        d.line((*m1, *m2), fill=mc, width=mw)
+        d.line((m1[0] + 5, m1[1] - 4, m2[0] - 6, m2[1] - 4), fill=_lt(mc, 0.35), width=max(3, mw // 4))
+        d.line((*bulb, ex, ey), fill=INK, width=30)                                                # Haarbalg (Scheide um die Wurzel)
+        d.line((*bulb, ex, ey), fill=(250, 226, 206), width=18)
+        d.ellipse((bulb[0] - 21, bulb[1] - 21, bulb[0] + 21, bulb[1] + 21), fill=(150, 96, 70), outline=INK, width=5)   # Haarzwiebel
+        d.line((*bulb, *tip), fill=INK, width=17)                                                  # Haar
+        d.line((*bulb, *tip), fill=(104, 70, 52), width=8)
+        if e > 0.6:                                                                                # kurze Zuck-Striche am Muskel
+            k = (e - 0.6) / 0.4
+            for j, (ox, oy) in enumerate(((40, -34), (64, -10))):
+                d.line((m2[0] + ox * 0.5, m2[1] + oy * 0.5 + 60, m2[0] + ox * (0.5 + 0.5 * k), m2[1] + oy * (0.5 + 0.5 * k) + 60), fill=(226, 70, 76), width=6)
+
+
+PROPS["goosebumps"] = p_goosebumps                         # Schaubild Gänsehaut: Haare richten sich auf (Regie: stage.GOOSE_RE)
+PROP_ALIASES.update({"gänsehaut": "goosebumps", "haarwurzel": "goosebumps", "haarwurzeln": "goosebumps", "haarbalgmuskel": "goosebumps", "haarbalg": "goosebumps",
+                     "härchen": "goosebumps", "goose bumps": "goosebumps"})
+
+
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
 # Was hier fehlt (Naturereignisse, Himmelskörper), wird als Schaubild frei gezeichnet.
 SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": (7.5, 1010), "tree": (7.5, 1130), "rock": (0.8, 1262),
@@ -1439,7 +1491,7 @@ SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "b
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
-         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "tank": (1.75, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255)}
+         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "tank": (1.75, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255), "goosebumps": (1.5, 1245)}
 # ------------------------------------------------------------------ See-Schatz (versenkte Kisten, Taucher, Baumstämme am Seegrund)
 def _rotp(pivot, deg):
     """Wie _rot, nimmt aber einen Punkt (x, y) als ein Argument."""
@@ -1880,7 +1932,7 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True, parked=Tru
             x = -100 + ph * (W + 200)
             y = 995 + (i * 37) % 86
             d.arc((x, y, x + 90 + (i % 3) * 30, y + 22), 180, 360, fill=(226, 244, 255, 230), width=5)
-    if "sea" in els or ground == "water":                         # Wellen laufen
+    if ("sea" in els and "harbor" not in els) or ground == "water":   # Wellen laufen (im Hafenbecken nicht: sie liefen über Pier und Frachter)
         y0, y1 = (base - 200, base - 16) if "sea" in els else (base + 40, H - 240)
         for y in range(int(y0), int(y1), 46):
             sh = (t * 60 + y * 3) % 160
