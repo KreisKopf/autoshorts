@@ -1,5 +1,5 @@
 {
- "updated": 1794821102.8920634,
+ "updated": 1794823013.747641,
  "enough": true,
  "counted": 15,
  "total": 17,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1616,
+   "avg_views": 1622,
    "avg_likes": 51.0,
-   "like_rate": 3.16,
-   "avg_score": 2380
+   "like_rate": 3.14,
+   "avg_score": 2387
   },
   {
    "slug": "whatif",
@@ -36,19 +36,19 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1594,
+   "avg_views": 1614,
    "avg_likes": 39.0,
-   "like_rate": 2.45,
-   "avg_score": 2179
+   "like_rate": 2.42,
+   "avg_score": 2199
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1347,
-   "avg_likes": 23.0,
-   "like_rate": 1.71,
-   "avg_score": 1722
+   "avg_views": 1354,
+   "avg_likes": 24.0,
+   "like_rate": 1.77,
+   "avg_score": 1744
   },
   {
    "slug": "fakten",
@@ -72,9 +72,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1616 Aufrufe, 3.16 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1622 Aufrufe, 3.14 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2376 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2380 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -113,21 +113,21 @@
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2117,
+   "views": 2118,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2807
+   "score": 2808
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1642,
+   "views": 1643,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2617
+   "score": 2618
   }
  ],
  "flop": [
