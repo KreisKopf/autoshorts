@@ -1,5 +1,5 @@
 {
- "updated": 1794870335.0060828,
+ "updated": 1794872137.3076217,
  "enough": true,
  "counted": 17,
  "total": 20,
@@ -18,16 +18,16 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1743,
+   "avg_views": 1795,
    "avg_likes": 43.0,
-   "like_rate": 2.47,
-   "avg_score": 2388
+   "like_rate": 2.4,
+   "avg_score": 2440
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1721,
+   "avg_views": 1720,
    "avg_likes": 40.6,
    "like_rate": 2.36,
    "avg_score": 2334
@@ -36,28 +36,28 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1665,
+   "avg_views": 1664,
    "avg_likes": 42.0,
    "like_rate": 2.52,
-   "avg_score": 2295
+   "avg_score": 2294
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1651,
+   "avg_views": 1650,
    "avg_likes": 12.0,
    "like_rate": 0.73,
-   "avg_score": 1921
+   "avg_score": 1920
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1420,
+   "avg_views": 1446,
    "avg_likes": 27.0,
-   "like_rate": 1.9,
-   "avg_score": 1855
+   "like_rate": 1.87,
+   "avg_score": 1881
   },
   {
    "slug": "fakten",
@@ -75,7 +75,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.06,
-  "comedy": 1.05,
+  "comedy": 1.04,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -83,7 +83,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2392 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2397 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -102,11 +102,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2251,
+   "views": 2249,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3166
+   "score": 3164
   },
   {
    "id": 84,
