@@ -183,7 +183,8 @@ Jede Fläche bekommt automatisch einen dunklen Umriss ("o": false schaltet ihn a
 Antwortformat: {"name": "<deutscher Name, klein>", "aliases": ["weitere Wörter, auch Mehrzahl"], "height_m": <echte Höhe in Metern>,
  "sky": <true nur für Dinge am Himmel>, "anim": "none" | "bob" | "pulse", "shapes": [ ... ]}
 Wenn das Gewünschte kein einzelner greifbarer Gegenstand ist (ein Ort, ein Wetter, ein Gefühl, ein Vorgang) oder eine echte Person,
-eine Marke oder ein Logo wäre, antworte mit {"skip": true}.
+eine Marke oder ein Logo, ein Symbol einer Partei, Ideologie oder Gruppe, eine Geste oder etwas Anstößiges oder Gewalttätiges wäre,
+antworte mit {"skip": true}.
 Beispiel Wasserturm: {"name":"wasserturm","aliases":["wassertürme","water tower"],"height_m":30,"sky":false,"anim":"none","shapes":[
  {"t":"poly","p":[[150,170],[120,400],[145,400],[170,170]],"c":"#6b7280"},{"t":"poly","p":[[230,170],[255,400],[280,400],[250,170]],"c":"#6b7280"},
  {"t":"rect","x":185,"y":170,"w":30,"h":230,"c":"#8b93a1"},{"t":"line","p":[[150,290],[250,290]],"c":"#4b5563","w":8},

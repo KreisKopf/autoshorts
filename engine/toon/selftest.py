@@ -1068,6 +1068,27 @@ def main():
         assert cats["motivation"]["enabled"] and cats["motivation"]["caption_style"] == "word" and cats["vergleich"]["enabled"]
     check("Motivation: Wort für Wort, Rubriken da", _word_caps)
 
+    def _adopt():                                                # Gelerntes aus Kopien: nur Neues, keine fremden Wörter, nur nach Bild-Prüfung
+        import tempfile
+        from pathlib import Path
+        from .. import adopt, state as st_
+        good = [{"t": "rect", "x": 150, "y": 200, "w": 100, "h": 200, "c": "#88aa44"}, {"t": "ellipse", "cx": 200, "cy": 180, "rx": 60, "ry": 40, "c": "#cc4444"}]
+        theirs = {"kompass": {"name": "kompass", "aliases": ["kompasse", "haus", "geld"], "shapes": good}, "auto": {"name": "auto", "shapes": good},
+                  "kaputt": {"name": "kaputt", "shapes": [{"t": "rect"}]}, "boese": {"name": "boese", "shapes": good}, "x": "<script>"}
+        saved = {}
+        old = (adopt._repo_ok, adopt._fetch_shapes, adopt._looks_ok, adopt.load, adopt.save)
+        try:
+            adopt._repo_ok = lambda f: "main" if f == "freund/autoshorts" else None
+            adopt._fetch_shapes = lambda f, b: theirs
+            adopt._looks_ok = lambda n, png: (n != "boese", "test")
+            adopt.load = lambda name, default: {}
+            adopt.save = lambda name, obj: saved.update(obj)
+            assert adopt.adopt("freund/autoshorts,fremd/repo") == 1
+        finally:
+            adopt._repo_ok, adopt._fetch_shapes, adopt._looks_ok, adopt.load, adopt.save = old
+        assert set(saved) == {"kompass"} and saved["kompass"]["aliases"] == ["kompasse"], saved.keys()
+    check("Kanäle: Übernahme aus Kopien nur geprüft", _adopt)
+
     from ..writer import repeat_trouble as _w_rep
     def _ice():                                                  # zugefrorenes Meer: Eisfläche statt Wellen/Gebirge, Schiff im Eis, Eisdecke über dem Wasser, Atemloch
         from PIL import Image

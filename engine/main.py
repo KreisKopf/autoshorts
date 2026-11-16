@@ -765,6 +765,9 @@ def main(argv=None):
         elif a.action == "reset":        # Kopie für einen anderen Kanal neu einrichten (--topic = Name der Kopie als Bestätigung)
             from . import fresh
             fresh.reset(a.topic)
+        elif a.action == "adopt":        # Admin: gelernte Gegenstände aus Kopien geprüft übernehmen (--topic "name/kopie,name2/kopie")
+            from . import adopt
+            adopt.adopt(a.topic)
         elif a.action == "update":       # Kopie: neuesten Motor aus dem Original holen, eigene Daten bleiben
             from . import fresh
             fresh.update_engine()

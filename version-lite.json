@@ -1,6 +1,6 @@
 {
-  "version": "1.12.0",
-  "file": "releases/AutoShorts-Kanal-1.12.0.cmd",
-  "sha256": "8368e4b768ef71c8994e95e0e9709ef8c04c09b1e2815c23ca0a94ba518fa1df",
-  "notes": "Admin-Tab: Zugänge mit Laufzeit erstellen, verlängern, löschen; Rechte je Zugang; Kanal-App mit Zugangscode"
+  "version": "1.13.0",
+  "file": "releases/AutoShorts-Kanal-1.13.0.cmd",
+  "sha256": "480189f05593c8cef677d88f506ef5eb6605ce282a2211f118779cae1140c8bf",
+  "notes": "Admin: Kanäle-Übersicht – Gelerntes aus Kopien geprüft übernehmen, fehlende Dinge nachbauen lassen"
 }

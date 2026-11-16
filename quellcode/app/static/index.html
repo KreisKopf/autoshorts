@@ -726,6 +726,50 @@ function accStatus(e) {
   return d <= 0 ? '<span class="chip mute">abgelaufen</span>' : d < 3 ? `<span class="chip warn">läuft in ${Math.ceil(d)} Tag${Math.ceil(d) > 1 ? "en" : ""} ab</span>` : `<span class="chip good">aktiv bis ${fmtDate(e.expires)}</span>`;
 }
 const permBoxes = (pre, perms) => `<div class="grid2" style="gap:6px 18px">${PERMS.map(([k, l, d]) => `<label class="check"><input type="checkbox" data-${pre}="${k}" ${(perms && k in perms ? perms[k] : d) ? "checked" : ""}> ${l}</label>`).join("")}</div>`;
+/* Kanäle: alle Kopien (Forks) des Repositorys – was sie gelernt haben und was ihnen fehlt; Gelerntes in die eigene Engine übernehmen */
+let FORKS = null, FORKS_BUSY = false;
+const cleanWord = w => String(w || "").toLowerCase().replace(/[^a-zäöüß0-9 \-]/g, "").trim().slice(0, 30);
+const num = x => { const n = Number(x); return Number.isFinite(n) && n >= 0 ? Math.floor(n) : 0; };
+const rawJson = (full, br, f) => fetch(`https://raw.githubusercontent.com/${full}/${br}/docs/data/${f}?t=${Date.now()}`, {cache: "no-store"}).then(r => r.ok ? r.json() : null).catch(() => null);
+async function loadForks() {
+  const mine = await gh("GET", "/contents/docs/data/shapes.json?ref=main", null, true).then(x => typeof x === "string" ? JSON.parse(x) : x).catch(() => ({}));
+  const forks = await gh("GET", "/forks?per_page=100&sort=newest");
+  FORKS = await Promise.all((forks || []).map(async f => {
+    const br = f.default_branch || "main";
+    const [shapes, wishes, conf, vids] = await Promise.all(["shapes.json", "wishes.json", "config.json", "videos.json"].map(n => rawJson(f.full_name, br, n)));
+    const sh = shapes && typeof shapes === "object" ? shapes : {}, vl = Array.isArray(vids) ? vids : [];
+    const st = (conf && conf.settings) || {};
+    // alles aus der Kopie ist fremde Eingabe: nur bereinigte Wörter und Zahlen, nie Code oder HTML
+    return {full: String(f.full_name), url: `https://github.com/${String(f.full_name)}`, name: String(st.channel_name || "").slice(0, 60), focus: String(st.channel_focus || "").slice(0, 200), accessId: String(st.access_id || "").slice(0, 20),
+      newShapes: Object.keys(sh).map(cleanWord).filter(k => k.length > 1 && !(k in (mine || {}))).slice(0, 200),
+      missing: Object.entries(wishes && typeof wishes === "object" ? wishes : {}).filter(([, w]) => w && !w.done).map(([k, w]) => [cleanWord(k), num(w.n) || 1]).filter(([k]) => k.length > 2).sort((a, b) => b[1] - a[1]).slice(0, 60),
+      videos: vl.length, published: vl.filter(v => v && v.status === "published").length, last: vl.length ? Math.max(0, ...vl.map(v => num(v && v.created))) : 0};
+  }));
+}
+function forksHtml() {
+  if (!FORKS) return `<div class="empty">${FORKS_BUSY ? "Lade Kanäle …" : "Noch nicht geladen."}</div>`;
+  if (!FORKS.length) return `<div class="empty">Noch keine Kopien. Sobald jemand einen Fork anlegt, steht er hier.</div>`;
+  const allNew = new Set(FORKS.flatMap(f => f.newShapes));
+  return `<p class="hint">Übernehmen läuft auf deinem Motor: Jede Zeichnung wird technisch geprüft, probeweise gezeichnet und von der Bild-KI angeschaut. Nur eindeutig harmlose Gegenstände mit neuem Namen kommen in deine Bibliothek – nichts Vorhandenes wird ersetzt.</p>
+  ${allNew.size ? `<div class="inline" style="margin-bottom:10px"><button class="btn primary" id="fkAll">${allNew.size} neue Gegenstände aus allen Kanälen prüfen und übernehmen</button></div>` : ""}` + FORKS.map((f, i) => {
+    const acc = ACC && ACC.access.find(a => a.id === f.accessId);
+    return `<details class="set-sec" style="margin-bottom:8px"><summary><span class="s-t"><b>${esc(f.name || f.full)}</b><span class="hint">${esc(f.full)} · ${f.videos} Videos (${f.published} veröffentlicht)${f.last ? " · zuletzt " + fmtDate(f.last) : ""}</span></span>
+      <span class="s-chip">${acc ? accStatus(acc) : f.accessId ? '<span class="chip mute">Zugang gelöscht</span>' : '<span class="chip warn">ohne Zugang</span>'}</span></summary>
+      <div class="set-b">
+        ${f.focus ? `<p class="hint">Schwerpunkt: ${esc(f.focus)}</p>` : ""}
+        <div class="lbl">Selbst gelernt, bei dir noch nicht vorhanden (${f.newShapes.length})</div>
+        <p class="hint">${f.newShapes.length ? f.newShapes.map(k => esc(k)).join(", ") : "nichts Neues"}</p>
+        ${f.newShapes.length ? `<button class="btn sm primary" data-fktake="${i}">Geprüft übernehmen</button>` : ""}
+        <div class="lbl" style="margin-top:10px">Fehlt diesem Kanal noch (${f.missing.length})</div>
+        <p class="hint">${f.missing.length ? f.missing.slice(0, 30).map(([k, n]) => esc(k) + (n > 1 ? ` ×${n}` : "")).join(", ") : "nichts"}</p>
+        ${f.missing.length ? `<button class="btn sm" data-fklearn="${i}">Bei mir nachbauen lassen</button>` : ""}
+        <div class="inline" style="margin-top:8px"><a class="btn sm" href="${esc(f.url)}" target="_blank" rel="noopener">Kopie öffnen ↗</a></div></div></details>`; }).join("");
+}
+async function takeShapes(fulls) {   // Übernahme läuft geprüft auf dem eigenen Motor (engine/adopt.py), nie direkt aus fremden Daten
+  const list = fulls.filter(f => /^[A-Za-z0-9-]{1,39}\/[A-Za-z0-9._-]{1,100}$/.test(f)).slice(0, 20);
+  if (!list.length) return false;
+  return dispatch({action: "adopt", topic: list.join(",")}, "Gegenstände werden geprüft und übernommen");
+}
 async function viewAdmin() {
   if (ACC === null) { $("#main").innerHTML = `<div class="empty">Lade Zugänge …</div>`; try { await loadAccess(); } catch (e) { $("#main").innerHTML = `<div class="empty">${esc(e.message)}</div>`; return; } if (TAB !== "admin") return; }
   const list = ACC.access.slice().sort((a, b) => (b.created || 0) - (a.created || 0));
@@ -744,6 +788,8 @@ async function viewAdmin() {
         <div class="inline" style="margin-top:10px;flex-wrap:wrap"><button class="btn sm primary" data-asave="${e.id}">Rechte speichern</button>
           <select data-adur="${e.id}" aria-label="Verlängern um"><option value="7">+7 Tage</option><option value="30" selected>+30 Tage</option><option value="90">+90 Tage</option><option value="365">+1 Jahr</option><option value="0">unbegrenzt</option></select>
           <button class="btn sm" data-aext="${e.id}">Verlängern</button><button class="btn sm danger" data-adel="${e.id}">Zugang löschen</button></div></div></details>`).join("") : `<div class="empty">Noch keine Zugänge.</div>`}</section>
+  <section class="panel in" style="--i:2"><div class="section-h"><div><h2>Kanäle</h2><p class="hint">Alle Kopien deines Repositorys: was sie selbst gelernt haben, was ihnen fehlt. Übernimmst du Gelerntes in deine Engine, bekommen es alle Kanäle beim nächsten Motor-Update.</p></div>
+    <button class="btn sm" id="fkLoad">${FORKS ? "Aktualisieren" : "Kanäle laden"}</button></div><div id="fkBox">${forksHtml()}</div></section>
   <section class="panel in" style="--i:2"><div class="section-h"><div><h2>Standard-Rechte</h2><p class="hint">So sind die Häkchen bei neuen Zugängen vorbelegt.</p></div></div>
     ${permBoxes("dp", ACC.defaults)}<div class="inline" style="margin-top:10px"><button class="btn sm primary" id="dpSave">Standard speichern</button></div></section>`;
   const perms = attr => Object.fromEntries([...document.querySelectorAll(`[data-${attr}]`)].map(x => [x.getAttribute(`data-${attr}`), x.checked]));
@@ -757,6 +803,17 @@ async function viewAdmin() {
       expires: days ? now + days * 86400 : 0, perms: perms("np")};
     await loadAccess(); ACC.access.push(e); await saveAccess("Zugang " + name); ACC_NEW = {name, code, expires: e.expires}; toast("Zugang erstellt");
   });
+  const bindForks = () => {
+    if ($("#fkAll")) $("#fkAll").onclick = async () => { if (await takeShapes(FORKS.filter(f => f.newShapes.length).map(f => f.full))) toast("Läuft auf GitHub: jeder Gegenstand wird geprüft. Das Protokoll zeigt, was übernommen oder abgelehnt wurde."); };
+    document.querySelectorAll("[data-fktake]").forEach(b => b.onclick = async () => { if (await takeShapes([FORKS[+b.dataset.fktake].full])) toast("Läuft auf GitHub: jeder Gegenstand wird geprüft."); });
+    document.querySelectorAll("[data-fklearn]").forEach(b => b.onclick = async () => { const f = FORKS[+b.dataset.fklearn];
+      const words = f.missing.slice(0, 12).map(([k]) => cleanWord(k)).filter(k => k.length > 2);
+      if (!words.length || !confirm(`Diese Wörter von deiner Engine selbst zeichnen lassen?\n\n${words.join(", ")}\n\nNur bestätigen, wenn du mit allen einverstanden bist.`)) return;
+      if (await dispatch({action: "learn", topic: words.join(", ")}, "Gegenstände werden nachgebaut")) toast("Läuft auf GitHub – danach kennt deine Engine sie, die Kanäle bekommen sie beim Motor-Update."); });
+  };
+  bindForks();
+  $("#fkLoad").onclick = async () => { FORKS_BUSY = true; FORKS = null; $("#fkBox").innerHTML = forksHtml(); $("#fkLoad").disabled = true;
+    try { await loadForks(); } catch (e) { toast(e.message, true); } FORKS_BUSY = false; $("#fkLoad").disabled = false; $("#fkLoad").textContent = "Aktualisieren"; $("#fkBox").innerHTML = forksHtml(); bindForks(); };
   $("#dpSave").onclick = () => busy($("#dpSave"), async () => { const d = perms("dp"); await loadAccess(); ACC.defaults = d; await saveAccess("Standard-Rechte"); toast("Gespeichert"); });
   document.querySelectorAll("[data-asave]").forEach(b => b.onclick = () => busy(b, async () => { const id = b.dataset.asave, p_ = perms("ep-" + id);
     await loadAccess(); const e = ACC.access.find(x => x.id === id); if (!e) throw new Error("Zugang nicht mehr da."); e.perms = p_; await saveAccess("Rechte " + e.name); toast("Rechte gespeichert – gilt in ihrer App spätestens nach 10 Minuten"); }));
