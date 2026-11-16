@@ -1,5 +1,5 @@
 {
- "updated": 1794796672.5622969,
+ "updated": 1794798472.3299549,
  "enough": true,
  "counted": 14,
  "total": 17,
@@ -9,7 +9,7 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1614,
+   "avg_views": 1615,
    "avg_likes": 51.0,
    "like_rate": 3.16,
    "avg_score": 2380
@@ -18,10 +18,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1701,
+   "avg_views": 1702,
    "avg_likes": 39.9,
    "like_rate": 2.34,
-   "avg_score": 2303
+   "avg_score": 2304
   },
   {
    "slug": "comedy",
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1566,
-   "avg_likes": 37.0,
-   "like_rate": 2.36,
-   "avg_score": 2121
+   "avg_views": 1573,
+   "avg_likes": 38.0,
+   "like_rate": 2.42,
+   "avg_score": 2143
   },
   {
    "slug": "fakten",
@@ -63,9 +63,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1614 Aufrufe, 3.16 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1615 Aufrufe, 3.16 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2424 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2426 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -114,11 +114,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1643,
+   "views": 1645,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2618
+   "score": 2620
   }
  ],
  "flop": [
