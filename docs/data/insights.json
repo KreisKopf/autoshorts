@@ -1,5 +1,5 @@
 {
- "updated": 1794798472.3299549,
+ "updated": 1794800276.8713539,
  "enough": true,
  "counted": 14,
  "total": 17,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1615,
+   "avg_views": 1616,
    "avg_likes": 51.0,
    "like_rate": 3.16,
-   "avg_score": 2380
+   "avg_score": 2381
   },
   {
    "slug": "whatif",
@@ -21,7 +21,7 @@
    "avg_views": 1702,
    "avg_likes": 39.9,
    "like_rate": 2.34,
-   "avg_score": 2304
+   "avg_score": 2303
   },
   {
    "slug": "comedy",
@@ -63,7 +63,7 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1615 Aufrufe, 3.16 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1616 Aufrufe, 3.16 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2426 zu 704 Punkte)."
  ],
@@ -84,11 +84,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2219,
+   "views": 2217,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3134
+   "score": 3132
   },
   {
    "id": 84,
