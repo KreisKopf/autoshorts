@@ -1,5 +1,5 @@
 {
- "updated": 1794837859.1900523,
+ "updated": 1794838228.3730378,
  "enough": true,
  "counted": 16,
  "total": 18,
@@ -21,34 +21,34 @@
    "avg_views": 1714,
    "avg_likes": 40.6,
    "like_rate": 2.37,
-   "avg_score": 2327
+   "avg_score": 2328
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1658,
+   "avg_views": 1659,
    "avg_likes": 42.0,
    "like_rate": 2.53,
-   "avg_score": 2288
+   "avg_score": 2289
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1543,
-   "avg_likes": 39.5,
-   "like_rate": 2.56,
-   "avg_score": 2136
+   "avg_views": 1545,
+   "avg_likes": 40.0,
+   "like_rate": 2.59,
+   "avg_score": 2145
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1378,
+   "avg_views": 1380,
    "avg_likes": 24.0,
    "like_rate": 1.74,
-   "avg_score": 1768
+   "avg_score": 1770
   },
   {
    "slug": "fakten",
@@ -66,7 +66,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
-  "comedy": 0.98,
+  "comedy": 0.99,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -74,7 +74,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1634 Aufrufe, 3.18 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2382 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2384 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,21 +93,21 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2222,
+   "views": 2224,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3137
+   "score": 3139
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2002,
+   "views": 2004,
    "likes": 66,
    "comments": 0,
    "shares": 0,
-   "score": 2992
+   "score": 2994
   },
   {
    "id": 80,
