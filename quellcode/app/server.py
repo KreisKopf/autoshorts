@@ -548,7 +548,9 @@ def _post_script(url, payload):
         raise ValueError(f"Das Script hat nicht wie erwartet geantwortet: {hint}. Die Script-Vorlage macht es richtig.")
     if js.get("ok") is not True:
         raise ValueError("Das Backup-Script meldet: " + str(js.get("error") or "Fehler")[:200]
-                         + (" – ist das die AutoShorts-Vorlage? Ein Script einer anderen App passt nicht." if "Dateiname" in str(js.get("error")) or "name" in str(js.get("error")) else ""))
+                         + (" – unter dem Link läuft nicht das AutoShorts-Script, sondern vermutlich das einer anderen App. Bitte ein eigenes "
+                            "Apps-Script-Projekt mit der AutoShorts-Vorlage bereitstellen und dessen Link eintragen."
+                            if re.search(r"dateiname|filename|name", str(js.get("error")), re.I) else ""))
     return js
 
 
@@ -799,8 +801,13 @@ def backup_test(h):
     url = (SET.get("backup_url") or "").strip()
     if not url:
         raise ValueError("Erst den Backup-Link eintragen.")
-    _post_script(url, {"app": "AutoShorts", "action": "ping", "secret": SET.get("backup_secret") or ""})
-    h._send(200, {"ok": True, "msg": "Verbindung klappt – das Script antwortet richtig."})
+    js = _post_script(url, {"app": "AutoShorts", "action": "ping", "secret": SET.get("backup_secret") or ""})
+    if js.get("script") != "autoshorts-backup" and "folder" not in js:   # ein anderes Script antwortet zwar, aber nicht wie die Vorlage
+        raise ValueError("Unter diesem Link antwortet ein anderes Script, nicht das AutoShorts-Backup-Script (vermutlich das einer anderen App). "
+                         "Bitte ein NEUES Apps-Script-Projekt mit der AutoShorts-Vorlage anlegen, als Web-App bereitstellen und dessen /exec-Link eintragen.")
+    SET.update(backup_error="")
+    save_set()
+    h._send(200, {"ok": True, "msg": "Verbindung klappt – das AutoShorts-Script antwortet. Jetzt „Jetzt sichern“ tippen."})
 
 
 @route("POST", r"/api/backup/now")

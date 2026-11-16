@@ -1,6 +1,6 @@
 {
-  "version": "1.14.3",
-  "file": "releases/AutoShorts-Kanal-1.14.3.cmd",
-  "sha256": "4dd00a6ee0c613f9434dfbc5b3e77dc84e7a500f538dfbec2e006fbd9b6e25b7",
-  "notes": "Backup direkt aus Google Drive laden; Reparatur: 1.14.2 startete nicht; Updates werden vor dem Installieren probeweise gestartet"
+  "version": "1.14.4",
+  "file": "releases/AutoShorts-Kanal-1.14.4.cmd",
+  "sha256": "2835bca7868885eefcac1536b55a7f1a86019620dfda848c88b94e85ea813d75",
+  "notes": "Backup: Verbindungstest erkennt ein falsches Script (z. B. das einer anderen App)"
 }
