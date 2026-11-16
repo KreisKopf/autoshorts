@@ -1,0 +1,449 @@
+{
+ "title": "5 Dinge, die dein Gehirn schläft",
+ "scenes": [
+  {
+   "text": "Fünf geheime Dinge, die dein Gehirn nachts macht.",
+   "see": "Ein pinkes Gehirn schrubbt mit einer Bürste saubere Nerven im Schlafzimmer.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "synapse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NACHTS IM KOPF"
+   }
+  },
+  {
+   "text": "Und der letzte Punkt rettet dir morgen garantiert deine Laune.",
+   "see": "Das Gehirn schüttet Wasser über sich selbst im dunklen Raum.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Erstens: Putzen.",
+   "see": "Das Gehirn wischt den Boden im Tiefschlaf blitzblank sauber.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Im Tiefschlaf spült Hirnwasser schädliche Abfallstoffe des Tages einfach weg.",
+   "see": "Wasser fließt zwischen den Nervenzellen und spült Schmutz weg.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "faucet"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Die Zwischenräume werden dafür im Schlaf deutlich weiter.",
+   "see": "Das Gehirn zieht Wände auseinander, um mehr Platz zu machen.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "TIEFSCHLAF"
+   }
+  },
+  {
+   "text": "Forscher haben diesen nächtlichen Waschgang zuerst bei Mäusen entdeckt.",
+   "see": "Forscher mit Brille beobachten ein Gehirn mit der Lupe.",
+   "place": "lab",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Zweitens: Aufräumen.",
+   "see": "Das Gehirn sortiert Kisten in ein riesiges Regal.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Wichtige Erlebnisse wandern ins Langzeitgedächtnis, während Unwichtiges einfach verblasst.",
+   "see": "Ein Buch mit Vokabeln fliegt in einen Tresor.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "lehrbuch"
+    },
+    {
+     "type": "tresor"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Drittens: Lähmen.",
+   "see": "Das Gehirn drückt einen roten Schalter für Motoren aus.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Damit du deine Träume nicht nachspielst, schaltet das Gehirn fast alle Muskeln stumm.",
+   "see": "Eine schlafende Person liegt ganz ruhig im Bett.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_muskel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nur deine Augen und die Atmung laufen ungestört weiter.",
+   "see": "Augen bewegen sich schnell unter geschlossenen Lidern.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "auge"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NUR AUGEN & ATMUNG"
+   }
+  },
+  {
+   "text": "Du denkst, dein Gehirn schläft nachts durch? Falsch, in der Traumphase brennt es vor Aktivität.",
+   "see": "Das Gehirn rennt auf einem Laufband und schwitzt wild.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "run",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "VOLL AKTIV",
+    "color": "purple"
+   }
+  },
+  {
+   "text": "Viertens: Verknüpfen.",
+   "see": "Zwei Nervenenden verbinden sich leuchtend miteinander.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Über Nacht entstehen neue Verbindungen, weshalb Geübtes am nächsten Tag viel leichter klappt.",
+   "see": "Das Gehirn löst ein Rätsel und freut sich mit erhobenen Armen.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "synapse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Fünftens: Gefühle verarbeiten.",
+   "see": "Das Gehirn entspannt gemütlich in einem Sessel.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "stuhl"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Weil Stresshormone im Traum herunterfahren, heilen emotional anstrengende Momente ganz von allein.",
+   "see": "Stressmoleküle sinken wie Steine zu Boden.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Eine Nacht drüber zu schlafen bringt biologisch also wirklich extrem viel.",
+   "see": "Das Gehirn legt eine Decke über ein trauriges Herz.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Wer dauerhaft zu wenig schläft, merkt das sofort an Gedächtnis und Laune.",
+   "see": "Eine müde Person stolpert mit dunklen Augenringen durch die Gegend.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "sad",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Achte deshalb gut auf dein Gehirn und nutze diese nächtlichen Superkräfte.",
+   "see": "Das Gehirn zeigt auf den Kopf der schlafenden Figur.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}
