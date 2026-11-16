@@ -1,6 +1,6 @@
 {
-  "version": "1.14.1",
-  "file": "releases/AutoShorts-Kanal-1.14.1.cmd",
-  "sha256": "1c4563c24f256a12a0e7e698de767774d2a87321db523e4adc54780c4c75bd7f",
-  "notes": "Backup: klare Fehlermeldungen (404, Anmeldung, /dev-Link), Anmeldeseite zählt nicht mehr als Erfolg"
+  "version": "1.14.2",
+  "file": "releases/AutoShorts-Kanal-1.14.2.cmd",
+  "sha256": "b133aac0d4f6d033ee5973be4e9e79d336d367f993652d40deb26f5675d39f85",
+  "notes": "Backup: Knopf „Verbindung testen“, Vorlage mit Test-Funktion"
 }

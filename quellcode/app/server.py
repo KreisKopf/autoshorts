@@ -502,6 +502,45 @@ def backup_name():
     return time.strftime("AutoShorts-Backup-%Y-%m-%d-%H%M.asbak")
 
 
+def _post_script(url, payload):
+    body = json.dumps(payload).encode()
+    req = urllib.request.Request(url, data=body, method="POST", headers={"Content-Type": "application/json", "User-Agent": UA})
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:   # Google Apps Script leitet nach dem Speichern weiter (wird automatisch gefolgt)
+            code, txt = r.status, r.read(200_000).decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        code, txt = e.code, e.read(2000).decode("utf-8", "replace")
+    if code == 404:
+        raise ValueError("Fehler 404 – Google findet unter diesem Link kein Script. Prüfe: 1) Es ist die Web-App-Adresse mit /exec am Ende "
+                         "(nicht /dev), 2) Bereitstellen → Bereitstellungen verwalten → Web-App, Zugriff „Jeder“, 3) Nach Änderungen am Script "
+                         "eine NEUE Version bereitstellen und den Link neu kopieren.")
+    if code in (401, 403):
+        raise ValueError(f"Fehler {code} – das Script verlangt eine Anmeldung. Bei der Bereitstellung als Web-App den Zugriff auf „Jeder“ stellen.")
+    if code >= 400:
+        raise ValueError(f"Der Backup-Link antwortet mit Fehler {code}.")
+    try:
+        js = json.loads(txt)
+    except ValueError:
+        js = None
+    if not isinstance(js, dict):                      # z. B. Google-Anmeldeseite oder „Funktion doPost nicht gefunden“ – das ist KEIN Erfolg
+        hint = "das Script verlangt eine Anmeldung (Zugriff auf „Jeder“ stellen)" if re.search(r"accounts\.google|ServiceLogin|signin", txt, re.I) \
+            else "dem Script fehlt die Funktion doPost" if re.search(r"doPost", txt) else "kein {\"ok\": true} zurückgegeben"
+        raise ValueError(f"Das Script hat nicht wie erwartet geantwortet: {hint}. Die Script-Vorlage macht es richtig.")
+    if js.get("ok") is not True:
+        raise ValueError("Das Backup-Script meldet: " + str(js.get("error") or "Fehler")[:200]
+                         + (" – ist das die AutoShorts-Vorlage? Ein Script einer anderen App passt nicht." if "Dateiname" in str(js.get("error")) or "name" in str(js.get("error")) else ""))
+    return js
+
+
+@route("POST", r"/api/backup/test")
+def backup_test(h):
+    url = (SET.get("backup_url") or "").strip()
+    if not url:
+        raise ValueError("Erst den Backup-Link eintragen.")
+    _post_script(url, {"app": "AutoShorts", "action": "ping", "secret": SET.get("backup_secret") or ""})
+    h._send(200, {"ok": True, "msg": "Verbindung klappt – das Script antwortet richtig."})
+
+
 def upload_backup(force=False):
     """Backup bauen und an den hinterlegten Link schicken. Gibt eine Meldung zurück; Fehler landen in SET["backup_error"]."""
     url, pw = (SET.get("backup_url") or "").strip(), SET.get("backup_password") or ""
@@ -515,33 +554,9 @@ def upload_backup(force=False):
     try:
         blob = make_backup(pw)
         name = backup_name()
-        body = json.dumps({"app": "AutoShorts", "action": "backup", "secret": SET.get("backup_secret") or "", "filename": name,
+        _post_script(url, {"app": "AutoShorts", "action": "backup", "secret": SET.get("backup_secret") or "", "filename": name,
                            "mimeType": "application/octet-stream", "keep": int(SET.get("backup_keep") or 30),
-                           "data": base64.b64encode(blob).decode()}).encode()
-        req = urllib.request.Request(url, data=body, method="POST", headers={"Content-Type": "application/json", "User-Agent": UA})
-        try:
-            with urllib.request.urlopen(req, timeout=120) as r:   # Google Apps Script leitet nach dem Speichern weiter (wird automatisch gefolgt)
-                code, txt = r.status, r.read(200_000).decode("utf-8", "replace")
-        except urllib.error.HTTPError as e:
-            code, txt = e.code, e.read(2000).decode("utf-8", "replace")
-        if code == 404:
-            raise ValueError("Fehler 404 – Google findet unter diesem Link kein Script. Prüfe: 1) Es ist die Web-App-Adresse mit /exec am Ende "
-                             "(nicht /dev), 2) Bereitstellen → Bereitstellungen verwalten → Web-App, Zugriff „Jeder“, 3) Nach Änderungen am Script "
-                             "eine NEUE Version bereitstellen und den Link neu kopieren.")
-        if code in (401, 403):
-            raise ValueError(f"Fehler {code} – das Script verlangt eine Anmeldung. Bei der Bereitstellung als Web-App den Zugriff auf „Jeder“ stellen.")
-        if code >= 400:
-            raise ValueError(f"Der Backup-Link antwortet mit Fehler {code}.")
-        try:
-            js = json.loads(txt)
-        except ValueError:
-            js = None
-        if not isinstance(js, dict):                      # z. B. Google-Anmeldeseite oder „Funktion doPost nicht gefunden“ – das ist KEIN Erfolg
-            hint = "das Script verlangt eine Anmeldung (Zugriff auf „Jeder“ stellen)" if re.search(r"accounts\.google|ServiceLogin|signin", txt, re.I) \
-                else "dem Script fehlt die Funktion doPost" if re.search(r"doPost", txt) else "kein {\"ok\": true} zurückgegeben"
-            raise ValueError(f"Das Script hat nicht wie erwartet geantwortet: {hint}. Die Script-Vorlage unten macht es richtig.")
-        if js.get("ok") is not True:
-            raise ValueError("Das Backup-Script meldet: " + str(js.get("error") or "Fehler")[:200])
+                           "data": base64.b64encode(blob).decode()})
         SET.update(backup_last=time.time(), backup_error="", backup_last_name=name, backup_last_size=len(blob))
         save_set()
         log(f"Backup hochgeladen: {name} ({len(blob) // 1024} KB)")
