@@ -1,5 +1,5 @@
 {
- "updated": 1794816516.279644,
+ "updated": 1794818772.1481204,
  "enough": true,
  "counted": 15,
  "total": 17,
@@ -36,19 +36,19 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1594,
+   "avg_views": 1591,
    "avg_likes": 39.0,
    "like_rate": 2.45,
-   "avg_score": 2179
+   "avg_score": 2176
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1345,
-   "avg_likes": 23.0,
-   "like_rate": 1.71,
-   "avg_score": 1720
+   "avg_views": 1346,
+   "avg_likes": 24.0,
+   "like_rate": 1.78,
+   "avg_score": 1736
   },
   {
    "slug": "fakten",
@@ -74,7 +74,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1616 Aufrufe, 3.16 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2375 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2376 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,11 +93,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2221,
+   "views": 2222,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3136
+   "score": 3137
   },
   {
    "id": 84,
