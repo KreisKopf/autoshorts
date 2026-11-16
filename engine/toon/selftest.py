@@ -1204,6 +1204,9 @@ def main():
         assert a_g.get("pos") == "left" and a_g.get("action") == "point" and sg[0].get("shot") != "event", f"Figur läuft durch das Schaubild: {a_g} {sg[0].get('shot')}"
         assert frame(sg[0], {"du": {}}) is not None
         assert stage.poster_hero("Warum du bei Musik Gänsehaut bekommst", [{"actors": [{"kind": "chimp"}]}] * 2 + [{"actors": [{"kind": "brain"}]}] * 5 + [{}] * 13, None, ["brain"]) == "brain", "Nebenfigur auf dem Titelbild"
+        assert not any(k_ == "money" for pat_, k_ in stage.TEXT_PROPS if __import__("re").search(pat_, "gesteuert wird das ganze vom unwillkürlichen nervensystem")), "gesteuert → Geld"
+        assert stage._hint("Schon in den Sekunden vor deiner Lieblingsstelle steigt der Spiegel im Kopf an.") != "bathroom", "Dopaminspiegel → Badezimmer"
+        assert stage._hint("Du schaust morgens in den Spiegel.") == "bathroom"
         from .. import overlays as _ov
         assert _ov.quote("FORSCHER VERMUTEN", "…dass die plötzliche Wende der Musik im Gehirn kurz wie ein Alarm wirkt.") is not None
     check("Prüfung 16.11.: Nacht ohne Grund, Haarbalgmuskeln, Vorfahren, blitzschnell", _pruef_1116b)

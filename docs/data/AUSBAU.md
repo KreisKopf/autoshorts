@@ -316,3 +316,5 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Zitat-Karte (`overlays.quote`): lange Aussage in kleinerer Schrift auf vier Zeilen, nie mit Artikel am abgeschnittenen Ende.
   Nach dem 2. Neubau: Steht das Schaubild `goosebumps` neben einer Figur, steht sie links davon und zeigt darauf (kein Laufen durch die Tafel,
   kein `event`). `poster_hero`: Ein Wesen, das nur in ein, zwei Szenen eines langen Videos vorkommt, kommt nicht aufs Titelbild.
+  Nach Video 120: „gesteuert“ ist nicht „teuer“ (kein Geldstapel), „der Spiegel im Kopf steigt“ ist kein Badezimmer; für Körperteile
+  (Haar, Haut, Kopf …) wird nichts gelernt (`main.NO_THINGS`), der gelernte Haarschopf ist aus `shapes.json` entfernt.

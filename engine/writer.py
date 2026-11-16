@@ -513,6 +513,7 @@ def polish(js):
     if isinstance(js.get("description"), str):           # der Kanal spricht den Zuschauer an – kein „Wir zeigen dir“
         js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)?, ", "Hier siehst du, ", js["description"])
         js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)? ", "Hier siehst du ", js["description"])
+        js["description"] = re.sub(r"\bWir (?:schauen|sehen|gucken) uns an, ", "Hier siehst du, ", js["description"])      # „Wir schauen uns an, was dabei passiert.“
         js["description"] = re.sub(r"\bWir (?:testen|checken|prüfen|vergleichen|untersuchen|erklären|klären) ", "Hier siehst du ", js["description"])
         js["description"] = re.sub(r"(?i)\b(welches|dein|das|ein) feature\b", lambda m: {"welches": "Welche", "dein": "Deine", "das": "Die", "ein": "Eine"}[m.group(1).lower()] + " Regel", js["description"])
     for sc in js.get("scenes", []):
