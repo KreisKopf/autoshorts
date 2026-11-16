@@ -8,11 +8,11 @@
   "nachbauen": true,
   "rubriken": true,
   "rubriken_bearbeiten": false,
-  "laenge": false,
+  "laenge": true,
   "trends": false,
   "ki": false,
   "stil": false,
-  "zahlen": false
+  "zahlen": true
  },
  "access": []
 }
