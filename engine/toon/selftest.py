@@ -440,6 +440,41 @@ def main():
             assert px[2] > px[0], f"keine Decke über der Schlafenden ({tm_}): {px}"
     check("Schlaf-Video (keine Regie-Wörter, Nacht bleibt, Schlafende zugedeckt)", _sleep)
 
+    def _body():                                                 # Körper-Sätze (Prüfung 16.11.2026, Video 126): die Figur macht vor, was der Satz beschreibt; Gehirn als Figur statt Passanten; „Welle“ ist kein Strand
+        cast_b = {"du": {"shirt": "blau", "hair": "curly", "gender": "w"}}
+        T = [("Ein lauter Knall, und du zuckst zusammen.", "livingroom", "shocked", ""), ("Zuerst blinzeln die Augen, um sich zu schützen.", "livingroom", "shocked", ""),
+             ("Dann ziehst du den Kopf ein, Nacken und Schultern spannen sich an.", "livingroom", "shocked", ""),
+             ("Das schützt den Nacken, die Welle läuft von oben nach unten.", "livingroom", "shocked", ""),
+             ("Die Beine reagieren zuletzt.", "livingroom", "look_around", "close"), ("Du atmest schneller, mehr Blut fließt in die Muskeln.", "livingroom", "run", ""),
+             ("Die Pupillen weiten sich und lassen mehr Licht herein.", "livingroom", "shocked", ""), ("Oft erstarrst du erst einen Moment.", "hallway", "shocked", "close"),
+             ("In dieser Schreckstarre prüft das Gehirn die Lage.", "street", "shocked", ""), ("Herz und Pupillen beruhigen sich rasch.", "livingroom", "walk", ""),
+             ("Deshalb zittern die Hände noch Minuten später.", "livingroom", "shake", "close")]
+        scs = stage.direct([{"text": t_, "place": pl, "time": "day", "crowd": "worried" if pl == "street" else "", "shot": sh,
+                             "actors": [{"id": "du", "action": ac, "emotion": "scared"}]} for t_, pl, ac, sh in T],
+                           [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T))], "Was in deinem Körper passiert, wenn du dich erschrickst", "fakten", "")
+        act = lambda i: str(scs[i]["actors"][0].get("action"))   # noqa: E731
+        assert act(0) == "cower" and act(2) == "cower", "Zusammenzucken/Kopf einziehen wird nicht gespielt"
+        assert act(1) == "blink" and scs[1].get("shot") == "close", "Blinzeln ohne Großaufnahme"
+        assert stage.places.resolve(stage.backdrop(scs[3])) != "beach", "„die Welle läuft von oben nach unten“ spielt am Strand"
+        assert scs[4].get("shot") != "close", "Satz über die Beine als Großaufnahme des Gesichts"
+        assert act(5) == "pant" and act(6) == "pupils" and act(7) == "freeze" and scs[7].get("shot") != "close", "Atmen/Pupillen/Erstarren fehlen"
+        assert any(a.get("kind") == "brain" for a in scs[8]["actors"]) and not scs[8].get("crowd"), "Gehirn-Satz ohne Gehirn-Figur oder mit Passanten"
+        assert stage.places.resolve(stage.backdrop(scs[8])) != "street", "Gehirn-Satz spielt auf der Straße"
+        assert act(9) != "pupils", "„Pupillen beruhigen sich“ zeigt sich weitende Pupillen"
+        assert act(10) == "tremble", "zitternde Hände fehlen"
+        for sc_b in scs:
+            for t_b in (0.1, 1.2, 2.4):
+                frame(sc_b, cast_b, t_b)
+        for ac_b in ("cower", "freeze", "tremble", "blink", "pant", "pupils"):
+            for t_b in (0.0, 0.2, 1.0, 2.9):
+                rig.pose_at(ac_b, t_b, 3.0, "scared", 0.3, 1)
+        from .. import writer as _wr_b
+        js_b = _wr_b.polish({"title": "t", "description": "d", "hashtags": ["#koerper"], "tags": ["koerperreaktion"],
+                              "scenes": [{"text": "Dann die Finte: Du denkst, du rennst sofort los."}, {"text": "Die Finte des Gegners ist klug."}]})
+        assert js_b["hashtags"] == ["#körper"] and js_b["scenes"][0]["text"].startswith("Du denkst") and js_b["scenes"][1]["text"].startswith("Die Finte"), "Regie-Wort gesprochen oder Umlaute fehlen"
+
+    check("Körper-Sätze (Zusammenzucken, Blinzeln, Erstarren, Gehirn-Figur)", _body)
+
     def _sea():                                                  # Meerestiere: das genannte Tier ist die Figur, allein und unter Wasser
         T = [("Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.", "livingroom", [{"id": "du", "action": "shocked", "hold": "phone"}], ["computer"], "close"),
              ("Der Pistolenkrebs knallt seine Schere zu.", "underwater", [], ["explosion"], "event"),

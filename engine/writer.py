@@ -227,6 +227,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
      action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält – NICHT für Kopfschütteln, dafür idle),
              float (schwebt schwerelos in der Luft – dann schweben auch die Dinge aus "props" mit; für Sätze über Schweben, Abheben, fehlende Schwerkraft)
+             Körper-Reaktionen: cower (zuckt zusammen, zieht den Kopf ein), freeze (erstarrt), tremble (Hände zittern), blink (blinzelt), pupils (Pupillen weiten sich),
+             pant (atmet schnell, Hand an der Brust). NICHT in jeder Szene "shocked" – die Figur macht vor, was der Satz beschreibt.
      hold (optional): was die Figur in der Hand hält – phone, flashlight, bag, bottle, umbrella, sign, map, radio oder jeder kleine Gegenstand
           aus "props"/"wishes" (z. B. "schuh", "glass", "candle")
      HANDLUNG STATT GEGENSTAND: Beschreibt der Satz, dass jemand etwas mit einem Ding tut (Schuhe ausschütteln, Kerze halten, Glas heben),
@@ -497,6 +499,15 @@ def given_meta(js, topic):
     return js
 
 
+_UML = {"koerper": "körper", "gefuehl": "gefühl", "glueck": "glück", "aengst": "ängst", "erklaer": "erklär", "traeum": "träum", "maedchen": "mädchen",
+        "schoen": "schön", "gesuender": "gesünder", "zaehne": "zähne", "haende": "hände", "fuesse": "füße", "muedigkeit": "müdigkeit", "muede": "müde",
+        "ernaehrung": "ernährung", "gaensehaut": "gänsehaut", "gedaechtnis": "gedächtnis", "raetsel": "rätsel", "phaenomen": "phänomen", "taeglich": "täglich",
+        "ueberleben": "überleben", "ueberrasch": "überrasch", "fuer": "für", "natuerlich": "natürlich", "kuenstlich": "künstlich", "maerchen": "märchen",
+        "woerter": "wörter", "hoeren": "hören", "geraeusch": "geräusch", "loesung": "lösung", "groesse": "größe", "groesste": "größte", "suess": "süß",
+        "stoerung": "störung", "kaelte": "kälte", "waerme": "wärme", "gefaehrlich": "gefährlich", "aerzt": "ärzt", "unglaeubig": "ungläubig", "mythen": "mythen"}
+_UML_RE = r"(?i)" + "|".join(sorted(_UML, key=len, reverse=True))
+
+
 def polish(js):
     """Letzter Schliff ohne Text-KI: ß in Sprechertext, Titel und Beschreibung; englische Wörter in Einblendungen und Grafiken
     („GEHIRN-EFFECT“) werden deutsch."""
@@ -539,10 +550,15 @@ def polish(js):
         js["description"] = re.sub(r"\bWir (?:schauen|sehen|gucken) uns an, ", "Hier siehst du, ", js["description"])      # „Wir schauen uns an, was dabei passiert.“
         js["description"] = re.sub(r"\bWir (?:testen|checken|prüfen|vergleichen|untersuchen|erklären|klären) ", "Hier siehst du ", js["description"])
         js["description"] = re.sub(r"(?i)\b(welches|dein|das|ein) feature\b", lambda m: {"welches": "Welche", "dein": "Deine", "das": "Die", "ein": "Eine"}[m.group(1).lower()] + " Regel", js["description"])
+    for k in ("hashtags", "tags"):                        # echte Umlaute in Hashtags und Suchbegriffen („#koerper“ → „#körper“)
+        if isinstance(js.get(k), list):
+            js[k] = [_re_p.sub(_UML_RE, lambda m: _UML[m.group(0).lower()], x) if isinstance(x, str) else x for x in js[k]]
     for sc in js.get("scenes", []):
         if not isinstance(sc, dict):
             continue
         if isinstance(sc.get("text"), str):
+            sc["text"] = _re_p.sub(r"^\s*(?:(?:Und |Doch |Aber )?(?:dann|jetzt|nun|hier)\s+)?(?:kommt\s+)?(?:die|eine|der|ein)?\s*(?:Finte|Rehook|Re-Hook|Cliffhanger|Hook|Twist|Überleitung)\s*[:–—-]\s*(\w)",
+                                   lambda m: m.group(1).upper(), sc["text"], flags=_re_p.I)     # Regie-Wort der Vorgabe mitgesprochen („Dann die Finte: Du denkst …“)
             sc["text"] = fix_eszett(sc["text"])
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
             sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])   # „viertausendviershundert“

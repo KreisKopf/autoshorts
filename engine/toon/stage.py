@@ -991,7 +991,7 @@ def auto_graphic(text, hud=""):
     if m and _number(m.group(1)) and len(raw.split()) <= 6:
         return {"type": "round", "kicker": f"RUNDE {int(_number(m.group(1)))}", "text": (m.group(2) or "LOS").upper()}
     fig = find_figure(raw)
-    if not fig and _re.search(r"ganze stadt|stadtviertel|von oben|häuserblock|stadtweit|ganze viertel|millionenstadt|in der stadt", low):
+    if not fig and _re.search(r"ganze stadt|stadtviertel|(?:blick|sicht|aufnahme|stadt|häuser|straßen) (?:\w+ ){0,2}von oben|von oben (?:gesehen|betrachtet|aus gesehen)|häuserblock|stadtweit|ganze viertel|millionenstadt|in der stadt", low):
         return {"type": "city", "kicker": kick, "dark": bool(_re.search(r"ohne strom|stromausfall|dunkel|ohne licht|lichter gehen aus", low))}
     if not fig:
         if raw.endswith("?") and len(raw.split()) <= 5 and len(raw) <= 26:
@@ -1831,7 +1831,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 if step == 1 and topic_any and topic_ins < 2:                 # das Ding, um das sich das Video dreht, groß im Bild
                     sc["props"] = [{"type": topic_any[topic_ins % len(topic_any)]}]
                     sc["shot"], topic_ins = "insert", topic_ins + 1
-                elif step == 2:                                                # Blick nach draußen: Straße, Menschen, das Thema am Himmel
+                elif step == 2 and not _re0.search(r"\b(?:du|dich|dir|dein\w*|ich|mich|mir|mein\w*)\b|" + BODY_BRAIN_RE + r"|\bkörper", str(sc.get("text") or "").lower()):   # Blick nach draußen: Straße, Menschen, das Thema am Himmel – nicht, wenn der Satz von „dir“, deinem Körper oder dem Gehirn spricht („Dann ziehst du den Kopf ein“ zeigte Passanten)
                     sc["place"], sc["backdrop"] = "street", None
                     sc["actors"], sc["shot"] = [], "event"
                     sc["props"] = [{"type": k} for k in topic_any[:1]]
@@ -2212,6 +2212,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _music(scenes, topic)
     _indoor_sense(scenes)
     _sleep_story(scenes, topic)
+    _body_story(scenes)
     for i_n in range(1, len(scenes)):                     # eben stand das Ding schon groß allein im Bild: der nächste Satz schneidet nicht noch einmal darauf (neun Sekunden derselbe Lautsprecher)
         sc_n, pv_n = scenes[i_n], scenes[i_n - 1]
         if isinstance(sc_n, dict) and isinstance(pv_n, dict) and str(pv_n.get("shot") or "") == "insert":
@@ -2223,7 +2224,7 @@ def direct(scenes, times, topic="", style="", look=""):
 
 ROOMS = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
 OUTSIDE_RE = r"bauernhof|\bhof\b|\bfeld|wiese|draußen|\bgarten|\bwald|strand|straße|\bstadt|\bdorf|\bpark\b|\bberg|\bmeer|\bsee\b|himmel|wüste|\bland\b"
-BODY_PROPS = ("auge", "augen", "ohr", "ohren", "nase", "zahn", "zähne", "finger")
+BODY_PROPS = ("auge", "augen", "ohr", "ohren", "nase", "zahn", "zähne", "finger", "muskel", "muskeln")
 BIG_M = 4.0                                               # Bibliotheks-Dinge ab dieser echten Höhe (Schloss, Wasserturm, Gebäude, Achterbahn) stehen in keinem Zimmer
 
 
@@ -2247,6 +2248,85 @@ def _indoor_sense(scenes):
             sc["props"] = keep
             if str(sc.get("shot") or "") == "insert" and not keep:
                 sc["shot"] = ""
+
+
+# Körper-Sätze (Prüfung 16.11.2026, 21-Uhr-Termin, „Was in deinem Körper passiert, wenn du dich erschrickst“ – Video 126: vierzehn von neunzehn
+# Szenen zeigten dieselbe Schreck-Pose, zum Gehirn-Satz standen Passanten auf der Straße): Beschreibt der Satz, was der Körper tut, tut die Figur genau das.
+BODY_ACTS = ((r"zuck\w* (?:\w+ ){0,3}zusammen|zusammenzuck|zusammengezuckt|kopf (?:\w+ ){0,2}ein\b|kopf einzieh|ziehst (?:\w+ ){0,3}kopf|nacken und schultern|"
+              r"schultern (?:\w+ ){0,3}(?:hoch|spann)|duck(?:s?t)? dich", "cower", ""),
+             (r"erstarr|schreckstarre|wie gelähmt|wie angewurzelt|salzsäule|stocksteif", "freeze", "wide"),
+             (r"(?:hände|finger|knie|beine) (?:\w+ ){0,3}zitter|zitter\w* (?:\w+ ){0,4}(?:hände|finger|knie|beine)|\bzitterst\b", "tremble", ""),
+             (r"pupillen (?:\w+ ){0,5}(?:weit|groß|größer|riesig|öffn|licht)|(?:weit|groß|riesig|geweitet)\w* (?:\w+ ){0,2}pupillen", "pupils", "close"),
+             (r"blinzel|lidschl|lider (?:\w+ ){0,3}(?:zu\b|schließ)|augen (?:\w+ ){0,4}(?:zu\b|schließ|kneif)|kneifst (?:\w+ ){0,3}augen", "blink", "close"),
+             (r"atmest (?:\w+ ){0,3}(?:schneller|flach|hektisch)|atmung (?:\w+ ){0,3}(?:schneller|beschleunig|flach|rast)|schnappst nach luft|außer atem|keuch", "pant", ""),
+             (r"herz (?:\w+ ){0,3}(?:schlägt|rast|klopft|pocht|hämmert|pumpt)|herzschlag (?:\w+ ){0,3}(?:schneller|beschleunig|rast)|puls (?:\w+ ){0,3}(?:steigt|rast|schnellt|jagt)", "pant", "wide"))
+BODY_BRAIN_RE = r"\bgehirn|\bhirn\b|hirnstamm|mandelkern|amygdala|großhirn|kleinhirn|denkzentrale"
+BODY_LEGS_RE = r"\bbeine?n?\b|\bfüßen?\b|\bknien?\b"
+
+
+def _body_story(scenes):
+    """Schlussdurchgang: (1) Zusammenzucken, Erstarren, Zittern, Blinzeln, weite Pupillen, schnelles Atmen – die Figur macht es vor
+    (rig: cower, freeze, tremble, blink, pupils, pant) statt in jeder Szene dieselbe Schreck-Pose zu zeigen. (2) Spricht der Satz vom
+    Gehirn (Hirnstamm, Mandelkern) und steht nur ein Mensch im Bild, steht das Gehirn als Figur daneben – ohne Passanten. (3) Ein Satz
+    über Beine/Füße ist keine Großaufnahme des Gesichts."""
+    prev_room = None
+    ids_b = [str(a.get("id") or "") for sc in scenes if isinstance(sc, dict) for a in sc.get("actors") or []
+             if isinstance(a, dict) and a.get("id") and not a.get("kind") and not re.search(r"gehirn|hirn|brain|" + FRIDGE_ID_RE, str(a.get("id") or "").lower())]
+    lead_b = max(set(ids_b), key=ids_b.count) if ids_b else ""
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        shot = str(sc.get("shot") or "")
+        bd = backdrop(sc)
+        rp = places.resolve(bd) if not isinstance(bd, dict) else "custom"
+        low = str(sc.get("text") or "").lower()
+        if lead_b and shot == "event" and rp in ("street", "park", "plain") and not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] \
+                and re.search(BODY_BRAIN_RE, low) and not re.search(OUTSIDE_RE + "|" + PEOPLE_RE, low):
+            sc["shot"] = shot = ""                        # „prüft das Gehirn die Lage“ als Straßenbild mit besorgten Passanten: zurück zur Figur
+            sc["actors"] = [{"id": lead_b, "action": "freeze" if re.search(r"erstarr|schreckstarre", low) else "idle", "emotion": "worried", "emote": "", "pos": "center",
+                             "speaks": False, "say": "", "hold": "", "facing": ""}]
+            sc["props"] = []
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        humans = [a for a in acts if not a.get("kind") and not re.search(r"gehirn|hirn|brain|" + FRIDGE_ID_RE, str(a.get("id") or "").lower())]
+        if shot in ("graphic", "insert") or not humans or rp in MAPS + ("underwater", "space", "highsky"):
+            prev_room = rp if rp in ROOMS else prev_room
+            continue
+        h = humans[0]
+        hit = next(((act, want) for pat, act, want in BODY_ACTS if re.search(pat, low)), None)
+        free = str(h.get("action") or "").lower() in ("", "idle", "talk", "shocked", "scared", "look_around", "think", "walk", "run", "point", "shake", "wave", "jump")
+        if hit and free and len(acts) == 1 and not h.get("hold"):
+            act, want = hit
+            h.update(action=act, emote="", pos="center")
+            h.pop("to", None)
+            if act in ("tremble", "pant", "cower") and not str(h.get("emotion") or ""):
+                h["emotion"] = "worried"
+            if want == "close":
+                sc["shot"], sc["props"], sc["crowd"] = "close", [], ""
+            elif want == "wide" and shot in ("close", "event"):
+                sc["shot"] = ""
+            sc["_no_cut"] = True                          # kein Gegenschnitt mitten in der Geste
+        elif shot == "close" and re.search(BODY_LEGS_RE, low):
+            sc["shot"] = ""                               # „die Beine reagieren zuletzt“: die ganze Figur, nicht nur das Gesicht
+        if re.search(BODY_BRAIN_RE, low) and len(acts) == 1 and not (hit and hit[1] == "close") and str(sc.get("shot") or "") != "close" and not h.get("hold") \
+                and str(h.get("action") or "").lower() not in ("dance", "sit", "sleep", "fall", "float", "jump") and not sc.get("_beside_bed") \
+                and not re.search(r"im kopf\b.{0,12}$", low):
+            if rp in ("street", "park", "plain") and not re.search(OUTSIDE_RE, low):
+                sc["place"], sc["backdrop"] = prev_room or "livingroom", None    # ein Gedanken-Satz spielt nicht plötzlich auf der Straße
+            sc["crowd"] = ""
+            h["pos"] = 300
+            h.pop("to", None)
+            if str(h.get("action") or "").lower() in ("walk", "run"):
+                h["action"] = "idle"
+            busy = bool(re.search(r"prüf|bewert|entscheid|überleg|rechne|sortier|vergleich", low))
+            sc["actors"] = [h, {"id": "_hirn", "kind": "brain", "hero": False, "pos": 770, "action": "think" if busy else "talk", "emotion": "", "emote": "?" if busy else "",
+                                "say": "", "hold": "", "facing": "left", "speaks": False}]
+            sc["props"] = [q for q in (sc.get("props") or []) if not isinstance(q, dict) or q.get("pos") in (None, "")][:1]
+            if str(sc.get("shot") or "") == "event":
+                sc["shot"] = ""
+        bd = backdrop(sc)
+        rp = places.resolve(bd) if not isinstance(bd, dict) else "custom"
+        prev_room = rp if rp in ROOMS else prev_room
+    return scenes
 
 
 # Regie-Wörter aus der Drehbuch-Anleitung, die die Text-KI manchmal als Einblendung ausgibt (Prüfung 16.11.2026, Video 121: Schild „CLIFFHANGER“, Karte „REHOOK“)
@@ -3610,7 +3690,7 @@ HINTS = [
     (r"\bgarten|gärten|\bwiese|\brasen\b|käfer|insekten|maulwurf|regenwurm|schnecken", "park"),
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
-    (r"\bmeer|ozean|küste|strand|\bwellen\b|\bwelle\b", "beach"),
+    (r"\bmeer|ozean|küste|strand|meereswelle|brandung|\bwellen? (?:schlagen|schlägt|rauschen|rauscht|brechen|bricht|rollen|rollt)", "beach"),   # ein bloßes „die Welle läuft von oben nach unten“ (Schreckreflex) ist kein Strand
     (r"tiefsee|unter wasser|meeresgrund|meeresboden|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),

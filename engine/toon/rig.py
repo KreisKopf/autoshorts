@@ -214,7 +214,7 @@ def hair_color(look):
     return HAIRS[_HAIR_AUTO[(look.shirt[0] + look.shirt[1] * 3 + look.shirt[2] * 7 + look.skin[0]) % len(_HAIR_AUTO)]]
 
 
-def _eye(d, cx, cy, r, kind, look, lid=0.0):
+def _eye(d, cx, cy, r, kind, look, lid=0.0, pupil=None):
     white = (255, 255, 255)
     if kind in ("closed", "happy"):
         if kind == "happy":
@@ -226,6 +226,8 @@ def _eye(d, cx, cy, r, kind, look, lid=0.0):
     d.ellipse((cx - rx - r * 0.2, cy - ry - r * 0.2, cx + rx + r * 0.2, cy + ry + r * 0.2), fill=INK)
     d.ellipse((cx - rx, cy - ry, cx + rx, cy + ry), fill=white)
     pr = r * (0.46 if kind == "wide" else 0.7)
+    if pupil:                                             # geweitete Pupillen (Schreck, Dunkelheit): Anteil am Augenradius
+        pr = r * max(0.3, min(1.05, float(pupil)))
     px = cx + look * (rx - pr) * 0.85
     py = cy + (ry - pr) * (0.45 if kind in ("sad", "worried") else 0.12)
     d.ellipse((px - pr, py - pr, px + pr, py + pr), fill=INK)
@@ -384,7 +386,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             cxk = ex + sgn * 58 * u
             d.ellipse((cxk - 17 * u, ey + 24 * u, cxk + 17 * u, ey + 44 * u), fill=_mix(skin, CHEEK, 0.55))
     for sgn in (-1, 1):
-        _eye(d, ex + sgn * 37 * u, ey, er, pose.eyes, lk)
+        _eye(d, ex + sgn * 37 * u, ey, er, pose.eyes, lk, pupil=pose.extra.get("pupil"))
     if fem and pose.eyes not in ("closed",):              # Wimpern: zwei kleine Striche am äußeren oberen Augenrand
         for sgn in (-1, 1):
             exx = ex + sgn * 37 * u
@@ -610,6 +612,45 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a")
         p.eyes = "wide"
         p.lean = -6 + 3 * s(t * 30) * (0.3 + j)
         p.leg_l, p.leg_r = 10, -10
+    elif a == "cower":                                     # zuckt zusammen: Kopf eingezogen, Schultern hoch, Arme schützend vor der Brust, Knie weich
+        j = min(1.0, t / 0.18)
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = 26 * j, 118 * j, 34 * j, 128 * j
+        p.head, p.lean = 13 * j, 9 * j
+        p.lift = -16 * j
+        p.squash = 0.93 + 0.01 * s(t * 26)
+        p.knee_l = p.knee_r = 16 * j
+        p.eyes = "closed" if t < 1.1 else "worried"
+        p.brow = -0.5
+    elif a == "freeze":                                    # Schreckstarre: stocksteif, Arme leicht abgespreizt, große Augen, nichts bewegt sich
+        p.squash = 1.0
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -22, 4, 22, -4
+        p.leg_l, p.leg_r = 3, -3
+        p.eyes, p.brow = "wide", 0.9
+        p.look = 0.0
+    elif a == "tremble":                                   # zitternde Hände: beide Hände vor dem Körper, sie beben
+        q = s(t * 38)
+        p.arm_l, p.fore_l = 20 + 3 * q, 74 + 9 * s(t * 41 + 1)
+        p.arm_r, p.fore_r = 34 + 3 * s(t * 36 + 2), 88 + 9 * q
+        p.head = 9
+        p.look = 0.0
+        p.eyes = "worried"
+        p.smile = -0.4
+        p.lean = 2 + 0.8 * q
+    elif a == "blink":                                     # blinzelt schnell (Lidschluss als Schutz): Augen fallen immer wieder kurz zu
+        p.eyes = "closed" if (t * 2.6) % 1.0 < 0.42 else "wide"
+        p.brow = 0.4
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -14, -10, 14, 10
+    elif a == "pant":                                      # atmet schnell: Brustkorb hebt und senkt sich rasch, Hand an der Brust
+        p.squash = 1 + 0.045 * s(t * 11)
+        p.lift = 5 * s(t * 11)
+        p.arm_r, p.fore_r = 14, 118
+        p.arm_l, p.fore_l = -16, -10
+        p.eyes = "worried"
+        p.extra["open"] = 0.4
+    elif a == "pupils":                                    # starrt mit sich weitenden Pupillen
+        p.eyes, p.brow, p.look = "wide", 0.8, 0.0
+        p.extra["pupil"] = 0.46 + 0.5 * min(1.0, max(0.0, (t - 0.25) / 1.1))
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -18, -8, 18, 8
     elif a == "sad":
         p.head, p.lean = 18, 10
         p.arm_l, p.arm_r = -4, 4
@@ -675,13 +716,13 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a")
         p.eyes, p.smile = "happy", 1
 
     emo = (emotion or "").lower()
-    if emo and a not in ("shocked", "jump", "happy", "sad", "sleep"):
+    if emo and a not in ("shocked", "jump", "happy", "sad", "sleep", "cower", "freeze", "tremble", "blink", "pant", "pupils"):
         p.eyes = {"happy": "happy", "shocked": "wide", "scared": "wide", "sad": "sad", "angry": "angry",
                   "worried": "worried", "tired": "closed"}.get(emo, p.eyes)
         p.smile = {"happy": 0.8, "sad": -0.8, "angry": -0.6, "worried": -0.4}.get(emo, p.smile)
     if gest and a in ("talk", "idle", "point"):
         apply_gesture(p, gest, t)
-    if p.eyes not in ("closed", "happy") and _blink(t, seed):
+    if p.eyes not in ("closed", "happy") and a not in ("freeze", "pupils", "blink") and _blink(t, seed):
         p.eyes = "closed"
     p.mouth = max(mouth, 0.75) if a in ("shocked", "scared", "fall", "float", "schweben") or emo in ("shocked", "scared") else mouth
     if p.extra.get("open", 0) > p.mouth:                 # Staunen: Mund bleibt offen (rund), auch wenn die Figur nicht spricht

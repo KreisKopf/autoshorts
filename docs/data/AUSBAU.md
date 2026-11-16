@@ -343,3 +343,15 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Im leeren Schlafzimmer eines Schlaf-Videos liegt nachts die Hauptfigur im Bett. `render.build_ass`: Eine Ecken-Zeile, die nur aus einer Uhrzeit
   besteht und sich nie ändert („03:14 UHR“), entfällt.
   Nach Video 124 (veröffentlicht): `writer.polish` streicht einen Schlusssatz, der auf einem Artikel endet („Und das sind genau die“).
+
+- Prüfung 16.11.2026, 21-Uhr-Termin (Schreck-Video „Was in deinem Körper passiert, wenn du dich erschrickst“, Video 126 verworfen):
+  Körper-Reaktionen als Haltung (`rig.pose_at`): `cower` (zuckt zusammen, Kopf eingezogen, Arme vor der Brust), `freeze` (Schreckstarre), `tremble`
+  (zitternde Hände), `blink` (blinzelt), `pupils` (Pupillen weiten sich – `rig._eye(pupil=…)`), `pant` (atmet schnell, Hand an der Brust).
+  Schlussdurchgang `stage._body_story` (`BODY_ACTS`): Beschreibt der Satz Zusammenzucken, Kopf einziehen, Erstarren, Zittern, Blinzeln, weite Pupillen,
+  schnelles Atmen oder Herzklopfen, macht die Figur genau das vor (Blinzeln und Pupillen als Großaufnahme, Erstarren in der Totale) – vorher zeigten
+  vierzehn von neunzehn Szenen dieselbe Schreck-Pose. Spricht der Satz vom Gehirn, Hirnstamm oder Mandelkern (`BODY_BRAIN_RE`) und steht nur ein Mensch
+  im Bild, steht das Gehirn als Figur daneben; ein solcher Satz spielt nicht als Straßenbild mit Passanten. Ein Satz über Beine/Füße ist keine
+  Großaufnahme des Gesichts. Der „Blick nach draußen“ der Abwechslungs-Regie (Straße mit Passanten) entfällt bei Sätzen mit du/dein/ich, Körper oder Gehirn.
+  „Welle“ allein ist kein Strand (`HINTS`: nur Meer, Küste, Brandung, „Wellen schlagen“), „von oben nach unten“ keine Stadt-Grafik (`auto_graphic`).
+  Ein Oberarm (`muskel`) aus der Bibliothek liegt nicht neben der Figur im Zimmer (`BODY_PROPS`). `writer.polish`: mitgesprochene Regie-Wörter am Satzanfang
+  („Dann die Finte: …“) entfallen; Hashtags und Suchbegriffe bekommen echte Umlaute (`_UML`: „#koerper“ → „#körper“). Selbsttest: `_body`.
