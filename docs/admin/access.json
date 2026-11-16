@@ -9,9 +9,9 @@
   "rubriken": true,
   "rubriken_bearbeiten": false,
   "laenge": true,
-  "trends": false,
+  "trends": true,
   "ki": false,
-  "stil": false,
+  "stil": true,
   "zahlen": true
  },
  "access": []
