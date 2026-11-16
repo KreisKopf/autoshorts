@@ -5,7 +5,7 @@
   "kanal": true,
   "plattform": true,
   "videos": true,
-  "nachbauen": true,
+  "nachbauen": false,
   "rubriken": true,
   "rubriken_bearbeiten": false,
   "laenge": true,
