@@ -1,5 +1,5 @@
 {
- "updated": 1794809282.7241373,
+ "updated": 1794811076.7858517,
  "enough": true,
  "counted": 14,
  "total": 17,
@@ -12,7 +12,7 @@
    "avg_views": 1616,
    "avg_likes": 51.0,
    "like_rate": 3.16,
-   "avg_score": 2381
+   "avg_score": 2380
   },
   {
    "slug": "whatif",
@@ -36,23 +36,23 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1589,
-   "avg_likes": 38.0,
-   "like_rate": 2.39,
-   "avg_score": 2159
+   "avg_views": 1594,
+   "avg_likes": 39.0,
+   "like_rate": 2.45,
+   "avg_score": 2179
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1024,
+   "avg_views": 1020,
    "avg_likes": 30.5,
-   "like_rate": 2.98,
-   "avg_score": 1496
+   "like_rate": 2.99,
+   "avg_score": 1493
   }
  ],
  "weights": {
-  "fakten": 0.69,
+  "fakten": 0.68,
   "storys": 1.09,
   "mysterien": 1.2,
   "tiere": 1.2,
@@ -64,8 +64,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1616 Aufrufe, 3.16 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2428 zu 704 Punkte)."
+  "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2429 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -84,11 +84,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2219,
+   "views": 2221,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3134
+   "score": 3136
   },
   {
    "id": 84,
@@ -114,11 +114,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1645,
+   "views": 1642,
    "likes": 65,
    "comments": 0,
    "shares": 0,
-   "score": 2620
+   "score": 2617
   }
  ],
  "flop": [
@@ -126,21 +126,21 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1124,
+   "views": 1125,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1409
+   "score": 1410
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 595,
+   "views": 594,
    "likes": 16,
    "comments": 0,
    "shares": 0,
-   "score": 835
+   "score": 834
   },
   {
    "id": 44,
