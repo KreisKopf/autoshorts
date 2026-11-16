@@ -462,6 +462,102 @@ def _download_install():
             check_update()
 
 
+# ───────────────────────── Backups (verschlüsselt, z. B. per Google-Apps-Script in Google Drive) ─────────────────────────
+# Inhalt: die Einstellungen dieses PCs (GitHub-Schlüssel, Client-Secrets, Zugangscode …) und eine Kopie der Daten aus dem Repository.
+# Verschlüsselt mit dem Backup-Passwort, BEVOR etwas die App verlässt – das Script und Google sehen nur unlesbare Bytes.
+BACKUP_FIELDS = ("backup_url", "backup_secret", "backup_password", "backup_every", "backup_keep")
+REPO_FILES = ("docs/data/config.json", "docs/data/videos.json", "docs/data/stats.json", "docs/data/state.json", "docs/data/shapes.json",
+              "docs/data/wishes.json", "docs/data/plans.json", "docs/data/insights.json", "docs/admin/access.json")
+BACKUP = {"busy": False}
+
+
+def _backup_key(password):
+    return hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), b"autoshorts-backup-v1", 200_000)
+
+
+def make_backup(password):
+    import io
+    import zipfile
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        mine = {k: v for k, v in SET.items() if k not in ("backup_password",)}   # das Passwort selbst nie mit hinein
+        z.writestr("pc/einstellungen.json", json.dumps(mine, ensure_ascii=False, indent=1))
+        for name in os.listdir(DATA):                     # weitere kleine Dateien dieses PCs (ohne Sicherungen alter App-Versionen)
+            fp = os.path.join(DATA, name)
+            if name != "einstellungen.json" and os.path.isfile(fp) and os.path.getsize(fp) < 2_000_000 and name.endswith((".json", ".txt", ".log")):
+                z.write(fp, "pc/" + name)
+        repo_ok = 0
+        if SET.get("token"):
+            for f in REPO_FILES:
+                st, body = gh("GET", repo_path(f"/contents/{f}?ref=main"), raw=True)
+                if st == 200 and body:
+                    z.writestr("repo/" + f, body)
+                    repo_ok += 1
+        z.writestr("info.json", json.dumps({"app": "AutoShorts", "version": APP_VERSION, "edition": EDITION, "repo": f"{SET.get('owner')}/{SET.get('repo')}",
+                                            "created": time.time(), "repo_files": repo_ok}, ensure_ascii=False))
+    return encrypt(buf.getvalue(), _backup_key(password))
+
+
+def backup_name():
+    return time.strftime("AutoShorts-Backup-%Y-%m-%d-%H%M.asbak")
+
+
+def upload_backup(force=False):
+    """Backup bauen und an den hinterlegten Link schicken. Gibt eine Meldung zurück; Fehler landen in SET["backup_error"]."""
+    url, pw = (SET.get("backup_url") or "").strip(), SET.get("backup_password") or ""
+    if not url or not pw:
+        raise ValueError("Erst Backup-Link und Passwort eintragen.")
+    if not url.lower().startswith("https://"):
+        raise ValueError("Der Backup-Link muss mit https:// beginnen.")
+    if BACKUP["busy"]:
+        raise ValueError("Es läuft schon ein Backup.")
+    BACKUP["busy"] = True
+    try:
+        blob = make_backup(pw)
+        name = backup_name()
+        body = json.dumps({"app": "AutoShorts", "action": "backup", "secret": SET.get("backup_secret") or "", "filename": name,
+                           "mimeType": "application/octet-stream", "keep": int(SET.get("backup_keep") or 30),
+                           "data": base64.b64encode(blob).decode()}).encode()
+        req = urllib.request.Request(url, data=body, method="POST", headers={"Content-Type": "application/json", "User-Agent": UA})
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:   # Google Apps Script leitet nach dem Speichern weiter (wird automatisch gefolgt)
+                code, txt = r.status, r.read(200_000).decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            code, txt = e.code, e.read(2000).decode("utf-8", "replace")
+        if code >= 400:
+            raise ValueError(f"Der Backup-Link antwortet mit Fehler {code}.")
+        try:
+            js = json.loads(txt)
+        except ValueError:
+            js = None
+        if isinstance(js, dict) and js.get("ok") is False:
+            raise ValueError("Das Backup-Script meldet: " + str(js.get("error") or "Fehler")[:200])
+        SET.update(backup_last=time.time(), backup_error="", backup_last_name=name, backup_last_size=len(blob))
+        save_set()
+        log(f"Backup hochgeladen: {name} ({len(blob) // 1024} KB)")
+        return f"Backup hochgeladen ({len(blob) // 1024} KB)"
+    except Exception as e:
+        SET.update(backup_error=str(e)[:300], backup_error_at=time.time())
+        save_set()
+        raise
+    finally:
+        BACKUP["busy"] = False
+
+
+def _backup_loop():
+    time.sleep(60)
+    while True:
+        try:
+            every = {"daily": 86400, "weekly": 7 * 86400}.get(SET.get("backup_every") or "daily", 86400)
+            failed_recently = time.time() - float(SET.get("backup_error_at") or 0) < 3600
+            if SET.get("backup_url") and SET.get("backup_password") and SET.get("backup_every") != "off" and not failed_recently \
+                    and time.time() - float(SET.get("backup_last") or 0) >= every:
+                upload_backup()
+        except Exception as e:  # noqa: BLE001
+            log(f"Automatisches Backup fehlgeschlagen: {e}", "error")
+        time.sleep(900)
+
+
 def _update_loop():
     time.sleep(15)
     last = 0
@@ -629,6 +725,79 @@ def state(h):
         "connected": bool(SET.get("token")), "owner": SET["owner"], "repo": SET["repo"],
         "local_secrets": {k: bool(v) for k, v in SET.get("client_secrets", {}).items()},
         "auto_update": bool(SET.get("auto_update")), "update": UPDATE, "redirect": REDIRECT})
+
+
+@route("GET", r"/api/backup")
+def backup_get(h):
+    h._send(200, {"url": SET.get("backup_url") or "", "secret": bool(SET.get("backup_secret")), "password": bool(SET.get("backup_password")),
+                  "every": SET.get("backup_every") or "daily", "keep": int(SET.get("backup_keep") or 30), "last": SET.get("backup_last"),
+                  "last_name": SET.get("backup_last_name") or "", "last_size": SET.get("backup_last_size") or 0,
+                  "error": SET.get("backup_error") or "", "busy": BACKUP["busy"]})
+
+
+@route("POST", r"/api/backup")
+def backup_set(h):
+    b = h._json()
+    url = str(b.get("url") or "").strip()
+    if url and not re.match(r"^https://[^\s\"'<>]{8,2000}$", url):
+        raise ValueError("Der Backup-Link muss eine https://-Adresse sein.")
+    SET["backup_url"] = url
+    if b.get("secret") is not None and str(b.get("secret")).strip():
+        SET["backup_secret"] = str(b["secret"]).strip()[:200]
+    if b.get("password") is not None and str(b.get("password")):
+        if len(str(b["password"])) < 8:
+            raise ValueError("Das Backup-Passwort braucht mindestens 8 Zeichen.")
+        SET["backup_password"] = str(b["password"])
+    if b.get("every") in ("daily", "weekly", "off"):
+        SET["backup_every"] = b["every"]
+    if b.get("keep") is not None:
+        SET["backup_keep"] = max(3, min(365, int(b.get("keep") or 30)))
+    save_set()
+    h._send(200, {"ok": True})
+
+
+@route("POST", r"/api/backup/now")
+def backup_now(h):
+    h._send(200, {"ok": True, "msg": upload_backup(force=True)})
+
+
+@route("POST", r"/api/backup/download")
+def backup_download(h):
+    pw = SET.get("backup_password") or ""
+    if not pw:
+        raise ValueError("Erst ein Backup-Passwort festlegen.")
+    h._send(200, make_backup(pw), "application/octet-stream")
+
+
+@route("POST", r"/api/backup/restore")
+def backup_restore(h):
+    """Backup-Datei (roh im Körper) mit dem Passwort aus dem Kopf X-Backup-Password entschlüsseln und die Einstellungen dieses PCs
+    wiederherstellen. Die Repository-Daten liegen ohnehin auf GitHub; ihre Kopie im Backup ist für den Notfall."""
+    import io
+    import zipfile
+    n = int(h.headers.get("Content-Length") or 0)
+    if n <= 0 or n > 100_000_000:
+        raise ValueError("Die Backup-Datei ist leer oder zu groß.")
+    pw = urllib.parse.unquote(h.headers.get("X-Backup-Password") or "")
+    data = h.rfile.read(n)
+    try:
+        raw = decrypt(data, _backup_key(pw))
+        z = zipfile.ZipFile(io.BytesIO(raw))
+        mine = json.loads(z.read("pc/einstellungen.json").decode("utf-8"))
+        info = json.loads(z.read("info.json").decode("utf-8"))
+    except Exception:  # noqa: BLE001
+        raise ValueError("Passwort falsch oder keine AutoShorts-Backup-Datei.")
+    if info.get("edition") and info["edition"] != EDITION:
+        raise ValueError("Dieses Backup stammt aus der anderen App (Admin/Kanal-App).")
+    keep = {k: SET.get(k) for k in ("auto_update",)}
+    SET.clear()
+    SET.update(mine)
+    SET.update({k: v for k, v in keep.items() if v is not None})
+    SET["backup_password"] = pw
+    save_set()
+    ACCESS.update(at=0, res=None)
+    log(f"Backup wiederhergestellt ({info.get('repo')}, erstellt {time.strftime('%d.%m.%Y %H:%M', time.localtime(info.get('created') or 0))})")
+    h._send(200, {"ok": True, "repo": info.get("repo"), "created": info.get("created")})
 
 
 @route("GET", r"/api/access")
@@ -1323,6 +1492,7 @@ def main():
         threading.Timer(1.0, lambda: open_app_window(url)).start()
     threading.Thread(target=ensure_desktop_shortcut, args=(LAUNCHER, DATA, log), daemon=True).start()
     threading.Thread(target=_update_loop, daemon=True).start()
+    threading.Thread(target=_backup_loop, daemon=True).start()
     threading.Thread(target=_idle_loop, daemon=True).start()
     try:
         srv.serve_forever()

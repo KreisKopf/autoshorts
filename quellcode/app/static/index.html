@@ -677,6 +677,57 @@ const PERMS = [["zeitplan", "Autopilot & Upload-Zeiten", true], ["kanal", "Kanal
   ["rubriken_bearbeiten", "Video-Arten bearbeiten & neu anlegen", false], ["laenge", "Video-Länge", false], ["trends", "Trends & Thumbnail", false],
   ["ki", "KI-Anbieter & Stimme", false], ["stil", "Video-Stil (Look, Untertitel, Musik)", false], ["zahlen", "Abruf der Zahlen", false]];
 const can = k => !LITE() || !!(S.access && S.access.perms && S.access.perms[k]);
+/* ═════════════════ Backup ═════════════════ */
+const GAS_TEMPLATE = "// AutoShorts-Backup → Google Drive (Google Apps Script, als Web-App bereitstellen: Ausführen als „Ich“, Zugriff „Jeder“)\nconst GEHEIMWORT = 'HIER-DEIN-GEHEIMWORT';   // dasselbe Wort in AutoShorts unter „Geheimwort“ eintragen\nconst ORDNER = 'AutoShorts Backups';\nfunction doPost(e) {\n  try {\n    var d = JSON.parse(e.postData.contents);\n    if (d.app !== 'AutoShorts' || d.secret !== GEHEIMWORT) return out({ok: false, error: 'Geheimwort falsch'});\n    if (!/^AutoShorts-Backup-[0-9-]+\\.asbak$/.test(d.filename)) return out({ok: false, error: 'Dateiname'});\n    var it = DriveApp.getFoldersByName(ORDNER), folder = it.hasNext() ? it.next() : DriveApp.createFolder(ORDNER);\n    var f = folder.createFile(Utilities.newBlob(Utilities.base64Decode(d.data), 'application/octet-stream', d.filename));\n    var files = [], all = folder.getFiles();          // nur die neuesten „keep“ Backups behalten\n    while (all.hasNext()) { var x = all.next(); if (/^AutoShorts-Backup-/.test(x.getName())) files.push(x); }\n    files.sort(function (a, b) { return b.getDateCreated() - a.getDateCreated(); });\n    files.slice(Math.max(3, d.keep || 30)).forEach(function (x) { x.setTrashed(true); });\n    return out({ok: true, id: f.getId()});\n  } catch (err) { return out({ok: false, error: String(err)}); }\n}\nfunction out(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }";
+let BK = null;
+async function loadBackup() { try { BK = await api("/api/backup"); } catch (e) { BK = null; } }
+function backupSec() {
+  const b = BK || {}, last = b.last ? new Date(b.last * 1000).toLocaleString("de-DE", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) : "";
+  const chip = b.error ? '<span class="chip warn">Fehler</span>' : b.last ? '<span class="chip good">gesichert</span>' : b.url ? '<span class="chip warn">noch keins</span>' : '<span class="chip mute">aus</span>';
+  return sec("backup", I.key, "Backup", b.last ? `Letztes Backup ${last}` : "Automatisch verschlüsselt in Google Drive sichern", chip, `
+    <p class="hint">Sichert die Einstellungen dieses PCs (GitHub-Schlüssel, Client-Secrets, Zugang) und eine Kopie aller Daten aus dem Repository. Alles wird mit deinem Passwort verschlüsselt, bevor es den PC verlässt – das Script und Google sehen nur unlesbare Daten. Auf einem neuen PC stellst du es beim ersten Start mit „Aus Backup wiederherstellen“ wieder her.</p>
+    <div class="row"><label for="bkUrl">Backup-Link<small>Web-App-Adresse deines Google-Apps-Scripts (https://script.google.com/macros/s/…/exec).</small></label><input id="bkUrl" value="${esc(b.url || "")}" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"></div>
+    <div class="row"><label for="bkSec">Geheimwort<small>Dasselbe Wort wie im Script – damit niemand sonst in deinen Ordner schreiben kann.</small></label><input id="bkSec" type="password" autocomplete="off" placeholder="${b.secret ? "✓ hinterlegt – zum Ändern neu eintragen" : "eintragen"}"></div>
+    <div class="row"><label for="bkPw">Backup-Passwort<small>Mindestens 8 Zeichen. <b>Gut aufschreiben</b> – ohne Passwort lässt sich kein Backup öffnen.</small></label><input id="bkPw" type="password" autocomplete="new-password" placeholder="${b.password ? "✓ hinterlegt – zum Ändern neu eintragen" : "festlegen"}"></div>
+    <div class="row"><label for="bkEvery">Automatisch<small>Läuft, solange die App geöffnet ist (auch im Hintergrund), und beim Start, wenn eins fällig ist.</small></label><select id="bkEvery"><option value="daily" ${b.every === "daily" ? "selected" : ""}>täglich</option><option value="weekly" ${b.every === "weekly" ? "selected" : ""}>wöchentlich</option><option value="off" ${b.every === "off" ? "selected" : ""}>aus</option></select></div>
+    <div class="row"><label for="bkKeep">Backups behalten<small>Ältere löscht das Script (Vorlage unten).</small></label><input id="bkKeep" type="number" min="3" max="365" value="${b.keep || 30}"></div>
+    ${b.error ? `<p class="hint neg">Letzter Versuch fehlgeschlagen: ${esc(b.error)}</p>` : ""}
+    ${b.last ? `<p class="hint">Letztes Backup: ${esc(b.last_name)} · ${Math.round((b.last_size || 0) / 1024)} KB · ${last}</p>` : ""}
+    <div class="inline" style="flex-wrap:wrap"><button class="btn primary" id="bkSave">Speichern</button><button class="btn" id="bkNow">Jetzt sichern</button><button class="btn" id="bkDl">Backup herunterladen</button><button class="btn" id="bkGas">Script-Vorlage</button></div>
+    <div id="bkGasBox" hidden><p class="hint" style="margin-top:10px">Falls dein Script anders aufgebaut ist: AutoShorts schickt per POST ein JSON <code>{app, action:"backup", secret, filename, mimeType, keep, data (Base64)}</code> und erwartet <code>{"ok": true}</code> zurück. Diese Vorlage macht genau das (script.google.com → Neues Projekt → einfügen → Bereitstellen → Web-App):</p>
+      <textarea id="bkGasTxt" rows="14" readonly style="width:100%;font-family:monospace;font-size:11px">${esc(GAS_TEMPLATE)}</textarea><button class="btn sm" id="bkGasCopy">Kopieren</button></div>`);
+}
+function bindBackup() {
+  if (!$("#bkSave")) return;
+  const save = async () => { const body = {url: $("#bkUrl").value.trim(), every: $("#bkEvery").value, keep: +$("#bkKeep").value};
+    if ($("#bkSec").value) body.secret = $("#bkSec").value; if ($("#bkPw").value) body.password = $("#bkPw").value;
+    await api("/api/backup", body); $("#bkSec").value = ""; $("#bkPw").value = ""; await loadBackup(); };
+  $("#bkSave").onclick = async () => { try { await save(); toast("Backup-Einstellungen gespeichert"); OPEN.add("backup"); viewSettings(); } catch (e) { toast(e.message, true); } };
+  $("#bkNow").onclick = async () => { const b = $("#bkNow"); b.disabled = true; b.textContent = "Sichere …";
+    try { await save(); const r = await api("/api/backup/now", {}); toast(r.msg); } catch (e) { toast(e.message, true); } await loadBackup(); OPEN.add("backup"); viewSettings(); };
+  $("#bkDl").onclick = async () => { try { if ($("#bkPw").value) await save();
+      const r = await fetch("/api/backup/download", {method: "POST", headers: {"X-AS": "1"}}); if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || "Fehler");
+      const a = document.createElement("a"); a.href = URL.createObjectURL(await r.blob()); a.download = `AutoShorts-Backup-${new Date().toISOString().slice(0, 10)}.asbak`; a.click(); }
+    catch (e) { toast(e.message, true); } };
+  $("#bkGas").onclick = () => { $("#bkGasBox").hidden = !$("#bkGasBox").hidden; };
+  $("#bkGasCopy").onclick = () => navigator.clipboard.writeText(GAS_TEMPLATE).then(() => toast("Kopiert"), () => { $("#bkGasTxt").select(); toast("Markiert – mit Strg+C kopieren"); });
+}
+function restoreBox() {
+  return `<details style="margin-top:14px"><summary class="hint" style="cursor:pointer">Neuer PC? Aus Backup wiederherstellen</summary>
+    <div style="display:grid;gap:8px;margin-top:8px"><input type="file" id="rsFile" accept=".asbak"><input type="password" id="rsPw" placeholder="Backup-Passwort" autocomplete="off">
+    <button class="btn" id="rsGo">Wiederherstellen</button></div></details>`;
+}
+function bindRestore() {
+  if (!$("#rsGo")) return;
+  $("#rsGo").onclick = async () => { const f = $("#rsFile").files[0], pw = $("#rsPw").value, b = $("#rsGo");
+    if (!f || !pw) return toast("Backup-Datei wählen und Passwort eingeben.", true);
+    b.disabled = true;
+    try { const r = await fetch("/api/backup/restore", {method: "POST", headers: {"X-AS": "1", "Content-Type": "application/octet-stream", "X-Backup-Password": encodeURIComponent(pw)}, body: f});
+      const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || `Fehler ${r.status}`);
+      toast(`Wiederhergestellt: ${j.repo || ""}`); setTimeout(() => location.reload(), 900); }
+    catch (e) { toast(e.message, true); b.disabled = false; } };
+}
+
 /* ═════════════════ Zugang (Kanal-App) ═════════════════ */
 function renderAccess() {
   const a = S.access || {}, why = {abgelaufen: `Dein Zugang${a.name ? " „" + esc(a.name) + "“" : ""} ist abgelaufen.`, "gelöscht": "Dieser Zugangscode gilt nicht (mehr).",
@@ -686,7 +737,8 @@ function renderAccess() {
     ${why ? `<p class="hint neg" style="font-size:14px">${why} Melde dich beim Admin, der dir die App gegeben hat.</p>` : ""}
     <p class="hint" style="font-size:14px">Gib den Zugangscode ein, den du zusammen mit dem Download-Link bekommen hast.</p>
     <input id="acc" autocomplete="off" placeholder="z. B. AS-7K2M-Q9XP" style="text-transform:uppercase">
-    <button class="btn primary" id="accGo" style="padding:12px">Freischalten</button></div></div>`;
+    <button class="btn primary" id="accGo" style="padding:12px">Freischalten</button>${restoreBox()}</div></div>`;
+  bindRestore();
   $("#acc").focus();
   const go_ = async () => { const b = $("#accGo"); b.disabled = true;
     try { const r = await api("/api/access", {code: $("#acc").value});
@@ -840,7 +892,9 @@ function renderSetup() {
     <details ${LITE() ? "open" : ""}><summary class="hint" style="cursor:pointer">${LITE() ? "Deine Kopie (GitHub-Name / Name der Kopie)" : "Anderes Repository"}</summary>
       <div class="grid2" style="gap:10px;margin-top:8px"><input id="rown" value="${esc(S.owner)}" placeholder="dein GitHub-Name" aria-label="Besitzer"><input id="rrep" value="${esc(S.repo)}" aria-label="Repository"></div></details>
     <button class="btn primary" id="conn" style="padding:12px">Verbinden</button>
+    ${restoreBox()}
   </div></div>`;
+  bindRestore();
   $("#tok").focus();
   $("#conn").onclick = async () => {
     const b = $("#conn"); b.disabled = true;
@@ -1371,6 +1425,7 @@ function viewSettings() {
     <div class="row"><label>Repository<small>Hier liegen Motor, Daten und fertige Videos.</small></label><div class="inline"><a class="btn" href="https://github.com/${esc(S.owner)}/${esc(S.repo)}" target="_blank" rel="noopener">Öffnen ↗</a></div></div>
     <div class="row"><label>Alle Läufe<small>Protokolle jedes Auftrags auf GitHub Actions.</small></label><div class="inline"><a class="btn" href="https://github.com/${esc(S.owner)}/${esc(S.repo)}/actions" target="_blank" rel="noopener">Ansehen ↗</a></div></div>
     <div class="row"><label>Zugangsschlüssel auf diesem PC löschen<small>Danach fragt die App beim Start erneut danach.</small></label><button class="btn danger" id="ghOut">Abmelden</button></div>`)}
+  ${backupSec()}
   ${sec("app", I.app, "App & Updates", `Version ${esc(S.version)} · Desktop-Symbol · Protokoll`, updChip, `
     <div class="row"><label>Installierte Version<small>${U.checked ? "Zuletzt geprüft: " + fmtTs(U.checked) : "Die App prüft bei jedem Start und alle 3 Stunden."}</small></label><div class="inline"><b>${esc(S.version)}</b>${updChip}</div></div>
     <div class="row"><label>Nach Updates suchen und installieren<small>${U.available && U.notes ? esc(U.notes) : "Deine Einstellungen und Videos bleiben erhalten."}</small></label><button class="btn primary" id="updNow">${U.available ? "Jetzt aktualisieren" : "Nach Updates suchen"}</button></div>
@@ -1433,6 +1488,8 @@ function viewSettings() {
     if (await dispatch({action: "reset", topic: name}, "Kanal wird neu eingerichtet")) toast("Läuft auf GitHub – in etwa 2 Minuten ist die Kopie leer.");
   };
   if ($("#updEngine")) $("#updEngine").onclick = async () => { if (await dispatch({action: "update"}, "Motor wird aktualisiert")) toast("Läuft auf GitHub – dauert etwa 2 Minuten."); };
+  bindBackup();
+  if (BK === null) loadBackup().then(() => { if (TAB === "einstellungen" && !DIRTY && BK) viewSettings(); });
   $("#ghOut").onclick = () => armed($("#ghOut"), "Sicher? Nochmal tippen", async () => { await api("/api/github/logout", {}); S = await api("/api/state"); render(); });
   $("#updNow").onclick = async () => { const b = $("#updNow"); b.disabled = true;
     try { const u = await api("/api/update/check", {}); S.update = u; if (u.available) return runUpdate(); toast(u.error || "Du hast die neueste Version."); viewSettings(); }

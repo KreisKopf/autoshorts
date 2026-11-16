@@ -1,6 +1,6 @@
 {
-  "version": "1.13.0",
-  "file": "releases/AutoShorts-1.13.0.cmd",
-  "sha256": "2ba1620063512c452402c5abb5b745ebbd0c5bf179e73f093a0f8c42859f2738",
-  "notes": "Admin: Kanäle-Übersicht – Gelerntes aus Kopien geprüft übernehmen, fehlende Dinge nachbauen lassen"
+  "version": "1.14.0",
+  "file": "releases/AutoShorts-1.14.0.cmd",
+  "sha256": "0bd3f5cde4b11cb15a65e26f3b8e844f6c318d0b4775d361564fa9fff199d909",
+  "notes": "Backup: automatisch verschlüsselt in Google Drive (per Script-Link), Wiederherstellen auf neuem PC"
 }
