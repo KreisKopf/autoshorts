@@ -1179,6 +1179,28 @@ def main():
         for sc_ in sd:
             assert frame(sc_, {"du": {}}) is not None
     check("Prüfung 16.11.: halber Schlusssatz, erfundenes Siegertreppchen, Plakette mit Fragezeichen", _pruef_1116)
+
+    def _pruef_1116b():                                          # Prüfung 16.11., 1. Neubau: Nacht ohne Grund, Oberarm statt Haarbalgmuskeln, Mensch statt Vorfahre, Blitz bei „blitzschnell“
+        T = [{"text": "Manche Songs treffen dich so hart, dass dir plötzlich Gänsehaut kommt.", "place": "livingroom", "time": "night", "actors": [{"id": "du"}]},
+             {"text": "In diesem Moment ziehen sich winzige Muskeln zusammen, aber warum reagiert dein Körper so?", "place": "livingroom", "time": "night",
+              "props": [{"type": "lib_muskel"}], "shot": "insert"},
+             {"text": "Das ist ein alter Reflex von deinen behaarten Vorfahren.", "place": "forest", "time": "day", "actors": [{"id": "du", "action": "think"}]},
+             {"text": "Die blitzschnelle Erleichterung danach fühlt sich extrem gut an.", "place": "livingroom", "time": "night", "actors": [{"id": "du"}]},
+             {"text": "Das funktioniert bei traurigen Songs genauso wie bei wilden Party-Hits.", "place": "livingroom", "time": "night", "actors": [{"id": "du"}]}]
+        sd = stage.direct([dict(x_) for x_ in T], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Warum du bei Musik Gänsehaut bekommst – Vorgaben: keine Zahlen", "fakten")
+        assert all(sc_.get("time") != "night" for sc_ in sd), f"Nacht ohne Grund: {[sc_.get('time') for sc_ in sd]}"
+        k1 = [str(q_.get("type") if isinstance(q_, dict) else q_) for q_ in sd[1].get("props") or []]
+        assert "lib_muskel" not in k1, f"Oberarm statt Haarbalgmuskeln: {k1}"
+        assert [str(a_.get("kind") or "") for a_ in sd[2].get("actors") or []] == ["chimp"], f"Vorfahren: {sd[2].get('actors')}"
+        assert "lightning" not in [str(q_.get("type") if isinstance(q_, dict) else q_) for q_ in sd[3].get("props") or []], "Blitz bei blitzschnell"
+        sn = stage.direct([dict(x_, text=x_["text"] + (" Mitten in der Nacht." if n_ == 0 else "")) for n_, x_ in enumerate(T)],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Musik in der Nacht", "fakten")
+        assert sn[0].get("time") == "night", "genannte Nacht wird Tag"
+        for sc_ in sd:
+            assert frame(sc_, {"du": {}}) is not None
+        from .. import overlays as _ov
+        assert _ov.quote("FORSCHER VERMUTEN", "…dass die plötzliche Wende der Musik im Gehirn kurz wie ein Alarm wirkt.") is not None
+    check("Prüfung 16.11.: Nacht ohne Grund, Haarbalgmuskeln, Vorfahren, blitzschnell", _pruef_1116b)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

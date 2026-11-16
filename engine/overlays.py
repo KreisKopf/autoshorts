@@ -90,9 +90,15 @@ def tag(text):
 def quote(head, text):
     """Zitat-Karte („FORSCHER WARNEN“ + Aussage): weiße Karte, Rolle als Kopfzeile, großes rotes Anführungszeichen – ohne Namen."""
     fh, ft, fq = font(40, "Bold"), font(52), _cfont(190)
-    lines = _wrap(text, ft, 640)[:3]
-    if len(_wrap(text, ft, 640)) > 3:
-        lines[-1] = lines[-1].rstrip(".,;: ") + " …"
+    if len(_wrap(text, ft, 640)) > 3:                          # passt die Aussage nicht in drei Zeilen: kleinere Schrift und vier Zeilen statt „… kurz wie ein …“
+        ft = font(44)
+    full = _wrap(text, ft, 640)
+    lines = full[:4 if ft.size < 52 else 3]
+    if len(full) > len(lines):
+        ws = lines[-1].rstrip(".,;: ").split()
+        while len(ws) > 1 and ws[-1].lower().strip(".,:;") in _DANGLING:      # nie auf Artikel oder Verhältniswort enden
+            ws.pop()
+        lines[-1] = " ".join(ws) + " …"
     w, h = 860, 150 + 66 * len(lines)
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     dr = ImageDraw.Draw(im)

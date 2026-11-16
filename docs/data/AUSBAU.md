@@ -310,3 +310,7 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Liste `_DANGLING`). `stage.direct`: Siegertreppchen (`podium`) bleibt nur, wenn mindestens zwei der drei Plätze im Satz oder in den Nachbarsätzen
   genannt werden; Plakette ohne Fragezeichen, wenn der Satz nichts fragt; folgt eine Plakette direkt auf eine andere Vollbild-Grafik, weicht sie
   dem Bild der Szene; stand ein Ding eben als Einschub groß allein im Bild, schneidet der nächste Satz nicht noch einmal darauf (`_no_insert`).
+  Nach dem 1. Neubau: `_time_weather` stellt ein Video, das die Text-KI ohne Grund fast ganz in die Nacht legt (kein Wort von Nacht, Schlaf,
+  Dunkelheit – `NIGHT_WHY_RE`), auf Tag. `_music`: „winzige Muskeln“ im Gänsehaut-Video sind das Schaubild `goosebumps`, kein Oberarm.
+  `ANCESTOR_RE` („behaarte Vorfahren“, „aufgestelltes Fell“): ein Affe im Wald statt der Hauptfigur. „blitzschnell“ ist kein Blitz.
+  Zitat-Karte (`overlays.quote`): lange Aussage in kleinerer Schrift auf vier Zeilen, nie mit Artikel am abgeschnittenen Ende.

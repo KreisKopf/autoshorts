@@ -1985,7 +1985,7 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc.get("shot") == "event":
                 sc["shot"] = ""
             filled += 1
-    _time_weather(scenes)
+    _time_weather(scenes, topic, style)
     _carry_thing(scenes, main_id)
     _opening(scenes)
     _auto_explain(scenes)
@@ -2216,6 +2216,19 @@ def _music(scenes, topic):
                 and places.resolve(backdrop(sc)) not in places.OUTDOOR + ("underwater", "space") + tuple(MAPS):
             sc["props"] = (sc.get("props") or []) + [{"type": "goosebumps"}]     # „Gänsehaut“: das Schaubild steht neben der Figur
             kinds.append("goosebumps")
+        if "lib_muskel" in kinds and (music or goose_seen or re.search(GOOSE_RE, low)) and not re.search(r"bizeps|oberarm|training|kraftsport|\bsport", low) \
+                and re.search(r"(?:winzig|klein|fein|mini)\w* muskel|muskel\w* (?:\w+ ){0,4}(?:haar|haut)|zieh\w* sich (?:\w+ ){0,3}muskel", low):
+            sc["props"] = [({"type": "goosebumps"} if _key(q) == "lib_muskel" else q) for q in sc["props"]]   # „winzige Muskeln ziehen sich zusammen“: die Haarbalgmuskeln im Schaubild, kein Oberarm mit Schild „HAARWURZELN“
+            kinds = [_key(q) for q in sc["props"]]
+            if kinds.count("goosebumps") > 1:
+                seen_g, keep_g = False, []
+                for q in sc["props"]:
+                    if _key(q) == "goosebumps":
+                        if seen_g:
+                            continue
+                        seen_g = True
+                    keep_g.append(q)
+                sc["props"], kinds = keep_g, [_key(q) for q in keep_g]
         goose_seen = goose_seen or "goosebumps" in kinds
         if "lib_muskel" in kinds and goose_seen and not re.search(r"\bmuskel|bizeps|oberarm", low):
             sc["props"] = [q for q in sc["props"] if _key(q) != "lib_muskel"]     # aus dem Haarbalg-Satz mitgenommener Oberarm (_carry_thing)
@@ -2236,6 +2249,9 @@ ANIMAL_IDIOM_RE = (r"schwein gehabt|armes schwein|kein schwein|schweinehund|spar
 TALKING_RE = r"tiere?n?\b.{0,50}\b(?:sprechen|reden|sprache|sprächen)|sprechende[nrs]? tiere?"
 
 
+ANCESTOR_RE = r"behaart\w* (?:vorfahr|urahn|ahnen)|(?:vorfahr\w*|urahn\w*|ahnen) (?:\w+ ){0,5}fell\b|aufgestellt\w* fell|fell (?:\w+ ){0,4}(?:aufstell|aufgestellt|sträub|aufplust)|(?:sträub|plustert)\w* (?:\w+ ){0,4}fell"
+
+
 def _named_animals(scenes, topic):
     talking = bool(re.search(TALKING_RE, str(topic or "").lower()))
     for sc in scenes:
@@ -2245,6 +2261,14 @@ def _named_animals(scenes, topic):
         rp = places.resolve(backdrop(sc))
         low = str(sc.get("text") or "").lower()
         if shot in ("graphic", "insert") or rp in MAPS + ("underwater", "space", "highsky") or re.search(ANIMAL_IDIOM_RE, low):
+            continue
+        if re.search(ANCESTOR_RE, low) and not any(a.get("kind") for a in (sc.get("actors") or []) if isinstance(a, dict)):
+            sc["actors"] = [{"id": "_ahne", "kind": "chimp", "hero": True, "pos": "center", "action": "idle", "emote": "", "say": "", "hold": "", "facing": "",
+                             "emotion": "scared" if re.search(r"gegner|feind|gefahr|bedroh|kälte|kalt|frier", low) else ""}]   # „behaarte Vorfahren“, „aufgestelltes Fell“: ein Affe im Wald – nicht der Mensch von heute mit Kopfhörern
+            sc["crowd"], sc["props"] = "", []
+            if rp in INDOOR or rp in GENERIC:
+                sc["place"], sc["backdrop"] = "forest", None
+            sc["shot"] = "" if shot in ("close", "event") else sc.get("shot")
             continue
         hit = next(((k, pl) for pat, k, pl in NAMED_ANIMALS if re.search(pat, low)), None)
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
@@ -3181,10 +3205,18 @@ WEATHER_RE = [(r"gewitter|blitz und donner|\bunwetter|\bsturm\b|stürme|orkan|st
               (r"hitze|brütend heiß|\bheiß\b|hitzewelle|glühend heiß|sengende", "heat"), (r"asche regnet|ascheregen|aschewolke", "ash")]
 
 
-def _time_weather(scenes):
+NIGHT_WHY_RE = r"\bnacht|\babend|dunkel|finster|schlaf|schläf|\bbett\b|\btraum|träum|müde|mitternacht|\bmond|\bstern|gruse|unheimlich|spuk|\bgeist|einbrech|einbruch|stromausfall|kerze|lagerfeuer|\bwach\b|aufwach|wecker"
+
+
+def _time_weather(scenes, topic="", style=""):
     """Nennt der Satz Nacht/Tag oder ein Wetter, stimmt das Bild: nachts wird es Nacht (drinnen mit Lichtkegel, draußen dunkelblau),
     Regen, Schnee, Sturm, Wind und Hitze sieht man – Wetter nur draußen (drinnen regnet es nicht). Verneintes zählt nicht."""
     import re as _re
+    dark_n = [sc for sc in scenes if isinstance(sc, dict) and str(sc.get("time") or "") == "night"]
+    all_n = " ".join(str(sc.get("text") or "") for sc in scenes if isinstance(sc, dict)).lower() + " " + str(topic or "").lower()
+    if len(dark_n) * 2 > len(scenes) and str(style or "").lower() not in ("grusel", "mysterien", "horror") and not _re.search(NIGHT_RE + "|" + NIGHT_WHY_RE, all_n):
+        for sc in dark_n:                                 # die Text-KI legt das ganze Video in die Nacht, obwohl kein Satz von Nacht, Schlaf oder Dunkelheit spricht: bei Tag (ein fröhliches Thema im Halbdunkel wirkt düster)
+            sc["time"] = "day"
     for sc in scenes:
         if not isinstance(sc, dict) or sc.get("shot") == "graphic":
             continue
@@ -3562,7 +3594,7 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
               (r"\bautos?\b|\bstau\b|kleinwagen|sportwagen|\bpkw\b|karosserie", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
               (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|teuer|preise|milliarden euro|bezahl", "money"),
               (r"solar", "solarpanel"), (r"generator|notstrom|aggregat", "generator"), (r"\bfeuer\b|flammen|\bbrand\b|in brand|lichterloh|waldbr[aä]nd|\bbrände", "fire"), (r"\brauch\b|qualm", "smoke"),
-              (r"vulkan|lava", "volcano"), (r"meteor|asteroid|komet", "meteor"), (r"tornado|wirbelsturm", "tornado"), (r"gewitter|\bblitz", "lightning"),
+              (r"vulkan|lava", "volcano"), (r"meteor|asteroid|komet", "meteor"), (r"tornado|wirbelsturm", "tornado"), (r"gewitter|\bblitz(?!schnell|artig|blank|sauber|gescheit)", "lightning"),
               (r"überschwemm|\bflut|hochwasser", "flood"), (r"erdbeben|boden reißt|erdkruste|fundament|reiß\w* .{0,40}\b(ab|auf)\b|bricht .{0,20}\bauf\b|\brisse\b|spalte", "crack"), (r"tsunami|riesenwelle|wasserwelle|wasserwand|wassermassen|flutwelle|monsterwelle|riesige\w* welle", "wave"), (r"orkan|hurrikan|\bsturm\b", "stormcloud"), (r"explo", "explosion"),
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
               (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
