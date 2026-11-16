@@ -1,6 +1,6 @@
 {
-  "version": "1.14.5",
-  "file": "releases/AutoShorts-1.14.5.cmd",
-  "sha256": "710d62d5ddd2bddf48d22660eff3dac1c68f302549d15a477c1e248b066ff7a3",
-  "notes": "TikTok/YouTube-Anzeige: bei Upload über Zernio grün, wenn der letzte Upload geklappt hat"
+  "version": "1.14.6",
+  "file": "releases/AutoShorts-1.14.6.cmd",
+  "sha256": "e4048e47c84e72f0371f3ef1616214724ca825af3ee9d8343562175b656864f1",
+  "notes": "Hängende GitHub-Aufträge: eigene Hintergrund-Abrufe werden nach 20 Min. automatisch abgebrochen, Banner erklärt es"
 }

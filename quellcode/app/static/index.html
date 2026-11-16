@@ -499,8 +499,10 @@ function runName(r) { if (r.event === "schedule") return "Autopilot"; const a = 
    Im Vordergrund holt sie die Zahlen alle paar Minuten („live“), im Hintergrund weckt sie alle 15 Minuten den Autopiloten. */
 let QUIET_AT = 0, TICK_AT = 0, quietWas = false; const QUIET = new Set();
 const isQuiet = r => QUIET.has(r.id);
+const STUCK_MIN = 20;   // so lange ohne Start: GitHub hat den Auftrag „vergessen“ (kommt gelegentlich vor)
+const isStuck = r => r.status === "queued" && Date.now() - new Date(r.created_at) > STUCK_MIN * 60000;
 async function tick() {
-  if (!CFG || !S || !S.connected || PENDING || RUNS.some(r => r.status !== "completed") || Date.now() - QUIET_AT < 150000) return;
+  if (!CFG || !S || !S.connected || PENDING || RUNS.some(r => r.status !== "completed" && !isStuck(r)) || Date.now() - QUIET_AT < 150000) return;
   const now = Date.now(), live = Number(S_("stats_live")), age = now - Number(ST.last_stats || 0) * 1000;
   let action = "";
   if (!document.hidden && live > 0 && age > live * 60000 && (VIDS || []).some(v => v.status === "published" || v.status === "partial")) action = "stats";
@@ -513,8 +515,11 @@ const isLive = r => r.status !== "completed" && !isQuiet(r) && (r.event !== "sch
 async function pollRuns() {
   clearTimeout(runTimer);
   try { const j = await gh("GET", "/actions/workflows/autoshorts.yml/runs?per_page=10"); RUNS = j.workflow_runs || []; } catch (e) {}
-  for (const r of RUNS) if (r.event === "workflow_dispatch" && /^(stats|auto)\b/.test((r.display_title || "").trim())) { const c = new Date(r.created_at).getTime(); if (QUIET_AT && c > QUIET_AT - 10000 && c < QUIET_AT + 150000) QUIET.add(r.id); }
-  const quietNow = RUNS.some(r => isQuiet(r) && r.status !== "completed");
+  for (const r of RUNS) if (r.event === "workflow_dispatch" && /^(stats|auto)\b|^AutoShorts$/.test((r.display_title || "").trim())) { const c = new Date(r.created_at).getTime(); if (QUIET_AT && c > QUIET_AT - 10000 && c < QUIET_AT + 150000) QUIET.add(r.id); }
+  for (const r of RUNS) if (isStuck(r) && (isQuiet(r) || /^(stats|auto)\b|^AutoShorts$/.test((r.display_title || "").trim())) && !CANCELING.has(r.id)) {
+    CANCELING.add(r.id); gh("POST", `/actions/runs/${r.id}/cancel`).catch(() => gh("POST", `/actions/runs/${r.id}/force-cancel`).catch(() => {}));   // eigener Hintergrund-Abruf hängt: still abbrechen
+  }
+  const quietNow = RUNS.some(r => isQuiet(r) && r.status !== "completed" && !isStuck(r));
   if (quietWas && !quietNow) { await loadData(); if (!$("#dayDrw") && !$(".modal-bg") && !DIRTY) render(); }   // stille Läufe: Zahlen ohne Hinweis nachladen
   quietWas = quietNow;
   const active = RUNS.some(isLive);
@@ -547,7 +552,7 @@ function banner() {
   let h = "";
   const live = RUNS.filter(isLive), recent = RUNS.find(r => r.status === "completed" && r.event !== "schedule" && Date.now() - new Date(r.updated_at) < 15 * 60000);
   if (PENDING && !live.length) h += `<div class="banner run"><span class="spin"></span><b>${esc(PENDING.label)}</b><span class="muted">Auftrag an GitHub gesendet, startet gleich …</span><button class="btn sm" style="margin-left:auto" onclick="cancelRun(0)">Abbrechen</button></div>`;
-  else if (live.length) { const r = live[0]; h += `<div class="banner run"><span class="spin"></span><b>${esc(runName(r))} …</b><span class="muted">${CANCELING.has(r.id) ? "wird abgebrochen …" : r.status === "queued" ? "wartet auf einen freien Rechner" : "läuft seit " + mins(r.run_started_at)}</span><a href="${esc(r.html_url)}" target="_blank" rel="noopener">Protokoll ↗</a>${CANCELING.has(r.id) ? "" : `<button class="btn sm" style="margin-left:auto" onclick="cancelRun(${Number(r.id)})">Abbrechen</button>`}</div>`; }
+  else if (live.length) { const r = live[0]; h += `<div class="banner run"><span class="spin"></span><b>${esc(runName(r))} …</b><span class="muted">${CANCELING.has(r.id) ? "wird abgebrochen …" : r.status === "queued" ? (isStuck(r) ? `hängt bei GitHub seit ${mins(r.created_at)} – abbrechen und neu starten` : "wartet auf einen freien Rechner") : "läuft seit " + mins(r.run_started_at)}</span><a href="${esc(r.html_url)}" target="_blank" rel="noopener">Protokoll ↗</a>${CANCELING.has(r.id) ? "" : `<button class="btn sm" style="margin-left:auto" onclick="cancelRun(${Number(r.id)})">Abbrechen</button>`}</div>`; }
   else if (recent && recent.conclusion === "cancelled") h += `<div class="banner run"><b>Abgebrochen:</b><span>${esc(runName(recent))}</span></div>`;
   else if (recent) { const ok = recent.conclusion === "success"; h += `<div class="banner ${ok ? "ok" : "bad"}"><b class="${ok ? "pos" : "neg"}">${ok ? "Fertig" : "Fehlgeschlagen"}:</b><span>${esc(runName(recent))}</span><a href="${esc(recent.html_url)}" target="_blank" rel="noopener">Protokoll ↗</a></div>`; }
   if (S && S.update && S.update.available) h += `<div class="banner">Update verfügbar: Version <b>${esc(S.update.version)}</b>${S.update.notes ? ` · ${esc(S.update.notes)}` : ""}<button class="btn primary sm" style="margin-left:auto" onclick="runUpdate()">Jetzt aktualisieren</button></div>`;
