@@ -1,5 +1,5 @@
 {
- "updated": 1794854503.0025554,
+ "updated": 1794857058.7016392,
  "enough": true,
  "counted": 17,
  "total": 19,
@@ -9,25 +9,25 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1652,
+   "avg_views": 1650,
    "avg_likes": 52.5,
    "like_rate": 3.18,
-   "avg_score": 2440
+   "avg_score": 2438
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1708,
+   "avg_views": 1725,
    "avg_likes": 43.0,
-   "like_rate": 2.52,
-   "avg_score": 2353
+   "like_rate": 2.49,
+   "avg_score": 2370
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1716,
+   "avg_views": 1717,
    "avg_likes": 40.6,
    "like_rate": 2.37,
    "avg_score": 2330
@@ -36,10 +36,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1636,
+   "avg_views": 1655,
    "avg_likes": 42.0,
-   "like_rate": 2.57,
-   "avg_score": 2266
+   "like_rate": 2.54,
+   "avg_score": 2285
   },
   {
    "slug": "musik",
@@ -54,10 +54,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1388,
-   "avg_likes": 26.0,
-   "like_rate": 1.87,
-   "avg_score": 1808
+   "avg_views": 1399,
+   "avg_likes": 27.0,
+   "like_rate": 1.93,
+   "avg_score": 1834
   },
   {
    "slug": "fakten",
@@ -71,7 +71,7 @@
  ],
  "weights": {
   "fakten": 0.68,
-  "storys": 1.12,
+  "storys": 1.11,
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.07,
@@ -81,9 +81,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1652 Aufrufe, 3.18 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1650 Aufrufe, 3.18 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2380 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2385 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -92,21 +92,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2543,
+   "views": 2544,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3383
+   "score": 3384
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2238,
+   "views": 2239,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3153
+   "score": 3154
   },
   {
    "id": 84,
