@@ -4634,5 +4634,46 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Prüfung: Regie-Wort „Finte“ gesprochen, Satzfehler („Pupillen weisen“), fast jede Szene dieselbe Schreck-Pose, Strand und Passanten ohne Bezug"
+ },
+ {
+  "id": 127,
+  "category": "fakten",
+  "topic": "5 Dinge, die dein Gehirn tut, während du schläfst – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und in dieser Reihenfolge erzählen, als Liste mit genau fünf Punkten (Erstens bis Fünftens), zu jedem Punkt zwei bis drei ganze Sätze, insgesamt rund 210 Wörter: Erstens Putzen: im Tiefschlaf spült Hirnwasser zwischen den Nervenzellen die Abfallstoffe des Tages weg, die Zwischenräume werden dafür im Schlaf weiter, Forscher haben das zuerst bei Mäusen gezeigt; Zweitens Aufräumen: das Gehirn spielt den Tag noch einmal durch, Wichtiges wie gelernte Vokabeln wandert ins Langzeitgedächtnis, Unwichtiges wie das Mittagessen verblasst; Drittens Lähmen: in der Traumphase schaltet der Hirnstamm fast alle Muskeln ab, nur Augen und Atmung arbeiten weiter, damit du deine Träume nicht nachspielst und aus dem Bett fällst; dann die Finte: Du denkst, dein Gehirn ruht sich nachts aus, falsch, in der Traumphase ist es fast so aktiv wie im Wachzustand; Viertens Verknüpfen: nach dem Lernen entstehen im Schlaf neue Verbindungen zwischen Nervenzellen, deshalb klappt das Geübte am nächsten Tag besser; Fünftens Gefühle verarbeiten: in der Traumphase ist das Stresshormon Noradrenalin fast abgeschaltet, das Gehirn geht belastende Erlebnisse noch einmal durch, am Morgen fühlen sie sich weniger schlimm an, eine Nacht darüber schlafen hilft also wirklich; Schluss: wer zu wenig schläft, merkt es sofort an Konzentration, Gedächtnis und Laune. Keine erfundenen Zahlen, keine Uhrzeiten, keine Gigabyte, keine Prozent- oder Mengenangaben, keine Jahreszahlen; nicht behaupten, das Gehirn wachse im Schlaf oder koche über; das Wort Schlafparalyse nicht verwenden. Einblendungen nur auf Deutsch und nur mit Wörtern aus dem Satz. Bilder: fast alles im Schlafzimmer bei Nacht, die Figur schläft im Bett, das Gehirn ist eine eigene Figur und tut, was der Satz sagt; Gegenstände nur, wenn der Satz sie nennt; kein Schloss, kein Tresor, kein Büro, keine Passanten, keine Landschaft. Titel: 5 Dinge, die dein Gehirn tut, während du schläfst. Titelbild-Text: DEIN GEHIRN NACHTS",
+  "status": "rendered",
+  "created": 1794855425.9869964,
+  "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
+  "description": "Was passiert eigentlich in deinem Kopf, während du tief schläfst?\nHier siehst du fünf abgefahrene Dinge, die dein Gehirn nachts anstellt.\nBist du Team Langschläfer oder Nachtmensch?",
+  "hashtags": [
+   "#shorts",
+   "#fakten",
+   "#wissen",
+   "#schlaf",
+   "#psychologie",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "gehirn",
+   "schlaf",
+   "fakten",
+   "traumphase",
+   "psychologie",
+   "gesundheit",
+   "wissen"
+  ],
+  "thumb_text": "DEIN GEHIRN NACHTS",
+  "missing": [
+   "vokabel"
+  ],
+  "cover_ms": 84559,
+  "duration": 84.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

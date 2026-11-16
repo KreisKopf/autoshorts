@@ -1,0 +1,621 @@
+{
+ "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
+ "scenes": [
+  {
+   "text": "Fünf geheime Dinge, die dein Gehirn jede Nacht treibt.",
+   "see": "Das Gehirn wacht im dunklen Schlafzimmer auf.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "synapse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "5 FAKTEN"
+   }
+  },
+  {
+   "text": "Und die allerletzte bestimmt deine Laune am nächsten Tag.",
+   "see": "Du schläfst tief im Bett und der Wecker steht bereit.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Erstens putzen. Im tiefen Schlaf spült Hirnwasser die Abfallstoffe des Tages weg.",
+   "see": "Das Gehirn putzt mit einem Schwamm im Schlafzimmer.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "ERSTENS"
+   }
+  },
+  {
+   "text": "Dafür weiten sich extra die winzigen Zwischenräume zwischen all den Nerven.",
+   "see": "Zellen öffnen sich im Schlafzimmer.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "synapse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Zweitens aufräumen. Das Gehirn spielt den ganzen stressigen Tag noch einmal komplett durch.",
+   "see": "Das Gehirn räumt Akten im Schlafzimmer auf.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "ZWEITENS"
+   }
+  },
+  {
+   "text": "Wichtiges wie gelernte Vokabeln wandert ins Langzeitgedächtnis, das unnötige Mittagessen verblasst einfach.",
+   "see": "Vokabeln wandern in das Langzeitgedächtnis.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Drittens lähmen. In der wilden Traumphase schaltet der Hirnstamm fast alle Muskeln ab.",
+   "see": "Der Hirnstamm lähmt die Muskeln im Bett.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "muskel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "DRITTENS"
+   }
+  },
+  {
+   "text": "Nur Augen und Atmung arbeiten weiter, damit du im Bett sicher liegen bleibst.",
+   "see": "Du atmest ruhig im Bett weiter.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du denkst bestimmt, dein Gehirn ruht sich nachts endlich mal gemütlich aus?",
+   "see": "Du denkst nach im Bett.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "question",
+    "text": "WIRKLICH?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Völlig falsch, in der Traumphase ist es fast genau so aktiv wie tagsüber.",
+   "see": "Das Gehirn leuchtet aktiv im Schlafzimmer.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "synapse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Viertens verknüpfen. Nach dem Pauken entstehen nachts neue feste Brücken zwischen den Zellen.",
+   "see": "Das Gehirn verbindet Nervenzellen.",
+   "place": "bedroom",
+   "backdrop": {
+    "elements": [
+     "bridge",
+     "river",
+     "city"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "synapse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "VIERTENS"
+   }
+  },
+  {
+   "text": "Deshalb klappt das schwierige Gitarrensolo am nächsten Morgen plötzlich fast wie von selbst.",
+   "see": "Du spielst Gitarre am nächsten Morgen.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Fünftens Gefühle verarbeiten. Das Stresshormon Noradrenalin wird im Schlaf stark heruntergefahren.",
+   "see": "Das Gehirn fährt das Stresshormon herunter.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "FÜNFTENS"
+   }
+  },
+  {
+   "text": "So geht das Gehirn peinliche Erlebnisse von gestern noch einmal absolut stressfrei durch.",
+   "see": "Das Gehirn geht Erlebnisse stressfrei durch.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "nachricht"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Eine Nacht darüber schlafen hilft deshalb wirklich gegen belastende Sorgen.",
+   "see": "Du schläfst entspannt im Bett.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "worried",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "HILFT WIRKLICH"
+   }
+  },
+  {
+   "text": "Wer dauerhaft zu wenig schläft, merkt das sofort an seiner miserablen Laune.",
+   "see": "Du wachst müde und schlecht gelaunt auf.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Griff zur Tasse Kaffee am Morgen wird dann zu einem echten Pflichttermin.",
+   "see": "Du greifst nach der Kaffeetasse am Morgen.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die müden grauen Zellen streiken ohne Pause und der Tag wird horror.",
+   "see": "Graue Zellen streiken im Gehirn.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Fünf verrückte Dinge, die dein Gehirn nachts heimlich tut.",
+   "see": "Das Gehirn winkt zum Abschied im Schlafzimmer.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "pos": "left",
+     "to": "left",
+     "speaks": false
+    },
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 830,
+     "to": 830
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
