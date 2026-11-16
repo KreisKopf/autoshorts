@@ -4598,7 +4598,7 @@
   "id": 126,
   "category": "fakten",
   "topic": "Was in deinem Körper passiert, wenn du dich erschrickst – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und in dieser Reihenfolge erzählen, zu jedem Punkt ein bis zwei ganze Sätze, insgesamt rund 210 Wörter: Einstieg: ein lauter Knall hinter dir, du zuckst zusammen, noch bevor du weißt, was los ist; der Schreckreflex läuft über den Hirnstamm und nicht über das bewusste Denken, vom Ohr bis zu den Muskeln sind es nur wenige Schaltstellen; zuerst blinzeln die Augen, um sich zu schützen, das geht in Bruchteilen einer Sekunde; dann ziehst du den Kopf ein, Nacken und Schultern spannen sich an, das schützt den empfindlichen Nacken, die Welle läuft von oben nach unten, die Beine reagieren zuletzt; der Mandelkern, die Alarmanlage im Gehirn, bewertet die Gefahr und verstärkt den Schreck, wer schon Angst hat, etwa beim Horrorfilm, erschrickt deshalb viel heftiger; die Nebennieren schütten Adrenalin aus, das Herz schlägt schneller, du atmest schneller, mehr Blut fließt in die Muskeln; die Pupillen weiten sich und lassen mehr Licht herein, die Verdauung wird gebremst; dann die Finte: Du denkst, du rennst sofort los, falsch, oft erstarrst du erst einen Moment, in dieser Schreckstarre prüft das Gehirn die Lage; erst danach heißt es kämpfen oder fliehen; meist ist es ein Fehlalarm, zum Beispiel nur eine zugefallene Tür; Herz und Pupillen beruhigen sich rasch, aber das Adrenalin im Blut wirkt noch nach, deshalb zittern die Hände noch Minuten später; Schluss: der Reflex ist uralt und schützt dich, bevor du denken kannst. Keine Zahlen, keine Prozent-, Puls-, Kalorien- oder Zeitangaben in Ziffern, keine Jahreszahlen, keine Namen von Forschern. Einblendungen nur auf Deutsch und nur mit Wörtern aus dem Satz. Bilder: die Hauptfigur abends zu Hause im Wohnzimmer, das Gehirn als eigene Figur, keine Passanten, kein Büro. Titel: Was in deinem Körper passiert, wenn du dich erschrickst. Titelbild-Text: DEIN KÖRPER IM SCHRECK",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794854000.5666158,
   "title": "Was in deinem Körper passiert, wenn du dich erschrickst",
   "description": "Erlebe den ultimativen Schreckmoment am eigenen Leib!\nDein Körper reagiert in Sekundenschnelle, noch bevor du überhaupt denken kannst.\nBist du Team Angsthase oder Team Eiskalt?",
@@ -4632,6 +4632,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Regie-Wort „Finte“ gesprochen, Satzfehler („Pupillen weisen“), fast jede Szene dieselbe Schreck-Pose, Strand und Passanten ohne Bezug"
  }
 ]
