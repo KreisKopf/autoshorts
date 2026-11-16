@@ -470,7 +470,11 @@ def match_words(text, heard, total):
     hit = 0
     for blk in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks():
         for k in range(blk.size):
-            times[blk.a + k] = (heard[blk.b + k][1], heard[blk.b + k][2])
+            s_h, e_h = heard[blk.b + k][1], heard[blk.b + k][2]
+            # Die Spracherkennung dehnt das letzte Wort vor einer überhörten Stelle bis an deren Ende („bremst“ dauerte vier Sekunden):
+            # Der nicht erkannte Satz danach bekam dann keine Zeit – vier Sekunden ohne Untertitel und das Bild des Satzes davor (Video 128).
+            e_h = min(e_h, s_h + 0.45 + 0.09 * len(a[blk.a + k]))
+            times[blk.a + k] = (s_h, max(e_h, s_h + 0.06))
             hit += 1
     # zusammengezogene/getrennte Wörter: „supervulkan“ ↔ „super vulkan“ zählen als gehört
     ratio = hit / max(1, len(words))

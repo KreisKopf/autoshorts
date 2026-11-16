@@ -355,3 +355,7 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   „Welle“ allein ist kein Strand (`HINTS`: nur Meer, Küste, Brandung, „Wellen schlagen“), „von oben nach unten“ keine Stadt-Grafik (`auto_graphic`).
   Ein Oberarm (`muskel`) aus der Bibliothek liegt nicht neben der Figur im Zimmer (`BODY_PROPS`). `writer.polish`: mitgesprochene Regie-Wörter am Satzanfang
   („Dann die Finte: …“) entfallen; Hashtags und Suchbegriffe bekommen echte Umlaute (`_UML`: „#koerper“ → „#körper“). Selbsttest: `_body`.
+  Nach dem 1. Neubau (Video 128 verworfen): Der „Blick nach draußen“ entfällt bei jedem Satz über den Körper (`BODY_PARTS_RE`: Beine, Hände, Herz,
+  Muskeln, Verdauung, Reflex, Adrenalin …) – zu „Die Beine reagieren zuletzt“ standen besorgte Passanten auf der Straße. `ai.match_words`: Die
+  Spracherkennung dehnt das letzte Wort vor einer überhörten Stelle bis an deren Ende; die Dauer eines gehörten Worts ist jetzt begrenzt
+  (0,45 s + 0,09 s je Buchstabe), damit der überhörte Satz seine Zeit behält – vorher vier Sekunden ohne Untertitel und mit dem Bild des Satzes davor.

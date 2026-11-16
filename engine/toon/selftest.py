@@ -462,6 +462,12 @@ def main():
         assert stage.places.resolve(stage.backdrop(scs[8])) != "street", "Gehirn-Satz spielt auf der Straße"
         assert act(9) != "pupils", "„Pupillen beruhigen sich“ zeigt sich weitende Pupillen"
         assert act(10) == "tremble", "zitternde Hände fehlen"
+        T2 = ["Ein lauter Knall lässt alle zusammenfahren.", "Das geht schneller als jeder Gedanke.", "Die Beine reagieren zuletzt und machen sich bereit zum Start.", "Das Herz pumpt mehr Blut in die Muskeln.",
+              "Die Verdauung macht Pause.", "Die Nebennieren schütten Adrenalin aus.", "Der Reflex ist uralt.", "Die Haut wird blass."]
+        scs2 = stage.direct([{"text": t_, "place": "livingroom", "time": "day", "mood": "tense", "actors": [{"id": "du", "action": "talk"}]} for t_ in T2],
+                            [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T2))], "Was in deinem Körper passiert, wenn du dich erschrickst", "fakten", "")
+        for sc_b in scs2[2:]:
+            assert stage.places.resolve(stage.backdrop(sc_b)) != "street" and not sc_b.get("crowd"), "Körper-Satz als Straßenbild mit Passanten: " + sc_b["text"]
         for sc_b in scs:
             for t_b in (0.1, 1.2, 2.4):
                 frame(sc_b, cast_b, t_b)
@@ -474,6 +480,16 @@ def main():
         assert js_b["hashtags"] == ["#körper"] and js_b["scenes"][0]["text"].startswith("Du denkst") and js_b["scenes"][1]["text"].startswith("Die Finte"), "Regie-Wort gesprochen oder Umlaute fehlen"
 
     check("Körper-Sätze (Zusammenzucken, Blinzeln, Erstarren, Gehirn-Figur)", _body)
+
+    def _stretched_word():                                       # Sprach-Abgleich (Video 128): ein gedehntes Wort vor einer überhörten Stelle darf dem überhörten Satz nicht die Zeit nehmen
+        from .. import ai as _ai_s
+        txt_s = "Die Verdauung bremst. Deine Pupillen weiten sich und lassen mehr Licht herein. Du denkst nach."
+        heard_s = [("Die", 0.0, 0.2), ("Verdauung", 0.2, 0.9), ("bremst", 0.9, 5.4), ("Du", 5.5, 5.7), ("denkst", 5.7, 6.1), ("nach", 6.1, 6.5)]
+        out_s, _ = _ai_s.match_words(txt_s, heard_s, 6.6)
+        assert out_s[3][1] < 2.2 and out_s[10][2] > 4.5, f"überhörter Satz zusammengequetscht: {out_s[3]} … {out_s[10]}"
+        assert all(b_[1] >= a_[1] for a_, b_ in zip(out_s, out_s[1:])), "Wort-Zeiten nicht aufsteigend"
+
+    check("Sprach-Abgleich: gedehntes Wort vor überhörter Stelle", _stretched_word)
 
     def _sea():                                                  # Meerestiere: das genannte Tier ist die Figur, allein und unter Wasser
         T = [("Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.", "livingroom", [{"id": "du", "action": "shocked", "hold": "phone"}], ["computer"], "close"),

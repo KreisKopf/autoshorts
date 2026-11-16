@@ -1831,7 +1831,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 if step == 1 and topic_any and topic_ins < 2:                 # das Ding, um das sich das Video dreht, groß im Bild
                     sc["props"] = [{"type": topic_any[topic_ins % len(topic_any)]}]
                     sc["shot"], topic_ins = "insert", topic_ins + 1
-                elif step == 2 and not _re0.search(r"\b(?:du|dich|dir|dein\w*|ich|mich|mir|mein\w*)\b|" + BODY_BRAIN_RE + r"|\bkörper", str(sc.get("text") or "").lower()):   # Blick nach draußen: Straße, Menschen, das Thema am Himmel – nicht, wenn der Satz von „dir“, deinem Körper oder dem Gehirn spricht („Dann ziehst du den Kopf ein“ zeigte Passanten)
+                elif step == 2 and not _re0.search(r"\b(?:du|dich|dir|dein\w*|ich|mich|mir|mein\w*)\b|" + BODY_BRAIN_RE + "|" + BODY_PARTS_RE, str(sc.get("text") or "").lower()):   # Blick nach draußen: Straße, Menschen, das Thema am Himmel – nicht, wenn der Satz von „dir“, deinem Körper oder dem Gehirn spricht („Dann ziehst du den Kopf ein“ zeigte Passanten)
                     sc["place"], sc["backdrop"] = "street", None
                     sc["actors"], sc["shot"] = [], "event"
                     sc["props"] = [{"type": k} for k in topic_any[:1]]
@@ -2261,6 +2261,8 @@ BODY_ACTS = ((r"zuck\w* (?:\w+ ){0,3}zusammen|zusammenzuck|zusammengezuckt|kopf 
              (r"atmest (?:\w+ ){0,3}(?:schneller|flach|hektisch)|atmung (?:\w+ ){0,3}(?:schneller|beschleunig|flach|rast)|schnappst nach luft|außer atem|keuch", "pant", ""),
              (r"herz (?:\w+ ){0,3}(?:schlägt|rast|klopft|pocht|hämmert|pumpt)|herzschlag (?:\w+ ){0,3}(?:schneller|beschleunig|rast)|puls (?:\w+ ){0,3}(?:steigt|rast|schnellt|jagt)", "pant", "wide"))
 BODY_BRAIN_RE = r"\bgehirn|\bhirn\b|hirnstamm|mandelkern|amygdala|großhirn|kleinhirn|denkzentrale"
+BODY_PARTS_RE = (r"\bkörper|\bbeine?n?\b|\bfüßen?\b|\bknien?\b|\bhänden?\b|\bhand\b|\barmen?\b|\baugen?\b|pupille|\bohr(?:en)?\b|\bherz|\bpuls\b|muskel|\bnacken|schulter|"
+                 r"\bkopf\b|\bhaut\b|\batem|atmung|\bblut\b|\bmagen|verdauung|\bnerven?\b|reflex|adrenalin|hormon")   # Sätze über den Körper zeigen die Figur, nie Passanten auf der Straße (Video 128: „Die Beine reagieren zuletzt“)
 BODY_LEGS_RE = r"\bbeine?n?\b|\bfüßen?\b|\bknien?\b"
 
 
