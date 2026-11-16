@@ -4675,5 +4675,53 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 128,
+  "category": "fakten",
+  "topic": "Was in deinem Körper passiert, wenn du dich erschrickst – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und in dieser Reihenfolge erzählen, zu jedem Punkt ein bis zwei ganze, grammatisch saubere Sätze, insgesamt rund 220 Wörter: Einstieg: ein lauter Knall hinter dir, du zuckst zusammen, noch bevor du weißt, was los ist; dieser Schreckreflex läuft über den Hirnstamm und nicht über das bewusste Denken, vom Ohr bis zu den Muskeln sind es nur wenige Schaltstellen; zuerst blinzelst du, die Augen schützen sich in Bruchteilen einer Sekunde; dann ziehst du den Kopf ein, Nacken und Schultern spannen sich an, das schützt den empfindlichen Nacken; die Reaktion läuft von oben nach unten durch den Körper, die Beine reagieren zuletzt; der Mandelkern, die Alarmanlage im Gehirn, bewertet die Gefahr und verstärkt den Schreck, wer schon Angst hat, etwa beim Horrorfilm, erschrickt deshalb viel heftiger; die Nebennieren schütten Adrenalin aus, dein Herz schlägt schneller und du atmest schneller, mehr Blut fließt in die Muskeln; deine Pupillen weiten sich und lassen mehr Licht herein, die Verdauung wird gebremst; danach direkt die Frage mit Auflösung „Du denkst, du rennst sofort los? Falsch, oft erstarrst du erst einen Moment“, in dieser Schreckstarre prüft dein Gehirn die Lage; erst danach heißt es kämpfen oder fliehen; meist ist es ein Fehlalarm, zum Beispiel nur eine zugefallene Tür; Herz und Pupillen beruhigen sich rasch, aber das Adrenalin im Blut wirkt noch nach, deshalb zittern deine Hände noch Minuten später; Schluss: der Reflex ist uralt und schützt dich, bevor du denken kannst. Die Wörter Finte, Rehook, Cliffhanger und Welle nicht verwenden. Keine Zahlen, keine Prozent-, Puls-, Kalorien- oder Zeitangaben in Ziffern, keine Jahreszahlen, keine Namen von Forschern. Einblendungen nur auf Deutsch und nur mit Wörtern aus dem Satz. Bilder: alles spielt am selben Tag zu Hause im Wohnzimmer, die Hauptfigur macht jede Körper-Reaktion vor, das Gehirn als eigene Figur, keine Passanten, kein Büro, kein Labor, kein Strand, keine Straße. Titel: Was in deinem Körper passiert, wenn du dich erschrickst. Titelbild-Text: DEIN KÖRPER IM SCHRECK",
+  "status": "rendered",
+  "created": 1794856235.496293,
+  "title": "Was in deinem Körper passiert, wenn du dich erschrickst",
+  "description": "Erlebe, wie dein Körper blitzschnell auf einen Schreck reagiert.\nVon der Alarmanlage im Gehirn bis zum Adrenalin im Blut.\nWie schnell bist du nach einem Schreck wieder ruhig?",
+  "hashtags": [
+   "#shorts",
+   "#foryou",
+   "#viral",
+   "#fakten",
+   "#wissen",
+   "#körper",
+   "#biologie",
+   "#gesundheit"
+  ],
+  "tags": [
+   "schreck",
+   "adrenalin",
+   "gehirn",
+   "reflex",
+   "körper",
+   "angst",
+   "reaktion",
+   "mandelkern",
+   "herz",
+   "puls",
+   "pupillen",
+   "biologie fakten",
+   "wissen für dich"
+  ],
+  "thumb_text": "DEIN KÖRPER IM SCHRECK",
+  "missing": [
+   "knall"
+  ],
+  "cover_ms": 80689,
+  "duration": 80.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

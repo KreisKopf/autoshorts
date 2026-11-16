@@ -1,0 +1,501 @@
+{
+ "title": "Was in deinem Körper passiert, wenn du dich erschrickst",
+ "scenes": [
+  {
+   "text": "Ein lauter Knall, und dein Körper reagiert, noch bevor du denkst.",
+   "see": "Du stehst im Wohnzimmer und zuckst zusammen, weil hinter dir eine Tür laut zufällt.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SCHNELL"
+   }
+  },
+  {
+   "text": "Und am Ende zitterst du, obwohl längst alles vorbei ist.",
+   "see": "Du stehst im Wohnzimmer und deine Hände zittern leicht.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "tremble",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Vom Ohr bis zu den Muskeln sind es nur wenige Schaltstellen.",
+   "see": "Ein menschliches Ohr leuchtet auf und zeigt die Nervenbahnen zum Muskel.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_muskel"
+    },
+    {
+     "type": "lib_ohr"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "SCHALTSTELLEN"
+   }
+  },
+  {
+   "text": "Zuerst blinzelst du, die Augen schützen sich in Bruchteilen einer Sekunde.",
+   "see": "Du blinzelst schnell mit den Augen.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "blink",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Dann ziehst du den Kopf ein, Nacken und Schultern spannen sich an.",
+   "see": "Du ziehst den Kopf ein und spannst die Schultern an.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SCHUTZ"
+   }
+  },
+  {
+   "text": "Das schützt den empfindlichen Nacken vor schnellen Angriffen.",
+   "see": "Du hältst schützend die Hände in den Nacken.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Die Reaktion läuft von oben nach unten durch den Körper.",
+   "see": "Du stehst im Zimmer und die Reaktion wandert am Körper nach unten.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Die Beine reagieren zuletzt und machen sich bereit zum Start.",
+   "see": "Du bewegst die Beine und machst dich bereit zum Start.",
+   "place": "street",
+   "time": "day",
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "tag",
+    "text": "BEINE"
+   }
+  },
+  {
+   "text": "Der Mandelkern, die Alarmanlage im Gehirn, bewertet sofort die Gefahr.",
+   "see": "Das Gehirn leuchtet auf und zeigt den Mandelkern.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "GEFAHR",
+    "color": "orange"
+   }
+  },
+  {
+   "text": "Wer schon Angst hat, etwa beim Horrorfilm, erschrickt deshalb viel heftiger.",
+   "see": "Du schaust ängstlich im Fernsehzimmer auf den Bildschirm.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "HORROR"
+   }
+  },
+  {
+   "text": "Die Nebennieren schütten Adrenalin aus und fluten deinen gesamten Körper.",
+   "see": "Die Nebennieren im Körper schütten Adrenalin aus.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dein Herz schlägt schneller und du atmest automatisch viel tiefer.",
+   "see": "Du legst die Hand auf die Brust und atmest tief ein.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "PULS"
+   }
+  },
+  {
+   "text": "Mehr Blut fließt in die Muskeln, während die Verdauung sofort bremst.",
+   "see": "Du stehst angespannt im Zimmer, während das Blut durch den Körper fließt.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Deine Pupillen weiten sich und lassen deutlich mehr Licht herein.",
+   "see": "Deine Pupillen weiten sich in einer Nahaufnahme.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pupils",
+     "emotion": "shocked",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "BLICKE"
+   }
+  },
+  {
+   "text": "Du denkst, du rennst sofort los? Falsch, oft erstarrst du erst einen Moment.",
+   "see": "Du erstarrst regungslos mitten im Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "scared",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "In dieser kurzen Schreckstarre prüft dein Gehirn blitzschnell die Lage.",
+   "see": "Das Gehirn arbeitet blitzschnell und prüft die Umgebung.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_auge",
+     "pos": 800
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Erst danach entscheidet der Körper zwischen kämpfen oder fliehen.",
+   "see": "Du überlegst im Zimmer kurz zwischen Flucht und Kampf.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "panic",
+   "overlay": {
+    "type": "tag",
+    "text": "ENTSCHEIDUNG"
+   }
+  },
+  {
+   "text": "Meistens ist es ein Fehlalarm, zum Beispiel nur eine zugefallene Tür.",
+   "see": "Eine Zimmertür fällt im Flur von alleine zu.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Herz und Pupillen beruhigen sich rasch, aber das Adrenalin wirkt nach.",
+   "see": "Du atmest im Zimmer aus, während das Adrenalin noch nachwirkt.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "RUHE"
+   }
+  },
+  {
+   "text": "Deshalb zittern deine Hände noch Minuten später, wenn du längst sicher bist.",
+   "see": "Du stehst sicher im Wohnzimmer und deine Hände zittern immer noch.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "tremble",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Der Reflex ist absolut uralt und schützt dich, bevor du denken kannst.",
+   "see": "Du stehst entspannt im Zimmer und lächelt über den alten Reflex.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "SCHUTZ"
+   }
+  }
+ ]
+}
