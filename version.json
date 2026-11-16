@@ -1,6 +1,6 @@
 {
-  "version": "1.14.7",
-  "file": "releases/AutoShorts-1.14.7.cmd",
-  "sha256": "7aca00a02e3b2162b8c458d321b1a5517610d117230deeb830bc9e143527e865",
-  "notes": "Geister-Aufträge bei GitHub (Abbruch angenommen, bleiben trotzdem stehen) werden nicht mehr endlos angezeigt"
+  "version": "1.14.8",
+  "file": "releases/AutoShorts-1.14.8.cmd",
+  "sha256": "0f8ee3e00442464e393d8e7049bc541b5356154c8814d6447c52149c5c50e6f4",
+  "notes": "Videos haben Vorrang: Live-Zahlen höchstens alle 15 Min., vor Video-Terminen gar nicht – kein Stau mehr auf GitHub"
 }

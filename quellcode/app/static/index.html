@@ -503,7 +503,10 @@ const STUCK_MIN = 20;   // so lange ohne Start: GitHub hat den Auftrag „verges
 const isStuck = r => r.status === "queued" && Date.now() - new Date(r.created_at) > STUCK_MIN * 60000;
 async function tick() {
   if (!CFG || !S || !S.connected || PENDING || RUNS.some(r => r.status !== "completed" && !isStuck(r)) || Date.now() - QUIET_AT < 150000) return;
-  const now = Date.now(), live = Number(S_("stats_live")), age = now - Number(ST.last_stats || 0) * 1000;
+  const now = Date.now(), live0 = Number(S_("stats_live")), live = live0 > 0 ? Math.max(15, live0) : 0, age = now - Number(ST.last_stats || 0) * 1000;
+  // Videos haben Vorrang: kurz vor einem Video-Termin (45 Min.) keine Zahlen-Abrufe, damit der Termin die Spur auf GitHub frei hat
+  const nr = nextRun(); if (nr && nr - now < 45 * 60000 && nr - now > -30 * 60000) { if (now - TICK_AT > 15 * 60000) { QUIET_AT = now; TICK_AT = now;
+    try { await gh("POST", "/actions/workflows/autoshorts.yml/dispatches", {ref: "main", inputs: {action: "auto"}}); setTimeout(pollRuns, 5000); } catch (e) {} } return; }
   let action = "";
   if (!document.hidden && live > 0 && age > live * 60000 && (VIDS || []).some(v => v.status === "published" || v.status === "partial")) action = "stats";
   else if (now - TICK_AT > 15 * 60000) action = "auto";
@@ -520,7 +523,8 @@ async function pollRuns() {
   clearTimeout(runTimer);
   try { const j = await gh("GET", "/actions/workflows/autoshorts.yml/runs?per_page=10"); RUNS = j.workflow_runs || []; } catch (e) {}
   for (const r of RUNS) if (r.event === "workflow_dispatch" && /^(stats|auto)\b|^AutoShorts$/.test((r.display_title || "").trim())) { const c = new Date(r.created_at).getTime(); if (QUIET_AT && c > QUIET_AT - 10000 && c < QUIET_AT + 150000) QUIET.add(r.id); }
-  for (const r of RUNS) if (isStuck(r) && (isQuiet(r) || /^(stats|auto)\b|^AutoShorts$/.test((r.display_title || "").trim())) && !CANCELING.has(r.id)) {
+  const busyReal = RUNS.some(r => r.status === "in_progress" && !isQuiet(r));
+  for (const r of RUNS) if (isStuck(r) && !busyReal && (isQuiet(r) || /^(stats|auto)\b|^AutoShorts$/.test((r.display_title || "").trim())) && !CANCELING.has(r.id)) {
     CANCELING.add(r.id); CANCEL_AT[r.id] = Date.now(); gh("POST", `/actions/runs/${r.id}/cancel`).catch(() => gh("POST", `/actions/runs/${r.id}/force-cancel`).catch(() => {}));   // eigener Hintergrund-Abruf hängt: still abbrechen
   }
   const quietNow = RUNS.some(r => isQuiet(r) && r.status !== "completed" && !isStuck(r));
@@ -1407,7 +1411,7 @@ function viewSettings() {
     ${!can("zeitplan") ? "" : fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
     ${!can("laenge") ? "" : fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}
     ${!can("zahlen") ? "" : sel("stats_minutes", "Zahlen der Videos holen", "Aufrufe, Likes und Kommentare. GitHub startet geplante Läufe manchmal einige Minuten verspätet.", [["30", "alle 30 Minuten"], ["60", "stündlich"], ["180", "alle 3 Stunden"]])}
-    ${!can("zahlen") ? "" : sel("stats_live", "Live-Zahlen", "Solange die App offen im Vordergrund ist, holt sie die Zahlen selbst in kurzen Abständen. Ein Abruf dauert etwa eine Minute.", [["2", "alle 2 Minuten"], ["5", "alle 5 Minuten"], ["10", "alle 10 Minuten"], ["0", "aus"]])}
+    ${!can("zahlen") ? "" : sel("stats_live", "Live-Zahlen", "Solange die App offen im Vordergrund ist, holt sie die Zahlen selbst. Jeder Abruf belegt auf GitHub etwa 2 Minuten die Spur, auf der auch die Videos entstehen – deshalb höchstens alle 15 Minuten, und kurz vor einem Video-Termin gar nicht.", [["15", "alle 15 Minuten"], ["30", "alle 30 Minuten"], ["60", "stündlich"], ["0", "aus"]])}
     ${!can("laenge") ? "" : fld("min_seconds", "Mindest-Länge in Sekunden", "Kürzer wird kein Video: Das Drehbuch wird verlängert, notfalls spricht der Erzähler etwas ruhiger. 0 = aus.", 'type="number" min="0" max="170"')}`)}
   ${!can("trends") ? "" : sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
     ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
