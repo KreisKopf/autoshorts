@@ -4585,5 +4585,13 @@
   "yt_thumb_at": 1794852733.0827243,
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
+ },
+ {
+  "id": 125,
+  "category": "fakten",
+  "topic": "Warum du manche Töne im Ohr hörst, die gar nicht da sind",
+  "status": "error",
+  "created": 1794852854.7187138,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
  }
 ]
