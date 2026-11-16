@@ -339,11 +339,31 @@ def _validate_build(data, sha=None):
     return m.group(1)
 
 
+def _probe_start(data):
+    """Startet die neue App-Datei einmal mit --pruefen in einem eigenen Ordner. Nur wenn sie sauber hochfährt, wird installiert."""
+    import subprocess
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        fp = os.path.join(tmp, "probe.cmd")
+        with open(fp, "wb") as f:
+            f.write(data)
+        env = {**os.environ, "AS_DATA": os.path.join(tmp, "daten"), "AS_PORT": "0", "AS_LAUNCHER": fp}
+        try:
+            r = subprocess.run([sys.executable, fp, "--pruefen"], capture_output=True, text=True, timeout=90, env=env,
+                               creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        except Exception as e:  # noqa: BLE001
+            raise ValueError(f"Die neue Version ließ sich nicht probeweise starten ({e}). Das Update wurde nicht installiert.")
+        if "AUTOSHORTS-OK" not in (r.stdout or ""):
+            log(f"Update abgelehnt, Probestart fehlgeschlagen: {(r.stderr or r.stdout or '')[-500:]}", "error")
+            raise ValueError("Die neue Version startet nicht – das Update wurde nicht installiert, deine App bleibt wie sie ist.")
+
+
 def install_update(data, sha=None):
     if not LAUNCHER.lower().endswith(".cmd") or not os.path.exists(LAUNCHER):
         raise ValueError("Updates funktionieren nur mit der Ein-Datei-Version (AutoShorts.cmd). "
                          "Wurde die App direkt aus der ZIP gestartet? Dann bitte erst entpacken.")
     new_version = _validate_build(data, sha)
+    _probe_start(data)                                # neue Version erst probeweise starten – startet sie nicht, bleibt die alte
     backup_dir = os.path.join(DATA, "backup")
     os.makedirs(backup_dir, exist_ok=True)
     with open(LAUNCHER, "rb") as f:
@@ -530,15 +550,6 @@ def _post_script(url, payload):
         raise ValueError("Das Backup-Script meldet: " + str(js.get("error") or "Fehler")[:200]
                          + (" – ist das die AutoShorts-Vorlage? Ein Script einer anderen App passt nicht." if "Dateiname" in str(js.get("error")) or "name" in str(js.get("error")) else ""))
     return js
-
-
-@route("POST", r"/api/backup/test")
-def backup_test(h):
-    url = (SET.get("backup_url") or "").strip()
-    if not url:
-        raise ValueError("Erst den Backup-Link eintragen.")
-    _post_script(url, {"app": "AutoShorts", "action": "ping", "secret": SET.get("backup_secret") or ""})
-    h._send(200, {"ok": True, "msg": "Verbindung klappt – das Script antwortet richtig."})
 
 
 def upload_backup(force=False):
@@ -783,6 +794,15 @@ def backup_set(h):
     h._send(200, {"ok": True})
 
 
+@route("POST", r"/api/backup/test")
+def backup_test(h):
+    url = (SET.get("backup_url") or "").strip()
+    if not url:
+        raise ValueError("Erst den Backup-Link eintragen.")
+    _post_script(url, {"app": "AutoShorts", "action": "ping", "secret": SET.get("backup_secret") or ""})
+    h._send(200, {"ok": True, "msg": "Verbindung klappt – das Script antwortet richtig."})
+
+
 @route("POST", r"/api/backup/now")
 def backup_now(h):
     h._send(200, {"ok": True, "msg": upload_backup(force=True)})
@@ -796,17 +816,11 @@ def backup_download(h):
     h._send(200, make_backup(pw), "application/octet-stream")
 
 
-@route("POST", r"/api/backup/restore")
-def backup_restore(h):
-    """Backup-Datei (roh im Körper) mit dem Passwort aus dem Kopf X-Backup-Password entschlüsseln und die Einstellungen dieses PCs
-    wiederherstellen. Die Repository-Daten liegen ohnehin auf GitHub; ihre Kopie im Backup ist für den Notfall."""
+def restore_blob(data, pw, url=None, secret=None):
+    """Backup entschlüsseln und die Einstellungen dieses PCs wiederherstellen. Die Repository-Daten liegen ohnehin auf GitHub;
+    ihre Kopie im Backup ist für den Notfall."""
     import io
     import zipfile
-    n = int(h.headers.get("Content-Length") or 0)
-    if n <= 0 or n > 100_000_000:
-        raise ValueError("Die Backup-Datei ist leer oder zu groß.")
-    pw = urllib.parse.unquote(h.headers.get("X-Backup-Password") or "")
-    data = h.rfile.read(n)
     try:
         raw = decrypt(data, _backup_key(pw))
         z = zipfile.ZipFile(io.BytesIO(raw))
@@ -814,6 +828,8 @@ def backup_restore(h):
         info = json.loads(z.read("info.json").decode("utf-8"))
     except Exception:  # noqa: BLE001
         raise ValueError("Passwort falsch oder keine AutoShorts-Backup-Datei.")
+    if not isinstance(mine, dict):
+        raise ValueError("Backup-Datei beschädigt.")
     if info.get("edition") and info["edition"] != EDITION:
         raise ValueError("Dieses Backup stammt aus der anderen App (Admin/Kanal-App).")
     keep = {k: SET.get(k) for k in ("auto_update",)}
@@ -821,10 +837,62 @@ def backup_restore(h):
     SET.update(mine)
     SET.update({k: v for k, v in keep.items() if v is not None})
     SET["backup_password"] = pw
+    if url:
+        SET["backup_url"] = url
+    if secret:
+        SET["backup_secret"] = secret
     save_set()
     ACCESS.update(at=0, res=None)
     log(f"Backup wiederhergestellt ({info.get('repo')}, erstellt {time.strftime('%d.%m.%Y %H:%M', time.localtime(info.get('created') or 0))})")
-    h._send(200, {"ok": True, "repo": info.get("repo"), "created": info.get("created")})
+    return {"ok": True, "repo": info.get("repo"), "created": info.get("created")}
+
+
+@route("POST", r"/api/backup/restore")
+def backup_restore(h):
+    """Backup-Datei (roh im Körper) mit dem Passwort aus dem Kopf X-Backup-Password wiederherstellen."""
+    n = int(h.headers.get("Content-Length") or 0)
+    if n <= 0 or n > 100_000_000:
+        raise ValueError("Die Backup-Datei ist leer oder zu groß.")
+    pw = urllib.parse.unquote(h.headers.get("X-Backup-Password") or "")
+    h._send(200, restore_blob(h.rfile.read(n), pw))
+
+
+def _drive_args(b):
+    url = str(b.get("url") or SET.get("backup_url") or "").strip()
+    secret = str(b.get("secret") or SET.get("backup_secret") or "")
+    if not re.match(r"^https://[^\s\"'<>]{8,2000}$", url):
+        raise ValueError("Bitte den Backup-Link (https://…/exec) eintragen.")
+    return url, secret
+
+
+@route("POST", r"/api/backup/list")
+def backup_list(h):
+    """Backups im Google-Drive-Ordner auflisten (über das Script, mit Geheimwort)."""
+    url, secret = _drive_args(h._json())
+    js = _post_script(url, {"app": "AutoShorts", "action": "list", "secret": secret})
+    items = [{"id": str(x.get("id") or "")[:200], "name": str(x.get("name") or "")[:120], "size": int(x.get("size") or 0),
+              "date": str(x.get("date") or "")[:40]} for x in (js.get("files") or []) if isinstance(x, dict)][:200]
+    h._send(200, {"ok": True, "files": items})
+
+
+@route("POST", r"/api/backup/restore_drive")
+def backup_restore_drive(h):
+    """Ein Backup direkt aus Google Drive holen (über das Script) und wiederherstellen."""
+    b = h._json()
+    url, secret = _drive_args(b)
+    fid, pw = str(b.get("id") or "").strip(), str(b.get("password") or "")
+    if not re.fullmatch(r"[A-Za-z0-9_-]{10,200}", fid):
+        raise ValueError("Ungültige Backup-Auswahl.")
+    if not pw:
+        raise ValueError("Bitte das Backup-Passwort eingeben.")
+    js = _post_script(url, {"app": "AutoShorts", "action": "get", "secret": secret, "id": fid})
+    try:
+        data = base64.b64decode(js.get("data") or "")
+    except Exception:  # noqa: BLE001
+        raise ValueError("Das Script hat kein lesbares Backup geliefert.")
+    if not data or len(data) > 100_000_000:
+        raise ValueError("Das Script hat kein Backup geliefert – ist die neueste Script-Vorlage bereitgestellt?")
+    h._send(200, restore_blob(data, pw, url, secret))
 
 
 @route("GET", r"/api/access")
@@ -1477,6 +1545,9 @@ def _kill_other_instances():
 
 def main():
     global SRV
+    if "--pruefen" in sys.argv:                       # Probestart: alles geladen, keine Fehler – sofort wieder beenden
+        print(f"AUTOSHORTS-OK {APP_VERSION} {EDITION} {len(ROUTES)}", flush=True)
+        return
     srv = None
     url = f"http://127.0.0.1:{PORT}"
     if sys.platform.startswith("win"):

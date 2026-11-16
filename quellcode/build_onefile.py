@@ -111,6 +111,15 @@ def main():
         for p in files:
             with open(p, "w", encoding="utf-8", newline="\r\n") as f:
                 f.write(out)
+        import subprocess
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:   # Probestart: eine App, die nicht hochfährt, wird nie veröffentlicht
+            r = subprocess.run([sys.executable, files[0], "--pruefen"], capture_output=True, text=True, timeout=120,
+                               env={**os.environ, "AS_DATA": tmp, "AS_PORT": "0", "AS_LAUNCHER": files[0]})
+            if f"AUTOSHORTS-OK {version} {edition}" not in r.stdout:
+                for p in files:
+                    os.remove(p)
+                raise SystemExit(f"PROBESTART FEHLGESCHLAGEN ({edition}) – nichts veröffentlicht:\n{(r.stderr or r.stdout)[-1500:]}")
         with open(files[0], "rb") as f:
             sha = hashlib.sha256(f.read()).hexdigest()
         with open(os.path.join(ROOT, vfile), "w", encoding="utf-8") as f:

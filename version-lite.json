@@ -1,6 +1,6 @@
 {
-  "version": "1.14.2",
-  "file": "releases/AutoShorts-Kanal-1.14.2.cmd",
-  "sha256": "b133aac0d4f6d033ee5973be4e9e79d336d367f993652d40deb26f5675d39f85",
-  "notes": "Backup: Knopf „Verbindung testen“, Vorlage mit Test-Funktion"
+  "version": "1.14.3",
+  "file": "releases/AutoShorts-Kanal-1.14.3.cmd",
+  "sha256": "4dd00a6ee0c613f9434dfbc5b3e77dc84e7a500f538dfbec2e006fbd9b6e25b7",
+  "notes": "Backup direkt aus Google Drive laden; Reparatur: 1.14.2 startete nicht; Updates werden vor dem Installieren probeweise gestartet"
 }

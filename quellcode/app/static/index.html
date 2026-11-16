@@ -678,7 +678,7 @@ const PERMS = [["zeitplan", "Autopilot & Upload-Zeiten", true], ["kanal", "Kanal
   ["ki", "KI-Anbieter & Stimme", false], ["stil", "Video-Stil (Look, Untertitel, Musik)", false], ["zahlen", "Abruf der Zahlen", false]];
 const can = k => !LITE() || !!(S.access && S.access.perms && S.access.perms[k]);
 /* ═════════════════ Backup ═════════════════ */
-const GAS_TEMPLATE = "// AutoShorts-Backup → Google Drive (Google Apps Script, als Web-App bereitstellen: Ausführen als „Ich“, Zugriff „Jeder“)\nconst GEHEIMWORT = 'HIER-DEIN-GEHEIMWORT';   // dasselbe Wort in AutoShorts unter „Geheimwort“ eintragen\nconst ORDNER = 'AutoShorts Backups';\nfunction doPost(e) {\n  try {\n    var d = JSON.parse(e.postData.contents);\n    if (d.app !== 'AutoShorts' || d.secret !== GEHEIMWORT) return out({ok: false, error: 'Geheimwort falsch'});\n    var it = DriveApp.getFoldersByName(ORDNER), folder = it.hasNext() ? it.next() : DriveApp.createFolder(ORDNER);\n    if (d.action === 'ping') return out({ok: true, folder: folder.getUrl()});   // Verbindung testen: nichts speichern\n    if (!/^AutoShorts-Backup-[0-9-]+\\.asbak$/.test(d.filename)) return out({ok: false, error: 'Dateiname'});\n    var f = folder.createFile(Utilities.newBlob(Utilities.base64Decode(d.data), 'application/octet-stream', d.filename));\n    var files = [], all = folder.getFiles();          // nur die neuesten „keep“ Backups behalten\n    while (all.hasNext()) { var x = all.next(); if (/^AutoShorts-Backup-/.test(x.getName())) files.push(x); }\n    files.sort(function (a, b) { return b.getDateCreated() - a.getDateCreated(); });\n    files.slice(Math.max(3, d.keep || 30)).forEach(function (x) { x.setTrashed(true); });\n    return out({ok: true, id: f.getId()});\n  } catch (err) { return out({ok: false, error: String(err)}); }\n}\nfunction out(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }";
+const GAS_TEMPLATE = "// AutoShorts-Backup ↔ Google Drive (Google Apps Script, als Web-App bereitstellen: Ausführen als „Ich“, Zugriff „Jeder“)\nconst GEHEIMWORT = 'HIER-DEIN-GEHEIMWORT';   // dasselbe Wort in AutoShorts unter „Geheimwort“ eintragen\nconst ORDNER = 'AutoShorts Backups';\nfunction doPost(e) {\n  try {\n    var d = JSON.parse(e.postData.contents);\n    if (d.app !== 'AutoShorts' || d.secret !== GEHEIMWORT) return out({ok: false, error: 'Geheimwort falsch'});\n    var it = DriveApp.getFoldersByName(ORDNER), folder = it.hasNext() ? it.next() : DriveApp.createFolder(ORDNER);\n    if (d.action === 'ping') return out({ok: true, folder: folder.getUrl()});   // Verbindung testen: nichts speichern\n    if (d.action === 'list') {                         // Backups auflisten (zum Wiederherstellen)\n      var l = [], fl = folder.getFiles();\n      while (fl.hasNext()) { var y = fl.next(); if (/^AutoShorts-Backup-/.test(y.getName())) l.push({id: y.getId(), name: y.getName(), size: y.getSize(), date: y.getDateCreated().toISOString()}); }\n      l.sort(function (a, b) { return a.date < b.date ? 1 : -1; });\n      return out({ok: true, files: l});\n    }\n    if (d.action === 'get') {                          // ein Backup holen – nur aus diesem Ordner\n      var g = DriveApp.getFileById(d.id), ps = g.getParents(), inside = false;\n      while (ps.hasNext()) if (ps.next().getId() === folder.getId()) inside = true;\n      if (!inside || !/^AutoShorts-Backup-/.test(g.getName())) return out({ok: false, error: 'nicht gefunden'});\n      return out({ok: true, filename: g.getName(), data: Utilities.base64Encode(g.getBlob().getBytes())});\n    }\n    if (!/^AutoShorts-Backup-[0-9-]+\\.asbak$/.test(d.filename)) return out({ok: false, error: 'Dateiname'});\n    var f = folder.createFile(Utilities.newBlob(Utilities.base64Decode(d.data), 'application/octet-stream', d.filename));\n    var files = [], all = folder.getFiles();          // nur die neuesten „keep“ Backups behalten\n    while (all.hasNext()) { var x = all.next(); if (/^AutoShorts-Backup-/.test(x.getName())) files.push(x); }\n    files.sort(function (a, b) { return b.getDateCreated() - a.getDateCreated(); });\n    files.slice(Math.max(3, d.keep || 30)).forEach(function (x) { x.setTrashed(true); });\n    return out({ok: true, id: f.getId()});\n  } catch (err) { return out({ok: false, error: String(err)}); }\n}\nfunction out(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }\n// Einmal oben über „Ausführen“ starten, damit Google die Drive-Erlaubnis abfragt\nfunction erlauben() { DriveApp.getFoldersByName(ORDNER); }";
 let BK = null;
 async function loadBackup() { try { BK = await api("/api/backup"); } catch (e) { BK = null; } }
 function backupSec() {
@@ -693,7 +693,8 @@ function backupSec() {
     <div class="row"><label for="bkKeep">Backups behalten<small>Ältere löscht das Script (Vorlage unten).</small></label><input id="bkKeep" type="number" min="3" max="365" value="${b.keep || 30}"></div>
     ${b.error ? `<p class="hint neg">Letzter Versuch fehlgeschlagen: ${esc(b.error)}</p>` : ""}
     ${b.last ? `<p class="hint">Letztes Backup: ${esc(b.last_name)} · ${Math.round((b.last_size || 0) / 1024)} KB · ${last}</p>` : ""}
-    <div class="inline" style="flex-wrap:wrap"><button class="btn primary" id="bkSave">Speichern</button><button class="btn" id="bkTest">Verbindung testen</button><button class="btn" id="bkNow">Jetzt sichern</button><button class="btn" id="bkDl">Backup herunterladen</button><button class="btn" id="bkGas">Script-Vorlage</button></div>
+    <div class="inline" style="flex-wrap:wrap"><button class="btn primary" id="bkSave">Speichern</button><button class="btn" id="bkTest">Verbindung testen</button><button class="btn" id="bkNow">Jetzt sichern</button><button class="btn" id="bkDl">Backup herunterladen</button><button class="btn" id="bkGas">Script-Vorlage</button><button class="btn" id="bkLoad">Backup aus Drive laden</button></div>
+    <div id="bkLoadBox" hidden style="margin-top:10px"><input id="bkLoadPw" type="password" placeholder="Backup-Passwort zum Öffnen" autocomplete="off" style="margin-bottom:8px"><div id="bkLoadList"></div></div>
     <div id="bkGasBox" hidden><p class="hint" style="margin-top:10px">Falls dein Script anders aufgebaut ist: AutoShorts schickt per POST ein JSON <code>{app, action:"backup", secret, filename, mimeType, keep, data (Base64)}</code> und erwartet <code>{"ok": true}</code> zurück. Diese Vorlage macht genau das (script.google.com → Neues Projekt → einfügen → Bereitstellen → Web-App):</p>
       <textarea id="bkGasTxt" rows="14" readonly style="width:100%;font-family:monospace;font-size:11px">${esc(GAS_TEMPLATE)}</textarea><button class="btn sm" id="bkGasCopy">Kopieren</button></div>`);
 }
@@ -711,16 +712,44 @@ function bindBackup() {
       const r = await fetch("/api/backup/download", {method: "POST", headers: {"X-AS": "1"}}); if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || "Fehler");
       const a = document.createElement("a"); a.href = URL.createObjectURL(await r.blob()); a.download = `AutoShorts-Backup-${new Date().toISOString().slice(0, 10)}.asbak`; a.click(); }
     catch (e) { toast(e.message, true); } };
+  const loadFn = bindDriveRestore(null, null, $("#bkLoadPw"), $("#bkLoadList"), false);
+  $("#bkLoad").onclick = async () => { $("#bkLoadBox").hidden = false; await save().catch(() => {}); loadFn($("#bkLoad")); };
   $("#bkGas").onclick = () => { $("#bkGasBox").hidden = !$("#bkGasBox").hidden; };
   $("#bkGasCopy").onclick = () => navigator.clipboard.writeText(GAS_TEMPLATE).then(() => toast("Kopiert"), () => { $("#bkGasTxt").select(); toast("Markiert – mit Strg+C kopieren"); });
 }
 function restoreBox() {
   return `<details style="margin-top:14px"><summary class="hint" style="cursor:pointer">Neuer PC? Aus Backup wiederherstellen</summary>
-    <div style="display:grid;gap:8px;margin-top:8px"><input type="file" id="rsFile" accept=".asbak"><input type="password" id="rsPw" placeholder="Backup-Passwort" autocomplete="off">
-    <button class="btn" id="rsGo">Wiederherstellen</button></div></details>`;
+    <div style="display:grid;gap:8px;margin-top:8px">
+      <b style="font-size:13px">Direkt aus Google Drive</b>
+      <input id="rdUrl" placeholder="Backup-Link (https://script.google.com/…/exec)" autocomplete="off">
+      <input id="rdSec" type="password" placeholder="Geheimwort" autocomplete="off">
+      <input id="rsPw" type="password" placeholder="Backup-Passwort" autocomplete="off">
+      <button class="btn" id="rdList">Backups anzeigen</button><div id="rdBox"></div>
+      <b style="font-size:13px;margin-top:6px">Oder aus einer Datei (.asbak)</b>
+      <input type="file" id="rsFile" accept=".asbak"><button class="btn" id="rsGo">Datei wiederherstellen</button></div></details>`;
+}
+const driveList = files => files.length ? files.map((f, i) => `<div class="inline" style="justify-content:space-between;border-top:1px solid var(--line, #ddd);padding:6px 0">
+  <span class="hint">${esc(f.date ? new Date(f.date).toLocaleString("de-DE", {day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"}) : f.name)} · ${Math.round(f.size / 1024)} KB${i === 0 ? " · neuestes" : ""}</span>
+  <button class="btn sm ${i === 0 ? "primary" : ""}" data-rdid="${esc(f.id)}">Wiederherstellen</button></div>`).join("") : `<p class="hint">Keine Backups im Ordner.</p>`;
+function bindDriveRestore(urlEl, secEl, pwEl, box, reloadAfter) {
+  const list = async btn => { btn.disabled = true;
+    try { const r = await api("/api/backup/list", {url: urlEl ? urlEl.value.trim() : "", secret: secEl ? secEl.value : ""});
+      box.innerHTML = driveList(r.files);
+      box.querySelectorAll("[data-rdid]").forEach(b => b.onclick = async () => {
+        if (!pwEl.value) return toast("Bitte das Backup-Passwort eingeben.", true);
+        if (!reloadAfter && !confirm("Dieses Backup wiederherstellen? Die Einstellungen auf diesem PC werden dadurch ersetzt.")) return;
+        b.disabled = true;
+        try { const j = await api("/api/backup/restore_drive", {url: urlEl ? urlEl.value.trim() : "", secret: secEl ? secEl.value : "", id: b.dataset.rdid, password: pwEl.value});
+          toast(`Wiederhergestellt: ${j.repo || ""}`); setTimeout(() => location.reload(), 900); }
+        catch (e) { toast(e.message, true); b.disabled = false; } }); }
+    catch (e) { toast(e.message, true); }
+    btn.disabled = false; };
+  return list;
 }
 function bindRestore() {
   if (!$("#rsGo")) return;
+  const listFn = bindDriveRestore($("#rdUrl"), $("#rdSec"), $("#rsPw"), $("#rdBox"), true);
+  $("#rdList").onclick = () => listFn($("#rdList"));
   $("#rsGo").onclick = async () => { const f = $("#rsFile").files[0], pw = $("#rsPw").value, b = $("#rsGo");
     if (!f || !pw) return toast("Backup-Datei wählen und Passwort eingeben.", true);
     b.disabled = true;
