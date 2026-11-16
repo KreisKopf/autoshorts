@@ -1,5 +1,5 @@
 {
- "updated": 1794858938.8119626,
+ "updated": 1794860788.1886368,
  "enough": true,
  "counted": 17,
  "total": 20,
@@ -9,55 +9,55 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1650,
+   "avg_views": 1654,
    "avg_likes": 52.5,
-   "like_rate": 3.18,
-   "avg_score": 2438
+   "like_rate": 3.17,
+   "avg_score": 2442
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1725,
+   "avg_views": 1764,
    "avg_likes": 43.0,
-   "like_rate": 2.49,
-   "avg_score": 2370
+   "like_rate": 2.44,
+   "avg_score": 2409
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1717,
+   "avg_views": 1719,
    "avg_likes": 40.6,
-   "like_rate": 2.37,
-   "avg_score": 2330
+   "like_rate": 2.36,
+   "avg_score": 2332
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1655,
+   "avg_views": 1660,
    "avg_likes": 42.0,
-   "like_rate": 2.54,
-   "avg_score": 2285
+   "like_rate": 2.53,
+   "avg_score": 2290
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1641,
+   "avg_views": 1645,
    "avg_likes": 12.0,
    "like_rate": 0.73,
-   "avg_score": 1911
+   "avg_score": 1915
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1399,
+   "avg_views": 1415,
    "avg_likes": 27.0,
-   "like_rate": 1.93,
-   "avg_score": 1834
+   "like_rate": 1.91,
+   "avg_score": 1850
   },
   {
    "slug": "fakten",
@@ -74,16 +74,16 @@
   "storys": 1.11,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.07,
+  "whatif": 1.06,
   "comedy": 1.04,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1650 Aufrufe, 3.18 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2385 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2391 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -102,11 +102,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2239,
+   "views": 2249,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3154
+   "score": 3164
   },
   {
    "id": 84,
