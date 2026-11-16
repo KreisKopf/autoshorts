@@ -1,804 +1,4 @@
 {
- "2026-11-15 13:00": {
-  "category": "tiere",
-  "topic": "Der Fangschreckenkrebs: Das Tier mit dem stärksten Punch im Universum, das dich wortwörtlich one-shotted",
-  "trend": null,
-  "script": {
-   "title": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich",
-   "description": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich\nEin winziger Krebs schlägt so schnell zu wie eine Pistolenkugel. Kannst du den Punch in Zeitlupe überhaupt erkennen?\nSchnelligkeit oder pure Muskelkraft?",
-   "hashtags": [
-    "#shorts",
-    "#tierfakten",
-    "#wissenschaft",
-    "#fangschreckenkrebs",
-    "#nature",
-    "#viral"
-   ],
-   "tags": [
-    "fangschreckenkrebs",
-    "stärkster punch",
-    "tierreichfakten",
-    "meerestiere",
-    "zeitlupe punch",
-    "biologie",
-    "spannende tierfakten"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a colorful mantis shrimp in action underwater, its claws punching forward at extreme speed, shocked cartoon scuba diver watching in background, dramatic lighting, vector art",
-    "text": "TÖDLICHER ALS PISTOLE"
-   },
-   "wishes": [
-    "krebs",
-    "keule",
-    "muschel"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "short",
-     "hair_color": "braun",
-     "gender": "m",
-     "skin": "hell"
-    },
-    "krebs": {
-     "kind": "mantis"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Das bunte Meerestier schwimmt am Meeresboden, während eine Zahl die Kugelgeschwindigkeit zeigt.",
-     "text": "Drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "drei"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "3 UNMÖGLICHE FAKTEN"
-     },
-     "image": "Drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Krebs holt Schwung und der Sprecher warnt vor dem Gefährlichsten.",
-     "text": "Und der letzte Fakt zerstört sogar Panzerglas.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs",
-      "keule"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "point",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "panzerglas"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GEFÄHRLICH",
-      "color": "red"
-     },
-     "image": "Und der letzte Fakt zerstört sogar Panzerglas.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Erster Fakt wird eingeblendet, der Krebs schlägt zu.",
-     "text": "Erstens: Sein Schlag ist so schnell wie eine Kugel aus einer Pistole.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "jump",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "pistole"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "FAKT EINS"
-     },
-     "image": "Erstens: Sein Schlag ist so schnell wie eine Kugel aus einer Pistole.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zähler zeigt die Beschleunigung der Fangschreckenkrebs-Keule.",
-     "text": "Seine Keulen beschleunigen in zwei Millisekunden auf achtzig Kilometer pro Stunde.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "none",
-     "graphic": {
-      "type": "number",
-      "kicker": "BESCHLEUNIGUNG",
-      "value": "80 KM/H",
-      "label": "IN 2 MILLISEKUNDEN"
-     },
-     "highlight": [
-      "achtzig"
-     ],
-     "overlay": null,
-     "image": "Seine Keulen beschleunigen in zwei Millisekunden auf achtzig Kilometer pro Stunde.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Krabbe wird vom Schlag völlig überrascht weggeschleudert.",
-     "text": "Das ist fünfzigmal schneller als ein menschlicher Wimpernschlag.",
-     "who": [
-      "du"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "muschel"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "pan_left",
-     "sfx": "whoosh",
-     "highlight": [
-      "fünfzigmal"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "GESCHWINDIGKEIT",
-      "value": 50,
-      "unit": "MAL SCHNELLER",
-      "sub": "ALS DEIN WIMPERNSCHLAG"
-     },
-     "image": "Das ist fünfzigmal schneller als ein menschlicher Wimpernschlag.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Balkendiagramm vergleicht die Beschleunigung mit einer echten Kugel.",
-     "text": "Da die Muskeln das nicht schaffen, nutzt er eine Art Sprungfeder-Mechanismus.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "think",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "sprungfeder"
-     ],
-     "overlay": null,
-     "image": "Da die Muskeln das nicht schaffen, nutzt er eine Art Sprungfeder-Mechanismus.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zweiter Fakt wird gezeigt: Explosion unter Wasser.",
-     "text": "Nummer zwei: Er lässt das Wasser wortwörtlich kochen.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "steam",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "shake",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "kochen"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": 4700
-     },
-     "image": "Nummer zwei: Er lässt das Wasser wortwörtlich kochen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Kleine Blasen entstehen durch die extreme Bewegung im Wasser.",
-     "text": "Durch den extremen Unterdruck entstehen kleine Dampfblasen.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "blase"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "insert",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "dampfblasen"
-     ],
-     "overlay": null,
-     "image": "Durch den extremen Unterdruck entstehen kleine Dampfblasen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Thermometer zeigt eine extrem hohe Temperatur kurz an.",
-     "text": "Wenn diese Blasen kollabieren, entstehen mehrere tausend Grad Celsius.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "graphic": {
-      "type": "number",
-      "kicker": "TEMPERATUR DER BLASE",
-      "value": "4.700 °C",
-      "label": "SO HEISS WIE DIE SONNENOBERFLÄCHE"
-     },
-     "highlight": [
-      "vierundsiebzighundert"
-     ],
-     "overlay": null,
-     "image": "Wenn diese Blasen kollabieren, entstehen mehrere tausend Grad Celsius.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Sonne wird kurz zum Vergleich mit der Blase eingeblendet.",
-     "text": "Das ist fast so heiß wie die Oberfläche der Sonne.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "sun"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "sonne"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "SONNENHITZE"
-     },
-     "image": "Das ist fast so heiß wie die Oberfläche der Sonne.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Krebs schaut frech und triumphiert über seine Beute.",
-     "text": "Selbst wenn er das Opfer verfehlt, tötet die Druckwelle der Blase.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs",
-      "muschel"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "druckwelle"
-     ],
-     "overlay": null,
-     "image": "Selbst wenn er das Opfer verfehlt, tötet die Druckwelle der Blase.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Bonuspunkte-Grafikschild kündigt Fakt drei an.",
-     "text": "Drittens: Seine Augen sind ein absoluter Cheat-Code.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "auge"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "augen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "FAKT DREI"
-     },
-     "image": "Drittens: Seine Augen sind ein absoluter Cheat-Code.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Menschliche Augen werden mit Krebsaugen im Duell verglichen.",
-     "text": "Menschen haben drei Farbrezeptoren im Auge.",
-     "who": [
-      "du"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "auge"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "drei"
-     ],
-     "overlay": {
-      "type": "compare",
-      "left": "MENSCH",
-      "right": "KREBS",
-      "value": "3",
-      "sub": "16"
-     },
-     "image": "Menschen haben drei Farbrezeptoren im Auge.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein riesiges Ziffernschild stellt die sechzehn Farbrezeptoren dar.",
-     "text": "Dieser Krebs besitzt sechzehn und sieht ultraviolettes sowie polarisiertes Licht.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "look_around",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "sechzehn"
-     ],
-     "overlay": null,
-     "image": "Dieser Krebs besitzt sechzehn und sieht ultraviolettes sowie polarisiertes Licht.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Tauchboot zerspringt symbolisch unter Wasser am Aquariumsglas.",
-     "text": "Er ist so stark, dass er sogar normales Aquarienglas zerschmettert.",
-     "who": [
-      "du"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "glasscheibe"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "zerschmettert"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "ZERSTÖRT",
-      "color": "red"
-     },
-     "image": "Er ist so stark, dass er sogar normales Aquarienglas zerschmettert.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Notizzettel mahnt vor dem Halten im Heimaquarium.",
-     "text": "Forscher müssen ihn deshalb in speziellen dickwandigen Plastikbecken halten.",
-     "who": [],
-     "place": "lab",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "barrel"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "graphic": {
-      "type": "badge",
-      "kicker": "WARNUNG",
-      "text": "PLASTIKBECKEN PFLICHT"
-     },
-     "highlight": [
-      "plastikbecken"
-     ],
-     "overlay": null,
-     "image": "Forscher müssen ihn deshalb in speziellen dickwandigen Plastikbecken halten.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Tier blickt starr in die Kamera, Keulen bereit zum Schlag.",
-     "text": "Ein Schlag auf deine Hand würde Knochen sofort brechen.",
-     "who": [
-      "du",
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "fall",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "right",
-       "speaks": false
-      },
-      {
-       "id": "krebs",
-       "action": "jump",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "knochen"
-     ],
-     "overlay": null,
-     "image": "Ein Schlag auf deine Hand würde Knochen sofort brechen.",
-     "who_desc": "; ",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Krebs schaut direkt auf den Betrachter und holt aus.",
-     "text": "Man nennt ihn nicht umsonst den stärksten Boxer der Meere.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "boxer"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "STÄRKSTER BOXER"
-     },
-     "image": "Man nennt ihn nicht umsonst den stärksten Boxer der Meere.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Krebs setzt zum finalen Schlag an, der nahtlos zum Start führt.",
-     "text": "Und hier kommen drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krebs"
-     ],
-     "actors": [
-      {
-       "id": "krebs",
-       "action": "jump",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "unmöglich"
-     ],
-     "overlay": null,
-     "image": "Und hier kommen drei Fakten über den Fangschreckenkrebs, die vollkommen unmöglich klingen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "pistole",
-   "sprungfeder"
-  ],
-  "title": "Fangschreckenkrebs: Der tödlichste Schlag im Tierreich",
-  "created": 1794680506.4394143
- },
  "2026-11-15 18:00": {
   "category": "comedy",
   "topic": "Ich wollte wie im Mittelalter leben und mein Haushalt hat mich verklagt: Die skurrilsten Lifehacks von 1348",
@@ -3052,5 +2252,759 @@
   ],
   "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
   "created": 1794767071.456929
+ },
+ "2026-11-16 18:00": {
+  "category": "fakten",
+  "topic": "5 faszinierende Dinge, die dein Gehirn tut, während du schläfst",
+  "trend": null,
+  "script": {
+   "title": "5 verrückte Dinge, die dein Gehirn nachts tut",
+   "description": "Dein Gehirn ist nachts aktiver als du denkst!\nVon Selbstreinigung bis Lähmung: Das passiert in deinem Kopf, während du schläfst.\nWas war dein verrücktestes Traum-Erlebnis?",
+   "hashtags": [
+    "#shorts",
+    "#gehirn",
+    "#schlaf",
+    "#fakten",
+    "#wissen",
+    "#unterhaltung",
+    "#viral"
+   ],
+   "tags": [
+    "gehirn im schlaf",
+    "schlaffakten",
+    "schlafparalyse",
+    "biologie fakten",
+    "psychologie fakten",
+    "was passiert im schlaf"
+   ],
+   "thumbnail": {
+    "image": "A dramatic cartoon brain wearing a tiny nightcap, washing itself with a sponge inside a human skull, glowing neon blue water, wide eyes, exaggerated humorous face, dark bedroom background",
+    "text": "GEHIRN REINIGT SICH"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "braun",
+     "gender": "w",
+     "skin": "hell"
+    },
+    "gehirn": {
+     "kind": "brain",
+     "speaks": false
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein schlafender Mensch im Bett, während ein kleines rosa Gehirn mit Nachtmütze daneben schwebt.",
+     "text": "Fünf verrückte Dinge, die dein Gehirn nachts heimlich tut.",
+     "image": "Fünf verrückte Dinge, die dein Gehirn nachts heimlich tut.",
+     "who": [
+      "du",
+      "gehirn"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Fünf verrückte"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "5 GEHIRN-FAKTEN"
+     },
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schrubbt sich selbst mit einem Schwamm sauber.",
+     "text": "Und Nummer fünf rettet dich jeden Tag vor dem absoluten Chaos.",
+     "image": "Und Nummer fünf rettet dich jeden Tag vor dem absoluten Chaos.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Nummer fünf"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "CLIFFHANGER"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Erstens: Eine Müllabfuhr-Grafik wäscht das Gehirn durch.",
+     "text": "Erstens: Dein Kopf wäscht sich buchstäblich selbst durch.",
+     "image": "Erstens: Dein Kopf wäscht sich buchstäblich selbst durch.",
+     "who": [],
+     "place": "lab",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "wäscht sich"
+     ],
+     "graphic": {
+      "type": "badge",
+      "kicker": "PUNKT 1",
+      "text": "GEHIRNWÄSCHE"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Flüssigkeit spült giftige Eiweiße aus dem Gehirn.",
+     "text": "Nachts pumpt das Gehirn Gehirnflüssigkeit durch die Zellen und spült Giftstoffe ab.",
+     "image": "Nachts pumpt das Gehirn Gehirnflüssigkeit durch die Zellen und spült Giftstoffe ab.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "faucet",
+      "glass"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "pan_up",
+     "sfx": "none",
+     "highlight": [
+      "Giftstoffe"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "PUTZAKTION"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zweitens: Eine Kalender-Grafik löscht unwichtige Erinnerungen.",
+     "text": "Zweitens: Es löscht unnötige Erinnerungen wie eine volle Festplatte.",
+     "image": "Zweitens: Es löscht unnötige Erinnerungen wie eine volle Festplatte.",
+     "who": [],
+     "place": "office",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "löscht"
+     ],
+     "graphic": {
+      "type": "number",
+      "kicker": "SPEICHERPLATZ",
+      "value": "100 GB",
+      "label": "GELÖSCHT"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schmeißt Blätter in einen Mülleimer.",
+     "text": "Was du mittags gegessen hast, fliegt raus, aber Vokabeln werden fest gespeichert.",
+     "image": "Was du mittags gegessen hast, fliegt raus, aber Vokabeln werden fest gespeichert.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "trash"
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "point",
+       "emotion": "",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "fest gespeichert"
+     ],
+     "overlay": {
+      "type": "checklist",
+      "title": "NIGHT SHIFT",
+      "items": [
+       [
+        "Mittagessen",
+        false
+       ],
+       [
+        "Vokabeln",
+        true
+       ]
+      ]
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Drittens: Eine Muskel-Grafik schaltet den Körper ab.",
+     "text": "Drittens: Es lähmt deinen gesamten Körper zu deinem eigenen Schutz.",
+     "image": "Drittens: Es lähmt deinen gesamten Körper zu deinem eigenen Schutz.",
+     "who": [],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "lähmt"
+     ],
+     "graphic": {
+      "type": "badge",
+      "kicker": "PUNKT 3",
+      "text": "SCHLAFPARALYSE"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Figur liegt starr im Bett und träumt vom Rennen.",
+     "text": "Damit du deine Träume nicht wirklich nachspielst und aus dem Bett fällst.",
+     "image": "Damit du deine Träume nicht wirklich nachspielst und aus dem Bett fällst.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "scared",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Träume"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GESPERRT",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du denkst, das Gehirn schläft auch? Falsch gedacht!",
+     "text": "Du denkst, dein Kopf ruht sich aus? Falsch, er läuft auf Hochtouren!",
+     "image": "Du denkst, dein Kopf ruht sich aus? Falsch, er läuft auf Hochtouren!",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "shake",
+     "sfx": "ding",
+     "highlight": [
+      "Falsch"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "IRRTUM!"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Chart-Grafik schießt steil nach oben.",
+     "text": "In der REM-Phase verbraucht dein Gehirn fast so viel Energie wie im Wachzustand.",
+     "image": "In der REM-Phase verbraucht dein Gehirn fast so viel Energie wie im Wachzustand.",
+     "who": [],
+     "place": "lab",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "REM-Phase"
+     ],
+     "graphic": {
+      "type": "chart",
+      "kicker": "GEHIRNAKTIVITÄT",
+      "value": "100 %",
+      "label": "HOCHTOUREN"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Viertens: Das Gehirn wächst und bildet neue Verbindungen.",
+     "text": "Viertens: Dein Gehirn wächst wortwörtlich im Schlaf.",
+     "image": "Viertens: Dein Gehirn wächst wortwörtlich im Schlaf.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "sprout"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "wächst"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "PUNKT 4"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Microchip-Symbol glüht auf.",
+     "text": "Es knüpft tausende neue Synapsen, damit du gelernte Dinge morgen besser kannst.",
+     "image": "Es knüpft tausende neue Synapsen, damit du gelernte Dinge morgen besser kannst.",
+     "who": [],
+     "place": "lab",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "mikrochip"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "insert",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Synapsen"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "NEUE SYNAPSEN",
+      "value": 10000,
+      "unit": "PRO NACHT"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Bleibt die Frage, was Punkt fünf eigentlich ist.",
+     "text": "Aber was passiert mit deinen Gefühlen nach einem richtig schlechten Tag?",
+     "image": "Aber was passiert mit deinen Gefühlen nach einem richtig schlechten Tag?",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "sad",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Gefühlen"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "REHOOK"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Fünftens: Das Gehirn sortiert Gefühle neu.",
+     "text": "Fünftens: Dein Kopf betreibt emotionale Therapie.",
+     "image": "Fünftens: Dein Kopf betreibt emotionale Therapie.",
+     "who": [],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Therapie"
+     ],
+     "graphic": {
+      "type": "badge",
+      "kicker": "PUNKT 5",
+      "text": "EMOTIONALER RESET"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Stresshormone sinken im Diagramm.",
+     "text": "Er baut Stresshormone ab, damit dich Probleme am nächsten Morgen weniger belasten.",
+     "image": "Er baut Stresshormone ab, damit dich Probleme am nächsten Morgen weniger belasten.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "lab",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Stresshormone"
+     ],
+     "overlay": {
+      "type": "bar",
+      "label": "STRESS",
+      "value": 12
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ohne Schlaf würde der Kopf komplett überkochen.",
+     "text": "Ohne diesen nächtlichen Hausputz würde dein Gehirn nach zwei Tagen überkochen.",
+     "image": "Ohne diesen nächtlichen Hausputz würde dein Gehirn nach zwei Tagen überkochen.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "überkochen"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "SYSTEMFEHLER",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Wecker klingelt laut im Zimmer.",
+     "text": "Das war also nicht einfach nur ein komischer Traum.",
+     "image": "Das war also nicht einfach nur ein komischer Traum.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "wecker"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "komischer Traum"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "FAZIT",
+      "text": "Schlaf ist Überleben"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Figur geht schlafen, um das Gehirn wieder arbeiten zu lassen.",
+     "text": "Geh lieber pünktlich ins Bett, schließlich warten da noch...",
+     "image": "Geh lieber pünktlich ins Bett, schließlich warten da noch...",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_out",
+     "sfx": "whoosh",
+     "highlight": [
+      "pünktlich ins Bett"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Schleife schließt sich zurück zum Anfang.",
+     "text": "Fünf verrückte Dinge, die dein Gehirn tut, während du tief schläfst.",
+     "image": "Fünf verrückte Dinge, die dein Gehirn tut, während du tief schläfst.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bedroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Fünf verrückte"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "festplatte",
+   "synapse",
+   "schwamm"
+  ],
+  "title": "5 verrückte Dinge, die dein Gehirn nachts tut",
+  "created": 1794824463.0611856
  }
 }
