@@ -1,5 +1,5 @@
 {
- "updated": 1794803882.7937546,
+ "updated": 1794805675.044341,
  "enough": true,
  "counted": 14,
  "total": 17,
@@ -36,19 +36,19 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1577,
-   "avg_likes": 38.0,
-   "like_rate": 2.41,
-   "avg_score": 2147
+   "avg_views": 1581,
+   "avg_likes": 37.0,
+   "like_rate": 2.34,
+   "avg_score": 2136
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1024,
+   "avg_views": 1021,
    "avg_likes": 30.5,
-   "like_rate": 2.98,
-   "avg_score": 1496
+   "like_rate": 2.99,
+   "avg_score": 1494
   }
  ],
  "weights": {
@@ -64,8 +64,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1616 Aufrufe, 3.15 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1024 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2427 zu 704 Punkte)."
+  "Schwächste Kategorie: 💡 Fakten (Ø 1021 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2426 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
