@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "auto | make | review_make | upload | discard | stats | trends | sounds"
+        description: "auto | make | review_make | upload | discard | stats | trends | sounds | reset | update"
         default: "make"
         type: string
       category:
@@ -152,6 +152,8 @@ jobs:
           git add docs/data/state.json docs/data/videos.json docs/data/stats.json docs/data/trends.json docs/thumbs tokens
           git add docs/data/wishes.json docs/data/shapes.json docs/data/plans.json docs/data/insights.json docs/data/scripts 2>/dev/null || true
           if [ "$IN_ACTION" = "sounds" ]; then git add assets/sfx music 2>/dev/null || true; fi
+          if [ "$IN_ACTION" = "reset" ]; then git add -A docs/data docs/thumbs tokens; fi
+          if [ "$IN_ACTION" = "update" ]; then git add -A engine assets music docs/data/shapes.json README.md; fi
           if git diff --cached --quiet; then echo "Nichts zu speichern"; exit 0; fi
           git commit -q -m "AutoShorts: $IN_ACTION"
           for i in 1 2 3 4 5; do

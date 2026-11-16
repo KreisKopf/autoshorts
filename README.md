@@ -59,6 +59,23 @@ Bis Google dein Projekt geprüft hat, landen API-Uploads auf **„Privat“** (F
 
 Bis TikTok die App geprüft hat, sind API-Uploads nur als **„Nur ich“** erlaubt. Alternative: Upload-Art **„Als Entwurf in die TikTok-App“**.
 
+## App an einen Freund weitergeben (eigener Kanal)
+
+Jeder Kanal braucht seine **eigene Kopie** dieses Repositorys – dort liegen Videos, Zahlen und Anmeldungen getrennt.
+
+1. Auf GitHub oben rechts **Fork** → eigene Kopie anlegen. In der Kopie unter **Actions** die Workflows einschalten.
+2. `AutoShorts.cmd` starten und beim Verbinden den **eigenen** GitHub-Schlüssel und die **eigene Kopie** eintragen.
+3. In der App **Einstellungen → Kopie dieses Kanals → Neu einrichten**: leert Video-Liste, Zahlen, Warteschlange, Drehbücher,
+   Vorschaubilder und Anmeldungen des Originals und vergibt ein eigenes **Kanal-Merkmal**. Das Original selbst lässt sich nie zurücksetzen.
+4. Eigenen Gemini-Schlüssel speichern und YouTube/TikTok wie oben beschrieben mit eigenen Google-/TikTok-Apps verbinden.
+5. Unter **Einstellungen → Kanal-Profil** Namen und Themen-Schwerpunkt eintragen.
+
+Damit entstehen andere Videos: eigene Themen-Liste, eigener Schwerpunkt, jede Woche andere Themen-Blickwinkel, eigene Hauptfigur
+und eine eigene Reihenfolge bei Melodien und Remix-Stilen der Musik-Kugel.
+
+**Updates:** Die App aktualisiert sich selbst. Den Motor holt die Kopie mit **Einstellungen → Kopie dieses Kanals → Motor aktualisieren**.
+Nicht „Sync fork“ auf GitHub benutzen – das brächte die Video-Daten des Originals mit.
+
 ## Später upgraden
 **Einstellungen → Skript & Stimme**: Skript und Stimme einzeln auf OpenAI oder ElevenLabs umstellen und den Schlüssel unter Zugangsdaten speichern. Die App zeigt die Kosten pro Video. Fällt ein bezahlter Dienst aus, nimmt der Motor automatisch den kostenlosen.
 

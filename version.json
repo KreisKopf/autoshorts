@@ -1,6 +1,6 @@
 {
-  "version": "1.9.0",
-  "file": "releases/AutoShorts-1.9.0.cmd",
-  "sha256": "453387cd376b3a49437e4f2037514d787ab5f881c4192b1fa1b237d0c5b2d07f",
-  "notes": "Musik-Kugel: eigene Lieder hochladen (Studio) – die Kugel springt auf die Töne und Beats im Refrain"
+  "version": "1.10.0",
+  "file": "releases/AutoShorts-1.10.0.cmd",
+  "sha256": "786384e76540f32a6a7bdddf83a40bc838ba56e528ccbc240eb44696cfe8350e",
+  "notes": "Kanal-Profil und App weitergeben: eigene Kopie neu einrichten, Motor aktualisieren, jeder Kanal bekommt andere Videos"
 }

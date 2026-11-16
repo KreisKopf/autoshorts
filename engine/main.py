@@ -18,7 +18,7 @@ from PIL import Image
 
 from . import ai, render, thumbnail, trends, uploaders, writer
 from .schedule import due_slot, plan_slot, review_slot, review_stale, stats_due
-from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, drop_token, log, save_all, video
+from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, channel_rand, channel_seed, drop_token, log, save_all, video
 
 RELEASE = "videos"
 
@@ -414,7 +414,11 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             log("Animiere Szenen …")
             if not script.get("cast"):
                 script["cast"] = {"du": {}}
-            script["cast"] = stage.balance_cast(script["cast"], v["id"], scenes)   # „du“ ist in jedem zweiten Video eine Frau
+            rnd_c = channel_rand("cast")                  # Kanal-Profil: jede Kopie hat ihre eigene Hauptfigur (Farben, Haare, Brille)
+            if rnd_c and isinstance(script["cast"].get("du"), dict) and not script["cast"]["du"].get("kind") and not script["cast"]["du"].get("shirt"):
+                script["cast"]["du"] = {**script["cast"]["du"], "shirt": rnd_c.choice(["rot", "grün", "gelb", "lila", "orange", "türkis", "pink", "blau"]),
+                                        "hair_color": rnd_c.choice(["schwarz", "braun", "blond", "rot"]), "glasses": rnd_c.random() < 0.3}
+            script["cast"] = stage.balance_cast(script["cast"], v["id"] + (sum(map(ord, channel_seed())) % 2 if channel_seed() else 0), scenes)   # „du“ ist in jedem zweiten Video eine Frau
             word_caps = str(cat.get("caption_style") or "") == "word"   # Motivation: das große Wort ist die Einblendung – keine Schilder, Karten, Grafiken
 
             def _no_overlays(graphics=True):
@@ -551,9 +555,11 @@ def make_bounce(cat, upload=True, force=None):
         STATE["bounce_src"] = "cc" if song else "remix"
         if not song:                                      # bekannte Melodie als moderner Remix (Stil im Wechsel)
             from . import remix
-            mel = bounce.pick_song(used)
+            mel = bounce.pick_song(used, channel_rand("songs", len(used)))
             last_st = STATE.get("bounce_styles", [])
-            style = sorted(remix.STYLES, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
+            styles = list(remix.STYLES)
+            (channel_rand("styles") or random).shuffle(styles)   # jede Kopie mischt die Stile anders
+            style = sorted(styles, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
             if not last_st or last_st[-1] != "pop":       # jedes zweite Video im Pop-Stil (kommt am besten an)
                 style = "pop"
             song = {"remix": mel, "style": style, "asset": mel}
@@ -738,6 +744,12 @@ def main(argv=None):
                 prepare(nxt)
         elif a.action == "learn":        # Gegenstände gezielt nachbauen lassen: --topic "Router, Mikroskop, Leiter"
             learn([w.strip() for w in a.topic.split(",") if w.strip()])
+        elif a.action == "reset":        # Kopie für einen anderen Kanal neu einrichten (--topic = Name der Kopie als Bestätigung)
+            from . import fresh
+            fresh.reset(a.topic)
+        elif a.action == "update":       # Kopie: neuesten Motor aus dem Original holen, eigene Daten bleiben
+            from . import fresh
+            fresh.update_engine()
         elif a.action == "trends":       # „Aktualisieren“ in der App: Trends und Kanal-Analyse sofort neu
             trends.refresh(force=True)
         else:

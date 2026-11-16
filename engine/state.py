@@ -125,6 +125,9 @@ PRESET_CATEGORIES = [
 
 
 DEFAULT_SETTINGS = {
+    "channel_name": "",             # Kanal-Profil: Name des Kanals (nur zur Übersicht)
+    "channel_focus": "",            # Kanal-Profil: Themen-Schwerpunkt, z. B. „Sport und Fitness“ oder „Essen und Kochen“
+    "channel_seed": "",             # Kanal-Merkmal: jede Kopie (Fork) mischt Themen, Figuren und Melodien anders (leer = Original)
     "autopilot": True,
     "upload_times": "18:00",
     "upload_via": "direct",         # direct = eigene Google-/TikTok-App · zernio = über den Dienst Zernio (ein API-Schlüssel)
@@ -201,6 +204,37 @@ def load(name, default):
         return json.loads(p.read_text(encoding="utf-8"))
     except (FileNotFoundError, json.JSONDecodeError):
         return json.loads(json.dumps(default))
+
+
+ANGLES = ("Alltag und Schule", "Essen und Trinken", "Sport und Körper", "Geld und Jobs", "Internet und Games", "Natur und Tiere",
+          "Weltall und Physik", "Geschichte und alte Kulturen", "Psychologie und Gefühle", "Städte und Reisen", "Technik und Erfindungen",
+          "Musik und Filme", "Gesundheit und Schlaf", "Rekorde und Extreme", "Verbrechen und Rätsel", "Meer und Wetter")
+
+
+def channel_seed():
+    return str((CONFIG.get("settings") or {}).get("channel_seed") or "").strip()
+
+
+def channel_rand(*salt):
+    """Zufall, der für diesen Kanal fest ist (anderes Kanal-Merkmal → andere Reihenfolge); None im Original ohne Merkmal."""
+    import random
+    seed = channel_seed()
+    return random.Random("|".join([seed] + [str(x) for x in salt])) if seed else None
+
+
+def channel_hint():
+    """Kanal-Profil für die Themenwahl: eigener Schwerpunkt und – je Kanal-Merkmal – eigene Blickwinkel, die wöchentlich wechseln.
+    So wählen zwei Kopien der App selbst bei denselben Trends andere Themen."""
+    st = CONFIG.get("settings") or {}
+    parts = []
+    if str(st.get("channel_focus") or "").strip():
+        parts.append(f"Schwerpunkt dieses Kanals: {str(st['channel_focus']).strip()[:200]}. Wähle Themen, die dazu passen.")
+    rnd = channel_rand("angles", time.strftime("%G-%V"))
+    if rnd:
+        a, b = rnd.sample(ANGLES, 2)
+        parts.append(f"Eigener Blickwinkel dieses Kanals diese Woche: bevorzugt Themen rund um „{a}“ oder „{b}“ "
+                     f"(Kanal-Merkmal {channel_seed()} – andere Kanäle mit derselben App wählen andere Themen).")
+    return ("\n" + "\n".join(parts) + "\n") if parts else ""
 
 
 def save(name, obj):

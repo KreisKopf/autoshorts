@@ -4,7 +4,7 @@ import os
 import re
 
 from . import ai, trends
-from .state import VIDEOS, cfg
+from .state import VIDEOS, cfg, channel_hint
 
 
 def audience():
@@ -635,6 +635,7 @@ def new_topic(cat: dict) -> str:
             "und bei dieser Zielgruppe auf TikTok funktioniert (Thema, über das man in der Bubble redet, oder das man sofort teilen will).\n"
             "Diese Themen gab es schon (nicht wiederholen, auch nicht sehr ähnlich):\n- "
             + ("\n- ".join(past) if past else "(noch keine)")
+            + channel_hint()
             + ("" if cat.get("topic_examples") else _insight(cat))   # eigenes Format: die Kanal-Hits (meist „Was wäre, wenn …“) würden es verbiegen
             + _niche(cat)
             + (("\nDas Thema MUSS genau in dieses Format passen. So sehen passende Themen aus (nur Beispiele, nicht wiederholen): "
@@ -670,7 +671,7 @@ def trend_topic(cat: dict):
             "die auch in ein paar Tagen noch stimmt. " + UNSUITABLE + "\n"
             "WICHTIG: Das Thema muss wirklich zur Kategorie passen (z. B. Tierwelt = ein echtes Tier steht im Mittelpunkt; "
             "Grusel = eine Gruselgeschichte). Passt kein Trend sauber, antworte mit {\"index\": null} – lieber kein Trend als ein unpassender. "
-            + _insight(cat).replace("\n", " ") +
+            + _insight(cat).replace("\n", " ") + channel_hint().replace("\n", " ") +
             "Marken, Spiele, Filme, Serien und Apps dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
             "dahinter (statt eines Spiels z. B. 'Warum wir Nostalgie lieben').\n"
             "Diese Themen gab es schon:\n- " + ("\n- ".join(past) if past else "(noch keine)") + "\n"

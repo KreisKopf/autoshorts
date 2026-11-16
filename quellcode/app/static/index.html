@@ -493,7 +493,7 @@ async function dispatch(inputs, label) {
 
 /* ═════════════════ Läufe auf GitHub ═════════════════ */
 let runTimer = null, wasActive = false;
-const RUNLABEL = {remake: "Video wird nachgebaut", make: "Video wird erstellt", upload: "Upload läuft", stats: "Zahlen werden geholt", trends: "Trends werden gesammelt", auto: "Autopilot läuft", disconnect: "Plattform wird getrennt"};
+const RUNLABEL = {reset: "Kanal wird neu eingerichtet", update: "Motor wird aktualisiert", remake: "Video wird nachgebaut", make: "Video wird erstellt", upload: "Upload läuft", stats: "Zahlen werden geholt", trends: "Trends werden gesammelt", auto: "Autopilot läuft", disconnect: "Plattform wird getrennt"};
 function runName(r) { if (r.event === "schedule") return "Autopilot"; const a = (r.display_title || "").trim().split(/\s+/)[0]; return RUNLABEL[a] || r.display_title || "Auftrag"; }
 /* Taktgeber: Solange die App läuft, stößt sie die Läufe selbst an – GitHubs eigener Zeitplan kommt oft Stunden zu spät.
    Im Vordergrund holt sie die Zahlen alle paar Minuten („live“), im Hintergrund weckt sie alle 15 Minuten den Autopiloten. */
@@ -1194,6 +1194,18 @@ function viewSettings() {
         <input type="password" autocomplete="off" id="sv_${n}" placeholder="${has ? "hinterlegt – zum Ändern neu eintragen" : "einfügen"}">
         <div class="inline">${has === true ? `<span class="chip good">✓</span>` : has === false ? `<span class="chip mute">fehlt</span>` : ""}${loc === false && has ? `<span class="chip warn" title="Für das Verbinden auf diesem PC noch einmal eintragen">PC</span>` : ""}<button class="btn sm primary" data-secret="${n}">Speichern</button></div></div>`; }).join("")}
     ${SECRETS === "err" ? `<p class="hint neg">Die App kann nicht sehen, welche Schlüssel hinterlegt sind: Dem GitHub-Zugangsschlüssel fehlt die Berechtigung „Secrets“.</p>` : ""}`)}
+  ${sec("kanal", I.spark, "Kanal-Profil", S_("channel_name") ? esc(S_("channel_name")) + (S_("channel_focus") ? " · " + esc(S_("channel_focus")) : "") : "Name, Themen-Schwerpunkt, eigenes Merkmal", S_("channel_seed") ? `<span class="chip good">eigenes Merkmal</span>` : "", `
+    <p class="hint">Nutzen mehrere Leute AutoShorts, sorgt das Kanal-Profil dafür, dass jeder Kanal andere Videos bekommt: eigener Themen-Schwerpunkt, eigene Hauptfigur, eigene Reihenfolge bei Melodien und Remix-Stilen und jede Woche andere Themen-Blickwinkel.</p>
+    ${fld("channel_name", "Kanal-Name", "Nur zur Übersicht in der App.", 'placeholder="z. B. Wissen in 60 Sekunden" maxlength="60"')}
+    <div class="row"><label for="f_channel_focus">Themen-Schwerpunkt<small>Worum es auf diesem Kanal vor allem gehen soll, z. B. „Sport und Fitness“, „Essen und Kochen“ oder „Geschichte“. Leer = alles.</small></label><textarea id="f_channel_focus" data-k="channel_focus" rows="2" maxlength="200">${esc(S_("channel_focus"))}</textarea></div>
+    <div class="row"><label>Kanal-Merkmal<small>${S_("channel_seed") ? "Wird beim „Neu einrichten“ vergeben. Damit mischt dieser Kanal Themen, Figuren und Melodien anders als alle anderen." : "Dein Original-Kanal braucht keins. Eine Kopie bekommt es beim „Neu einrichten“."}</small></label><div class="inline"><code>${esc(S_("channel_seed") || "–")}</code></div></div>`)}
+  ${(S.owner + "/" + S.repo).toLowerCase() === "quatratkopf/autoshorts" ? sec("teilen", I.gh, "App weitergeben", "So bekommt ein Freund seine eigene Kopie", "", `
+    <p class="hint">1. Dein Freund legt auf GitHub eine eigene Kopie an: <a href="https://github.com/${esc(S.owner)}/${esc(S.repo)}/fork" target="_blank" rel="noopener">Fork erstellen ↗</a> und schaltet in seiner Kopie unter „Actions“ die Workflows ein.<br>
+    2. Er startet AutoShorts.cmd und verbindet die App mit <b>seiner</b> Kopie (eigener GitHub-Schlüssel).<br>
+    3. In seiner App unter Einstellungen → „Kopie dieses Kanals“ auf <b>Neu einrichten</b> tippen: Deine Videos, Zahlen und Anmeldungen verschwinden aus seiner Kopie, und sie bekommt ein eigenes Kanal-Merkmal.<br>
+    4. Eigenen Gemini-Schlüssel, YouTube und TikTok verbinden (Anleitung in der README). Motor-Updates holt er später mit „Motor aktualisieren“ – nie mit „Sync fork“, das brächte deine Daten mit.</p>`) : sec("kopie", I.gh, "Kopie dieses Kanals", `${esc(S.owner)}/${esc(S.repo)} · eigene Kopie`, S_("channel_seed") ? '<span class="chip good">eingerichtet</span>' : '<span class="chip warn">noch nicht eingerichtet</span>', `
+    <div class="row"><label>Neu einrichten<small>Leert in dieser Kopie Video-Liste, Zahlen, Warteschlange, Drehbücher, Vorschaubilder und Anmeldungen und vergibt ein eigenes Kanal-Merkmal. Motor, Video-Arten und Klang-Bibliothek bleiben. Nur einmal am Anfang nötig.</small></label><button class="btn danger" id="freshBtn">Neu einrichten</button></div>
+    <div class="row"><label>Motor aktualisieren<small>Holt die neueste Engine aus dem Original (QuatratKopf/autoshorts). Deine Videos, Einstellungen und Anmeldungen bleiben. Nicht „Sync fork“ auf GitHub benutzen – das brächte fremde Video-Daten mit.</small></label><button class="btn" id="updEngine">Motor aktualisieren</button></div>`)}
   ${sec("github", I.gh, "GitHub", `${esc(S.owner)}/${esc(S.repo)}`, '<span class="chip good">verbunden</span>', `
     <div class="row"><label>Repository<small>Hier liegen Motor, Daten und fertige Videos.</small></label><div class="inline"><a class="btn" href="https://github.com/${esc(S.owner)}/${esc(S.repo)}" target="_blank" rel="noopener">Öffnen ↗</a></div></div>
     <div class="row"><label>Alle Läufe<small>Protokolle jedes Auftrags auf GitHub Actions.</small></label><div class="inline"><a class="btn" href="https://github.com/${esc(S.owner)}/${esc(S.repo)}/actions" target="_blank" rel="noopener">Ansehen ↗</a></div></div>
@@ -1253,6 +1265,13 @@ function viewSettings() {
     }
     catch (e) { toast(e.message, true); }
   });
+  if ($("#freshBtn")) $("#freshBtn").onclick = async () => {
+    const name = `${S.owner}/${S.repo}`;
+    const typed = prompt(`Wirklich neu einrichten? In ${name} werden Video-Liste, Zahlen, Warteschlange und Anmeldungen gelöscht.\n\nZum Bestätigen den Namen der Kopie eintippen:\n${name}`);
+    if ((typed || "").trim().toLowerCase() !== name.toLowerCase()) return toast("Abgebrochen – der Name stimmte nicht.", true);
+    if (await dispatch({action: "reset", topic: name}, "Kanal wird neu eingerichtet")) toast("Läuft auf GitHub – in etwa 2 Minuten ist die Kopie leer.");
+  };
+  if ($("#updEngine")) $("#updEngine").onclick = async () => { if (await dispatch({action: "update"}, "Motor wird aktualisiert")) toast("Läuft auf GitHub – dauert etwa 2 Minuten."); };
   $("#ghOut").onclick = () => armed($("#ghOut"), "Sicher? Nochmal tippen", async () => { await api("/api/github/logout", {}); S = await api("/api/state"); render(); });
   $("#updNow").onclick = async () => { const b = $("#updNow"); b.disabled = true;
     try { const u = await api("/api/update/check", {}); S.update = u; if (u.available) return runUpdate(); toast(u.error || "Du hast die neueste Version."); viewSettings(); }

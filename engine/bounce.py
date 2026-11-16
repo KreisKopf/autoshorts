@@ -761,10 +761,10 @@ def cc_track(used, work):
     raise RuntimeError("Kein passender freier Track gefunden")
 
 
-def pick_song(used):
-    """Melodie, die am längsten nicht dran war."""
+def pick_song(used, rnd=None):
+    """Melodie, die am längsten nicht dran war (rnd: Kanal-Zufall – jede Kopie der App spielt die Lieder in anderer Reihenfolge)."""
     order = list(SONGS)
-    random.shuffle(order)
+    (rnd or random).shuffle(order)
     return sorted(order, key=lambda s: used.index(s) if s in used else -1)[0]
 
 
