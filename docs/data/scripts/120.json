@@ -1,0 +1,529 @@
+{
+ "title": "Warum du bei Musik Gänsehaut bekommst",
+ "scenes": [
+  {
+   "text": "Warum Musik sofort diesen plötzlichen Schauer auf deiner Haut auslöst.",
+   "see": "Du stehst im Wohnzimmer und hörst Musik über Kopfhörer.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "GÄNSEHAUT"
+   }
+  },
+  {
+   "text": "Das passiert meistens, wenn dich ein Song musikalisch völlig überrascht.",
+   "see": "Ein Musiksymbol leuchtet auf.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Etwa wenn ein Song plötzlich viel lauter wird oder eine neue Stimme einsetzt.",
+   "see": "Du hörst im Wohnzimmer überrascht hin.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "DER DROP"
+   }
+  },
+  {
+   "text": "Genau in diesem Moment ziehen sich winzige Muskeln an jeder Haarwurzel blitzschnell zusammen.",
+   "see": "Eine Schaubild-Requisite zeigt Muskeln und Haare.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "touch",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du denkst, das ist nur Einbildung? Falsch, dadurch stellen sich deine Haare auf.",
+   "see": "Du fasst dir im Wohnzimmer an den Arm.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_haar"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "touch",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "HAARWURZELN"
+   }
+  },
+  {
+   "text": "Dieser Reflex ist ein echtes Erbe unserer behaarten Vorfahren aus dem Wald.",
+   "see": "Ein Vorfahre steht im Wald.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_ahne",
+     "kind": "chimp",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Früher hielt aufgestelltes Fell warm und ließ sie im Kampf viel größer wirken.",
+   "see": "Im Wald stürmen Bäume und Wind.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "wind",
+   "actors": [
+    {
+     "id": "_ahne",
+     "kind": "chimp",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "SCHUTZ"
+   }
+  },
+  {
+   "text": "Gesteuert wird das Ganze vom unwillkürlichen Nervensystem, genau wie bei Kälte.",
+   "see": "Du schauderst im Wohnzimmer leicht bei Kälte.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Hirnscans im Labor zeigen einen faszinierenden Einblick.",
+   "see": "Im Labor leuchten Bildschirme.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "IM LABOR"
+   }
+  },
+  {
+   "text": "Bei Musik-Gänsehaut schüttet das Gehirn den Botenstoff Dopamin aus.",
+   "see": "Das Gehirn leuchtet im Labor auf.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "herz"
+    },
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "smile",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das ist genau derselbe Botenstoff für Belohnung wie bei richtig gutem Essen.",
+   "see": "Ein leckerer Kuchen steht auf dem Tisch.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "kuchen"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "smile",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "GLÜCKSHORMON"
+   }
+  },
+  {
+   "text": "Schon in den Sekunden vor deiner Lieblingsstelle steigt der Spiegel im Kopf an.",
+   "see": "Du wartest gespannt im Wohnzimmer auf den Song.",
+   "place": "bathroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Weil dein Gehirn diese Stelle im Song bereits erwartet.",
+   "see": "Du lächelst im Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "smile",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Am Höhepunkt folgt dann der zweite gewaltige Schub.",
+   "see": "Musiknoten fliegen durch das Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "SCHUB"
+   }
+  },
+  {
+   "text": "Forscher vermuten, dass die Überraschung kurz wie ein kleiner Alarm wirkt.",
+   "see": "Ein Wecker klingelt kurz als Alarm.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "quote",
+    "title": "FORSCHER VERMUTEN",
+    "text": "…dass die Überraschung kurz wie ein kleiner Alarm wirkt."
+   }
+  },
+  {
+   "text": "Die Erleichterung danach fühlt sich super an, aber funktioniert das bei jeder Musikart?",
+   "see": "Du denkst im Wohnzimmer nach.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Das klappt bei traurigen Balladen genauso gut wie bei energiegeladener Musik.",
+   "see": "Du hörst traurige und laute Musik im Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "VIELFALT"
+   }
+  },
+  {
+   "text": "Bei Menschen mit Musik-Gänsehaut ist die Hörrinde dichter mit den Gefühlszentren verbunden.",
+   "see": "Im Labor zeigt das Gehirn vernetzte Bereiche.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Genau das macht deinen Lieblingssong jedes Mal aufs Neue so einzigartig.",
+   "see": "Du hörst deinen Lieblingssong im Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "smile",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "wear": "headphones"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "LIEBLINGSSONG"
+   }
+  }
+ ]
+}

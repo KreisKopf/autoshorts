@@ -4357,5 +4357,43 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 120,
+  "category": "fakten",
+  "topic": "Warum du bei Musik Gänsehaut bekommst – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und in dieser Reihenfolge erzählen: gleich nach dem Einstieg klar sagen, dass Gänsehaut bei Musik meist dann kommt, wenn der Song überrascht, etwa wenn er plötzlich lauter wird, eine neue Stimme einsetzt oder der Bass einsetzt; winzige Muskeln an jeder Haarwurzel ziehen sich zusammen und stellen das Haar auf; der Reflex ist ein Erbe behaarter Vorfahren, aufgestelltes Fell hielt warm und ließ sie größer wirken; gesteuert wird er vom unwillkürlichen Nervensystem, genau wie bei Kälte oder Schreck; Hirnscans zeigen, dass das Gehirn bei Musik-Gänsehaut Dopamin ausschüttet, den Botenstoff für Belohnung, wie bei gutem Essen; schon in den Sekunden vor der Lieblingsstelle steigt das Dopamin, weil das Gehirn die Stelle erwartet, am Höhepunkt folgt der zweite Schub; Forscher vermuten, dass die Überraschung kurz wie ein Alarm wirkt und die Erleichterung danach sich gut anfühlt; das klappt bei trauriger wie bei energiegeladener Musik; nicht jeder kennt das Gefühl, manche spüren es nie; bei Menschen mit Musik-Gänsehaut ist die Hörrinde dichter mit den Gefühlszentren verbunden. Orte nur Wohnzimmer, Labor und Wald. Nicht übertreiben: Musik löst keine Panik aus. Keine Zahlen, keine Jahreszahlen, keine Prozentangaben, keine halbe Sekunde, keine Ranglisten. Jeder Satz bringt etwas Neues; am Ende ein runder, vollständiger Abschlusssatz über den Lieblingssong. Titelbild-Text: GÄNSEHAUT DURCH MUSIK.",
+  "status": "rendered",
+  "created": 1794829933.9300168,
+  "title": "Warum du bei Musik Gänsehaut bekommst",
+  "description": "Erlebst du auch diesen plötzlichen Schauer bei deinem Lieblingssong?\nWir schauen uns an, was dabei im Körper passiert.\nHörst du eher traurige Balladen oder puren Bass?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#musik",
+   "#fakten",
+   "#psychologie",
+   "#wissen"
+  ],
+  "tags": [
+   "musik gänsehaut",
+   "gehirn dopamin",
+   "warum gänsehaut",
+   "musik psychologie",
+   "song überraschung",
+   "körperreaktionen"
+  ],
+  "thumb_text": "GÄNSEHAUT DURCH MUSIK",
+  "missing": null,
+  "cover_ms": 79619,
+  "duration": 79.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
