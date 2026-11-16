@@ -1,5 +1,5 @@
 {
- "updated": 1794868328.8521438,
+ "updated": 1794870335.0060828,
  "enough": true,
  "counted": 17,
  "total": 20,
@@ -36,19 +36,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1664,
-   "avg_likes": 42.5,
-   "like_rate": 2.55,
-   "avg_score": 2301
+   "avg_views": 1665,
+   "avg_likes": 42.0,
+   "like_rate": 2.52,
+   "avg_score": 2295
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1649,
+   "avg_views": 1651,
    "avg_likes": 12.0,
    "like_rate": 0.73,
-   "avg_score": 1919
+   "avg_score": 1921
   },
   {
    "slug": "tiere",
@@ -83,7 +83,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2393 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2392 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
