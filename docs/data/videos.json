@@ -4184,5 +4184,47 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 116,
+  "category": "motivation",
+  "topic": "Du bist nicht müde, du hast nur dein Ziel vergessen.",
+  "status": "rendered",
+  "created": 1794786947.156164,
+  "title": "Du bist nicht müde: Hol dir deine Energie zurück!",
+  "description": "Du bist nicht müde, du hast nur deine Vision verloren.\nErfahre, wie du sofort deine Motivation zurückholst und Ausreden löschst.\nWelches Ziel gehst du heute an: Sport oder Lernen?",
+  "hashtags": [
+   "#shorts",
+   "#motivation",
+   "#mindset",
+   "#fokus",
+   "#erfolg",
+   "#tatsachen",
+   "#disziplin",
+   "#unternehmer"
+  ],
+  "tags": [
+   "motivation deutsch",
+   "fokus halten",
+   "keine ausreden",
+   "müdigkeit überwinden",
+   "ziele erreichen",
+   "erfolg mindset",
+   "disziplin aufbauen"
+  ],
+  "thumb_text": "SCHLUSS MIT AUSREDEN",
+  "missing": [
+   "kompass"
+  ],
+  "cover_ms": 82391,
+  "duration": 82.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

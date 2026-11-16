@@ -427,5 +427,13 @@
  "musik": {
   "n": 1,
   "last": "Dein Algorithmus weiß mehr über deine Träume als du selbst"
+ },
+ "kompass": {
+  "n": 1,
+  "last": "Du bist nicht müde: Hol dir deine Energie zurück!"
+ },
+ "wecker": {
+  "n": 1,
+  "last": "Du bist nicht müde: Hol dir deine Energie zurück!"
  }
 }
