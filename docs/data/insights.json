@@ -1,7 +1,7 @@
 {
- "updated": 1794926798.7131658,
+ "updated": 1794929229.0019846,
  "enough": true,
- "counted": 19,
+ "counted": 20,
  "total": 21,
  "needed": 6,
  "categories": [
@@ -27,10 +27,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1726,
-   "avg_likes": 43.5,
-   "like_rate": 2.52,
-   "avg_score": 2379
+   "avg_views": 1732,
+   "avg_likes": 43.0,
+   "like_rate": 2.48,
+   "avg_score": 2376
   },
   {
    "slug": "whatif",
@@ -44,37 +44,37 @@
   {
    "slug": "fakten",
    "name": "💡 Fakten",
-   "n": 4,
-   "avg_views": 1457,
-   "avg_likes": 42.8,
-   "like_rate": 2.93,
-   "avg_score": 2106
+   "n": 5,
+   "avg_views": 1470,
+   "avg_likes": 40.6,
+   "like_rate": 2.76,
+   "avg_score": 2085
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1733,
+   "avg_views": 1735,
    "avg_likes": 12.0,
    "like_rate": 0.69,
-   "avg_score": 2003
+   "avg_score": 2005
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1487,
+   "avg_views": 1489,
    "avg_likes": 27.0,
-   "like_rate": 1.82,
-   "avg_score": 1922
+   "like_rate": 1.81,
+   "avg_score": 1924
   }
  ],
  "weights": {
-  "fakten": 0.93,
+  "fakten": 0.92,
   "storys": 1.08,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.03,
+  "whatif": 1.04,
   "comedy": 1.05,
   "musik": 1.2,
   "vergleich": 1.2,
@@ -82,8 +82,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1487 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2453 zu 705 Punkte)."
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1489 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2428 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -122,21 +122,21 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1858,
+   "views": 1859,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2863
+   "score": 2864
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2120,
+   "views": 2119,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2810
+   "score": 2809
   }
  ],
  "flop": [

@@ -1,1508 +1,4 @@
 {
- "2026-11-16 13:00": {
-  "category": "fakten",
-  "topic": "Warum du Gänsehaut bekommst, wenn dein Lieblingssong droppt: Was dein Gehirn in genau 0,5 Sekunden mit Dopamin anstellt",
-  "trend": null,
-  "script": {
-   "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
-   "description": "Warum kriegst du bei Musik Gänsehaut?\nDein Gehirn schüttet Dopamin aus.\nHörst du Lieder lieber laut?",
-   "hashtags": [
-    "#shorts",
-    "#musik",
-    "#wissenschaft",
-    "#fakten",
-    "#gehirn",
-    "#dopamin",
-    "#fyp",
-    "#viral"
-   ],
-   "tags": [
-    "gänsehaut musik",
-    "dopamin gehirn",
-    "warum gänsehaut bei musik",
-    "bass drop gehirn",
-    "musik fakten",
-    "psychologie musik",
-    "gehirn dopamin kick",
-    "musik im kopf"
-   ],
-   "thumbnail": {
-    "image": "Close-up cartoon shot of a young person wearing large glowing headphones with eyes wide in utter disbelief and bliss, tiny dopamine icons floating around the head, bright background with music soundwaves, highly detailed visual narrative",
-    "text": "DOPAMIN-EXPLOSION IM GEHIRN"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "lila",
-     "hat": "",
-     "hair": "ponytail",
-     "hair_color": "blond",
-     "gender": "w",
-     "skin": "weiß"
-    },
-    "gehirn": {
-     "kind": "brain"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein Mädchen mit Kopfhörern lauscht gespannt der Musik in ihrem Zimmer.",
-     "text": "Dein Gehirn löst deine Musik-Gänsehaut in nur einer halben Sekunde aus.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Gänsehaut"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "MUSIK-KICK"
-     },
-     "image": "Dein Gehirn löst deine Musik-Gänsehaut in nur einer halben Sekunde aus.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn taucht als Figur auf und rechnet aufmerksam mit einer Stoppuhr.",
-     "text": "Und das Erstaunliche passiert bereits kurz vor dem eigentlichen Bassdrop.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true,
-       "hold": "clock"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Gehirn"
-     ],
-     "overlay": null,
-     "image": "Und das Erstaunliche passiert bereits kurz vor dem eigentlichen Bassdrop.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen wartet gespannt auf den Beat und schaut auf den Lautsprecher.",
-     "text": "Schon eine halbe Sekunde vor dem Bassdrop passiert etwas völlig Verrücktes im Kopf.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "Bassdrop"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "0,5 SEKUNDEN"
-     },
-     "image": "Schon eine halbe Sekunde vor dem Bassdrop passiert etwas völlig Verrücktes im Kopf.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Puls-Grafik zeigt die Vorfreude des Gehirns in einer Sekunde.",
-     "text": "Messungen zeigen, dass das Belohnungszentrum schon in der Erwartung komplett hochfährt.",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "0,5",
-      "label": "SEKUNDEN VOR DEM DROP"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Erwartung"
-     ],
-     "overlay": null,
-     "image": "Messungen zeigen, dass das Belohnungszentrum schon in der Erwartung komplett hochfährt.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn feuert im Labor freudig Neurotransmitter wie ein DJ ab.",
-     "text": "Dein Körper schüttet Dopamin aus, aber betrifft das wirklich jede Musikrichtung?",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "pop",
-     "highlight": [
-      "Dopamin"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "DOPAMIN-SPIEGEL",
-      "value": 200,
-      "unit": "GEHIRN",
-      "sub": "MAXIMALER KICK"
-     },
-     "image": "Dein Körper schüttet Dopamin aus, aber betrifft das wirklich jede Musikrichtung?",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen zuckt zusammen und spürt ein Kribbeln am Arm.",
-     "text": "Du denkst vielleicht, dass nur traurige Lieder diesen Gänsehaut-Effekt bei dir auslösen.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "traurige Lieder"
-     ],
-     "overlay": null,
-     "image": "Du denkst vielleicht, dass nur traurige Lieder diesen Gänsehaut-Effekt bei dir auslösen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Stempel zeigt, dass diese Vermutung völlig falsch ist.",
-     "text": "Falsch, denn extrem energetische Beats erzeugen im Gehirn exakt dieselbe biochemische Reaktion.",
-     "who": [],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Falsch"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FALSCH",
-      "color": "red"
-     },
-     "image": "Falsch, denn extrem energetische Beats erzeugen im Gehirn exakt dieselbe biochemische Reaktion.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn steht verdutzt vor einem Diagramm zum Stresshormon.",
-     "text": "Aber warum zieht sich deine Haut dann eigentlich so zusammen wie bei Frost?",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Frost"
-     ],
-     "overlay": null,
-     "image": "Aber warum zieht sich deine Haut dann eigentlich so zusammen wie bei Frost?",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik-Frage nach der echten Ursache im Muskelgewebe.",
-     "text": "Es ist ein uralter Überlebensreflex aus der Steinzeit gegen plötzliche Gefahren.",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "question",
-      "text": "ÜBERLEBENSREFLEX?"
-     },
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Überlebensreflex"
-     ],
-     "overlay": null,
-     "image": "Es ist ein uralter Überlebensreflex aus der Steinzeit gegen plötzliche Gefahren.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen zittert wie bei Kälte im Zimmer und schaut entsetzt.",
-     "text": "Wenn die Musik sich überraschend verändert, meldet dein Nervensystem ganz kurz ein Bedrohungssignal.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "whoosh",
-     "highlight": [
-      "Bedrohungssignal"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "ALARM-SIGNAL"
-     },
-     "image": "Wenn die Musik sich überraschend verändert, meldet dein Nervensystem ganz kurz ein Bedrohungssignal.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Notiz zeigt die Regel zum Muskelkrampf der Haarbalgmuskeln.",
-     "text": "Winzige Muskeln an deinen Haarwurzeln spannen sich schlagartig an, doch was schaltet das Signal ab?",
-     "who": [],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Haarwurzeln"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "MUSKEL-REFLEX",
-      "text": "Haarbalgmuskeln spannen sich extrem an"
-     },
-     "image": "Winzige Muskeln an deinen Haarwurzeln spannen sich schlagartig an, doch was schaltet das Signal ab?",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn lacht aufgeregt und winkt Entwarnung im Labor.",
-     "text": "Doch direkt danach erkennt dein Denkorgan, dass gar keine reale Gefahr droht.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_out",
-     "sfx": "pop",
-     "highlight": [
-      "keine Gefahr"
-     ],
-     "overlay": null,
-     "image": "Doch direkt danach erkennt dein Denkorgan, dass gar keine reale Gefahr droht.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Vergleichs-Balken zeigen die Messung von Musik-Gänsehaut im Vergleich zu Essen.",
-     "text": "Dieser schnelle Wechsel von Schreck zu Sicherheit löst die Dopamin-Explosion aus, aber trifft das jeden?",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "graphic",
-     "graphic": {
-      "type": "compare",
-      "left": "ESSEN",
-      "right": "MUSIK-DROP",
-      "value": "50%",
-      "sub": "SCHRECK"
-     },
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Dopamin-Explosion"
-     ],
-     "overlay": null,
-     "image": "Dieser schnelle Wechsel von Schreck zu Sicherheit löst die Dopamin-Explosion aus, aber trifft das jeden?",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen tanzt begeistert durch ihr Zimmer mit aufgedrehtem Handy.",
-     "text": "Ein echter Lieblingssong aktiviert dein Gehirn genau wie gutes Essen oder Achterbahnfahren.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Achterbahnfahren"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "REINES GLÜCK"
-     },
-     "image": "Ein echter Lieblingssong aktiviert dein Gehirn genau wie gutes Essen oder Achterbahnfahren.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Podest zeigt die Körperstellen, die am meisten Gänsehaut bekommen.",
-     "text": "Nicht jeder Mensch spürt dieses Gefühl gleich stark, doch woran liegt dieser individuelle Unterschied?",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "podium",
-      "kicker": "KÖRPER",
-      "text": "ARME",
-      "left": "NACKEN",
-      "right": "RÜCKEN"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "fünfzig Prozent"
-     ],
-     "overlay": null,
-     "image": "Nicht jeder Mensch spürt dieses Gefühl gleich stark, doch woran liegt dieser individuelle Unterschied?",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn präsentiert stolz eine Erfolgs-Plakette für besondere Vernetzung.",
-     "text": "Wer dieses Kribbeln kennt, besitzt nachweislich dichtere Nervenverbindungen im Gehirn.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Nervenverbindungen"
-     ],
-     "overlay": {
-      "type": "badge",
-      "kicker": "VIP-GEHIRN",
-      "text": "DICHTERE NERVEN"
-     },
-     "image": "Wer dieses Kribbeln kennt, besitzt nachweislich dichtere Nervenverbindungen im Gehirn.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen zeigt auf ihre Arme und schüttelt ungläubig den Kopf.",
-     "text": "Das bedeutet, dass deine Hörrinde extrem stark mit deinen Emotionen verknüpft ist.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Emotionen"
-     ],
-     "overlay": null,
-     "image": "Das bedeutet, dass deine Hörrinde extrem stark mit deinen Emotionen verknüpft ist.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn schaltet zufrieden die Musik-Anlage im Labor an.",
-     "text": "Du erlebst Töne also buchstäblich intensiver als viele andere Menschen.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "intensiver"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "SUPER-HÖRER"
-     },
-     "image": "Du erlebst Töne also buchstäblich intensiver als viele andere Menschen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen drückt wieder auf Play am Handy und macht sich für den nächsten Kick bereit.",
-     "text": "Und genau aus diesem Grund passiert das jedes Mal wieder, sobald...",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "jedes Mal"
-     ],
-     "overlay": null,
-     "image": "Und genau aus diesem Grund passiert das jedes Mal wieder, sobald...",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "kopfhörer",
-   "bassbox",
-   "muskel",
-   "achterbahn"
-  ],
-  "title": "Warum du bei Musik Gänsehaut bekommst: Die 0,5-Sekunden-Dopamin-Falle",
-  "created": 1794767071.456929
- },
- "2026-11-16 18:00": {
-  "category": "fakten",
-  "topic": "5 faszinierende Dinge, die dein Gehirn tut, während du schläfst",
-  "trend": null,
-  "script": {
-   "title": "5 verrückte Dinge, die dein Gehirn nachts tut",
-   "description": "Dein Gehirn ist nachts aktiver als du denkst!\nVon Selbstreinigung bis Lähmung: Das passiert in deinem Kopf, während du schläfst.\nWas war dein verrücktestes Traum-Erlebnis?",
-   "hashtags": [
-    "#shorts",
-    "#gehirn",
-    "#schlaf",
-    "#fakten",
-    "#wissen",
-    "#unterhaltung",
-    "#viral"
-   ],
-   "tags": [
-    "gehirn im schlaf",
-    "schlaffakten",
-    "schlafparalyse",
-    "biologie fakten",
-    "psychologie fakten",
-    "was passiert im schlaf"
-   ],
-   "thumbnail": {
-    "image": "A dramatic cartoon brain wearing a tiny nightcap, washing itself with a sponge inside a human skull, glowing neon blue water, wide eyes, exaggerated humorous face, dark bedroom background",
-    "text": "GEHIRN REINIGT SICH"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "curly",
-     "hair_color": "braun",
-     "gender": "w",
-     "skin": "hell"
-    },
-    "gehirn": {
-     "kind": "brain",
-     "speaks": false
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein schlafender Mensch im Bett, während ein kleines rosa Gehirn mit Nachtmütze daneben schwebt.",
-     "text": "Fünf verrückte Dinge, die dein Gehirn nachts heimlich tut.",
-     "image": "Fünf verrückte Dinge, die dein Gehirn nachts heimlich tut.",
-     "who": [
-      "du",
-      "gehirn"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sleep",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Fünf verrückte"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "5 GEHIRN-FAKTEN"
-     },
-     "who_desc": "; ",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn schrubbt sich selbst mit einem Schwamm sauber.",
-     "text": "Und Nummer fünf rettet dich jeden Tag vor dem absoluten Chaos.",
-     "image": "Und Nummer fünf rettet dich jeden Tag vor dem absoluten Chaos.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Nummer fünf"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "CLIFFHANGER"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Erstens: Eine Müllabfuhr-Grafik wäscht das Gehirn durch.",
-     "text": "Erstens: Dein Kopf wäscht sich buchstäblich selbst durch.",
-     "image": "Erstens: Dein Kopf wäscht sich buchstäblich selbst durch.",
-     "who": [],
-     "place": "lab",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "wäscht sich"
-     ],
-     "graphic": {
-      "type": "badge",
-      "kicker": "PUNKT 1",
-      "text": "GEHIRNWÄSCHE"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Flüssigkeit spült giftige Eiweiße aus dem Gehirn.",
-     "text": "Nachts pumpt das Gehirn Gehirnflüssigkeit durch die Zellen und spült Giftstoffe ab.",
-     "image": "Nachts pumpt das Gehirn Gehirnflüssigkeit durch die Zellen und spült Giftstoffe ab.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "faucet",
-      "glass"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "pan_up",
-     "sfx": "none",
-     "highlight": [
-      "Giftstoffe"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "PUTZAKTION"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zweitens: Eine Kalender-Grafik löscht unwichtige Erinnerungen.",
-     "text": "Zweitens: Es löscht unnötige Erinnerungen wie eine volle Festplatte.",
-     "image": "Zweitens: Es löscht unnötige Erinnerungen wie eine volle Festplatte.",
-     "who": [],
-     "place": "office",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "löscht"
-     ],
-     "graphic": {
-      "type": "number",
-      "kicker": "SPEICHERPLATZ",
-      "value": "100 GB",
-      "label": "GELÖSCHT"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn schmeißt Blätter in einen Mülleimer.",
-     "text": "Was du mittags gegessen hast, fliegt raus, aber Vokabeln werden fest gespeichert.",
-     "image": "Was du mittags gegessen hast, fliegt raus, aber Vokabeln werden fest gespeichert.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "trash"
-     ],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "point",
-       "emotion": "",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "fest gespeichert"
-     ],
-     "overlay": {
-      "type": "checklist",
-      "title": "NIGHT SHIFT",
-      "items": [
-       [
-        "Mittagessen",
-        false
-       ],
-       [
-        "Vokabeln",
-        true
-       ]
-      ]
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Drittens: Eine Muskel-Grafik schaltet den Körper ab.",
-     "text": "Drittens: Es lähmt deinen gesamten Körper zu deinem eigenen Schutz.",
-     "image": "Drittens: Es lähmt deinen gesamten Körper zu deinem eigenen Schutz.",
-     "who": [],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "lähmt"
-     ],
-     "graphic": {
-      "type": "badge",
-      "kicker": "PUNKT 3",
-      "text": "SCHLAFPARALYSE"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Figur liegt starr im Bett und träumt vom Rennen.",
-     "text": "Damit du deine Träume nicht wirklich nachspielst und aus dem Bett fällst.",
-     "image": "Damit du deine Träume nicht wirklich nachspielst und aus dem Bett fällst.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sleep",
-       "emotion": "scared",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Träume"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GESPERRT",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du denkst, das Gehirn schläft auch? Falsch gedacht!",
-     "text": "Du denkst, dein Kopf ruht sich aus? Falsch, er läuft auf Hochtouren!",
-     "image": "Du denkst, dein Kopf ruht sich aus? Falsch, er läuft auf Hochtouren!",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "shake",
-     "sfx": "ding",
-     "highlight": [
-      "Falsch"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "IRRTUM!"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Chart-Grafik schießt steil nach oben.",
-     "text": "In der REM-Phase verbraucht dein Gehirn fast so viel Energie wie im Wachzustand.",
-     "image": "In der REM-Phase verbraucht dein Gehirn fast so viel Energie wie im Wachzustand.",
-     "who": [],
-     "place": "lab",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "REM-Phase"
-     ],
-     "graphic": {
-      "type": "chart",
-      "kicker": "GEHIRNAKTIVITÄT",
-      "value": "100 %",
-      "label": "HOCHTOUREN"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Viertens: Das Gehirn wächst und bildet neue Verbindungen.",
-     "text": "Viertens: Dein Gehirn wächst wortwörtlich im Schlaf.",
-     "image": "Viertens: Dein Gehirn wächst wortwörtlich im Schlaf.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "sprout"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "wächst"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "PUNKT 4"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Microchip-Symbol glüht auf.",
-     "text": "Es knüpft tausende neue Synapsen, damit du gelernte Dinge morgen besser kannst.",
-     "image": "Es knüpft tausende neue Synapsen, damit du gelernte Dinge morgen besser kannst.",
-     "who": [],
-     "place": "lab",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "mikrochip"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "insert",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Synapsen"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "NEUE SYNAPSEN",
-      "value": 10000,
-      "unit": "PRO NACHT"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Bleibt die Frage, was Punkt fünf eigentlich ist.",
-     "text": "Aber was passiert mit deinen Gefühlen nach einem richtig schlechten Tag?",
-     "image": "Aber was passiert mit deinen Gefühlen nach einem richtig schlechten Tag?",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "sad",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Gefühlen"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "REHOOK"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Fünftens: Das Gehirn sortiert Gefühle neu.",
-     "text": "Fünftens: Dein Kopf betreibt emotionale Therapie.",
-     "image": "Fünftens: Dein Kopf betreibt emotionale Therapie.",
-     "who": [],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Therapie"
-     ],
-     "graphic": {
-      "type": "badge",
-      "kicker": "PUNKT 5",
-      "text": "EMOTIONALER RESET"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Stresshormone sinken im Diagramm.",
-     "text": "Er baut Stresshormone ab, damit dich Probleme am nächsten Morgen weniger belasten.",
-     "image": "Er baut Stresshormone ab, damit dich Probleme am nächsten Morgen weniger belasten.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Stresshormone"
-     ],
-     "overlay": {
-      "type": "bar",
-      "label": "STRESS",
-      "value": 12
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ohne Schlaf würde der Kopf komplett überkochen.",
-     "text": "Ohne diesen nächtlichen Hausputz würde dein Gehirn nach zwei Tagen überkochen.",
-     "image": "Ohne diesen nächtlichen Hausputz würde dein Gehirn nach zwei Tagen überkochen.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "überkochen"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "SYSTEMFEHLER",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Wecker klingelt laut im Zimmer.",
-     "text": "Das war also nicht einfach nur ein komischer Traum.",
-     "image": "Das war also nicht einfach nur ein komischer Traum.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "wecker"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "komischer Traum"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "FAZIT",
-      "text": "Schlaf ist Überleben"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Figur geht schlafen, um das Gehirn wieder arbeiten zu lassen.",
-     "text": "Geh lieber pünktlich ins Bett, schließlich warten da noch...",
-     "image": "Geh lieber pünktlich ins Bett, schließlich warten da noch...",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sleep",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_out",
-     "sfx": "whoosh",
-     "highlight": [
-      "pünktlich ins Bett"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Schleife schließt sich zurück zum Anfang.",
-     "text": "Fünf verrückte Dinge, die dein Gehirn tut, während du tief schläfst.",
-     "image": "Fünf verrückte Dinge, die dein Gehirn tut, während du tief schläfst.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bedroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Fünf verrückte"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "festplatte",
-   "synapse",
-   "schwamm"
-  ],
-  "title": "5 verrückte Dinge, die dein Gehirn nachts tut",
-  "created": 1794824463.0611856
- },
  "2026-11-16 21:00": {
   "category": "fakten",
   "topic": "Was passiert im Körper, wenn du plötzlich erschrickst?",
@@ -2886,5 +1382,722 @@
   "needs": [],
   "created": 1794911783.5982518,
   "special": "bounce"
+ },
+ "2026-11-17 21:00": {
+  "category": "tiere",
+  "topic": "Warum dieses winzige Tier gefährlicher ist als ein Löwe",
+  "trend": null,
+  "script": {
+   "title": "Dieses winzige Tier ist gefährlicher als ein Löwe",
+   "description": "Kennst du das winzige Tier, das extrem widerstandsfähig ist?\nEs überlebt im Vakuum des Weltalls und hält extreme Hitze aus.\nWürdest du es freiwillig in deinem Zimmer halten?",
+   "hashtags": [
+    "#shorts",
+    "#fyp",
+    "#viral",
+    "#tierfakten",
+    "#wissen",
+    "#biologie",
+    "#bärtierchen",
+    "#fakt"
+   ],
+   "tags": [
+    "bärtierchen",
+    "tierfakten",
+    "weltall",
+    "wissenschaft",
+    "tiere",
+    "gefährlich",
+    "unzerstörbar",
+    "biologie",
+    "mikroskopisch",
+    "tardigrade"
+   ],
+   "thumbnail": {
+    "place": "underwater",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "tardigrade"
+    ],
+    "weather": "",
+    "image": "Close-up of a tiny cute water bear under a glowing microscope lens, dark background, exaggerated shocked expression, bright blue and orange contrast",
+    "text": "GEFÄHRLICHER ALS LÖWEN"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grün",
+     "hat": "",
+     "hair": "short",
+     "gender": "w",
+     "hair_color": "braun",
+     "skin": "hell"
+    },
+    "tier": {
+     "kind": "tardigrade"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Dieses winzige Tier ist tödlicher als ein ganzer Löwe.",
+     "image": "A small cute tardigrade standing proudly next to a massive cartoon lion in a laboratory setting",
+     "who": [
+      "tier"
+     ],
+     "place": "savannah",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "winzige Tier"
+     ],
+     "overlay": null,
+     "see": "Ein Löwe brüllt in der Savanne, daneben ein winziges Bärtierchen im Gras.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "dry",
+      "elements": [
+       "grass"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das Bärtierchen ist gerade mal einen halben Millimeter groß.",
+     "image": "Microscopic view of a tiny water bear holding a small ruler showing zero point five millimeters",
+     "who": [
+      "tier"
+     ],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "halben Millimeter"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "0,5 MM"
+     },
+     "see": "Ein Bärtierchen unter dem Mikroskop im Labor.",
+     "time": "day",
+     "props": [
+      "tardigrade",
+      "mikroskop"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du kannst es mit bloßem Auge kaum sehen, doch es steckt voller Superkräfte.",
+     "image": "A person squinting through a large glass magnifying glass at a tiny moving dot on a desk",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Superkräfte"
+     ],
+     "overlay": null,
+     "see": "Eine Person versucht vergeblich, ein winziges Bärtierchen mit einer Lupe zu finden.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "trees"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wenn es brenzlig wird, rollt es sich ein und trocknet komplett aus.",
+     "image": "The tardigrade curling into a tight round ball and glowing slightly as water drops evaporate",
+     "who": [
+      "tier"
+     ],
+     "place": "forest",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "trocknet komplett aus"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "TONNENSTADIUM"
+     },
+     "see": "Ein Bärtierchen rollt sich auf einem Moosblatt zusammen und trocknet aus.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "soil",
+      "elements": [
+       "forest",
+       "trees"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "tardigrade",
+      "salbeiblatt"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "In diesem sogenannten Tonnenzustand fährt es seinen Stoffwechsel auf null herunter.",
+     "image": "A tiny barrel-shaped organism resting peacefully inside a dry moss leaf under warm lab lights",
+     "who": [
+      "tier"
+     ],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Stoffwechsel"
+     ],
+     "overlay": null,
+     "see": "Das Bärtierchen als winzige Tonne im Labor.",
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Es braucht weder Wasser noch Sauerstoff und wartet einfach auf bessere Zeiten.",
+     "image": "A digital clock showing zero next to the dormant tiny animal while dust particles float",
+     "who": [
+      "tier"
+     ],
+     "place": "desert",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "weder Wasser"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "JAHRE OHNE WASSER",
+      "value": 30,
+      "unit": "JAHRE"
+     },
+     "see": "Ein Bärtierchen liegt regungslos auf trockenem Grund.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "dry",
+      "elements": [
+       "cactus"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Selbst kochendes Wasser von einhundert Grad Celsius übersteht es problemlos.",
+     "image": "The tiny water bear swimming happily inside a boiling glass beaker with rising steam bubbles",
+     "who": [
+      "tier"
+     ],
+     "place": "kitchen",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "einhundert Grad"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": 100
+     },
+     "see": "Ein Bärtierchen in kochendem Wasser im Kessel.",
+     "time": "day",
+     "weather": "steam",
+     "props": [
+      "tardigrade",
+      "kessel"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Im tiefsten Frost bei minus zweihundert Grad schläft es seelenruhig weiter.",
+     "image": "The tardigrade sitting on a giant ice crystal wearing tiny blue earmuffs looking very cozy",
+     "who": [
+      "tier"
+     ],
+     "place": "snow",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "minus zweihundert"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": -200
+     },
+     "see": "Ein Bärtierchen im tiefsten Eis bei Minusgraden.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "snow",
+      "elements": [
+       "glacier"
+      ]
+     },
+     "time": "day",
+     "weather": "cold",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nicht mal der enorme Druck am Grund des Ozeans kann diesem Winzling etwas anhaben.",
+     "image": "The tiny creature resting on the deep ocean floor under heavy cartoon water pressure waves",
+     "who": [
+      "tier"
+     ],
+     "place": "underwater",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Druck"
+     ],
+     "overlay": null,
+     "see": "Ein Bärtierchen am finsteren Meeresgrund unter enormem Druck.",
+     "time": "night",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und als wäre das nicht genug, schickten Forscher es sogar ins eiskalte Weltall.",
+     "image": "A cartoon rocket launching into a starry night sky carrying a tiny glass vial with the animal",
+     "who": [
+      "tier"
+     ],
+     "place": "space",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Weltall"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "RAUMFAHRT"
+     },
+     "see": "Eine Rakete fliegt ins Weltall, an Bord ein Bärtierchen.",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": []
+     },
+     "time": "night",
+     "props": [
+      "tardigrade",
+      "rocket"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dort schwebte es tagelang im absoluten Vakuum voller tödlicher Sonnenstrahlung.",
+     "image": "The tiny water bear floating weightlessly in dark space with glowing cosmic rays around it",
+     "who": [
+      "tier"
+     ],
+     "place": "space",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Vakuum"
+     ],
+     "overlay": null,
+     "see": "Das Bärtierchen schwebt im absoluten Vakuum des Weltalls neben der Sonne.",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": []
+     },
+     "time": "night",
+     "props": [
+      "tardigrade",
+      "sun"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die meisten Lebewesen wären sofort tot gewesen, doch das Bärtierchen?",
+     "image": "A person looking at a computer screen in total shock with wide open eyes and raised hands",
+     "who": [
+      "du"
+     ],
+     "place": "lab",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "sofort tot"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "ÜBERLEBT",
+      "color": "green"
+     },
+     "see": "Ein verblüffter Wissenschaftler schaut auf das Bärtierchen im All.",
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach der Rückkehr gab man ihm einfach ein paar Tropfen Wasser auf den Körper.",
+     "image": "A small green pipette dropping a clear water droplet onto the tiny dried-up ball",
+     "who": [
+      "tier"
+     ],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Tropfen Wasser"
+     ],
+     "overlay": null,
+     "see": "Jemand tropft Wasser auf das ausgetrocknete Bärtierchen.",
+     "time": "day",
+     "props": [
+      "tardigrade",
+      "giesskanne"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Binnen weniger Minuten erwachte es zum Leben und krabbelte fröhlich davon.",
+     "image": "The revived water bear stretching its eight small legs and crawling away happily",
+     "who": [
+      "tier"
+     ],
+     "place": "lab",
+     "camera": "pan_right",
+     "sfx": "ding",
+     "highlight": [
+      "erwachte"
+     ],
+     "overlay": null,
+     "see": "Das Bärtierchen krabbelt munter davon.",
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Ein Löwe hätte im Weltall keine Chance, dieses winzige Tier überlebt es.",
+     "image": "A cartoon lion wearing a tiny space helmet looking very sad while floating away",
+     "who": [
+      "tier"
+     ],
+     "place": "space",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "dieses Tier nicht"
+     ],
+     "overlay": null,
+     "see": "Ein Löwe im Raumanzug schwebt hilflos im All, daneben das Bärtierchen.",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": []
+     },
+     "time": "night",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Es schützt seine DNA mit speziellen Schildproteinen wie ein professioneller Tresor.",
+     "image": "A shiny metal vault door opening up to reveal glowing DNA strands protected inside",
+     "who": [
+      "tier"
+     ],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Schildproteinen"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DNA SCHUTZ"
+     },
+     "see": "Ein Tresor schützt seine wertvolle DNA.",
+     "time": "day",
+     "props": [
+      "tardigrade",
+      "tresor"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Strahlung bricht so die Erbsubstanz nicht auf und Mutationen werden sofort repariert.",
+     "image": "Glowing green light bouncing harmlessly off a tiny shield surrounding the microscopic creature",
+     "who": [
+      "tier"
+     ],
+     "place": "lab",
+     "camera": "pan_left",
+     "sfx": "tick",
+     "highlight": [
+      "repariert"
+     ],
+     "overlay": null,
+     "see": "Strahlung prallt am Schildprotein ab, die DNA bleibt heil.",
+     "time": "day",
+     "props": [
+      "tardigrade",
+      "laserstrahl"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du findest diese heimlichen Herrscher der Erde in fast jeder feuchten Moosnische.",
+     "image": "A person gently touching a soft green patch of forest moss growing on an old stone wall",
+     "who": [
+      "du"
+     ],
+     "place": "forest",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Moosnische"
+     ],
+     "overlay": null,
+     "see": "Ein Bärtierchen im feuchten Moos im Wald.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "soil",
+      "elements": [
+       "forest",
+       "trees",
+       "flowers"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Ein Löwe ist groß und stark, aber dieses winzige Tier schlägt ihn locker.",
+     "image": "The tiny tardigrade standing victoriously on top of a tiny sleeping cartoon lion",
+     "who": [
+      "tier"
+     ],
+     "place": "savannah",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "winzige Tier"
+     ],
+     "overlay": null,
+     "see": "Ein stolzer Löwe steht im Gras, während das winzige Bärtierchen siegreich daneben sitzt.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "dry",
+      "elements": [
+       "grass"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "tardigrade"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "löwe",
+   "moos"
+  ],
+  "title": "Dieses winzige Tier ist gefährlicher als ein Löwe",
+  "created": 1794929214.5832634
  }
 }
