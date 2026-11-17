@@ -138,7 +138,8 @@ def find_trend(trend_id):
 # Begriffe, die kein Gegenstand sind: Dafür wird nichts „gelernt“ (aus „Bug“ wurde sonst ein Käfer in jeder Szene).
 NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "spielregel", "spielregeln", "physik", "schwerkraft", "zeit",
              "idee", "problem", "trick", "system", "update", "spiel", "videospiel", "level", "leben", "alltag", "realität", "inventar",
-             "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
+             "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
+             "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
 
 def known_thing(word):

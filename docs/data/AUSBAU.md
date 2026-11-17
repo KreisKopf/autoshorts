@@ -327,6 +327,12 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   bleibt es Tönnchen bis „erwacht/krabbelt/lebt“ (`TUN_RE`, `WAKE_RE`). „Löwe“ steht in `NAMED_ANIMALS` (nicht „Löwenanteil“).
   `main.too_similar`: Frage- und Fürwörter („warum“, „dieses“) zählen nicht als Thema, bei alten Videos zählt nur der Kern vor dem Gedankenstrich
   (`_topic_core`) – der vorbereitete Bärtierchen-Plan wurde als „gab es gerade erst (Warum du bei Musik Gänsehaut bekommst)“ übergangen. Selbsttest: `_tiny`.
+  Nach den Neubauten 137–139: Stehen nur Tiere am Boden im Bild, zoomt die Kamera um einen Punkt unter der Bodenlinie (`cam["ay"]`) – der Fixpunkt oben
+  schob das Tier in die Untertitel. Ein Einschub über das Tier oder Moos wird zur Szene (vorher Tür und Moos frei vor leerem Grund). „Enormer Druck“ spielt
+  in der Tiefsee, Hitze-Zahlen stehen als Zähler über dem Tönnchen, „auf Dächern und Mauern“ zeigt das Tier klein am Moospolster, das Schutz-Eiweiß als
+  neue Requisite `shield` (Schild mit Erbgut-Strang). Größe je Figur `_ksz` überlebt jetzt `sanitize`. Titelbild eines Winzling-Videos zeigt das Tier
+  (die Bibliothek hatte „tönnchen“ als Holzfass mit Alias „tonne“ gelernt – entfernt, `main.NO_THINGS` ergänzt). `writer.polish`: Beschreibung ohne
+  „ · “ als Zeilentrenner und ohne Zeilen mit Zahlen, die niemand sagt.
 
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten

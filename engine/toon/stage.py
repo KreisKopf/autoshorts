@@ -2652,7 +2652,8 @@ def _tiny_story(scenes):
                 h["facing"] = "right"
                 if str(h.get("action") or "") in ("walk", "run", "float", "sit", "sleep", "look_around"):
                     h["action"] = "point" if re.search(r"gaben|gab |gibt|tropf|gießt|schick|setzt|legt|zeig|fand|find|entdeck|untersuch|beobacht", low) else "think"
-                sc["actors"] = acts = [h, beast(pos=760, facing="left", hero=False, _ksz=0.85)]   # neben dem Menschen: deutlich kleiner als er, aber gut zu erkennen
+                sc["actors"] = acts = [h, beast(pos=760, facing="left", hero=False, _ksz=0.85)]
+                sc["_no_cut"] = True                       # kein Gegenschnitt: gespiegelt und näher schnitt er Mensch und Tier an den Rändern ab (Video 139)   # neben dem Menschen: deutlich kleiner als er, aber gut zu erkennen
                 sc["crowd"] = ""
                 if str(sc.get("shot") or "") in ("close", "event"):
                     sc["shot"] = ""
@@ -4513,6 +4514,8 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
         keys, hk = ["ship_ice"], ""                       # zugefrorenes Meer: das eingefrorene Schiff aufs Titelbild – nicht der Fisch aus einer Nebenszene
     if hk in extras.CREATURES and (_sea_named(low) == hk or any(k_ == hk and _re.search(pat, low) for pat, k_ in TOPIC_CREATURES + ANY_CREATURES)):
         keys = []                                         # das Thema nennt das Tier: Es gehört aufs Titelbild, kein Gegenstand aus dem Text
+    if hk in TINY_KINDS:
+        keys = []                                         # Video über einen Winzling: das Tier aufs Titelbild – nicht ein Gegenstand aus dem Vorschlag der Text-KI (Videos 138/139: ein Holzfass für „Tönnchen“)
     if hk == "fridge":
         keys = []                                         # der Kühlschrank ist eine Figur der Geschichte: mit Gesicht aufs Titelbild, nicht als Gerät
     for k in keys:
