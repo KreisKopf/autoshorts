@@ -1,5 +1,5 @@
 {
- "updated": 1794955059.6074846,
+ "updated": 1794956580.7109811,
  "enough": true,
  "counted": 20,
  "total": 23,
@@ -9,10 +9,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1799,
+   "avg_views": 1800,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2444
+   "avg_score": 2445
   },
   {
    "slug": "storys",
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1533,
+   "avg_views": 1534,
    "avg_likes": 41.0,
    "like_rate": 2.67,
-   "avg_score": 2154
+   "avg_score": 2155
   },
   {
    "slug": "musik",
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1491,
+   "avg_views": 1492,
    "avg_likes": 27.0,
    "like_rate": 1.81,
-   "avg_score": 1926
+   "avg_score": 1927
   }
  ],
  "weights": {
@@ -82,9 +82,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1491 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2450 zu 705 Punkte)."
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1492 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2451 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,11 +93,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2548,
+   "views": 2549,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3388
+   "score": 3389
   },
   {
    "id": 77,
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1927,
+   "views": 1932,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2932
+   "score": 2937
   },
   {
    "id": 80,
