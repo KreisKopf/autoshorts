@@ -74,7 +74,7 @@
    "voice_rate": "-4%",
    "voice_pitch": "-4Hz",
    "voice_instructions": "Leise, langsam und unheimlich, mit Spannung in der Stimme.",
-   "enabled": false,
+   "enabled": true,
    "trends": false
   },
   {
@@ -224,24 +224,5 @@
    "topic_rules": "Es geht um DICH: Einstellung, Disziplin, Angst vor dem ersten Schritt, Ausreden, Neuanfang, Durchhalten, Selbstwert. KEINE Technik-, Handy-, Algorithmus-, Daten- oder Überwachungs-Themen, KEINE 'Was wäre, wenn'-Fragen, nichts Gruseliges oder Düsteres. Das Thema klingt wie ein Satz, den ein Coach dir ins Gesicht sagt."
   }
  ],
- "queue": [
-  {
-   "id": "qaxmu4ql2",
-   "category": "fakten",
-   "text": "5 faszinierende Dinge, die dein Gehirn tut, während du schläfst",
-   "created": 1794769403.756
-  },
-  {
-   "id": "qezkt1s0o",
-   "category": "fakten",
-   "text": "Was passiert im Körper, wenn du plötzlich erschrickst?",
-   "created": 1794769410.896
-  },
-  {
-   "id": "qt49vv57v",
-   "category": "fakten",
-   "text": "Warum bekommen wir Gänsehaut? Die verblüffende biologische Ursache",
-   "created": 1794769413.717
-  }
- ]
+ "queue": []
 }
