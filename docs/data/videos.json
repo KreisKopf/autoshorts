@@ -4992,7 +4992,7 @@
   "id": 135,
   "category": "musik",
   "topic": "Musik-Kugel: When the Saints Go Marching In (Pop Remix)",
-  "status": "rendered",
+  "status": "published",
   "created": 1794930099.736802,
   "title": "Bekanntes Lied als Pop-Remix – erkennst du es? 🎵",
   "description": "Ein Lied, das jeder kennt – als Pop-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
@@ -5018,6 +5018,12 @@
   },
   "thumb": true,
   "look": "musik",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6afc7630915303bf9fc35a35",
+  "yt_status": "Zernio: published",
+  "yt_id": "DWfy-zydzN0",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6afc7630915303bf9fc35a35",
+  "error": null
  }
 ]
