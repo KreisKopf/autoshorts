@@ -14,5 +14,27 @@
   "stil": true,
   "zahlen": true
  },
- "access": []
+ "access": [
+  {
+   "id": "13djg9p",
+   "name": "Anil",
+   "hash": "a714f951d3d4c8bb3d64783352543c6cedc9fc49a11195c21b03716f9739e008",
+   "created": 1794934789,
+   "expires": 0,
+   "perms": {
+    "zeitplan": true,
+    "kanal": true,
+    "plattform": true,
+    "videos": true,
+    "nachbauen": false,
+    "rubriken": true,
+    "rubriken_bearbeiten": false,
+    "laenge": true,
+    "trends": true,
+    "ki": false,
+    "stil": true,
+    "zahlen": true
+   }
+  }
+ ]
 }
