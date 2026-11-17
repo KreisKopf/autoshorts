@@ -854,6 +854,18 @@ def hook_weak(js):
     return len(words) > 13 or bool(_re.search(WEAK_START, t0.lower())) or verbatim or not names_topic
 
 
+def hook_drops(sc, s0, s1):
+    """Ginge mit dem neuen Einstieg eine Tatsache verloren? (Prüfung 17.11.2026: Satz 2 „An jeder Haarwurzel sitzt ein winziger Muskel …“
+    wurde durch „Und der wahre Grund wird dich überraschen“ ersetzt – die Erklärung fehlte im ganzen Video.) Wahr, wenn der alte Satz 2
+    mindestens drei tragende Wörter hat, die weder im neuen Einstieg noch in einem späteren Satz vorkommen."""
+    import re as _re
+    stem = lambda t: {w[:6] for w in _re.findall(r"[a-zäöüß]{6,}", str(t or "").lower())}   # noqa: E731
+    rest = stem(s0) | stem(s1)
+    for x in sc[2:]:
+        rest |= stem(x.get("text"))
+    return len(stem(sc[1].get("text")) - rest) >= 3
+
+
 def sharpen_hook(js, topic):
     """Lässt die Text-KI die ersten zwei Sätze schärfen; übernimmt sie nur, wenn sie kurz, deutsch und ohne Floskel sind."""
     import json as _json
@@ -862,7 +874,8 @@ def sharpen_hook(js, topic):
     if len(sc) < 3:
         return js
     user = (f"Thema: {topic}\nTitel: {js.get('title')}\n"
-            + "\n".join(f"Satz {i + 1}: {_json.dumps(str(s.get('text') or ''), ensure_ascii=False)}" for i, s in enumerate(sc[:4])))
+            + "\n".join(f"Satz {i + 1}: {_json.dumps(str(s.get('text') or ''), ensure_ascii=False)}" for i, s in enumerate(sc[:4]))
+            + "\nDer Einstieg darf nichts behaupten, was Thema und Sätze nicht hergeben (keine Übertreibung wie „rettet dein Leben“).")
     for attempt in range(2):                              # zweiter Versuch mit Hinweis, wenn Satz 1 das Thema nicht nennt
         out, _ = ai.chat_json(HOOK, user + ("\nACHTUNG: Satz 1 muss das Thema nennen (Wörter aus dem Titel), kurz und spannend."
                                              if attempt else ""), 0.7)
@@ -871,6 +884,10 @@ def sharpen_hook(js, topic):
         ok0 = ok0 and not hook_weak({"title": js.get("title"), "scenes": [{"text": s0}]})   # nennt das Thema, liest nicht den Titel vor
         ok1 = s1 and len(s1.split()) <= 18 and not _foreign(s1) and not any(c in s1 for c in "{}[]<>()")
         if ok0 and ok1:
+            if hook_drops(sc, s0, s1):                     # Satz 2 trug eine Tatsache, die sonst nirgends steht: er bleibt, nur Satz 1 wird geschärft
+                ai.log(f"Einstieg geschärft (Satz 2 bleibt, er trägt Inhalt): „{s0}“")
+                sc[0]["text"] = s0
+                break
             if (s0, s1) != (sc[0].get("text"), sc[1].get("text")):
                 ai.log(f"Einstieg geschärft: „{s0}“ / „{s1}“")
             sc[0]["text"], sc[1]["text"] = s0, s1

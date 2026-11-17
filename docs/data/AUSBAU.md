@@ -315,6 +315,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Gänsehaut-Tafel nie an derselben Stelle (nennt der Satz Adrenalin, bleibt die Adrenalin-Tafel). „Dir ist kalt“ zählt als Kälte (`COLD_RE`,
   verneint nicht). Bibliothek von Hand gezeichnet: `maus` (weiße Labormaus statt der vorläufigen Computermaus), `gans`, `gerupfte gans`;
   `library.text_props`: ein mehrteiliger Name („gerupfte Gans“) sperrt den einfachen („Gans“) an derselben Stelle. Selbsttest: `_goose`.
+  `writer.hook_drops`: Der geschärfte Einstieg ersetzt Satz 2 nicht, wenn dieser eine Tatsache trägt, die sonst nirgends im Drehbuch steht (in
+  Fassung 132 fehlte so die ganze Erklärung mit dem Muskel an der Haarwurzel); der Einstieg darf nichts behaupten, was das Thema nicht hergibt.
+  „… Luftschicht ein, wie eine dickere Jacke“: keine Jacke neben der Fell-Tafel. Der Muskel an der Haarwurzel zeigt keinen Oberarm (`muskel`).
 
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten

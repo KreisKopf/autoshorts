@@ -2487,6 +2487,12 @@ def _fur_story(scenes):
         said = bool(re.search(FUR_RE, low)) and not beast and shot not in ("graphic", "close") and places.resolve(backdrop(sc)) not in ("underwater", "space") + tuple(MAPS)
         carry = prev_fur and "goosebumps" in kinds and not re.search(GOOSE_RE, low) and re.search(COLD_RE + r"|\bwärm|\bwarm|\bschütz|\bwinter", low)
         like = prev_fur and not beast and shot not in ("graphic", "close") and re.search(FUR_LIKE_RE, low)   # „Das wirkte wie eine dickere Jacke“: Vergleich – die Fell-Tafel bleibt, keine einzelne Jacke im Schnee
+        if re.search(FUR_RE, low) and re.search(FUR_LIKE_RE, low):          # „… schloss eine Luftschicht ein, wie eine dickere Jacke“: die Jacke ist nur der Vergleich
+            sc["props"] = [q for q in (sc.get("props") or []) if not re.search(r"jacke|mantel|coat|decke|pullover|schlafsack", _key(q))]
+            kinds = [_key(q) for q in sc["props"]]
+        if re.search(r"haarwachstum|haarwurzel|haarbalg|härchen", low) and not re.search(r"bizeps|oberarm|armmuskel", low):   # der Muskel an der Haarwurzel ist kein Oberarm
+            sc["props"] = [q for q in (sc.get("props") or []) if _key(q) not in ("muskel", "lib_muskel")]
+            kinds = [_key(q) for q in sc["props"]]
         if like:
             sc["props"] = [q for q in (sc.get("props") or []) if _key(q) in ("fur", "goosebumps")]
             sc["shot"] = "" if shot in ("event", "insert") else sc.get("shot")

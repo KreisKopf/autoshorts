@@ -502,6 +502,10 @@ def main():
         from .. import writer as _wg
         assert _wg.given_meta({}, "x – y. Titel: Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?") == {"title": "Warum bekommen wir Gänsehaut?", "thumbnail": {"text": "WARUM GÄNSEHAUT?"}}
         assert _wg.given_meta({}, "x. Titel: 5 Dinge, die dein Gehirn tut, während du schläfst. Titelbild-Text: DEIN GEHIRN NACHTS")["title"] == "5 Dinge, die dein Gehirn tut, während du schläfst"
+        sc_h = [{"text": "Dir ist kalt, und die Härchen stellen sich auf."}, {"text": "An jeder Haarwurzel sitzt ein winziger Muskel, er richtet das Haar auf."},
+                {"text": "Deine Haut wölbt sich dabei zu kleinen Hügeln."}, {"text": "Steuern kannst du das nicht."}]
+        assert _wg.hook_drops(sc_h, "Warum du Gänsehaut bekommst.", "Und der wahre Grund wird dich überraschen."), "Einstieg löscht die Erklärung"
+        assert not _wg.hook_drops([{"text": "a"}, {"text": "Und das Ende wird dich überraschen."}] + sc_h, "Warum du Gänsehaut bekommst.", "Und der Grund ist uralt.")
         T2 = [("Bei Kälte stellte sich das Fell auf und schloss eine wärmende Luftschicht ein.", "snow", [{"id": "vorfahre", "action": "shiver"}], []),
               ("Das wirkte wie eine dickere Jacke.", "snow", [], ["coat"]),
               ("Ausgelöst wird er auch von Adrenalin, deshalb bekommst du Gänsehaut bei Angst.", "livingroom", [{"id": "du", "action": "cower"}], ["adrenaline", "goosebumps"]),
@@ -511,6 +515,13 @@ def main():
         k2 = lambda i: [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in s2[i].get("props") or []]   # noqa: E731
         assert all(a.get("kind") == "chimp" for i in (0, 3) for a in s2[i]["actors"] if a.get("id") == "vorfahre"), "Figur „vorfahre“ ist ein Mensch im Pulli"
         assert k2(1) == ["fur"], f"Jacken-Vergleich: {k2(1)}"
+        s3 = stage.direct([{"text": "Bei Kälte stellte sich das Fell auf und schloss eine wärmende Luftschicht ein, wie eine dickere Jacke.", "place": "forest", "time": "day",
+                            "actors": [{"id": "vorfahre", "action": "idle"}], "props": ["fur", "coat"]},
+                           {"text": "Forscher fanden bei Mäusen heraus, dass derselbe Muskel bei Kälte das Haarwachstum anregt.", "place": "forest", "time": "day", "actors": [], "props": ["muskel"]}],
+                          [(0, 3.5), (3.5, 7)], "Warum bekommen wir Gänsehaut?", "fakten", "")
+        k3 = lambda i: [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in s3[i].get("props") or []]   # noqa: E731
+        assert not any("jacke" in k or k == "coat" for k in k3(0)), f"Jacke neben der Fell-Tafel: {k3(0)}"
+        assert not any("muskel" in k for k in k3(1)), f"Oberarm beim Haar-Muskel: {k3(1)}"
         assert k2(2) == ["adrenaline"], f"zwei Tafeln übereinander: {k2(2)}"
         p3 = sorted(a.get("pos") for a in s2[3]["actors"])
         assert len(p3) == 2 and isinstance(p3[0], int) and p3[1] - p3[0] >= 300, f"Mensch und Vorfahre stehen ineinander: {p3}"
