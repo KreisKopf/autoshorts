@@ -1,5 +1,5 @@
 {
- "updated": 1794884796.1628327,
+ "updated": 1794886605.4095528,
  "enough": true,
  "counted": 17,
  "total": 20,
@@ -18,10 +18,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1795,
+   "avg_views": 1796,
    "avg_likes": 43.0,
-   "like_rate": 2.4,
-   "avg_score": 2440
+   "like_rate": 2.39,
+   "avg_score": 2441
   },
   {
    "slug": "whatif",
@@ -54,10 +54,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1454,
+   "avg_views": 1464,
    "avg_likes": 27.0,
-   "like_rate": 1.86,
-   "avg_score": 1889
+   "like_rate": 1.84,
+   "avg_score": 1899
   },
   {
    "slug": "fakten",
@@ -83,7 +83,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2399 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2400 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
