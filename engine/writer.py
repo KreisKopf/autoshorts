@@ -490,10 +490,11 @@ def given_meta(js, topic):
     (Prüfung 16.11.2026: aus „5 Dinge, die dein Gehirn tut, während du schläfst“ wurde der Titel „5 Dinge, die dein Gehirn schläft“).
     Der Wert reicht bis zum nächsten Punkt, Strichpunkt oder Zeilenende."""
     t = str(topic or "")
-    m_t = re.search(r"(?<![A-Za-zÄÖÜäöüß-])Titel:\s*([^.;\n]{8,95})", t)
+    # endet auch am Frage-/Ausrufezeichen und vor der nächsten Vorgabe (Prüfung 17.11.2026: „Warum bekommen wir Gänsehaut? Titelbild-Text: …“ stand als Titel da)
+    m_t = re.search(r"(?<![A-Za-zÄÖÜäöüß-])Titel:\s*([^.;\n]{8,95}?)(?=[.;\n]|$|(?<=[?!])\s|\s+Titelbild-Text:)", t)
     if m_t and not _BRAND_RE.search(m_t.group(1)):
         js["title"] = fix_eszett(m_t.group(1).strip().strip("„“\"' "))
-    m_b = re.search(r"Titelbild-Text:\s*([^.;\n]{3,40})", t)
+    m_b = re.search(r"Titelbild-Text:\s*([^.;\n]{3,40}?)(?=[.;\n]|$|(?<=[?!])\s|\s+Titel:)", t)
     if m_b and len(m_b.group(1).split()) <= 5 and not _BRAND_RE.search(m_b.group(1)):
         th = js.get("thumbnail") if isinstance(js.get("thumbnail"), dict) else {}
         th["text"] = m_b.group(1).strip().strip("„“\"' ").upper()
@@ -691,6 +692,29 @@ def new_topic(cat: dict) -> str:
     return topic
 
 
+PERSON_TITLE_RE = (r"\b(?:könig|königin|king|queen|prinz|prinzessin|präsident|präsidentin|kanzler|kanzlerin|papst|minister|ministerin|"
+                   r"premierminister|premierministerin|bürgermeister|bürgermeisterin|herzog|herzogin|kaiser|kaiserin|trainer|sänger|sängerin|"
+                   r"rapper|rapperin|schauspieler|schauspielerin|youtuber|youtuberin|streamer|streamerin|influencer|influencerin|milliardär)\s+"
+                   r"(?-i:[A-ZÄÖÜ][a-zäöüß]+)")
+
+
+def named_person(topic, names=None, trend_title=""):
+    """Dreht sich ein Trend-Thema um eine namentlich genannte echte Person, Firma oder Marke? Solche Themen baut der Kanal nicht
+    (keine echten Personen, keine Marken – und was über sie behauptet wird, lässt sich nicht prüfen). names: was die Text-KI selbst
+    als Namen im Thema meldet; dazu Titel + Name („König Charles“, „Präsident Müller“) im Thema."""
+    import re
+    t = str(topic or "")
+    for n in names if isinstance(names, (list, tuple)) else []:
+        n = str(n or "").strip()
+        if len(n) >= 3 and n.lower() in t.lower():
+            return True
+    for m in re.finditer("(?i)" + PERSON_TITLE_RE, str(trend_title or "")):       # „King Charles visits …“ → „Charles“ im Thema
+        if re.search(r"\b" + re.escape(m.group(0).split()[-1]) + r"\b", t):
+            return True
+    # Titel + Name ohne Artikel davor („Warum König Charles …“); „der König Angst hat“ ist kein Name
+    return bool(re.search(r"(?i)(?<!\bder )(?<!\bden )(?<!\bdem )(?<!\bdes )(?<!\bdie )(?<!\bein )(?<!\beine )(?<!\beinen )(?<!\beinem )(?<!\beiner )" + PERSON_TITLE_RE, t))
+
+
 def trend_topic(cat: dict):
     """Wählt aus den aktuellen Trends ein Thema, das zur Kategorie passt. Gibt (thema, trend) oder (None, None)."""
     items = trends.current()
@@ -717,12 +741,21 @@ def trend_topic(cat: dict):
             "Marken, Spiele, Filme, Serien und Apps dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
             "dahinter (statt eines Spiels z. B. 'Warum wir Nostalgie lieben').\n"
             "Diese Themen gab es schon:\n- " + ("\n- ".join(past) if past else "(noch keine)") + "\n"
-            'Antworte als JSON: {"index": Nummer des Trends, "topic": "konkretes Video-Thema auf Deutsch", "why": "kurz, warum es passt"} '
+            "Kommt im Trend eine echte Person (auch Könige, Präsidenten, Stars), eine Firma, ein einzelnes Geschäft oder eine Marke vor, "
+            "darf ihr Name im Thema NICHT stehen – geht das Thema ohne den Namen nicht, antworte mit {\"index\": null}.\n"
+            'Antworte als JSON: {"index": Nummer des Trends, "topic": "konkretes Video-Thema auf Deutsch", "why": "kurz, warum es passt", '
+            '"names": [alle echten Personen, Firmen, Geschäfte und Marken, die im Thema namentlich vorkommen – sonst leer]} '
             'oder {"index": null}, wenn keiner passt.')
     js, _ = ai.chat_json("Du bist Trend-Scout für einen deutschen Gen-Z-TikTok-Kanal und kennst die Internet-Kultur in den USA "
                           "und Deutschland. Sorgfältig bei Fakten. Antworte nur mit JSON.", user, 0.7)
     idx, topic = js.get("index"), str(js.get("topic") or "").strip()
     if idx is None or not topic:
+        return None, None
+    try:
+        _tt = items[int(idx)].get("title")
+    except (ValueError, IndexError, TypeError):
+        return None, None
+    if named_person(topic, js.get("names"), _tt):              # Trend über eine echte Person/Marke (Prüfung 17.11.2026: „Warum König Charles … Spudbros-Kiosk“)
         return None, None
     try:
         tr = items[int(idx)]

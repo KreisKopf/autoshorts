@@ -2213,6 +2213,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _named_animals(scenes, topic)
     _household(scenes)
     _music(scenes, topic)
+    _fur_ancestor(scenes)
     _fur_story(scenes)
     _indoor_sense(scenes)
     _sleep_story(scenes, topic)
@@ -2448,6 +2449,28 @@ def _music(scenes, topic):
     return scenes
 
 
+FUR_LIKE_RE = r"\bwie (?:\w+ ){0,3}(?:jacke|mantel|decke|daunen\w*|pullover|schlafsack|isolierung)\b"
+ANCESTOR_ID_RE = r"^_?(?:vorfahr\w*|urahn\w*|ahne|ahnin|ahnen|urzeit\w*vorfahr\w*)$"
+
+
+def _fur_ancestor(scenes):
+    """Prüfung 17.11.2026: Erzählt das Video vom Fell der Vorfahren (ANCESTOR_RE oder FUR_RE in einem Satz), ist eine Figur mit der Kennung
+    „vorfahre“/„urahn“ der Affe mit Fell – kein heutiger Mensch im Kapuzenpulli, der neben der Fell-Tafel friert oder am Schluss winkt."""
+    if not any(isinstance(sc, dict) and re.search(ANCESTOR_RE + "|" + FUR_RE, str(sc.get("text") or "").lower()) for sc in scenes):
+        return
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        acts_f = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if len(acts_f) == 2 and sum(1 for a in acts_f if not a.get("kind") and re.search(ANCESTOR_ID_RE, str(a.get("id") or "").lower())) == 1:
+            for a in acts_f:                              # Mensch links, Vorfahre rechts – der große Affe stünde sonst vor der Figur
+                a["pos"] = 760 if re.search(ANCESTOR_ID_RE, str(a.get("id") or "").lower()) else 300
+        for a in sc.get("actors") or []:
+            if isinstance(a, dict) and not a.get("kind") and re.search(ANCESTOR_ID_RE, str(a.get("id") or "").lower()):
+                a.update(kind="chimp", hero=True, action="puff" if a.get("action") == "puff" else "idle", hold="", wear="", speaks=False,
+                         emotion="scared" if a.get("action") in ("shiver", "cower", "shocked") else "happy" if a.get("action") in ("wave", "cheer", "dance") else str(a.get("emotion") or ""))
+
+
 def _fur_story(scenes):
     """Schlussdurchgang (Ausbau 17.11.2026): Spricht der Satz davon, dass sich das Fell aufstellt und eine Luftschicht einschließt (`FUR_RE`),
     steht das Schaubild `fur` im Bild – statt der Gänsehaut-Tafel, die das Drehbuch dort mangels Besserem hinstellt. Der Folgesatz ohne eigenes
@@ -2463,7 +2486,12 @@ def _fur_story(scenes):
         beast = any(isinstance(a, dict) and a.get("kind") for a in (sc.get("actors") or []))
         said = bool(re.search(FUR_RE, low)) and not beast and shot not in ("graphic", "close") and places.resolve(backdrop(sc)) not in ("underwater", "space") + tuple(MAPS)
         carry = prev_fur and "goosebumps" in kinds and not re.search(GOOSE_RE, low) and re.search(COLD_RE + r"|\bwärm|\bwarm|\bschütz|\bwinter", low)
-        if said or carry:
+        like = prev_fur and not beast and shot not in ("graphic", "close") and re.search(FUR_LIKE_RE, low)   # „Das wirkte wie eine dickere Jacke“: Vergleich – die Fell-Tafel bleibt, keine einzelne Jacke im Schnee
+        if like:
+            sc["props"] = [q for q in (sc.get("props") or []) if _key(q) in ("fur", "goosebumps")]
+            sc["shot"] = "" if shot in ("event", "insert") else sc.get("shot")
+            kinds = [_key(q) for q in sc["props"]]
+        if said or carry or like:
             if "goosebumps" in kinds:
                 sc["props"] = [({"type": "fur", **({"pos": q["pos"]} if isinstance(q, dict) and q.get("pos") else {})} if _key(q) == "goosebumps" else q) for q in sc["props"]]
             elif "fur" not in kinds and len(kinds) < 2:
@@ -2497,6 +2525,10 @@ def _fur_story(scenes):
             sc["props"] = [q if isinstance(q, dict) or _key(q) != board else {"type": board, "pos": 770} for q in sc["props"]]
             sc["shot"] = "" if shot in ("event", "close") else sc.get("shot")
             sc["_no_cut"] = True
+        if "adrenaline" in kinds and ("goosebumps" in kinds or "fur" in kinds):   # zwei Schautafeln an derselben Stelle verdecken sich: nennt der Satz Adrenalin, bleibt die Adrenalin-Tafel
+            drop_a = ("goosebumps", "fur") if re.search(r"adrenalin|nebenniere|stresshormon", low) else ("adrenaline",)
+            sc["props"] = [q for q in sc["props"] if _key(q) not in drop_a]
+            kinds = [_key(q) for q in sc["props"]]
         prev_fur = "fur" in kinds
     return scenes
 
@@ -2516,6 +2548,9 @@ TALKING_RE = r"tiere?n?\b.{0,50}\b(?:sprechen|reden|sprache|sprächen)|sprechend
 ANCESTOR_RE = r"behaart\w* (?:vorfahr|urahn|ahnen)|(?:vorfahr\w*|urahn\w*|ahnen) (?:\w+ ){0,8}fell\b|aufgestellt\w* (?:\w+ ){0,3}(?:vorfahr|urahn)|(?:vorfahr\w*|urahn\w*) (?:\w+ ){0,5}(?:größer|bedrohlicher)|aufgestellt\w* fell|fell (?:\w+ ){0,4}(?:aufstell|aufgestellt|sträub|aufplust)|(?:sträub|plustert)\w* (?:\w+ ){0,4}fell"
 
 
+CAT_PUFF_RE = r"(?:katze|kater\b|kätzchen)\w* (?:\w+ ){0,6}(?:sträub|plustert|buckel|fell (?:\w+ ){0,3}auf)|(?:sträub|plustert|aufgestellt)\w* (?:\w+ ){0,6}(?:katze|kater\b|kätzchen)|katzenbuckel"
+
+
 def _named_animals(scenes, topic):
     talking = bool(re.search(TALKING_RE, str(topic or "").lower()))
     for sc in scenes:
@@ -2525,6 +2560,11 @@ def _named_animals(scenes, topic):
         rp = places.resolve(backdrop(sc))
         low = str(sc.get("text") or "").lower()
         if shot in ("graphic", "insert") or rp in MAPS + ("underwater", "space", "highsky") or re.search(ANIMAL_IDIOM_RE, low):
+            continue
+        if re.search(CAT_PUFF_RE, low):                    # „Eine Katze sträubt ihr Fell“: die Katze mit Buschschwanz – nicht der Affen-Vorfahre (Prüfung 17.11.2026)
+            sc["actors"] = [{"id": "_katze", "kind": "cat", "hero": True, "pos": "center", "action": "puff", "emote": "", "say": "", "hold": "", "facing": "", "emotion": "angry"}]
+            sc["crowd"], sc["props"] = "", []
+            sc["shot"] = "" if shot in ("close", "event") else sc.get("shot")
             continue
         if re.search(ANCESTOR_RE, low) and not any(a.get("kind") for a in (sc.get("actors") or []) if isinstance(a, dict)):
             sc["actors"] = [{"id": "_ahne", "kind": "chimp", "hero": True, "pos": "center", "action": "idle", "emote": "", "say": "", "hold": "", "facing": "",
@@ -3465,7 +3505,7 @@ def _opening(scenes):
 NIGHT_RE = (r"\bnachts\b|in der nacht|\bum mitternacht|mitten in der nacht|\babends\b|am abend|nachtaktiv|im dunkeln\b|bei nacht|heute nacht|"
             r"jede nacht|die ganze nacht|nächtlich|in dieser nacht|sternenhimmel|im mondlicht")
 DAY_RE = r"\btagsüber\b|am morgen|\bmorgens\b|am tag\b|\bmittags\b|am nachmittag|bei tageslicht|sonnenaufgang|in der mittagssonne|bei sonnenschein"
-COLD_RE = r"\bkälte\b|eiskalt|eisig\w*|bitterkalt|klirrend\w* k[aä]lt|\bfrost\b|\bfrostig|minusgrade|\bfrierst\b|\bfrieren\b|\bfröstel"
+COLD_RE = r"\bkälte\b|\b(?:dir|mir|ihm|ihr|uns|euch|ihnen) (?:ist|wird|war|wurde) (?:(?!nicht\b|kaum\b|nie\b|gar\b)\w+ ){0,2}kalt\b|\bes (?:ist|wird|war|wurde) (?:(?!nicht\b|kaum\b|nie\b|gar\b)\w+ ){0,2}kalt\b|eiskalt|eisig\w*|bitterkalt|klirrend\w* k[aä]lt|\bfrost\b|\bfrostig|minusgrade|\bfrierst\b|\bfrieren\b|\bfröstel"
 WEATHER_RE = [(r"gewitter|blitz und donner|\bunwetter|\bsturm\b|stürme|orkan|sturmböen|hurrikan", "storm"),
               (r"\bregnet|\bregen\b|regenschauer|platzregen|wolkenbruch|in strömen|nieselregen|regentropfen", "rain"),
               (r"\bschneit|schneefall|schneesturm|schneeflocken", "snow"), (r"\bwindig|\bwind\b|böen|weht", "wind"),

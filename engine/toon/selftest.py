@@ -223,6 +223,11 @@ def main():
         assert writer.fix_label_typos("TAGEELANG", "Das dauert oft tagelang.") == "TAGELANG"
         assert writer.polish({"scenes": [{"text": "Das ist reine reine Fantasie."}]})["scenes"][0]["text"] == "Das ist reine Fantasie."
         assert writer.fix_eszett("Ausser der Masse auf der Strasse") == "Außer der Masse auf der Straße"
+        assert writer.named_person("Warum König Charles ausgerechnet den berühmten Spudbros-Pommes-Kiosk besucht hat"), "Trend über eine echte Person"
+        assert writer.named_person("Warum der britische Monarch Charles Pommes isst", [], "King Charles visits the Spudbros kiosk"), "Name aus dem Trend im Thema"
+        assert writer.named_person("Wie Taylor Swift Stadien füllt", ["Taylor Swift"]), "gemeldeter Name im Thema"
+        assert not writer.named_person("Warum der König der Tiere brüllt") and not writer.named_person("Warum der König Angst hat")
+        assert not writer.named_person("Warum ein Pommes-Kiosk Millionen Zuschauer hat", ["Spudbros"], "King Charles visits the Spudbros kiosk")
         js = writer.polish({"scenes": [{"text": "x", "graphic": {"type": "badge", "kicker": "GEHIRN-EFFECT", "text": "KONTROLLE"}}]})
         assert js["scenes"][0]["graphic"]["kicker"] == "GEHIRN-EFFEKT"
     check("Erfundene Zahlen, liegende Figur, ß", _unspoken)
@@ -478,6 +483,45 @@ def main():
             rig.pose_at("shiver", t_f, 3.0, "worried", 0.3, 1)
             assert extras.creature("chimp", t_f, -1, 0.0, "angry", 1.0, "puff") is not None
     check("Fell-Tafel, Adrenalin-Tafel, Kälte, gesträubter Vorfahre (Ausbau 17.11.)", _fur)
+
+    def _goose():                                                # Prüfung 17.11.2026: Katze sträubt ihr Fell, „dir ist kalt“, gerupfte Gans, Mäuse
+        T = [("Eine Katze sträubt ihr Fell heute noch genauso.", "forest"), ("Dir ist kalt.", "snow"),
+             ("Der Name kommt daher, dass deine Haut dann aussieht wie die einer gerupften Gans.", "livingroom"),
+             ("Forscher fanden bei Mäusen heraus, dass derselbe Muskel das Haarwachstum anregt.", "lab"), ("Dir ist nicht kalt.", "park")]
+        scs = stage.direct([{"text": t_, "place": pl, "time": "day", "actors": [{"id": "du", "action": "talk", "emotion": "neutral", "speaks": True}]} for t_, pl in T],
+                           [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T))], "Warum bekommen wir Gänsehaut?", "fakten", "")
+        kn = lambda i: [str(q.get("type") if isinstance(q, dict) else q).lower() for q in scs[i].get("props") or []]   # noqa: E731
+        ac = lambda i: [(a.get("kind") or "", a.get("action")) for a in scs[i].get("actors") or []]   # noqa: E731
+        assert ac(0) == [("cat", "puff")], f"Katze sträubt ihr Fell: {ac(0)}"
+        assert scs[1].get("weather") == "cold", f"„dir ist kalt“ draußen: {scs[1].get('weather')} {ac(1)}"
+        assert scs[4].get("weather") != "cold", "verneintes „kalt“"
+        if "lib_gerupfte_gans" in extras.PROPS:
+            assert "lib_gerupfte_gans" in kn(2), f"gerupfte Gans fehlt: {kn(2)}"
+        if "lib_maus" in extras.PROPS:
+            assert "lib_maus" in kn(3), f"Mäuse fehlen: {kn(3)}"
+        from .. import writer as _wg
+        assert _wg.given_meta({}, "x – y. Titel: Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?") == {"title": "Warum bekommen wir Gänsehaut?", "thumbnail": {"text": "WARUM GÄNSEHAUT?"}}
+        assert _wg.given_meta({}, "x. Titel: 5 Dinge, die dein Gehirn tut, während du schläfst. Titelbild-Text: DEIN GEHIRN NACHTS")["title"] == "5 Dinge, die dein Gehirn tut, während du schläfst"
+        T2 = [("Bei Kälte stellte sich das Fell auf und schloss eine wärmende Luftschicht ein.", "snow", [{"id": "vorfahre", "action": "shiver"}], []),
+              ("Das wirkte wie eine dickere Jacke.", "snow", [], ["coat"]),
+              ("Ausgelöst wird er auch von Adrenalin, deshalb bekommst du Gänsehaut bei Angst.", "livingroom", [{"id": "du", "action": "cower"}], ["adrenaline", "goosebumps"]),
+              ("Gänsehaut ist ein Gruß deiner Vorfahren.", "forest", [{"id": "du", "action": "wave"}, {"id": "vorfahre", "action": "wave"}], [])]
+        s2 = stage.direct([{"text": t_, "place": pl, "time": "day", "actors": a_, "props": pr} for t_, pl, a_, pr in T2],
+                          [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T2))], "Warum bekommen wir Gänsehaut?", "fakten", "")
+        k2 = lambda i: [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in s2[i].get("props") or []]   # noqa: E731
+        assert all(a.get("kind") == "chimp" for i in (0, 3) for a in s2[i]["actors"] if a.get("id") == "vorfahre"), "Figur „vorfahre“ ist ein Mensch im Pulli"
+        assert k2(1) == ["fur"], f"Jacken-Vergleich: {k2(1)}"
+        assert k2(2) == ["adrenaline"], f"zwei Tafeln übereinander: {k2(2)}"
+        p3 = sorted(a.get("pos") for a in s2[3]["actors"])
+        assert len(p3) == 2 and isinstance(p3[0], int) and p3[1] - p3[0] >= 300, f"Mensch und Vorfahre stehen ineinander: {p3}"
+        for sc_g in s2:
+            frame(sc_g, {"du": {"shirt": "blau"}, "vorfahre": {"shirt": "braun"}}, 1.2)
+        for t_g in (0.1, 0.8, 2.6):
+            assert extras.creature("cat", t_g, 1, 0.0, "angry", 1.0, "puff") is not None
+            assert extras.creature("cat", t_g, -1, 0.0, "angry", 0.5, "puff") is not None
+        for sc_g in scs:
+            frame(sc_g, {"du": {"shirt": "blau"}}, 1.2)
+    check("Katze sträubt das Fell, „dir ist kalt“, gerupfte Gans, Mäuse (Prüfung 17.11.)", _goose)
 
     def _body():                                                 # Körper-Sätze (Prüfung 16.11.2026, Video 126): die Figur macht vor, was der Satz beschreibt; Gehirn als Figur statt Passanten; „Welle“ ist kein Strand
         cast_b = {"du": {"shirt": "blau", "hair": "curly", "gender": "w"}}

@@ -2438,9 +2438,26 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         wag = math.sin(t * (12 if dog else 3)) * (26 if dog else 14)
         belly = _light(col, 0.55)
         tail = [(-110, -120), (-150, -150), (-165, -205 - wag * 0.5), (-150 + wag, -250)] if not dog else [(-110, -125), (-150, -160), (-170 + wag, -215)]
-        stroke(tail, 22, _dark(col, 0.1))
+        puff = action == "puff" and not dog                                        # Katze sträubt das Fell: Buschschwanz steil nach oben, Haare stehen an Rücken und Schwanz ab
+        if puff:
+            tail = [(-110, -120), (-146, -170), (-150, -240), (-140 + wag * 0.3, -300)]
+            for i in range(9):                                                      # abstehende Haare rund um den Schwanz
+                ty_ = -150 - i * 18
+                tx_ = -146 + (ty_ + 170) * 0.03
+                q = 1 + 0.08 * math.sin(t * 24 + i * 1.7)
+                for sd in (-1, 1):
+                    poly([(tx_, ty_ - 9), (tx_ + sd * 44 * q, ty_ - 8 - 10 * q), (tx_, ty_ + 9)], _dark(col, 0.1) if i % 2 else col, shade=0)
+        stroke(tail, 34 if puff else 22, _dark(col, 0.1))
         if not dog:
-            stroke(tail[-1:] + [(tail[-1][0] + 2, tail[-1][1] - 4)], 22, _dark(col, 0.35))
+            stroke(tail[-1:] + [(tail[-1][0] + 2, tail[-1][1] - 4)], 34 if puff else 22, _dark(col, 0.35))
+        if puff:
+            for i in range(11):                                                     # gesträubtes Rückenfell
+                an = math.radians(200 + i * 14)
+                q = 1 + 0.08 * math.sin(t * 24 + i * 1.9)
+                bx_, by_ = -8 + math.cos(an) * 108, -107 + math.sin(an) * 52
+                tx_, ty_ = -8 + math.cos(an) * (120 + 62 * q), -107 + math.sin(an) * (62 + 62 * q)
+                nx_, ny_ = -math.sin(an) * 19, math.cos(an) * 19
+                poly([(bx_ + nx_, by_ + ny_), (tx_, ty_), (bx_ - nx_, by_ - ny_)], _dark(col, 0.1) if i % 2 else col, shade=0)
         for lx in (-85, 45):                                                       # Beine auf der abgewandten Seite
             rr(lx, -80, lx + 30, 0, 13, _dark(col, 0.18), shade=0)
         ell(-128, -170, 112, -45, col)

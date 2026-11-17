@@ -165,10 +165,14 @@ def names():
 def text_props():
     """(Suchmuster, Requisite) für die Regie: Wird ein gelernter Gegenstand im Satz genannt, erscheint er im Bild."""
     out = []
+    multi = [w for it in LIB.values() for w in [it["name"]] + it["aliases"] if " " in w]
+
+    def guard(w):                                                  # „gerupfte Gans“ ist ein eigener Gegenstand: dort steht nicht zusätzlich die „Gans“
+        return "".join("(?<!" + re.escape(m[:-len(w)]) + ")" for m in multi if m.endswith(" " + w))
     for name, item in LIB.items():
         words = [name] + item["aliases"]
         # ganzes Wort (mit Beugungsendung): „Ball“ steckt nicht in „Ballerspiele“, „Chip“ nicht in „Chipstüte“
-        pat = "|".join(r"\b" + re.escape(w.replace("-", " ")).replace(r"\ ", r"[ -]?") + r"(?:e?s|e?n|e)?\b" for w in words if len(w) > 2)
+        pat = "|".join(guard(w) + r"\b" + re.escape(w.replace("-", " ")).replace(r"\ ", r"[ -]?") + r"(?:e?s|e?n|e)?\b" for w in words if len(w) > 2)
         if pat:
             out.append((pat, item["key"]))
     return out

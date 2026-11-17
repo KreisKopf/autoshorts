@@ -306,6 +306,16 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   pinzette, nachricht, zigarette, notenschluessel, schwamm, maus, ohr. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie, anwaltstitel,
   toplitzsee, miete, algorithmus, statistik, musik, kompass, knall (greifbar davon: polyp, knie, kompass).
 
+- Prüfung 17.11.2026 (Video „Warum bekommen wir Gänsehaut?“): `writer.named_person` – ein Trend-Thema, das eine echte Person, Firma oder Marke
+  beim Namen nennt („Warum König Charles … Spudbros-Kiosk“), wird nicht gebaut (die Text-KI meldet Namen im Feld `names`, dazu Titel + Name im Thema
+  und Namen aus dem Trend-Titel). `writer.given_meta`: „Titel: …?“ endet am Frage-/Ausrufezeichen und vor „Titelbild-Text:“.
+  Katze sträubt ihr Fell (`stage.CAT_PUFF_RE`): die Katze mit Buschschwanz und abstehendem Rückenfell (`extras.creature` cat, `action: "puff"`) –
+  nicht der Affen-Vorfahre. Figur mit Kennung „vorfahre“/„urahn“ ist in einem Fell-Video der Affe (`stage._fur_ancestor`), steht rechts neben dem
+  Menschen. „Das wirkte wie eine dickere Jacke“ (`FUR_LIKE_RE`) behält die Fell-Tafel statt einer einzelnen Jacke im Schnee. Adrenalin- und
+  Gänsehaut-Tafel nie an derselben Stelle (nennt der Satz Adrenalin, bleibt die Adrenalin-Tafel). „Dir ist kalt“ zählt als Kälte (`COLD_RE`,
+  verneint nicht). Bibliothek von Hand gezeichnet: `maus` (weiße Labormaus statt der vorläufigen Computermaus), `gans`, `gerupfte gans`;
+  `library.text_props`: ein mehrteiliger Name („gerupfte Gans“) sperrt den einfachen („Gans“) an derselben Stelle. Selbsttest: `_goose`.
+
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
   rückwärts gebaut (echte Wurfparabel zwischen zwei Tönen, die Scheibe liegt so, dass sie die Richtungsänderung erklärt) – deshalb sitzt
