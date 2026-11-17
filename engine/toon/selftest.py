@@ -484,6 +484,39 @@ def main():
             assert extras.creature("chimp", t_f, -1, 0.0, "angry", 1.0, "puff") is not None
     check("Fell-Tafel, Adrenalin-Tafel, Kälte, gesträubter Vorfahre (Ausbau 17.11.)", _fur)
 
+    def _tiny():                                                 # Prüfung 17.11.2026 („Dieses winzige Tier ist zäher als ein Löwe“): Löwe, Savanne, Bärtierchen bleibt das Tier des Videos, Tönnchen
+        from .. import main as main_
+        for act_l in ("idle", "roar", "walk"):
+            for f_l in (1, -1):
+                assert extras.creature("lion", 0.7, f_l, 0.0, "scared" if act_l == "walk" else "", 1.0, act_l) is not None
+        assert extras.creature("tardigrade", 0.7, 1, 0.0, "", 1.0, "tun") is not None
+        assert places.resolve("savanne") == "savannah" and places.background("savannah", False).size == (places.W, places.H)
+        tx = ["Dieses winzige Tier ist zäher als ein Löwe.", "Das Bärtierchen ist nur einen halben Millimeter groß.", "Wenn es trocken wird, trocknet es fast komplett aus.",
+              "So übersteht es enorme Hitze.", "Forscher schickten es sogar ins Weltall.", "Zurück auf der Erde gaben Forscher ihm ein paar Tropfen Wasser.",
+              "Kurz darauf erwachte es und krabbelte davon.", "Du findest sie in fast jedem Moospolster."]
+        pl = ["park", "lab", "forest", "kitchen", "space", "lab", "lab", "forest"]
+        scs = stage.direct([{"text": t_, "place": p_, "time": "day", "props": [], "actors": [{"id": "du", "action": "talk", "pos": "center", "speaks": True}]} for t_, p_ in zip(tx, pl)],
+                           [(i * 4.0, i * 4.0 + 4.0) for i in range(len(tx))], "Dieses winzige Tier ist zäher als ein Löwe", "tiere")
+        ks = [[(a.get("kind") or "mensch", a.get("action")) for a in sc["actors"]] for sc in scs]
+        assert [k for k, _ in ks[0]] == ["lion", "tardigrade"] and places.resolve(scs[0].get("place")) == "savannah" and not scs[0].get("float"), f"Löwe: {ks[0]} {scs[0].get('place')}"
+        assert [k for k, _ in ks[1]] == ["tardigrade"] and ks[1][0][1] != "tun", f"Name: {ks[1]}"
+        assert ks[2] == [("tardigrade", "tun")] and ks[3] == [("tardigrade", "tun")], f"Tönnchen: {ks[2:4]}"
+        assert ks[4] == [("tardigrade", "tun")] and scs[4].get("float") == "float", f"All: {ks[4]} {scs[4].get('float')}"
+        assert [k for k, _ in ks[5]] == ["mensch", "tardigrade"] and ks[5][1][1] == "tun", f"Wasser: {ks[5]}"
+        assert [k for k, _ in ks[6]] == ["tardigrade"] and ks[6][0][1] != "tun", f"erwacht: {ks[6]}"
+        assert ks[7][-1][0] == "tardigrade" and ks[7][-1][1] != "tun" and any(q.get("type") == "moss" for q in scs[7].get("props") or []), f"Moos: {ks[7]} {scs[7].get('props')}"
+        for sc in scs:
+            frame(sc, {"du": {"shirt": "grün"}})
+        # ein Löwe ohne Winzling-Video: steht als Tier neben dem Menschen; Redewendungen meinen keinen Löwen
+        s2 = stage.direct([{"text": "Ein Löwe schläft bis zu zwanzig Stunden am Tag.", "place": "park", "time": "day", "props": [], "actors": [{"id": "du", "action": "talk", "pos": "center"}]},
+                           {"text": "Du bekommst den Löwenanteil vom Kuchen.", "place": "kitchen", "time": "day", "props": [], "actors": [{"id": "du", "action": "talk", "pos": "center"}]}],
+                          [(0, 4), (4, 8)], "Fakten", "fakten")
+        assert any(a.get("kind") == "lion" for a in s2[0]["actors"]) and not any(a.get("kind") == "lion" for a in s2[1]["actors"]), "Löwe/Löwenanteil"
+        # Ähnlichkeits-Sperre: Frage- und Fürwörter tragen kein Thema, Vorgaben hinter dem Gedankenstrich zählen nicht
+        assert not (main_._stems("Warum dieses winzige Tier gefährlicher ist als ein Löwe") & main_._stems("Warum du bei Musik Gänsehaut bekommst"))
+        assert main_._topic_core("Warum bekommen wir Gänsehaut? – Vorgaben: winzige Muskeln") == "Warum bekommen wir Gänsehaut?"
+    check("Winzling/Löwe", _tiny)
+
     def _goose():                                                # Prüfung 17.11.2026: Katze sträubt ihr Fell, „dir ist kalt“, gerupfte Gans, Mäuse
         T = [("Eine Katze sträubt ihr Fell heute noch genauso.", "forest"), ("Dir ist kalt.", "snow"),
              ("Der Name kommt daher, dass deine Haut dann aussieht wie die einer gerupften Gans.", "livingroom"),

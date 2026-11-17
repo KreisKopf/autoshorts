@@ -116,6 +116,24 @@ def p_rock(d, x, t, s=1.0):
     d.line((x + 20 * s, GROUND - 60 * s, x + 50 * s, GROUND - 30 * s, x + 44 * s, GROUND - 6), fill=(90, 88, 100), width=5)        # Riss
 
 
+def p_moss(d, x, t, s=1.0):
+    """Moospolster (Prüfung 17.11.2026, Bärtierchen): sattgrünes, buckliges Kissen mit Sporenkapseln auf dünnen Stielen und Tautropfen."""
+    g, gd, gl = (86, 150, 70), (60, 116, 54), (124, 186, 96)
+    for bx, r in ((-150, 70), (-70, 100), (30, 112), (126, 84), (190, 56)):          # Umriss der Buckel
+        d.chord((x + bx - r - O, GROUND - r - O, x + bx + r + O, GROUND + r + O), 180, 360, fill=INK)
+    for bx, r in ((-150, 70), (-70, 100), (30, 112), (126, 84), (190, 56)):
+        d.chord((x + bx - r, GROUND - r, x + bx + r, GROUND + r), 180, 360, fill=gd)
+        d.chord((x + bx - r * 0.84, GROUND - r * 0.92, x + bx + r * 0.7, GROUND + r * 0.92), 180, 360, fill=g)
+    for i, (bx, by) in enumerate(((-150, 44), (-96, 78), (-40, 60), (10, 96), (62, 70), (116, 62), (168, 36), (-10, 36), (-116, 26), (86, 28))):   # Tupfen: einzelne Moos-Büschel
+        d.ellipse((x + bx - 16, GROUND - by - 10, x + bx + 16, GROUND - by + 10), fill=gl if i % 2 else gd)
+    for bx, h in ((-84, 150), (6, 176), (98, 140)):                                  # Sporenkapseln, wiegen sich leicht
+        sway = math.sin(t * 2.2 + bx) * 8
+        d.line((x + bx, GROUND - h + 60, x + bx + sway, GROUND - h), fill=(120, 90, 60), width=6)
+        d.ellipse((x + bx + sway - 10, GROUND - h - 22, x + bx + sway + 10, GROUND - h + 4), fill=(196, 150, 84), outline=INK, width=4)
+    for bx, by in ((-30, 104), (140, 72)):                                           # Tautropfen
+        d.ellipse((x + bx - 9, GROUND - by - 9, x + bx + 9, GROUND - by + 9), fill=(190, 230, 250), outline=(90, 150, 200), width=3)
+
+
 def p_box(d, x, t, s=1.0):
     _r(d, (x - 100, GROUND - 170, x + 100, GROUND), (214, 170, 110), 8)
     d.line((x - 100, GROUND - 120, x + 100, GROUND - 120), fill=INK, width=5)
@@ -1326,7 +1344,7 @@ def p_cctv(d, x, t, s=1.0):
 
 
 PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
-         "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "police": p_police, "ambulance": p_ambulance, "fire": p_fire, "tv": p_tv, "computer": p_computer,
+         "eclipse": p_eclipse, "sprout": p_sprout, "moss": p_moss, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "police": p_police, "ambulance": p_ambulance, "fire": p_fire, "tv": p_tv, "computer": p_computer,
          "money": p_money, "rocket": p_rocket, "ufo": p_ufo, "meteor": p_meteor, "explosion": p_explosion, "earth": p_earth,
          "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano,
          "cart": p_cart, "candle": p_candle, "bus": p_bus, "truck": p_truck, "house": p_house, "trafficlight": p_trafficlight,
@@ -1350,7 +1368,7 @@ PROP_ALIASES = {"tuer": "door", "türe": "door", "türen": "door", "haustür": "
                 "schneehaufen": "pile", "sandhaufen": "sandpile", "sand": "sandpile", "müll": "trash", "müllberg": "trash", "garbage": "trash",
                 "wasserhahn": "faucet", "tap": "faucet", "hahn": "faucet", "gebäude": "house", "möbel": "shelf", "aktie": "money", "aktien": "money", "wasserstrom": "faucet", "wasserströme": "faucet", "wasserstrahl": "faucet", "glas": "glass", "wasserglas": "glass", "getränk": "glass",
                 "fass": "barrel", "tonne": "barrel", "ölfass": "barrel", "solar": "solarpanel", "solaranlage": "solarpanel",
-                "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun",
+                "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "moos": "moss", "moospolster": "moss", "mooskissen": "moss", "flechte": "moss", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun",
                 "fischglas": "aquarium", "goldfischglas": "aquarium", "aquarien": "aquarium", "fischbecken": "aquarium", "fish tank": "aquarium", "fishtank": "aquarium"}
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
@@ -1642,7 +1660,7 @@ PROP_ALIASES.update({"fell": "fur", "pelz": "fur", "luftschicht": "fur", "luftpo
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
 # Was hier fehlt (Naturereignisse, Himmelskörper), wird als Schaubild frei gezeichnet.
 SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": (7.5, 1010), "tree": (7.5, 1130), "rock": (0.8, 1262),
-         "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262),
+         "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262), "moss": (0.7, 1262),
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
@@ -3114,6 +3132,20 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     elif kind == "tardigrade":
         # Bärtierchen: pralles, gegliedertes Körperchen auf acht Stummelbeinen mit Krallen, runder Rüssel-Mund
         col = (214, 186, 150)
+        if action == "tun":
+            # Tönnchen (Prüfung 17.11.2026): eingerollt und ausgetrocknet – faltige, geschrumpfte Tonne, Beine eingezogen, Augen zu, regungslos
+            col = (186, 156, 118)
+            ell(-150, -196, 150, -8, col)
+            for rx_ in (-96, -48, 0, 48, 96):                                    # Falten quer über die Tonne
+                hh = 94 * math.sqrt(max(0.0, 1 - (rx_ / 150) ** 2))
+                d.line((*P(rx_, -102 - hh * 0.86), *P(rx_ - 10, -102), *P(rx_, -102 + hh * 0.86)), fill=_dark(col, 0.34), width=max(2, int(7 * k)), joint="curve")
+            for sx in (-92, -30, 30, 92):                                        # eingezogene Beinstummel
+                ell(sx - 20, -30, sx + 20, 0, _dark(col, 0.2), shade=0)
+            eye(70, -118, 13, "closed")
+            eye(112, -112, 13, "closed")
+            ell(128, -92, 160, -64, _light(col, 0.25), shade=0)                  # eingezogener Rüssel
+            out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
+            return out, ax / S, gy / S, fly
         step = math.sin(t * 6)
         by = -150 + bob * 0.3
         segs = [(-150, 6, 70), (-80, -6, 88), (0, -10, 92), (78, -4, 82)]
@@ -3428,13 +3460,68 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         brow(hx + 34, by - 38, 13, -1)
         cheek(hx - 28, by + 16, 11)
         mouthf(hx + 12, by + 24, 10)
+    elif kind in ("lion", "löwe", "loewe"):
+        # Löwe (Prüfung 17.11.2026, „zäher als ein Löwe“): kräftige Raubkatze mit dunkler Mähne, breiter Brust, dicken Pranken und Schwanzquaste;
+        # action = "roar": Maul weit offen, Kopf gehoben; action = "walk": schreitet
+        col = (228, 176, 92)
+        belly = _light(col, 0.55)
+        mane = (150, 92, 44)
+        roar = action == "roar"
+        walk = action in ("walk", "run")
+        oy = bob * 0.25
+        wag = math.sin(t * 2.6) * 14
+        sw = math.sin(t * 6) if walk else 0.0
+        tail = [(-176, -214 + oy), (-236, -226 + oy), (-276, -186 + oy + wag * 0.4), (-282 + wag * 0.5, -128 + oy + wag)]
+        stroke(tail, 18, col)
+        ell(tail[-1][0] - 22, tail[-1][1] - 14, tail[-1][0] + 22, tail[-1][1] + 34, mane, shade=0.1)   # Quaste
+
+        def leg(front, e, c2):
+            top = (96, -150 + oy) if front else (-132, -150 + oy)
+            paw = (top[0] + 6 + 46 * e, -12 - 10 * max(0.0, e))
+            knee = ((top[0] + paw[0]) / 2 + (10 if front else -18), (top[1] + paw[1]) / 2 + 4)
+            stroke([top, knee, paw], 36, c2)
+            ell(paw[0] - 24, paw[1] - 14, paw[0] + 34, paw[1] + 12, _light(c2, 0.25), shade=0)
+        leg(True, -sw * 0.9 - 0.25, _dark(col, 0.22))                             # Beine der abgewandten Seite
+        leg(False, sw * 0.9 - 0.3, _dark(col, 0.22))
+        ell(-200, -262 + oy, 70, -122 + oy, col)                                 # Rumpf
+        ell(-10, -280 + oy, 150, -112 + oy, col)                                 # breite Brust
+        ell(-184, -254 + oy, 96, -132 + oy, col, shade=0, line=False)
+        ell(-130, -178 + oy, 110, -124 + oy, belly, shade=0, line=False)
+        leg(True, sw * 0.9, col)
+        leg(False, -sw * 0.9, col)
+        hx, hy = 170, -318 + oy - (14 if roar else 0)
+        for i_m in range(12):                                                    # Mähne: Kranz aus Zotteln rund um den Kopf, bis auf die Brust
+            a_m = i_m * math.pi / 6 + math.sin(t * 2 + i_m) * 0.03
+            mx_, my_ = hx - 14 + math.cos(a_m) * 84, hy + 6 + math.sin(a_m) * 92
+            ell(mx_ - 46, my_ - 46, mx_ + 46, my_ + 46, mane, shade=0)
+        ell(hx - 104, hy - 96, hx + 76, hy + 112, mane, shade=0, line=False)
+        ell(hx - 60, hy - 4, hx + 30, hy + 120, _dark(mane, 0.18), shade=0, line=False)   # dunklere Brustmähne
+        for ex_ in (-40, 30):                                                    # runde Ohren
+            ell(hx + ex_ - 20, hy - 86, hx + ex_ + 20, hy - 44, col, shade=0)
+            ell(hx + ex_ - 9, hy - 76, hx + ex_ + 9, hy - 54, _dark(col, 0.35), shade=0, line=False)
+        ell(hx - 60, hy - 62, hx + 70, hy + 56, col)                             # Kopf
+        ell(hx + 4, hy - 2, hx + 86, hy + 54, belly, shade=0, line=False)        # helle Schnauze
+        poly([(hx + 46, hy + 2), (hx + 74, hy + 2), (hx + 60, hy + 20)], (70, 44, 40), shade=0)   # Nase
+        if roar:
+            mh_ = 26 + 6 * math.sin(t * 14)
+            d.ellipse(B(hx + 30, hy + 24, hx + 84, hy + 24 + 2 * mh_), fill=(110, 36, 46), outline=INK, width=max(2, int(5 * k)))
+            for tx_ in (40, 70):                                                 # Reißzähne
+                poly([(hx + tx_ - 6, hy + 28), (hx + tx_ + 6, hy + 28), (hx + tx_, hy + 46)], (250, 250, 244), shade=0, line=False)
+            d.chord(B(hx + 40, hy + 24 + mh_, hx + 76, hy + 24 + 2 * mh_ - 4), 0, 180, fill=(240, 120, 130))
+        else:
+            mouthf(hx + 58, hy + 34, 14)
+        eye(hx + 2, hy - 18, 15, "angry" if roar else None)
+        eye(hx + 46, hy - 18, 15, "angry" if roar else None)
+        brow(hx + 2, hy - 44, 14, 1)
+        brow(hx + 46, hy - 44, 14, -1)
+        cheek(hx - 26, hy + 22, 13)
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)

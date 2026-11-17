@@ -319,6 +319,14 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Fassung 132 fehlte so die ganze Erklärung mit dem Muskel an der Haarwurzel); der Einstieg darf nichts behaupten, was das Thema nicht hergibt.
   „… Luftschicht ein, wie eine dickere Jacke“: keine Jacke neben der Fell-Tafel. Der Muskel an der Haarwurzel zeigt keinen Oberarm (`muskel`).
   Kälte-Wetter (`cold`: Eiskristalle, Atemwolke) entfällt am Ende von `direct`, wenn die Szene drinnen spielt (in Video 133 schneite es im Wohnzimmer).
+- Prüfung 17.11.2026, Termin 21:00 („Dieses winzige Tier ist zäher als ein Löwe“, Bärtierchen): Neues Wesen `lion` (Löwe mit Mähne; `roar` brüllt,
+  `walk` schreitet), neuer Ort `savannah` (trockenes Grasland, Schirmakazien `acacia`), neue Requisite `moss` (Moospolster), Bärtierchen-Haltung `tun`
+  (eingerolltes, ausgetrocknetes Tönnchen). `stage._one_tiny`/`_tiny_story`: Nennt das Drehbuch genau einen Winzling (`TINY_KINDS`), ist er das Tier des
+  ganzen Videos – jeder Satz ohne Menschen zeigt ihn (vorher nur der Satz mit seinem Namen), Menschen-Sätze über das Tier zeigen es kleiner neben dem
+  Menschen (`_ksz`: Größe je Figur), im All treibt es schwerelos, der Vergleich mit dem Löwen zeigt Löwe und Winzling in der Savanne, ab „trocknet aus“
+  bleibt es Tönnchen bis „erwacht/krabbelt/lebt“ (`TUN_RE`, `WAKE_RE`). „Löwe“ steht in `NAMED_ANIMALS` (nicht „Löwenanteil“).
+  `main.too_similar`: Frage- und Fürwörter („warum“, „dieses“) zählen nicht als Thema, bei alten Videos zählt nur der Kern vor dem Gedankenstrich
+  (`_topic_core`) – der vorbereitete Bärtierchen-Plan wurde als „gab es gerade erst (Warum du bei Musik Gänsehaut bekommst)“ übergangen. Selbsttest: `_tiny`.
 
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten

@@ -161,6 +161,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   axolotl (rosa Schwanzlurch mit Kiemenästen) · überall: tardigrade (Bärtierchen).
   Wildtiere an Land und in der Luft: cheetah (Gepard – action "run" = Galopp), eagle (Adler, fliegt), flea (Floh – action "jump" = springt hoch).
   Nennt der Satz Gepard, Adler oder Floh, zeigt die Regie das Tier von selbst groß und allein im Bild.
+  lion (Löwe mit Mähne – action "roar" = brüllt; Ort "savannah" = Savanne mit Schirmakazien). Bärtierchen: action "tun" = eingerolltes, ausgetrocknetes
+  Tönnchen. In einem Video über das Bärtierchen zeigt die Regie das Tier von selbst in jedem Satz, der von ihm handelt; Moos heißt "moss".
   Sie spielen am Ort underwater; nie monster oder fish als Ersatz für ein Tier nehmen, das es hier gibt.
   sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle),
   brain (das Gehirn als rosa Figur – für Sätze wie „dein Gehirn schlägt Alarm“; Kennung z. B. "gehirn").

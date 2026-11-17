@@ -262,7 +262,7 @@ def _prepare(scene, cast):
             look_a = dataclasses.replace(look_a, hat="headphones")
         actors.append({"look": look_a, "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
-                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed")), "hero": bool(a.get("hero")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
+                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed")), "hero": bool(a.get("hero")), "ksz": float(a["_ksz"]) if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool) and 0.2 <= a["_ksz"] <= 2.0 else 0.0, "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"),
                        "teeth": TEETH_COLORS.get(str(a.get("teeth") or "").lower())})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
@@ -777,7 +777,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             x += 34 * math.sin(t * 0.9 + a["seed"])
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
-            ksz = 1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)   # Tiere in echter Größe – als Hauptfigur des Videos groß
+            ksz = a["ksz"] if a.get("ksz") else 1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)   # Tiere in echter Größe – als Hauptfigur des Videos groß
             if a.get("small") and a["kind"] == "brain":
                 ksz *= 0.72                                # neben dem Bett: kleiner, damit die Schlafende sichtbar bleibt
             if close and a["kind"] == "brain":
@@ -859,7 +859,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 head_y = gy - 300 * scale
             _zzz(od, pose, x, head_y + 75 * scale, t)
         if weather in extras.COLD and not close and not (not a["kind"] and (pose.lying or action in ("sleep", "fall"))):
-            ksz_c = (1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)) if a["kind"] else a["look"].size
+            ksz_c = (a["ksz"] if a.get("ksz") else 1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)) if a["kind"] else a["look"].size
             extras.draw_breath(over, x + facing * 86 * scale * ksz_c, head_y + 215 * scale * ksz_c, facing, t + a["seed"], scale * ksz_c)   # Kälte: Atemwolke vor dem Mund
         if a.get("say"):
             extras.draw_bubble(over, a["say"], x, head_y, t, min(scale, 1.4))
@@ -1219,6 +1219,7 @@ def direct(scenes, times, topic="", style="", look=""):
     sea_age = any_age = 0
     _SEA_DEF[0] = None
     _SEA_DEF[0] = _sea_default(scenes, topic)
+    any_video = _one_tiny(scenes)
     sea_topic = bool(_re0.search(SEA_TOPIC_RE, str(topic or "").lower() + " " + " ".join(str(x.get("text") or "") for x in scenes if isinstance(x, dict)).lower()))
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
@@ -1462,6 +1463,8 @@ def direct(scenes, times, topic="", style="", look=""):
                 any_last = None
             else:
                 any_now = any_last                         # „Sie trocknen jahrelang aus“: der Satz handelt weiter vom selben Tier
+        if not any_now and any_video and not gfx_s and not other_s and not sea_now and not any(_re0.search(pat, txt0) for pat, _k, _pl in NAMED_ANIMALS):
+            any_now = any_video                            # Ein-Tier-Video („Es rollt sich ein …“, „Dieser Winzling …“): jeder Satz ohne Menschen zeigt das Tier – auch viele Sätze nach seinem Namen
         if any_now and not gfx_s and places.resolve(sc.get("place")) not in MAPS:
             sc["actors"] = acts = [{"id": "_tier", "kind": any_now, "hero": True, "action": "idle", "speaks": False, "pos": "center", "emote": "", "say": "",
                                     "hold": "", "facing": "right", "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}]
@@ -2211,6 +2214,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _map_sense(scenes)
     _ice_story(scenes, topic)
     _named_animals(scenes, topic)
+    _tiny_story(scenes)
     _household(scenes)
     _music(scenes, topic)
     _fur_ancestor(scenes)
@@ -2551,6 +2555,7 @@ NAMED_ANIMALS = ((r"\bkuh\b|\bkühen?\b|\brind(?:er|ern|es)?\b|\bkalb\b|\bkälbe
                  (r"schimpanse|\baffen?\b|menschenaffe|gorilla", "chimp", r"schimpansen|\baffen\b|gorillas"),
                  (r"\bmücken?\b|stechmücke|moskito", "mosquito", r"mücken|moskitos"),
                  (r"\b(?:eine|die|jede|der|einer) fliege\b|stubenfliege", "fly", r"$^"),
+                 (r"\blöwen?\b|\blöwin", "lion", r"(?:\b(?:die|viele|alle|zwei|drei|mehrere|ganze[ns]?) |-)löwen\b|\blöwen (?:sind|haben|jagen|leben|töten|brüllen)|löwenrudel"),
                  (r"spinne", "spider", r"spinnen"), (r"katze|kater\b|kätzchen", "cat", r"katzen"), (r"\bhund(?:e|es|en|chen)?\b|welpe", "dog", r"\bhunde[n]?\b|welpen"))
 ANIMAL_IDIOM_RE = (r"schwein gehabt|armes schwein|kein schwein|schweinehund|sparschwein|glücksschwein|schweineteuer|affenhitze|affenzahn|laust der affe|heilige kuh|"
                    r"melkkuh|kuhhandel|hundemüde|hundeelend|katzensprung|katzenwäsche|\bkater\b.{0,20}(?:alkohol|party|getrunken)|spinnst|spinnen die")
@@ -2561,6 +2566,101 @@ ANCESTOR_RE = r"behaart\w* (?:vorfahr|urahn|ahnen)|(?:vorfahr\w*|urahn\w*|ahnen)
 
 
 CAT_PUFF_RE = r"(?:katze|kater\b|kätzchen)\w* (?:\w+ ){0,6}(?:sträub|plustert|buckel|fell (?:\w+ ){0,3}auf)|(?:sträub|plustert|aufgestellt)\w* (?:\w+ ){0,6}(?:katze|kater\b|kätzchen)|katzenbuckel"
+
+
+TINY_KINDS = ("tardigrade",)
+TINY_REF_RE = r"\b(es|ihm|ihn|sie|ihnen|ihre[nmrs]?|seine[nmrs]?|tier(?:e|en|es|chen)?|winzling\w*|überlebenskünstler\w*|bärtierchen|wasserbär\w*)\b"
+TUN_RE = (r"tönnchen|tonnen(?:zustand|stadium|form)|\btonne\b|trocknet\w*|ausgetrocknet|getrocknet|eingetrocknet|vertrocknet|rollt sich|eingerollt|zieht (?:\w+ ){0,3}beine ein|"
+          r"scheintot|kryptobiose|stoffwechsel|regungslos|starre\b|wie tot")
+WAKE_RE = (r"erwach|wacht (?:\w+ ){0,4}auf|aufgewacht|aufwach|krabbel|wieder (?:los|munter|lebendig|wach|aktiv)|zum leben|\blebt\b|\bleben sie\b|findest|\bwach und\b|\baktiv\b|"
+           r"\bfrisst|\bläuft|tapst|spaziert|moos")
+LION_SCENE_RE = r"\blöwen?\b|\blöwin"
+
+
+def _one_tiny(scenes):
+    """Nennt das ganze Drehbuch genau einen Winzling (Bärtierchen), ist er das Tier des Videos (Prüfung 17.11.2026: Im vorbereiteten Plan
+    „Dieses winzige Tier …“ stand das Bärtierchen nur im Satz mit seinem Namen im Bild, danach 15 Sätze lang ein Mensch im Park oder gar nichts)."""
+    kinds = {k for sc in scenes if isinstance(sc, dict) for pat, k in ANY_CREATURES if re.search(pat, str(sc.get("text") or "").lower())}
+    if any(_sea_named(str(sc.get("text") or "").lower()) for sc in scenes if isinstance(sc, dict)):
+        return None                                       # „3 Tiere mit Superkräften“ (Axolotl, Qualle, Bärtierchen): jedes Tier hat nur seine eigenen Sätze
+    return next(iter(kinds)) if len(kinds) == 1 and next(iter(kinds)) in TINY_KINDS else None
+
+
+def _tiny_story(scenes):
+    """Ein-Tier-Video über einen Winzling: Der Vergleich mit dem Löwen zeigt beide (Löwe groß in der Savanne, der Winzling klein davor); spricht ein
+    Menschen-Satz vom Tier („Forscher gaben ihm Wasser“, „Du findest sie im Moos“), steht es neben dem Menschen – im All und unter Wasser allein;
+    ausgetrocknet ist es ein Tönnchen (extras.creature „tun“), bis ein Satz vom Aufwachen spricht."""
+    kind = _one_tiny(scenes)
+    if not kind:
+        return scenes
+    tun = False
+
+    def beast(**kw):
+        return dict({"id": "_tier", "kind": kind, "hero": True, "action": "idle", "speaks": False, "pos": "center", "emote": "", "say": "", "hold": "",
+                     "facing": "right", "emotion": ""}, **kw)
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        if re.search(WAKE_RE, low):
+            tun = False
+        elif re.search(TUN_RE, low):
+            tun = True
+        if "actors" not in sc or str(sc.get("shot") or "") in ("graphic", "insert"):
+            continue
+        rp = places.resolve(backdrop(sc))
+        if rp in MAPS:
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if places.resolve(sc.get("place")) == "space" and rp == "custom" and str((sc.get("backdrop") or {}).get("sky") or "") == "night":
+            rp = "space"                                   # Weltall mit eigener Kulisse (Sternenhimmel über Fels) bleibt Weltall
+        alone = rp in ("space", "underwater", "highsky")
+        if re.search(LION_SCENE_RE, low) and rp == "space":   # „Ein Löwe hätte im Weltall keine Chance“: der Löwe treibt erschrocken und allein im All
+            sc["actors"] = [{"id": "_loewe", "kind": "lion", "hero": True, "action": "idle", "speaks": False, "pos": "center", "emote": "!", "say": "", "hold": "",
+                             "facing": "right", "emotion": "scared"}]
+            sc["props"], sc["crowd"], sc["shot"], sc["float"], sc["_no_cut"] = [], "", "", "float", True
+            continue
+        if re.search(LION_SCENE_RE, low) and not alone:    # „zäher als ein Löwe“: der Löwe groß, der Winzling klein und unbeeindruckt vor ihm
+            if not _said_place(low) or rp in INDOOR or rp in GENERIC:
+                sc["place"], sc["backdrop"], sc["time"], sc["weather"] = "savannah", None, "day", ""
+            sc["actors"] = [{"id": "_loewe", "kind": "lion", "hero": True, "action": "roar" if re.search(r"stark|stärk|gefährlich|brüll|mächtig|könig|raubtier|zäh|hart", low) else "idle",
+                             "speaks": False, "pos": 340, "emote": "", "say": "", "hold": "", "facing": "right",
+                             "emotion": "scared" if re.search(r"keine chance|wäre (?:\w+ ){0,2}tot|überleb\w* (?:\w+ ){0,3}nicht|hätte", low) else ""},
+                            beast(hero=False, pos=930, facing="left", emotion="happy")]
+            sc["props"], sc["crowd"], sc["shot"], sc["overlay"] = [], "", "", (sc.get("overlay") if str((sc.get("overlay") or {}).get("type") or "") in ("tag", "") else None)
+            sc["_no_cut"], sc["float"], sc["aloft"] = True, "", False
+            continue
+        mine = [a for a in acts if str(a.get("kind") or "").lower() == kind]
+        humans = [a for a in acts if not a.get("kind")]
+        if not mine and not any(a.get("kind") for a in acts) and re.search(TINY_REF_RE, low):
+            if alone or not humans:
+                sc["actors"] = acts = [beast()]
+                sc["crowd"] = ""
+            else:
+                h = humans[0]
+                h["pos"] = 170
+                h.pop("to", None)
+                h["facing"] = "right"
+                if str(h.get("action") or "") in ("walk", "run", "float", "sit", "sleep", "look_around"):
+                    h["action"] = "point" if re.search(r"gaben|gab |gibt|tropf|gießt|schick|setzt|legt|zeig|fand|find|entdeck|untersuch|beobacht", low) else "think"
+                sc["actors"] = acts = [h, beast(pos=760, facing="left", hero=False, _ksz=1.1)]   # neben dem Menschen: deutlich kleiner als er, aber gut zu erkennen
+                sc["crowd"] = ""
+                if str(sc.get("shot") or "") in ("close", "event"):
+                    sc["shot"] = ""
+            mine = [a for a in acts if str(a.get("kind") or "").lower() == kind]
+        if mine and re.search(r"\bmoos", low) and rp not in ("space", "underwater", "highsky") and rp not in INDOOR:   # „in fast jedem Moospolster“: das Moos liegt im Bild
+            sc["props"] = [{"type": "moss", "pos": 480 if len(acts) > 1 else 230}]
+            sc["_no_cut"] = True
+        if mine and rp == "space" and not sc.get("float"):
+            sc["float"] = "float"                          # im All steht nichts auf dem Boden: das Tier treibt schwerelos
+        for a in mine:
+            if tun:
+                a.update(action="tun", emotion="", emote="")
+            elif str(a.get("action") or "") == "tun":
+                a["action"] = "idle"
+            if re.search(r"erwach|wacht (?:\w+ ){0,4}auf|krabbel|wieder (?:los|munter|lebendig)|zum leben", low):
+                a["emotion"] = "happy"
+    return scenes
 
 
 def _named_animals(scenes, topic):
@@ -3091,7 +3191,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -3134,7 +3234,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -3935,12 +4035,12 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
               (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
               (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server|zock|gaming|videospiel|ballerspiel|\bgamer|\bpc\b|laptop", "computer"),
-              (r"pflanze[n]? wachs|keim|\bsaat", "sprout"), (r"haarwurzel|haarbalg|härchen", "goosebumps"),
+              (r"pflanze[n]? wachs|keim|\bsaat", "sprout"), (r"\bmoos(?!gummi)|moospolster|mooskissen", "moss"), (r"haarwurzel|haarbalg|härchen", "goosebumps"),
               (r"adrenalin|nebenniere|stresshormon", "adrenaline"), (FUR_RE, "fur")]   # „Gänsehaut“ selbst setzt stage._music (nicht als Ding des Themas in jeder zweiten Szene)
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
@@ -4176,7 +4276,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if actors and shot != "close" and not ov_tall and place not in MAPS and not scene.get("float") and str(scene.get("shot") or "") != "event":
         for a_w in actors:                                              # Tiere: echte Breite ins Bild nehmen und nicht an den Rand stellen
             if a_w["kind"] and a_w["x0"] == a_w["x1"]:
-                ksz_w = 1.0 if a_w.get("giant") else HERO_SIZE.get(a_w["kind"], 0.8) if a_w.get("hero") else CREATURE_SIZE.get(a_w["kind"], 1.0)
+                ksz_w = a_w["ksz"] if a_w.get("ksz") else 1.0 if a_w.get("giant") else HERO_SIZE.get(a_w["kind"], 0.8) if a_w.get("hero") else CREATURE_SIZE.get(a_w["kind"], 1.0)
                 r_w = extras.creature(a_w["kind"], 0.0, 1, 0.0, "", scale * 0.9 * ksz_w)
                 if r_w:
                     a_w["_hw"] = r_w[0].width / 2 + 40
@@ -4188,6 +4288,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
             if a_l.get("kind") in LONG_KINDS:
                 xs += [a_l["x1"] - 190, a_l["x1"] + 190]
                 cam["punch"] = None
+            if a_l.get("kind") == "lion" and a_l.get("hero"):          # der Löwe samt Mähne und Schwanzquaste ist breiter als jedes andere Tier
+                xs += [max(40, a_l["x1"] - 330), min(W - 40, a_l["x1"] + 300)]
         for a_l in actors:                                              # Taucher samt Flossen und Lampe ganz im Bild lassen
             if a_l.get("kind") == "diver":
                 xs += [max(210, a_l["x1"] - 330), min(W - 210, a_l["x1"] + 330)]

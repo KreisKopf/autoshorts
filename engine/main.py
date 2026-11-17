@@ -152,7 +152,7 @@ def known_thing(word):
             | {"mensch", "menschen", "leute", "person", "personen", "figur", "mann", "frau", "kind", "kinder", "menge", "familie",
                "katze", "hund", "spinne", "krebs", "krebse", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
                "wespe", "delfin", "delfine", "delphin", "schweinswal", "schweinswale", "tümmler", "kuh", "kühe", "rind", "rinder", "schwein", "schweine", "ferkel",
-               "schimpanse", "schimpansen", "affe", "affen", "mücke", "mücken", "stechmücke", "fliege", "atemloch", "atemlöcher", "eisloch", "eislöcher", "armee", "soldaten", "truppen", "heer",
+               "schimpanse", "schimpansen", "affe", "affen", "mücke", "mücken", "stechmücke", "fliege", "löwe", "löwen", "löwin", "raubkatze", "atemloch", "atemlöcher", "eisloch", "eislöcher", "armee", "soldaten", "truppen", "heer",
                "gehirn", "hirn", "himmel", "boden", "licht", "dunkelheit", "nacht", "regen", "schnee", "sturm", "wind", "nebel", "erdbeben", "hitze", "kälte", "kaelte", "frost"})
     forms = {w, w.rstrip("n"), w.rstrip("en"), w.rstrip("e"), w.rstrip("s"), w + "e", w + "n", w + "en"}
     if forms & pool:
@@ -184,7 +184,17 @@ def missing_things(script, topic):
 def _stems(text):
     import re as _re
     return {w[:6] for w in _re.findall(r"[a-zäöüß]{5,}", str(text or "").lower())
-            if w not in ("wäre", "würde", "passiert", "plötzlich", "morgen", "menschen", "alles", "unsere", "wirklich", "komplett", "einfach")}
+            if w not in ("wäre", "würde", "passiert", "plötzlich", "morgen", "menschen", "alles", "unsere", "wirklich", "komplett", "einfach",
+                         # Frage- und Fürwörter tragen kein Thema: „Warum dieses winzige Tier …“ galt sonst als dasselbe wie „Warum du bei Musik …“ (Prüfung 17.11.2026)
+                         "warum", "wieso", "weshalb", "dieses", "diese", "dieser", "diesem", "diesen", "deine", "deinem", "deinen", "deiner", "wirst", "können",
+                         "kannst", "macht", "machen", "eigentlich", "manche", "manchmal", "immer", "niemals", "genau", "darum",
+                         "deshalb", "welche", "welcher", "welches", "sogar", "nicht", "keine", "einen", "einem", "einer", "eines", "dinge", "fakten", "gründe")}
+
+
+def _topic_core(topic):
+    """Kern eines Themas: der Teil vor „ – Vorgaben …“ (Neubauten der Prüfung hängen dort lange Stichpunkte an)."""
+    import re as _re
+    return _re.split(r"\s+[–—-]\s+", str(topic or ""), maxsplit=1)[0]
 
 
 def too_similar(topic, trend=None, published_only=False, skip_slot=None):
@@ -203,7 +213,7 @@ def too_similar(topic, trend=None, published_only=False, skip_slot=None):
     for old in olds:
         if trend and old.get("trend") and old["trend"].get("title") == trend.get("title"):
             return old.get("title") or old.get("topic")
-        b = _stems(f"{old.get('topic') or ''} {old.get('title') or ''}")
+        b = _stems(f"{_topic_core(old.get('topic'))} {old.get('title') or ''}")   # nur der Kern: die Vorgaben hinter dem Gedankenstrich sind kein Thema
         if a and b and len(a & b) >= max(2, round(0.5 * len(a))):
             return old.get("title") or old.get("topic")
     return None

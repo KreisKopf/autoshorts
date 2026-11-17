@@ -1287,6 +1287,30 @@ def _mid_palms(p, rnd):
             p.poly([top, ((top[0] + ex) / 2, top[1] - h * 0.1), (ex, ey), ((top[0] + ex) / 2, top[1] + h * 0.03)], (70, 160, 84), o=5)
 
 
+def _mid_acacia(p, rnd):
+    """Schirmakazien der Savanne: schlanker, geneigter Stamm, flache breite Krone."""
+    for x, y, lean in ((150, 1050, 1), (940, 1110, -1)):
+        h, w = px(4.4, y), max(12, int(px(0.34, y)))
+        top = (x + lean * h * 0.1, y - h * 0.82)
+        p.line((x, y, x + lean * h * 0.03, y - h * 0.45, top[0], top[1]), INK, w + 10)
+        p.line((x, y, x + lean * h * 0.03, y - h * 0.45, top[0], top[1]), p.c((120, 88, 60)), w)
+        for bx_ in (-0.26, 0.24):                                                # zwei Hauptäste
+            p.line((top[0], top[1] + h * 0.1, top[0] + bx_ * h, top[1] - h * 0.06), INK, int(w * 0.6) + 8)
+            p.line((top[0], top[1] + h * 0.1, top[0] + bx_ * h, top[1] - h * 0.06), p.c((120, 88, 60)), int(w * 0.6))
+        r = h * 0.15
+        p.blobs([(top[0] - h * 0.34, top[1] - h * 0.08, r * 0.8), (top[0] - h * 0.16, top[1] - h * 0.14, r), (top[0] + h * 0.04, top[1] - h * 0.16, r * 1.05),
+                 (top[0] + h * 0.22, top[1] - h * 0.13, r), (top[0] + h * 0.36, top[1] - h * 0.07, r * 0.75)], (116, 150, 74), o=5)
+
+
+def _el_savannah(p, rnd):
+    """Weite Savanne: flache, trockene Hügelketten mit vereinzelten fernen Schirmbäumen."""
+    p.d.ellipse((-400, BASE - 250, 800, BASE + 300), fill=p.c((198, 184, 118)), outline=INK, width=5)
+    p.d.ellipse((380, BASE - 190, 1500, BASE + 300), fill=p.c((186, 168, 100)), outline=INK, width=5)
+    for bx, by, r in ((240, BASE - 270, 26), (700, BASE - 215, 30), (900, BASE - 200, 22)):
+        p.line((bx, by + r * 2.2, bx, by), INK, 9)
+        p.blobs([(bx - r, by, r * 0.7), (bx, by - r * 0.3, r), (bx + r, by, r * 0.7)], (128, 150, 86), o=4)
+
+
 def _mid_cactus(p, rnd):
     for x, y in ((170, 1050), (930, 1120)):
         h, w = px(3.0, y), px(0.5, y)
@@ -1468,13 +1492,13 @@ def _mid_tower(p, rnd):
     p.oval((cx - 9, y - m * 14.4 - 9, cx + 9, y - m * 14.4 + 9), (240, 80, 70), o=4, glow=True)
 
 
-MID = {"tower": _mid_tower, "church": _mid_church, "forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus,
+MID = {"tower": _mid_tower, "church": _mid_church, "forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus, "acacia": _mid_acacia,
        "street": _mid_street, "powerlines": _mid_powerlines, "windturbines": _mid_windturbines, "gasstation": _mid_gasstation,
        "powerplant": _mid_powerplant, "bridge": _mid_bridge, "camp": _mid_camp, "graves": _mid_graves}
 
 BACK = {"mountains": _el_mountains, "hills": _el_hills, "dunes": _el_dunes, "forest": _el_forest, "trees": _el_trees,
         "deadtrees": _el_deadtrees, "city": _el_city, "village": _el_village, "ruins": _el_ruins, "factory": _el_factory,
-        "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier, "packice": _el_packice, "harbor": _el_harbor}
+        "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier, "packice": _el_packice, "harbor": _el_harbor, "savannah": _el_savannah}
 FRONT_EL = {"fields": _fg_fields, "river": _fg_river, "dryriver": _fg_dryriver, "lake": _fg_lake, "cracks": _fg_cracks,
             "rocks": _fg_rocks, "flowers": _fg_flowers, "asphalt": _fg_asphalt, "icecracks": _fg_icecracks}
 EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald": "forest", "bäume": "trees", "stadt": "city",
@@ -1492,7 +1516,7 @@ EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald"
               "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenkräne": "harbor", "containerterminal": "harbor", "port": "harbor"}
 
 
-MID_ORDER = ("tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
+MID_ORDER = ("tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "acacia", "palms",
              "deadtrees", "trees", "forest")
 
 
@@ -1621,6 +1645,7 @@ OUTDOOR_SPECS = {
     "headquarters": {"ground": "road", "elements": ["city", "tower"]},
     "icesea": {"ground": "ice", "elements": ["packice", "icecracks"]},        # zugefrorenes Meer (Regie: stage._ice_story)
     "harbor": {"ground": "quay", "elements": ["sea", "harbor"]},              # Hafen: Kai, Containerbrücken, Frachter
+    "savannah": {"ground": "dry", "elements": ["savannah", "acacia"]},        # Savanne: trockenes Grasland mit Schirmakazien (Löwe, Gepard)
 }
 
 
@@ -2002,7 +2027,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
           "serverroom": serverroom, "cinema": cinema, "highsky": highsky, "garage": garage}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
-ALIASES = {"asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
+ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
            "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "livingroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
