@@ -520,7 +520,11 @@ def main():
         assert places.resolve(stage.backdrop(s3[2])) == "underwater", "Druck nicht in der Tiefsee"
         assert s3[4].get("shot") != "insert" and [q.get("type") for q in s3[4].get("props") or []] == ["moss"] and any(a.get("kind") == "tardigrade" for a in s3[4]["actors"]), f"Moos-Einschub: {s3[4]}"
         assert [q.get("type") for q in s3[5].get("props") or []] == ["moss"] and not s3[5]["actors"][0].get("hero"), f"Dächer: {s3[5]}"
-        for sc in s3:
+        s4 = stage.direct([{"text": "Das Bärtierchen ist winzig.", "place": "lab", "actors": [], "props": []},
+                           {"text": "Ein Schutz-Eiweiß legt sich wie ein Schild um ihr Erbgut.", "place": "lab", "actors": [], "props": []}], [(0, 4), (4, 8)], "Tiere", "tiere")
+        assert [q.get("type") for q in s4[1].get("props") or []] == ["shield"] and s4[1]["actors"][0].get("_ksz"), f"Schild: {s4[1]}"
+        assert stage._prepare(dict(s4[1]), {})[3][0].get("ksz"), "Größe je Figur geht in _prepare verloren"
+        for sc in s3 + s4:
             frame(sc, {"du": {"shirt": "grün"}})
         # ein Löwe ohne Winzling-Video: steht als Tier neben dem Menschen; Redewendungen meinen keinen Löwen
         s2 = stage.direct([{"text": "Ein Löwe schläft bis zu zwanzig Stunden am Tag.", "place": "park", "time": "day", "props": [], "actors": [{"id": "du", "action": "talk", "pos": "center"}]},

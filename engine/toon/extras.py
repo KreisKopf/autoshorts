@@ -134,6 +134,26 @@ def p_moss(d, x, t, s=1.0):
         d.ellipse((x + bx - 9, GROUND - by - 9, x + bx + 9, GROUND - by + 9), fill=(190, 230, 250), outline=(90, 150, 200), width=3)
 
 
+def p_shield(d, x, t, s=1.0):
+    """Schutzschild mit Erbgut-Strang (Prüfung 17.11.2026: „ein Schutz-Eiweiß legt sich wie ein Schild um ihr Erbgut“): blauer Wappenschild, darauf eine
+    gewundene Doppelhelix; pulsiert leicht."""
+    k = 1.0 + 0.03 * math.sin(t * 5)
+    w, h, top = 120 * k, 300 * k, GROUND - 330
+    out = [(x - w, top), (x + w, top), (x + w, top + h * 0.5), (x, top + h), (x - w, top + h * 0.5)]
+    d.polygon(out, fill=(40, 96, 190), outline=INK, width=O)
+    d.polygon([(x - w + 18, top + 18), (x - 4, top + 18), (x - 4, top + h - 30), (x - w + 18, top + h * 0.5 - 6)], fill=(74, 140, 230))
+    pa, pb = [], []
+    for i in range(13):                                                              # Doppelhelix
+        yy = top + 44 + i * (h * 0.62) / 12
+        dx = math.sin(i * 0.78 + t * 2.4) * 46
+        pa.append((x + dx, yy))
+        pb.append((x - dx, yy))
+        if i % 2 == 0:
+            d.line((x + dx, yy, x - dx, yy), fill=(255, 236, 170), width=6)
+    d.line(pa, fill=(255, 255, 255), width=10, joint="curve")
+    d.line(pb, fill=(255, 196, 80), width=10, joint="curve")
+
+
 def p_box(d, x, t, s=1.0):
     _r(d, (x - 100, GROUND - 170, x + 100, GROUND), (214, 170, 110), 8)
     d.line((x - 100, GROUND - 120, x + 100, GROUND - 120), fill=INK, width=5)
@@ -1344,7 +1364,7 @@ def p_cctv(d, x, t, s=1.0):
 
 
 PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
-         "eclipse": p_eclipse, "sprout": p_sprout, "moss": p_moss, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "police": p_police, "ambulance": p_ambulance, "fire": p_fire, "tv": p_tv, "computer": p_computer,
+         "eclipse": p_eclipse, "sprout": p_sprout, "moss": p_moss, "shield": p_shield, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "police": p_police, "ambulance": p_ambulance, "fire": p_fire, "tv": p_tv, "computer": p_computer,
          "money": p_money, "rocket": p_rocket, "ufo": p_ufo, "meteor": p_meteor, "explosion": p_explosion, "earth": p_earth,
          "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano,
          "cart": p_cart, "candle": p_candle, "bus": p_bus, "truck": p_truck, "house": p_house, "trafficlight": p_trafficlight,
@@ -1368,7 +1388,7 @@ PROP_ALIASES = {"tuer": "door", "türe": "door", "türen": "door", "haustür": "
                 "schneehaufen": "pile", "sandhaufen": "sandpile", "sand": "sandpile", "müll": "trash", "müllberg": "trash", "garbage": "trash",
                 "wasserhahn": "faucet", "tap": "faucet", "hahn": "faucet", "gebäude": "house", "möbel": "shelf", "aktie": "money", "aktien": "money", "wasserstrom": "faucet", "wasserströme": "faucet", "wasserstrahl": "faucet", "glas": "glass", "wasserglas": "glass", "getränk": "glass",
                 "fass": "barrel", "tonne": "barrel", "ölfass": "barrel", "solar": "solarpanel", "solaranlage": "solarpanel",
-                "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "moos": "moss", "moospolster": "moss", "mooskissen": "moss", "flechte": "moss", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun",
+                "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "schutzschild": "shield", "moos": "moss", "moospolster": "moss", "mooskissen": "moss", "flechte": "moss", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun",
                 "fischglas": "aquarium", "goldfischglas": "aquarium", "aquarien": "aquarium", "fischbecken": "aquarium", "fish tank": "aquarium", "fishtank": "aquarium"}
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
@@ -1660,7 +1680,7 @@ PROP_ALIASES.update({"fell": "fur", "pelz": "fur", "luftschicht": "fur", "luftpo
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
 # Was hier fehlt (Naturereignisse, Himmelskörper), wird als Schaubild frei gezeichnet.
 SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": (7.5, 1010), "tree": (7.5, 1130), "rock": (0.8, 1262),
-         "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262), "moss": (0.7, 1262),
+         "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262), "moss": (0.7, 1262), "shield": (1.7, 1262),
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),

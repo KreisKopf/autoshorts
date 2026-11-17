@@ -189,6 +189,8 @@ def sanitize(sc):
                 continue
             c = {"id": str(a.get("id")) if isinstance(a.get("id"), (str, int)) and not isinstance(a.get("id"), bool) else "held",
                  "speaks": a.get("speaks") is True, **({"hero": True} if a.get("hero") is True else {})}
+            if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool):
+                c["_ksz"] = float(a["_ksz"])               # Größe je Figur, von der Regie gesetzt (stage._tiny_story)
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
             if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
@@ -2650,7 +2652,7 @@ def _tiny_story(scenes):
                 h["facing"] = "right"
                 if str(h.get("action") or "") in ("walk", "run", "float", "sit", "sleep", "look_around"):
                     h["action"] = "point" if re.search(r"gaben|gab |gibt|tropf|gießt|schick|setzt|legt|zeig|fand|find|entdeck|untersuch|beobacht", low) else "think"
-                sc["actors"] = acts = [h, beast(pos=760, facing="left", hero=False, _ksz=1.1)]   # neben dem Menschen: deutlich kleiner als er, aber gut zu erkennen
+                sc["actors"] = acts = [h, beast(pos=760, facing="left", hero=False, _ksz=0.85)]   # neben dem Menschen: deutlich kleiner als er, aber gut zu erkennen
                 sc["crowd"] = ""
                 if str(sc.get("shot") or "") in ("close", "event"):
                     sc["shot"] = ""
@@ -2663,12 +2665,16 @@ def _tiny_story(scenes):
             rp = "underwater"
         if mine and len(acts) == 1 and re.search(r"\bdach|dächer|mauer|gehweg|pflaster|regenrinne|hauswand|balkon", low) and rp not in ("space", "underwater"):
             # „auf Hausdächern und Mauern … unsichtbar für das bloße Auge“: kein haushohes Tier auf der Straße – klein neben einem Moospolster
-            mine[0].update(hero=False, _ksz=1.0, pos=700, facing="left")
+            mine[0].update(hero=False, _ksz=0.8, pos=700, facing="left")
             sc["props"] = [{"type": "moss", "pos": 330}]
-            sc["crowd"], sc["_no_cut"] = "", True
+            sc["crowd"], sc["_no_cut"], sc["no_traffic"] = "", True, True
         if mine and len(acts) == 1 and tun:                # mehrere Tönnchen-Sätze hintereinander: abwechselnd links und rechts, mal von der anderen Seite
             n_tun += 1
             mine[0].update(pos=(400, 680)[n_tun % 2], facing=("right", "left")[n_tun % 2])
+        if mine and len(acts) == 1 and re.search(r"\bschild\b|schutzschild|schutz-?eiweiß|schutz-?protein|erbgut|\bdna\b", low) and rp not in ("space", "underwater"):
+            mine[0].update(pos=770, facing="left", hero=False, _ksz=0.9)   # „wie ein Schild um ihr Erbgut“: der Schild mit dem Erbgut-Strang steht neben dem Tier
+            sc["props"] = [{"type": "shield", "pos": 300}]
+            sc["_no_cut"] = True
         if mine and tun and not sc.get("overlay") and re.search(r"hitze|heiß|grad", low):
             fig_t = find_figure(str(sc.get("text") or ""))
             if fig_t and str(fig_t.get("unit") or "").upper().startswith("GRAD"):
