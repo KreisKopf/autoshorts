@@ -1,0 +1,418 @@
+{
+ "title": "Warum bekommen wir Gänsehaut?",
+ "scenes": [
+  {
+   "text": "Warum plötzliche Gänsehaut dein Überleben sichern kann.",
+   "see": "Du frierst draußen im Schnee und bekommst plötzliche Gänsehaut.",
+   "place": "snow",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "mountains"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shiver",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "DER REFLEX"
+   }
+  },
+  {
+   "text": "Und der wahre Grund dafür wird dich absolut überraschen.",
+   "see": "Du stehst im Wohnzimmer und staunst über eine Entdeckung.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "WINZIGER MUSKEL"
+   }
+  },
+  {
+   "text": "Deine Haut wölbt sich dabei zu kleinen Hügeln.",
+   "see": "Eine Schautafel zeigt die Haut mit kleinen Hügeln.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "emotion": "",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Steuern kannst du das nicht, den Befehl gibt dein unwillkürliches Nervensystem.",
+   "see": "Du greifst dir an den Kopf und denkst nach.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "UNWILLKÜRLICH"
+   }
+  },
+  {
+   "text": "Der Name kommt daher, dass deine Haut dann aussieht wie die einer gerupften Gans.",
+   "see": "Eine gerupfte Gans steht im Hof.",
+   "place": "farm",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "farm",
+     "fields"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gerupfte_gans"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Unsere Vorfahren hatten noch ein dichtes Fell am ganzen Körper.",
+   "see": "Ein urzeitlicher Vorfahre mit dichtem Fell steht im Wald.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_ahne",
+     "kind": "chimp",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Bei Kälte stellte sich das Fell auf und schloss eine wärmende Luftschicht ein, wie eine dickere Jacke.",
+   "see": "Der Vorfahre steht im tiefen Winterwald im Schnee.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "fur"
+    },
+    {
+     "type": "lib_jacke"
+    }
+   ],
+   "actors": [
+    {
+     "id": "vorfahre",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "chimp",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "hero": true,
+     "wear": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "WÄRME"
+   }
+  },
+  {
+   "text": "Bei Gefahr wirkten unsere Vorfahren mit aufgestelltem Fell größer und schreckten Feinde ab.",
+   "see": "Der Vorfahre stellt im Wald das Fell gegen Gefahren auf.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_ahne",
+     "kind": "chimp",
+     "hero": true,
+     "pos": "center",
+     "action": "puff",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": "angry"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "GEFAHR",
+    "color": "orange"
+   }
+  },
+  {
+   "text": "Eine Katze sträubt ihr Fell heute noch genauso.",
+   "see": "Eine Katze sträubt ihr Fell im Garten.",
+   "place": "park",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_katze",
+     "kind": "cat",
+     "hero": true,
+     "pos": "center",
+     "action": "puff",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": "angry"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du denkst, Gänsehaut wärmt dich? Falsch, dafür hast du viel zu wenig Haare.",
+   "see": "Du schüttelst im Wohnzimmer ungläubig den Kopf.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Bei dir ist der Reflex nur noch ein Überbleibsel aus der Urzeit.",
+   "see": "Du stehst im Schnee und denkst an vergangene Zeiten.",
+   "place": "snow",
+   "time": "day",
+   "weather": "cold",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Ausgelöst wird er auch von Adrenalin, deshalb bekommst du Gänsehaut bei Angst, etwa beim Horrorfilm.",
+   "see": "Eine Schautafel zeigt Adrenalin im Körper.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "adrenaline"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "ADRENALIN"
+   }
+  },
+  {
+   "text": "Und auch bei starken Gefühlen, wenn dich etwas tief berührt.",
+   "see": "Du stehst im Wohnzimmer und fühlst tiefe Rührung.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Forscher fanden bei Mäusen heraus, dass derselbe Muskel und sein Nerv bei anhaltender Kälte das Haarwachstum anregen.",
+   "see": "Eine Maus sitzt im Wald und spürt die Kälte.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "muskel"
+    },
+    {
+     "type": "lib_maus"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "MÄUSE"
+   }
+  },
+  {
+   "text": "Gänsehaut ist ein Gruß deiner Vorfahren, den dein Körper bis heute nicht vergessen hat.",
+   "see": "Du stehst im Schnee und lächelst freundlich.",
+   "place": "snow",
+   "time": "day",
+   "weather": "cold",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "URZEIT"
+   }
+  }
+ ]
+}
