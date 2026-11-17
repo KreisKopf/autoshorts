@@ -1,5 +1,5 @@
 {
- "updated": 1794904026.600587,
+ "updated": 1794906098.7941933,
  "enough": true,
  "counted": 18,
  "total": 20,
@@ -36,10 +36,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1670,
+   "avg_views": 1669,
    "avg_likes": 42.0,
-   "like_rate": 2.51,
-   "avg_score": 2300
+   "like_rate": 2.52,
+   "avg_score": 2299
   },
   {
    "slug": "musik",
