@@ -1,5 +1,5 @@
 {
- "updated": 1794946843.4908144,
+ "updated": 1794948646.955605,
  "enough": true,
  "counted": 20,
  "total": 23,
@@ -18,7 +18,7 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1654,
+   "avg_views": 1655,
    "avg_likes": 52.5,
    "like_rate": 3.17,
    "avg_score": 2442
@@ -27,10 +27,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1742,
+   "avg_views": 1755,
    "avg_likes": 43.0,
-   "like_rate": 2.47,
-   "avg_score": 2388
+   "like_rate": 2.45,
+   "avg_score": 2400
   },
   {
    "slug": "whatif",
@@ -39,25 +39,25 @@
    "avg_views": 1722,
    "avg_likes": 40.6,
    "like_rate": 2.36,
-   "avg_score": 2335
+   "avg_score": 2336
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1505,
+   "avg_views": 1510,
    "avg_likes": 41.0,
    "like_rate": 2.72,
-   "avg_score": 2126
+   "avg_score": 2131
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1735,
+   "avg_views": 1736,
    "avg_likes": 12.0,
    "like_rate": 0.69,
-   "avg_score": 2005
+   "avg_score": 2006
   },
   {
    "slug": "tiere",
@@ -76,7 +76,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.03,
-  "comedy": 1.05,
+  "comedy": 1.06,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -84,7 +84,7 @@
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🐾 Tierwelt (Ø 1491 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2441 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2444 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1915,
+   "views": 1927,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2920
+   "score": 2932
   },
   {
    "id": 80,
