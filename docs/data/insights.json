@@ -1,5 +1,5 @@
 {
- "updated": 1794877534.886128,
+ "updated": 1794879392.821098,
  "enough": true,
  "counted": 17,
  "total": 20,
@@ -27,19 +27,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1722,
+   "avg_views": 1720,
    "avg_likes": 40.6,
    "like_rate": 2.36,
-   "avg_score": 2335
+   "avg_score": 2334
   },
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1666,
+   "avg_views": 1665,
    "avg_likes": 42.0,
    "like_rate": 2.52,
-   "avg_score": 2296
+   "avg_score": 2295
   },
   {
    "slug": "musik",
@@ -54,10 +54,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1454,
+   "avg_views": 1446,
    "avg_likes": 27.0,
-   "like_rate": 1.86,
-   "avg_score": 1889
+   "like_rate": 1.87,
+   "avg_score": 1881
   },
   {
    "slug": "fakten",
@@ -83,7 +83,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1020 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2399 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2397 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -102,21 +102,21 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2255,
+   "views": 2249,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3170
+   "score": 3164
   },
   {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
-   "views": 2006,
+   "views": 2005,
    "likes": 66,
    "comments": 0,
    "shares": 0,
-   "score": 2996
+   "score": 2995
   },
   {
    "id": 80,
