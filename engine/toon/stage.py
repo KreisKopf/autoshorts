@@ -2658,7 +2658,9 @@ def _tiny_story(scenes):
                     sc["shot"] = ""
             mine = [a for a in acts if str(a.get("kind") or "").lower() == kind]
         if mine and re.search(r"\bmoos", low) and rp not in ("space", "underwater", "highsky") and rp not in INDOOR:   # „in fast jedem Moospolster“: das Moos liegt im Bild
-            sc["props"] = [{"type": "moss", "pos": 480 if len(acts) > 1 else 230}]
+            sc["props"] = [{"type": "moss", "pos": 480 if len(acts) > 1 else 170}]
+            if len(acts) == 1:
+                mine[0].update(pos=790, facing="left")     # das Tier steht neben dem Moos – in der Mitte verdeckte es das Polster (Video 138)
             sc["_no_cut"] = True
         if mine and len(acts) == 1 and re.search(r"\bdruck\b|tiefsee|meeresgrund|meeresboden", low) and rp not in ("space", "underwater"):
             sc.update(place="underwater", backdrop=None, time="night", weather="")   # „enormer Druck“: am Grund der Tiefsee – nicht in einer Höhle
@@ -4341,7 +4343,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
         cam.update(tight=True, zt=max(1.0, min(1.42, W / span)), fx=(max(xs) + min(xs)) / 2)
     if actors and all(a_g["kind"] in LONG_KINDS for a_g in actors) and not scene.get("float") and place != "highsky" and \
             (place != "underwater" or all(a_g["kind"] in TINY_KINDS for a_g in actors)):
-        cam["ay"] = 1262.0                                                  # nur Tiere am Boden: Die Kamera zoomt um die Bodenlinie – der Fixpunkt oben schob Bärtierchen und Löwe sonst in die Untertitel (Video 137)
+        cam["ay"] = 1450.0                                                  # nur Tiere am Boden: Die Kamera zoomt um einen Punkt unter der Bodenlinie, die Füße rücken dabei nach oben – der Fixpunkt oben schob Bärtierchen und Löwe sonst in die Untertitel (Video 137)
     if scene.get("_balloon") and isinstance(scene.get("overlay"), dict):
         cam["punch"] = None                                                 # kein Sprung ins Bild: der Ballon wüchse sonst unter das Schild
     cam["opener"] = index == 0

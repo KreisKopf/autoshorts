@@ -549,6 +549,14 @@ def polish(js):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])
             js[k] = re.sub(r"[ \t]*[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D]+", "", js[k]).strip()      # keine Emojis in Titel und Beschreibung
+    if isinstance(js.get("description"), str):           # Prüfung 17.11.2026 (Video 138): Zeilen mit „ · “ statt Zeilenumbruch; „Würdest du tausend Jahre im Eis schlafen …?“ – die Zahl sagt niemand
+        js["description"] = re.sub(r"\s+[·•|]\s+", "\n", js["description"])
+        spoken_d = " ".join(str(x.get("text") or "") for x in (js.get("scenes") or []) if isinstance(x, dict)).lower()
+        lines_d = [l for l in js["description"].replace("\\n", "\n").split("\n") if l.strip()]
+        num_d = r"\b(?:hundert\w*|tausend\w*|zehntausend\w*|million\w*|milliarde\w*|billion\w*|\d[\d.,]*)\b"
+        keep_d = [l for i_d, l in enumerate(lines_d) if i_d == 0 or all(m_d.group(0)[:6] in spoken_d for m_d in re.finditer(num_d, l.lower()))]
+        if spoken_d and len(keep_d) != len(lines_d):
+            js["description"] = "\n".join(keep_d)
     if isinstance(js.get("description"), str):           # der Kanal spricht den Zuschauer an – kein „Wir zeigen dir“
         js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)?, ", "Hier siehst du, ", js["description"])
         js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)? ", "Hier siehst du ", js["description"])
