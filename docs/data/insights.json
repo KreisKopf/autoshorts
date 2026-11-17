@@ -1,5 +1,5 @@
 {
- "updated": 1794956580.7109811,
+ "updated": 1794958720.9292974,
  "enough": true,
  "counted": 20,
  "total": 23,
@@ -9,10 +9,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1800,
+   "avg_views": 1799,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2445
+   "avg_score": 2444
   },
   {
    "slug": "storys",
@@ -45,28 +45,28 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1534,
+   "avg_views": 1533,
    "avg_likes": 41.0,
    "like_rate": 2.67,
-   "avg_score": 2155
+   "avg_score": 2154
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1736,
+   "avg_views": 1738,
    "avg_likes": 12.0,
    "like_rate": 0.69,
-   "avg_score": 2006
+   "avg_score": 2008
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1492,
+   "avg_views": 1491,
    "avg_likes": 27.0,
    "like_rate": 1.81,
-   "avg_score": 1927
+   "avg_score": 1926
   }
  ],
  "weights": {
@@ -82,8 +82,8 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1492 Aufrufe) – kommt seltener dran.",
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1491 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2451 zu 705 Punkte)."
  ],
  "words_good": [],
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1932,
+   "views": 1928,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2937
+   "score": 2933
   },
   {
    "id": 80,
