@@ -1,7 +1,7 @@
 {
- "updated": 1794923209.3196738,
+ "updated": 1794925007.1036391,
  "enough": true,
- "counted": 18,
+ "counted": 19,
  "total": 21,
  "needed": 6,
  "categories": [
@@ -42,6 +42,15 @@
    "avg_score": 2328
   },
   {
+   "slug": "fakten",
+   "name": "💡 Fakten",
+   "n": 4,
+   "avg_views": 1456,
+   "avg_likes": 42.5,
+   "like_rate": 2.92,
+   "avg_score": 2101
+  },
+  {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
@@ -58,32 +67,23 @@
    "avg_likes": 27.0,
    "like_rate": 1.83,
    "avg_score": 1911
-  },
-  {
-   "slug": "fakten",
-   "name": "💡 Fakten",
-   "n": 3,
-   "avg_views": 1323,
-   "avg_likes": 34.7,
-   "like_rate": 2.62,
-   "avg_score": 1853
   }
  ],
  "weights": {
-  "fakten": 0.83,
-  "storys": 1.1,
+  "fakten": 0.93,
+  "storys": 1.08,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.05,
-  "comedy": 1.04,
+  "whatif": 1.03,
+  "comedy": 1.03,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1323 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2420 zu 706 Punkte)."
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1476 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2445 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -119,24 +119,24 @@
    "score": 2994
   },
   {
+   "id": 124,
+   "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
+   "category": "fakten",
+   "views": 1855,
+   "likes": 66,
+   "comments": 0,
+   "shares": 0,
+   "score": 2845
+  },
+  {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2120,
+   "views": 2119,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2810
-  },
-  {
-   "id": 62,
-   "title": "Hollywood Heists sind physikalisch komplett wild",
-   "category": "storys",
-   "views": 1644,
-   "likes": 65,
-   "comments": 0,
-   "shares": 0,
-   "score": 2619
+   "score": 2809
   }
  ],
  "flop": [
@@ -144,11 +144,11 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1126,
+   "views": 1125,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1411
+   "score": 1410
   },
   {
    "id": 58,
