@@ -23,6 +23,10 @@ STYLES = {
     "trap": {"name": "Trap", "tempo": 1.0, "shift": 0, "lead": "pluck", "drums": "trap", "bass": "808", "pad": True},
     "edm": {"name": "EDM", "tempo": 1.12, "shift": 0, "lead": "saw", "drums": "house", "bass": "offbeat", "pad": True},
     "lofi": {"name": "Lo-Fi", "tempo": 0.86, "shift": 0, "lead": "keys", "drums": "lofi", "bass": "sub", "pad": True},
+    # Glas: wie die erfolgreichen Kugel-Videos – hohe, kurz angeschlagene Melodie, leichter Bass, kein Schlagzeug, Klirren auf jedem Ton
+    # (an einem Vorbild gemessen: Klangschwerpunkt ~1500–2000 Hz, gut die Hälfte Anschläge, ~20 % Bass, keine regelmäßige Kick)
+    "glas": {"name": "Glas", "tempo": 1.0, "shift": 12, "lead": "glass", "drums": "none", "bass": "sub", "pad": False,
+             "glass": 5.0, "lead_gain": 1.3, "bass_gain": 0.45},
     "pop": {"name": "Pop", "tempo": 1.08, "shift": 0, "lead": "pluck", "drums": "dance", "bass": "offbeat", "pad": True},
     "spedup": {"name": "Sped Up", "tempo": 1.28, "shift": 3, "lead": "bell", "drums": "pop", "bass": "sub", "pad": True},
 }
@@ -33,6 +37,7 @@ DRUMS = {   # Schlagzeug je Takt (in Schlägen): kick, snare, hat (Abstand), ope
     "house": {"kick": (0, 1, 2, 3), "snare": (1, 3), "hat": None, "open": (0.5, 1.5, 2.5, 3.5)},
     "lofi": {"kick": (0, 1.75, 2.5), "snare": (1, 3), "hat": 0.5, "swing": 0.08},
     "pop": {"kick": (0, 2, 2.5), "snare": (1, 3), "hat": 0.5},
+    "none": {"kick": (), "snare": (), "hat": None},                                   # Glas: nur Melodie, Bass und Klirren – kein Schlagzeug
     "dance": {"kick": (0, 1, 2, 3), "snare": (1, 3), "hat": 0.5, "open": (1.5, 3.5)},   # Radio-Pop: gerader Kick, Klatscher auf 2 und 4
 }
 
@@ -76,9 +81,24 @@ def lead_note(kind, m, dur):
     elif kind == "keys":                                 # Lo-Fi-E-Piano mit leichtem Beben
         s = (np.sin(2 * np.pi * f * t) + 0.3 * np.sin(2 * np.pi * 2 * f * t) + 0.12 * np.sin(2 * np.pi * 3.5 * f * t) * np.exp(-t * 9))
         s *= (1 + 0.08 * np.sin(2 * np.pi * 5 * t)) * _env(n, 0.004, 0.8)
+    elif kind == "glass":                                # Glas-Ton: hell, kurz angeschlagen, klingt in ~0,1 s ab (wie in den Kugel-Videos)
+        s = (np.sin(2 * np.pi * f * t) * np.exp(-t * 11) * 0.6 + np.sin(2 * np.pi * 2 * f * t) * np.exp(-t * 18) * 0.25
+             + np.sin(2 * np.pi * 4.2 * f * t) * np.exp(-t * 30) * 0.1 + np.sin(2 * np.pi * 0.5 * f * t) * np.exp(-t * 6) * 0.12) * _env(n, 0.002, 10)
     else:                                                # Glockenspiel
         s = (np.sin(2 * np.pi * f * t) * np.exp(-t * 3.2) * 0.62 + np.sin(2 * np.pi * 2 * f * t) * np.exp(-t * 6) * 0.22
              + np.sin(2 * np.pi * 3.01 * f * t) * np.exp(-t * 9) * 0.12) * _env(n, 0.003, 10)
+    return s
+
+
+def shatter(rng):
+    """Glas zerspringt: kurzes, helles Rauschen plus ein paar klirrende Splitter-Töne."""
+    n = int(0.35 * SR)
+    t = np.arange(n) / SR
+    noise = np.diff(np.diff(np.concatenate([[0, 0], rng.standard_normal(n)])))    # nur Höhen
+    s = noise * np.exp(-t * 40) * 0.18
+    for _ in range(5):
+        fr, t0 = rng.uniform(3000, 7500), rng.uniform(0, 0.06)
+        s += np.sin(2 * np.pi * fr * np.clip(t - t0, 0, None)) * np.exp(-np.clip(t - t0, 0, None) * rng.uniform(18, 35)) * (t >= t0) * 0.07
     return s
 
 
@@ -193,21 +213,24 @@ def build(song_seq, key, style_key, out: Path, lead_in_beats=None, seed=0):
         if m is None:
             continue
         t = (lead_in + b0) * beat
-        _add(buf, t, lead_note(st["lead"], m, d * beat), 0.55)
+        _add(buf, t, lead_note(st["lead"], m, d * beat), 0.55 * st.get("lead_gain", 1.0))
         hits.append((round(t, 4), m))
+    if st.get("glass"):                                  # jeder Melodieton zerbricht eine Scheibe: hörbares Klirren genau auf dem Ton
+        for t_h, _m in hits:
+            _add(buf, t_h, shatter(rng), float(st.get("glass") or 0.8))
     prog = harmonize([(b0, m, d) for b0, m, d in events], (tonic + shift) % 12, mode, bar)
     for k in range(int((total_beats - lead_in) / bar)):  # Akkorde und Bass je Takt
         root, pcs = prog[min(k, len(prog) - 1)]
         t = (lead_in + k * bar) * beat
         if st["pad"]:
             notes = sorted(55 + (pc - 55) % 12 for pc in pcs)   # Akkord zwischen G3 und F#4
-            _add(buf, t, pad_chord(notes, bar * beat), 1.0)
+            _add(buf, t, pad_chord(notes, bar * beat), st.get("pad_gain", 1.0))
         bass_m = 28 + (root - 4) % 12                    # Bass zwischen E1 und D#2
         if st["bass"] == "offbeat":
             for j in range(bar):
                 _add(buf, t + (j + 0.5) * beat, bass_note("offbeat", bass_m + 12, 0.4 * beat), 0.9)
         else:
-            _add(buf, t, bass_note(st["bass"], bass_m + (12 if st["bass"] == "sub" else 0), bar * beat * 0.95), 1.0)
+            _add(buf, t, bass_note(st["bass"], bass_m + (12 if st["bass"] == "sub" else 0), bar * beat * 0.95), st.get("bass_gain", 1.0))
     dr = DRUMS[st["drums"]]
     kk, sn = kick(1.3 if st["drums"] in ("phonk", "trap") else 1.0), snare(rng)
     first_drop = lead_in * beat

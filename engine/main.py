@@ -576,8 +576,10 @@ def make_bounce(cat, upload=True, force=None):
             styles = list(remix.STYLES)
             (channel_rand("styles") or random).shuffle(styles)   # jede Kopie mischt die Stile anders
             style = sorted(styles, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
-            if not last_st or last_st[-1] != "pop":       # jedes zweite Video im Pop-Stil (kommt am besten an)
-                style = "pop"
+            if not last_st or last_st[-1] != "glas":      # jedes zweite Video im Glas-Stil (nur Melodie + Klirren, wie die erfolgreichen Kugel-Videos)
+                style = "glas"
+            else:                                         # dazwischen Pop und die anderen Stile im Wechsel
+                style = sorted([x for x in styles if x != "glas"], key=lambda x: last_st.index(x) if x in last_st else -1)[0]
             want_style = next((w for w in want if w in remix.STYLES), None) if want_mel else None
             style = want_style or style
             song = {"remix": mel, "style": style, "asset": mel}
