@@ -4987,5 +4987,37 @@
   "slot": "2026-11-17 18:00",
   "review_at": 1794928409.6510482,
   "error": "Bei der Prüfung verworfen: Prüfung: vier Sekunden leeres Bild am Schluss – Neubau folgt"
+ },
+ {
+  "id": 135,
+  "category": "musik",
+  "topic": "Musik-Kugel: When the Saints Go Marching In (Pop Remix)",
+  "status": "rendered",
+  "created": 1794930099.736802,
+  "title": "Bekanntes Lied als Pop-Remix – erkennst du es? 🎵",
+  "description": "Ein Lied, das jeder kennt – als Pop-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
+  "hashtags": [
+   "#musik",
+   "#remix",
+   "#pop",
+   "#satisfying",
+   "#erkennstdudaslied",
+   "#shorts"
+  ],
+  "tags": [
+   "musik",
+   "melodie",
+   "when the saints go marching in (pop remix)",
+   "satisfying"
+  ],
+  "thumb_text": "ERKENNST DU ES?",
+  "duration": 24.4,
+  "providers": {
+   "text": "Melodie",
+   "voice": "eigener Ton"
+  },
+  "thumb": true,
+  "look": "musik",
+  "mp4": true
  }
 ]
