@@ -41,7 +41,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "chart", "radar")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "chart", "radar", "size")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -1124,7 +1124,154 @@ def _lines(d, text, f, max_w):
     return out + ([cur] if cur else [])
 
 
-DRAW = {"radar": _g_radar, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
+# ------------------------------------------------------------------ Größe veranschaulichen (winzige Tiere: Bärtierchen, Milbe, Floh …)
+
+_NUMW = {"ein": 1, "eins": 1, "einen": 1, "eine": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7, "acht": 8,
+         "neun": 9, "zehn": 10, "fünfzehn": 15, "zwanzig": 20, "dreißig": 30, "fünfzig": 50, "hundert": 100, "zweihundert": 200,
+         "dreihundert": 300, "fünfhundert": 500}
+_FRAC = {"halben": 0.5, "halbe": 0.5, "halber": 0.5, "viertel": 0.25, "zehntel": 0.1, "hundertstel": 0.01, "drittel": 1 / 3}
+_UNIT = {"mm": 1.0, "millimeter": 1.0, "mikrometer": 0.001, "µm": 0.001, "tausendstel millimeter": 0.001, "cm": 10.0, "zentimeter": 10.0}
+SIZE_RE = (r"(?:(\d+(?:[.,]\d+)?)|(anderthalb|eineinhalb)|(?:(?:nur |etwa |rund |gerade mal |knapp |ungefähr |circa |ca\. )*"
+           r"(?:(ein|eins|einen|eine|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|fünfzehn|zwanzig|dreißig|fünfzig|hundert|zweihundert|dreihundert|fünfhundert)\s+)?"
+           r"(halben|halbe|halber|viertel|zehntel|hundertstel|drittel)?))\s*(tausendstel millimeter|millimeter|mikrometer|zentimeter|µm|mm|cm)\b")
+
+
+def size_mm(text):
+    """Größenangabe aus einem Satz in Millimetern („einen halben Millimeter“ → 0.5, „0,1 mm“ → 0.1, „50 Mikrometer“ → 0.05).
+    Nur kleine Dinge (bis 2 cm) – für alles Größere braucht es kein Lineal."""
+    for m in re.finditer(SIZE_RE, str(text or "").lower()):
+        num, onehalf, word, frac, unit = m.groups()
+        if num:
+            v = float(num.replace(",", "."))
+        elif onehalf:
+            v = 1.5
+        elif frac:
+            v = (_NUMW.get(word, 1) if word else 1) * _FRAC[frac]
+        elif word:
+            v = _NUMW[word]
+        else:
+            continue
+        mm = v * _UNIT[unit]
+        if 0.001 <= mm <= 20:
+            return mm
+    return None
+
+
+def fmt_size(mm):
+    if mm < 0.1:
+        return f"{mm * 1000:.0f} µm"
+    txt = f"{mm:.2f}".rstrip("0").rstrip(".").replace(".", ",")
+    return f"{txt} mm"
+
+
+def _size_val(v):
+    m = re.match(r"\s*(\d+(?:[.,]\d+)?)\s*(µm|mm)", str(v or ""))
+    if not m:
+        return None
+    x = float(m.group(1).replace(",", "."))
+    return x / 1000 if m.group(2) == "µm" else x
+
+
+def _g_size(frame, g, t, dur):
+    """Wie klein ist das wirklich? Erst ganz nah: das Tier zwischen riesigen Grashalmen, Moos und einem Sandkorn – dann zoomt die
+    Kamera heraus, bis es als Pünktchen neben einem Lineal liegt; eine Klammer zeigt die echte Größe."""
+    from . import extras
+    mm = _size_val(g.get("value")) or 0.5
+    L = 1.0 if mm < 0.1 else 10.0 if mm <= 5 else 50.0                # Lineal: 1 mm, 1 cm oder 5 cm
+    ppm = 860 / L                                                       # Bildpunkte je Millimeter bei voller Ansicht
+    x_c = L * 0.3                                                       # hier steht das Tier auf dem Lineal
+    z0 = max(1.0, 620 / (mm * ppm))                                     # Anfang: das Tier etwa 620 Bildpunkte groß
+    z_a, z_b = 0.55, max(1.3, min(dur * 0.62, 2.5))
+    u = min(1.0, max(0.0, (t - z_a) / (z_b - z_a)))
+    e = u * u * (3 - 2 * u)
+    Z = z0 ** (1 - e)                                                   # gleichmäßig wirkender Zoom (geometrisch)
+    fx, fy = x_c + (L / 2 - x_c) * e, -(mm / 2) * (1 - e)               # Blickpunkt in Millimetern (y nach unten, Boden = 0)
+    ax, ay = W / 2, 960 * (1 - e) + 1130 * e                            # dort liegt der Blickpunkt im Bild
+
+    def P(x, y):
+        return (ax + (x - fx) * ppm * Z, ay + (y - fy) * ppm * Z)
+    sc_px = ppm * Z
+    d = ImageDraw.Draw(frame, "RGBA")
+    for i in range(0, H, 8):                                            # helle Makro-Welt statt Nacht-Hintergrund
+        k = i / H
+        d.rectangle((0, i, W, i + 8), fill=(int(214 - 30 * k), int(232 - 24 * k), int(214 - 70 * k)))
+    gy = P(0, 0)[1]
+    d.rectangle((0, gy, W, H), fill=(120, 92, 64))                      # Erdboden
+    rnd = random.Random(7)
+    ow = max(2, min(7, int(0.04 * sc_px)))
+    macro = L >= 10                                                     # Gras, Moos, Sandkorn nur bei Millimetern (unter 0,1 mm wären sie falsch groß)
+    for j in range(26 if macro else 0):                                                 # Grashalme: Millimeter breit, Zentimeter hoch
+        x = -3 * L / 10 + j * (L * 1.6 / 26) + rnd.uniform(-0.2, 0.2) * L / 10
+        if abs(x - x_c) < max(0.9, mm * 2.2) * L / 10:
+            continue
+        hgt, wid, lean = rnd.uniform(6, 16) * L / 10, rnd.uniform(0.45, 0.9) * L / 10, rnd.uniform(-1.5, 1.5) * L / 10
+        col = (int(60 + rnd.uniform(0, 40)), int(150 + rnd.uniform(0, 50)), int(60 + rnd.uniform(0, 30)))
+        pts = [P(x - wid / 2, 0), P(x + lean * 0.5 + wid * 0.25, -hgt * 0.6), P(x + lean, -hgt), P(x + lean * 0.5 - wid * 0.25, -hgt * 0.6), P(x + wid / 2, 0)]
+        d.polygon(pts, fill=col + (255,), outline=INK, width=ow)
+    w1, w2 = 0.9 * L / 10, 1.0 * L / 10
+    for x, hgt, wid, lean, col in (((x_c - mm * 0.95 - w1 / 2, 9 * L / 10, w1, -0.8 * L / 10, (52, 150, 70)),
+                                    (x_c + mm * 1.05 + w2 / 2, 12 * L / 10, w2, 1.2 * L / 10, (72, 170, 80))) if macro else ()):
+        pts = [P(x - wid / 2, 0), P(x + lean * 0.5 + wid * 0.25, -hgt * 0.6), P(x + lean, -hgt), P(x + lean * 0.5 - wid * 0.25, -hgt * 0.6), P(x + wid / 2, 0)]
+        d.polygon(pts, fill=col + (255,), outline=INK, width=ow)       # zwei Halme direkt neben dem Tier: von nah wie riesige Wände
+    for j in range(14 if macro else 0):                                 # Moospolster und ein Sandkorn neben dem Tier
+        mx, mr = x_c + rnd.uniform(-2.2, 2.6) * L / 10, rnd.uniform(0.12, 0.35) * L / 10
+        a_, b_ = P(mx - mr, -mr * 1.6), P(mx + mr, 0)
+        d.ellipse((a_[0], a_[1], b_[0], b_[1] + mr * sc_px * 0.2), fill=(70, 140, 70, 255), outline=INK, width=max(1, ow - 1))
+    sg = [(0, 0), (0.25, -0.5), (0.55, -0.62), (0.8, -0.35), (0.85, 0)]
+    sx0, sr = x_c + max(1.2, mm * 3) * L / 10 * (1 if mm < 3 else 0.6), 0.6 * (L / 10)
+    if macro:
+        d.polygon([P(sx0 + px * sr, py * sr) for px, py in sg], fill=(222, 196, 140, 255), outline=INK, width=ow)
+    img, fx_, fy_, _fly = extras.creature(str(g.get("kind") or "tardigrade"), t)   # das Tier selbst, in echter Größe
+    box = img.getbbox()
+    if box:
+        img = img.crop(box)
+        h_px = mm * sc_px
+        if h_px >= 3:
+            f = h_px / img.height
+            im2 = img.resize((max(1, int(img.width * f)), max(1, int(h_px))), Image.LANCZOS)
+            px_, py_ = P(x_c, 0)
+            frame.paste(im2, (int(px_ - im2.width / 2), int(py_ - im2.height)), im2)
+        else:
+            px_, py_ = P(x_c, 0)
+            d.ellipse((px_ - 2, py_ - 4, px_ + 2, py_), fill=INK)
+    rh = 0.28 * L                                                       # Lineal liegt vorne auf dem Boden
+    a_, b_ = P(0, 0.05 * L), P(L, 0.05 * L + rh)
+    d.rounded_rectangle((a_[0], a_[1], b_[0], b_[1]), int(min(30, 0.02 * L * sc_px)), fill=(246, 214, 96, 255), outline=INK, width=ow)
+    step = 0.1 if L == 1.0 else 1.0 if L == 10.0 else 5.0
+    n_t = int(round(L / step))
+    if step * sc_px >= 7:
+        for i in range(n_t + 1):
+            x = i * step
+            long_ = i % 5 == 0
+            p0, p1 = P(x, 0.05 * L), P(x, 0.05 * L + rh * (0.55 if long_ else 0.32))
+            d.line((p0[0], p0[1], p1[0], p1[1]), fill=INK, width=max(2, ow - (0 if long_ else 2)))
+        if e > 0.9:                                                     # Beschriftung, sobald das Lineal ganz im Bild ist
+            unit = "mm" if L <= 10 else "cm"
+            f_r = _font(46, "Bold")
+            for i, lab in ((0, "0"), (n_t // 2, (f"{L / 2:g}" if unit == "mm" else f"{L / 20:g}").replace(".", ",")), (n_t, (f"{L:g} mm" if unit == "mm" else f"{L / 10:g} cm").replace(".", ","))):
+                p0 = P(i * step, 0.05 * L + rh * 0.62)
+                w_ = d.textlength(lab, font=f_r)
+                d.text((min(W - 30 - w_, max(30, p0[0] - w_ / 2)), p0[1]), lab, font=f_r, fill=INK)
+    k = _pop(t, z_b, 0.4)                                                # Klammer mit der echten Größe
+    if k > 0:
+        top, bot = P(x_c, -mm), P(x_c, 0)
+        bx = bot[0] + max(26, mm * sc_px * 0.8)
+        d.line((bx, top[1], bx, bot[1]), fill=(230, 60, 50), width=6)
+        for yy in (top[1], bot[1]):
+            d.line((bx - 14, yy, bx + 14, yy), fill=(230, 60, 50), width=6)
+        f_v = _font(int(96 * min(1.0, k)), "anton")
+        lab = str(g.get("value"))
+        tx = min(W - 40 - d.textlength(lab, font=f_v), bx + 30)
+        d.text((tx, top[1] - 150), lab, font=f_v, fill=(230, 60, 50), stroke_width=6, stroke_fill=(255, 255, 255))
+        d.line((tx + 10, top[1] - 40, bx + 4, (top[1] + bot[1]) / 2), fill=(230, 60, 50), width=5)
+    kt = str(g.get("kicker") or "ECHTE GRÖSSE").upper()[:40]            # dunkle Schrift: der Hintergrund ist hier hell
+    f_k = _fit(d, kt, 70, 940, "Bold")
+    d.rounded_rectangle((W / 2 - d.textlength(kt, font=f_k) / 2 - 34, 268, W / 2 + d.textlength(kt, font=f_k) / 2 + 34, 268 + f_k.size + 44), 30,
+                        fill=(255, 255, 255, 215))
+    _center(d, 288, kt, f_k, fill=INK, shadow=False)
+
+
+DRAW = {"radar": _g_radar, "size": _g_size, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
         "news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
         "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
@@ -1135,6 +1282,9 @@ def clean(g):
     if not isinstance(g, dict) or str(g.get("type") or "").lower() not in TYPES:
         return None
     out = {"type": str(g["type"]).lower()}
+    if out["type"] == "size":                    # welches Tier gezeigt wird (nur bekannte Wesen)
+        kind = str(g.get("kind") or "").lower()
+        out["kind"] = kind if re.fullmatch(r"[a-z_]{2,24}", kind) else "tardigrade"
     for k in ("kicker", "value", "label", "sub", "text", "left", "right"):
         v = g.get(k)
         if isinstance(v, (str, int, float)) and not isinstance(v, bool) and str(v).strip():
@@ -1142,7 +1292,7 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "radar": None}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "radar": None, "size": "value"}[out["type"]]
     mode = str(g.get("mode") or "").lower()
     if out["type"] == "phone":
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"
@@ -1155,6 +1305,8 @@ def clean(g):
     if out["type"] == "score" and not re.match(r"^\s*\d{1,3}\s*[:\-–]\s*\d{1,3}\s*$", out["value"]):
         return None
     if out["type"] == "share" and not share_parts(out["value"]):
+        return None
+    if out["type"] == "size" and _size_val(out["value"]) is None:
         return None
     return out
 

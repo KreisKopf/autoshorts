@@ -1365,6 +1365,23 @@ def main():
         assert set(saved) == {"kompass"} and saved["kompass"]["aliases"] == ["kompasse"], saved.keys()
     check("Kanäle: Übernahme aus Kopien nur geprüft", _adopt)
 
+    def _size():                                                 # winzige Tiere: Größe mit Zoom und Lineal statt Tier so groß wie ein Bär
+        assert graphics.size_mm("nur etwa einen halben Millimeter groß") == 0.5 and graphics.size_mm("50 Mikrometer") == 0.05
+        assert graphics.size_mm("0,3 mm") == 0.3 and graphics.size_mm("Der Hai ist 4 Meter lang") is None
+        assert graphics.fmt_size(0.5) == "0,5 mm" and graphics.fmt_size(0.05) == "50 µm"
+        scs = [{"text": "Ein Löwe ist stark.", "place": "savannah", "actors": [{"id": "du"}]},
+               {"text": "Das Bärtierchen ist nur etwa einen halben Millimeter groß.", "place": "forest", "actors": [{"id": "_t", "kind": "tardigrade"}]},
+               {"text": "Es wird einen halben Millimeter groß.", "place": "forest", "actors": [{"id": "_t", "kind": "tardigrade"}]}]
+        stage.direct(scs, [(k * 3.5, k * 3.5 + 3.5) for k in range(3)], "Bärtierchen", "tiere", "")
+        assert scs[1].get("shot") == "graphic" and scs[1]["graphic"]["type"] == "size" and scs[1]["graphic"]["value"] == "0,5 mm", scs[1]
+        assert scs[2].get("graphic", {}) is None or (scs[2].get("graphic") or {}).get("type") != "size"   # nur einmal je Video
+        for v, k_ in (("0,5 mm", "tardigrade"), ("2 mm", "flea"), ("50 µm", "cell"), ("12 mm", "bee")):
+            g_ = graphics.clean({"type": "size", "value": v, "kind": k_})
+            for t_ in (0.0, 1.0, 3.0):
+                assert graphics.frame(g_, t_, 3.4) is not None
+        assert graphics.clean({"type": "size", "value": "groß"}) is None
+    check("Größe: winzige Tiere mit Zoom und Lineal", _size)
+
     from ..writer import repeat_trouble as _w_rep
     def _ice():                                                  # zugefrorenes Meer: Eisfläche statt Wellen/Gebirge, Schiff im Eis, Eisdecke über dem Wasser, Atemloch
         from PIL import Image

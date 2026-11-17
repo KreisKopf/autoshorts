@@ -1214,6 +1214,7 @@ def direct(scenes, times, topic="", style="", look=""):
     topic_place = _hint(topic)
     topic_place = topic_place if isinstance(topic_place, str) and topic_place in TOPIC_PLACES else None
     stale, topic_ins, gfx = 0, 0, 0
+    size_done = False                                     # „nur einen halben Millimeter groß“: einmal je Video die Größe mit Lineal zeigen
     charts = 0
     neon = str(look or "").lower() == "neon"
     cur_hud = ""
@@ -1802,6 +1803,16 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["actors"], sc["props"], sc["crowd"], sc["overlay"], sc["weather"] = [], [], "", None, ""
             acts, lone = [], False
             charts += 1
+        if not size_done and sc.get("shot") != "graphic":   # winziges Tier mit Größenangabe: Zoom heraus bis zum Lineal statt Tier so groß wie ein Bär
+            mm_s = graphics.size_mm(str(sc.get("text") or ""))
+            kinds_s = [str(a.get("kind") or "").lower() for a in (sc.get("actors") or []) if isinstance(a, dict)
+                       and str(a.get("kind") or "").lower() in extras.CREATURES and str(a.get("kind") or "").lower() not in ("ghost", "robot", "agent", "monster", "alien", "fridge", "diver")]
+            if mm_s and kinds_s:
+                g_s = graphics.clean({"type": "size", "value": graphics.fmt_size(mm_s), "kind": kinds_s[0], "kicker": "ECHTE GRÖSSE"})
+                if g_s:
+                    sc["shot"], sc["graphic"] = "graphic", g_s
+                    sc["actors"], sc["props"], sc["crowd"], sc["overlay"], sc["weather"] = [], [], "", None, ""
+                    acts, lone, size_done = [], False, True
         if sc.get("shot") == "graphic":
             gfx += 1
         elif (lone or not acts) and (fig_prev or neon or (i and scenes[i - 1].get("shot") == "graphic")) and sc.get("shot") in ("", "close", "event") \

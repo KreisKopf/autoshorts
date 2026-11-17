@@ -281,6 +281,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "radio", "kicker": "FUNK · KANAL 4", "text": "BERGWACHT"}                               Funkspruch oder Durchsage mit Wellenform
     {"type": "radar", "kicker": "FLUGSICHERUNG", "text": "SIGNAL VERLOREN", "sub": "lost"}           Radarschirm mit umlaufendem Suchstrahl und Leuchtpunkt; "sub": "lost" = der Punkt
                                                                                                      blinkt und erlischt (Flugzeug/Schiff verschwindet vom Radar), ohne "sub" bleibt er
+    {"type": "size", "value": "0,5 mm", "kind": "tardigrade"}                                        Zoom von ganz nah (Tier zwischen riesigen Grashalmen) heraus bis zum Lineal –
+                                                                                                     für winzige Tiere mit Größenangabe (kommt bei „einen halben Millimeter“ auch von selbst)
     {"type": "chart", "kicker": "AKTIENKURS", "value": "3 BIO.", "label": "DOLLAR"}                   Kurve schießt nach oben ("dark": true = stürzt ab) – für Kurse,
                                                                                                      Umsatz, Wachstum, Nachfrage; value/label nur, wenn der Sprecher die Zahl nennt
     {"type": "distance", "value": "100 m", "left": "IHR", "right": "ZIEL"}                           Entfernung als Messlinie zwischen zwei Punkten
