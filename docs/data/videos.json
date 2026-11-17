@@ -5127,7 +5127,7 @@
   "id": 138,
   "category": "tiere",
   "topic": "Dieses winzige Tier ist zäher als ein Löwe – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und kurzen Sätzen erzählen. Es geht um das Bärtierchen. Wichtig: Spätestens der zweite Satz nennt es beim Namen (Das Bärtierchen ist nur etwa einen halben Millimeter groß). Einstieg: Ein Löwe ist stark, aber dieses winzige Tier übersteht Dinge, die kein Löwe überlebt. Es hat acht Stummelbeine und lebt in feuchtem Moos. Wird es trocken, zieht es die Beine ein, trocknet fast völlig aus und wird zu einem Tönnchen, sein Stoffwechsel steht dann praktisch still. Als Tönnchen übersteht es einige Minuten lang Hitze von rund 150 Grad, Kälte nahe dem absoluten Nullpunkt und enormen Druck wie in der Tiefsee. 2007 flogen getrocknete Bärtierchen zehn Tage lang ungeschützt durch den offenen Weltraum, zurück auf der Erde bekamen sie Wasser und viele erwachten und krabbelten wieder los. Ein Schutz-Eiweiß legt sich wie ein Schild um ihr Erbgut und schützt es vor Strahlung. Finte: Unsterblich sind sie nicht, wach und aktiv vertragen sie auf Dauer nicht einmal 38 Grad Wärme. Ein Bärtierchen erwachte sogar nach über 30 Jahren im Eis wieder. Schluss: Du findest sie in fast jedem Moospolster, sogar auf Hausdächern und Mauern. Keine anderen Jahreszahlen und keine weiteren Zahlen erfinden. Nicht behaupten, das Tier sei gefährlich oder tödlich. Kein Mensch im Weltall. Titel: Dieses winzige Tier ist zäher als ein Löwe. Titelbild-Text: ZÄHER ALS EIN LÖWE.",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794943616.34656,
   "title": "Dieses winzige Tier ist zäher als ein Löwe",
   "description": "Ein Löwe ist stark, aber dieses Moostier überlebt Dinge, die kein Löwe packt. · Erfahre, wie es sich in ein Tönnchen verwandelt und sogar im Weltall überlebt. · Würdest du tausend Jahre im Eis schlafen oder lieber sofort aufgeben?",
@@ -5161,7 +5161,8 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Untertitel über den Beinen des Tiers, Beschreibung nennt es Moostier und erfindet tausend Jahre, Holzfass auf dem Titelbild"
  },
  {
   "id": 139,
