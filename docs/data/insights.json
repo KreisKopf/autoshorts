@@ -1,5 +1,5 @@
 {
- "updated": 1794902112.4446747,
+ "updated": 1794903072.455686,
  "enough": true,
  "counted": 18,
  "total": 20,
@@ -36,10 +36,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1668,
+   "avg_views": 1669,
    "avg_likes": 42.0,
    "like_rate": 2.52,
-   "avg_score": 2298
+   "avg_score": 2299
   },
   {
    "slug": "musik",
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 3,
-   "avg_views": 1320,
+   "avg_views": 1321,
    "avg_likes": 34.7,
-   "like_rate": 2.63,
-   "avg_score": 1850
+   "like_rate": 2.62,
+   "avg_score": 1851
   }
  ],
  "weights": {
@@ -75,15 +75,15 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.05,
-  "comedy": 1.03,
+  "comedy": 1.04,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1320 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2410 zu 706 Punkte)."
+  "Schwächste Kategorie: 💡 Fakten (Ø 1321 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2411 zu 706 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
