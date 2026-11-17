@@ -5034,7 +5034,7 @@
   "id": 136,
   "category": "tiere",
   "topic": "Wie sich diese Insekten komplett verwandeln, um zu überleben",
-  "status": "review",
+  "status": "discarded",
   "created": 1794939063.0323553,
   "title": "Diese Insekten sprengen ihren eigenen Körper",
   "description": "Wie überleben Insekten den ultimativen Albtraum?\nSie verwandeln sich komplett und lassen alles zurück.\nWürdest du deine alte Haut freiwillig abwerfen?",
@@ -5074,6 +5074,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-17 21:00",
-  "review_at": 1794939925.7709386
+  "review_at": 1794939925.7709386,
+  "error": "Bei der Prüfung verworfen: Prüfung: kein Schmetterling im ganzen Video (Flugzeug, Suppenteller, Marienkäfer, Apfel statt Raupe/Puppe/Falter), Füllsätze"
  }
 ]
