@@ -341,6 +341,12 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Thema „cc“ oder „remix“ im Studio erzwingt die Quelle.
 - Kategorie mit `every_days: 1` und `special: "bounce"`: `main.pick` nimmt sie, sobald ein Tag seit der letzten um ist (`STATE["last_musik"]`),
   sonst nie; `make_bounce` rendert ohne Drehbuch und Sprecher und lädt hoch wie jedes Video.
+- Prüfung 17.11.2026 (Video 134, erste geprüfte Musik-Kugel): Nach dem letzten Ton lief der Beat vier Sekunden über einem leeren Bild weiter.
+  `bounce.end_time`: Das Video endet `END_HOLD` (0,8 s) nachdem die Kugel aus dem Bild ist, der Ton blendet aus (`END_FADE`). Ab dem letzten Ton
+  steht oben „Welches Lied war das? / Schreib es in die Kommentare“ (`OUTRO`, nur beim Rate-Video). Stille Zwischen-Aufpralle (`with_ghosts`)
+  sind keine bunten Glasscheiben mehr, sondern blasse Banden (`GHOST_COL`), die nicht zerspringen – „Jede Scheibe ist ein Ton“ stimmt wieder.
+  `remix.PEAK` 0,6 statt 0,89 (Spitzen lagen über Vollausschlag). Neubau derselben Fassung: Thema „saints pop“ (Melodie-Schlüssel aus
+  `bounce.SONGS`, optional Stil aus `remix.STYLES`) bei `make` mit Kategorie `musik`.
 
 - Prüfung 16.11.2026 (Gänsehaut-Video): `writer.polish` streicht am Schlusssatz einen angefangenen Nebensatz („… jedes Mal wieder, sobald.“ –
   Liste `_DANGLING`). `stage.direct`: Siegertreppchen (`podium`) bleibt nur, wenn mindestens zwei der drei Plätze im Satz oder in den Nachbarsätzen

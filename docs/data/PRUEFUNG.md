@@ -53,6 +53,14 @@ Repo: `QuatratKopf/autoshorts`, Branch `main`. Antworten und Berichte auf Deutsc
    was nicht zu beheben war. Nur noch Kleinigkeiten offen: die beste Fassung hochladen und die Kleinigkeiten im Bericht nennen.
 8. Kurzer Bericht am Ende: Titel, Link (`https://www.youtube.com/watch?v=<yt_id>`), was gefunden und behoben wurde, was offen ist.
 
+## Musik-Kugel (Kategorie `musik`, kein Drehbuch)
+Statt Szenen gegen Sätze: Bildübersicht über das ganze Video, Anfang und Schluss groß ansehen. Prüfen: Kugel trifft jede Scheibe und fliegt
+durch keine hindurch; nichts ragt in die Überschrift; kein leeres Bild am Schluss (Video endet kurz nachdem die Kugel weg ist, oben steht die
+Frage an die Zuschauer); blasse Banden nur bei stillen Zwischen-Aufprallen; Titel und Beschreibung verraten das Lied nicht; Melodie ist
+gemeinfrei (`bounce.SONGS`). Ton messen (Lautheit, Spitzen, Melodie-Einsätze auf den Aufprall-Zeiten). Die Länge liegt bei 20–40 s – die
+60-Sekunden-Regel gilt hier nicht. Neubau derselben Melodie: `make` mit `category=musik`, `upload=0`, `topic=<Melodie-Schlüssel> <Stil>`
+(z. B. `saints pop`).
+
 ## Auftrag des Inhabers: alles selbst beheben
 Alles, was bei der Prüfung auffällt – auch Kleinigkeiten und Dinge, die nicht in der Prüfliste stehen –, wird ohne Rückfrage sofort in der
 Engine behoben (Ursache, nicht nur dieses Video), mit Selbsttest geprüft, committet und gepusht. Das gilt auch, wenn das Video schon

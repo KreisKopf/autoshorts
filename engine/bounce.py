@@ -569,7 +569,28 @@ def _launcher(d, start, t, td):
             d.ellipse((sx - r, sy - r, sx + r, sy + r), outline=(255, 255, 255, int(120 * glow)), width=3)
 
 
-def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=False, work: Path = None):
+TITLE_TOP = "Erkennst du das Lied?"
+OUTRO = ("Welches Lied war das?", "Schreib es in die Kommentare")   # steht ab dem letzten Ton oben (nur beim Rate-Video)
+GHOST_COL = (205, 210, 230)      # stille Zwischen-Aufpralle: blasse Bande statt bunter Glasscheibe
+END_HOLD = 0.8                   # so lange läuft das Video weiter, nachdem die Kugel nach dem letzten Ton aus dem Bild ist (s)
+END_FADE = 0.8                   # Ton blendet am gekürzten Schluss aus (s)
+
+
+def end_time(segs, start):
+    """Schluss des Videos: END_HOLD nachdem die Kugel nach dem letzten Ton das Bild verlassen hat (vorher lief der Beat noch
+    bis zu vier Sekunden über einem leeren Bild weiter)."""
+    if not segs:
+        return 0.0
+    t = segs[-1]["t"]
+    while t < segs[-1]["t"] + 3.0:
+        bx, by = ball_at(t, segs, start)
+        if by > H + BALL_R or bx < -BALL_R or bx > W + BALL_R:
+            break
+        t += 1 / FPS
+    return t + END_HOLD
+
+
+def render(song, out: Path, seed=0, title_top=TITLE_TOP, reveal=False, work: Path = None):
     """Ganzes Video rendern (Bild + Ton). Gibt (Dauer, Pfad zum Vorschaubild) zurück. work = Ordner für Zwischendateien."""
     work = Path(work) if work else out.parent
     if isinstance(song, dict) and song.get("remix"):     # Remix einer gemeinfreien Melodie: {"remix": Melodie, "style": Stil}
@@ -588,6 +609,10 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Fa
         audio(hits, total, wav, seed)
     hits = with_ghosts(hits)
     segs, start = path(hits, seed)
+    full = total
+    total = min(total, end_time(segs, start))            # nach dem letzten Ton kein leeres Bild: Schluss, kurz nachdem die Kugel weg ist
+    last_t = segs[-1]["t"] if segs else total
+    outro = OUTRO if title_top == TITLE_TOP and not reveal else None
     rnd = random.Random(seed)
     hue0 = rnd.random()
     bg = _background(seed)
@@ -600,10 +625,13 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Fa
         col = _hue_col(hue0 + 0.75 * i / max(1, len(segs)) + ((hits[i][1] or 0) % 12) * 0.004)
         shards = [(rnd.uniform(-1, 1), rnd.uniform(-1, 1), rnd.uniform(-260, 260), rnd.uniform(-420, -60), rnd.uniform(-9, 9), rnd.uniform(10, 26))
                   for _ in range(7)]
-        panes.append({"t": s["t"], "c": (cx, cy), "a": ang, "col": col, "shards": shards, "v": s["v_out"], "show": s["t"] - appears[i]})
+        panes.append({"t": s["t"], "c": (cx, cy), "a": ang, "col": col, "shards": shards, "v": s["v_out"], "show": s["t"] - appears[i],
+                      "ghost": hits[i][1] is None})
     n_frames = int(total * FPS)
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
-                           "-r", str(FPS), "-i", "-", "-i", str(wav), "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
+                           "-r", str(FPS), "-i", "-", "-i", str(wav)]
+                          + (["-af", f"afade=t=out:st={max(0.0, total - END_FADE):.3f}:d={END_FADE}"] if total < full - 0.05 else [])
+                          + ["-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
                            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(out)],
                           stdin=subprocess.PIPE)
     trail = []
@@ -626,12 +654,25 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Fa
                     for sx, sy in ((-hl, -PANE_W / 2), (hl, -PANE_W / 2), (hl, PANE_W / 2), (-hl, PANE_W / 2)):
                         pts.append((cx + sx * ca - sy * sa, cy + sx * sa + sy * ca))
                     a = int(255 * k)
+                    if pn["ghost"]:                      # stiller Zwischen-Aufprall: blasse Bande ohne Farbe und Lichtpunkte – kein Ton, kein Glas
+                        d.polygon(pts, fill=GHOST_COL + (int(a * 0.16),), outline=GHOST_COL + (int(a * 0.5),), width=2)
+                        continue
                     d.polygon(pts, fill=pn["col"] + (int(a * 0.55),), outline=pn["col"] + (a,), width=3)
                     for j in (-2, -1, 0, 1, 2):          # Glas-Lichtpunkte wie im Vorbild
                         px, py = cx + j * hl * 0.36 * ca, cy + j * hl * 0.36 * sa
                         d.ellipse((px - 2.5, py - 2.5, px + 2.5, py + 2.5), fill=(255, 255, 255, int(a * 0.8)))
                 elif -0.9 < dtp <= 0:                    # zersprungen: Splitter fliegen und fallen
                     age = -dtp
+                    if pn["ghost"]:                      # Bande zerspringt nicht: sie federt kurz nach und verblasst
+                        if age < 0.3:
+                            k = 1 - age / 0.3
+                            off = 10 * math.sin(age * 40) * k
+                            nxp, nyp = math.cos(pn["a"] - math.pi / 2), math.sin(pn["a"] - math.pi / 2)
+                            pts = []
+                            for sx, sy in ((-PANE_LEN / 2, -PANE_W / 2), (PANE_LEN / 2, -PANE_W / 2), (PANE_LEN / 2, PANE_W / 2), (-PANE_LEN / 2, PANE_W / 2)):
+                                pts.append((cx + sx * ca - sy * sa - nxp * off, cy + sx * sa + sy * ca - nyp * off))
+                            d.polygon(pts, fill=GHOST_COL + (int(40 * k),), outline=GHOST_COL + (int(128 * k),), width=2)
+                        continue
                     if age < 0.18:                       # Lichtblitz am Aufprall
                         r = 30 + 260 * age
                         gd.ellipse((cx - r, cy - r, cx + r, cy + r), outline=pn["col"] + (int(255 * (1 - age / 0.18)),), width=6)
@@ -656,6 +697,9 @@ def render(song, out: Path, seed=0, title_top="Erkennst du das Lied?", reveal=Fa
             if reveal and t > total - 3.2:               # Auflösung am Ende
                 n_l = _text_center(d, 180, name, 64, (255, 230, 120))
                 _text_center(d, 262 + (40 if n_l > 1 else 0), who, 40, (220, 220, 230))
+            elif outro and t >= last_t:                  # nach dem letzten Ton: Frage an die Zuschauer statt leerem Bild
+                _text_center(d, 180, outro[0], 64, (255, 230, 120))
+                _text_center(d, 262, outro[1], 40, (220, 220, 230))
             else:
                 _text_center(d, 180, title_top, 64, (255, 255, 255))
                 _text_center(d, 262, "Jede Scheibe ist ein Ton", 40, (200, 200, 215))

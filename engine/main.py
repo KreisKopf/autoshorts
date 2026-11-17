@@ -542,6 +542,10 @@ def make_bounce(cat, upload=True, force=None):
     work = WORK / f"v{vid}"
     shutil.rmtree(work, ignore_errors=True)
     work.mkdir(parents=True)
+    want = [w for w in (force or "").replace(":", " ").replace(",", " ").split()]   # Neubau nach der Prüfung: „saints pop“ = dieselbe Melodie, derselbe Stil
+    want_mel = next((w for w in want if w in bounce.SONGS), None)
+    if want_mel:
+        force = "remix"
     own = bounce.user_songs() if force not in ("remix", "cc") else []   # eigene Lieder aus der App haben Vorrang
     song = None
     if own:
@@ -556,15 +560,18 @@ def make_bounce(cat, upload=True, force=None):
         STATE["bounce_src"] = "cc" if song else "remix"
         if not song:                                      # bekannte Melodie als moderner Remix (Stil im Wechsel)
             from . import remix
-            mel = bounce.pick_song(used, channel_rand("songs", len(used)))
+            mel = want_mel or bounce.pick_song(used, channel_rand("songs", len(used)))
             last_st = STATE.get("bounce_styles", [])
             styles = list(remix.STYLES)
             (channel_rand("styles") or random).shuffle(styles)   # jede Kopie mischt die Stile anders
             style = sorted(styles, key=lambda x: last_st.index(x) if x in last_st else -1)[0]
             if not last_st or last_st[-1] != "pop":       # jedes zweite Video im Pop-Stil (kommt am besten an)
                 style = "pop"
+            want_style = next((w for w in want if w in remix.STYLES), None) if want_mel else None
+            style = want_style or style
             song = {"remix": mel, "style": style, "asset": mel}
-            STATE["bounce_styles"] = (last_st + [style])[-10:]
+            if not (want_style and last_st and last_st[-1] == style):   # Neubau derselben Fassung zählt im Stil-Wechsel nicht doppelt
+                STATE["bounce_styles"] = (last_st + [style])[-10:]
     title, desc, tags, name = bounce.meta(song)
     v = {"id": vid, "category": cat["slug"], "topic": f"Musik-Kugel: {name}", "status": "rendering", "created": time.time(),
          "title": title, "description": desc, "hashtags": tags, "tags": ["musik", "melodie", name.lower(), "satisfying"], "thumb_text": "ERKENNST DU ES?"}
@@ -581,7 +588,10 @@ def make_bounce(cat, upload=True, force=None):
         Image.open(thumb).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
         v.update(status="rendered", duration=round(dur, 1), providers={"text": "Melodie", "voice": "eigener Ton"}, thumb=True, look="musik")
         v["mp4"] = publish_mp4([final, cover])
-        used.append(song["asset"] if isinstance(song, dict) else song)
+        asset = song["asset"] if isinstance(song, dict) else song
+        if asset in used:
+            used.remove(asset)                           # Neubau: steht nur einmal (hinten) in der Liste
+        used.append(asset)
         STATE["bounce_songs"] = used[-40:]
         STATE["last_" + cat["slug"]] = time.time()
         log(f"Video {vid} fertig")

@@ -907,6 +907,25 @@ def main():
         assert not bounce.instrumental({"title": "I Insist (Remix)", "tags": [{"name": "rap"}, {"name": "instrumental"}]})
         assert bounce.instrumental({"title": "Night Drive", "tags": [{"name": "instrumental"}]}) and not bounce.instrumental({"title": "x", "tags": []})
         assert set(bounce.SONGS) <= set(remix.KEYS)
+        with tempfile.TemporaryDirectory() as tmp:            # Schluss: kein leeres Bild nach dem letzten Ton (Video 134 lief vier Sekunden leer weiter)
+            for mel_, stl in (("saints", "pop"), ("funkel", "phonk")):
+                h5, t5 = remix.build(bounce.SONGS[mel_], remix.KEYS[mel_], stl, Path(tmp) / "e.wav", seed=2)
+                sg5, st5 = bounce.path(bounce.with_ghosts(h5), 2)
+                end5 = bounce.end_time(sg5, st5)
+                assert h5[-1][0] + 0.8 <= end5 <= h5[-1][0] + 3.9 and end5 <= t5, (mel_, end5, t5, h5[-1])
+                by5 = bounce.ball_at(end5 - bounce.END_HOLD - 2 / bounce.FPS, sg5, st5)[1]
+                assert by5 <= bounce.H + bounce.BALL_R, (mel_, by5)      # bis kurz vor Schluss ist die Kugel noch im Bild
+            import subprocess
+            import wave as _wave
+            import numpy as _np
+            with _wave.open(str(Path(tmp) / "e.wav")) as w5:           # Aussteuerung: Abstand zum Vollausschlag (AAC übersteuerte)
+                x5 = _np.frombuffer(w5.readframes(w5.getnframes()), "<i2")
+            assert 0.5 < abs(x5).max() / 32768 <= 0.7, abs(x5).max()
+            dur5, _th = bounce.render({"remix": "saints", "style": "pop"}, Path(tmp) / "s.mp4", seed=134, work=Path(tmp))
+            assert 23.5 < dur5 < 25.5, dur5                          # vorher 27,9 s
+            out5 = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(Path(tmp) / "s.mp4")],
+                                  capture_output=True, text=True).stdout.strip()
+            assert abs(float(out5) - dur5) < 0.15, (out5, dur5)
         with tempfile.TemporaryDirectory() as tmp:
             for stl in remix.STYLES:
                 h3, tot3 = remix.build(bounce.SONGS["ode_freude"], remix.KEYS["ode_freude"], stl, Path(tmp) / f"{stl}.wav", seed=1)

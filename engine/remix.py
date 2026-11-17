@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np
 
 SR = 44100
+PEAK = 0.6                       # Aussteuerung: bei 0,89 lagen die Spitzen zwischen den Abtastwerten über Vollausschlag (+2,3 dBTP), AAC übersteuerte
 
 # Tonart und Taktart je Melodie: (Grundton 0=C … 11=H, "dur"/"moll", Schläge pro Takt)
 KEYS = {"fuer_elise": (9, "moll", 3), "ode_freude": (0, "dur", 4), "bergkoenig": (11, "moll", 4), "korobeiniki": (9, "moll", 4),
@@ -236,7 +237,7 @@ def build(song_seq, key, style_key, out: Path, lead_in_beats=None, seed=0):
         tt = np.arange(len(buf)) / SR
         buf *= 1 - 0.35 * np.exp(-((tt - first_drop) % beat) / 0.11) * (tt > first_drop)
     y = np.tanh(buf * 1.15)
-    y = y / max(1e-6, np.max(np.abs(y))) * 0.89
+    y = y / max(1e-6, np.max(np.abs(y))) * PEAK
     fade = int(0.9 * SR)
     end = int(total * SR)
     y = y[:end]
