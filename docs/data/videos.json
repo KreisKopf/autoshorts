@@ -4776,5 +4776,51 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7708856121619959073?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 130,
+  "category": "fakten",
+  "topic": "Warum König Charles ausgerechnet den berühmten Spudbros-Pommes-Kiosk besucht hat",
+  "status": "review",
+  "created": 1794910258.0065992,
+  "trend": {
+   "title": "King Charles visits the Spudbros kiosk",
+   "source": "Reddit r/TikTokCringe"
+  },
+  "title": "Warum König Charles an Pommes stand",
+  "description": "König Charles besucht einen kleinen Pommes-Kiosk.\nWas hinter dem viralen Clip steckt und warum alle darüber reden.\nWem würdest du eine Portion Pommes ausgeben?",
+  "hashtags": [
+   "#shorts",
+   "#kingcharles",
+   "#spudbros",
+   "#viral",
+   "#trending",
+   "#fakten",
+   "#wissen"
+  ],
+  "tags": [
+   "koenig charles",
+   "spudbros",
+   "pommes",
+   "viral",
+   "wissen",
+   "fakten"
+  ],
+  "thumb_text": "KÖNIG AN DER POMMESBUDE",
+  "missing": [
+   "friteuse"
+  ],
+  "cover_ms": 66442,
+  "duration": 66.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-17 13:00",
+  "review_at": 1794911729.4638212
  }
 ]

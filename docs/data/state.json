@@ -18,7 +18,8 @@
   "2026-11-15 21:00",
   "2026-11-16 13:00",
   "2026-11-16 18:00",
-  "2026-11-16 21:00"
+  "2026-11-16 21:00",
+  "2026-11-17 13:00"
  ],
  "used_queue": [
   "qkv0cbgez",
@@ -31,20 +32,20 @@
   "qt49vv57v"
  ],
  "last_stats": 1794909693.7584643,
- "next_id": 130,
+ "next_id": 131,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.82,
+ "voice_wps": 2.629,
  "last_trends": 1794906098.7953327,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
-  "palette": 4,
-  "video": 129
+  "palette": 0,
+  "video": 130
  },
  "cat_credit": {
   "fakten": -2.079999999999999,
