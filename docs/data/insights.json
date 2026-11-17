@@ -1,5 +1,5 @@
 {
- "updated": 1794933317.0365403,
+ "updated": 1794934879.745852,
  "enough": true,
  "counted": 20,
  "total": 22,
@@ -27,10 +27,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1732,
-   "avg_likes": 43.0,
-   "like_rate": 2.48,
-   "avg_score": 2376
+   "avg_views": 1726,
+   "avg_likes": 43.5,
+   "like_rate": 2.52,
+   "avg_score": 2379
   },
   {
    "slug": "whatif",
@@ -45,19 +45,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1471,
+   "avg_views": 1462,
    "avg_likes": 40.6,
-   "like_rate": 2.76,
-   "avg_score": 2086
+   "like_rate": 2.78,
+   "avg_score": 2077
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1735,
+   "avg_views": 1733,
    "avg_likes": 12.0,
    "like_rate": 0.69,
-   "avg_score": 2005
+   "avg_score": 2003
   },
   {
    "slug": "tiere",
@@ -75,7 +75,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.04,
-  "comedy": 1.05,
+  "comedy": 1.06,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -83,7 +83,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 🐾 Tierwelt (Ø 1489 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2428 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2426 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -122,11 +122,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1861,
+   "views": 1860,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2866
+   "score": 2865
   },
   {
    "id": 80,
