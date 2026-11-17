@@ -1,5 +1,5 @@
 {
- "updated": 1794907898.3427858,
+ "updated": 1794909693.7613206,
  "enough": true,
  "counted": 18,
  "total": 20,
@@ -36,10 +36,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1669,
+   "avg_views": 1672,
    "avg_likes": 42.0,
-   "like_rate": 2.52,
-   "avg_score": 2299
+   "like_rate": 2.51,
+   "avg_score": 2302
   },
   {
    "slug": "musik",
@@ -54,10 +54,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1469,
+   "avg_views": 1474,
    "avg_likes": 27.0,
-   "like_rate": 1.84,
-   "avg_score": 1904
+   "like_rate": 1.83,
+   "avg_score": 1909
   },
   {
    "slug": "fakten",
