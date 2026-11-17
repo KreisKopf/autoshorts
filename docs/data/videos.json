@@ -4952,5 +4952,39 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7709105384849493281?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 134,
+  "category": "musik",
+  "topic": "Musik-Kugel: When the Saints Go Marching In (Pop Remix)",
+  "status": "review",
+  "created": 1794928354.5356307,
+  "title": "Bekanntes Lied als Pop-Remix – erkennst du es? 🎵",
+  "description": "Ein Lied, das jeder kennt – als Pop-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
+  "hashtags": [
+   "#musik",
+   "#remix",
+   "#pop",
+   "#satisfying",
+   "#erkennstdudaslied",
+   "#shorts"
+  ],
+  "tags": [
+   "musik",
+   "melodie",
+   "when the saints go marching in (pop remix)",
+   "satisfying"
+  ],
+  "thumb_text": "ERKENNST DU ES?",
+  "duration": 27.9,
+  "providers": {
+   "text": "Melodie",
+   "voice": "eigener Ton"
+  },
+  "thumb": true,
+  "look": "musik",
+  "mp4": true,
+  "slot": "2026-11-17 18:00",
+  "review_at": 1794928409.6510482
  }
 ]
