@@ -1,5 +1,5 @@
 {
- "updated": 1794953374.4112978,
+ "updated": 1794955059.6074846,
  "enough": true,
  "counted": 20,
  "total": 23,
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1510,
+   "avg_views": 1533,
    "avg_likes": 41.0,
-   "like_rate": 2.71,
-   "avg_score": 2131
+   "like_rate": 2.67,
+   "avg_score": 2154
   },
   {
    "slug": "musik",
@@ -70,13 +70,13 @@
   }
  ],
  "weights": {
-  "fakten": 0.94,
+  "fakten": 0.95,
   "grusel": 1.2,
-  "storys": 1.08,
+  "storys": 1.07,
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.03,
-  "comedy": 1.06,
+  "comedy": 1.05,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -84,7 +84,7 @@
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🐾 Tierwelt (Ø 1491 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2444 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2450 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
