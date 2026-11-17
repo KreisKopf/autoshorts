@@ -507,6 +507,21 @@ def main():
         assert ks[7][-1][0] == "tardigrade" and ks[7][-1][1] != "tun" and any(q.get("type") == "moss" for q in scs[7].get("props") or []), f"Moos: {ks[7]} {scs[7].get('props')}"
         for sc in scs:
             frame(sc, {"du": {"shirt": "grün"}})
+        # Video 137: Einschub „Moospolster vor deiner Haustür“ wird zur Szene mit Moos und Tier; „enormer Druck“ spielt in der Tiefsee; Dächer/Mauern: kleines Tier am Moos; Hitze-Zahl als Zähler
+        s3 = stage.direct([{"text": "Das Bärtierchen trocknet fast völlig aus.", "place": "park", "actors": [], "props": []},
+                           {"text": "Als Tönnchen übersteht es Hitze von rund einhundertfünfzig Grad.", "place": "desert", "actors": [], "props": []},
+                           {"text": "Es überlebt Kälte und enormen Druck.", "place": "cave", "actors": [], "props": []},
+                           {"text": "Viele erwachten und krabbelten wieder los.", "place": "park", "actors": [], "props": []},
+                           {"text": "Du findest diese Überlebenskünstler in fast jedem Moospolster vor deiner Haustür.", "place": "park", "shot": "insert", "props": [{"type": "door"}, {"type": "moss"}],
+                            "actors": [{"id": "du", "action": "point"}]},
+                           {"text": "Sogar auf Hausdächern und alten Mauern krabbeln sie herum.", "place": "street", "actors": [], "props": []}],
+                          [(i * 4.0, i * 4.0 + 4.0) for i in range(6)], "Dieses winzige Tier ist zäher als ein Löwe", "tiere")
+        assert (s3[1].get("overlay") or {}).get("value") == 150, f"Hitze-Zähler: {s3[1].get('overlay')}"
+        assert places.resolve(stage.backdrop(s3[2])) == "underwater", "Druck nicht in der Tiefsee"
+        assert s3[4].get("shot") != "insert" and [q.get("type") for q in s3[4].get("props") or []] == ["moss"] and any(a.get("kind") == "tardigrade" for a in s3[4]["actors"]), f"Moos-Einschub: {s3[4]}"
+        assert [q.get("type") for q in s3[5].get("props") or []] == ["moss"] and not s3[5]["actors"][0].get("hero"), f"Dächer: {s3[5]}"
+        for sc in s3:
+            frame(sc, {"du": {"shirt": "grün"}})
         # ein Löwe ohne Winzling-Video: steht als Tier neben dem Menschen; Redewendungen meinen keinen Löwen
         s2 = stage.direct([{"text": "Ein Löwe schläft bis zu zwanzig Stunden am Tag.", "place": "park", "time": "day", "props": [], "actors": [{"id": "du", "action": "talk", "pos": "center"}]},
                            {"text": "Du bekommst den Löwenanteil vom Kuchen.", "place": "kitchen", "time": "day", "props": [], "actors": [{"id": "du", "action": "talk", "pos": "center"}]}],

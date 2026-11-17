@@ -2593,7 +2593,7 @@ def _tiny_story(scenes):
     kind = _one_tiny(scenes)
     if not kind:
         return scenes
-    tun = False
+    tun, n_tun = False, 0
 
     def beast(**kw):
         return dict({"id": "_tier", "kind": kind, "hero": True, "action": "idle", "speaks": False, "pos": "center", "emote": "", "say": "", "hold": "",
@@ -2606,6 +2606,13 @@ def _tiny_story(scenes):
             tun = False
         elif re.search(TUN_RE, low):
             tun = True
+        if str(sc.get("shot") or "") == "insert" and re.search(TINY_REF_RE + r"|\bmoos", low):
+            # „Du findest sie in jedem Moospolster vor deiner Haustür“ war ein Einschub: Tür und Moos frei vor leerem Grund (Video 137) – daraus wird eine Szene mit Figur, Moos und Tier
+            sc["shot"] = ""
+            sc["props"] = []
+            sc.setdefault("actors", [])
+            if places.resolve(backdrop(sc)) in INDOOR + GENERIC + ("plain",) and re.search(r"\bmoos", low):
+                sc["place"], sc["backdrop"] = "forest", None
         if "actors" not in sc or str(sc.get("shot") or "") in ("graphic", "insert"):
             continue
         rp = places.resolve(backdrop(sc))
@@ -2651,6 +2658,21 @@ def _tiny_story(scenes):
         if mine and re.search(r"\bmoos", low) and rp not in ("space", "underwater", "highsky") and rp not in INDOOR:   # „in fast jedem Moospolster“: das Moos liegt im Bild
             sc["props"] = [{"type": "moss", "pos": 480 if len(acts) > 1 else 230}]
             sc["_no_cut"] = True
+        if mine and len(acts) == 1 and re.search(r"\bdruck\b|tiefsee|meeresgrund|meeresboden", low) and rp not in ("space", "underwater"):
+            sc.update(place="underwater", backdrop=None, time="night", weather="")   # „enormer Druck“: am Grund der Tiefsee – nicht in einer Höhle
+            rp = "underwater"
+        if mine and len(acts) == 1 and re.search(r"\bdach|dächer|mauer|gehweg|pflaster|regenrinne|hauswand|balkon", low) and rp not in ("space", "underwater"):
+            # „auf Hausdächern und Mauern … unsichtbar für das bloße Auge“: kein haushohes Tier auf der Straße – klein neben einem Moospolster
+            mine[0].update(hero=False, _ksz=1.0, pos=700, facing="left")
+            sc["props"] = [{"type": "moss", "pos": 330}]
+            sc["crowd"], sc["_no_cut"] = "", True
+        if mine and len(acts) == 1 and tun:                # mehrere Tönnchen-Sätze hintereinander: abwechselnd links und rechts, mal von der anderen Seite
+            n_tun += 1
+            mine[0].update(pos=(400, 680)[n_tun % 2], facing=("right", "left")[n_tun % 2])
+        if mine and tun and not sc.get("overlay") and re.search(r"hitze|heiß|grad", low):
+            fig_t = find_figure(str(sc.get("text") or ""))
+            if fig_t and str(fig_t.get("unit") or "").upper().startswith("GRAD"):
+                sc["overlay"] = fig_t                      # „Hitze von rund 150 Grad“: die Zahl steht groß über dem Tönnchen
         if mine and rp == "space" and not sc.get("float"):
             sc["float"] = "float"                          # im All steht nichts auf dem Boden: das Tier treibt schwerelos
         for a in mine:
@@ -4167,7 +4189,7 @@ def _camera(frame, t, dur, cam):
         z += (0.06 if cam.get("flat") else 0.1) * (1 - e_m)
     else:                                                 # Schwenk: braucht etwas Zoom, damit seitlich Platz ist
         z += 0.07
-    ax, ay = 540.0, (TIGHT_AY if cam.get("tight") else 1010.0)
+    ax, ay = 540.0, (cam.get("ay") or (TIGHT_AY if cam.get("tight") else 1010.0))
     if move in ("pan_r", "pan_l"):
         ax += (1 if move == "pan_r" else -1) * 260 * (e_m - 0.5)
     if cam.get("tight"):                                  # nah dran: Figuren füllen das Bild, der leere Boden unten fällt weg
@@ -4311,6 +4333,9 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 cam["punch"] = None
         span = max(xs) - min(xs) + 420                                  # Breite der Gruppe samt Armen
         cam.update(tight=True, zt=max(1.0, min(1.42, W / span)), fx=(max(xs) + min(xs)) / 2)
+    if actors and all(a_g["kind"] in LONG_KINDS for a_g in actors) and not scene.get("float") and place != "highsky" and \
+            (place != "underwater" or all(a_g["kind"] in TINY_KINDS for a_g in actors)):
+        cam["ay"] = 1262.0                                                  # nur Tiere am Boden: Die Kamera zoomt um die Bodenlinie – der Fixpunkt oben schob Bärtierchen und Löwe sonst in die Untertitel (Video 137)
     if scene.get("_balloon") and isinstance(scene.get("overlay"), dict):
         cam["punch"] = None                                                 # kein Sprung ins Bild: der Ballon wüchse sonst unter das Schild
     cam["opener"] = index == 0
