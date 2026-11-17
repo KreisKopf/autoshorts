@@ -4823,5 +4823,45 @@
   "slot": "2026-11-17 13:00",
   "review_at": 1794911729.4638212,
   "error": "Bei der Prüfung verworfen: Prüfung: Trend-Thema über eine echte Person und eine Marke (König Charles, Spudbros), erfundene Behauptungen, letzter Satz bricht ab – wird durch das eingeplante Gänsehaut-Thema ersetzt"
+ },
+ {
+  "id": 131,
+  "category": "fakten",
+  "topic": "Warum bekommen wir Gänsehaut? – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und in dieser Reihenfolge erzählen, zu jedem Punkt ein bis zwei ganze, grammatisch saubere Sätze, insgesamt rund 220 Wörter: Einstieg: dir ist kalt oder du erschrickst, und plötzlich stellen sich die Härchen an deinen Armen auf; an jeder Haarwurzel sitzt ein winziger Muskel, er zieht sich zusammen und richtet das Haar auf, deine Haut wölbt sich dabei zu kleinen Hügeln; steuern kannst du das nicht, den Befehl gibt dein unwillkürliches Nervensystem; der Name kommt daher, dass deine Haut dann aussieht wie die einer gerupften Gans; unsere Vorfahren hatten noch ein dichtes Fell am ganzen Körper; bei Kälte stellte sich das Fell auf und schloss eine wärmende Luftschicht ein, wie eine dickere Jacke; bei Gefahr wirkten unsere Vorfahren mit aufgestelltem Fell größer und schreckten Feinde ab, eine Katze sträubt ihr Fell heute noch genauso; danach direkt die Frage mit Auflösung „Du denkst, Gänsehaut wärmt dich? Falsch, dafür hast du viel zu wenig Haare“, bei dir ist der Reflex nur noch ein Überbleibsel aus der Urzeit; ausgelöst wird er auch von Adrenalin, deshalb bekommst du Gänsehaut bei Angst, etwa beim Horrorfilm; und auch bei starken Gefühlen, wenn dich etwas tief berührt; Forscher fanden bei Mäusen heraus, dass derselbe Muskel und sein Nerv bei anhaltender Kälte das Haarwachstum anregen; Schluss: Gänsehaut ist ein Gruß deiner Vorfahren, den dein Körper bis heute nicht vergessen hat. Die Wörter Finte, Rehook und Cliffhanger nicht verwenden. Keine Zahlen in Ziffern, keine Prozent-, Zeit- oder Mengenangaben, keine Jahreszahlen, keine Namen von Forschern. Dopamin, Lieder und Bass kommen nicht vor. Jeder Satz spricht den Zuschauer mit du oder dein an oder erzählt von den Vorfahren. Einblendungen nur auf Deutsch und nur mit Wörtern aus dem Satz. Bilder: die Hauptfigur friert draußen im Winter oder steht zu Hause im Wohnzimmer, der Vorfahre mit Fell steht im Wald, keine Passanten, kein Büro, kein Labor, kein Blitz, keine Straße. Titel: Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?",
+  "status": "rendered",
+  "created": 1794912012.3221707,
+  "title": "Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?",
+  "description": "Dir ist kalt oder du erschreckst\nErfahre das biologische Geheimnis\nEin Relikt aus der tiefen Urzeit",
+  "hashtags": [
+   "#shorts",
+   "#fakten",
+   "#biologie",
+   "#wissen",
+   "#gänsehaut",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "gänsehaut",
+   "biologie fakten",
+   "körper",
+   "urzeit",
+   "wissen",
+   "reflex",
+   "haare",
+   "evolution"
+  ],
+  "thumb_text": "WARUM GÄNSEHAUT?",
+  "missing": null,
+  "cover_ms": 66439,
+  "duration": 66.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

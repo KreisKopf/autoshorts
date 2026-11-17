@@ -1,0 +1,539 @@
+{
+ "title": "Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?",
+ "scenes": [
+  {
+   "text": "Warum deine Haut plötzlich so aussieht wie bei einer gerupften Gans.",
+   "see": "Du stehst im kalten Wald und deine Haut sieht plötzlich aus wie bei einer gerupften Gans.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "goosebumps",
+     "pos": 770
+    },
+    {
+     "type": "lib_gans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shiver",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "KÄLTE ODER SCHRECK"
+   }
+  },
+  {
+   "text": "Winzige Muskeln an jeder Haarwurzel ziehen sich blitzschnell zusammen.",
+   "see": "Winzige Muskeln an jeder Haarwurzel ziehen sich blitzschnell zusammen.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "goosebumps"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "WINZIGE MUSKELN"
+   }
+  },
+  {
+   "text": "Deine Haut wölbt sich dabei zu kleinen Hügeln, steuern kannst du das nicht.",
+   "see": "Deine Haut wölbt sich dabei zu kleinen Hügeln und du kannst das nicht steuern.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Den Befehl gibt dein unwillkürliches Nervensystem.",
+   "see": "Das unwillkürliche Nervensystem gibt den Befehl.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "UNWILLKÜRLICH"
+   }
+  },
+  {
+   "text": "Der Name kommt daher, dass deine Haut dann aussieht wie die einer gerupften Gans.",
+   "see": "Der Name kommt daher, dass deine Haut dann aussieht wie die einer gerupften Gans.",
+   "place": "farm",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "farm"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm"
+  },
+  {
+   "text": "Unsere Vorfahren hatten noch ein dichtes Fell am ganzen Körper.",
+   "see": "Unsere Vorfahren hatten noch ein dichtes Fell am ganzen Körper.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_ahne",
+     "kind": "chimp",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "DIE URZEIT"
+   }
+  },
+  {
+   "text": "Bei Kälte stellte sich das Fell auf und schloss eine wärmende Luftschicht ein.",
+   "see": "Bei Kälte stellte sich das Fell auf und schloss eine wärmende Luftschicht ein.",
+   "place": "snow",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "fur",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "vorfahre",
+     "speaks": true,
+     "action": "shiver",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "WÄRMEISOLATION"
+   }
+  },
+  {
+   "text": "Das wirkte wie eine dickere Jacke.",
+   "see": "Das wirkte wie eine dickere Jacke.",
+   "place": "snow",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "lib_jacke"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Bei Gefahr wirkten unsere Vorfahren mit aufgestelltem Fell größer und schreckten Feinde ab.",
+   "see": "Bei Gefahr wirkten unsere Vorfahren mit aufgestelltem Fell größer und schreckten Feinde ab.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_ahne",
+     "kind": "chimp",
+     "hero": true,
+     "pos": "center",
+     "action": "puff",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": "angry"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "GEFAHRENSCHUTZ"
+   }
+  },
+  {
+   "text": "Eine Katze sträubt ihr Fell heute noch genauso.",
+   "see": "Eine Katze sträubt ihr Fell heute noch genauso.",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_ahne",
+     "kind": "chimp",
+     "hero": true,
+     "pos": "center",
+     "action": "puff",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du denkst, Gänsehaut wärmt dich?",
+   "see": "Du denkst, Gänsehaut wärmt dich?",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Falsch, dafür hast du viel zu wenig Haare.",
+   "see": "Falsch, dafür hast du viel zu wenig Haare.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Bei dir ist der Reflex nur noch ein Überbleibsel aus der Urzeit.",
+   "see": "Bei dir ist der Reflex nur noch ein Überbleibsel aus der Urzeit.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Ausgelöst wird er auch von Adrenalin, deshalb bekommst du Gänsehaut bei Angst.",
+   "see": "Ausgelöst wird er auch von Adrenalin, deshalb bekommst du Gänsehaut bei Angst.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "adrenaline",
+     "pos": 770
+    },
+    {
+     "type": "goosebumps",
+     "pos": 770
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "ADRENALINKICK"
+   }
+  },
+  {
+   "text": "Etwa wenn du einen Horrorfilm schaust.",
+   "see": "Etwa wenn du einen Horrorfilm schaust.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Und auch bei starken Gefühlen, wenn dich etwas tief berührt.",
+   "see": "Und auch bei starken Gefühlen, wenn dich etwas tief berührt.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Bei langanhaltender Kälte regt dieser Muskel sogar das Haarwachstum an.",
+   "see": "Bei langanhaltender Kälte regt dieser Muskel sogar das Haarwachstum an.",
+   "place": "snow",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "goosebumps"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "HAARWACHSTUM"
+   }
+  },
+  {
+   "text": "Gänsehaut ist ein Gruß deiner Vorfahren, den dein Körper bis heute nicht vergessen hat.",
+   "see": "Gänsehaut ist ein Gruß deiner Vorfahren, den dein Körper bis heute nicht vergessen hat.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "forest",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    },
+    {
+     "id": "vorfahre",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "ERBE DER URZEIT"
+   }
+  }
+ ]
+}
