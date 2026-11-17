@@ -2224,6 +2224,12 @@ def direct(scenes, times, topic="", style="", look=""):
             keys_n = {str(q.get("type") if isinstance(q, dict) else q) for q in pv_n.get("props") or []}
             if keys_n & {str(q.get("type") if isinstance(q, dict) else q) for q in sc_n.get("props") or []}:
                 sc_n["_no_insert"] = True
+    for sc in scenes:                                     # Kälte-Wetter (Eiskristalle, Atemwolke) gibt es nur draußen – wechselt die Regie den Ort nachträglich ins Zimmer, entfällt es (Prüfung 17.11.2026)
+        if isinstance(sc, dict) and str(sc.get("weather") or "") == "cold" and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in INDOOR:
+            sc["weather"] = ""
+            for a in sc.get("actors") or []:
+                if isinstance(a, dict) and a.get("action") == "shiver" and not re.search(COLD_RE + "|" + SHIVER_RE, str(sc.get("text") or "").lower()):
+                    a["action"] = "idle"
     return scenes
 
 

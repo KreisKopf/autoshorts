@@ -522,6 +522,9 @@ def main():
         k3 = lambda i: [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in s3[i].get("props") or []]   # noqa: E731
         assert not any("jacke" in k or k == "coat" for k in k3(0)), f"Jacke neben der Fell-Tafel: {k3(0)}"
         assert not any("muskel" in k for k in k3(1)), f"Oberarm beim Haar-Muskel: {k3(1)}"
+        s4 = stage.direct([{"text": "Dir ist kalt oder du erschrickst, und plötzlich stellen sich die Härchen auf.", "place": "livingroom", "time": "day", "weather": "cold",
+                            "actors": [{"id": "du", "action": "shiver"}], "props": []}], [(0, 3.5)], "Warum bekommen wir Gänsehaut?", "fakten", "")
+        assert not s4[0].get("weather"), "Eiskristalle im Wohnzimmer"
         assert k2(2) == ["adrenaline"], f"zwei Tafeln übereinander: {k2(2)}"
         p3 = sorted(a.get("pos") for a in s2[3]["actors"])
         assert len(p3) == 2 and isinstance(p3[0], int) and p3[1] - p3[0] >= 300, f"Mensch und Vorfahre stehen ineinander: {p3}"

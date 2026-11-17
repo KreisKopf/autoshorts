@@ -318,6 +318,7 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   `writer.hook_drops`: Der geschärfte Einstieg ersetzt Satz 2 nicht, wenn dieser eine Tatsache trägt, die sonst nirgends im Drehbuch steht (in
   Fassung 132 fehlte so die ganze Erklärung mit dem Muskel an der Haarwurzel); der Einstieg darf nichts behaupten, was das Thema nicht hergibt.
   „… Luftschicht ein, wie eine dickere Jacke“: keine Jacke neben der Fell-Tafel. Der Muskel an der Haarwurzel zeigt keinen Oberarm (`muskel`).
+  Kälte-Wetter (`cold`: Eiskristalle, Atemwolke) entfällt am Ende von `direct`, wenn die Szene drinnen spielt (in Video 133 schneite es im Wohnzimmer).
 
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
