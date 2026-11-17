@@ -1,5 +1,5 @@
 {
- "updated": 1794919596.4349244,
+ "updated": 1794921396.3144326,
  "enough": true,
  "counted": 18,
  "total": 21,
@@ -45,10 +45,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1661,
+   "avg_views": 1685,
    "avg_likes": 12.0,
-   "like_rate": 0.72,
-   "avg_score": 1931
+   "like_rate": 0.71,
+   "avg_score": 1955
   },
   {
    "slug": "tiere",
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 3,
-   "avg_views": 1322,
+   "avg_views": 1323,
    "avg_likes": 34.7,
    "like_rate": 2.62,
-   "avg_score": 1852
+   "avg_score": 1853
   }
  ],
  "weights": {
@@ -82,8 +82,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1322 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2415 zu 706 Punkte)."
+  "Schwächste Kategorie: 💡 Fakten (Ø 1323 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2417 zu 706 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -102,11 +102,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2255,
+   "views": 2257,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3170
+   "score": 3172
   },
   {
    "id": 84,
