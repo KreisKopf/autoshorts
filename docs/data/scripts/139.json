@@ -2,39 +2,59 @@
  "title": "Dieses winzige Tier ist zäher als ein Löwe",
  "scenes": [
   {
-   "text": "Dieses winzige Tier überlebt sogar im eisigen Weltall.",
-   "see": "Ein Bärtierchen schwebt im eisigen Weltall.",
-   "place": "space",
-   "time": "night",
+   "text": "Ein Löwe ist stark, aber dieses winzige Tier übersteht Dinge, die kein Löwe überlebt.",
+   "see": "Ein Löwe brüllt in der Savanne, während ein winziges Bärtierchen daneben sitzt.",
+   "place": "savannah",
+   "time": "day",
    "actors": [
     {
-     "id": "_tier",
-     "kind": "tardigrade",
+     "id": "_loewe",
+     "kind": "lion",
      "hero": true,
-     "action": "idle",
+     "action": "roar",
      "speaks": false,
-     "pos": "center",
+     "pos": 340,
      "emote": "",
      "say": "",
      "hold": "",
      "facing": "right",
-     "emotion": "worried"
+     "emotion": ""
+    },
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": false,
+     "action": "idle",
+     "speaks": false,
+     "pos": 930,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "emotion": "happy"
     }
    ],
-   "mood": "tense"
+   "mood": "calm"
   },
   {
-   "text": "Es ist nur etwa einen halben Millimeter groß und hat acht Stummelbeine.",
-   "see": "Ein Bärtierchen ist winzig und hat acht Stummelbeine.",
-   "place": "moss",
+   "text": "Das Bärtierchen ist nur etwa einen halben Millimeter groß und lebt in feuchtem Moos.",
+   "see": "Ein Bärtierchen krabbelt auf feuchtem Moos.",
+   "place": "forest",
    "backdrop": {
     "sky": "day",
-    "ground": "moss",
+    "ground": "soil",
     "elements": [
+     "forest",
      "moss"
     ]
    },
    "time": "day",
+   "props": [
+    {
+     "type": "moss",
+     "pos": 170
+    }
+   ],
    "actors": [
     {
      "id": "_tier",
@@ -42,33 +62,33 @@
      "hero": true,
      "action": "idle",
      "speaks": false,
-     "pos": "center",
+     "pos": 790,
      "emote": "",
      "say": "",
      "hold": "",
-     "facing": "right",
+     "facing": "left",
      "emotion": ""
     }
    ],
    "mood": "calm"
   },
   {
-   "text": "Dieses Tier lebt in feuchtem Moos und wartet dort auf den nächsten Regen.",
-   "see": "Ein Bärtierchen lebt im feuchten Moos.",
-   "place": "park",
+   "text": "Es hat acht Stummelbeine und wandert gemächlich durch den grünen Urwald aus Moos.",
+   "see": "Das Bärtierchen wandert gemächlich durch das Moos.",
+   "place": "forest",
    "backdrop": {
     "sky": "day",
-    "ground": "moss",
+    "ground": "soil",
     "elements": [
+     "forest",
      "moss"
     ]
    },
    "time": "day",
-   "weather": "rain",
    "props": [
     {
      "type": "moss",
-     "pos": 230
+     "pos": 170
     }
    ],
    "actors": [
@@ -78,11 +98,11 @@
      "hero": true,
      "action": "look_around",
      "speaks": false,
-     "pos": "center",
+     "pos": 790,
      "emote": "",
      "say": "",
      "hold": "",
-     "facing": "right",
+     "facing": "left",
      "emotion": ""
     }
    ],
@@ -90,8 +110,8 @@
   },
   {
    "text": "Wird es trocken, zieht es die Beine ein und trocknet fast völlig aus.",
-   "see": "Das Bärtierchen zieht die Beine ein, wenn es trocken wird.",
-   "place": "park",
+   "see": "Das Moos trocknet aus, und das Bärtierchen zieht die Beine ein.",
+   "place": "forest",
    "backdrop": {
     "sky": "haze",
     "ground": "dry",
@@ -108,20 +128,20 @@
      "hero": true,
      "action": "tun",
      "speaks": false,
-     "pos": "center",
+     "pos": 680,
      "emote": "",
      "say": "",
      "hold": "",
-     "facing": "right",
+     "facing": "left",
      "emotion": ""
     }
    ],
    "mood": "tense"
   },
   {
-   "text": "Nun wird es zu einem Tönnchen und der Stoffwechsel steht dann praktisch still.",
-   "see": "Das getrocknete Bärtierchen liegt als Tönnchen da.",
-   "place": "park",
+   "text": "Es wird zu einem Tönnchen, und sein Stoffwechsel steht dann praktisch völlig still.",
+   "see": "Das Bärtierchen wird zu einem Tönnchen und der Stoffwechsel stoppt.",
+   "place": "forest",
    "backdrop": {
     "sky": "day",
     "ground": "dry",
@@ -137,7 +157,7 @@
      "hero": true,
      "action": "tun",
      "speaks": false,
-     "pos": "right",
+     "pos": 400,
      "emote": "",
      "say": "",
      "hold": "",
@@ -148,15 +168,15 @@
    "mood": "calm",
    "overlay": {
     "type": "tag",
-    "text": "TÖNNCHEN-PHASE"
+    "text": "TÖNNCHEN"
    }
   },
   {
-   "text": "Als Tönnchen übersteht es einige Minuten lang Hitze von rund einhundertfünfzig Grad.",
-   "see": "Eine Hitze von einhundertfünfzig Grad trifft das Tönnchen.",
+   "text": "In dieser Form übersteht es einige Minuten lang eine Hitze von rund einhundertfünfzig Grad.",
+   "see": "Hitze flimmert über dem Tönnchen bei enormen Temperaturen.",
    "place": "desert",
    "backdrop": {
-    "sky": "red",
+    "sky": "day",
     "ground": "sand",
     "elements": [
      "dunes"
@@ -171,28 +191,35 @@
      "hero": true,
      "action": "tun",
      "speaks": false,
-     "pos": "center",
+     "pos": 680,
      "emote": "",
      "say": "",
      "hold": "",
-     "facing": "right",
+     "facing": "left",
      "emotion": ""
     }
    ],
-   "mood": "tense"
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 150,
+    "unit": "GRAD"
+   }
   },
   {
-   "text": "Aber das ist noch längst nicht alles, denn auch extreme Kälte macht ihm nichts aus.",
-   "see": "Extreme Kälte umgibt das Bärtierchen.",
+   "text": "Gleichzeitig trotzt es eisiger Kälte nahe dem absoluten Nullpunkt ohne mit der Wimper zu zucken.",
+   "see": "Eisige Kälte umgibt das Tönnchen.",
    "place": "snow",
    "backdrop": {
-    "sky": "night",
+    "sky": "day",
     "ground": "snow",
     "elements": [
+     "mountains",
      "glacier"
     ]
    },
-   "time": "night",
+   "time": "day",
    "weather": "cold",
    "actors": [
     {
@@ -201,7 +228,7 @@
      "hero": true,
      "action": "tun",
      "speaks": false,
-     "pos": "center",
+     "pos": 400,
      "emote": "",
      "say": "",
      "hold": "",
@@ -209,12 +236,12 @@
      "emotion": ""
     }
    ],
-   "mood": "tense"
+   "mood": "calm"
   },
   {
-   "text": "Es überlebt Temperaturen nahe dem absoluten Nullpunkt und enormen Druck.",
-   "see": "Das Bärtierchen übersteht Kälte und enormen Druck.",
-   "place": "cave",
+   "text": "Selbst enormer Druck wie in der tiefsten Tiefsee kann diesem kleinen Kämpfer nichts anhaben.",
+   "see": "Enormer Druck herrscht in der dunklen Tiefsee am Meeresboden.",
+   "place": "underwater",
    "time": "night",
    "actors": [
     {
@@ -223,26 +250,26 @@
      "hero": true,
      "action": "tun",
      "speaks": false,
-     "pos": "center",
+     "pos": 680,
      "emote": "",
      "say": "",
      "hold": "",
-     "facing": "right",
+     "facing": "left",
      "emotion": ""
     }
    ],
    "mood": "tense"
   },
   {
-   "text": "Zweitausendsieben flogen getrocknete Bärtierchen zehn Tage lang ungeschützt durch das Weltall.",
-   "see": "Bärtierchen fliegen getrocknet durch das Weltall.",
+   "text": "Zweitausendsieben flogen getrocknete Bärtierchen sogar zehn Tage lang ungeschützt durch den offenen Weltraum.",
+   "see": "Tönnchen fliegen ungeschützt durch den offenen Weltraum.",
    "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
    "time": "night",
-   "props": [
-    {
-     "type": "satellite"
-    }
-   ],
    "actors": [
     {
      "id": "_tier",
@@ -250,7 +277,7 @@
      "hero": true,
      "action": "tun",
      "speaks": false,
-     "pos": "center",
+     "pos": 400,
      "emote": "",
      "say": "",
      "hold": "",
@@ -260,18 +287,21 @@
    ],
    "mood": "calm",
    "overlay": {
-    "type": "tag",
-    "text": "WELTRAUM"
+    "type": "counter",
+    "label": "WELTRAUM",
+    "value": 10,
+    "unit": "TAGE"
    }
   },
   {
    "text": "Zurück auf der Erde bekamen sie Wasser und viele erwachten und krabbelten wieder los.",
-   "see": "Zurück auf der Erde bekommen sie Wasser und krabbeln los.",
-   "place": "park",
+   "see": "Wasser tropft auf das Tönnchen und es krabbelt wieder los.",
+   "place": "forest",
    "backdrop": {
     "sky": "day",
-    "ground": "moss",
+    "ground": "soil",
     "elements": [
+     "forest",
      "moss"
     ]
    },
@@ -295,30 +325,41 @@
    "mood": "happy"
   },
   {
-   "text": "Ein spezielles Schutz-Eiweiß legt sich wie ein Schild um ihr Erbgut und schützt es.",
-   "see": "Ein Schutz-Eiweiß legt sich um das Erbgut.",
+   "text": "Ein spezielles Schutz-Eiweiß legt sich wie ein Schild um ihr Erbgut und stoppt die Strahlung.",
+   "see": "Ein Schutz-Eiweiß legt sich schützend um das Erbgut.",
    "place": "lab",
    "time": "day",
+   "props": [
+    {
+     "type": "shield",
+     "pos": 300
+    }
+   ],
    "actors": [
     {
      "id": "_tier",
      "kind": "tardigrade",
-     "hero": true,
+     "hero": false,
      "action": "idle",
      "speaks": false,
-     "pos": "center",
+     "pos": 770,
      "emote": "",
      "say": "",
      "hold": "",
-     "facing": "right",
-     "emotion": ""
+     "facing": "left",
+     "emotion": "",
+     "_ksz": 0.9
     }
    ],
-   "mood": "calm"
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "DNS-SCHUTZ"
+   }
   },
   {
-   "text": "Du denkst vielleicht, dass diese kleinen Tiere absolut unsterblich sind.",
-   "see": "Eine Person denkt über die Unsterblichkeit nach.",
+   "text": "Du denkst vielleicht, diese kleinen Tiere sind völlig unsterblich und absolut unzerstörbar.",
+   "see": "Eine Person staunt über die vermeintliche Unsterblichkeit.",
    "place": "livingroom",
    "time": "day",
    "actors": [
@@ -326,7 +367,7 @@
      "id": "du",
      "speaks": true,
      "action": "think",
-     "emotion": "",
+     "emotion": "worried",
      "emote": "?",
      "kind": "",
      "hold": "",
@@ -346,15 +387,20 @@
      "hold": "",
      "facing": "left",
      "emotion": "",
-     "_ksz": 1.1
+     "_ksz": 0.85
     }
    ],
-   "mood": "calm"
+   "mood": "tense"
   },
   {
-   "text": "Falsch gedacht, denn wach und aktiv vertragen sie auf Dauer nicht einmal achtunddreißig Grad Wärme.",
-   "see": "Wach und aktiv vertragen sie keine Wärme.",
-   "place": "livingroom",
+   "text": "Falsch, wach und aktiv vertragen sie auf Dauer nicht einmal achtunddreißig Grad Wärme.",
+   "see": "Das Bärtierchen leidet bei zu viel Wärme.",
+   "place": "desert",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": []
+   },
    "time": "day",
    "weather": "heat",
    "actors": [
@@ -362,7 +408,7 @@
      "id": "_tier",
      "kind": "tardigrade",
      "hero": true,
-     "action": "look_around",
+     "action": "idle",
      "speaks": false,
      "pos": "center",
      "emote": "",
@@ -374,13 +420,14 @@
    ],
    "mood": "tense",
    "overlay": {
-    "type": "thermo",
-    "value": 38
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
    }
   },
   {
-   "text": "Ein Bärtierchen erwachte sogar nach über dreißig Jahren im Eis wieder zum Leben.",
-   "see": "Ein Bärtierchen erwacht nach vielen Jahren im Eis.",
+   "text": "Ein Exemplar erwachte sogar nach über dreißig Jahren tiefgefroren im Eis wieder zum Leben.",
+   "see": "Ein Bärtierchen taut nach vielen Jahren aus dem Eis auf.",
    "place": "snow",
    "backdrop": {
     "sky": "day",
@@ -416,79 +463,44 @@
    }
   },
   {
-   "text": "Du findest diese erstaunlichen Überlebenskünstler in fast jedem Moospolster vor deiner Haustür.",
-   "see": "Du findest sie in fast jedem Moospolster.",
-   "place": "park",
-   "backdrop": {
-    "sky": "day",
-    "ground": "moss",
-    "elements": [
-     "moss"
-    ]
-   },
-   "time": "day",
-   "props": [
-    {
-     "type": "door"
-    },
-    {
-     "type": "moss"
-    }
-   ],
-   "actors": [
-    {
-     "id": "du",
-     "speaks": true,
-     "action": "point",
-     "emotion": "happy",
-     "emote": "!",
-     "kind": "",
-     "hold": "",
-     "facing": "",
-     "say": "",
-     "pos": "center"
-    }
-   ],
-   "shot": "insert",
-   "mood": "happy"
-  },
-  {
-   "text": "Sogar auf Hausdächern und alten Mauern krabbeln sie unsichtbar für das bloße Auge herum.",
-   "see": "Sie krabbeln auf Hausdächern und alten Mauern.",
+   "text": "Du findest sie in fast jedem Moospolster, sogar auf Hausdächern und alten Mauern.",
+   "see": "Moospolster auf einem alten Hausdach in der Stadt.",
    "place": "street",
    "backdrop": {
     "sky": "day",
     "ground": "road",
     "elements": [
-     "ruins",
      "street"
     ]
    },
    "time": "day",
+   "props": [
+    {
+     "type": "moss",
+     "pos": 330
+    }
+   ],
    "actors": [
     {
      "id": "_tier",
      "kind": "tardigrade",
-     "hero": true,
+     "hero": false,
      "action": "idle",
      "speaks": false,
-     "pos": "center",
+     "pos": 700,
      "emote": "",
      "say": "",
      "hold": "",
-     "facing": "right",
-     "emotion": "happy"
+     "facing": "left",
+     "emotion": "",
+     "_ksz": 0.8
     }
    ],
-   "mood": "calm",
-   "overlay": {
-    "type": "tag",
-    "text": "ÜBERALL"
-   }
+   "mood": "calm"
   },
   {
-   "text": "Deshalb ist ein Löwe zwar stark, aber dieses winzige Tier übersteht Dinge, die kein Löwe überlebt.",
-   "see": "Ein Löwe brüllt in der Savanne, aber das Bärtierchen ist zäher.",
+   "text": "Sie warten dort geduldig auf den nächsten Regenschuss, während ein Löwe in der Savanne brüllt.",
+   "see": "Ein Bärtierchen wartet im Moos auf Regen, während ein Löwe in der Savanne brüllt.",
    "place": "savannah",
    "time": "day",
    "actors": [
@@ -519,7 +531,7 @@
      "emotion": "happy"
     }
    ],
-   "mood": "tense"
+   "mood": "calm"
   }
  ]
 }
