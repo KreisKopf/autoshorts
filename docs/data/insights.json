@@ -1,5 +1,5 @@
 {
- "updated": 1794940773.350928,
+ "updated": 1794943237.103303,
  "enough": true,
  "counted": 20,
  "total": 22,
@@ -18,7 +18,7 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1654,
+   "avg_views": 1655,
    "avg_likes": 52.5,
    "like_rate": 3.17,
    "avg_score": 2442
@@ -27,10 +27,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1742,
+   "avg_views": 1750,
    "avg_likes": 43.0,
-   "like_rate": 2.47,
-   "avg_score": 2388
+   "like_rate": 2.46,
+   "avg_score": 2395
   },
   {
    "slug": "whatif",
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1465,
+   "avg_views": 1496,
    "avg_likes": 40.8,
-   "like_rate": 2.79,
-   "avg_score": 2083
+   "like_rate": 2.73,
+   "avg_score": 2114
   },
   {
    "slug": "musik",
@@ -63,14 +63,14 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1491,
+   "avg_views": 1489,
    "avg_likes": 27.0,
    "like_rate": 1.81,
-   "avg_score": 1926
+   "avg_score": 1924
   }
  ],
  "weights": {
-  "fakten": 0.92,
+  "fakten": 0.93,
   "grusel": 1.2,
   "storys": 1.08,
   "mysterien": 1.2,
@@ -83,8 +83,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1491 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2429 zu 705 Punkte)."
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1489 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2438 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1889,
-   "likes": 68,
+   "views": 1915,
+   "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2909
+   "score": 2920
   },
   {
    "id": 80,
