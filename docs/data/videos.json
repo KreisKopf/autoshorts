@@ -5029,5 +5029,51 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7709166672900361505?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 136,
+  "category": "tiere",
+  "topic": "Wie sich diese Insekten komplett verwandeln, um zu überleben",
+  "status": "review",
+  "created": 1794939063.0323553,
+  "title": "Diese Insekten sprengen ihren eigenen Körper",
+  "description": "Wie überleben Insekten den ultimativen Albtraum?\nSie verwandeln sich komplett und lassen alles zurück.\nWürdest du deine alte Haut freiwillig abwerfen?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#tiere",
+   "#natur",
+   "#fakten",
+   "#wissen",
+   "#tiktokdeutschland"
+  ],
+  "tags": [
+   "tierfakten",
+   "insekten",
+   "metamorphose",
+   "biologie",
+   "wissen",
+   "raupe",
+   "schmetterling",
+   "naturwunder",
+   "evolution"
+  ],
+  "thumb_text": "KOMPLETT VERWANDELT",
+  "missing": [
+   "schmetterling"
+  ],
+  "cover_ms": 74249,
+  "duration": 74.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-17 21:00",
+  "review_at": 1794939925.7709386
  }
 ]

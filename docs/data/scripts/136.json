@@ -1,0 +1,411 @@
+{
+ "title": "Diese Insekten sprengen ihren eigenen Körper",
+ "scenes": [
+  {
+   "text": "Wie Raupen ihren eigenen Körper komplett auflösen, um zu überleben.",
+   "see": "Eine Raupe frisst im Wald an einem grünen Blatt.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees",
+     "flowers"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "sprout"
+    },
+    {
+     "type": "lib_raupe"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "DER KREISLAUF"
+   }
+  },
+  {
+   "text": "Und das Verrückteste passiert heimlich im Inneren der schützenden Puppe.",
+   "see": "Eine Puppe hängt an einem Ast und leuchtet geheimnisvoll.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "insekt"
+    },
+    {
+     "type": "lib_puppe"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "left",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Zuerst fressen sie sich tagelang voll und verdreifachen dabei ihr eigenes Körpergewicht.",
+   "see": "Eine Waage zeigt ein schweres Gewicht neben frischen Blättern.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "fields"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "scale"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "VIEL MEHR"
+   }
+  },
+  {
+   "text": "Aber dann passiert etwas völlig Unerwartetes im Inneren der schützenden Puppe.",
+   "see": "Die Puppe im Wald schimmert im Licht.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "insekt"
+    },
+    {
+     "type": "lib_puppe"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "left",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ihr alter Körper schmilzt komplett zu einer proteinreichen Suppe zusammen.",
+   "see": "Eine proteinreiche Suppe fließt im Mikroskop-Bild.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_suppe"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense"
+  },
+  {
+   "text": "Kein einziger Muskel bleibt wie zuvor, aber wie steuert das flüssige Chaos plötzlich den neuen Körper?",
+   "see": "Muskeln und Flüssigkeit wirbeln in einer Animation durcheinander.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Nur winzige Überlebenszellen genannt Imaginalscheiben überstehen diesen radikalen Umbau unbeschadet.",
+   "see": "Winzige Zellen leuchten unter dem Mikroskop auf.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "emotion": "",
+     "pos": "left",
+     "speaks": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NEUER START"
+   }
+  },
+  {
+   "text": "Aus diesem scheinbaren Chaos baut sich blitzschnell ein völlig neues Tier auf.",
+   "see": "Ein neuer Körper baut sich blitzschnell zusammen.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "flowers"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "wave",
+     "emotion": "happy",
+     "pos": "left",
+     "emote": ""
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Statt sechs kurzer Beine wachsen plötzlich riesige Flügel für den Flug in die Freiheit.",
+   "see": "Riesige Schmetterlingsflügel entfalten sich in der Sonne.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees",
+     "flowers"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "plane"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "SECHS BEINE"
+   }
+  },
+  {
+   "text": "Und das Beste daran ist dass sie sich sogar an manche Dinge erinnern können.",
+   "see": "Eine Erinnerungsblase schwebt über dem Schmetterling.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "flowers"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "blase"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Experimente zeigen dass die gelernten Ängste aus der Raupenzeit im Schmetterling weiterleben.",
+   "see": "Ein Experiment mit Lichtern zeigt Reaktionen im Labor.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das Gehirn schrumpft zwar kurzzeitig zusammen aber das Wissen geht niemals verloren.",
+   "see": "Ein kleines Gehirn leuchtet hell auf.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "speaks": true
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm"
+  },
+  {
+   "text": "Ohne diesen krassen Trick hätte keine einzige dieser Arten jemals überlebt.",
+   "see": "Ein Schmetterling fliegt sicher durch einen heftigen Sturm.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "storm",
+   "props": [
+    {
+     "type": "insekt"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "ÜBERLEBEN",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Die Natur erfindet sich eben ständig neu und sprengt dabei alle unsere Grenzen.",
+   "see": "Die Natur zeigt ihre bunte Vielfalt im Sonnenschein.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "flowers",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "apfel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "wave",
+     "emotion": "happy",
+     "pos": "left",
+     "emote": ""
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Deshalb bricht am Ende jeder Verwandlung ein völlig neuer Lebensabschnitt voller Wunder an.",
+   "see": "Ein Schmetterling erhebt sich in den blauen Himmel.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "wave",
+     "emotion": "happy",
+     "pos": "left",
+     "emote": ""
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "NEUANFANG"
+   }
+  },
+  {
+   "text": "So fängt das Spiel für die nächste Generation wieder von vorne an.",
+   "see": "Eine neue Raupe schlüpft auf einem frischen Blatt.",
+   "place": "forest",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "flowers"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "wave",
+     "emotion": "happy",
+     "pos": "left",
+     "emote": ""
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}

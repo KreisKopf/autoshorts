@@ -550,5 +550,21 @@
  "moos": {
   "n": 1,
   "last": "Dieses winzige Tier ist gefährlicher als ein Löwe"
+ },
+ "raupe": {
+  "n": 1,
+  "last": "Diese Insekten sprengen ihren eigenen Körper"
+ },
+ "puppe": {
+  "n": 1,
+  "last": "Diese Insekten sprengen ihren eigenen Körper"
+ },
+ "suppe": {
+  "n": 1,
+  "last": "Diese Insekten sprengen ihren eigenen Körper"
+ },
+ "schmetterling": {
+  "n": 1,
+  "last": "Diese Insekten sprengen ihren eigenen Körper"
  }
 }
