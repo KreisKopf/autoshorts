@@ -5081,7 +5081,7 @@
   "id": 137,
   "category": "tiere",
   "topic": "Dieses winzige Tier ist zäher als ein Löwe – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen Worten und kurzen Sätzen erzählen. Es geht um das Bärtierchen, den Namen im zweiten Satz nennen. Einstieg: Ein Löwe ist stark, aber dieses winzige Tier übersteht Dinge, die kein Löwe überlebt. Es ist nur etwa einen halben Millimeter groß, hat acht Stummelbeine und lebt in feuchtem Moos. Wird es trocken, zieht es die Beine ein, trocknet fast völlig aus und wird zu einem Tönnchen, sein Stoffwechsel steht dann praktisch still. Als Tönnchen übersteht es einige Minuten lang Hitze von rund 150 Grad, Kälte nahe dem absoluten Nullpunkt und enormen Druck. 2007 flogen getrocknete Bärtierchen zehn Tage lang ungeschützt durch den offenen Weltraum, zurück auf der Erde bekamen sie Wasser und viele erwachten und krabbelten wieder los. Ein Schutz-Eiweiß legt sich wie ein Schild um ihr Erbgut und schützt es vor Strahlung. Finte: Unsterblich sind sie nicht, wach und aktiv vertragen sie auf Dauer nicht einmal 38 Grad Wärme. Ein Bärtierchen erwachte sogar nach über 30 Jahren im Eis wieder. Schluss: Du findest sie in fast jedem Moospolster, sogar auf Hausdächern und Mauern. Keine anderen Jahreszahlen und keine weiteren Zahlen erfinden. Nicht behaupten, das Tier sei gefährlich oder tödlich. Kein Mensch im Weltall. Titel: Dieses winzige Tier ist zäher als ein Löwe. Titelbild-Text: ZÄHER ALS EIN LÖWE.",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794942162.2473166,
   "title": "Dieses winzige Tier ist zäher als ein Löwe",
   "description": "Ein Löwe ist stark, aber dieses winzige Tier übersteht Dinge, die kein Löwe überlebt!\nErfahre alles über das Bärtierchen und seine krassen Superkräfte im Weltall und Eis.\nHast du schon mal ein Bärtierchen unter dem Mikroskop gesehen?",
@@ -5120,6 +5120,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Untertitel quer über dem Tier, Tür und Moos frei vor leerem Grund, 30 s dasselbe Bild, Name des Tiers erst nach 35 s"
  }
 ]
