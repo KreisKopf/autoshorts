@@ -1,731 +1,4 @@
 {
- "2026-11-16 21:00": {
-  "category": "fakten",
-  "topic": "Was passiert im Körper, wenn du plötzlich erschrickst?",
-  "trend": null,
-  "script": {
-   "title": "Schreckreflex: Was passiert in 1 Sekunde im Körper?",
-   "description": "Was passiert in deinem Körper, wenn du dich richtig erschrickst?\nEin überraschendes Zusammenspiel aus Gehirn, Hormonen und Muskeln blitzschnell erklärt.\nWürdest du eher kämpfen oder weglaufen?",
-   "hashtags": [
-    "#shorts",
-    "#fakten",
-    "#wissen",
-    "#biologie",
-    "#körper",
-    "#gesundheit",
-    "#viral"
-   ],
-   "tags": [
-    "Schreckreflex",
-    "was passiert bei schreck",
-    "körperreaktion",
-    "Adrenalinrausch",
-    "Gehirnfunktion",
-    "biologie fakten",
-    "wissenschaft einfach"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a young person with wide open eyes and an exaggerated shocked expression, dark background with glowing red stress lines, bold contrast, huge space on top for text",
-    "text": "SCHRECK IN 1 SEKUNDE",
-    "place": "bedroom",
-    "time": "night",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "herz"
-    ],
-    "weather": ""
-   },
-   "wishes": [
-    "herz",
-    "muskel",
-    "auge"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "lila",
-     "hat": "",
-     "hair": "ponytail",
-     "hair_color": "blond",
-     "gender": "w",
-     "skin": "hell"
-    },
-    "gehirn": {
-     "kind": "brain"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein gruseliges Geräusch erschreckt dich nachts im Zimmer.",
-     "text": "Dieser eine Reflex kann dir in Sekundenschnelle das Leben retten.",
-     "image": "A young woman sitting in a dark bedroom at night, suddenly looking shocked at a shadow.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Reflex",
-      "Leben"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "SCHRECK-REFLEX"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Highlight ist das Herz, das sofort losrasen will.",
-     "text": "Doch was danach in deinem Körper passiert, ist ein echter Ausnahmezustand.",
-     "image": "An animated pink brain cartoon character wildly pulling levers in a panic room.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "backdrop": null,
-     "props": [
-      "herz"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "close",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "ohne dich"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Grafik zeigt eine Sekunde Herzschlag.",
-     "text": "Es dauert eine Zehntelsekunde, bis das Gehirn Alarm schlägt und reagiert.",
-     "image": "A graphical pulse line jumping up sharply with glowing red effects.",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "0,1",
-      "label": "ZEHNTELSEKUNDE"
-     },
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Zehntelsekunde"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Amygdala feuert Signale ab.",
-     "text": "Deine Amygdala, die Notfallzentrale im Kopf, scannt ständig deine Umgebung.",
-     "image": "Brain character wearing radar goggles looking around intently.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Amygdala"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "NOTFALLZENTRALE"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein großes Auge weitet sich im Zoom.",
-     "text": "Sieht oder hört sie eine Bedrohung, zuckst du blitzschnell zusammen.",
-     "image": "An insert shot of a gigantic eye opening wide in shock.",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [
-      "auge"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "insert",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "Bedrohung"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Adrenalin wird ausgeschüttet.",
-     "text": "Aber wie verteilt sich diese Panik so schnell im ganzen Blut?",
-     "image": "Graphic card showing adrenaline chemical wave.",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "graphic": {
-      "type": "question",
-      "text": "WIE SCHNELL?"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Panik",
-      "Blut"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Nebennieren schießen Hormone raus.",
-     "text": "Deine Nebennieren pumpen sofort ordentlich Adrenalin in deine Adern.",
-     "image": "Graphic counter showing adrenaline level spiking up.",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "HORMONSCHUB",
-      "value": "100 %",
-      "label": "ADRENALIN"
-     },
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Adrenalin"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Herz fängt heftig an zu schlagen.",
-     "text": "Dein Puls schnellt hoch wie bei einem Hundertmeter-Sprint.",
-     "image": "An insert of a glowing red cartoon heart beating rapidly.",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [
-      "herz"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "insert",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Puls"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "180 BPM"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Pupillen werden riesig.",
-     "text": "Deine Pupillen werden riesig, damit maximal viel Licht hineinfällt.",
-     "image": "The character looking straight into the camera with ultra wide pupils.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Pupillen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Muskeln spannen sich extrem an.",
-     "text": "Gleichzeitig wird deine Verdauung komplett gestoppt, um Energie zu sparen.",
-     "image": "An animated muscle prop glowing with orange energy lines.",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [
-      "muskel"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "insert",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Verdauung gestoppt"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "PAUSE",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Gänsehaut bildet sich auf den Armen.",
-     "text": "Du bekommst Gänsehaut, weil sich deine feinen Haarbalgmuskeln zusammenziehen.",
-     "image": "Close-up diagram of goosebumps forming on human skin.",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "insert",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Gänsehaut"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst wie erstarrt im Zimmer.",
-     "text": "Du denkst, dass du in diesem Moment sofort losrennst, aber stimmt das wirklich?",
-     "image": "The main character standing completely frozen in the middle of the room.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "losrennst"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Finte: Du erstarrst tatsächlich erst mal kurz.",
-     "text": "Falsch: Dein Körper erstarrt meistens für Millisekunden zur Salzsäule.",
-     "image": "The character turns literally into a stone statue expression for a funny second.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "pan_left",
-     "sfx": "pop",
-     "highlight": [
-      "Salzsäule"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "FREEZE-EFFEKT"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Vergleich der zwei Optionen Wegrennen oder Kämpfen.",
-     "text": "Das verschafft deinem Hirn Zeit für die Entscheidung: Kämpfen oder Flüchten?",
-     "image": "A versus graphic comparing fighting against running away.",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "graphic": {
-      "type": "versus",
-      "left": "KÄMPFEN",
-      "right": "FLÜCHTEN",
-      "kicker": "DEINE WAHL"
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kämpfen",
-      "Flüchten"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du schreckst wegen eines Handys auf.",
-     "text": "Meistens war die vermeintliche Bedrohung aber nur deine herabstürzende Handyhülle.",
-     "image": "A smartphone lying on the floor, character pointing at it awkwardly.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [
-      "computer"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "sweat",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Handyhülle"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein lustiger Zähler mit den gesparten Kalorien.",
-     "text": "Trotzdem hast du gerade etwa zwei Kalorien rein durch Panik verbrannt.",
-     "image": "Graphic counter showing 2 calories burned.",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "PANIK-WORKOUT",
-      "value": "2",
-      "label": "KALORIEN VERBRANNT"
-     },
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "zwei Kalorien"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du entspannst dich wieder im Bett.",
-     "text": "Das war im Grunde ein kostenloses Mini-Workout auf dem Sofa.",
-     "image": "The character relaxing on the bed with a relieved smile.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Mini-Workout"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn wischt sich erleichtert den Schweiß ab.",
-     "text": "Dein System fährt langsam wieder herunter und beruhigt den Herzschlag.",
-     "image": "The brain character wiping its brow with relief in the lab.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "sweat",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "herunter"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "ALLES SICHER"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Überleitung zurück zum allerersten Satz für die perfekte Schleife.",
-     "text": "Und genau deshalb ist klar:",
-     "image": "The room darkens again slightly, character looks up attentively.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "backdrop": null,
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "klar"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "nebenniere"
-  ],
-  "title": "Schreckreflex: Was passiert in 1 Sekunde im Körper?",
-  "created": 1794844128.3940234
- },
  "2026-11-17 13:00": {
   "category": "fakten",
   "topic": "Warum bekommen wir Gänsehaut? Die verblüffende biologische Ursache",
@@ -2099,5 +1372,646 @@
   ],
   "title": "Dieses winzige Tier ist gefährlicher als ein Löwe",
   "created": 1794929214.5832634
+ },
+ "2026-11-18 13:00": {
+  "category": "mysterien",
+  "topic": "3 versteckte Orte in Videospielen, die fast kein Spieler je betreten hat",
+  "trend": null,
+  "script": {
+   "title": "Drei geheime Orte in Videospielen, die fast niemand kennt",
+   "description": "Kennst du diese geheimnisvollen Orte in Games?\nHier siehst du drei versteckte Bereiche, die kaum ein Spieler betreten hat.\nWürdest du diese Map ganz alleine erkunden?",
+   "hashtags": [
+    "#shorts",
+    "#gaming",
+    "#mysterium",
+    "#easteregg",
+    "#foryou",
+    "#viral",
+    "#geheimnis",
+    "#gamer"
+   ],
+   "tags": [
+    "gaming mysterien",
+    "easter eggs",
+    "versteckte orte",
+    "videospiele geheimnisse",
+    "lost media",
+    "gaming fakten"
+   ],
+   "thumbnail": {
+    "place": "space",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "satellite"
+    ],
+    "weather": "",
+    "image": "Close-up of a shocked gamer looking at a glowing secret door in a dark video game cave, bold simple composition, empty space in the upper third",
+    "text": "GEHEIME ORTE IN GAMES"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "headphones",
+     "hair": "short",
+     "hair_color": "schwarz",
+     "skin": "mittel",
+     "gender": "m"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Drei versteckte Orte in Videospielen, die fast kein Spieler je betreten hat.",
+     "image": "Gamer sitting in front of a glowing computer screen in a dark room, looking amazed.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Drei versteckte Orte"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "TOP 3"
+     },
+     "see": "Spieler steht im Raum vor einer Infokarte über geheime Orte",
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und der letzte Bereich ist so gut versteckt, dass er jahrelang unentdeckt blieb.",
+     "image": "Close up of a secret glowing door opening in a dark rock wall.",
+     "who": [],
+     "place": "space",
+     "camera": "pan_left",
+     "sfx": "whoosh",
+     "highlight": [
+      "jahrelang un entdeckt"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "DER LETZTE ORT"
+     },
+     "see": "Eine verlassene Raumstation schwebt im dunklen Weltall",
+     "time": "night",
+     "props": [
+      "satellite"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer eins ist eine verlassene Raumstation in einem riesigen Online Rollenspiel.",
+     "image": "An abandoned futuristic space station floating in deep dark space.",
+     "who": [],
+     "place": "space",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nummer eins",
+      "Raumstation"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NUMMER 1"
+     },
+     "see": "Raumschiff fliegt durch den leeren Weltraum",
+     "time": "night",
+     "props": [
+      "rocket"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du musst stundenlang in eine absolut leere Richtung fliegen, um sie zu erreichen.",
+     "image": "A tiny spaceship flying through an endless dark void of stars.",
+     "who": [
+      "du"
+     ],
+     "place": "space",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "stundenlang"
+     ],
+     "overlay": null,
+     "see": "Spielerfigur fliegt im Raumanzug durch die Leere",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "float",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dort angekommen warten keine Gegner, sondern welche geheimnisvollen Audiologs?",
+     "image": "A futuristic computer terminal blinking with red warning lights.",
+     "who": [],
+     "place": "space",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Audiologs"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "AUDIO LOG"
+     },
+     "see": "Audiolog liegt verlassen in der Raumstation",
+     "time": "night",
+     "props": [
+      "radio"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nur zwei Prozent aller Spieler haben diesen trostlosen Sektor je auf ihrer Karte gesehen.",
+     "image": "A digital map showing a tiny glowing dot in a massive dark sector.",
+     "who": [],
+     "place": "worldmap",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "zwei Prozent"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "SPIELER",
+      "value": 2,
+      "unit": "PROZENT"
+     },
+     "see": "Grafik zeigt zwei Prozent auf einer Weltkarte",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "number",
+      "kicker": "SEKTOR",
+      "value": "2%",
+      "label": "SPIELER"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Bleibt die Frage, warum Entwickler so viel Mühe in unsichtbare Ecken stecken.",
+     "image": "A developer working on a massive digital world map on multiple screens.",
+     "who": [],
+     "place": "livingroom",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "warum Entwickler"
+     ],
+     "overlay": null,
+     "see": "Spieler denkt nach vor dem Monitor",
+     "time": "day",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer zwei führt dich tief unter die Spielwelt eines bekannten Open World Hits.",
+     "image": "A character falling endlessly through glitchy textures under the game map.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Nummer zwei",
+      "unter die Spielwelt"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NUMMER 2"
+     },
+     "see": "Auto fährt durch eine Open World Landschaft",
+     "backdrop": {
+      "sky": "day",
+      "ground": "road",
+      "elements": [
+       "hills"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "car"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du musst durch eine unsichtbare Wand glitchen, während du mit voller Geschwindigkeit fährst.",
+     "image": "A sports car crashing straight through a solid concrete wall.",
+     "who": [
+      "du"
+     ],
+     "place": "cave",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "unsichtbare Wand"
+     ],
+     "overlay": null,
+     "see": "Auto fährt mit Vollgas gegen eine Felswand",
+     "time": "night",
+     "props": [
+      "car",
+      "rock"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dahinter wartet eine bizarre Unterwasserstadt, die komplett ohne Texturen gerendert wurde.",
+     "image": "Grey untextured 3d models of buildings deep underwater.",
+     "who": [],
+     "place": "underwater",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "bizarre Unterwasserstadt"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "OHNE TEXTUREN"
+     },
+     "see": "Bizarre Unterwasserstadt ohne Texturen in der Tiefsee",
+     "time": "night",
+     "props": [
+      "submersible"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Alles wirkt grau, leblos und extrem unheimlich in dieser digitalen Geisterstadt.",
+     "image": "Empty grey streets between massive blocky buildings without any life.",
+     "who": [],
+     "place": "ruins",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Geisterstadt"
+     ],
+     "overlay": null,
+     "see": "Graue geisterhafte Kulisse im Videospiel",
+     "backdrop": {
+      "sky": "storm",
+      "ground": "rock",
+      "elements": [
+       "ruins"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "shot": "event",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer dort zu lange bleibt, stürzt ohne Vorwarnung in den ewigen digitalen Abgrund.",
+     "image": "A character silhouette falling down into an endless black digital grid.",
+     "who": [
+      "du"
+     ],
+     "place": "underwater",
+     "camera": "zoom_out",
+     "sfx": "pop",
+     "highlight": [
+      "digitalen Abgrund"
+     ],
+     "overlay": null,
+     "see": "Figur stürzt in den digitalen Abgrund",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber was genau verbirgt sich im noch absurderen Fund von Nummer drei?",
+     "image": "A glowing mysterious chest hidden behind a giant waterfall in a green forest.",
+     "who": [],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Nummer drei"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NUMMER 3"
+     },
+     "see": "Spieler staunt über die nächste Entdeckung",
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "In einem friedlichen Strategiespiel existiert ein winziges Zimmer mitten im Berg.",
+     "image": "Inside a tiny secret stone room with a small wooden table and a lamp.",
+     "who": [],
+     "place": "cave",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "winziges Zimmer"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "VERSTECKTER RAUM"
+     },
+     "see": "Winziges Zimmer mitten im Berg eines Strategiespiels",
+     "backdrop": {
+      "sky": "day",
+      "ground": "rock",
+      "elements": [
+       "mountains"
+      ]
+     },
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dort sitzt ein einzelner Entwickler als pixeliges Cartoon Gesicht am Holztisch.",
+     "image": "A pixelated cartoon face of a smiling man sitting behind a tiny wooden desk.",
+     "who": [],
+     "place": "cave",
+     "camera": "close",
+     "sfx": "none",
+     "highlight": [
+      "einzelner Entwickler"
+     ],
+     "overlay": null,
+     "see": "Einzelner Entwickler sitzt am Holztisch",
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Er spricht kein Wort, sondern starrt die Spieler nur stumm und grinsend an.",
+     "image": "Close up of the pixel face staring directly forward with a wide grin.",
+     "who": [],
+     "place": "cave",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "stumm und grinsend"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "CREEPY",
+      "color": "purple"
+     },
+     "see": "Entwickler starrt grinsend und stumm nach vorn",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Kein Questmarker führt jemals zu diesem Easter Egg in den tiefen Bergen.",
+     "image": "A massive mountain range with a tiny glowing red dot deep inside.",
+     "who": [],
+     "place": "mountain",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Easter Egg"
+     ],
+     "overlay": null,
+     "see": "Tiefes Gebirge ohne Questmarker",
+     "backdrop": {
+      "sky": "day",
+      "ground": "rock",
+      "elements": [
+       "mountains"
+      ]
+     },
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Modder haben den Raum erst nach zehn Jahren durch Zufall im Code entdeckt.",
+     "image": "Lines of colorful computer code scrolling down a dark hacker monitor screen.",
+     "who": [],
+     "place": "serverroom",
+     "camera": "pan_right",
+     "sfx": "ding",
+     "highlight": [
+      "zehn Jahren"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "JAHRE",
+      "value": 10,
+      "unit": "BIS ZUR ENTDECKUNG"
+     },
+     "see": "Modder entdecken den Code nach zehn Jahren",
+     "time": "night",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "audiolog"
+  ],
+  "title": "Drei geheime Orte in Videospielen, die fast niemand kennt",
+  "created": 1794940761.4727979
  }
 }

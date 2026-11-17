@@ -1,5 +1,5 @@
 {
- "last_category": "tiere",
+ "last_category": "mysterien",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -33,7 +33,7 @@
   "qezkt1s0o",
   "qt49vv57v"
  ],
- "last_stats": 1794937750.5458214,
+ "last_stats": 1794940773.350917,
  "next_id": 137,
  "connected": {
   "youtube": {
@@ -42,7 +42,7 @@
   }
  },
  "voice_wps": 2.754,
- "last_trends": 1794929229.0029755,
+ "last_trends": 1794940773.3521597,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
@@ -50,14 +50,15 @@
   "video": 136
  },
  "cat_credit": {
-  "fakten": -1.149999999999999,
-  "storys": 1.3900000000000012,
-  "mysterien": 1.7400000000000002,
-  "tiere": -7.130000000000001,
-  "whatif": 1.0600000000000003,
-  "comedy": 1.6900000000000002,
-  "vergleich": 1.2,
-  "motivation": 1.2
+  "fakten": -0.22999999999999898,
+  "storys": 2.4700000000000015,
+  "mysterien": -7.1499999999999995,
+  "tiere": -5.930000000000001,
+  "whatif": 2.0900000000000003,
+  "comedy": 2.75,
+  "vergleich": 2.4,
+  "motivation": 2.4,
+  "grusel": 1.2
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",
