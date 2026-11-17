@@ -1,5 +1,5 @@
 {
- "updated": 1794882995.9785461,
+ "updated": 1794884796.1628327,
  "enough": true,
  "counted": 17,
  "total": 20,
@@ -27,10 +27,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1721,
+   "avg_views": 1722,
    "avg_likes": 40.6,
    "like_rate": 2.36,
-   "avg_score": 2334
+   "avg_score": 2335
   },
   {
    "slug": "comedy",
@@ -54,10 +54,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1457,
+   "avg_views": 1454,
    "avg_likes": 27.0,
-   "like_rate": 1.85,
-   "avg_score": 1892
+   "like_rate": 1.86,
+   "avg_score": 1889
   },
   {
    "slug": "fakten",
