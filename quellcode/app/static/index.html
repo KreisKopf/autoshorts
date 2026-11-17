@@ -824,7 +824,7 @@ async function saveAccess(msg) {
 }
 async function sha256hex(t) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join(""); }
 function newCode() { const a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", r = crypto.getRandomValues(new Uint8Array(8)); const c = [...r].map(x => a[x % a.length]).join(""); return `AS-${c.slice(0, 4)}-${c.slice(4)}`; }
-const DL_LINK = () => `https://github.com/${S.owner}/${S.repo}/raw/main/AutoShorts-Kanal.cmd`;
+const DL_LINK = () => `https://github.com/${S.owner}/${S.repo}/releases/download/app/AutoShorts-Kanal.cmd`;   // echter Download (raw-Links zeigen nur Text)
 const fmtDate = t => new Date(t * 1000).toLocaleDateString("de-DE", {day: "numeric", month: "short", year: "numeric"});
 function accStatus(e) {
   if (!e.expires) return '<span class="chip good">aktiv · unbegrenzt</span>';
@@ -1462,7 +1462,7 @@ function viewSettings() {
     <div class="row"><label>Kanal-Merkmal<small>${S_("channel_seed") ? "Wird beim „Neu einrichten“ vergeben. Damit mischt dieser Kanal Themen, Figuren und Melodien anders als alle anderen." : "Dein Original-Kanal braucht keins. Eine Kopie bekommt es beim „Neu einrichten“."}</small></label><div class="inline"><code>${esc(S_("channel_seed") || "–")}</code></div></div>`)}
   ${(S.owner + "/" + S.repo).toLowerCase() === "quatratkopf/autoshorts" ? sec("teilen", I.gh, "App weitergeben", "So bekommt ein Freund seine eigene Kopie", "", `
     <p class="hint">1. Dein Freund legt auf GitHub eine eigene Kopie an: <a href="https://github.com/${esc(S.owner)}/${esc(S.repo)}/fork" target="_blank" rel="noopener">Fork erstellen ↗</a> und schaltet in seiner Kopie unter „Actions“ die Workflows ein.<br>
-    2. Er lädt die <b>Kanal-App</b> herunter – <a href="https://github.com/${esc(S.owner)}/${esc(S.repo)}/blob/main/AutoShorts-Kanal.cmd" target="_blank" rel="noopener">AutoShorts-Kanal.cmd ↗</a> (Download-Symbol) – und verbindet sie mit <b>seiner</b> Kopie (eigener GitHub-Schlüssel). Die Kanal-App zeigt nur das Nötigste; alles andere (Stil, KI, Video-Arten) kommt von dir über den Motor.<br>
+    2. Er lädt die <b>Kanal-App</b> herunter – <a href="https://github.com/${esc(S.owner)}/${esc(S.repo)}/releases/download/app/AutoShorts-Kanal.cmd" target="_blank" rel="noopener">AutoShorts-Kanal.cmd herunterladen ↗</a> – und verbindet sie mit <b>seiner</b> Kopie (eigener GitHub-Schlüssel). Die Kanal-App zeigt nur das Nötigste; alles andere (Stil, KI, Video-Arten) kommt von dir über den Motor.<br>
     3. In seiner App unter Einstellungen → „Kopie dieses Kanals“ auf <b>Neu einrichten</b> tippen: Deine Videos, Zahlen und Anmeldungen verschwinden aus seiner Kopie, und sie bekommt ein eigenes Kanal-Merkmal.<br>
     4. Eigenen Gemini-Schlüssel, YouTube und TikTok verbinden (Anleitung in der README). Motor-Updates holt er später mit „Motor aktualisieren“ – nie mit „Sync fork“, das brächte deine Daten mit.</p>`) : sec("kopie", I.gh, "Kopie dieses Kanals", `${esc(S.owner)}/${esc(S.repo)} · eigene Kopie`, S_("channel_seed") ? '<span class="chip good">eingerichtet</span>' : '<span class="chip warn">noch nicht eingerichtet</span>', `
     <div class="row"><label>Neu einrichten<small>Leert in dieser Kopie Video-Liste, Zahlen, Warteschlange, Drehbücher, Vorschaubilder und Anmeldungen und vergibt ein eigenes Kanal-Merkmal. Motor, Video-Arten und Klang-Bibliothek bleiben. Nur einmal am Anfang nötig.</small></label><button class="btn danger" id="freshBtn">Neu einrichten</button></div>

@@ -1,6 +1,6 @@
 {
-  "version": "1.15.0",
-  "file": "releases/AutoShorts-1.15.0.cmd",
-  "sha256": "440a72a2483f703536a0cc376039774c370ee0d034099272c0bee6f10bfe2529",
-  "notes": "Aufgeräumt: nicht mehr genutzte KI-Dienste (OpenAI, ElevenLabs, Pollinations-Auswahl, Kosten-Rechner) aus der App entfernt"
+  "version": "1.15.1",
+  "file": "releases/AutoShorts-1.15.1.cmd",
+  "sha256": "ae21e8f29f7e0a67ae3796286d82e582f993a9296a9d73bc330b14fe347b0335",
+  "notes": "Download-Link der Kanal-App lädt jetzt wirklich herunter (statt Text anzuzeigen)"
 }

@@ -1,13 +1,16 @@
 name: AutoShorts
-run-name: "${{ github.event_name == 'schedule' && 'Stündliche Prüfung' || format('{0} {1}', inputs.action, inputs.category) }}"
+run-name: "${{ github.event_name == 'schedule' && 'Stündliche Prüfung' || github.event_name == 'push' && 'App bereitstellen' || format('{0} {1}', inputs.action, inputs.category) }}"
 
 on:
   schedule:
     - cron: "17,47 * * * *"   # alle 30 Minuten; der Motor entscheidet selbst, ob ein Video oder neue Zahlen fällig sind
+  push:                       # neue App-Version im Repository → als Download bereitstellen (Release „app“)
+    branches: [main]
+    paths: ["AutoShorts.cmd", "AutoShorts-Kanal.cmd"]
   workflow_dispatch:
     inputs:
       action:
-        description: "auto | make | review_make | upload | discard | stats | trends | sounds | reset | update | adopt"
+        description: "auto | make | review_make | upload | discard | stats | trends | sounds | reset | update | adopt | app"
         default: "make"
         type: string
       category:
@@ -47,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      IN_ACTION: ${{ inputs.action || 'auto' }}
+      IN_ACTION: ${{ github.event_name == 'push' && 'app' || inputs.action || 'auto' }}
       IN_CATEGORY: ${{ inputs.category }}
       IN_TOPIC: ${{ inputs.topic }}
       IN_UPLOAD: ${{ inputs.upload || '1' }}

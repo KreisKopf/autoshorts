@@ -781,6 +781,15 @@ def main(argv=None):
         elif a.action == "update":       # Kopie: neuesten Motor aus dem Original holen, eigene Daten bleiben
             from . import fresh
             fresh.update_engine()
+        elif a.action == "app":          # beide Apps als echten Download bereitstellen (Release „app“) – ein raw-Link zeigt nur Text
+            from .state import ROOT
+            files = [str(ROOT / n) for n in ("AutoShorts-Kanal.cmd", "AutoShorts.cmd") if (ROOT / n).exists()]
+            if _gh("release", "view", "app", check=False).returncode != 0:
+                _gh("release", "create", "app", "--title", "AutoShorts – App zum Herunterladen", "--latest=false", "--notes",
+                    "AutoShorts-Kanal.cmd = Kanal-App für andere Leute (mit Zugangscode vom Admin) · AutoShorts.cmd = Admin-App. "
+                    "Datei herunterladen, in einen festen Ordner legen (z. B. Dokumente), doppelklicken – die App hält sich danach selbst aktuell.")
+            _gh("release", "upload", "app", *files, "--clobber")
+            log("Apps zum Herunterladen bereitgestellt: " + ", ".join(os.path.basename(f) for f in files))
         elif a.action == "trends":       # „Aktualisieren“ in der App: Trends und Kanal-Analyse sofort neu
             trends.refresh(force=True)
         else:

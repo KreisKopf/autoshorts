@@ -6,7 +6,7 @@ Die Videos baut der Motor kostenlos auf GitHub Actions, auch wenn dein PC aus is
 
 ## Starten
 
-1. **AutoShorts.cmd** herunterladen (oben auf die Datei klicken → Download-Symbol).
+1. **AutoShorts.cmd** herunterladen: https://github.com/QuatratKopf/autoshorts/releases/download/app/AutoShorts.cmd
 2. In einen festen Ordner legen, z. B. Dokumente (nicht direkt aus der ZIP starten, vorher entpacken).
 3. Doppelklick. Fehlt Python, wird es einmalig automatisch installiert.
 4. Die App öffnet sich in einem eigenen Fenster und legt ein Symbol **AutoShorts** auf dem Desktop an.
@@ -64,7 +64,7 @@ Bis TikTok die App geprüft hat, sind API-Uploads nur als **„Nur ich“** erla
 Jeder Kanal braucht seine **eigene Kopie** dieses Repositorys – dort liegen Videos, Zahlen und Anmeldungen getrennt.
 
 1. Auf GitHub oben rechts **Fork** → eigene Kopie anlegen. In der Kopie unter **Actions** die Workflows einschalten.
-2. Die **Kanal-App** `AutoShorts-Kanal.cmd` herunterladen und starten, beim Verbinden den **eigenen** GitHub-Schlüssel und die **eigene Kopie** eintragen.
+2. Die **Kanal-App** herunterladen: https://github.com/QuatratKopf/autoshorts/releases/download/app/AutoShorts-Kanal.cmd – und starten, beim Verbinden den **eigenen** GitHub-Schlüssel und die **eigene Kopie** eintragen.
    Die Kanal-App zeigt nur das Nötigste (Autopilot, Upload-Zeiten, Kanal-Profil, YouTube/TikTok, Schlüssel). Alles andere – Stil, KI, Video-Arten –
    stellt der Admin mit der vollen App `AutoShorts.cmd` ein und gibt es über den Motor weiter.
 3. In der App **Einstellungen → Kopie dieses Kanals → Neu einrichten**: leert Video-Liste, Zahlen, Warteschlange, Drehbücher,
