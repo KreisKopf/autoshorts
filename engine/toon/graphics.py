@@ -1180,7 +1180,7 @@ def _g_size(frame, g, t, dur):
     L = 1.0 if mm < 0.1 else 10.0 if mm <= 5 else 50.0                # Lineal: 1 mm, 1 cm oder 5 cm
     ppm = 860 / L                                                       # Bildpunkte je Millimeter bei voller Ansicht
     x_c = L * 0.3                                                       # hier steht das Tier auf dem Lineal
-    z0 = max(1.0, 620 / (mm * ppm))                                     # Anfang: das Tier etwa 620 Bildpunkte groß
+    z0 = max(1.0, 430 / (mm * ppm))                                     # Anfang: das Tier etwa 430 Bildpunkte groß, die Halme daneben im Bild
     z_a, z_b = 0.55, max(1.3, min(dur * 0.62, 2.5))
     u = min(1.0, max(0.0, (t - z_a) / (z_b - z_a)))
     e = u * u * (3 - 2 * u)
@@ -1196,7 +1196,22 @@ def _g_size(frame, g, t, dur):
         k = i / H
         d.rectangle((0, i, W, i + 8), fill=(int(214 - 30 * k), int(232 - 24 * k), int(214 - 70 * k)))
     gy = P(0, 0)[1]
-    d.rectangle((0, gy, W, H), fill=(120, 92, 64))                      # Erdboden
+    for i in range(int(max(0, gy)), H, 6):                              # Erdboden: nach unten dunkler
+        k_ = (i - gy) / max(1, H - gy)
+        d.rectangle((0, i, W, i + 6), fill=(int(128 - 34 * k_), int(98 - 28 * k_), int(68 - 20 * k_)))
+    rg = random.Random(11)                                              # Körnchen und Steinchen in echter Größe: von nah wie Kiesel
+    x_lo, x_hi = fx - (W / 2) / (ppm * Z), fx + (W / 2) / (ppm * Z)
+    for _ in range(900):
+        gx_, gy_ = rg.uniform(-0.3 * L, 2.0 * L), rg.uniform(0.0, 1.6 * L)
+        r_ = rg.uniform(0.004, 0.02) * L
+        if not (x_lo - r_ <= gx_ <= x_hi + r_):
+            continue
+        c_ = P(gx_, gy_)
+        rp = r_ * ppm * Z
+        if rp < 1.2 or c_[1] - rp > H or c_[1] + rp < gy:
+            continue
+        sh = rg.randint(-22, 22)
+        d.ellipse((c_[0] - rp, c_[1] - rp * 0.7, c_[0] + rp, c_[1] + rp * 0.7), fill=(150 + sh, 118 + sh, 84 + sh // 2, 255))
     rnd = random.Random(7)
     ow = max(2, min(7, int(0.04 * sc_px)))
     macro = L >= 10                                                     # Gras, Moos, Sandkorn nur bei Millimetern (unter 0,1 mm wären sie falsch groß)
@@ -1234,36 +1249,60 @@ def _g_size(frame, g, t, dur):
         else:
             px_, py_ = P(x_c, 0)
             d.ellipse((px_ - 2, py_ - 4, px_ + 2, py_), fill=INK)
-    rh = 0.28 * L                                                       # Lineal liegt vorne auf dem Boden
-    a_, b_ = P(0, 0.05 * L), P(L, 0.05 * L + rh)
-    d.rounded_rectangle((a_[0], a_[1], b_[0], b_[1]), int(min(30, 0.02 * L * sc_px)), fill=(246, 214, 96, 255), outline=INK, width=ow)
-    step = 0.1 if L == 1.0 else 1.0 if L == 10.0 else 5.0
-    n_t = int(round(L / step))
-    if step * sc_px >= 7:
-        for i in range(n_t + 1):
-            x = i * step
-            long_ = i % 5 == 0
-            p0, p1 = P(x, 0.05 * L), P(x, 0.05 * L + rh * (0.55 if long_ else 0.32))
-            d.line((p0[0], p0[1], p1[0], p1[1]), fill=INK, width=max(2, ow - (0 if long_ else 2)))
-        if e > 0.9:                                                     # Beschriftung, sobald das Lineal ganz im Bild ist
-            unit = "mm" if L <= 10 else "cm"
-            f_r = _font(46, "Bold")
-            for i, lab in ((0, "0"), (n_t // 2, (f"{L / 2:g}" if unit == "mm" else f"{L / 20:g}").replace(".", ",")), (n_t, (f"{L:g} mm" if unit == "mm" else f"{L / 10:g} cm").replace(".", ","))):
-                p0 = P(i * step, 0.05 * L + rh * 0.62)
-                w_ = d.textlength(lab, font=f_r)
-                d.text((min(W - 30 - w_, max(30, p0[0] - w_ / 2)), p0[1]), lab, font=f_r, fill=INK)
-    k = _pop(t, z_b, 0.4)                                                # Klammer mit der echten Größe
+    # Lineal: Holz mit Kante, Schatten, Maserung und Glanz; Skala mm / 5 mm / cm; läuft wie ein echtes über den Bildrand hinaus
+    D, y0 = 0.30 * L, 0.05 * L                                          # Tiefe der Oberseite, Abstand zum Tier
+    x0, x1 = -0.10 * L, 3.2 * L
+    edge = 0.055 * L                                                    # sichtbare Vorderkante (Dicke)
+    lay = Image.new("RGBA", frame.size, (0, 0, 0, 0))
+    ld = ImageDraw.Draw(lay)
+    s0, s1 = P(x0 + 0.03 * L, y0 + 0.06 * L), P(x1, y0 + D + edge + 0.07 * L)
+    ld.rounded_rectangle((s0[0], s0[1], s1[0], s1[1]), int(max(4, 0.03 * L * sc_px)), fill=(40, 26, 10, 120))
+    frame.paste(Image.new("RGB", frame.size, (40, 26, 10)), (0, 0), lay.filter(ImageFilter.GaussianBlur(max(3, 0.02 * L * sc_px))).getchannel("A"))
+    d = ImageDraw.Draw(frame, "RGBA")
+    rad = int(min(40, max(3, 0.025 * L * sc_px)))
+    a_, b_ = P(x0, y0 + D - 0.02 * L), P(x1, y0 + D + edge)             # Vorderkante (dunkleres Holz)
+    d.rounded_rectangle((a_[0], a_[1], b_[0], b_[1]), rad, fill=(184, 128, 62, 255), outline=INK, width=max(2, ow - 2))
+    a_, b_ = P(x0, y0), P(x1, y0 + D)                                   # Oberseite
+    d.rounded_rectangle((a_[0], a_[1], b_[0], b_[1]), rad, fill=(236, 194, 120, 255), outline=INK, width=max(2, ow - 2))
+    rw = random.Random(3)
+    for k_ in range(9):                                                 # Holzmaserung (feine, leicht wellige Linien)
+        yy = y0 + D * (0.18 + 0.08 * k_) + rw.uniform(-0.01, 0.01) * L
+        pts = [P(x, yy + 0.008 * L * math.sin(x / L * 9 + k_)) for x in [x0 + 0.04 * L + q * 0.05 * L for q in range(int((x1 - x0) / (0.05 * L)))]]
+        pts = [q for q in pts if -50 < q[0] < W + 50]
+        if len(pts) > 1:
+            d.line(pts, fill=(214, 168, 96, 150), width=max(1, int(0.004 * L * sc_px)))
+    a_, b_ = P(x0 + 0.02 * L, y0 + 0.012 * L), P(x1, y0 + 0.05 * L)      # Glanz an der Oberkante
+    d.rounded_rectangle((a_[0], a_[1], b_[0], b_[1]), max(2, rad // 2), fill=(255, 245, 220, 110))
+    minor = L / 10 if L <= 10 else 1.0                                  # kleinster Strich: 1 mm (bei Mikrometern 0,1 mm)
+    if minor * sc_px >= 5:
+        n0, n1 = int(math.floor((fx - (W / 2) / sc_px) / minor)) - 1, int(math.ceil((fx + (W / 2) / sc_px) / minor)) + 1
+        for i_ in range(max(0, n0), min(int(x1 / minor), n1)):
+            x = i_ * minor
+            major, mid = i_ % 10 == 0, i_ % 5 == 0
+            ln = D * (0.50 if major else 0.34 if mid else 0.20)
+            p0, p1 = P(x, y0 + 0.004 * L), P(x, y0 + ln)
+            d.line((p0[0], p0[1], p1[0], p1[1]), fill=(52, 34, 18, 255), width=max(2, int((0.010 if major else 0.007) * L * sc_px)))
+            if major and e > 0.85:                                      # Zahlen unter den langen Strichen (0, 1, 2 … in cm bzw. mm)
+                num = str(i_ // 10) + ((" mm" if L <= 1 else " cm") if i_ // 10 == max(1, round(L / 10)) else "")   # Einheit an der letzten Zahl im Bild
+                f_r = _font(int(max(30, min(64, 0.1 * L * sc_px))), "Bold")
+                q = P(x, y0 + ln + 0.02 * L)
+                d.text((q[0] - d.textlength(num, font=f_r) / 2, q[1]), num, font=f_r, fill=(52, 34, 18))
+    k = _pop(t, z_b, 0.4)                                                # Klammer und Etikett mit der echten Größe
     if k > 0:
         top, bot = P(x_c, -mm), P(x_c, 0)
-        bx = bot[0] + max(26, mm * sc_px * 0.8)
-        d.line((bx, top[1], bx, bot[1]), fill=(230, 60, 50), width=6)
+        bx = bot[0] + max(22, mm * sc_px * 0.75)
+        red = (226, 58, 48)
+        d.line((bx, top[1], bx, bot[1]), fill=red, width=5)
         for yy in (top[1], bot[1]):
-            d.line((bx - 14, yy, bx + 14, yy), fill=(230, 60, 50), width=6)
-        f_v = _font(int(96 * min(1.0, k)), "anton")
-        lab = str(g.get("value"))
-        tx = min(W - 40 - d.textlength(lab, font=f_v), bx + 30)
-        d.text((tx, top[1] - 150), lab, font=f_v, fill=(230, 60, 50), stroke_width=6, stroke_fill=(255, 255, 255))
-        d.line((tx + 10, top[1] - 40, bx + 4, (top[1] + bot[1]) / 2), fill=(230, 60, 50), width=5)
+            d.line((bx - 12, yy, bx + 12, yy), fill=red, width=5)
+        lab_ = str(g.get("value"))
+        f_v = _font(int(84 * min(1.0, 0.6 + 0.4 * k)), "anton")
+        tw = d.textlength(lab_, font=f_v)
+        cx_ = min(W - 60 - tw / 2, max(60 + tw / 2, bx + 150))
+        cy_ = top[1] - 230
+        d.line((bx, (top[1] + bot[1]) / 2, cx_ - tw / 2 + 20, cy_ + 60), fill=red, width=4)
+        d.rounded_rectangle((cx_ - tw / 2 - 34, cy_ - 16, cx_ + tw / 2 + 34, cy_ + f_v.size + 28), 26, fill=(255, 255, 255, 240), outline=red, width=5)
+        d.text((cx_ - tw / 2, cy_), lab_, font=f_v, fill=red)
     kt = str(g.get("kicker") or "ECHTE GRÖSSE").upper()[:40]            # dunkle Schrift: der Hintergrund ist hier hell
     f_k = _fit(d, kt, 70, 940, "Bold")
     d.rounded_rectangle((W / 2 - d.textlength(kt, font=f_k) / 2 - 34, 268, W / 2 + d.textlength(kt, font=f_k) / 2 + 34, 268 + f_k.size + 44), 30,
