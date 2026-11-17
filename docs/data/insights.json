@@ -1,5 +1,5 @@
 {
- "updated": 1794925007.1036391,
+ "updated": 1794926798.7131658,
  "enough": true,
  "counted": 19,
  "total": 21,
@@ -24,6 +24,15 @@
    "avg_score": 2441
   },
   {
+   "slug": "comedy",
+   "name": "🤪 Comedy",
+   "n": 2,
+   "avg_views": 1726,
+   "avg_likes": 43.5,
+   "like_rate": 2.52,
+   "avg_score": 2379
+  },
+  {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
@@ -33,22 +42,13 @@
    "avg_score": 2335
   },
   {
-   "slug": "comedy",
-   "name": "🤪 Comedy",
-   "n": 2,
-   "avg_views": 1676,
-   "avg_likes": 43.5,
-   "like_rate": 2.6,
-   "avg_score": 2328
-  },
-  {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 4,
-   "avg_views": 1456,
-   "avg_likes": 42.5,
-   "like_rate": 2.92,
-   "avg_score": 2101
+   "avg_views": 1457,
+   "avg_likes": 42.8,
+   "like_rate": 2.93,
+   "avg_score": 2106
   },
   {
    "slug": "musik",
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1476,
+   "avg_views": 1487,
    "avg_likes": 27.0,
-   "like_rate": 1.83,
-   "avg_score": 1911
+   "like_rate": 1.82,
+   "avg_score": 1922
   }
  ],
  "weights": {
@@ -75,15 +75,15 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.03,
-  "comedy": 1.03,
+  "comedy": 1.05,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1476 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2445 zu 705 Punkte)."
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1487 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2453 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -102,11 +102,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2257,
+   "views": 2259,
    "likes": 61,
    "comments": 0,
    "shares": 0,
-   "score": 3172
+   "score": 3174
   },
   {
    "id": 84,
@@ -122,21 +122,21 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1855,
-   "likes": 66,
+   "views": 1858,
+   "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2845
+   "score": 2863
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 2119,
+   "views": 2120,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2809
+   "score": 2810
   }
  ],
  "flop": [
