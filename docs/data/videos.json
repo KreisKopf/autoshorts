@@ -4781,7 +4781,7 @@
   "id": 130,
   "category": "fakten",
   "topic": "Warum König Charles ausgerechnet den berühmten Spudbros-Pommes-Kiosk besucht hat",
-  "status": "review",
+  "status": "discarded",
   "created": 1794910258.0065992,
   "trend": {
    "title": "King Charles visits the Spudbros kiosk",
@@ -4821,6 +4821,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-17 13:00",
-  "review_at": 1794911729.4638212
+  "review_at": 1794911729.4638212,
+  "error": "Bei der Prüfung verworfen: Prüfung: Trend-Thema über eine echte Person und eine Marke (König Charles, Spudbros), erfundene Behauptungen, letzter Satz bricht ab – wird durch das eingeplante Gänsehaut-Thema ersetzt"
  }
 ]
