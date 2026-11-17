@@ -1,6 +1,6 @@
 {
-  "version": "1.15.1",
-  "file": "releases/AutoShorts-Kanal-1.15.1.cmd",
-  "sha256": "b21e1d00115eba9665905546c64b7bd4c20c66681aa48210a22e96eb6c98cded",
-  "notes": "Download-Link der Kanal-App lädt jetzt wirklich herunter (statt Text anzuzeigen)"
+  "version": "1.15.2",
+  "file": "releases/AutoShorts-Kanal-1.15.2.cmd",
+  "sha256": "7de1b0a0fad3cf387fa596136381b12cb3b4a459915962be67a9ee78fa115013",
+  "notes": "Falscher GitHub-Schlüssel: direkt änderbar; Schlüssel wird beim Verbinden gründlich geprüft"
 }

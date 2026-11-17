@@ -676,7 +676,13 @@ function render(animate) {
   if (!$(".nav")) shell();
   document.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-current", b.dataset.tab === TAB));
   navInd(); head(animate); banner();
-  if (!CFG) { $("#main").innerHTML = `<div class="empty">${LOADERR ? esc(LOADERR) : "Lade Daten …"}</div>`; return; }
+  if (!CFG) { $("#main").innerHTML = `<div class="empty">${LOADERR ? esc(LOADERR) : "Lade Daten …"}</div>${LOADERR ? `
+    <div class="inline" style="justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap"><button class="btn" id="leRetry">Erneut versuchen</button>
+    <button class="btn primary" id="leRelogin">GitHub-Schlüssel oder Repository ändern</button></div>
+    <p class="hint" style="text-align:center;margin-top:8px">Falscher Schlüssel eingetragen, abgelaufen oder für ein anderes Repository? Hier neu eintragen.</p>` : ""}`;
+    if ($("#leRetry")) $("#leRetry").onclick = () => refreshAll();
+    if ($("#leRelogin")) $("#leRelogin").onclick = async () => { await api("/api/github/logout", {}); S = await api("/api/state"); LOADERR = ""; $("#app").innerHTML = ""; renderSetup(); };
+    return; }
   DAYS = null;
   ({dashboard: viewDash, kalender: viewCal, studio: viewStudio, einstellungen: viewSettings, admin: viewAdmin})[TAB]();
   syncAccessId();

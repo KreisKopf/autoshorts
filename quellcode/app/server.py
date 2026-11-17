@@ -933,6 +933,16 @@ def github_connect(h):
         raise ValueError(f"Repository {owner}/{repo} nicht erreichbar ({s}). Ist der Schlüssel für dieses Repository freigegeben?")
     if not json.loads(body).get("permissions", {}).get("push"):
         raise ValueError("Der Schlüssel hat keine Schreibrechte (Contents: Read and write).")
+    # Ein falsch eingerichteter Schlüssel soll hier auffallen – nicht erst später, wenn die App schon „verbunden“ ist
+    s2, _b = gh("GET", f"/repos/{owner}/{repo}/contents/docs/data/config.json?ref=main", token=tok)
+    if s2 != 200:
+        raise ValueError(f"In {owner}/{repo} liegt kein AutoShorts-Motor (docs/data/config.json fehlt). Ist das deine Kopie (Fork) von AutoShorts?")
+    s3, _b = gh("GET", f"/repos/{owner}/{repo}/actions/workflows", token=tok)
+    if s3 != 200:
+        raise ValueError("Dem Schlüssel fehlt die Berechtigung „Actions: Read and write“. Bitte beim Schlüssel auf GitHub ergänzen.")
+    s4, _b = gh("GET", f"/repos/{owner}/{repo}/actions/secrets/public-key", token=tok)
+    if s4 != 200:
+        raise ValueError("Dem Schlüssel fehlt die Berechtigung „Secrets: Read and write“. Bitte beim Schlüssel auf GitHub ergänzen.")
     SET.update(token=tok, owner=owner, repo=repo)
     save_set()
     log(f"Mit GitHub verbunden: {owner}/{repo}")
