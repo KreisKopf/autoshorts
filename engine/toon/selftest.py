@@ -93,7 +93,7 @@ def main():
             for nt in (False, True):
                 check(f"Menge {c} in {pl}", lambda: frame({"place": pl if isinstance(pl, str) else None, "backdrop": None if isinstance(pl, str) else pl,
                                                            "crowd": c, "actors": [{"id": "du"}], "no_traffic": nt}))
-    for w in ("rain", "storm", "snow", "wind", "ash", "quake", "heat", "dark", "steam", "unbekannt"):
+    for w in ("rain", "storm", "snow", "cold", "wind", "ash", "quake", "heat", "dark", "steam", "unbekannt"):
         for pl in ("street", "forest", "office"):
             check(f"Wetter {w} in {pl}", lambda: frame({"place": pl, "weather": w, "time": "night" if w == "dark" else "day", "actors": [{"id": "du"}]}))
     for m in ("panic", "tense", "scary", "sad", "happy", "calm", "unbekannt"):
@@ -439,6 +439,45 @@ def main():
             px = fr.getpixel((560, 1100))
             assert px[2] > px[0], f"keine Decke über der Schlafenden ({tm_}): {px}"
     check("Schlaf-Video (keine Regie-Wörter, Nacht bleibt, Schlafende zugedeckt)", _sleep)
+
+    def _fur():                                                  # Ausbau 17.11.2026 („Warum bekommen wir Gänsehaut?“): Fell-Tafel mit Luftschicht, Adrenalin-Tafel, Kälte, gesträubter Vorfahre
+        from .. import main as _mn_f
+        cast_f = {"du": {"shirt": "blau"}}
+        T = [("Unsere Vorfahren hatten noch ein sehr viel dichteres Fell am gesamten Körper.", "forest", "", [], [{"id": "du", "action": "think"}], ""),
+             ("Dadurch stellte sich das Fell auf und schloss eine wärmende Luftschicht ein.", "forest", "snow", ["goosebumps"], [], "event"),
+             ("Das schützte effektiv vor eisiger Kälte und Frost im Winter.", "snow", "snow", ["goosebumps"], [], "event"),
+             ("Aufgestellt wirkten unsere Vorfahren dadurch plötzlich deutlich größer.", "forest", "", ["goosebumps"], [], "event"),
+             ("Adrenalin durchströmt in Sekundenschnelle unseren gesamten Organismus.", "livingroom", "", ["herz"], [{"id": "du", "action": "walk"}], ""),
+             ("Du stehst im Wald und frierst in der eisigen Kälte.", "forest", "", [], [{"id": "du", "action": "talk"}], ""),
+             ("Hier gibt es keine Kälte mehr.", "park", "", [], [{"id": "du", "action": "talk"}], ""),
+             ("Er schloss die Augen und dachte nach.", "park", "", [], [{"id": "du", "action": "think"}], ""),
+             ("Das Vorhängeschloss an der Tür war aufgebrochen.", "hallway", "", [], [{"id": "du", "action": "talk"}], "")]
+        scs = stage.direct([{"text": t_, "place": pl, "time": "day", "weather": w_, "props": list(pr), "actors": [dict(a) for a in ac], "shot": sh} for t_, pl, w_, pr, ac, sh in T],
+                           [(i * 4.0, i * 4.0 + 4.0) for i in range(len(T))], "Warum bekommen wir Gänsehaut?", "fakten", "")
+        kn = lambda i: [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in scs[i].get("props") or []]   # noqa: E731
+        ac = lambda i: [(a.get("kind") or "", a.get("action")) for a in scs[i].get("actors") or []]   # noqa: E731
+        assert ac(0) and ac(0)[0][0] == "chimp", f"dichtes Fell der Vorfahren ohne Affen: {ac(0)}"
+        assert kn(1) == ["fur"], f"Luftschicht ohne Fell-Tafel (oder mit Schloss/Gänsehaut): {kn(1)}"
+        assert "fur" in kn(2) and "goosebumps" not in kn(2), f"Folgesatz Kälte: {kn(2)}"
+        assert ac(3) == [("chimp", "puff")], f"aufgestellt/größer ohne gesträubten Affen: {ac(3)}"
+        assert kn(4) == ["adrenaline"] and ac(4)[0][1] == "point", f"Adrenalin: {kn(4)} {ac(4)}"
+        assert scs[5].get("weather") == "cold" and ac(5)[0][1] == "shiver", f"Kälte draußen: {scs[5].get('weather')} {ac(5)}"
+        assert scs[6].get("weather") != "cold", "verneinte Kälte"
+        assert not any("schloss" in k or k == "lib_burg" for i in (1, 7) for k in kn(i)), "„schloss“ als Verb zeigt ein Schloss"
+        assert "lib_vorhaengeschloss" in kn(8) or "lib_vorhaengeschloss" not in extras.PROPS, f"Vorhängeschloss fehlt: {kn(8)}"
+        for w_f in ("fell", "luftschicht", "kälte", "adrenalin", "nebenniere", "hautschnitt"):
+            assert _mn_f.known_thing(w_f), "nicht als bekannt erkannt: " + w_f
+        for sc_f in scs:
+            for t_f in (0.1, 0.8, 2.6):
+                frame(sc_f, cast_f, t_f)
+        for k_f in ("fur", "adrenaline"):
+            for t_f in (0.0, 0.7, 1.4, 3.3):
+                frame({"place": "lab", "actors": [], "props": [{"type": k_f}], "shot": "insert"}, cast_f, t_f)
+                frame({"place": "snow", "weather": "cold", "actors": [{"id": "du", "action": "shiver"}], "props": [{"type": k_f}]}, cast_f, t_f)
+        for t_f in (0.0, 0.2, 1.0, 2.9):
+            rig.pose_at("shiver", t_f, 3.0, "worried", 0.3, 1)
+            assert extras.creature("chimp", t_f, -1, 0.0, "angry", 1.0, "puff") is not None
+    check("Fell-Tafel, Adrenalin-Tafel, Kälte, gesträubter Vorfahre (Ausbau 17.11.)", _fur)
 
     def _body():                                                 # Körper-Sätze (Prüfung 16.11.2026, Video 126): die Figur macht vor, was der Satz beschreibt; Gehirn als Figur statt Passanten; „Welle“ ist kein Strand
         cast_b = {"du": {"shirt": "blau", "hair": "curly", "gender": "w"}}

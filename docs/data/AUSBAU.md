@@ -284,6 +284,28 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   kamin, pinzette, nachricht, zigarette. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus,
   statistik, musik, kompass (davon sind nur polyp, knie und kompass greifbare Dinge).
 
+- Ausbau 17.11.2026 (Video „Warum bekommen wir Gänsehaut?“, 13-Uhr-Termin: fell, luftschicht, kälte, adrenalin):
+  Schautafel `fur` (`extras.p_fur`: dichtes Fell liegt flach, die Kälte – blaue Pfeile – kommt bis an die Haut; dann richtet es sich auf und schließt
+  eine warme Luftschicht ein, an der die Kälte abprallt). Wörter Luftschicht, Luftpolster, „Fell stellt sich auf“ (`stage.FUR_RE`, `TEXT_PROPS`);
+  Schlussdurchgang `stage._fur_story`: ersetzt dort die Gänsehaut-Tafel des Drehbuchs, der Folgesatz über Kälte/Wärme/Schutz behält die Fell-Tafel,
+  nie beide Tafeln nebeneinander. Ein bloßes „Fell“ zeigt weiter den Affen (`ANCESTOR_RE`, jetzt auch „Vorfahren hatten … viel dichteres Fell“ und
+  „Aufgestellt wirkten unsere Vorfahren größer“): mit „aufgestellt/sträubt/größer“ sträubt er das Fell (`extras.creature` chimp, `action: "puff"`).
+  Schautafel `adrenaline` (`extras.p_adrenaline`: Oberkörper, Nieren mit gelben Nebennieren, die pulsieren; Tropfen strömen durch die Adern zum
+  rasenden Herzen und in den Kopf). Wörter Adrenalin, Nebenniere, Stresshormon; ein Herz aus der Bibliothek daneben entfällt, die Figur steht links
+  und zeigt darauf. Beide Tafeln teilen sich den Rahmen `extras._board`.
+  Wetter `cold` (`extras.draw_weather`, `extras.COLD`): kaltes blaues Licht, treibende Eiskristalle; `stage._frame` zeichnet jeder stehenden Figur eine
+  Atemwolke vor den Mund (`extras.draw_breath`). Regie: `stage.COLD_RE` in `WEATHER_RE` (Kälte, Frost, eisig, Minusgrade, frieren – nur draußen,
+  verneint zählt nicht); Menschen frieren dann sichtbar (`rig.pose_at`: `shiver`, Arme um den Körper, bibbert – `stage._shiver`, auch bei Schnee +
+  Kälte-Satz). Ton: Wind. `main.known_thing` kennt „kälte“ und „frost“.
+  Bibliothek von Hand gezeichnet: `vorhängeschloss` und `burg` statt der vorläufigen Zeichnung `schloss` – das Wort „schloss“ ist meist das Verb
+  („schloss eine Luftschicht ein“, „schloss die Augen“) und stellte ein Märchenschloss in drei Szenen des Gänsehaut-Videos; ein bloßes „Schloss“ zeigt
+  deshalb nichts mehr, nur Vorhänge-/Tür-/Zahlenschloss bzw. Burg, Märchenschloss, Festung, Palast. Neu: `vokabel` (Karteikarten; Vokabeln,
+  Karteikarte); neu gezeichnet statt der vorläufigen Fassung: `synapse` (Endknöpfchen mit Bläschen, Spalt, Empfänger – pulsiert), `festplatte`.
+  „Hautschnitt“ ist die Gänsehaut-Tafel. Selbsttest: `_fur`.
+  Noch offen (vorläufige Zeichnungen der Text-KI): kaffeebohne, tarantel, insekt, erdloch, keule, radar, kunststoffbecken, knoblauch, kessel, kamin,
+  pinzette, nachricht, zigarette, notenschluessel, schwamm, maus, ohr. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie, anwaltstitel,
+  toplitzsee, miete, algorithmus, statistik, musik, kompass, knall (greifbar davon: polyp, knie, kompass).
+
 ## Musik-Kugel (Video-Art `musik`, einmal am Tag)
 - `engine/bounce.py`: Eine Kugel springt durch Glasscheiben, jeder Aufprall ist ein Ton der Melodie. Der Flugweg wird aus den Tonzeiten
   rückwärts gebaut (echte Wurfparabel zwischen zwei Tönen, die Scheibe liegt so, dass sie die Richtungsänderung erklärt) – deshalb sitzt

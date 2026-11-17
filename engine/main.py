@@ -153,7 +153,7 @@ def known_thing(word):
                "katze", "hund", "spinne", "krebs", "krebse", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
                "wespe", "delfin", "delfine", "delphin", "schweinswal", "schweinswale", "tümmler", "kuh", "kühe", "rind", "rinder", "schwein", "schweine", "ferkel",
                "schimpanse", "schimpansen", "affe", "affen", "mücke", "mücken", "stechmücke", "fliege", "atemloch", "atemlöcher", "eisloch", "eislöcher", "armee", "soldaten", "truppen", "heer",
-               "gehirn", "hirn", "himmel", "boden", "licht", "dunkelheit", "nacht", "regen", "schnee", "sturm", "wind", "nebel", "erdbeben", "hitze"})
+               "gehirn", "hirn", "himmel", "boden", "licht", "dunkelheit", "nacht", "regen", "schnee", "sturm", "wind", "nebel", "erdbeben", "hitze", "kälte", "kaelte", "frost"})
     forms = {w, w.rstrip("n"), w.rstrip("en"), w.rstrip("e"), w.rstrip("s"), w + "e", w + "n", w + "en"}
     if forms & pool:
         return True

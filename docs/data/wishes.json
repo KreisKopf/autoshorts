@@ -156,7 +156,8 @@
  },
  "schloss": {
   "n": 1,
-  "last": "Warum Hollywood-Heist-Filme physikalisch komplett wild sind"
+  "last": "Warum Hollywood-Heist-Filme physikalisch komplett wild sind",
+  "done": true
  },
  "staub": {
   "n": 1,
@@ -358,19 +359,23 @@
  },
  "schwein": {
   "n": 1,
-  "last": "Was passiert, wenn alle Tiere plötzlich sprechen könnten?"
+  "last": "Was passiert, wenn alle Tiere plötzlich sprechen könnten?",
+  "done": true
  },
  "mücke": {
   "n": 1,
-  "last": "Was passiert, wenn alle Tiere plötzlich sprechen könnten?"
+  "last": "Was passiert, wenn alle Tiere plötzlich sprechen könnten?",
+  "done": true
  },
  "eisscholle": {
   "n": 1,
-  "last": "Was passiert, wenn die Ostsee komplett zufriert?"
+  "last": "Was passiert, wenn die Ostsee komplett zufriert?",
+  "done": true
  },
  "eisschicht": {
   "n": 1,
-  "last": "Was passiert, wenn die Ostsee komplett zufriert?"
+  "last": "Was passiert, wenn die Ostsee komplett zufriert?",
+  "done": true
  },
  "kopfhörer": {
   "n": 1,
@@ -394,7 +399,8 @@
  },
  "armee": {
   "n": 1,
-  "last": "Was wäre, wenn die Ostsee plötzlich komplett zufriert?"
+  "last": "Was wäre, wenn die Ostsee plötzlich komplett zufriert?",
+  "done": true
  },
  "hafen": {
   "n": 2,
@@ -445,11 +451,13 @@
  },
  "festplatte": {
   "n": 1,
-  "last": "5 verrückte Dinge, die dein Gehirn nachts tut"
+  "last": "5 verrückte Dinge, die dein Gehirn nachts tut",
+  "done": true
  },
  "synapse": {
   "n": 1,
-  "last": "5 verrückte Dinge, die dein Gehirn nachts tut"
+  "last": "5 verrückte Dinge, die dein Gehirn nachts tut",
+  "done": true
  },
  "schwamm": {
   "n": 1,
@@ -457,11 +465,13 @@
  },
  "haar": {
   "n": 2,
-  "last": "Warum du bei Musik Gänsehaut bekommst"
+  "last": "Warum du bei Musik Gänsehaut bekommst",
+  "done": true
  },
  "hautschnitt": {
   "n": 1,
-  "last": "Gänsehaut bei Musik: Das passiert wirklich im Gehirn"
+  "last": "Gänsehaut bei Musik: Das passiert wirklich im Gehirn",
+  "done": true
  },
  "notenschluessel": {
   "n": 1,
@@ -469,7 +479,8 @@
  },
  "nebenniere": {
   "n": 1,
-  "last": "Schreckreflex: Was passiert in 1 Sekunde im Körper?"
+  "last": "Schreckreflex: Was passiert in 1 Sekunde im Körper?",
+  "done": true
  },
  "maus": {
   "n": 1,
@@ -477,23 +488,28 @@
  },
  "vokabel": {
   "n": 3,
-  "last": "5 Dinge, die dein Gehirn tut, während du schläfst"
+  "last": "5 Dinge, die dein Gehirn tut, während du schläfst",
+  "done": true
  },
  "fell": {
   "n": 1,
-  "last": "Warum bekommen wir Gänsehaut?"
+  "last": "Warum bekommen wir Gänsehaut?",
+  "done": true
  },
  "luftschicht": {
   "n": 1,
-  "last": "Warum bekommen wir Gänsehaut?"
+  "last": "Warum bekommen wir Gänsehaut?",
+  "done": true
  },
  "kälte": {
   "n": 1,
-  "last": "Warum bekommen wir Gänsehaut?"
+  "last": "Warum bekommen wir Gänsehaut?",
+  "done": true
  },
  "adrenalin": {
   "n": 1,
-  "last": "Warum bekommen wir Gänsehaut?"
+  "last": "Warum bekommen wir Gänsehaut?",
+  "done": true
  },
  "ohr": {
   "n": 1,

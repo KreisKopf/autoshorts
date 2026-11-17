@@ -858,6 +858,9 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             if pose.lean > 60 or pose.lying:                 # liegt am Boden: Zeichen knapp über statt weit über der Figur
                 head_y = gy - 300 * scale
             _zzz(od, pose, x, head_y + 75 * scale, t)
+        if weather in extras.COLD and not close and not (not a["kind"] and (pose.lying or action in ("sleep", "fall"))):
+            ksz_c = (1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)) if a["kind"] else a["look"].size
+            extras.draw_breath(over, x + facing * 86 * scale * ksz_c, head_y + 215 * scale * ksz_c, facing, t + a["seed"], scale * ksz_c)   # Kälte: Atemwolke vor dem Mund
         if a.get("say"):
             extras.draw_bubble(over, a["say"], x, head_y, t, min(scale, 1.4))
         elif a["emote"]:
@@ -2210,6 +2213,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _named_animals(scenes, topic)
     _household(scenes)
     _music(scenes, topic)
+    _fur_story(scenes)
     _indoor_sense(scenes)
     _sleep_story(scenes, topic)
     _body_story(scenes)
@@ -2381,6 +2385,7 @@ def _sleep_story(scenes, topic):
 # Musik-Videos (Ausbau 16.11.2026, „Warum du bei Musik Gänsehaut bekommst“): Kopfhörer auf dem Kopf, Gänsehaut als Schaubild
 MUSIC_TOPIC_RE = r"\bmusik|\bsongs?\b|lieblingssong|lieblingslied|\blied(?:er|ern|es)?\b|playlist|kopfhörer|bassdrop|\bbeats?\b|ohrwurm|podcast|hörbuch"
 HEADPHONE_RE = r"kopfhörer|headset|ohrstöpsel|earbuds"
+FUR_RE = r"luftschicht|luftpolster|isolierschicht|\bfell (?:\w+ ){0,3}(?:auf\b|aufstell|aufricht|stell\w* sich|richt\w* sich)|(?:stell|richt)\w* sich (?:\w+ ){0,3}fell (?:\w+ ){0,2}auf"
 GOOSE_RE = r"gänsehaut|haarwurzel|haarbalg|härchen|haare (?:\w+ ){0,3}(?:stell|richt)\w* sich"
 
 
@@ -2443,6 +2448,59 @@ def _music(scenes, topic):
     return scenes
 
 
+def _fur_story(scenes):
+    """Schlussdurchgang (Ausbau 17.11.2026): Spricht der Satz davon, dass sich das Fell aufstellt und eine Luftschicht einschließt (`FUR_RE`),
+    steht das Schaubild `fur` im Bild – statt der Gänsehaut-Tafel, die das Drehbuch dort mangels Besserem hinstellt. Der Folgesatz ohne eigenes
+    Stichwort („Das schützte vor eisiger Kälte“) behält die Fell-Tafel. Ein Affe mit gesträubtem Fell (ANCESTOR_RE) bleibt allein im Bild."""
+    _key = lambda q: extras.PROP_ALIASES.get(str((q.get("type") if isinstance(q, dict) else q) or "").lower(), str((q.get("type") if isinstance(q, dict) else q) or "").lower())   # noqa: E731
+    prev_fur = False
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        shot = str(sc.get("shot") or "")
+        kinds = [_key(q) for q in (sc.get("props") or [])]
+        beast = any(isinstance(a, dict) and a.get("kind") for a in (sc.get("actors") or []))
+        said = bool(re.search(FUR_RE, low)) and not beast and shot not in ("graphic", "close") and places.resolve(backdrop(sc)) not in ("underwater", "space") + tuple(MAPS)
+        carry = prev_fur and "goosebumps" in kinds and not re.search(GOOSE_RE, low) and re.search(COLD_RE + r"|\bwärm|\bwarm|\bschütz|\bwinter", low)
+        if said or carry:
+            if "goosebumps" in kinds:
+                sc["props"] = [({"type": "fur", **({"pos": q["pos"]} if isinstance(q, dict) and q.get("pos") else {})} if _key(q) == "goosebumps" else q) for q in sc["props"]]
+            elif "fur" not in kinds and len(kinds) < 2:
+                sc["props"] = (sc.get("props") or []) + [{"type": "fur"}]
+            seen_f, keep_f = False, []
+            for q in sc["props"]:                         # nie zwei Fell-Tafeln (Drehbuch + Text-Hinweis)
+                if _key(q) == "fur":
+                    if seen_f:
+                        continue
+                    seen_f = True
+                keep_f.append(q)
+            sc["props"] = keep_f
+        kinds = [_key(q) for q in (sc.get("props") or [])]
+        if "fur" in kinds and "goosebumps" in kinds:      # nie beide Tafeln nebeneinander (Vorgriff im ersten Bild): es bleibt die, von der der Satz spricht
+            drop_f = "fur" if re.search(GOOSE_RE, low) and not re.search(FUR_RE, low) else "goosebumps"
+            sc["props"] = [q for q in sc["props"] if _key(q) != drop_f]
+            kinds = [_key(q) for q in sc["props"]]
+        if "adrenaline" in kinds:                         # das Schaubild zeigt das Herz schon: kein zweites Herz daneben
+            sc["props"] = [q for q in sc["props"] if _key(q) not in ("lib_herz", "heart")]
+        board = next((k for k in ("fur", "adrenaline") if k in kinds), None)
+        hum_f = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind") and not re.search(r"gehirn|hirn|brain", str(a.get("id") or "").lower())]
+        if board and hum_f and shot not in ("graphic", "insert") and len(sc.get("actors") or []) == 1:
+            h = hum_f[0]                                  # wie bei der Gänsehaut-Tafel: die Figur steht links daneben und zeigt darauf, statt hindurchzulaufen
+            h["pos"], h["facing"] = "left", "right"
+            h.pop("to", None)
+            if str(h.get("action") or "") in ("walk", "run", "jump", "dance", "idle", "talk", ""):
+                h["action"] = "point"
+            for q in sc["props"]:
+                if isinstance(q, dict) and _key(q) == board:
+                    q["pos"] = 770
+            sc["props"] = [q if isinstance(q, dict) or _key(q) != board else {"type": board, "pos": 770} for q in sc["props"]]
+            sc["shot"] = "" if shot in ("event", "close") else sc.get("shot")
+            sc["_no_cut"] = True
+        prev_fur = "fur" in kinds
+    return scenes
+
+
 # Tiere, die der Satz nennt, stehen im Bild (Kühe protestieren, das Schwein fragt, Schimpansen im Labor, die Mücke am Ohr) – wie PET_RE für Katze und Hund.
 NAMED_ANIMALS = ((r"\bkuh\b|\bkühen?\b|\brind(?:er|ern|es)?\b|\bkalb\b|\bkälber", "cow", r"kühe|rinder|kälber"),
                  (r"\bschwein(?:e|en|s)?\b|\bferkel", "pig", r"\bschweinen?\b|ferkel\b"),
@@ -2455,7 +2513,7 @@ ANIMAL_IDIOM_RE = (r"schwein gehabt|armes schwein|kein schwein|schweinehund|spar
 TALKING_RE = r"tiere?n?\b.{0,50}\b(?:sprechen|reden|sprache|sprächen)|sprechende[nrs]? tiere?"
 
 
-ANCESTOR_RE = r"behaart\w* (?:vorfahr|urahn|ahnen)|(?:vorfahr\w*|urahn\w*|ahnen) (?:\w+ ){0,5}fell\b|aufgestellt\w* fell|fell (?:\w+ ){0,4}(?:aufstell|aufgestellt|sträub|aufplust)|(?:sträub|plustert)\w* (?:\w+ ){0,4}fell"
+ANCESTOR_RE = r"behaart\w* (?:vorfahr|urahn|ahnen)|(?:vorfahr\w*|urahn\w*|ahnen) (?:\w+ ){0,8}fell\b|aufgestellt\w* (?:\w+ ){0,3}(?:vorfahr|urahn)|(?:vorfahr\w*|urahn\w*) (?:\w+ ){0,5}(?:größer|bedrohlicher)|aufgestellt\w* fell|fell (?:\w+ ){0,4}(?:aufstell|aufgestellt|sträub|aufplust)|(?:sträub|plustert)\w* (?:\w+ ){0,4}fell"
 
 
 def _named_animals(scenes, topic):
@@ -2470,7 +2528,9 @@ def _named_animals(scenes, topic):
             continue
         if re.search(ANCESTOR_RE, low) and not any(a.get("kind") for a in (sc.get("actors") or []) if isinstance(a, dict)):
             sc["actors"] = [{"id": "_ahne", "kind": "chimp", "hero": True, "pos": "center", "action": "idle", "emote": "", "say": "", "hold": "", "facing": "",
-                             "emotion": "scared" if re.search(r"gegner|feind|gefahr|bedroh|kälte|kalt|frier", low) else ""}]   # „behaarte Vorfahren“, „aufgestelltes Fell“: ein Affe im Wald – nicht der Mensch von heute mit Kopfhörern
+                             "emotion": "scared" if re.search(r"gegner|feind|gefahr|bedroh|kälte|kalt|frier", low) else ""}]
+            if re.search(r"aufgestellt|aufstell|stell\w* sich (?:\w+ ){0,3}auf|sträub|plustert|größer", low):
+                sc["actors"][0].update(action="puff", emotion="angry" if re.search(r"größer|bedroh|gegner|feind|angreif", low) else sc["actors"][0]["emotion"])   # gesträubtes Fell: das Tier wirkt größer (extras.creature, chimp „puff“)   # „behaarte Vorfahren“, „aufgestelltes Fell“: ein Affe im Wald – nicht der Mensch von heute mit Kopfhörern
             sc["crowd"], sc["props"] = "", []
             if rp in INDOOR or rp in GENERIC:
                 sc["place"], sc["backdrop"] = "forest", None
@@ -3405,13 +3465,27 @@ def _opening(scenes):
 NIGHT_RE = (r"\bnachts\b|in der nacht|\bum mitternacht|mitten in der nacht|\babends\b|am abend|nachtaktiv|im dunkeln\b|bei nacht|heute nacht|"
             r"jede nacht|die ganze nacht|nächtlich|in dieser nacht|sternenhimmel|im mondlicht")
 DAY_RE = r"\btagsüber\b|am morgen|\bmorgens\b|am tag\b|\bmittags\b|am nachmittag|bei tageslicht|sonnenaufgang|in der mittagssonne|bei sonnenschein"
+COLD_RE = r"\bkälte\b|eiskalt|eisig\w*|bitterkalt|klirrend\w* k[aä]lt|\bfrost\b|\bfrostig|minusgrade|\bfrierst\b|\bfrieren\b|\bfröstel"
 WEATHER_RE = [(r"gewitter|blitz und donner|\bunwetter|\bsturm\b|stürme|orkan|sturmböen|hurrikan", "storm"),
               (r"\bregnet|\bregen\b|regenschauer|platzregen|wolkenbruch|in strömen|nieselregen|regentropfen", "rain"),
               (r"\bschneit|schneefall|schneesturm|schneeflocken", "snow"), (r"\bwindig|\bwind\b|böen|weht", "wind"),
-              (r"hitze|brütend heiß|\bheiß\b|hitzewelle|glühend heiß|sengende", "heat"), (r"asche regnet|ascheregen|aschewolke", "ash")]
+              (COLD_RE, "cold"), (r"hitze|brütend heiß|\bheiß\b|hitzewelle|glühend heiß|sengende", "heat"), (r"asche regnet|ascheregen|aschewolke", "ash")]
+
+
+SHIVER_RE = r"\bfrierst\b|\bfriert\b|\bfrieren\b|\bfröstel|bibber|zitter\w* vor kälte|vor kälte (?:\w+ ){0,2}zitter|\bkälte\b|eiskalt|eisig|bitterkalt|\bfrost\b|minusgrade"
 
 
 NIGHT_WHY_RE = r"\bnacht|\babend|dunkel|finster|schlaf|schläf|\bbett\b|\btraum|träum|müde|mitternacht|\bmond|\bstern|gruse|unheimlich|spuk|\bgeist|einbrech|einbruch|stromausfall|kerze|lagerfeuer|\bwach\b|aufwach|wecker"
+
+
+def _shiver(sc):
+    """Die Menschen der Szene frieren (Arme um den Körper, bibbern) – nur wer gerade nichts anderes Bestimmtes tut."""
+    for a in (sc.get("actors") or []):
+        if isinstance(a, dict) and not a.get("kind") and not a.get("hold") and not a.get("to") \
+                and str(a.get("action") or "").lower() in ("", "idle", "talk", "look_around", "think", "shocked", "scared", "shake", "walk"):
+            a.update(action="shiver", emote="")
+            if str(a.get("emotion") or "").lower() in ("", "happy", "calm"):
+                a["emotion"] = "worried"
 
 
 def _time_weather(scenes, topic="", style=""):
@@ -3435,12 +3509,16 @@ def _time_weather(scenes, topic="", style=""):
         elif _re.search(DAY_RE, low) and sc.get("time") == "night" and not _re.search(NIGHT_RE, low):
             sc["time"] = "day"
         outdoor = rp in places.OUTDOOR or rp == "custom"
+        if outdoor and str(sc.get("weather") or "") in ("snow", "cold") and _re.search(SHIVER_RE, low) and not _re.search(r"(?:kein\w*|nicht|ohne|nie)\s+(?:\w+\s+){0,2}(?:kälte|frost|frier)", low):
+            _shiver(sc)                                   # es schneit und der Satz spricht von Kälte: die Figur friert
         if outdoor and not sc.get("weather"):
             for pat, w in WEATHER_RE:
                 m = _re.search(pat, low)
                 if m and not _re.search(r"(?:kein\w*|nicht|ohne|nie)\s+(?:\w+\s+){0,2}" + _re.escape(m.group(0)), low) \
                         and not _re.search(_re.escape(m.group(0)) + r"\w*\s+(?:\w+\s+)?(?:nicht|mehr)\b", low):
                     sc["weather"] = w
+                    if w == "cold":                        # Kälte: wer draußen steht, friert sichtbar (rig „shiver“) – das Tier schaut ängstlich
+                        _shiver(sc)
                     if w in ("rain", "storm"):             # bei Regen und Sturm ist der Himmel grau, nicht strahlend blau
                         spec = places.spec_of(backdrop(sc)) or {}
                         if spec and not spec.get("sky"):
@@ -3805,7 +3883,8 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
               (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
               (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server|zock|gaming|videospiel|ballerspiel|\bgamer|\bpc\b|laptop", "computer"),
-              (r"pflanze[n]? wachs|keim|\bsaat", "sprout"), (r"haarwurzel|haarbalg|härchen", "goosebumps")]   # „Gänsehaut“ selbst setzt stage._music (nicht als Ding des Themas in jeder zweiten Szene)
+              (r"pflanze[n]? wachs|keim|\bsaat", "sprout"), (r"haarwurzel|haarbalg|härchen", "goosebumps"),
+              (r"adrenalin|nebenniere|stresshormon", "adrenaline"), (FUR_RE, "fur")]   # „Gänsehaut“ selbst setzt stage._music (nicht als Ding des Themas in jeder zweiten Szene)
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).

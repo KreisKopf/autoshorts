@@ -146,7 +146,7 @@ def ambience_for(scene):
         return "rain"
     if w in ("storm", "gewitter", "thunder"):
         return "storm"
-    if w in ("wind", "snow", "schnee"):
+    if w in ("wind", "snow", "schnee", "cold", "kälte", "frost"):
         return "wind"
     from .toon import stage
     place = places.resolve(stage.backdrop(scene)) if scene.get("place") or scene.get("backdrop") else ""

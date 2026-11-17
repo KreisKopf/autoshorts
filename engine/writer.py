@@ -152,7 +152,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             Besetze Frauen und Männer etwa gleich oft – auch die Hauptfigur „du“ ist in ungefähr jedem zweiten Video eine Frau
             (z. B. {"du": {"shirt": "lila", "hair": "ponytail", "hair_color": "blond", "gender": "w"}}); in Gruppen immer gemischt.
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp, cow (Kuh, Rind), pig (Schwein),
-  chimp (Schimpanse, Affe), mosquito (Mücke), fly (Fliege), dolphin (Delfin, Schweinswal – schwimmt, nur am Ort underwater).
+  chimp (Schimpanse, Affe; "action": "puff" sträubt das Fell – das Tier wirkt größer), mosquito (Mücke), fly (Fliege), dolphin (Delfin, Schweinswal – schwimmt, nur am Ort underwater).
   Sprechen Tiere in der Geschichte, bekommt jedes sprechende Tier "speaks": true und ein kurzes "say" (Sprechblase).
   Zugefrorenes Meer („Ostsee friert zu“): Ort "icesea" (Eisfläche bis zum Horizont) – nicht snow (Gebirge), nicht beach; kein Eisberg ("ice")
   als Zeichen für die Eisdecke. Schiffe im Eis, das Atemloch der Delfine und die Eisdecke unter Wasser zeichnet die Regie von selbst.
@@ -199,7 +199,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   ein Feld, beim Meer das Meer. Nimm "street" nur, wenn es wirklich um die Stadt geht – nie als Verlegenheitslösung.
   Wechsle den Hintergrund, sobald der Text den Schauplatz wechselt.
   "time": "day" oder "night"
-  "weather": rain, storm, snow, wind (Sturm, Orkan), heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt), steam (Dampf steigt auf) oder ""
+  "weather": rain, storm, snow, cold (Kälte/Frost: blaues Licht, Eiskristalle, Atemwolken), wind (Sturm, Orkan), heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt), steam (Dampf steigt auf) oder ""
   "props": 0–2 Requisiten. Alle Dinge erscheinen automatisch in echter Größe im Verhältnis zu den Menschen.
            Dinge: car, bus, truck, bike, house, tree, rock, box, cart (Einkaufswagen), shelf (Regal), fridge, table, tv, computer,
                   money, cans (Konserven), canister, candle, generator, tent, fire, streetlamp, trafficlight, rocket, sprout,
@@ -213,6 +213,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
             die Sonne, sprout wächst zur Blume, volcano spuckt Lava)
            Körper: goosebumps (Schautafel Gänsehaut: Hautschnitt, die Haarbalgmuskeln ziehen sich zusammen, die Haare richten sich auf)
+                  fur (Schautafel Fell: die Haare richten sich auf und schließen eine warme Luftschicht ein, die Kälte prallt ab),
+                  adrenaline (Schautafel Adrenalin: die Nebennieren auf den Nieren schütten es aus, Tropfen strömen zum rasenden Herzen)
            Tiefsee: submersible (Forschungs-Tauchboot mit Scheinwerfer und Sonar-Ringen – nur am Ort underwater). "place": "underwater" mit
            "time": "night" zeigt die dunkle Tiefsee (Schlick, Felsen, kein Sonnenlicht) – für Meeresboden, Wracks, Flugschreiber; dafür KEIN
            "backdrop" mit Meeresoberfläche angeben. Nennt der Satz Blackbox/Flugschreiber, Wrack oder Sonar/Tauchboot, stellt die Regie sie dort selbst hin.
@@ -227,7 +229,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
      action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält – NICHT für Kopfschütteln, dafür idle),
              float (schwebt schwerelos in der Luft – dann schweben auch die Dinge aus "props" mit; für Sätze über Schweben, Abheben, fehlende Schwerkraft)
-             Körper-Reaktionen: cower (zuckt zusammen, zieht den Kopf ein), freeze (erstarrt), tremble (Hände zittern), blink (blinzelt), pupils (Pupillen weiten sich),
+             Körper-Reaktionen: cower (zuckt zusammen, zieht den Kopf ein), freeze (erstarrt), tremble (Hände zittern), shiver (friert: Arme um den Körper, bibbert), blink (blinzelt), pupils (Pupillen weiten sich),
              pant (atmet schnell, Hand an der Brust). NICHT in jeder Szene "shocked" – die Figur macht vor, was der Satz beschreibt.
      hold (optional): was die Figur in der Hand hält – phone, flashlight, bag, bottle, umbrella, sign, map, radio oder jeder kleine Gegenstand
           aus "props"/"wishes" (z. B. "schuh", "glass", "candle")

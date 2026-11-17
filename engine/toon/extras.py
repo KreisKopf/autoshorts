@@ -1487,6 +1487,158 @@ PROP_ALIASES.update({"gänsehaut": "goosebumps", "haarwurzel": "goosebumps", "ha
                      "härchen": "goosebumps", "goose bumps": "goosebumps"})
 
 
+def _board(d, x):
+    """Schautafel auf zwei Beinen wie bei p_goosebumps; gibt (linke Kante, Oberkante, rechte Kante, Unterkante) der hellen Fläche zurück."""
+    ys, bot = GROUND - 300, GROUND - 44
+    for lx in (-200, 200):
+        _r(d, (x + lx - 12, GROUND - 60, x + lx + 12, GROUND), (110, 118, 134), 5, 5)
+    _r(d, (x - 290, ys - 216, x + 290, bot + 26), (60, 110, 190), 30)
+    d.rounded_rectangle((x - 268, ys - 194, x + 268, bot + 4), 18, fill=(226, 238, 250), outline=INK, width=5)
+    return x - 262, ys - 188, x + 262, bot - 2
+
+
+def p_fur(d, x, t, s=1.0):
+    """Fell als Schaubild (Ausbau 17.11.2026): Hautschnitt mit dichtem Fell. Erst liegen die Haare flach und die Kälte (blaue Pfeile) kommt bis
+    an die Haut; dann richten sie sich auf und schließen eine warme Luftschicht ein (orange), an der die Kälte abprallt.
+    Wörter Luftschicht, Luftpolster, Fell stellt sich auf – stage.FUR_RE."""
+    e = max(0.0, min(1.0, (t - 0.6) / 0.45))
+    e = e * e * (3 - 2 * e)
+    x0, y0, x1, y1 = _board(d, x)
+    skin_y = y1 - 96
+    _r(d, (x0 + 14, skin_y + 30, x1 - 14, y1 - 6), (240, 160, 150), 14)                             # Lederhaut
+    _r(d, (x0 + 14, skin_y, x1 - 14, skin_y + 40), (240, 196, 164), 12)                             # Oberhaut
+    L = 156
+    air = 150 * e                                                                                   # Höhe der eingeschlossenen Luftschicht
+    if e > 0.02:
+        top = [(x0 + 22, skin_y)]
+        for i in range(25):
+            px_ = x0 + 22 + (x1 - x0 - 44) * i / 24
+            top.append((px_, skin_y - air - 8 * math.sin(i * 0.9 + t * 3)))
+        top.append((x1 - 22, skin_y))
+        d.polygon(top, fill=(255, 164, 56, int(235 * e)))
+        d.polygon([(a, skin_y - (skin_y - b) * 0.55) for a, b in top], fill=(255, 218, 128, int(215 * e)))
+        for i, wx in enumerate((-150, -10, 130)):                                                   # Wärme steigt von der Haut auf und bleibt im Fell
+            ph = (t * 0.7 + i * 0.37) % 1
+            wy = skin_y - 22 - ph * max(10.0, air - 60)
+            pts = [(x + wx + 30 + math.sin(j * 1.3 + t * 5 + i) * 9, wy - j * 9) for j in range(6)]
+            d.line(pts, fill=(226, 84, 50, int(230 * e * (1 - ph * 0.6))), width=7, joint="curve")
+    n = 13
+    for i in range(n):                                                                              # dichtes Fell: liegt flach, richtet sich auf (leicht gefächert, damit es die Tafel füllt)
+        rx = x0 + 40 + (x1 - x0 - 214) * i / (n - 1)
+        a = math.radians(60 * (1 - e) + (-8 + 40 * i / (n - 1)) * e + math.sin(t * 20 + i) * 1.2 * e)
+        ln = L * (0.92 + 0.08 * math.sin(i * 1.7))
+        tip = (rx + math.sin(a) * ln, skin_y + 6 - math.cos(a) * ln)
+        mid = (rx + math.sin(a * 0.8) * ln * 0.5, skin_y + 6 - math.cos(a * 0.8) * ln * 0.5)
+        d.line([(rx, skin_y + 14), mid, tip], fill=INK, width=17, joint="curve")
+        d.line([(rx, skin_y + 14), mid, tip], fill=(120, 80, 54) if i % 2 else (98, 64, 44), width=9, joint="curve")
+        d.ellipse((rx - 11, skin_y + 4, rx + 11, skin_y + 26), fill=(150, 96, 70), outline=INK, width=4)
+    stop = skin_y - 60 - (air + 40) * e                                                             # so tief kommt die Kälte
+    for i, ax_ in enumerate((-170, 0, 170)):                                                        # Kälte von oben: blaue Pfeile
+        bobk = 10 * math.sin(t * 4 + i * 1.7)
+        ay = stop - 18 + bobk
+        ax = x + ax_
+        top_y = max(y0 + 14, ay - 120)
+        d.line((ax, top_y, ax, ay - 30), fill=INK, width=24)
+        d.polygon([(ax - 34, ay - 40), (ax + 34, ay - 40), (ax, ay + 8)], fill=(70, 150, 230), outline=INK, width=5)
+        d.line((ax, top_y + 4, ax, ay - 34), fill=(70, 150, 230), width=14)
+        if e > 0.7:                                                                                 # prallt an der Luftschicht ab
+            for sx in (-1, 1):
+                d.line((ax + sx * 30, ay + 14, ax + sx * 56, ay + 2), fill=(70, 150, 230), width=6)
+    for i, (a_, b_, c_) in enumerate(_DROPS[:7]):                                                   # Schneekristalle im kalten Teil
+        fx_ = x0 + 30 + a_ * (x1 - x0 - 60)
+        fy_ = y0 + 20 + ((b_ + t * 0.12 * (1 + c_)) % 1) * max(20.0, stop - y0 - 110)
+        for k_ in range(3):
+            an = math.radians(k_ * 60 + i * 20)
+            d.line((fx_ - math.cos(an) * 11, fy_ - math.sin(an) * 11, fx_ + math.cos(an) * 11, fy_ + math.sin(an) * 11), fill=(255, 255, 255), width=4)
+
+
+def p_adrenaline(d, x, t, s=1.0):
+    """Adrenalin als Schaubild (Ausbau 17.11.2026): Oberkörper mit Herz und den beiden Nieren; die Nebennieren (gelb, sitzen wie Kappen auf den
+    Nieren) pulsieren und schütten Adrenalin aus – orange Tropfen strömen durch die Adern zum Herzen, das schneller schlägt, und weiter in
+    den Kopf. Wörter Adrenalin, Nebenniere, Stresshormon – stage.TEXT_PROPS."""
+    x0, y0, x1, y1 = _board(d, x)
+    body, body_d = (200, 214, 236), (150, 170, 204)
+    hy = y0 + 56
+    d.rounded_rectangle((x - 30, hy + 20, x + 30, hy + 80), 12, fill=body, outline=body_d, width=6)   # Hals
+    d.ellipse((x - 58, hy - 50, x + 58, hy + 50), fill=body, outline=body_d, width=6)               # Kopf
+    d.rounded_rectangle((x - 196, hy + 64, x + 196, y1), 76, fill=body, outline=body_d, width=6)    # Rumpf mit Schultern
+    d.rectangle((x - 196, y1 - 90, x + 196, y1), fill=body_d)
+    d.rectangle((x - 190, y1 - 92, x + 190, y1), fill=body)
+    d.rectangle((x - 24, hy + 58, x + 24, hy + 76), fill=body)
+    beat = abs(math.sin(t * 9.5)) ** 3
+    hx, hyy = x + 10, hy + 132
+    kid_y = y1 - 78
+    vein = (214, 84, 84)
+
+    def curve(p0, p1, p2, n=10):
+        return [((1 - u) ** 2 * p0[0] + 2 * u * (1 - u) * p1[0] + u * u * p2[0], (1 - u) ** 2 * p0[1] + 2 * u * (1 - u) * p1[1] + u * u * p2[1]) for u in (i / n for i in range(n + 1))]
+    paths = [curve((x + sx * 122, kid_y - 88), (x + sx * 128, hyy + 10), (hx + sx * 26, hyy + 14)) for sx in (-1, 1)]   # Adern: Nebenniere → Herz
+    paths.append(curve((hx, hyy - 20), (x + 14, hy + 70), (x, hy + 8), 6))                          # Herz → Kopf
+    for sx in (-1, 1):                                                                              # Nieren (Bohnenform, Einbuchtung zur Mitte)
+        kx = x + sx * 122
+        _o(d, (kx - 44, kid_y - 46, kx + 44, kid_y + 62), (176, 86, 74), 6)
+        nb = (kx - sx * 46 - 20, kid_y - 14, kx - sx * 46 + 20, kid_y + 32)
+        d.ellipse(nb, fill=body)
+        d.arc(nb, 270 if sx > 0 else 90, 90 if sx > 0 else 270, fill=INK, width=6)
+    for pth in paths:
+        d.line(pth, fill=_dk(vein, 0.3), width=17, joint="curve")
+        d.line(pth, fill=vein, width=9, joint="curve")
+    for sx in (-1, 1):                                                                              # Nebennieren: gelbe Kappen, pulsieren und feuern
+        kx = x + sx * 122
+        pul = 1 + 0.16 * math.sin(t * 9.5 + (0 if sx < 0 else 1.2))
+        for an_ in (200, 235, 305, 340):
+            ca, sa = math.cos(math.radians(an_)), math.sin(math.radians(an_))
+            r0, r1 = 60 + 8 * pul, 70 + 22 * pul
+            d.line((kx + ca * r0, kid_y - 60 + sa * r0 * 0.8, kx + ca * r1, kid_y - 60 + sa * r1 * 0.8), fill=(240, 150, 30), width=7)
+        d.pieslice((kx - 46 * pul, kid_y - 96 - 6 * pul, kx + 46 * pul, kid_y - 24 + 6 * pul), 180, 360, fill=(250, 190, 50), outline=INK, width=6)
+        d.line((kx - 46 * pul, kid_y - 60, kx + 46 * pul, kid_y - 60), fill=INK, width=6)
+        d.arc((kx - 30 * pul, kid_y - 86, kx + 8, kid_y - 50), 190, 290, fill=(255, 236, 160), width=5)
+    hs = 1 + 0.2 * beat                                                                             # Herz schlägt schnell
+    r_ = 27 * hs
+    for k_ in range(2):                                                                             # Puls-Ringe ums Herz
+        ph = (t * 1.9 + k_ / 2) % 1
+        rr_ = 70 + ph * 50
+        d.arc((hx - rr_, hyy - rr_ * 0.9, hx + rr_, hyy + rr_ * 0.9 + 16), 200, 340, fill=(226, 60, 76, int(230 * (1 - ph))), width=6)
+    d.ellipse((hx - r_ * 2 - 4, hyy - r_ * 1.5 - 4, hx + 4, hyy + r_ * 0.5 + 4), fill=INK)
+    d.ellipse((hx - 4, hyy - r_ * 1.5 - 4, hx + r_ * 2 + 4, hyy + r_ * 0.5 + 4), fill=INK)
+    d.polygon([(hx - r_ * 1.9 - 6, hyy), (hx + r_ * 1.9 + 6, hyy), (hx, hyy + r_ * 2.1 + 8)], fill=INK)
+    d.ellipse((hx - r_ * 2, hyy - r_ * 1.5, hx, hyy + r_ * 0.5), fill=(226, 60, 76))
+    d.ellipse((hx, hyy - r_ * 1.5, hx + r_ * 2, hyy + r_ * 0.5), fill=(226, 60, 76))
+    d.polygon([(hx - r_ * 1.86, hyy - 2), (hx + r_ * 1.86, hyy - 2), (hx, hyy + r_ * 2.1)], fill=(226, 60, 76))
+    d.ellipse((hx - r_ * 1.5, hyy - r_ * 1.1, hx - r_ * 0.8, hyy - r_ * 0.5), fill=(255, 170, 176))
+    for pi_, pth in enumerate(paths):                                                               # Adrenalin strömt: Tropfen laufen die Adern entlang
+        seg = [max(0.01, math.dist(pth[i], pth[i + 1])) for i in range(len(pth) - 1)]
+        tot = sum(seg)
+        for j in range(3 if pi_ < 2 else 2):
+            ph = (t * 1.2 + j / (3 if pi_ < 2 else 2)) % 1
+            dist, i = ph * tot, 0
+            while i < len(seg) - 1 and dist > seg[i]:
+                dist -= seg[i]
+                i += 1
+            f_ = min(1.0, dist / seg[i])
+            qx, qy = pth[i][0] + (pth[i + 1][0] - pth[i][0]) * f_, pth[i][1] + (pth[i + 1][1] - pth[i][1]) * f_
+            d.ellipse((qx - 12, qy - 12, qx + 12, qy + 12), fill=(255, 150, 30), outline=INK, width=4)
+            d.ellipse((qx - 6, qy - 7, qx - 1, qy - 2), fill=(255, 226, 150))
+
+
+def draw_breath(layer, x, y, facing, t, scale=1.0):
+    """Atemwolke vor dem Mund (Kälte): kleine weiße Wölkchen lösen sich und verwehen."""
+    d = ImageDraw.Draw(layer, "RGBA")
+    for i in range(3):
+        ph = (t * 0.75 + i / 3) % 1
+        r = (12 + ph * 30) * scale
+        cx = x + facing * (20 + ph * 110) * scale
+        cy = y - ph * 46 * scale + math.sin(t * 3 + i) * 5
+        d.ellipse((cx - r, cy - r * 0.8, cx + r, cy + r * 0.8), fill=(246, 250, 255, int(215 * (1 - ph) ** 0.8)))
+
+
+PROPS["fur"] = p_fur                                       # Schaubild Fell: richtet sich auf und schließt eine warme Luftschicht ein (Regie: stage.FUR_RE)
+PROPS["adrenaline"] = p_adrenaline                         # Schaubild Adrenalin: Nebennieren schütten aus, das Herz rast
+PROP_ALIASES.update({"fell": "fur", "pelz": "fur", "luftschicht": "fur", "luftpolster": "fur", "isolierschicht": "fur", "fur": "fur",
+                     "adrenalin": "adrenaline", "nebenniere": "adrenaline", "nebennieren": "adrenaline", "stresshormon": "adrenaline", "stresshormone": "adrenaline",
+                     "noradrenalin": "adrenaline", "hautschnitt": "goosebumps"})
+
+
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
 # Was hier fehlt (Naturereignisse, Himmelskörper), wird als Schaubild frei gezeichnet.
 SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": (7.5, 1010), "tree": (7.5, 1130), "rock": (0.8, 1262),
@@ -1494,7 +1646,7 @@ SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "b
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
-         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "tank": (1.75, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255), "goosebumps": (1.5, 1245)}
+         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245), "tank": (1.75, 1245), "sewing": (1.5, 1250), "fabric": (0.75, 1255), "goosebumps": (1.5, 1245), "fur": (1.5, 1245), "adrenaline": (1.5, 1245)}
 # ------------------------------------------------------------------ See-Schatz (versenkte Kisten, Taucher, Baumstämme am Seegrund)
 def _rotp(pivot, deg):
     """Wie _rot, nimmt aber einen Punkt (x, y) als ein Argument."""
@@ -1852,6 +2004,9 @@ _rnd = random.Random(42)
 _DROPS = [(_rnd.random(), _rnd.random(), _rnd.random()) for _ in range(140)]
 
 
+COLD = ("cold", "kälte", "kaelte", "frost")
+
+
 def draw_weather(layer, kind, t):
     d = ImageDraw.Draw(layer, "RGBA")
     kind = str(kind or "").lower()
@@ -1895,6 +2050,16 @@ def draw_weather(layer, kind, t):
             d.ellipse((x - r, y - r, x + r, y + r), fill=(250, 250, 252, int(170 * (1 - ph))))
     elif kind in ("heat", "hitze"):
         d.rectangle((0, 0, W, H), fill=(255, 120, 40, 34 + int(14 * math.sin(t * 2))))
+    elif kind in COLD:                                     # Kälte/Frost: kaltes blaues Licht, Eiskristalle treiben langsam (Atemwolken zeichnet stage._frame)
+        d.rectangle((0, 0, W, H), fill=(120, 176, 255, 58))
+        for a, b, c in _DROPS[:34]:
+            x = (a * W + math.sin(t * 0.8 + c * 9) * 50 + t * 22) % W
+            y = (b * H + t * (46 + c * 50)) % H
+            r = 9 + c * 9
+            tw = 0.55 + 0.45 * math.sin(t * 3 + c * 20)
+            for k_ in range(3):
+                an = math.radians(k_ * 60 + c * 60 + t * 20)
+                d.line((x - math.cos(an) * r, y - math.sin(an) * r, x + math.cos(an) * r, y + math.sin(an) * r), fill=(240, 250, 255, int(150 + 100 * tw)), width=3)
     elif kind in ("dark", "dunkel", "blackout"):
         d.rectangle((0, 0, W, H), fill=(4, 6, 20, 110))
 
@@ -3181,6 +3346,18 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     elif kind in ("chimp", "schimpanse", "affe", "monkey"):                          # Schimpanse: sitzt aufrecht, lange Arme, helles Gesicht, runde Ohren
         col, face = (92, 66, 50), (226, 184, 150)
         wv = math.sin(t * 3) * 10
+        if action == "puff":                                                        # aufgestelltes Fell: Haare sträuben sich rund um Körper und Kopf – das Tier wirkt größer
+            pe = 1.0
+            for cx_, cy_, rx_, ry_, n_ in ((0, -165, 92, 132, 22), (8, -372 + bob * 0.5, 108, 100, 20)):
+                for i in range(n_):
+                    an = 2 * math.pi * i / n_ + 0.1
+                    if cy_ == -165 and math.sin(an) > 0.55:
+                        continue                                                    # unten sitzen die Beine
+                    q = 1 + 0.05 * math.sin(t * 24 + i * 1.9)
+                    bx_, by_ = cx_ + math.cos(an) * rx_ * 0.9, cy_ + math.sin(an) * ry_ * 0.9
+                    tx_, ty_ = cx_ + math.cos(an) * (rx_ + 46 * pe * q), cy_ + math.sin(an) * (ry_ + 46 * pe * q)
+                    nx_, ny_ = -math.sin(an) * 17, math.cos(an) * 17
+                    poly([(bx_ + nx_, by_ + ny_), (tx_, ty_), (bx_ - nx_, by_ - ny_)], _dark(col, 0.1) if i % 2 else col)
         for lx in (-84, 36):                                                        # angewinkelte Beine mit Füßen
             ell(lx, -86, lx + 70, -6, _dark(col, 0.12) if lx < 0 else col)
             ell(lx + 30, -30, lx + 96, 4, face, shade=0.15)

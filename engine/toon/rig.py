@@ -636,6 +636,17 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a")
         p.eyes = "worried"
         p.smile = -0.4
         p.lean = 2 + 0.8 * q
+    elif a == "shiver":                                    # friert: Arme um den Körper geschlungen, Schultern hoch, der ganze Körper bibbert
+        q = s(t * 34)
+        p.arm_l, p.fore_l = 30 + 2 * q, 124 + 4 * s(t * 37 + 1)
+        p.arm_r, p.fore_r = 40 + 2 * s(t * 31 + 2), 134 + 4 * q
+        p.head, p.lean = 8, 3 + 1.2 * q
+        p.lift = -8
+        p.squash = 0.96 + 0.012 * q
+        p.knee_l = p.knee_r = 8
+        p.look = 0.0
+        p.eyes, p.brow, p.smile = "worried", -0.3, -0.5
+        p.extra["open"] = 0.25
     elif a == "blink":                                     # blinzelt schnell (Lidschluss als Schutz): Augen fallen immer wieder kurz zu
         p.eyes = "closed" if (t * 2.6) % 1.0 < 0.42 else "wide"
         p.brow = 0.4
@@ -716,7 +727,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a")
         p.eyes, p.smile = "happy", 1
 
     emo = (emotion or "").lower()
-    if emo and a not in ("shocked", "jump", "happy", "sad", "sleep", "cower", "freeze", "tremble", "blink", "pant", "pupils"):
+    if emo and a not in ("shocked", "jump", "happy", "sad", "sleep", "cower", "freeze", "tremble", "shiver", "blink", "pant", "pupils"):
         p.eyes = {"happy": "happy", "shocked": "wide", "scared": "wide", "sad": "sad", "angry": "angry",
                   "worried": "worried", "tired": "closed"}.get(emo, p.eyes)
         p.smile = {"happy": 0.8, "sad": -0.8, "angry": -0.6, "worried": -0.4}.get(emo, p.smile)
