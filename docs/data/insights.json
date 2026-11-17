@@ -1,5 +1,5 @@
 {
- "updated": 1794943237.103303,
+ "updated": 1794945046.2162383,
  "enough": true,
  "counted": 20,
  "total": 22,
@@ -18,7 +18,7 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1655,
+   "avg_views": 1654,
    "avg_likes": 52.5,
    "like_rate": 3.17,
    "avg_score": 2442
@@ -27,10 +27,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1750,
+   "avg_views": 1742,
    "avg_likes": 43.0,
-   "like_rate": 2.46,
-   "avg_score": 2395
+   "like_rate": 2.47,
+   "avg_score": 2388
   },
   {
    "slug": "whatif",
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1496,
+   "avg_views": 1497,
    "avg_likes": 40.8,
    "like_rate": 2.73,
-   "avg_score": 2114
+   "avg_score": 2115
   },
   {
    "slug": "musik",
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1489,
+   "avg_views": 1491,
    "avg_likes": 27.0,
    "like_rate": 1.81,
-   "avg_score": 1924
+   "avg_score": 1926
   }
  ],
  "weights": {
@@ -76,14 +76,14 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.03,
-  "comedy": 1.06,
+  "comedy": 1.05,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1489 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1491 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2438 zu 705 Punkte)."
  ],
  "words_good": [],
