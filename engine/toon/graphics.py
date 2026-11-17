@@ -1172,6 +1172,78 @@ def _size_val(v):
     return x / 1000 if m.group(2) == "µm" else x
 
 
+def _macro_backdrop():
+    """Hintergrund der Größen-Szene: warmes Licht von oben, weit entfernte unscharfe Halme und weiche Lichtkreise (wie Makro-Fotos)."""
+    if "macro" in _bg:
+        return _bg["macro"]
+    im = Image.new("RGB", (W, H))
+    d = ImageDraw.Draw(im)
+    for i in range(0, H, 6):
+        k = i / H
+        d.rectangle((0, i, W, i + 6), fill=(int(236 - 70 * k), int(238 - 40 * k), int(200 - 90 * k)))
+    lay = Image.new("RGBA", (W, H), (110, 180, 90, 0))                 # Grundfarbe auch im Durchsichtigen: sonst dunkle Ränder beim Weichzeichnen
+    ld = ImageDraw.Draw(lay)
+    r = random.Random(5)
+    for _ in range(46):                                                 # ferne Halme: helles, verschwommenes Grün
+        x, h = r.uniform(-60, W + 60), r.uniform(700, 1500)
+        w_, lean = r.uniform(26, 60), r.uniform(-140, 140)
+        g_ = r.randint(150, 200)
+        ld.polygon([(x - w_ / 2, H), (x + lean * 0.6, H - h * 0.6), (x + lean, H - h), (x + lean * 0.6 + w_ * 0.2, H - h * 0.6), (x + w_ / 2, H)],
+                   fill=(int(g_ * 0.55), g_, int(g_ * 0.45), 150))
+    bl = lay.filter(ImageFilter.GaussianBlur(22))
+    im.paste(bl.convert("RGB"), (0, 0), bl.getchannel("A"))
+    lay = Image.new("RGBA", (W, H), (255, 250, 215, 0))
+    ld = ImageDraw.Draw(lay)
+    for _ in range(22):                                                 # Lichtkreise (Sonne durch Blätter)
+        x, y, rr = r.uniform(0, W), r.uniform(0, H * 0.6), r.uniform(30, 110)
+        ld.ellipse((x - rr, y - rr, x + rr, y + rr), fill=(255, 250, 215, r.randint(40, 90)))
+    bl = lay.filter(ImageFilter.GaussianBlur(14))
+    im.paste(bl.convert("RGB"), (0, 0), bl.getchannel("A"))
+    _bg["macro"] = im
+    return im
+
+
+def _blade(d, P, x, hgt, wid, lean, col, ow, dew, sc_px, L):
+    """Grashalm: gebogen, spitz zulaufend, Licht- und Schattenseite, helle Mittelrippe, gelegentlich ein Tautropfen."""
+    n = 12
+    left, right, mid = [], [], []
+    for i in range(n + 1):
+        s_ = i / n
+        cx_, cy_ = x + lean * s_ * s_, -hgt * s_
+        ww = wid * (1 - s_) ** 0.85 / 2
+        left.append(P(cx_ - ww, cy_))
+        right.append(P(cx_ + ww, cy_))
+        mid.append(P(cx_, cy_))
+    d.polygon(left + right[::-1], fill=col + (255,), outline=INK, width=ow)
+    dark = tuple(max(0, int(c * 0.72)) for c in col)
+    d.polygon(mid + right[::-1], fill=dark + (255,))                    # Schattenseite
+    d.line(left + right[::-1] + [left[0]], fill=INK, width=ow)
+    light = tuple(min(255, int(c * 1.25)) for c in col)
+    d.line(mid[:-2], fill=light + (200,), width=max(1, int(0.03 * L / 10 * sc_px)))
+    if dew:                                                             # Tautropfen auf dem Halm
+        s_ = 0.42
+        cx_, cy_ = x + lean * s_ * s_ + wid * 0.12, -hgt * s_
+        rr = 0.16 * L / 10 * sc_px
+        c = P(cx_, cy_)
+        if rr >= 3:
+            d.ellipse((c[0] - rr, c[1] - rr, c[0] + rr, c[1] + rr), fill=(200, 235, 255, 150), outline=(40, 70, 90, 200), width=max(1, ow - 3))
+            d.ellipse((c[0] - rr * 0.55, c[1] - rr * 0.6, c[0] - rr * 0.1, c[1] - rr * 0.15), fill=(255, 255, 255, 230))
+
+
+def _moss(d, P, mx, mr, sc_px, ow, r):
+    """Moospolster: dunkles Kissen mit vielen kleinen hellen Blättchen obendrauf."""
+    a_, b_ = P(mx - mr, -mr * 1.3), P(mx + mr, 0)
+    d.ellipse((a_[0], a_[1], b_[0], b_[1] + mr * sc_px * 0.25), fill=(48, 104, 52, 255), outline=INK, width=max(1, ow - 2))
+    for _ in range(26):
+        ang, rad_ = r.uniform(math.pi, 2 * math.pi), r.uniform(0.2, 0.95)
+        lx, ly = mx + math.cos(ang) * mr * rad_, -mr * 0.65 + math.sin(ang) * mr * 0.65 * rad_
+        c = P(lx, ly)
+        ll = max(1.5, mr * 0.22 * sc_px)
+        rot = r.uniform(0, math.pi)
+        d.polygon([(c[0] + math.cos(rot) * ll, c[1] + math.sin(rot) * ll * 0.5), (c[0] - math.sin(rot) * ll * 0.3, c[1] - ll * 0.6),
+                   (c[0] - math.cos(rot) * ll, c[1] - math.sin(rot) * ll * 0.5)], fill=(r.randint(90, 130), r.randint(170, 205), r.randint(70, 100), 255))
+
+
 def _g_size(frame, g, t, dur):
     """Wie klein ist das wirklich? Erst ganz nah: das Tier zwischen riesigen Grashalmen, Moos und einem Sandkorn – dann zoomt die
     Kamera heraus, bis es als Pünktchen neben einem Lineal liegt; eine Klammer zeigt die echte Größe."""
@@ -1192,9 +1264,7 @@ def _g_size(frame, g, t, dur):
         return (ax + (x - fx) * ppm * Z, ay + (y - fy) * ppm * Z)
     sc_px = ppm * Z
     d = ImageDraw.Draw(frame, "RGBA")
-    for i in range(0, H, 8):                                            # helle Makro-Welt statt Nacht-Hintergrund
-        k = i / H
-        d.rectangle((0, i, W, i + 8), fill=(int(214 - 30 * k), int(232 - 24 * k), int(214 - 70 * k)))
+    frame.paste(_macro_backdrop(), (0, 0))                              # unscharfer Hintergrund wie bei einer Makro-Aufnahme
     gy = P(0, 0)[1]
     for i in range(int(max(0, gy)), H, 6):                              # Erdboden: nach unten dunkler
         k_ = (i - gy) / max(1, H - gy)
@@ -1215,27 +1285,28 @@ def _g_size(frame, g, t, dur):
     rnd = random.Random(7)
     ow = max(2, min(7, int(0.04 * sc_px)))
     macro = L >= 10                                                     # Gras, Moos, Sandkorn nur bei Millimetern (unter 0,1 mm wären sie falsch groß)
-    for j in range(26 if macro else 0):                                                 # Grashalme: Millimeter breit, Zentimeter hoch
-        x = -3 * L / 10 + j * (L * 1.6 / 26) + rnd.uniform(-0.2, 0.2) * L / 10
+    blades = []                                                         # (x, Höhe, Breite, Neigung, Farbe, Tau) in Millimetern
+    for jb in range(26 if macro else 0):
+        x = -3 * L / 10 + jb * (L * 1.6 / 26) + rnd.uniform(-0.2, 0.2) * L / 10
         if abs(x - x_c) < max(0.9, mm * 2.2) * L / 10:
             continue
-        hgt, wid, lean = rnd.uniform(6, 16) * L / 10, rnd.uniform(0.45, 0.9) * L / 10, rnd.uniform(-1.5, 1.5) * L / 10
-        col = (int(60 + rnd.uniform(0, 40)), int(150 + rnd.uniform(0, 50)), int(60 + rnd.uniform(0, 30)))
-        pts = [P(x - wid / 2, 0), P(x + lean * 0.5 + wid * 0.25, -hgt * 0.6), P(x + lean, -hgt), P(x + lean * 0.5 - wid * 0.25, -hgt * 0.6), P(x + wid / 2, 0)]
-        d.polygon(pts, fill=col + (255,), outline=INK, width=ow)
+        blades.append((x, rnd.uniform(6, 16) * L / 10, rnd.uniform(0.45, 0.9) * L / 10, rnd.uniform(-2.2, 2.2) * L / 10,
+                       (int(70 + rnd.uniform(0, 40)), int(150 + rnd.uniform(0, 50)), int(55 + rnd.uniform(0, 30))), rnd.random() < 0.3))
     w1, w2 = 0.9 * L / 10, 1.0 * L / 10
-    for x, hgt, wid, lean, col in (((x_c - mm * 0.95 - w1 / 2, 9 * L / 10, w1, -0.8 * L / 10, (52, 150, 70)),
-                                    (x_c + mm * 1.05 + w2 / 2, 12 * L / 10, w2, 1.2 * L / 10, (72, 170, 80))) if macro else ()):
-        pts = [P(x - wid / 2, 0), P(x + lean * 0.5 + wid * 0.25, -hgt * 0.6), P(x + lean, -hgt), P(x + lean * 0.5 - wid * 0.25, -hgt * 0.6), P(x + wid / 2, 0)]
-        d.polygon(pts, fill=col + (255,), outline=INK, width=ow)       # zwei Halme direkt neben dem Tier: von nah wie riesige Wände
-    for j in range(14 if macro else 0):                                 # Moospolster und ein Sandkorn neben dem Tier
-        mx, mr = x_c + rnd.uniform(-2.2, 2.6) * L / 10, rnd.uniform(0.12, 0.35) * L / 10
-        a_, b_ = P(mx - mr, -mr * 1.6), P(mx + mr, 0)
-        d.ellipse((a_[0], a_[1], b_[0], b_[1] + mr * sc_px * 0.2), fill=(70, 140, 70, 255), outline=INK, width=max(1, ow - 1))
-    sg = [(0, 0), (0.25, -0.5), (0.55, -0.62), (0.8, -0.35), (0.85, 0)]
-    sx0, sr = x_c + max(1.2, mm * 3) * L / 10 * (1 if mm < 3 else 0.6), 0.6 * (L / 10)
-    if macro:
-        d.polygon([P(sx0 + px * sr, py * sr) for px, py in sg], fill=(222, 196, 140, 255), outline=INK, width=ow)
+    if macro:                                                           # zwei Halme direkt neben dem Tier: von nah wie riesige Wände
+        blades += [(x_c - mm * 0.95 - w1 / 2, 9 * L / 10, w1, -1.4 * L / 10, (62, 150, 66), True),
+                   (x_c + mm * 1.05 + w2 / 2, 12 * L / 10, w2, 1.8 * L / 10, (84, 172, 76), False)]
+    for x, hgt, wid, lean, col, dew in blades:
+        _blade(d, P, x, hgt, wid, lean, col, ow, dew, sc_px, L)
+    for jm in range(9 if macro else 0):                                 # Moospolster aus vielen kleinen Blättchen
+        mx, mr = x_c + rnd.uniform(-2.2, 2.6) * L / 10, rnd.uniform(0.18, 0.4) * L / 10
+        _moss(d, P, mx, mr, sc_px, ow, random.Random(100 + jm))
+    if macro:                                                           # Sandkorn mit Facetten und Glanz
+        sx0, sr = x_c + max(1.2, mm * 3) * L / 10 * (1 if mm < 3 else 0.6), 0.6 * (L / 10)
+        sg = [(0, 0), (0.12, -0.42), (0.42, -0.66), (0.74, -0.52), (0.9, -0.18), (0.86, 0)]
+        d.polygon([P(sx0 + px_ * sr, py_ * sr) for px_, py_ in sg], fill=(226, 196, 138, 255), outline=INK, width=ow)
+        d.polygon([P(sx0 + px_ * sr, py_ * sr) for px_, py_ in ((0.42, -0.66), (0.74, -0.52), (0.9, -0.18), (0.5, -0.3))], fill=(196, 160, 104, 255))
+        d.polygon([P(sx0 + px_ * sr, py_ * sr) for px_, py_ in ((0.16, -0.38), (0.36, -0.56), (0.3, -0.36))], fill=(255, 244, 214, 220))
     img, fx_, fy_, _fly = extras.creature(str(g.get("kind") or "tardigrade"), t)   # das Tier selbst, in echter Größe
     box = img.getbbox()
     if box:
