@@ -1,19 +1,10 @@
 {
- "updated": 1794994836.2082484,
+ "updated": 1794997377.2248158,
  "enough": true,
  "counted": 21,
  "total": 23,
  "needed": 6,
  "categories": [
-  {
-   "slug": "mysterien",
-   "name": "🕵️ Mysterien & Rätsel",
-   "n": 1,
-   "avg_views": 1800,
-   "avg_likes": 43.0,
-   "like_rate": 2.39,
-   "avg_score": 2445
-  },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
@@ -22,6 +13,15 @@
    "avg_likes": 52.5,
    "like_rate": 3.17,
    "avg_score": 2443
+  },
+  {
+   "slug": "mysterien",
+   "name": "🕵️ Mysterien & Rätsel",
+   "n": 1,
+   "avg_views": 1797,
+   "avg_likes": 43.0,
+   "like_rate": 2.39,
+   "avg_score": 2442
   },
   {
    "slug": "comedy",
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1588,
+   "avg_views": 1592,
    "avg_likes": 43.2,
-   "like_rate": 2.72,
-   "avg_score": 2246
+   "like_rate": 2.71,
+   "avg_score": 2250
   },
   {
    "slug": "musik",
@@ -82,9 +82,9 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 🐾 Tierwelt (Ø 1492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2465 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2466 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,11 +93,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2550,
+   "views": 2551,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3390
+   "score": 3391
   },
   {
    "id": 77,

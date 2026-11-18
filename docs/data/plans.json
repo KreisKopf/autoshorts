@@ -1,653 +1,4 @@
 {
- "2026-11-17 13:00": {
-  "category": "fakten",
-  "topic": "Warum bekommen wir Gänsehaut? Die verblüffende biologische Ursache",
-  "trend": null,
-  "script": {
-   "title": "Warum bekommen wir Gänsehaut?",
-   "description": "Was passiert eigentlich in deinem Körper, wenn du plötzlich Gänsehaut bekommst?\nWir schauen uns die urzeitliche Ursache hinter diesem Reflex an.\nGänsehaut bei Kälte oder bei Musik?",
-   "hashtags": [
-    "#shorts",
-    "#foryou",
-    "#biologie",
-    "#fakten",
-    "#wissen",
-    "#body",
-    "#viral",
-    "#fyp"
-   ],
-   "tags": [
-    "gänsehaut",
-    "körper",
-    "biologie",
-    "reflex",
-    "evolution",
-    "haare",
-    "kälte",
-    "angst",
-    "wissen"
-   ],
-   "thumbnail": {
-    "place": "forest",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "goosebumps"
-    ],
-    "weather": "",
-    "image": "Close up of skin showing goosebumps rising with dramatic lighting, simple clean composition",
-    "text": "WARUM GÄNSEHAUT?"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "curly",
-     "hair_color": "braun",
-     "gender": "w",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Drei Gründe für Gänsehaut, die dein Körper vor Millionen Jahren brauchte.",
-     "image": "Close up of arms showing goosebumps forming.",
-     "who": [
-      "du"
-     ],
-     "place": "forest",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Haut",
-      "Härchen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "DER REFLEX"
-     },
-     "see": "Du stehst im Wald und denkst über Gänsehaut nach",
-     "time": "day",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und der letzte zeigt dir, was wir von unseren Vorfahren geerbt haben.",
-     "image": "Character looking surprised at their own arm.",
-     "who": [
-      "du"
-     ],
-     "place": "forest",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kälte",
-      "Song"
-     ],
-     "overlay": null,
-     "see": "Du zeigst nach vorne und erklärst etwas",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Doch der wahre Grund liegt Millionen Jahre in unserer evolutionären Vergangenheit.",
-     "image": "Ancient savanna landscape with prehistoric human ancestors.",
-     "who": [],
-     "place": "forest",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Vergangenheit"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "MIO. JAHRE"
-     },
-     "see": "Du schaust nachdenklich in die Ferne",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "calm",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Unsere Vorfahren hatten noch ein sehr viel dichteres Fell am gesamten Körper.",
-     "image": "Close up of an animal with thick fur.",
-     "who": [],
-     "place": "forest",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Fell"
-     ],
-     "overlay": null,
-     "see": "Ein haariger Vorfahre im Urwald",
-     "time": "day",
-     "props": [
-      "chimp"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wenn damals Gefahr drohte oder die Temperatur drastisch sank, passierte etwas Faszinierendes.",
-     "image": "Prehistoric human shivering in the cold wind.",
-     "who": [],
-     "place": "forest",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Gefahr",
-      "Temperatur"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GEFAHR",
-      "color": "red"
-     },
-     "see": "Ein Sturm zieht auf im Wald",
-     "time": "day",
-     "weather": "storm",
-     "props": [
-      "lightning"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Winzige Muskeln an den Haarwurzeln zogen sich blitzschnell und ruckartig zusammen.",
-     "image": "Animation of muscle pulling a hair follicle upright.",
-     "who": [],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Muskeln",
-      "Haarwurzeln"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "MUSKELKRAFT"
-     },
-     "see": "Nahaufnahme von Muskeln an Haarwurzeln",
-     "time": "day",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dadurch stellte sich das Fell auf und schloss eine wärmende Luftschicht ein.",
-     "image": "Animal fur puffing up to trap warm air.",
-     "who": [],
-     "place": "forest",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Luftschicht"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "ISOLATION"
-     },
-     "see": "Fell stellt sich auf und schützt vor Kälte",
-     "time": "day",
-     "weather": "snow",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Das schützte effektiv vor eisiger Kälte und Frost im Winter.",
-     "image": "Snowflakes falling gently on thick fur.",
-     "who": [],
-     "place": "snow",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Kälte",
-      "Frost"
-     ],
-     "overlay": null,
-     "see": "Schnee fällt im winterlichen Wald",
-     "time": "day",
-     "weather": "snow",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Bei Bedrohung hatte dieser Reflex aber einen noch viel clevereren Zweck.",
-     "image": "Animal looking large and threatening with puffed fur.",
-     "who": [],
-     "place": "forest",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Bedrohung",
-      "Zweck"
-     ],
-     "overlay": null,
-     "see": "Bedrohung im Wald",
-     "time": "day",
-     "weather": "storm",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Aufgestellt wirkten unsere Vorfahren dadurch plötzlich deutlich größer.",
-     "image": "Figure looking bigger with raised arms.",
-     "who": [
-      "du"
-     ],
-     "place": "forest",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "größer"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "GRÖSSER"
-     },
-     "see": "Aufgerichtetes Fell lässt Figur größer wirken",
-     "time": "day",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Angreifer wurden dadurch im letzten Moment eingeschüchtert und flüchteten sofort.",
-     "image": "Predator running away in fear.",
-     "who": [],
-     "place": "forest",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Angreifer",
-      "flüchteten"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FLUCHT",
-      "color": "orange"
-     },
-     "see": "Angreifer flüchtet im Wald",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Heute brauchen wir dieses dicke Fell rein biologisch eigentlich überhaupt nicht mehr.",
-     "image": "Character looking at smooth modern skin.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Fell",
-      "biologisch"
-     ],
-     "overlay": null,
-     "see": "Du stehst entspannt im modernen Park",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Unsere Körper reagieren bei starker Emotion aber genau wie in der Urzeit.",
-     "image": "Brain glowing with emotion signals.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Emotion",
-      "Jahren"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "DER URSPRUNG"
-     },
-     "see": "Du reagierst emotional im Park",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Ein guter Horrorfilm oder ein genialer Beat triggern exakt denselben alten Alarm.",
-     "image": "Character wearing headphones reacting with excitement.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Horrorfilm",
-      "Beat"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "MUSIK & FILM"
-     },
-     "see": "Kopfhörer und Musik im Park",
-     "time": "day",
-     "props": [
-      "kopfhörer",
-      "bassbox"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Adrenalin durchströmt in Sekundenschnelle unseren gesamten Organismus.",
-     "image": "Pulsing energy wave through a body outline.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Adrenalin",
-      "Organismus"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "ADRENALIN"
-     },
-     "see": "Adrenalin durchströmt den Körper",
-     "time": "day",
-     "props": [
-      "herz"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Deshalb spürst du diesen leichten Schauer bei Gänsehaut am ganzen Körper.",
-     "image": "Close up of arms showing goosebumps again.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Schauer",
-      "Gänsehaut"
-     ],
-     "overlay": null,
-     "see": "Du spürst den Schauer am ganzen Körper",
-     "time": "day",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wir tragen also ein echtes Urzeit-Relikt direkt unter unserer Haut.",
-     "image": "Character touching their arm thoughtfully.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Urzeit-Relikt",
-      "Haut"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "URZEIT",
-      "color": "green"
-     },
-     "see": "Ein Urzeit-Relikt unter der Haut",
-     "time": "day",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und genau deshalb zieht sich deine Haut zusammen und winzige Härchen stellen sich auf.",
-     "image": "Character smiling as goosebumps appear again in a loop.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Haut",
-      "Härchen"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Bei Kälte",
-      "b": "Bei Musik"
-     },
-     "see": "Haut zieht sich zusammen und Härchen stellen sich auf",
-     "time": "day",
-     "props": [
-      "goosebumps"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "fell",
-   "luftschicht",
-   "kälte",
-   "adrenalin"
-  ],
-  "title": "Warum bekommen wir Gänsehaut?",
-  "created": 1794853927.0196795
- },
  "2026-11-17 18:00": {
   "category": "musik",
   "topic": "Musik-Kugel",
@@ -2013,5 +1364,751 @@
   ],
   "title": "Drei geheime Orte in Videospielen, die fast niemand kennt",
   "created": 1794940761.4727979
+ },
+ "2026-11-18 18:00": {
+  "category": "comedy",
+  "topic": "Typische nervige Nachbarn, die wirklich jeder kennt",
+  "trend": null,
+  "script": {
+   "title": "Die Hölle auf Erden sind meine Nachbarn",
+   "description": "Was tun, wenn die Nachbarn Tag und Nacht eskalieren?\nErlebe den wahren Albtraum aus der Mietwohnung.\nKlingeln bei dir um Mitternacht auch die Wände?",
+   "hashtags": [
+    "#shorts",
+    "#fyp",
+    "#viral",
+    "#nachbarn",
+    "#comedy",
+    "#alltag",
+    "#eskalation",
+    "#mietwohnung"
+   ],
+   "tags": [
+    "nachbarn",
+    "mietwohnung",
+    "streit",
+    "alltag",
+    "comedy",
+    "eskalation",
+    "hausordnung",
+    "wohnung",
+    "lärm",
+    "genz"
+   ],
+   "thumbnail": {
+    "place": "hallway",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "wassermelone"
+    ],
+    "weather": "",
+    "image": "A young person looking stressed and angry in a living room, holding hands to their ears, vibrant cartoon style",
+    "text": "DIE NACHBARN ESKALIEREN"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grün",
+     "hat": "",
+     "hair": "curly",
+     "gender": "w",
+     "hair_color": "braun",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Vier Nachbarn, die dein Leben zur Hölle machen.",
+     "image": "A young woman sitting on a sofa in a living room at night looking annoyed",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nachbarn",
+      "drei Uhr"
+     ],
+     "hud": "TAG 1 · 3:00 UHR",
+     "status": "LÄRM: HOCH",
+     "overlay": {
+      "type": "tag",
+      "text": "NACHTSCHICHT"
+     },
+     "see": "Ein wütender Mann blickt panisch im Flur umher.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Der letzte Vorfall treibt mich seit vierundvierzig Stunden in den Wahnsinn.",
+     "image": "A young woman covering her ears on the sofa",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Uwe",
+      "Bassgitarren"
+     ],
+     "overlay": null,
+     "see": "Grafik über die lange Zeit von 44 Stunden.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "timer",
+      "value": "44:00:00",
+      "kicker": "LÄRM-TERROR"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Wand vibriert bereits seit vierundvierzig Stunden ohne Unterbrechung.",
+     "image": "A living room wall shaking with dust falling down",
+     "who": [],
+     "place": "bedroom",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "vierundvierzig",
+      "Stunden"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "STUNDEN LÄRM",
+      "value": 44,
+      "unit": "STUNDEN"
+     },
+     "see": "Die Wand im Schlafzimmer wackelt heftig, die Figur liegt schlaflos im Bett.",
+     "time": "night",
+     "weather": "quake",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Also bin ich rübergegangen, um höflich auf den Hausfrieden hinzuweisen.",
+     "image": "A young woman walking angrily towards a door",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Hausfrieden"
+     ],
+     "overlay": null,
+     "see": "Der Hauptdarsteller geht im Flur zur Nachbartür und klopft an.",
+     "time": "day",
+     "props": [
+      "door"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber Uwe hat nicht geöffnet, sondern mir einfach eine Melone vor die Tür gelegt.",
+     "image": "A close-up of a watermelon sitting in front of a closed apartment door",
+     "who": [],
+     "place": "hallway",
+     "camera": "insert",
+     "sfx": "pop",
+     "highlight": [
+      "Melone"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GRUSS",
+      "color": "orange"
+     },
+     "see": "Eine große Honigmelone liegt plötzlich vor der Wohnungstür.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "left",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Eine unbehandelte Honigmelone mit Post-it, doch was stand auf dem Zettel?",
+     "image": "A watermelon with a yellow sticky note on it close-up",
+     "who": [],
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Honigmelone",
+      "Post-it"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "NOTIZ",
+      "text": "WENIGER REDEN"
+     },
+     "see": "Nahaufnahme der Melone mit einem Notizzettel darauf.",
+     "time": "day",
+     "props": [
+      "honigmelone"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Da fängt das Problem erst an, weil Uwe einfach gar nicht reagiert.",
+     "image": "A young woman staring at a watermelon on the floor with wide eyes",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Gefühle"
+     ],
+     "overlay": null,
+     "see": "Uwe steht stur hinter der angelehnten Tür und reagiert nicht.",
+     "time": "day",
+     "props": [
+      "door"
+     ],
+     "actors": [
+      {
+       "id": "uwe",
+       "action": "idle",
+       "emotion": "",
+       "emote": "",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Er dreht den Bass nur noch weiter auf und ignoriert jedes Klopfen.",
+     "image": "A watermelon with a drawn-on face breathing heavily on the floor",
+     "who": [],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "atmen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "LÄRM"
+     },
+     "see": "Uwe dreht in seinem Zimmer an einer riesigen Lautsprecherbox auf.",
+     "time": "day",
+     "props": [
+      "bassbox"
+     ],
+     "actors": [
+      {
+       "id": "uwe",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du denkst dir jetzt, das ist absurd und du hast völlig recht.",
+     "image": "A young woman rubbing her temples in disbelief",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "absurd",
+      "recht"
+     ],
+     "overlay": null,
+     "see": "Die Figur schüttelt ungläubig den Kopf und zeigt auf die Wand.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sogar die anderen Nachbarn stehen mittlerweile genervt im Treppenhaus.",
+     "image": "A cat eating a piece of watermelon on the carpet",
+     "who": [],
+     "place": "hallway",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Katze",
+      "verspeist"
+     ],
+     "overlay": null,
+     "see": "Mehrere genervte Nachbarn stehen diskutierend im Treppenhaus.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "nachbarin",
+       "action": "talk",
+       "emotion": "angry",
+       "emote": "anger",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "worried",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aus der Wohnung dröhnt die Musik, als stünde man direkt im Club.",
+     "image": "A cat standing with multiple tiny guitars strapped to its back",
+     "who": [],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "boom",
+     "highlight": [
+      "achtundvierzig",
+      "Bassgitarren"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "BASS"
+     },
+     "see": "Bunt flackerndes Licht und Stroboskop im Raum wie in einer Diskothek.",
+     "time": "night",
+     "props": [
+      "bassbox"
+     ],
+     "actors": [
+      {
+       "id": "uwe",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das war der Moment, in dem die Hausverwaltung offiziell kapituliert hat.",
+     "image": "A letter flying through the air representing a capitulation",
+     "who": [],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "Hausverwaltung",
+      "kapituliert"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "KAPITULATION",
+      "color": "red"
+     },
+     "see": "Eine Mitteilung der Hausverwaltung mit einem großen KAPIULIERT-Stempel.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "sad",
+     "graphic": {
+      "type": "badge",
+      "kicker": "HAUSVERWALTUNG",
+      "text": "KAPITULIERT"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Viele drohen jetzt mit Mietminderung, aber wie reagiert Uwe darauf?",
+     "image": "A stack of pickles next to a digital coin display on a table",
+     "who": [],
+     "place": "office",
+     "camera": "insert",
+     "sfx": "none",
+     "highlight": [
+      "Kryptowährung",
+      "Essiggurken"
+     ],
+     "overlay": {
+      "type": "checklist",
+      "title": "MIETMINDERUNG",
+      "items": [
+       [
+        "Geld",
+        false
+       ],
+       [
+        "Gurken",
+        true
+       ]
+      ]
+     },
+     "see": "Checkliste der Mietminderungen wird eingeblendet.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "compare",
+      "left": "MIETE",
+      "right": "ABZUG",
+      "value": "100%",
+      "sub": "50%"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Uwe zog in den Flur und baute dort ein echtes Tonstudio auf.",
+     "image": "A hallway filled with mixing desks and cable chaos",
+     "who": [],
+     "place": "hallway",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Tonstudio"
+     ],
+     "overlay": null,
+     "see": "Uwe hat im Hausflur Mischpulte und Kabel aufgebaut.",
+     "time": "day",
+     "props": [
+      "computer",
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "uwe",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Mit Mischpulten, Nebelmaschinen und einem Chor aus genervten Nachbarn.",
+     "image": "Several neighbors standing in a foggy hallway holding microphones",
+     "who": [],
+     "place": "hallway",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Mischpulten",
+      "Nebelmaschinen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "CHOR DER WUT"
+     },
+     "see": "Nebel steigt im Flur auf, genervte Nachbarn stehen wie ein Chor herum.",
+     "time": "day",
+     "weather": "steam",
+     "props": [],
+     "actors": [
+      {
+       "id": "uwe",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "worried",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Meine Gläser im Schrank klappern ständig und spielen im Takt mit.",
+     "image": "A refrigerator with disco lights flashing and musical notes around it",
+     "who": [],
+     "place": "kitchen",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kühlschrank",
+      "Techno"
+     ],
+     "overlay": {
+      "type": "bar",
+      "label": "VIBRATION",
+      "value": 100
+     },
+     "see": "Gläser im Küchenschrank wackeln im Takt des Basses.",
+     "time": "day",
+     "weather": "quake",
+     "props": [
+      "glass",
+      "shelf"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer braucht schon Ruhe, wenn der Bass die Milch im Karton schüttelt.",
+     "image": "A milk carton shaking violently on a kitchen counter",
+     "who": [],
+     "place": "kitchen",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "Milch",
+      "schüttelt"
+     ],
+     "overlay": null,
+     "see": "Der Hauptdarsteller hält schockiert eine vibrierende Milchtüte im Raum.",
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Deshalb habe ich die Polizei gerufen und Schlafohrstöpsel gekauft.",
+     "image": "A young woman walking proudly with a suitcase towards the door",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Koffer",
+      "Uwe"
+     ],
+     "overlay": null,
+     "see": "Die Figur telefoniert panisch mit der Polizei.",
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "hold": "phone",
+       "emotion": "scared",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Jetzt spiele ich die Melone.",
+     "image": "A young woman holding a watermelon like a guitar and smiling",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Melone"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "ENDE",
+      "color": "green"
+     },
+     "see": "Die Figur trommelt mit zwei Stöcken voller Wut auf der Melone herum.",
+     "time": "day",
+     "props": [
+      "wassermelone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "angry",
+       "emote": "anger",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "post-it",
+   "mischpult",
+   "ohrstöpsel"
+  ],
+  "title": "Die Hölle auf Erden sind meine Nachbarn",
+  "created": 1794997363.4028482
  }
 }
