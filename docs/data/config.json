@@ -4,16 +4,16 @@
   "upload_times": "13:00, 18:00, 21:00",
   "target_seconds": 80,
   "text_provider": "gemini",
-  "tts_provider": "edge",
+  "tts_provider": "gemini",
   "image_provider": "cloudflare",
-  "gemini_model": "gemini-flash-latest",
+  "gemini_model": "gemini-3.5-flash",
   "openai_text_model": "gpt-4.1-mini",
   "openai_image_model": "gpt-image-1",
   "openai_image_quality": "low",
   "openai_tts_model": "gpt-4o-mini-tts",
   "openai_voice": "ash",
   "elevenlabs_voice_id": "",
-  "image_style": "flat 2D vector cartoon illustration, clean thick dark outlines, soft muted warm colors, simple cute characters with big round white eyes and expressive faces, minimalist cozy background with simple shapes, explainer animation style, vertical 9:16 composition, main subject centered in the middle of the frame, no text, no letters, no words, no watermark",
+  "image_style": "flat 2D vector illustration like a modern animated explainer short, solid flat colors, no gradients, no 3D, no realistic rendering, clean bold dark outlines, simple geometric shapes, cute minimal characters with simple round heads and big expressive white eyes, detailed but simple flat background (room, street or landscape) with a few clear objects, cinematic lighting with flat shading, vertical 9:16 composition, main subject in the lower middle of the frame, upper third calm and uncluttered, no text, no letters, no words, no watermark",
   "main_character": "a cheerful little character with a round yellow head, big round eyes, a small smile and a simple green bean-shaped body with thin stick arms and legs",
   "use_main_character": true,
   "subtitles_lowercase": true,
@@ -21,11 +21,11 @@
   "youtube_enabled": true,
   "youtube_privacy": "public",
   "youtube_category": "27",
-  "youtube_client_id": "563975677156-nhv1rl5em9tkcklvmoqvuotksmnfbh7o.apps.googleusercontent.com",
+  "youtube_client_id": "",
   "tiktok_enabled": true,
   "tiktok_mode": "direct",
   "tiktok_privacy": "PUBLIC_TO_EVERYONE",
-  "tiktok_client_key": "awe31n1155rw7vuv",
+  "tiktok_client_key": "",
   "ai_label": true,
   "trend_mode": "always",
   "make_thumbnail": true,
@@ -44,16 +44,23 @@
   "hold_missing": true,
   "stats_minutes": "30",
   "stats_live": "5",
-  "tiktok_handle": "wissens..wert",
-  "youtube_handle": "wissens-wertes",
-  "look": "cartoon"
+  "tiktok_handle": "",
+  "youtube_handle": "",
+  "look": "cartoon",
+  "channel_name": "",
+  "channel_focus": "",
+  "channel_seed": "697d51aa",
+  "auto_optimize": true,
+  "visual_mode": "toon",
+  "tts_checked": true,
+  "toon_checked": true
  },
  "categories": [
   {
    "slug": "fakten",
    "name": "Fakten",
    "emoji": "💡",
-   "description": "Verblüffende Fakten, kindgerecht und witzig erklärt.",
+   "description": "Verblüffende Fakten, frech und witzig erklärt.",
    "script_style": "Erkläre einen überraschenden, wahren Fakt Schritt für Schritt wie eine kleine Geschichte. Nutze konkrete Zahlen und Vergleiche aus dem Alltag. Nur belegbare, korrekte Fakten – nichts erfinden. Locker, frech, mit einem kleinen Witz zwischendurch.",
    "image_mood": "bright friendly daylight, cheerful colors, clear infographic-like scenes",
    "voice": "de-DE-FlorianMultilingualNeural",
@@ -70,7 +77,7 @@
    "description": "Gänsehaut-Geschichten und unheimliche Legenden.",
    "script_style": "Erzähle eine unheimliche Gruselgeschichte oder Legende mit langsam steigender Spannung. Kurze Sätze, Pausen durch Punkte, ein Schockmoment oder eine Wendung am Ende. Kein Blut, keine Gewalt-Details. Wenn es eine wahre Legende ist, sag das; sonst kennzeichne sie als Geschichte.",
    "image_mood": "dark moonlit night, eerie fog, deep blue and purple palette, spooky but still cartoonish, soft glow",
-   "voice": "de-DE-ConradNeural",
+   "voice": "de-DE-FlorianMultilingualNeural",
    "voice_rate": "-4%",
    "voice_pitch": "-4Hz",
    "voice_instructions": "Leise, langsam und unheimlich, mit Spannung in der Stimme.",
@@ -84,7 +91,7 @@
    "description": "Wahre Geschichten mit Wendungen: Rettungen, Rekorde, Coups.",
    "script_style": "Erzähle eine wahre, spannende Geschichte mit Hook, Aufbau, Höhepunkt und überraschender Auflösung. Nur reale, belegbare Ereignisse. Jede Szene endet so, dass man weiter zuhören will.",
    "image_mood": "cinematic lighting, dramatic composition, warm and cool contrast",
-   "voice": "de-DE-KillianNeural",
+   "voice": "de-DE-FlorianMultilingualNeural",
    "voice_rate": "+4%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Spannend und mitreißend, wie ein Erzähler in einer Doku.",
@@ -112,7 +119,7 @@
    "description": "Ungelöste Rätsel, seltsame Orte, mysteriöse Funde.",
    "script_style": "Stelle ein echtes, ungelöstes Rätsel vor: was passiert ist, welche Erklärungen es gibt, was bis heute offen ist. Trenne klar Belegtes von Spekulation.",
    "image_mood": "mysterious fog, teal and amber palette, flashlight beams, old maps and clues",
-   "voice": "de-DE-ConradNeural",
+   "voice": "de-DE-FlorianMultilingualNeural",
    "voice_rate": "+0%",
    "voice_pitch": "-2Hz",
    "voice_instructions": "Ruhig, geheimnisvoll, neugierig.",
@@ -140,7 +147,7 @@
    "description": "Was wäre wenn …? Verrückte Gedankenexperimente, wissenschaftlich durchgespielt.",
    "script_style": "Starte mit einer verrückten Was-wäre-wenn-Frage (z. B. 'Was wäre, wenn die Erde aufhört sich zu drehen?'). Spiele die Folgen Schritt für Schritt durch: erst Sekunden, dann Tage, dann Jahre – jede Stufe krasser als die davor. Stütze dich auf echte Physik, Biologie und Zahlen; sag klar, wo es Schätzung ist. Ende mit einem überraschenden Twist oder einer Frage an die Zuschauer.",
    "image_mood": "epic dramatic scale, glowing sci-fi colors, before/after contrast, planets, explosions in cartoon style",
-   "voice": "de-DE-KillianNeural",
+   "voice": "de-DE-FlorianMultilingualNeural",
    "voice_rate": "+6%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Staunend und mitreißend, wird mit jeder Stufe aufgeregter.",
@@ -204,7 +211,7 @@
    "description": "Kurze Motivationsrede: ein großes Wort nach dem anderen, schnelle Schnitte, Gute-Laune-Musik.",
    "script_style": "Motivationsrede direkt an 'du', wie ein Coach, der dich wachrüttelt. Kurze, rhythmische Sätze (3 bis 8 Wörter), Wiederholungen als Stilmittel ('Nicht morgen. Nicht nächste Woche. Jetzt.'). Aufbau: Hook, der trifft ('Du bist nicht faul. Du bist abgelenkt.'), dann das Problem aus dem Alltag (Handy, Scrollen bis drei Uhr nachts, Ausreden, Angst vor dem ersten Schritt), dann der Wendepunkt mit einem starken Bild oder Vergleich, dann konkrete kleine Schritte, Ende mit einem Satz zum Merken und 'Speicher dir das für die harten Tage.' Keine Zitate echter Personen, keine Versprechen von Reichtum. BILDER: Jede Szene ist kurz (ein Satz, höchstens 2–3 Sekunden) und zeigt eine eigene, klare Situation zum Satz: jemand liegt nachts mit Handy im Bett, rennt los, steht am Berg, trainiert, lernt am Schreibtisch, steht vor einer Tür, feiert. Viel Bewegung, Orte wechseln ständig, keine Einblendungen und keine Grafiken – der Text erscheint als großes Wort in der Bildmitte.",
    "image_mood": "vibrant purple, violet and warm orange colors, bright cinematic flat illustration, dynamic poses",
-   "voice": "de-DE-ConradNeural",
+   "voice": "de-DE-FlorianMultilingualNeural",
    "voice_rate": "+4%",
    "voice_pitch": "-2Hz",
    "voice_instructions": "Kraftvoll, warm und eindringlich wie ein Motivations-Coach; Pausen nach starken Sätzen.",
@@ -224,36 +231,5 @@
    "topic_rules": "Es geht um DICH: Einstellung, Disziplin, Angst vor dem ersten Schritt, Ausreden, Neuanfang, Durchhalten, Selbstwert. KEINE Technik-, Handy-, Algorithmus-, Daten- oder Überwachungs-Themen, KEINE 'Was wäre, wenn'-Fragen, nichts Gruseliges oder Düsteres. Das Thema klingt wie ein Satz, den ein Coach dir ins Gesicht sagt."
   }
  ],
- "queue": [
-  {
-   "id": "qb4ddjhrf",
-   "category": "comedy",
-   "text": "Typische nervige Nachbarn, die wirklich jeder kennt",
-   "created": 1794956617.472
-  },
-  {
-   "id": "qzcscan52",
-   "category": "comedy",
-   "text": "Besondere familiäre Momente an großen Feiertagen",
-   "created": 1794956624.401
-  },
-  {
-   "id": "q3tsxaysj",
-   "category": "whatif",
-   "text": "Was wäre, wenn man ein Wesen aus verschiedenen Tierarten erschafft?",
-   "created": 1794956634.711
-  },
-  {
-   "id": "qrsauuc3k",
-   "category": "whatif",
-   "text": "Absurde Alltagssituationen, in denen Technologie völlig verrückt spielt",
-   "created": 1794956639.931
-  },
-  {
-   "id": "qa5v1ywsb",
-   "category": "tiere",
-   "text": "Tiere, die extrem niedlich aussehen, aber tödlich gefährlich sind",
-   "created": 1794956650.083
-  }
- ]
+ "queue": []
 }

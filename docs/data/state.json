@@ -1,76 +1,8 @@
 {
- "last_category": "mysterien",
- "done_slots": [
-  "2026-11-08 18:00",
-  "2026-11-11 18:00",
-  "2026-11-11 21:00",
-  "2026-11-12 13:00",
-  "2026-11-12 18:00",
-  "2026-11-12 21:00",
-  "2026-11-13 13:00",
-  "2026-11-13 18:00",
-  "2026-11-13 21:00",
-  "2026-11-14 13:00",
-  "2026-11-14 18:00",
-  "2026-11-14 21:00",
-  "2026-11-15 13:00",
-  "2026-11-15 18:00",
-  "2026-11-15 21:00",
-  "2026-11-16 13:00",
-  "2026-11-16 18:00",
-  "2026-11-16 21:00",
-  "2026-11-17 13:00",
-  "2026-11-17 18:00",
-  "2026-11-17 21:00",
-  "2026-11-18 13:00"
- ],
- "used_queue": [
-  "qkv0cbgez",
-  "q14gkcy2d",
-  "qnm3oz96h",
-  "qnqm93yzl",
-  "qqprosnb9",
-  "qaxmu4ql2",
-  "qezkt1s0o",
-  "qt49vv57v",
-  "qb4ddjhrf"
- ],
- "last_stats": 1795006085.1962419,
- "next_id": 144,
- "connected": {
-  "youtube": {
-   "name": "Wissens Wert 💬",
-   "since": "2026-11-10"
-  }
- },
- "voice_wps": 2.604,
- "last_trends": 1795001427.6236708,
- "tiktok_handle": "wissens..wert",
- "last_poster": {
-  "hero": "",
-  "palette": 2,
-  "video": 143
- },
- "cat_credit": {
-  "fakten": -0.22999999999999898,
-  "storys": 2.4700000000000015,
-  "mysterien": -7.1499999999999995,
-  "tiere": -5.930000000000001,
-  "whatif": 2.0900000000000003,
-  "comedy": 2.75,
-  "vergleich": 2.4,
-  "motivation": 2.4,
-  "grusel": 1.2
- },
- "bounce_songs": [
-  "cc:a0374037-c7fc-4467-94de-28d2e36fc183",
-  "funkel",
-  "saints"
- ],
- "bounce_src": "remix",
- "last_musik": 1794930145.4995465,
- "bounce_styles": [
-  "phonk",
-  "pop"
- ]
+ "last_category": "",
+ "done_slots": [],
+ "used_queue": [],
+ "last_stats": 0,
+ "next_id": 1,
+ "connected": {}
 }
