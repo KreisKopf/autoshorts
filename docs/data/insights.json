@@ -1,5 +1,5 @@
 {
- "updated": 1794962372.3405552,
+ "updated": 1794963909.2731323,
  "enough": true,
  "counted": 20,
  "total": 23,
@@ -27,7 +27,7 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1755,
+   "avg_views": 1756,
    "avg_likes": 43.0,
    "like_rate": 2.45,
    "avg_score": 2400
@@ -45,19 +45,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1538,
+   "avg_views": 1537,
    "avg_likes": 41.0,
    "like_rate": 2.67,
-   "avg_score": 2159
+   "avg_score": 2158
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 1,
-   "avg_views": 1736,
+   "avg_views": 1738,
    "avg_likes": 12.0,
    "like_rate": 0.69,
-   "avg_score": 2006
+   "avg_score": 2008
   },
   {
    "slug": "tiere",
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1935,
+   "views": 1934,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2940
+   "score": 2939
   },
   {
    "id": 80,
