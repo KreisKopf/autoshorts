@@ -415,3 +415,16 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Muskeln, Verdauung, Reflex, Adrenalin …) – zu „Die Beine reagieren zuletzt“ standen besorgte Passanten auf der Straße. `ai.match_words`: Die
   Spracherkennung dehnt das letzte Wort vor einer überhörten Stelle bis an deren Ende; die Dauer eines gehörten Worts ist jetzt begrenzt
   (0,45 s + 0,09 s je Buchstabe), damit der überhörte Satz seine Zeit behält – vorher vier Sekunden ohne Untertitel und mit dem Bild des Satzes davor.
+
+- Ausbau 18.11.2026 (13-Uhr-Termin „Drei geheime Orte in Videospielen“: audiolog; dazu das Insekten-Video und die Pommes-Wünsche):
+  Bibliothek von Hand gezeichnet: `audiolog` (Aufnahmegerät mit leuchtender Tonspur, Antenne, Lautsprecher – pulsiert; auch „Audiologs“,
+  „Audio Log“, Tonaufnahme, Sprachaufnahme, Diktiergerät), `schmetterling` (Falter auf einer Blüte – als Himmels-Ding wäre er haushoch
+  über der Straße geflogen, deshalb steht er am Boden; Falter, Tagfalter); neu gezeichnet statt der vorläufigen Fassung: `raupe` (kriecht
+  nach rechts, auch „Larve“), `suppe` (Schüssel mit Löffel und Dampf), `kartoffel`, `krone`, `pommesbude` (Bude mit Markise und
+  Pommestüten-Schild ohne Schrift; der falsche Alias „frittöse“ ist weg). Die vorläufige Spielzeug-`puppe` ist entfernt: der Wunsch kam aus
+  dem Insekten-Video und meinte die Puppe eines Schmetterlings – jetzt `kokon` (grüne Puppe am Zweig; Wörter Kokon, Puppe, Puppen,
+  Verpuppung, Schmetterlings-/Insektenpuppe). Ein Satz über eine Spielzeugpuppe zeigt damit ebenfalls den Kokon.
+  Noch offen (vorläufige Zeichnungen der Text-KI): kaffeebohne, tarantel, insekt, erdloch, keule, radar, kunststoffbecken, knoblauch, kessel,
+  kamin, pinzette, nachricht, zigarette, notenschluessel, schwamm, ohr, jacke. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie,
+  anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, kompass, knall, friteuse, eiweiß, dach (greifbar davon: polyp, knie,
+  kompass, friteuse, dach).
