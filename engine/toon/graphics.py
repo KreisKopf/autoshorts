@@ -1458,10 +1458,10 @@ def _g_game(frame, g, t, dur):
             d.text((790 - d.textlength(txt, font=f) / 2, 13 * P), txt, font=f, fill=col)
             for i in range(6):                                                                       # der Name selbst bleibt ein blinkender Balken (keine echte Person im Bild)
                 d.rectangle((592 + i * 68, 16 * P - 10, 592 + i * 68 + 52, 16 * P + 44), fill=rb[(int(t * 8) + i) % len(rb)])
-    elif sub == "minus" and step == 0:                                                               # davor: unterirdisches Level, die Figur rutscht in die Mauer
+    elif sub == "minus" and step in (0, 3):                                                          # 3 = Vorstellung des Spiels: die Figur läuft im Level hin und her                                                               # davor: unterirdisches Level, die Figur rutscht in die Mauer
         d.rectangle((0, 0, W, H), fill=(16, 18, 40))
         brick, brick2 = (190, 110, 60), (160, 86, 46)
-        hx = 140 + min(1.0, k / 0.7) * 630                                                          # … und verschwindet darin
+        hx = 330 + math.sin(t * 1.5) * 190 if step == 3 else 140 + min(1.0, k / 0.7) * 630                                                          # … und verschwindet darin
         if hx > 16 * P:
             _game_hero(d, hx, 31 * P, t, 24)
         for c in range(cols + 1):

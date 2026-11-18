@@ -1291,6 +1291,10 @@ def main():
                           [(i_ * 4.0, i_ * 4.0 + 4.0) for i_ in range(len(T))], "Drei geheime Orte in Videospielen, die es wirklich gibt", "mysterien")
         subs = [(sc_.get("graphic") or {}).get("sub") if sc_.get("shot") == "graphic" and (sc_.get("graphic") or {}).get("type") == "game" else None for sc_ in sd]
         assert subs[0] == "world" and subs[1] == "room" and subs[3] == "room" and subs[4] == "minus" and subs[5] == "minus" and subs[6] == "far", subs
+        labs = [(sc_.get("graphic") or {}).get("label") for sc_ in sd]
+        assert labs[3] == "1" and labs[4] == "3" and labs[5] == "2" and labs[6] in ("1", "2"), labs
+        assert stage._game_step("room", "im geheimen raum blinkt sein name", {}) == "2" and stage._game_step("minus", "wer durch eine mauer rutscht, landet in welt minus eins", {}) == "0"
+        assert stage._game_step("far", "riesige wände voller löcher", {"far": "2"}) == "3"
         for i_ in (2, 7):
             assert subs[i_] is None and sd[i_]["place"] in ("office", "livingroom") and not sd[i_].get("crowd") and sd[i_]["actors"] and not sd[i_]["actors"][0].get("kind"), sd[i_]
         for sc_ in sd:

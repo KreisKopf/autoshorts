@@ -3077,6 +3077,24 @@ GAME_REAL_RE = (r"programmierer|entwickler|\bfirma|hersteller|erfinder|schöpfer
 GAME_DEV_RE = r"programmierer|entwickler|\bfirma|hersteller|erfinder|schöpfer|\bchefs?\b|\bcode\b|rechenfehler|update|gelöscht|entfernt"
 
 
+def _game_step(sub, low, seen):
+    """Welches Bild der Spielwelt zum Satz gehört (graphics._g_game, label): Der Satz bestimmt es, nicht die Reihenfolge – in Video 142 lief zum Satz
+    über den grauen Punkt schon der Raum mit dem Namen, und der Satz über die Mauer spielte bereits unter Wasser."""
+    import re as _re
+    if sub == "room":
+        st = "1" if _re.search(r"\bpunkt|durch (?:die|eine) (?:wand|mauer)|\btr[aä]g", low) else "2" if _re.search(r"\bname|blinkt|farben|leuchtet|schriftzug", low) else "0"
+    elif sub == "minus":
+        st = "0" if _re.search(r"mauer|\bwand\b|rutsch|gleite", low) else "2" if _re.search(r"wasser|endlos|wiederhol|schwimm|zeit (?:abl|aus)|schaffen|ausweg", low) else "3"
+    elif sub == "far":
+        st = "2" if _re.search(r"zerbricht|zerreißt|zerfällt|w[aä]nde?n?\b|löcher|himmel", low) else "1" if _re.search(r"millionen|verrechnet|rand der welt|ende der welt", low) else "0"
+        if st == "2" and seen.get("far") == "2":
+            st = "3"                                      # zweiter Satz über die Riesenwand: ganz nah, nur noch Wand und Löcher
+    else:
+        st = "0"
+    seen[sub] = st
+    return st
+
+
 def game_story(scenes, topic=""):
     import re as _re
     head = topic_head(topic).lower()                      # nur Videos über Orte und Welten IN Spielen – nicht „Videospiel-Regeln im Alltag“ oder die Firmengeschichte einer „Gaming-Bude“
@@ -3096,8 +3114,7 @@ def _game_story(scenes, topic="", main_id="du"):
         g_old = graphics.clean(sc.get("graphic")) if sc.get("shot") == "graphic" else None
         if g_old and g_old.get("type") in FIGURE_GFX + ("question", "round", "versus", "score", "podium", "chart") and g_old.get("type") != "badge":
             if g_old.get("type") == "number" and _re.search(GAME_FAR_RE, low) and _re.search(r"blöcke", low):
-                seen["far"] = seen.get("far", 0) + 1
-                sc.update(graphic={"type": "game", "sub": "far", "label": str(min(3, seen["far"] - 1)), "value": (str(g_old.get("value") or "") + " BLÖCKE").strip()}, overlay=None)
+                sc.update(graphic={"type": "game", "sub": "far", "label": _game_step("far", low, seen), "value": (str(g_old.get("value") or "") + " BLÖCKE").strip()}, overlay=None)
                 seg, run = "far", run + 1                 # „nach zwölf Millionen Blöcken zerbricht die Landschaft“: die Zahl steht über der zerbrechenden Welt
                 continue
             run = 0
@@ -3112,8 +3129,7 @@ def _game_story(scenes, topic="", main_id="du"):
         ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else {}
         if ingame:
             kick = str(ov.get("text") or "").strip() if str(ov.get("type") or "") in ("card", "tag") and not numbered_label_wrong(ov, sc.get("text")) else ""
-            g = {"type": "game", "sub": seg or "world", "label": str(min(3 if seg == "far" else 2, seen.get(seg or "world", 0)))}
-            seen[seg or "world"] = seen.get(seg or "world", 0) + 1
+            g = {"type": "game", "sub": seg or "world", "label": _game_step(seg or "world", low, seen)}
             if kick and len(kick) <= 22:
                 g["kicker"] = kick
             sc.update(shot="graphic", graphic=g, overlay=None, crowd="", float="")
