@@ -1,5 +1,5 @@
 {
- "updated": 1794993042.0991018,
+ "updated": 1794994836.2082484,
  "enough": true,
  "counted": 21,
  "total": 23,
@@ -27,7 +27,7 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1756,
+   "avg_views": 1754,
    "avg_likes": 43.0,
    "like_rate": 2.45,
    "avg_score": 2400
@@ -38,7 +38,7 @@
    "n": 8,
    "avg_views": 1723,
    "avg_likes": 40.8,
-   "like_rate": 2.37,
+   "like_rate": 2.36,
    "avg_score": 2338
   },
   {
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1935,
+   "views": 1936,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2940
+   "score": 2941
   },
   {
    "id": 80,
