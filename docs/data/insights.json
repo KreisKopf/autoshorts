@@ -1,19 +1,10 @@
 {
- "updated": 1794997377.2248158,
+ "updated": 1794999222.4886503,
  "enough": true,
  "counted": 21,
  "total": 23,
  "needed": 6,
  "categories": [
-  {
-   "slug": "storys",
-   "name": "🔥 Spannende Storys",
-   "n": 2,
-   "avg_views": 1656,
-   "avg_likes": 52.5,
-   "like_rate": 3.17,
-   "avg_score": 2443
-  },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
@@ -22,6 +13,15 @@
    "avg_likes": 43.0,
    "like_rate": 2.39,
    "avg_score": 2442
+  },
+  {
+   "slug": "storys",
+   "name": "🔥 Spannende Storys",
+   "n": 2,
+   "avg_views": 1654,
+   "avg_likes": 52.5,
+   "like_rate": 3.18,
+   "avg_score": 2441
   },
   {
    "slug": "comedy",
@@ -38,17 +38,17 @@
    "n": 8,
    "avg_views": 1723,
    "avg_likes": 40.8,
-   "like_rate": 2.36,
+   "like_rate": 2.37,
    "avg_score": 2338
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1592,
+   "avg_views": 1595,
    "avg_likes": 43.2,
    "like_rate": 2.71,
-   "avg_score": 2250
+   "avg_score": 2253
   },
   {
    "slug": "musik",
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1492,
+   "avg_views": 1497,
    "avg_likes": 27.0,
-   "like_rate": 1.81,
-   "avg_score": 1927
+   "like_rate": 1.8,
+   "avg_score": 1932
   }
  ],
  "weights": {
@@ -82,11 +82,14 @@
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2466 zu 705 Punkte)."
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1797 Aufrufe, 2.39 % Likes).",
+  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1497 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2467 zu 705 Punkte).",
+  "Wörter in starken Titeln: gänsehaut."
  ],
- "words_good": [],
+ "words_good": [
+  "gänsehaut"
+ ],
  "words_bad": [],
  "top": [
   {
@@ -123,11 +126,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1936,
+   "views": 1941,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2941
+   "score": 2946
   },
   {
    "id": 80,
