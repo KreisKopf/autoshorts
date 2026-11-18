@@ -137,7 +137,7 @@
    "voice_rate": "+6%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Warm, neugierig und begeistert.",
-   "enabled": true,
+   "enabled": false,
    "trends": true
   },
   {
