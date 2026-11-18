@@ -81,7 +81,7 @@
    "voice_rate": "-4%",
    "voice_pitch": "-4Hz",
    "voice_instructions": "Leise, langsam und unheimlich, mit Spannung in der Stimme.",
-   "enabled": false,
+   "enabled": true,
    "trends": false
   },
   {
@@ -95,7 +95,7 @@
    "voice_rate": "+4%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Spannend und mitreißend, wie ein Erzähler in einer Doku.",
-   "enabled": false,
+   "enabled": true,
    "trends": true
   },
   {
@@ -123,7 +123,7 @@
    "voice_rate": "+0%",
    "voice_pitch": "-2Hz",
    "voice_instructions": "Ruhig, geheimnisvoll, neugierig.",
-   "enabled": true,
+   "enabled": false,
    "trends": true
   },
   {
