@@ -1,5 +1,5 @@
 {
- "updated": 1794987635.3058238,
+ "updated": 1794989439.1944418,
  "enough": true,
  "counted": 21,
  "total": 23,
@@ -37,18 +37,18 @@
    "name": "🤯 What If",
    "n": 8,
    "avg_views": 1723,
-   "avg_likes": 40.6,
+   "avg_likes": 40.8,
    "like_rate": 2.36,
-   "avg_score": 2336
+   "avg_score": 2338
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1585,
-   "avg_likes": 42.8,
-   "like_rate": 2.7,
-   "avg_score": 2238
+   "avg_views": 1586,
+   "avg_likes": 43.2,
+   "like_rate": 2.72,
+   "avg_score": 2243
   },
   {
    "slug": "musik",
@@ -76,7 +76,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.02,
-  "comedy": 1.05,
+  "comedy": 1.04,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -84,7 +84,7 @@
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🐾 Tierwelt (Ø 1492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2462 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2464 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -103,11 +103,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2259,
-   "likes": 61,
+   "views": 2260,
+   "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3174
+   "score": 3190
   },
   {
    "id": 84,
@@ -155,11 +155,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 595,
-   "likes": 16,
+   "views": 596,
+   "likes": 17,
    "comments": 0,
    "shares": 0,
-   "score": 835
+   "score": 851
   },
   {
    "id": 44,
