@@ -1,5 +1,5 @@
 {
- "updated": 1794991241.2199855,
+ "updated": 1794993042.0991018,
  "enough": true,
  "counted": 21,
  "total": 23,
@@ -27,7 +27,7 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1754,
+   "avg_views": 1756,
    "avg_likes": 43.0,
    "like_rate": 2.45,
    "avg_score": 2400
@@ -38,17 +38,17 @@
    "n": 8,
    "avg_views": 1723,
    "avg_likes": 40.8,
-   "like_rate": 2.36,
+   "like_rate": 2.37,
    "avg_score": 2338
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1585,
+   "avg_views": 1588,
    "avg_likes": 43.2,
    "like_rate": 2.72,
-   "avg_score": 2242
+   "avg_score": 2246
   },
   {
    "slug": "musik",
@@ -76,7 +76,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.02,
-  "comedy": 1.05,
+  "comedy": 1.04,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -84,7 +84,7 @@
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🐾 Tierwelt (Ø 1492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2464 zu 705 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2465 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,11 +93,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2551,
+   "views": 2550,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3391
+   "score": 3390
   },
   {
    "id": 77,
