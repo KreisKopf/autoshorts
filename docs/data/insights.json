@@ -1,5 +1,5 @@
 {
- "updated": 1795003118.2108972,
+ "updated": 1795004929.1724021,
  "enough": true,
  "counted": 22,
  "total": 24,
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1609,
+   "avg_views": 1613,
    "avg_likes": 43.3,
    "like_rate": 2.69,
-   "avg_score": 2269
+   "avg_score": 2273
   },
   {
    "slug": "tiere",
@@ -84,7 +84,7 @@
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1797 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1664 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2434 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2435 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
@@ -92,9 +92,9 @@
  ],
  "words_bad": [
   "erkennst",
+  "lied",
   "remix",
-  "bekanntes",
-  "lied"
+  "bekanntes"
  ],
  "top": [
   {
