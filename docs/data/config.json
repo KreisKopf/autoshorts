@@ -151,7 +151,7 @@
    "voice_rate": "+6%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Staunend und mitreißend, wird mit jeder Stufe aufgeregter.",
-   "enabled": true
+   "enabled": false
   },
   {
    "slug": "comedy",
@@ -164,7 +164,7 @@
    "voice_rate": "+8%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Trocken, leicht genervt und selbstironisch, wie jemand, der seine eigene Geschichte nicht fassen kann.",
-   "enabled": true
+   "enabled": false
   },
   {
    "slug": "musik",
@@ -179,7 +179,7 @@
    "voice_rate": "+0%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "",
-   "enabled": true
+   "enabled": false
   },
   {
    "slug": "vergleich",
