@@ -1,5 +1,5 @@
 {
- "last_category": "tiere",
+ "last_category": "mysterien",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -21,7 +21,8 @@
   "2026-11-16 21:00",
   "2026-11-17 13:00",
   "2026-11-17 18:00",
-  "2026-11-17 21:00"
+  "2026-11-17 21:00",
+  "2026-11-18 13:00"
  ],
  "used_queue": [
   "qkv0cbgez",
@@ -34,20 +35,20 @@
   "qt49vv57v"
  ],
  "last_stats": 1794994836.2051096,
- "next_id": 140,
+ "next_id": 141,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.559,
+ "voice_wps": 2.504,
  "last_trends": 1794989439.1955001,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
-  "hero": "tardigrade",
-  "palette": 1,
-  "video": 139
+  "hero": "",
+  "palette": 2,
+  "video": 140
  },
  "cat_credit": {
   "fakten": -0.22999999999999898,

@@ -1,0 +1,403 @@
+{
+ "title": "Drei geheime Orte in Videospielen, die fast niemand kennt",
+ "scenes": [
+  {
+   "text": "Drei versteckte Orte in Videospielen, die fast kein Spieler je betreten hat.",
+   "see": "Spieler steht im Raum vor einer Infokarte über geheime Orte",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "TOP 3"
+   }
+  },
+  {
+   "text": "Und der letzte Bereich ist so gut versteckt, dass er jahrelang unentdeckt blieb.",
+   "see": "Eine verlassene Raumstation schwebt im dunklen Weltall",
+   "place": "street",
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "tag",
+    "text": "DER LETZTE ORT"
+   }
+  },
+  {
+   "text": "Nummer eins ist eine verlassene Raumstation in einem riesigen Online Rollenspiel.",
+   "see": "Raumschiff fliegt durch den leeren Weltraum",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "rocket"
+    }
+   ],
+   "shot": "event",
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "NUMMER 1"
+   }
+  },
+  {
+   "text": "Du musst stundenlang in eine absolut leere Richtung fliegen, um sie zu erreichen.",
+   "see": "Spielerfigur fliegt im Raumanzug durch die Leere",
+   "place": "street",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dort angekommen warten keine Gegner, sondern welche geheimnisvollen Audiologs?",
+   "see": "Audiolog liegt verlassen in der Raumstation",
+   "place": "street",
+   "props": [
+    {
+     "type": "lib_audiolog"
+    }
+   ],
+   "shot": "insert",
+   "mood": "scary",
+   "overlay": {
+    "type": "tag",
+    "text": "AUDIO LOG"
+   }
+  },
+  {
+   "text": "Nur zwei Prozent aller Spieler haben diesen trostlosen Sektor je auf ihrer Karte gesehen.",
+   "see": "Grafik zeigt zwei Prozent auf einer Weltkarte",
+   "place": "worldmap",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Bleibt die Frage, warum Entwickler so viel Mühe in unsichtbare Ecken stecken.",
+   "see": "Spieler denkt nach vor dem Monitor",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Nummer zwei führt dich tief unter die Spielwelt eines bekannten Open World Hits.",
+   "see": "Auto fährt durch eine Open World Landschaft",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "NUMMER 2"
+   }
+  },
+  {
+   "text": "Du musst durch eine unsichtbare Wand glitchen, während du mit voller Geschwindigkeit fährst.",
+   "see": "Auto fährt mit Vollgas gegen eine Felswand",
+   "place": "cave",
+   "time": "night",
+   "props": [
+    {
+     "type": "car"
+    },
+    {
+     "type": "rock"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Dahinter wartet eine bizarre Unterwasserstadt, die komplett ohne Texturen gerendert wurde.",
+   "see": "Bizarre Unterwasserstadt ohne Texturen in der Tiefsee",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "shot": "event",
+   "mood": "scary",
+   "overlay": {
+    "type": "tag",
+    "text": "OHNE TEXTUREN"
+   }
+  },
+  {
+   "text": "Alles wirkt grau, leblos und extrem unheimlich in dieser digitalen Geisterstadt.",
+   "see": "Graue geisterhafte Kulisse im Videospiel",
+   "place": "ruins",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "rock",
+    "elements": [
+     "ruins"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Wer dort zu lange bleibt, stürzt ohne Vorwarnung in den ewigen digitalen Abgrund.",
+   "see": "Figur stürzt in den digitalen Abgrund",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Aber was genau verbirgt sich im noch absurderen Fund von Nummer drei?",
+   "see": "Spieler staunt über die nächste Entdeckung",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "NUMMER 3"
+   }
+  },
+  {
+   "text": "In einem friedlichen Strategiespiel existiert ein winziges Zimmer mitten im Berg.",
+   "see": "Winziges Zimmer mitten im Berg eines Strategiespiels",
+   "place": "cave",
+   "backdrop": {
+    "sky": "day",
+    "ground": "rock",
+    "elements": [
+     "mountains"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "shot": "event",
+   "overlay": {
+    "type": "tag",
+    "text": "VERSTECKTER RAUM"
+   }
+  },
+  {
+   "text": "Dort sitzt ein einzelner Entwickler als pixeliges Cartoon Gesicht am Holztisch.",
+   "see": "Einzelner Entwickler sitzt am Holztisch",
+   "place": "cave",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Er spricht kein Wort, sondern starrt die Spieler nur stumm und grinsend an.",
+   "see": "Entwickler starrt grinsend und stumm nach vorn",
+   "place": "cave",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Kein Questmarker führt jemals zu diesem Easter Egg in den tiefen Bergen.",
+   "see": "Tiefes Gebirge ohne Questmarker",
+   "place": "mountain",
+   "backdrop": {
+    "sky": "day",
+    "ground": "rock",
+    "elements": [
+     "mountains"
+    ]
+   },
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Modder haben den Raum erst nach zehn Jahren durch Zufall im Code entdeckt.",
+   "see": "Modder entdecken den Code nach zehn Jahren",
+   "place": "serverroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "counter",
+    "label": "JAHRE",
+    "value": 10,
+    "unit": "BIS ZUR ENTDECKUNG"
+   }
+  }
+ ]
+}
