@@ -1,7 +1,7 @@
 {
- "updated": 1795001427.6227658,
+ "updated": 1795003118.2108972,
  "enough": true,
- "counted": 21,
+ "counted": 22,
  "total": 24,
  "needed": 6,
  "categories": [
@@ -9,19 +9,19 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1800,
+   "avg_views": 1797,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2445
+   "avg_score": 2442
   },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1656,
+   "avg_views": 1654,
    "avg_likes": 52.5,
-   "like_rate": 3.17,
-   "avg_score": 2443
+   "like_rate": 3.18,
+   "avg_score": 2441
   },
   {
    "slug": "comedy",
@@ -45,49 +45,57 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1588,
-   "avg_likes": 43.2,
-   "like_rate": 2.72,
-   "avg_score": 2246
-  },
-  {
-   "slug": "musik",
-   "name": "🎵 Musik-Kugel",
-   "n": 1,
-   "avg_views": 1739,
-   "avg_likes": 12.0,
-   "like_rate": 0.69,
-   "avg_score": 2009
+   "avg_views": 1609,
+   "avg_likes": 43.3,
+   "like_rate": 2.69,
+   "avg_score": 2269
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1496,
+   "avg_views": 1497,
    "avg_likes": 27.0,
    "like_rate": 1.8,
-   "avg_score": 1931
+   "avg_score": 1932
+  },
+  {
+   "slug": "musik",
+   "name": "🎵 Musik-Kugel",
+   "n": 2,
+   "avg_views": 1664,
+   "avg_likes": 10.0,
+   "like_rate": 0.6,
+   "avg_score": 1859
   }
  ],
  "weights": {
-  "fakten": 0.98,
+  "fakten": 1.0,
   "grusel": 1.2,
-  "storys": 1.06,
+  "storys": 1.07,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.02,
-  "comedy": 1.04,
-  "musik": 1.2,
+  "whatif": 1.03,
+  "comedy": 1.05,
+  "musik": 0.82,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🐾 Tierwelt (Ø 1496 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2465 zu 705 Punkte)."
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1797 Aufrufe, 2.39 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1664 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2434 zu 705 Punkte).",
+  "Wörter in starken Titeln: gänsehaut."
  ],
- "words_good": [],
- "words_bad": [],
+ "words_good": [
+  "gänsehaut"
+ ],
+ "words_bad": [
+  "erkennst",
+  "remix",
+  "bekanntes",
+  "lied"
+ ],
  "top": [
   {
    "id": 46,
@@ -103,11 +111,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2260,
+   "views": 2259,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3190
+   "score": 3189
   },
   {
    "id": 84,
@@ -123,11 +131,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1935,
+   "views": 1941,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2940
+   "score": 2946
   },
   {
    "id": 80,
