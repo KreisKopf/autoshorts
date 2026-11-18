@@ -2235,6 +2235,8 @@ def direct(scenes, times, topic="", style="", look=""):
     _indoor_sense(scenes)
     _sleep_story(scenes, topic)
     _body_story(scenes)
+    _game_story(scenes, topic, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                                     if isinstance(a, dict) and a.get("id") and not a.get("kind")), "du"))
     for i_n in range(1, len(scenes)):                     # eben stand das Ding schon groß allein im Bild: der nächste Satz schneidet nicht noch einmal darauf (neun Sekunden derselbe Lautsprecher)
         sc_n, pv_n = scenes[i_n], scenes[i_n - 1]
         if isinstance(sc_n, dict) and isinstance(pv_n, dict) and str(pv_n.get("shot") or "") == "insert":
@@ -3057,6 +3059,78 @@ def lake_story(scenes, topic=""):
     if not (_re.search(LAKE_RE, topic_head(topic).lower()) or n_lake >= 2):
         return False
     return any(_re.search(LAKE_UNDER_RE, t_) for t_ in texts) or bool(_re.search(LAKE_UNDER_RE + "|schatz", str(topic or "").lower()))
+
+
+# ------------------------------------------------------------------ Videospiel-Themen: Blick in die Spielwelt statt Straße, Höhle und Goldfisch
+# Prüfung 18.11.2026 (Video 140, „geheime Orte in Videospielen“): Die Engine kannte keine Spielwelt – zu sehen waren eine Straße voller Passanten,
+# ein rotes Auto in der Höhle, ein Goldfisch und ein leerer Tisch im Gebirge. Jetzt zeigt die Grafik „game“ (graphics._g_game) die Spielwelt als
+# eigenes Pixel-Bild; Sätze über Menschen (Programmierer, Firma, der Junge, der es fand) spielen am Rechner bzw. vor dem Fernseher.
+GAME_TOPIC_RE = r"videospiel|computerspiel|konsolenspiel|\bgames?\b|gaming|spielwelt|easter ?eggs?"
+GAME_ROOM_RE = r"\b1980\b|geheim\w* (?:raum|zimmer|kammer)|versteckt\w* (?:raum|zimmer|kammer)|grau\w* punkt|abenteuerspiel"
+GAME_MINUS_RE = r"\b1985\b|\bminus|hüpfspiel|unterwasser|wasser-?level|unter wasser"
+GAME_FAR_RE = r"blockspiel|klötzchen|blöcke\b|blöcken\b|rand der welt|ende der welt|bauspiel|riesenwand|riesige\w* w[aä]nd"
+GAME_IN_RE = (r"\braum\b|zimmer|kammer|\bwand\b|wände|mauer|level|\bwelt\b|spielwelt|wasser|schwimm|landschaft|blöcke|blöcken|spielfigur|\bfigur\b|\bpunkt\b|pixel|"
+              r"löcher|zerreißt|zerbricht|zerfällt|endlos|schleife|läufst|schwimmst|trägst|\brand\b|labyrinth|\bkarte\b|\bort\w*\b|bereich|\btür")
+GAME_REAL_RE = (r"programmierer|entwickler|\bfirma|hersteller|erfinder|schöpfer|\bchefs?\b|jährig|\bjunge\b|schüler|\bbrief|streamer|\bfans?\b|absicht|geplant|gewollt|"
+                r"\bcode\b|rechenfehler|ostereier|osterei\b|kommentar|gelöscht|entfernt|update|jahrelang|jahre lang")
+GAME_DEV_RE = r"programmierer|entwickler|\bfirma|hersteller|erfinder|schöpfer|\bchefs?\b|\bcode\b|rechenfehler|update|gelöscht|entfernt"
+
+
+def game_story(scenes, topic=""):
+    import re as _re
+    return bool(_re.search(GAME_TOPIC_RE, topic_head(topic).lower()))
+
+
+def _game_story(scenes, topic="", main_id="du"):
+    """Regie für Videos über Videospiele (siehe oben). Läuft am Schluss von direct."""
+    import re as _re
+    if not game_story(scenes, topic):
+        return
+    seg, run, n, seen = "", 0, len([x for x in scenes if isinstance(x, dict)]), {}
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        g_old = graphics.clean(sc.get("graphic")) if sc.get("shot") == "graphic" else None
+        if g_old and g_old.get("type") in FIGURE_GFX + ("question", "round", "versus", "score", "podium", "chart") and g_old.get("type") != "badge":
+            if g_old.get("type") == "number" and _re.search(GAME_FAR_RE, low) and _re.search(r"blöcke", low):
+                seen["far"] = seen.get("far", 0) + 1
+                sc.update(graphic={"type": "game", "sub": "far", "label": str(min(2, seen["far"] - 1)), "value": (str(g_old.get("value") or "") + " BLÖCKE").strip()}, overlay=None)
+                seg, run = "far", run + 1                 # „nach zwölf Millionen Blöcken zerbricht die Landschaft“: die Zahl steht über der zerbrechenden Welt
+                continue
+            run = 0
+            continue                                      # Zahl, Frage, Duell aus dem Drehbuch bleiben
+        new = "room" if _re.search(GAME_ROOM_RE, low) else "minus" if _re.search(GAME_MINUS_RE, low) else "far" if _re.search(GAME_FAR_RE, low) else ""
+        seg = new or seg
+        real = bool(_re.search(GAME_REAL_RE, low)) and not new
+        last = i == len(scenes) - 1 and n > 4
+        ingame = bool(new) or (not real and not last and bool(seg or i == 0 or _re.search(GAME_IN_RE + "|" + GAME_TOPIC_RE, low)))
+        if ingame and run >= 2 and not new:
+            ingame = False                                # höchstens zwei Spielbilder hintereinander, dann schaut man der Spielerin zu
+        ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else {}
+        if ingame:
+            kick = str(ov.get("text") or "").strip() if str(ov.get("type") or "") in ("card", "tag") and not numbered_label_wrong(ov, sc.get("text")) else ""
+            g = {"type": "game", "sub": seg or "world", "label": str(min(2, seen.get(seg or "world", 0)))}
+            seen[seg or "world"] = seen.get(seg or "world", 0) + 1
+            if kick and len(kick) <= 22:
+                g["kicker"] = kick
+            sc.update(shot="graphic", graphic=g, overlay=None, crowd="", float="")
+            run += 1
+            continue
+        run = 0
+        dev = bool(_re.search(GAME_DEV_RE, low))
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")][:1]
+        if not acts:
+            acts = [{"id": main_id, "action": "think" if dev else "shocked", "emotion": "calm" if dev else "surprised", "emote": "", "pos": "left", "speaks": False}]
+        acts[0] = dict(acts[0], pos="left" if dev else "right")
+        if acts[0].get("action") in ("fall", "float", "walk", "run", "swim", "sit", "lie"):
+            acts[0]["action"] = "think" if dev else "point"
+        if ov and str(ov.get("type") or "") in ("card", "tag") and numbered_label_wrong(ov, sc.get("text")):
+            sc["overlay"] = None
+        sc.update(place="office" if dev else "livingroom", time="day", mood="calm", backdrop=None, weather="", crowd="", float="", graphic=None, actors=acts,
+                  props=[] if dev else [{"type": "computer", "pos": 300}])   # Büro: Rechner steht schon da; im Wohnzimmer-Bild steht kein Fernseher (PLACE_HAS behauptet es nur) – der Bildschirm kommt als Requisite
+        if sc.get("shot") in ("graphic", "insert", "event"):
+            sc["shot"] = ""
 
 
 def _lake_story(scenes, topic="", main_id="du"):

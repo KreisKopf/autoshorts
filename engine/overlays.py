@@ -409,7 +409,12 @@ def frames_for(ov: dict):
             fr += [bar(str(ov["label"]), v, v * k / 24) for k in range(1, 25)]   # Balken füllt sich
             return fr, 300
         if t == "counter" and ov.get("value") is not None:
-            lab, unit, sub = str(ov.get("label") or "")[:26], str(ov.get("unit") or "")[:16], str(ov.get("sub") or "")[:30]
+            lab, unit, sub = str(ov.get("label") or "")[:26], " ".join(str(ov.get("unit") or "").split()), str(ov.get("sub") or "")[:30]
+            if len(unit) > 16:                            # lange Einheit („BIS ZUR ENTDECKUNG“ wurde zu „BIS ZUR ENTDECKU“): als Unterzeile zeigen, sonst am Wortende kürzen
+                if not sub and len(unit) <= 30:
+                    unit, sub = "", unit
+                else:
+                    unit = unit[:17].rsplit(" ", 1)[0]
             try:
                 v = float(str(ov["value"]).replace(",", "."))
                 v0 = float(str(ov.get("from") or 0).replace(",", "."))

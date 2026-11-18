@@ -41,7 +41,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "chart", "radar", "size")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "game", "chart", "radar", "size")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -1381,7 +1381,167 @@ def _g_size(frame, g, t, dur):
     _center(d, 288, kt, f_k, fill=INK, shadow=False)
 
 
-DRAW = {"radar": _g_radar, "size": _g_size, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
+# ------------------------------------------------------------------ Spielwelt (Videospiel-Themen): eigenes Pixel-Bild, keine Figur und keine Welt aus einem echten Spiel
+GAME_P = 40                                                    # Kantenlänge eines Bildpunkts der Spielwelt
+GAME_SUBS = ("world", "room", "minus", "far")
+_GAME_HERO = ("..yyy..", ".yyyyy.", ".yeyey.", ".yyyyy.", "ggggggg", "ggggggg", ".ggggg.", ".d...d.", ".d...d.")
+_GAME_COL = {"y": (255, 214, 80), "e": (24, 24, 36), "g": (70, 190, 110), "d": (40, 44, 70)}
+
+
+def _game_hero(d, x, by, t, px=14, walk=True):
+    """Kleine Spielfigur in den Farben der Kanal-Figur (gelber Kopf, grüner Körper) – eigene Zeichnung."""
+    step = int(t * 6) % 2 if walk else 0
+    for r, row in enumerate(_GAME_HERO):
+        for c, ch in enumerate(row):
+            if ch == ".":
+                continue
+            if r >= 7 and walk and ((c < 3) == bool(step)) and r == 8:
+                continue                                       # ein Bein hebt sich im Wechsel
+            x0, y0 = x + (c - 3.5) * px, by - (len(_GAME_HERO) - r) * px
+            d.rectangle((x0, y0, x0 + px - 1, y0 + px - 1), fill=_GAME_COL[ch])
+
+
+def _game_cells(d, cells, col, P=GAME_P):
+    for cx, cy in cells:
+        d.rectangle((cx * P, cy * P, cx * P + P - 1, cy * P + P - 1), fill=col)
+
+
+def _game_banner(d, text, y, t, col=WHITE):
+    text = str(text or "").upper().strip()[:26]
+    if not text or _pop(t, 0.15, 0.3) <= 0:
+        return
+    f = _fit(d, text, 84, 860)
+    w = d.textlength(text, font=f)
+    d.rectangle((W / 2 - w / 2 - 44, y - 18, W / 2 + w / 2 + 44, y + f.size + 34), fill=(12, 12, 20), outline=WHITE, width=8)
+    d.text((W / 2 - w / 2, y), text, font=f, fill=col)
+
+
+def _g_game(frame, g, t, dur):
+    """Blick in eine Spielwelt. sub: "world" (Landschaft mit verborgener Tür), "room" (dunkles Labyrinth, hinter der Wand ein geheimer Raum mit
+    blinkender Schrift), "minus" (endloses Unterwasser-Level, das sich wiederholt), "far" (Blocklandschaft, die am Rand der Welt zu einer
+    löchrigen Riesenwand zerbricht). kicker = Schild oben, text = Schrift im Bild."""
+    P = GAME_P
+    sub = str(g.get("sub") or "").lower()
+    sub = sub if sub in GAME_SUBS else "world"
+    d = ImageDraw.Draw(frame, "RGBA")
+    cols, rows = W // P, H // P
+    k = max(0.0, min(1.0, t / max(dur, 1.0)))
+    step = int(str(g.get("label") or "1")) if str(g.get("label") or "1").isdigit() else 1          # wievieltes Bild dieser Welt: 0 = davor, 1 = der Moment, 2 = danach
+    if sub == "room" and step >= 2:                                                                  # im geheimen Raum: die Schrift groß in wechselnden Farben
+        d.rectangle((0, 0, W, H), fill=(10, 10, 16))
+        wall = (150, 90, 220)
+        _game_cells(d, [(c, r) for c in range(cols) for r in (7, 8, 31, 32)] + [(c, r) for c in (0, 1, cols - 2, cols - 1) for r in range(7, 33)], wall)
+        rb = [(255, 90, 90), (255, 170, 60), (255, 230, 90), (110, 230, 120), (90, 190, 255), (190, 130, 255)]
+        txt = str(g.get("text") or "ERSCHAFFEN VON").upper()[:18]
+        f = _fit(d, txt, 150, 820)
+        d.text((W / 2 - d.textlength(txt, font=f) / 2, 560), txt, font=f, fill=rb[int(t * 8) % len(rb)])
+        for i in range(6):
+            d.rectangle((174 + i * 126, 800, 174 + i * 126 + 100, 900), fill=rb[(int(t * 8) + i) % len(rb)])
+        hx = 300 + math.sin(t * 1.4) * 120
+        d.rectangle((hx - 50, 1080, hx + 50, 1180), fill=(255, 214, 80))
+    elif sub == "room":
+        d.rectangle((0, 0, W, H), fill=(10, 10, 16))
+        wall = (150, 90, 220)
+        _game_cells(d, [(c, r) for c in range(cols) for r in (9, 10, 30, 31)], wall)                 # Gang oben/unten
+        _game_cells(d, [(c, r) for c in (0, cols - 1) for r in range(9, 32)], wall)
+        _game_cells(d, [(13, r) for r in range(11, 30) if r not in (19, 20, 21)], wall)              # Trennwand – in der Mitte nur eine hauchdünne Linie
+        d.rectangle((13 * P + 16, 19 * P, 13 * P + 23, 22 * P), fill=(90, 90, 100))
+        hx = 150 + min(1.0, k / 0.45) * 620 if step else 260 + math.sin(t * 1.6) * 130              # die Figur trägt den grauen Punkt durch die Wand (step 0: sie sucht noch)
+        hy = 21 * P + 34
+        d.rectangle((hx - 44, hy - 88, hx + 44, hy), fill=(255, 214, 80))
+        d.rectangle((hx + 56, hy - 54, hx + 76, hy - 34), fill=(170, 170, 180))
+        if k > 0.45 and step:                                                                        # im Raum: Schrift in wechselnden Farben
+            rb = [(255, 90, 90), (255, 170, 60), (255, 230, 90), (110, 230, 120), (90, 190, 255), (190, 130, 255)]
+            txt = str(g.get("text") or "ERSCHAFFEN VON").upper()[:18]
+            f = _fit(d, txt, 78, 400)
+            col = rb[int(t * 8) % len(rb)]
+            d.text((790 - d.textlength(txt, font=f) / 2, 13 * P), txt, font=f, fill=col)
+            for i in range(6):                                                                       # der Name selbst bleibt ein blinkender Balken (keine echte Person im Bild)
+                d.rectangle((592 + i * 68, 16 * P - 10, 592 + i * 68 + 52, 16 * P + 44), fill=rb[(int(t * 8) + i) % len(rb)])
+    elif sub == "minus" and step == 0:                                                               # davor: unterirdisches Level, die Figur rutscht in die Mauer
+        d.rectangle((0, 0, W, H), fill=(16, 18, 40))
+        brick, brick2 = (190, 110, 60), (160, 86, 46)
+        hx = 140 + min(1.0, k / 0.75) * 760
+        if hx > 16 * P:
+            _game_hero(d, hx, 31 * P, t, 24)
+        for c in range(cols + 1):
+            for r in list(range(6, 10)) + list(range(31, rows)):
+                _game_cells(d, [(c, r)], brick if (c + r) % 2 else brick2)
+        for c in range(17, 22):
+            for r in range(10, 31):
+                _game_cells(d, [(c, r)], brick if (c + r) % 2 else brick2)
+        if hx <= 16 * P:
+            _game_hero(d, hx, 31 * P, t, 24)
+    elif sub == "minus":
+        d.rectangle((0, 0, W, H), fill=(26, 60, 170))
+        d.rectangle((0, 0, W, 6 * P), fill=(60, 110, 220))
+        off = int(t * 5)                                                                             # die Welt zieht vorbei – und wiederholt sich alle 9 Spalten
+        for c in range(-1, cols + 2):
+            wc = (c + off) % 9
+            _game_cells(d, [(c, r) for r in range(31, rows)], (40, 70, 120) if (c + off) % 2 else (48, 82, 136))
+            if wc == 2:
+                _game_cells(d, [(c, r) for r in range(25, 31)], (70, 200, 120))                      # Seegras
+            if wc == 6:
+                _game_cells(d, [(c, r) for r in range(27, 31)], (240, 120, 160))                     # Koralle
+                _game_cells(d, [(c + 1, 28), (c - 1, 29)], (240, 120, 160))
+            if wc == 4:
+                _game_cells(d, [(c, r) for r in range(6, 13)], (120, 130, 150))                      # Felsblock von oben
+        for i in range(9):                                                                           # Luftblasen
+            bx = (i * 137 + 60) % W
+            by = H - ((t * (120 + i * 17) + i * 260) % (H - 240))
+            d.rectangle((bx, by, bx + 16, by + 16), outline=(200, 230, 255), width=4)
+        _game_hero(d, 470, 21 * P + math.sin(t * 3) * 30, t, 26)
+        hud = str(g.get("text") or "WELT  -1").upper()[:14]
+        f = _font(92)
+        d.text((W / 2 - d.textlength(hud, font=f) / 2, 150), hud, font=f, fill=WHITE)
+    else:
+        d.rectangle((0, 0, W, H), fill=(120, 190, 255))
+        d.rectangle((0, 0, W, 10 * P), fill=(96, 170, 250))
+        for cx, cy in ((3, 8), (17, 12), (10, 5)):                                                   # Pixel-Wolken
+            cx = (cx + int(t * 0.6)) % (cols + 6) - 3
+            _game_cells(d, [(cx + i, cy) for i in range(5)] + [(cx + 1 + i, cy - 1) for i in range(3)], WHITE)
+        grass, dirt, stone = (96, 200, 90), (150, 100, 60), (130, 132, 142)
+        far = sub == "far"
+        edge = 15 if far and step else cols + 1
+        for c in range(cols + 1):
+            top = 31 - (1 if c % 7 in (3, 4) else 0) - (2 if not far and c in (9, 10, 11) else 0)
+            if c >= edge:
+                continue
+            _game_cells(d, [(c, top)], grass)
+            _game_cells(d, [(c, r) for r in range(top + 1, top + 4)], dirt)
+            _game_cells(d, [(c, r) for r in range(top + 4, rows)], stone)
+        if far and not step:                                                                         # davor: die Figur läuft und läuft durch die Blocklandschaft
+            _game_hero(d, 200 + k * 620, 31 * P - (P if int((200 + k * 620) // P) % 7 in (3, 4) else 0), t, 24)
+        elif far:                                                                                    # Rand der Welt: die Landschaft zerbricht zu einer löchrigen Riesenwand bis in den Himmel
+            grow = min(1.0, k / 0.5) if step == 1 else 1.0
+            for c in range(edge, cols + 1):
+                for r in range(int(rows - (rows - 4) * grow), rows):
+                    if r < 31 and math.sin(r * 0.9) + math.sin(c * 1.7 + r * 0.35) + 0.5 * math.sin(c * 0.6 - r * 1.3) < -0.55:
+                        continue                                                                     # Loch: der Himmel scheint durch
+                    col = (grass if r == 31 else dirt if r < 35 else stone) if r >= 31 else grass if r % 6 == 0 else dirt if r % 6 in (1, 2) else stone
+                    _game_cells(d, [(c, r)], col)
+            hx = 120 + min(1.0, k / 0.7) * 360
+            _game_hero(d, hx, 31 * P, t, 24, walk=k < 0.7)
+        else:
+            door_c = 20                                                                              # Felswand rechts mit verborgener Tür, die aufleuchtet
+            _game_cells(d, [(c, r) for c in range(18, cols + 1) for r in range(17, 31)], stone)
+            glow = 0.5 + 0.5 * math.sin(t * 5)
+            _game_cells(d, [(c, r) for c in (door_c, door_c + 1, door_c + 2) for r in range(23, 31)], (int(40 + 215 * glow), int(40 + 180 * glow), 60))
+            f = _font(150)
+            d.text((door_c * P + 22, 18 * P), "?", font=f, fill=(255, 230, 90, int(255 * glow)))
+            hx = 140 + min(1.0, k / 0.8) * 470
+            _game_hero(d, hx, 30 * P if 9 * P <= hx <= 12 * P else 31 * P - (P if int(hx // P) % 7 in (3, 4) else 0), t, 24, walk=k < 0.8)
+        if g.get("value"):
+            val = str(g["value"]).upper()[:22]
+            f = _fit(d, val, 80, 900)
+            d.text((W / 2 - d.textlength(val, font=f) / 2, 150), val, font=f, fill=WHITE, stroke_width=6, stroke_fill=(20, 30, 60))
+    _game_banner(d, g.get("kicker"), 300, t, GOLD)
+    for y in range(0, H, 8):                                                                         # Zeilen eines alten Bildschirms
+        d.line((0, y, W, y), fill=(0, 0, 0, 26), width=2)
+
+
+
+DRAW = {"game": _g_game, "radar": _g_radar, "size": _g_size, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
         "news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
         "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
@@ -1402,7 +1562,7 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "radar": None, "size": "value"}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value"}[out["type"]]
     mode = str(g.get("mode") or "").lower()
     if out["type"] == "phone":
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"

@@ -1277,6 +1277,33 @@ def main():
 
     check("See-Schatz", _lake)
 
+    def _game():                                                 # Videospiel-Thema: Spielwelt als Pixel-Bild, Menschen-Sätze am Rechner – keine Straße, kein Goldfisch (Video 140)
+        T = ["Drei geheime Orte in Videospielen, die fast niemand je betreten hat.",
+             "Nummer eins: 1980 versteckt ein Programmierer einen geheimen Raum in einem Abenteuerspiel.",
+             "Seine Firma nennt ihre Entwickler damals nirgends.",
+             "Du trägst einen winzigen grauen Punkt durch eine Wand.",
+             "Nummer zwei steckt in einem berühmten Hüpfspiel von 1985.",
+             "Das Level liegt unter Wasser und wiederholt sich endlos.",
+             "Nach über zwölf Millionen Blöcken zerbricht die Landschaft am Rand der Welt.",
+             "Welchen Ort würdest du zuerst suchen?"]
+        sd = stage.direct([{"text": t_, "place": "underwater" if i_ % 2 else "street", "time": "night", "actors": [{"id": "du", "kind": "fish", "action": "fall"}] if i_ % 2 else [],
+                            "props": ["car"], "shot": "event" if i_ % 3 == 0 else "", "crowd": "walk"} for i_, t_ in enumerate(T)],
+                          [(i_ * 4.0, i_ * 4.0 + 4.0) for i_ in range(len(T))], "Drei geheime Orte in Videospielen, die es wirklich gibt", "mysterien")
+        subs = [(sc_.get("graphic") or {}).get("sub") if sc_.get("shot") == "graphic" and (sc_.get("graphic") or {}).get("type") == "game" else None for sc_ in sd]
+        assert subs[0] == "world" and subs[1] == "room" and subs[3] == "room" and subs[4] == "minus" and subs[5] == "minus" and subs[6] == "far", subs
+        for i_ in (2, 7):
+            assert subs[i_] is None and sd[i_]["place"] in ("office", "livingroom") and not sd[i_].get("crowd") and sd[i_]["actors"] and not sd[i_]["actors"][0].get("kind"), sd[i_]
+        for sc_ in sd:
+            frame(sc_)
+        for sub_ in graphics.GAME_SUBS + ("x",):
+            for st_ in ("0", "1", "2", ""):
+                for t_ in (0.0, 0.4, 2.0, 3.9):
+                    graphics.frame(graphics.clean({"type": "game", "sub": sub_, "label": st_, "kicker": "Nummer 1", "value": "12 Mio. Blöcke", "text": "x" * 40}), t_, 4.0)
+        other = stage.direct([{"text": "Ein geheimer Raum liegt hinter der Wand im Keller.", "place": "basement", "actors": [{"id": "du", "action": "point"}]}], [(0.0, 4.0)], "Das Geheimnis im Keller", "mysterien")
+        assert other[0].get("shot") != "graphic", other[0]
+        assert overlays.frames_for({"type": "counter", "label": "Jahre", "value": 10, "unit": "bis zur Entdeckung"}), "Zähler mit langer Einheit"
+    check("Videospiel-Welt", _game)
+
     def _surface():                                              # Meeresoberfläche: kein Mensch auf dem Wasser, Treibgut statt Karton, Radarschirm, Satellit im All statt Länderkarte
         T = [("Ein Passagierflugzeug verschwindet mitten über dem Ozean.", "space", [], ["plane"], "event", None, {"type": "card", "text": "SIGNAL VERLOREN"}),
              ("Aber moderne Satelliten empfangen noch stumme Pings.", "worldmap", [{"id": "du"}], [], "graphic", {"type": "map", "value": "germany,uk", "text": "PING"}, None),

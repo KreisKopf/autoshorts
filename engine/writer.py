@@ -281,6 +281,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "radio", "kicker": "FUNK · KANAL 4", "text": "BERGWACHT"}                               Funkspruch oder Durchsage mit Wellenform
     {"type": "radar", "kicker": "FLUGSICHERUNG", "text": "SIGNAL VERLOREN", "sub": "lost"}           Radarschirm mit umlaufendem Suchstrahl und Leuchtpunkt; "sub": "lost" = der Punkt
                                                                                                      blinkt und erlischt (Flugzeug/Schiff verschwindet vom Radar), ohne "sub" bleibt er
+    {"type": "game", "sub": "room"}                                                                   Blick in eine Spielwelt als Pixel-Bild (nur bei Videospiel-Themen): "sub" = "world" (Landschaft mit
+                                                                                                     verborgener Tür), "room" (Labyrinth mit geheimem Raum hinter der Wand), "minus" (endloses
+                                                                                                     Unterwasser-Level), "far" (Blocklandschaft zerbricht am Rand der Welt). Setzt die Regie auch selbst.
     {"type": "size", "value": "0,5 mm", "kind": "tardigrade"}                                        Zoom von ganz nah (Tier zwischen riesigen Grashalmen) heraus bis zum Lineal –
                                                                                                      für winzige Tiere mit Größenangabe (kommt bei „einen halben Millimeter“ auch von selbst)
     {"type": "chart", "kicker": "AKTIENKURS", "value": "3 BIO.", "label": "DOLLAR"}                   Kurve schießt nach oben ("dark": true = stürzt ab) – für Kurse,

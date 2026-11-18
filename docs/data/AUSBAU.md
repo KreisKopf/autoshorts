@@ -119,6 +119,14 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Kiste voller Scheine, ohne echtes Banknoten-Motiv), `goldbars`, `logs` (Schicht versunkener Baumstämme), `rocketpart` (verrostetes Versuchsteil am Grund
   statt startender Rakete). An Land spielt die Geschichte am Seeufer (nicht im Büro), ohne Passanten; „Soldaten bringen Kisten“ zeigt zwei Figuren mit
   schlichtem Helm (`hat: army`, ohne Abzeichen) neben dem Kistenstapel; „kein Gold“ zeigt keine Barren. Nie zweimal dasselbe Bild am Grund. Selbsttest: `_lake`.
+- Videospiel-Themen (`stage._game_story`, greift bei `GAME_TOPIC_RE` im Kern des Themas): Die Grafik `game` (`graphics._g_game`) zeigt die Spielwelt als eigenes
+  Pixel-Bild mit einer Spielfigur in den Farben der Kanal-Figur – `sub`: `world` (Landschaft mit verborgener Tür), `room` (Labyrinth, geheimer Raum hinter der
+  Wand mit blinkender Schrift), `minus` (Mauer, dann endloses Unterwasser-Level), `far` (Blocklandschaft zerbricht am Rand der Welt zur löchrigen Riesenwand);
+  `label` 0/1/2 = davor, der Moment, danach (zählt die Regie je Welt hoch, damit nicht dreimal dasselbe Bild läuft). Sätze über Menschen
+  (`GAME_REAL_RE`: Programmierer, Firma, der Junge, Streamer) und der Schlusssatz spielen im Büro am Rechner bzw. im Wohnzimmer vor dem Bildschirm, bei Tag,
+  ohne Passanten. Höchstens zwei Spielbilder hintereinander ohne neues Stichwort. Nie Figuren oder Welten echter Spiele nachzeichnen. Weitere Spielwelten:
+  Zweig in `_g_game`, Kürzel in `GAME_SUBS`, Stichwörter in `GAME_*_RE`, Fall im Selbsttest (`_game`).
+  Zähler-Einblendung: Eine Einheit über 16 Zeichen („BIS ZUR ENTDECKUNG“) steht als Unterzeile statt abgeschnitten neben der Zahl.
 - Grafiken: „Milliarden“ gesagt, aber „BILLIONEN“ gezeigt → wird berichtigt; Währung in der Unterzeile, die niemand nennt, entfällt; Fragezeichen-Grafik
   an einem Satz ohne Frage wird zur Plakette (`stage.direct`, Anfang).
 - Familie im Bild (`stage._family`, `FAMILY_RE`): Spricht der Satz von Familien, Frauen und Kindern, stehen neben der Hauptfigur eine Frau und ein
