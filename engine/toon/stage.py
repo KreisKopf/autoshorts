@@ -3066,6 +3066,7 @@ def lake_story(scenes, topic=""):
 # ein rotes Auto in der Höhle, ein Goldfisch und ein leerer Tisch im Gebirge. Jetzt zeigt die Grafik „game“ (graphics._g_game) die Spielwelt als
 # eigenes Pixel-Bild; Sätze über Menschen (Programmierer, Firma, der Junge, der es fand) spielen am Rechner bzw. vor dem Fernseher.
 GAME_TOPIC_RE = r"videospiel|computerspiel|konsolenspiel|\bgames?\b|gaming|spielwelt|easter ?eggs?"
+GAME_WORLD_RE = r"\borte?\b|\borten\b|\bwelt|level|\bräume|\braum\b|geheim|versteck|easter ?egg|rand der|spielwelt|\bkarte"
 GAME_ROOM_RE = r"\b1980\b|geheim\w* (?:raum|zimmer|kammer)|versteckt\w* (?:raum|zimmer|kammer)|grau\w* punkt|abenteuerspiel"
 GAME_MINUS_RE = r"\b1985\b|\bminus|hüpfspiel|unterwasser|wasser-?level|unter wasser"
 GAME_FAR_RE = r"blockspiel|klötzchen|blöcke\b|blöcken\b|rand der welt|ende der welt|bauspiel|riesenwand|riesige\w* w[aä]nd"
@@ -3078,7 +3079,8 @@ GAME_DEV_RE = r"programmierer|entwickler|\bfirma|hersteller|erfinder|schöpfer|\
 
 def game_story(scenes, topic=""):
     import re as _re
-    return bool(_re.search(GAME_TOPIC_RE, topic_head(topic).lower()))
+    head = topic_head(topic).lower()                      # nur Videos über Orte und Welten IN Spielen – nicht „Videospiel-Regeln im Alltag“ oder die Firmengeschichte einer „Gaming-Bude“
+    return bool(_re.search(GAME_TOPIC_RE, head) and _re.search(GAME_WORLD_RE, head) and not _re.search(r"im alltag|in echt|im echten|wirklichkeit|\bbude|firma|konzern", head))
 
 
 def _game_story(scenes, topic="", main_id="du"):
@@ -3095,7 +3097,7 @@ def _game_story(scenes, topic="", main_id="du"):
         if g_old and g_old.get("type") in FIGURE_GFX + ("question", "round", "versus", "score", "podium", "chart") and g_old.get("type") != "badge":
             if g_old.get("type") == "number" and _re.search(GAME_FAR_RE, low) and _re.search(r"blöcke", low):
                 seen["far"] = seen.get("far", 0) + 1
-                sc.update(graphic={"type": "game", "sub": "far", "label": str(min(2, seen["far"] - 1)), "value": (str(g_old.get("value") or "") + " BLÖCKE").strip()}, overlay=None)
+                sc.update(graphic={"type": "game", "sub": "far", "label": str(min(3, seen["far"] - 1)), "value": (str(g_old.get("value") or "") + " BLÖCKE").strip()}, overlay=None)
                 seg, run = "far", run + 1                 # „nach zwölf Millionen Blöcken zerbricht die Landschaft“: die Zahl steht über der zerbrechenden Welt
                 continue
             run = 0
@@ -3110,7 +3112,7 @@ def _game_story(scenes, topic="", main_id="du"):
         ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else {}
         if ingame:
             kick = str(ov.get("text") or "").strip() if str(ov.get("type") or "") in ("card", "tag") and not numbered_label_wrong(ov, sc.get("text")) else ""
-            g = {"type": "game", "sub": seg or "world", "label": str(min(2, seen.get(seg or "world", 0)))}
+            g = {"type": "game", "sub": seg or "world", "label": str(min(3 if seg == "far" else 2, seen.get(seg or "world", 0)))}
             seen[seg or "world"] = seen.get(seg or "world", 0) + 1
             if kick and len(kick) <= 22:
                 g["kicker"] = kick

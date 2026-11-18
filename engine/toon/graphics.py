@@ -1461,7 +1461,7 @@ def _g_game(frame, g, t, dur):
     elif sub == "minus" and step == 0:                                                               # davor: unterirdisches Level, die Figur rutscht in die Mauer
         d.rectangle((0, 0, W, H), fill=(16, 18, 40))
         brick, brick2 = (190, 110, 60), (160, 86, 46)
-        hx = 140 + min(1.0, k / 0.75) * 760
+        hx = 140 + min(1.0, k / 0.7) * 630                                                          # … und verschwindet darin
         if hx > 16 * P:
             _game_hero(d, hx, 31 * P, t, 24)
         for c in range(cols + 1):
@@ -1502,7 +1502,7 @@ def _g_game(frame, g, t, dur):
             _game_cells(d, [(cx + i, cy) for i in range(5)] + [(cx + 1 + i, cy - 1) for i in range(3)], WHITE)
         grass, dirt, stone = (96, 200, 90), (150, 100, 60), (130, 132, 142)
         far = sub == "far"
-        edge = 15 if far and step else cols + 1
+        edge = (15, 15, 8, 0)[min(step, 3)] if far and step else cols + 1                            # 2 = dicht vor der Wand, 3 = nur noch Wand und Löcher
         for c in range(cols + 1):
             top = 31 - (1 if c % 7 in (3, 4) else 0) - (2 if not far and c in (9, 10, 11) else 0)
             if c >= edge:
@@ -1520,8 +1520,9 @@ def _g_game(frame, g, t, dur):
                         continue                                                                     # Loch: der Himmel scheint durch
                     col = (grass if r == 31 else dirt if r < 35 else stone) if r >= 31 else grass if r % 6 == 0 else dirt if r % 6 in (1, 2) else stone
                     _game_cells(d, [(c, r)], col)
-            hx = 120 + min(1.0, k / 0.7) * 360
-            _game_hero(d, hx, 31 * P, t, 24, walk=k < 0.7)
+            hx = 120 + min(1.0, k / 0.7) * 360 if step == 1 else 150
+            if step < 3:
+                _game_hero(d, hx, 31 * P, t, 24, walk=k < 0.7 and step == 1)
         else:
             door_c = 20                                                                              # Felswand rechts mit verborgener Tür, die aufleuchtet
             _game_cells(d, [(c, r) for c in range(18, cols + 1) for r in range(17, 31)], stone)
@@ -1534,7 +1535,9 @@ def _g_game(frame, g, t, dur):
         if g.get("value"):
             val = str(g["value"]).upper()[:22]
             f = _fit(d, val, 80, 900)
-            d.text((W / 2 - d.textlength(val, font=f) / 2, 150), val, font=f, fill=WHITE, stroke_width=6, stroke_fill=(20, 30, 60))
+            tw = d.textlength(val, font=f)
+            d.rectangle((W / 2 - tw / 2 - 36, 138, W / 2 + tw / 2 + 36, 150 + f.size + 30), fill=(12, 12, 20), outline=WHITE, width=8)   # eigenes Feld: die Riesenwand dahinter macht die Zahl sonst unlesbar
+            d.text((W / 2 - tw / 2, 150), val, font=f, fill=WHITE)
     _game_banner(d, g.get("kicker"), 300, t, GOLD)
     for y in range(0, H, 8):                                                                         # Zeilen eines alten Bildschirms
         d.line((0, y, W, y), fill=(0, 0, 0, 26), width=2)

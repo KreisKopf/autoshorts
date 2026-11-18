@@ -1296,11 +1296,13 @@ def main():
         for sc_ in sd:
             frame(sc_)
         for sub_ in graphics.GAME_SUBS + ("x",):
-            for st_ in ("0", "1", "2", ""):
+            for st_ in ("0", "1", "2", "3", "9", ""):
                 for t_ in (0.0, 0.4, 2.0, 3.9):
                     graphics.frame(graphics.clean({"type": "game", "sub": sub_, "label": st_, "kicker": "Nummer 1", "value": "12 Mio. Blöcke", "text": "x" * 40}), t_, 4.0)
         other = stage.direct([{"text": "Ein geheimer Raum liegt hinter der Wand im Keller.", "place": "basement", "actors": [{"id": "du", "action": "point"}]}], [(0.0, 4.0)], "Das Geheimnis im Keller", "mysterien")
         assert other[0].get("shot") != "graphic", other[0]
+        assert not stage.game_story([], "Videospiel-Regeln im Alltag") and not stage.game_story([], "Wie eine Gaming-Bude zum Tech-Giganten wurde") \
+            and stage.game_story([], "3 versteckte Orte in Videospielen, die fast kein Spieler je betreten hat"), "Videospiel-Thema falsch erkannt"
         assert overlays.frames_for({"type": "counter", "label": "Jahre", "value": 10, "unit": "bis zur Entdeckung"}), "Zähler mit langer Einheit"
     check("Videospiel-Welt", _game)
 
