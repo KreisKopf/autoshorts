@@ -1,22 +1,11 @@
 {
- "updated": 1795008809.5992143,
+ "updated": 1795010713.3657243,
  "enough": false,
  "counted": 0,
  "total": 0,
  "needed": 6,
  "categories": [],
- "weights": {
-  "fakten": 1.0,
-  "grusel": 1.0,
-  "storys": 1.0,
-  "mysterien": 1.0,
-  "tiere": 1.0,
-  "whatif": 1.0,
-  "comedy": 1.0,
-  "musik": 1.0,
-  "vergleich": 1.0,
-  "motivation": 1.0
- },
+ "weights": {},
  "advice": [
   "Noch zu wenig Daten: 0 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
  ],
