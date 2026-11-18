@@ -1253,6 +1253,8 @@ def direct(scenes, times, topic="", style="", look=""):
             st_w = [w for w in _re0.findall(r"[a-zäöüß]{4,}", str(ov_n.get("text") or "").lower())]
             if st_w and not any(w[:5] in low0 for w in st_w) and not any(_re0.search(p_, low0) and lab_ == str(ov_n.get("text") or "").upper() for p_, lab_, _c in STAMPS):
                 sc["overlay"] = None                      # Stempel („GRATIS“, „PLEITE“) mit einem Wort, das im Satz gar nicht fällt
+            elif any(refuted(w[:5], low0) for w in st_w):
+                sc["overlay"] = None                      # Stempel „VERBOTEN“ zu „Du denkst, das war verboten? Falsch, …“
         simile = sc["_simile"] = []
         for pat, k in TEXT_PROPS:                         # „wie ein Raketenstart“, „wie ein Vulkan“: ein Vergleich, kein Ding im Bild
             m = _re0.search(r"\bwie (?:bei |in |auf |von )?(?:ein\w* |der |die |das |dem |den )?(?:\w+ )?(?:" + pat + ")", low0)
@@ -3864,12 +3866,22 @@ def _quote_for(text):
     return {"type": "quote", "title": f"{who} {m.group(2).upper()}"[:26], "text": body}
 
 
+REFUTED_RE = r"[^.!?]*\?\s*(?:falsch|nein\b|irrtum|von wegen|stimmt nicht|im gegenteil|weit gefehlt|keineswegs)"
+
+
+def refuted(stem, low):
+    """„Du denkst, das war verboten? Falsch, …“: Das Wort fällt nur in einer Frage, die der Satz gleich verneint – ein Stempel „VERBOTEN“
+    behauptet dann das Gegenteil dessen, was erzählt wird (Prüfung 18.11.2026, Video 143)."""
+    import re as _re
+    return bool(stem) and bool(_re.search(_re.escape(stem) + REFUTED_RE, low))
+
+
 def _stamp_for(low, prev=""):
     """Passender Stempel für den Satz (nicht verneint, nicht derselbe wie eben) → (Wort, Farbe) oder None."""
     import re as _re
     for pat, word, col in STAMPS:
         m = _re.search(pat, low)
-        if m and not _re.search(r"(?:nicht|kein\w*|nie)\s+(?:\w+\s+)?" + _re.escape(m.group(0)), low) and word != prev:
+        if m and not _re.search(r"(?:nicht|kein\w*|nie)\s+(?:\w+\s+)?" + _re.escape(m.group(0)), low) and word != prev and not refuted(m.group(0), low):
             return word, col
     return None
 

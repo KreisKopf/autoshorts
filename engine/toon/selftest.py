@@ -1310,6 +1310,16 @@ def main():
         assert overlays.frames_for({"type": "counter", "label": "Jahre", "value": 10, "unit": "bis zur Entdeckung"}), "Zähler mit langer Einheit"
     check("Videospiel-Welt", _game)
 
+    def _refuted():                                              # Stempel zu einem Wort, das der Satz gleich verneint
+        sd = stage.direct([{"text": "Du denkst, das war verboten? Falsch, die Firma ließ das Versteck im Spiel.", "place": "office", "actors": [{"id": "du", "action": "talk"}],
+                            "overlay": {"type": "stamp", "text": "VERBOTEN", "color": "red"}},
+                           {"text": "Das Betreten ist streng verboten.", "place": "office", "actors": [{"id": "du", "action": "talk"}], "overlay": {"type": "stamp", "text": "VERBOTEN", "color": "red"}}],
+                          [(0.0, 4.0), (4.0, 8.0)], "Der Wald", "fakten")
+        assert "VERBOTEN" not in str(sd[0].get("overlay")), sd[0].get("overlay")
+        assert "VERBOTEN" in str(sd[1].get("overlay")), sd[1].get("overlay")
+        assert stage.refuted("verbo", "du denkst, das war verboten? falsch, es war erlaubt.") and not stage.refuted("verbo", "das ist verboten. warum?")
+    check("Stempel verneint", _refuted)
+
     def _surface():                                              # Meeresoberfläche: kein Mensch auf dem Wasser, Treibgut statt Karton, Radarschirm, Satellit im All statt Länderkarte
         T = [("Ein Passagierflugzeug verschwindet mitten über dem Ozean.", "space", [], ["plane"], "event", None, {"type": "card", "text": "SIGNAL VERLOREN"}),
              ("Aber moderne Satelliten empfangen noch stumme Pings.", "worldmap", [{"id": "du"}], [], "graphic", {"type": "map", "value": "germany,uk", "text": "PING"}, None),

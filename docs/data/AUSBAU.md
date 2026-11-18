@@ -122,10 +122,12 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
 - Videospiel-Themen (`stage._game_story`, greift bei `GAME_TOPIC_RE` im Kern des Themas): Die Grafik `game` (`graphics._g_game`) zeigt die Spielwelt als eigenes
   Pixel-Bild mit einer Spielfigur in den Farben der Kanal-Figur – `sub`: `world` (Landschaft mit verborgener Tür), `room` (Labyrinth, geheimer Raum hinter der
   Wand mit blinkender Schrift), `minus` (Mauer, dann endloses Unterwasser-Level), `far` (Blocklandschaft zerbricht am Rand der Welt zur löchrigen Riesenwand);
-  `label` 0/1/2 = davor, der Moment, danach (zählt die Regie je Welt hoch, damit nicht dreimal dasselbe Bild läuft). Sätze über Menschen
+  `label` = welches Bild dieser Welt (0 davor, 1 der Moment, 2 danach, 3 Sonderbild: bei `far` nur Wand, bei `minus` die Vorstellung des Levels) – das bestimmt
+  der Satz (`stage._game_step`: grauer Punkt/Wand → 1, Name/blinkt → 2, Mauer/rutscht → 0, Wasser/endlos → 2, Millionen/verrechnet → 1, zerbricht/Wände/Löcher → 2), nicht die Reihenfolge. Sätze über Menschen
   (`GAME_REAL_RE`: Programmierer, Firma, der Junge, Streamer) und der Schlusssatz spielen im Büro am Rechner bzw. im Wohnzimmer vor dem Bildschirm, bei Tag,
   ohne Passanten. Höchstens zwei Spielbilder hintereinander ohne neues Stichwort. Nie Figuren oder Welten echter Spiele nachzeichnen. Weitere Spielwelten:
   Zweig in `_g_game`, Kürzel in `GAME_SUBS`, Stichwörter in `GAME_*_RE`, Fall im Selbsttest (`_game`).
+  Stempel: Fällt das Stempel-Wort nur in einer Frage, die der Satz gleich verneint („Du denkst, das war verboten? Falsch, …“ – `stage.refuted`), entfällt er.
   Zähler-Einblendung: Eine Einheit über 16 Zeichen („BIS ZUR ENTDECKUNG“) steht als Unterzeile statt abgeschnitten neben der Zahl.
 - Grafiken: „Milliarden“ gesagt, aber „BILLIONEN“ gezeigt → wird berichtigt; Währung in der Unterzeile, die niemand nennt, entfällt; Fragezeichen-Grafik
   an einem Satz ohne Frage wird zur Plakette (`stage.direct`, Anfang).
