@@ -5257,5 +5257,50 @@
   "slot": "2026-11-18 13:00",
   "review_at": 1794997060.357951,
   "error": "Bei der Prüfung verworfen: Inhalt erfunden (keine echten Spiele-Orte, erfundene Prozentzahl), Passanten-Straße, Goldfisch, leerer Tisch, Zähler abgeschnitten"
+ },
+ {
+  "id": 141,
+  "category": "mysterien",
+  "topic": "Drei geheime Orte in Videospielen, die es wirklich gibt – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen kurzen Sätzen spannend erzählen. Keine Spielenamen, keine Firmennamen, keine Personennamen, keine englischen Wörter wie Glitch, Bug, Map. Benutze die Wörter geheimer Raum, Hüpfspiel, Blockspiel. Nummer eins, 1980, ein Abenteuerspiel für eine frühe Spielkonsole: Die Firma nannte ihre Programmierer nirgends, damit die Konkurrenz sie nicht abwirbt. Ein Programmierer versteckte deshalb heimlich einen geheimen Raum im Spiel. Man muss einen winzigen grauen Punkt finden und durch eine Wand tragen. Im geheimen Raum blinkt sein Name in bunten Farben. Ein Fünfzehnjähriger fand den Raum und schrieb der Firma einen Brief. Die Firma ließ den Raum im Spiel und nannte solche Verstecke von da an Ostereier. Nummer zwei, 1985, ein berühmtes Hüpfspiel: Wer im zweiten Level an der richtigen Stelle durch eine Mauer rutscht, landet in Welt minus eins. Das Level liegt unter Wasser und wiederholt sich endlos, man kann es nicht schaffen, irgendwann läuft die Zeit ab. Es war nie geplant, sondern ein Fehler im Programm. Der Erfinder sagte später sinngemäß: Es stürzt nicht ab, also gehört es dazu. Nummer drei, ein Blockspiel, in dem man aus Blöcken baut: Über zwölf Millionen Blöcke vom Startpunkt entfernt verrechnet sich das Spiel und die Landschaft zerbricht am Rand der Welt zu riesigen Wänden voller Löcher bis in den Himmel. Zu Fuß bräuchte man rund achthundert Stunden ohne Pause. Später wurde der Ort per Update entfernt. Geprüfte Zahlen: 1980, 1985, fünfzehn, zwölf Millionen, achthundert Stunden. Keine anderen Jahreszahlen, keine Prozentzahlen, keine anderen Zahlen. Erster Satz: Aufhänger zu geheimen Orten in Videospielen. Am Schluss eine Frage an die Zuschauer, welchen der drei Orte sie suchen würden. Titelbild-Text: GEHEIME ORTE.",
+  "status": "rendered",
+  "created": 1794997531.7769465,
+  "title": "Drei krasse Orte, die Programmierer in Spielen versteckten",
+  "description": "Kennst du diese geheimen Orte in Videospielen?\nHier siehst du drei legendäre Orte, die wirklich existieren.\nWelchen dieser drei Orte würdest du als Erstes suchen?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#gaming",
+   "#mysterium",
+   "#rätsel",
+   "#wissen",
+   "#retro",
+   "#easteregg"
+  ],
+  "tags": [
+   "geheimer raum",
+   "hüpfspiel",
+   "blockspiel",
+   "videospiele",
+   "osterhase",
+   "easter egg",
+   "retro gaming",
+   "rätsel",
+   "geheimnis",
+   "programmfehler"
+  ],
+  "thumb_text": "GEHEIME ORTE",
+  "missing": [
+   "punkt"
+  ],
+  "cover_ms": 90059,
+  "duration": 90.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
