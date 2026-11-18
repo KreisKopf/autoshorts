@@ -192,7 +192,7 @@
    "voice_rate": "+10%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Locker, schnell und frech wie ein Kumpel, der vorrechnet; bei Pointen kurz trocken.",
-   "enabled": true,
+   "enabled": false,
    "topic_examples": [
     "Barbershop gegen Friseursalon – wer verdient mehr?",
     "Dönerladen gegen Burgerkette",
