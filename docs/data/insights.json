@@ -1,5 +1,5 @@
 {
- "updated": 1794967843.0654724,
+ "updated": 1794969638.79314,
  "enough": true,
  "counted": 20,
  "total": 23,
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 5,
-   "avg_views": 1538,
+   "avg_views": 1537,
    "avg_likes": 41.0,
    "like_rate": 2.67,
-   "avg_score": 2159
+   "avg_score": 2158
   },
   {
    "slug": "musik",
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1935,
+   "views": 1934,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2940
+   "score": 2939
   },
   {
    "id": 80,
