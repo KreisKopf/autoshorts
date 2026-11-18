@@ -5220,7 +5220,7 @@
   "id": 140,
   "category": "mysterien",
   "topic": "3 versteckte Orte in Videospielen, die fast kein Spieler je betreten hat",
-  "status": "review",
+  "status": "discarded",
   "created": 1794996600.1268075,
   "title": "Drei geheime Orte in Videospielen, die fast niemand kennt",
   "description": "Kennst du diese geheimnisvollen Orte in Games?\nHier siehst du drei versteckte Bereiche, die kaum ein Spieler betreten hat.\nWürdest du diese Map ganz alleine erkunden?",
@@ -5255,6 +5255,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-18 13:00",
-  "review_at": 1794997060.357951
+  "review_at": 1794997060.357951,
+  "error": "Bei der Prüfung verworfen: Inhalt erfunden (keine echten Spiele-Orte, erfundene Prozentzahl), Passanten-Straße, Goldfisch, leerer Tisch, Zähler abgeschnitten"
  }
 ]
