@@ -217,7 +217,7 @@
    "voice_instructions": "Kraftvoll, warm und eindringlich wie ein Motivations-Coach; Pausen nach starken Sätzen.",
    "caption_style": "word",
    "music_volume": 0.24,
-   "enabled": true,
+   "enabled": false,
    "topic_examples": [
     "Warum du nicht faul bist, sondern abgelenkt",
     "Der Tag, an dem du aufhörst, auf Motivation zu warten",
