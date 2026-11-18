@@ -1,5 +1,5 @@
 {
- "updated": 1794989439.1944418,
+ "updated": 1794991241.2199855,
  "enough": true,
  "counted": 21,
  "total": 23,
@@ -27,7 +27,7 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1756,
+   "avg_views": 1754,
    "avg_likes": 43.0,
    "like_rate": 2.45,
    "avg_score": 2400
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1586,
+   "avg_views": 1585,
    "avg_likes": 43.2,
    "like_rate": 2.72,
-   "avg_score": 2243
+   "avg_score": 2242
   },
   {
    "slug": "musik",
@@ -76,7 +76,7 @@
   "mysterien": 1.2,
   "tiere": 1.2,
   "whatif": 1.02,
-  "comedy": 1.04,
+  "comedy": 1.05,
   "musik": 1.2,
   "vergleich": 1.2,
   "motivation": 1.2
@@ -93,11 +93,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2550,
+   "views": 2551,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3390
+   "score": 3391
   },
   {
    "id": 77,
