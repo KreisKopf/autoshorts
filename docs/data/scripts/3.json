@@ -1,0 +1,511 @@
+{
+ "title": "3 Essensgewohnheiten im Späti, die eure Liebe verraten",
+ "scenes": [
+  {
+   "text": "Drei Späti-Gewohnheiten, die beweisen, dass ihr längst zusammen seid.",
+   "see": "Du und er schieben gemeinsam einen Einkaufswagen durch den hell erleuchteten Späti.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "cart"
+    },
+    {
+     "type": "lib_spaeti"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Nummer drei verrät, wer bei euch wirklich den Ton angibt.",
+   "see": "Eine runde Grafik blendet Runde 3 ein.",
+   "place": "supermarket",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "love",
+   "crowd": "walk",
+   "graphic": {
+    "type": "round",
+    "kicker": "GEWOHNHΕΙΤ",
+    "text": "NUMMER 3",
+    "dark": false
+   }
+  },
+  {
+   "text": "Aber am Ende isst nur eine Person fast alles auf.",
+   "see": "Du isst eine Tüte Chips fast ganz alleine im Wohnzimmer auf dem Sofa.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Du denkst an Streit, doch ihr überlasst den letzten Knabberkram kampflos.",
+   "see": "Ihr sitzt zusammen und teilt euch kampflos die letzten Chips.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Nummer zwei: Du greifst blind in seine Jackentasche und findest immer etwas.",
+   "see": "Eine runde Grafik zeigt Nummer zwei.",
+   "place": "street",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "love",
+   "crowd": "walk",
+   "graphic": {
+    "type": "round",
+    "kicker": "GEWOHNHEIT",
+    "text": "NUMMER 2",
+    "dark": false
+   }
+  },
+  {
+   "text": "Egal ob zerdrückte Bonbons oder Kaugummis mit Staub.",
+   "see": "Eine Jacke liegt auf dem Stuhl im Flur.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "emotion": "",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "love",
+   "overlay": {
+    "type": "card",
+    "text": "IMMER DABEI"
+   }
+  },
+  {
+   "text": "Du isst es trotzdem, weil du genau weißt, wo es herkommt.",
+   "see": "Du holst ein zerdrücktes Bonbon aus der Jackentasche und lächelst.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "jacke"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love"
+  },
+  {
+   "text": "Nummer drei: Ihr teilt euch eine Flasche und diskutiert über den Geschmack.",
+   "see": "Eine runde Grafik zeigt Nummer drei.",
+   "place": "supermarket",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "love",
+   "crowd": "walk",
+   "graphic": {
+    "type": "round",
+    "kicker": "GEWOHNHΕΙΤ",
+    "text": "NUMMER 3",
+    "dark": false
+   }
+  },
+  {
+   "text": "Du behauptest, es schmeckt nach Seife, doch was trinkst du dann freiwillig?",
+   "see": "Ihr steht im Späti und haltet eine gemeinsame Flasche.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "bottle"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Weil es zusammen einfach besser schmeckt als allein auf dem Sofa.",
+   "see": "Ihr sitzt abends gemütlich zusammen auf dem Sofa.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "lib_sofa"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Wer so einkauft, braucht keine großen Liebeserklärungen mehr im Alltag.",
+   "see": "Eine Karte zeigt den Späti-Einkauf.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "crowd": "walk",
+   "graphic": {
+    "type": "badge",
+    "kicker": "LIEBE",
+    "text": "IM ALLTAG",
+    "dark": false
+   }
+  },
+  {
+   "text": "Ihr kennt euch in und auswendig bei jedem kleinen Snack.",
+   "see": "Ihr greift gleichzeitig nach demselben Snack im Regal.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Manchmal reicht ein kleiner Gang zum Späti für das größte Glück.",
+   "see": "Ihr lauft nachts glücklich aus der Späti-Tür heraus.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    },
+    {
+     "type": "streetlamp"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Keine Sekunde geht verloren, wenn ihr gemeinsam durch die Gänge schlendert.",
+   "see": "Ihr schlendert zusammen durch die beleuchtete Straße.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "streetlamp"
+    },
+    {
+     "type": "gearbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "right"
+    }
+   ],
+   "mood": "love",
+   "crowd": "sad"
+  },
+  {
+   "text": "Und plötzlich merkt ihr, wie perfekt dieser kleine Moment eigentlich ist.",
+   "see": "Ihr seht euch auf der Straße tief in die Augen.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "streetlamp"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "shot": "close",
+   "mood": "love"
+  },
+  {
+   "text": "Drei kleine Essensgewohnheiten im Späti, die verraten, dass ihr längst zusammen seid.",
+   "see": "Ihr steht Arm in Arm im Späti an der Kasse.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "cart"
+    },
+    {
+     "type": "lib_spaeti"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  }
+ ]
+}

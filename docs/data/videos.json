@@ -37,5 +37,47 @@
   ],
   "thumb_text": "LÄNGST ZUSAMMEN",
   "error": "'list' object has no attribute 'get'"
+ },
+ {
+  "id": 3,
+  "category": "liebe",
+  "topic": "3 kleine Essensgewohnheiten im Späti, die verraten, dass ihr längst zusammen seid",
+  "status": "error",
+  "created": 1795092133.8742266,
+  "title": "3 Essensgewohnheiten im Späti, die eure Liebe verraten",
+  "description": "Echte Liebe zeigt sich nicht nur in großen Worten, sondern im ganz normalen Alltag.\nDrei kleine Essensgewohnheiten im Späti, an denen du erkennst, dass ihr längst zusammen seid.\nTeilst du dir auch immer alles?",
+  "hashtags": [
+   "#shorts",
+   "#beziehung",
+   "#paare",
+   "#liebe",
+   "#alltag",
+   "#fy",
+   "#viral"
+  ],
+  "tags": [
+   "beziehung",
+   "paare",
+   "liebe",
+   "späti",
+   "alltag",
+   "essensgewohnheiten",
+   "verliebt",
+   "partnerschaft"
+  ],
+  "thumb_text": "LÄNGST ZUSAMMEN",
+  "missing": null,
+  "cover_ms": 66439,
+  "yt_duration": 59.9,
+  "duration": 66.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "error": "Zernio: Zernio HTTP 401: Invalid, revoked or expired API key."
  }
 ]

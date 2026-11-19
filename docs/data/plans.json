@@ -694,5 +694,764 @@
   ],
   "title": "3 Essensgewohnheiten im Späti, die eure Liebe verraten",
   "created": 1795081652.675727
+ },
+ "2026-11-19 18:00": {
+  "category": "nachricht",
+  "topic": "Nachts um 3:12 Uhr schreibt dir eine unbekannte Nummer: Kauf im Supermarkt genau sieben Packungen billige Instant-Nudeln und versteck sie im Spind der Schulaula – und die Tage bis zum großen Ereignis am Freitag laufen ab.",
+  "trend": null,
+  "script": {
+   "title": "Nachts um drei Uhr vibriert das Handy mit einer unheimlichen Nachricht",
+   "description": "Erlebe die unheimliche Geschichte einer mysteriösen Nacht.\nWem gehört die unbekannte Nummer, die dir unheimliche Befehle schickt?\nWürdest du den Anweisungen einer fremden Nachricht folgen?",
+   "hashtags": [
+    "#shorts",
+    "#mystery",
+    "#creepy",
+    "#countdown",
+    "#geschichte",
+    "#viral",
+    "#foryou"
+   ],
+   "tags": [
+    "mystery geschichte",
+    "unbekannte nummer",
+    "countdown",
+    "grusel",
+    "handy nachricht",
+    "schlaflos",
+    "geheimnis",
+    "thriller",
+    "TikTok Story"
+   ],
+   "thumbnail": {
+    "place": "bedroom",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "phone"
+    ],
+    "weather": "dark",
+    "image": "Close up of a shocked person looking at a glowing smartphone in a dark bedroom at night, bold simple composition, high contrast",
+    "text": "UNBEKANNTE NUMMER"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hair": "ponytail",
+     "hair_color": "blond",
+     "gender": "w"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Nachts um drei Uhr kam diese unheimliche Nachricht.",
+     "image": "Nachts um drei Uhr kam diese unheimliche Nachricht.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "Drei Uhr zwölf",
+      "Unbekannte Nummer"
+     ],
+     "hud": "3:12 UHR",
+     "overlay": null,
+     "see": "Du liegst nachts im dunklen Schlafzimmer und starrst erschrocken auf das vibrierende Handy.",
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "close",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "status": ""
+    },
+    {
+     "text": "Und die letzte Anweisung verändert alles bis Freitag.",
+     "image": "Und die letzte Anweisung verändert alles bis Freitag.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "seltsame Nachricht"
+     ],
+     "overlay": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "Kauf sieben Packungen",
+       "billige Instant-Nudeln.",
+       "Versteck sie im Spind.",
+       "!Öffne niemals die Tür."
+      ]
+     },
+     "see": "Eine unheimliche Nachricht erscheint auf dem Display des Smartphones.",
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "phone"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "Bis Freitag",
+       "wird sich",
+       "alles ändern.",
+       "!Mach dich bereit."
+      ]
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du hältst es für einen dummen Scherz und löschst den Chat.",
+     "image": "Du hältst es für einen dummen Scherz und löschst den Chat.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "dummen Scherz"
+     ],
+     "overlay": null,
+     "see": "Du hältst das Handy mit genervtem Blick und löschst den Chat.",
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dann kommt ein Beweis, dass der Absender wirklich alles weiß.",
+     "image": "Dann kommt ein Beweis, dass der Absender wirklich alles weiß.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "Beweis"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ALLES WISSEN"
+     },
+     "see": "Auf dem Bildschirm taucht eine seltsame Karte mit einer geheimen Warnung auf.",
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "card",
+      "kicker": "WARNUNG",
+      "text": "ICH WEISS ALLES"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein Regenschirm.",
+     "image": "In deinem Kühlschrank liegen eine halbe Pizza und ein Regenschirm.",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kühlschrank",
+      "Regenschirm"
+     ],
+     "overlay": null,
+     "see": "Du öffnest den Kühlschrank und siehst eine halbe Pizza und einen Regenschirm.",
+     "time": "night",
+     "props": [
+      "fridge"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du prüfst es nach und es stimmt exakt.",
+     "image": "Du prüfst es nach und es stimmt exakt.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "stimmt exakt"
+     ],
+     "overlay": null,
+     "see": "Du überprüfst die Nachricht und merkst, dass es exakt stimmt.",
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sieben Tage bleiben dir bis zum großen Ereignis am Freitag.",
+     "image": "Sieben Tage bleiben dir bis zum großen Ereignis am Freitag.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "Sieben Tage"
+     ],
+     "overlay": {
+      "type": "chapter",
+      "value": "7",
+      "text": "TAGE ÜBRIG"
+     },
+     "see": "Eine Zeitanzeige erinnert an die verbleibenden Tage bis Freitag.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "7",
+      "text": "TAGE ÜBRIG"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Am nächsten Tag holst du genau sieben Packungen billige Nudeln.",
+     "image": "Am nächsten Tag holst du genau sieben Packungen billige Nudeln.",
+     "who": [
+      "du"
+     ],
+     "place": "supermarket",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "sieben Packungen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "TAG 6"
+     },
+     "see": "Am nächsten Tag kaufst du im Supermarkt genau sieben Packungen billige Nudeln.",
+     "time": "day",
+     "props": [
+      "cart",
+      "cans"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "left",
+       "to": "center",
+       "speaks": true,
+       "hold": "bag"
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du versteckst sie heimlich im alten Spind der Schulaula.",
+     "image": "Du versteckst sie heimlich im alten Spind der Schulaula.",
+     "who": [
+      "du"
+     ],
+     "place": "classroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Schulaula"
+     ],
+     "overlay": null,
+     "see": "Du versteckst die Nudeln heimlich im alten Spind der Schulaula.",
+     "time": "day",
+     "props": [
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "bag"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Fünf Tage übrig. Die nächste Nachricht fordert Geld abzuheben.",
+     "image": "Fünf Tage übrig. Die nächste Nachricht fordert Geld abzuheben.",
+     "who": [
+      "du"
+     ],
+     "place": "classroom",
+     "camera": "zoom_out",
+     "sfx": "tick",
+     "highlight": [
+      "Fünf Tage"
+     ],
+     "overlay": {
+      "type": "chapter",
+      "value": "5",
+      "text": "TAGE ÜBRIG"
+     },
+     "see": "Die nächste Kapitelkarte zeigt den neuen Countdown an.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "5",
+      "text": "TAGE ÜBRIG"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du befolgst den Befehl, obwohl deine Hände leicht zittern.",
+     "image": "Du befolgst den Befehl, obwohl deine Hände leicht zittern.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "befolgst den Befehl"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "ERSPART",
+      "value": 4300,
+      "unit": "€"
+     },
+     "see": "Du hebst Geld ab und deine Hände zittern leicht vor Aufregung.",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "tremble",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "money"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Drei Tage übrig. Du sollst dreihundert Dosen im Keller stapeln.",
+     "image": "Drei Tage übrig. Du sollst dreihundert Dosen im Keller stapeln.",
+     "who": [
+      "du"
+     ],
+     "place": "basement",
+     "camera": "pan_left",
+     "sfx": "tick",
+     "highlight": [
+      "dreihundert Dosen"
+     ],
+     "overlay": {
+      "type": "chapter",
+      "value": "3",
+      "text": "TAGE ÜBRIG"
+     },
+     "see": "Eine weitere Kapitelkarte zählt die Tage herunter.",
+     "time": "day",
+     "props": [
+      "cans",
+      "shelf"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "3",
+      "text": "TAGE ÜBRIG"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Jede Anweisung wirft Fragen auf, aber wer steckt dahinter?",
+     "image": "Jede Anweisung wirft Fragen auf, aber wer steckt dahinter?",
+     "who": [
+      "du"
+     ],
+     "place": "basement",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "seltsame Frage"
+     ],
+     "overlay": null,
+     "see": "Du stapelst hunderte Dosen im dunklen Keller und grübelst über den Sinn.",
+     "time": "day",
+     "props": [
+      "cans",
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Niemandem etwas sagen. Besonders nicht deinem neugierigen Nachbarn.",
+     "image": "Niemandem etwas sagen. Besonders nicht deinem neugierigen Nachbarn.",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Niemandem etwas sagen"
+     ],
+     "overlay": null,
+     "see": "Du schaust dich misstrauisch um, damit niemand dein Versteck bemerkt.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Ein Tag übrig. Im Fernsehen läuft plötzlich eine Eilmeldung.",
+     "image": "Ein Tag übrig. Im Fernsehen läuft plötzlich eine Eilmeldung.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Eilmeldung"
+     ],
+     "overlay": {
+      "type": "chapter",
+      "value": "1",
+      "text": "TAGE ÜBRIG"
+     },
+     "see": "Der vorletzte Tag bricht an und die Anspannung wächst.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "1",
+      "text": "TAG ÜBRIG"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der Nachbar wird misstrauisch und beobachtet dein Fenster.",
+     "image": "Der Nachbar wird misstrauisch und beobachtet dein Fenster.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "misstrauisch"
+     ],
+     "overlay": {
+      "type": "news",
+      "kicker": "NACHRICHTEN",
+      "text": "SELTSAME VORFÄLLE",
+      "sub": "Polizei warnt"
+     },
+     "see": "Im Fernsehen läuft plötzlich eine dramatische Eilmeldung.",
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Anspannung steigt ins Unermessliche in diesem dunklen Raum.",
+     "image": "Die Anspannung steigt ins Unermessliche in diesem dunklen Raum.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "Anspannung steigt"
+     ],
+     "overlay": null,
+     "see": "Dein neugieriger Nachbar beobachtet dein Fenster von draußen.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "nachbar",
+       "action": "point",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer schreibt diese Nachrichten eigentlich jede Nacht um drei Uhr zwölf?",
+     "image": "Wer schreibt diese Nachrichten eigentlich jede Nacht um drei Uhr zwölf?",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Wer schreibt"
+     ],
+     "overlay": null,
+     "see": "Du sitzt nachts wieder im Zimmer und fragst dich, wer dahintersteckt.",
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Es war dein eigenes altes Handy aus der Zukunft.",
+     "image": "Es war dein eigenes altes Handy aus der Zukunft.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "aus der Zukunft"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DEINE ZUKUNFT"
+     },
+     "see": "Die überraschende Auflösung erscheint als geheimnisvolle Nachricht.",
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "phone"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "card",
+      "kicker": "AUFLÖSUNG",
+      "text": "DEIN ZUKUNFT-ICH"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "3:12 UHR",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "spind"
+  ],
+  "title": "Nachts um drei Uhr vibriert das Handy mit einer unheimlichen Nachricht",
+  "created": 1795092946.6906133
  }
 }
