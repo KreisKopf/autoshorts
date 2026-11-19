@@ -1,0 +1,537 @@
+{
+ "title": "Nachts um drei Uhr vibriert das Handy mit einer unheimlichen Nachricht",
+ "scenes": [
+  {
+   "text": "Nachts um drei Uhr kam diese unheimliche Nachricht.",
+   "see": "Du liegst nachts im dunklen Schlafzimmer und starrst erschrocken auf das vibrierende Handy.",
+   "place": "bedroom",
+   "time": "night",
+   "weather": "dark",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "scary",
+   "hud": "3:12 UHR"
+  },
+  {
+   "text": "Und die letzte Anweisung verändert alles bis Freitag.",
+   "see": "Eine unheimliche Nachricht erscheint auf dem Display des Smartphones.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "message",
+    "kicker": "UNBEKANNT",
+    "dark": false,
+    "lines": [
+     "Bis Freitag",
+     "wird sich",
+     "alles ändern.",
+     "!Mach dich bereit."
+    ]
+   }
+  },
+  {
+   "text": "Du hältst es für einen dummen Scherz und löschst den Chat.",
+   "see": "Du hältst das Handy mit genervtem Blick und löschst den Chat.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dann kommt ein Beweis, dass der Absender wirklich alles weiß.",
+   "see": "Auf dem Bildschirm taucht eine seltsame Karte mit einer geheimen Warnung auf.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "ALLES WISSEN"
+   }
+  },
+  {
+   "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein Regenschirm.",
+   "see": "Du öffnest den Kühlschrank und siehst eine halbe Pizza und einen Regenschirm.",
+   "place": "kitchen",
+   "time": "night",
+   "props": [
+    {
+     "type": "fridge"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "umbrella",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du prüfst es nach und es stimmt exakt.",
+   "see": "Du überprüfst die Nachricht und merkst, dass es exakt stimmt.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Sieben Tage bleiben dir bis zum großen Ereignis am Freitag.",
+   "see": "Eine Zeitanzeige erinnert an die verbleibenden Tage bis Freitag.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "chapter",
+    "value": "7",
+    "text": "TAGE ÜBRIG",
+    "dark": false
+   }
+  },
+  {
+   "text": "Am nächsten Tag holst du genau sieben Packungen billige Nudeln.",
+   "see": "Am nächsten Tag kaufst du im Supermarkt genau sieben Packungen billige Nudeln.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "cart"
+    },
+    {
+     "type": "cans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "bag",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Du versteckst sie heimlich im alten Spind der Schulaula.",
+   "see": "Du versteckst die Nudeln heimlich im alten Spind der Schulaula.",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    },
+    {
+     "type": "lib_spind"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "bag",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Fünf Tage übrig. Die nächste Nachricht fordert Geld abzuheben.",
+   "see": "Die nächste Kapitelkarte zeigt den neuen Countdown an.",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_nachricht"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "chapter",
+    "value": "5",
+    "text": "TAGE ÜBRIG",
+    "dark": false
+   }
+  },
+  {
+   "text": "Du befolgst den Befehl, obwohl deine Hände leicht zittern.",
+   "see": "Du hebst Geld ab und deine Hände zittern leicht vor Aufregung.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "tremble",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "money",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Drei Tage übrig. Du sollst dreihundert Dosen im Keller stapeln.",
+   "see": "Eine weitere Kapitelkarte zählt die Tage herunter.",
+   "place": "basement",
+   "time": "day",
+   "props": [
+    {
+     "type": "cans"
+    },
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "graphic": {
+    "type": "chapter",
+    "value": "3",
+    "text": "TAGE ÜBRIG",
+    "dark": false
+   },
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 3,
+    "unit": "TAGE"
+   }
+  },
+  {
+   "text": "Jede Anweisung wirft Fragen auf, aber wer steckt dahinter?",
+   "see": "Du stapelst hunderte Dosen im dunklen Keller und grübelst über den Sinn.",
+   "place": "basement",
+   "time": "day",
+   "props": [
+    {
+     "type": "cans"
+    },
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Niemandem etwas sagen. Besonders nicht deinem neugierigen Nachbarn.",
+   "see": "Du schaust dich misstrauisch um, damit niemand dein Versteck bemerkt.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_nachricht"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense"
+  },
+  {
+   "text": "Ein Tag übrig. Im Fernsehen läuft plötzlich eine Eilmeldung.",
+   "see": "Der vorletzte Tag bricht an und die Anspannung wächst.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "chapter",
+    "value": "1",
+    "text": "TAG ÜBRIG",
+    "dark": false
+   }
+  },
+  {
+   "text": "Der Nachbar wird misstrauisch und beobachtet dein Fenster.",
+   "see": "Im Fernsehen läuft plötzlich eine dramatische Eilmeldung.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "news",
+    "kicker": "NACHRICHTEN",
+    "sub": "Polizei warnt",
+    "text": "SELTSAME VORFÄLLE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Die Anspannung steigt ins Unermessliche in diesem dunklen Raum.",
+   "see": "Dein neugieriger Nachbar beobachtet dein Fenster von draußen.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_nachricht"
+    }
+   ],
+   "actors": [
+    {
+     "id": "nachbar",
+     "speaks": true,
+     "action": "point",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "watch"
+  },
+  {
+   "text": "Wer schreibt diese Nachrichten eigentlich jede Nacht um drei Uhr zwölf?",
+   "see": "Du sitzt nachts wieder im Zimmer und fragst dich, wer dahintersteckt.",
+   "place": "bedroom",
+   "time": "night",
+   "weather": "dark",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Es war dein eigenes altes Handy aus der Zukunft.",
+   "see": "Die überraschende Auflösung erscheint als geheimnisvolle Nachricht.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "DEINE ZUKUNFT"
+   }
+  }
+ ]
+}

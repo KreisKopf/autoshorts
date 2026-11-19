@@ -1,19 +1,20 @@
 {
  "last_category": "nachricht",
  "done_slots": [
-  "2026-11-19 13:00"
+  "2026-11-19 13:00",
+  "2026-11-19 18:00"
  ],
  "used_queue": [],
- "last_stats": 1795104557.2500944,
- "next_id": 4,
+ "last_stats": 1795109489.1445749,
+ "next_id": 5,
  "connected": {},
  "last_trends": 1795104557.2532644,
  "tiktok_handle": "Liebes..leben",
  "engine_updated": "2026-11-19 18:00",
- "voice_wps": 2.843,
+ "voice_wps": 2.513,
  "last_poster": {
   "hero": "",
-  "palette": 1,
-  "video": 3
+  "palette": 2,
+  "video": 4
  }
 }
