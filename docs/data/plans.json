@@ -2134,5 +2134,793 @@
   ],
   "title": "3 Zeichen, dass ihr in der Schulaula heimlich verliebt seid",
   "created": 1795112277.736733
+ },
+ "2026-11-20 13:00": {
+  "category": "liebe",
+  "topic": "Was beim Verliebtsein in deinem Gehirn passiert: 3 verrückte Anzeichen",
+  "trend": null,
+  "script": {
+   "title": "Verliebtsein im Gehirn: 3 verrückte Anzeichen",
+   "description": "Was beim Verliebtsein in deinem Gehirn wirklich passiert!\nVom Hormon-Rausch bis zur totalen Schlaflosigkeit.\nBist du eher Team Herz oder Team Verstand?",
+   "hashtags": [
+    "#shorts",
+    "#liebe",
+    "#psychologie",
+    "#gehirn",
+    "#beziehung",
+    "#fakten",
+    "#viral"
+   ],
+   "tags": [
+    "verliebtsein gehirn",
+    "was passiert beim verlieben",
+    "liebe psychologie",
+    "dopamin liebe",
+    "anzeichen verliebt",
+    "liebeskummer gehirn",
+    "beziehung tipps"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a boy staring at his phone with big heart eyes, romantic pink glowing atmosphere, huge brain character floating next to him looking panicked.",
+    "text": "DEIN GEHIRN AUF LIEBE"
+   },
+   "wishes": [
+    "synapse",
+    "herz",
+    "schokolade"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "curly",
+     "gender": "m",
+     "hair_color": "dunkelbraun",
+     "skin": "hell"
+    },
+    "schwarm": {
+     "shirt": "rosa",
+     "hat": "",
+     "hair": "long",
+     "gender": "w",
+     "hair_color": "blond",
+     "skin": "weiß"
+    },
+    "gehirn": {
+     "kind": "brain"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein Junge guckt verliebt auf sein Handy im Zimmer.",
+     "text": "Drei verrückte Dinge, die dein Gehirn beim Verliebtsein tut.",
+     "image": "Boy sitting on bed looking at phone with a warm smile",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Gehirn"
+     ],
+     "overlay": null,
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "cozy bedroom with desk and soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schüttet viel Dopamin aus.",
+     "text": "Sobald du deinen Schwarm siehst, schüttet dein Kopf sehr viel Dopamin aus.",
+     "image": "Brain character throwing pink glowing confetti in a lab",
+     "who": [
+      "gehirn"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Dopamin"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DOPAMIN-RAUSCH"
+     },
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "synapse"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "schwarm",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "sunny park with green trees and a wooden bench",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Banner für das erste Zeichen.",
+     "text": "Hier sind drei verrückte Dinge, die genau jetzt in dir passieren.",
+     "image": "Graphic banner showing sign one",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "drei"
+     ],
+     "overlay": null,
+     "shot": "graphic",
+     "graphic": {
+      "type": "round",
+      "kicker": "ANZEICHEN 1",
+      "text": "DOPAMIN-SCHOCK"
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "modern science laboratory with glowing charts",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zwei Figuren sitzen zusammen auf einer Parkbank.",
+     "text": "Erstens: Du fühlst dich dauerhaft berauscht, wie nach zehn Tafeln Schokolade.",
+     "image": "Boy and girl sitting together on park bench smiling",
+     "who": [
+      "du",
+      "schwarm"
+     ],
+     "place": "park",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "berauscht"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "SCHOKOLADE",
+      "value": 10,
+      "unit": "TAFELN",
+      "sub": "= 1 GLÜCKSGEFÜHL"
+     },
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "schokolade"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "schwarm",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "sunny park with green trees and a wooden bench",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn tanzt mit Vorfreude.",
+     "text": "Warum macht dich dieser Dauerrausch sofort so süchtig nach jeder neuen Nachricht?",
+     "image": "Brain character dancing next to a big glowing smartphone",
+     "who": [
+      "gehirn"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "süchtig"
+     ],
+     "overlay": null,
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "hold": "phone",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "cozy bedroom with desk and soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Banner für das zweite Zeichen.",
+     "text": "Aber das ist noch nicht alles, was in deinem Kopf abgeht.",
+     "image": "Graphic banner showing sign two",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Kopf"
+     ],
+     "overlay": null,
+     "shot": "graphic",
+     "graphic": {
+      "type": "round",
+      "kicker": "ANZEICHEN 2",
+      "text": "BLINDER FOKUS"
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "modern science laboratory with glowing charts",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Junge schaut im Zimmer auf ein Bild.",
+     "text": "Zweitens: Dein kritischer Verstand schaltet sich schlichtweg ab.",
+     "image": "Boy looking at photo frame on table with glowing eyes",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Verstand"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "INAKTIV",
+      "color": "red"
+     },
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "cozy bedroom with desk and soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik über die Gehirnaktivität.",
+     "text": "Studien deuten darauf hin: Der Bereich für negative Urteile wird deutlich inaktiv.",
+     "image": "Brain scan chart with lower side dark",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "inaktiv"
+     ],
+     "overlay": null,
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "LOGIK",
+      "right": "GEFÜHL",
+      "value": "10%",
+      "sub": "100%"
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "modern science laboratory with glowing charts",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen lacht im Park über einen schwachen Witz.",
+     "text": "Wie kann plötzlich selbst der flachste Witz absolut genial auf dich wirken?",
+     "image": "Girl laughing loudly on park bench next to boy",
+     "who": [
+      "schwarm",
+      "du"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Witze"
+     ],
+     "overlay": null,
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "schwarm",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      },
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "left",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "who_desc": "; ",
+     "place_desc": "sunny park with green trees and a wooden bench",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Junge greift sich an die Brust wegen Herzklopfen.",
+     "text": "Du denkst, das ist nur Einbildung? Falsch, dein Körper reagiert echt.",
+     "image": "Boy holding his hand to his chest looking surprised",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Falsch"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "STRESS-PULS"
+     },
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "herz"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "cozy bedroom with desk and soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Herzschlag-Puls auf einem Monitor.",
+     "text": "Stresshormone wie Adrenalin schießen schlagartig durch dein Blut.",
+     "image": "Glowing pulse line pulsing quickly",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Adrenalin"
+     ],
+     "overlay": null,
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "120",
+      "label": "SCHLÄGE / MIN"
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "adrenaline"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "modern science laboratory with glowing charts",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Banner für das dritte Zeichen.",
+     "text": "Das führt direkt zum krassesten Anzeichen von allen.",
+     "image": "Graphic banner showing sign three",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "krassesten"
+     ],
+     "overlay": null,
+     "shot": "graphic",
+     "graphic": {
+      "type": "round",
+      "kicker": "ANZEICHEN 3",
+      "text": "SCHLAFLOSIGKEIT"
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "modern science laboratory with glowing charts",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Junge liegt nachts wach im Bett.",
+     "text": "Drittens: Du schläfst nachts kaum noch, bist aber trotzdem völlig wach.",
+     "image": "Boy lying in bed at night looking at ceiling with open eyes",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "schläfst"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "3:00 UHR NACHTS"
+     },
+     "shot": "wide",
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "cozy bedroom with desk and soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn hat nachts eine Glühbirne über dem Kopf.",
+     "text": "Dein Kopf läuft auf Hochtouren und verarbeitet jedes einzelne Gespräch.",
+     "image": "Brain character with glowing lightbulb in room at night",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Hochtouren"
+     ],
+     "overlay": null,
+     "shot": "wide",
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Junge sieht auf der Straße glücklich aus.",
+     "text": "Sogar der Herzschlag von zwei Verliebten passt sich oft spontan an.",
+     "image": "Boy walking happy on street holding chest gently",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Herzschlag"
+     ],
+     "overlay": null,
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      },
+      {
+       "id": "schwarm",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "to": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "sunny park with green trees and a wooden bench",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik vergleicht Herzschläge.",
+     "text": "Wenn ihr euch lange in die Augen schaut, schlagen eure Herzen synchron.",
+     "image": "Two glowing heart icons pulsing in sync",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "synchron"
+     ],
+     "overlay": null,
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "DEIN HERZ",
+      "right": "IHR HERZ",
+      "value": "80 BPM",
+      "sub": "80 BPM"
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "modern science laboratory with glowing charts",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Junge und Mädchen stehen nah beieinander im Park.",
+     "text": "Liebe ist also eine wunderschöne, wissenschaftlich bewiesene Verrücktheit.",
+     "image": "Boy and girl standing close together under a tree smiling",
+     "who": [
+      "du",
+      "schwarm"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Verrücktheit"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ECHTE MAGIE"
+     },
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "schwarm",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "sunny park with green trees and a wooden bench",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Junge schaut verträumt in den Himmel.",
+     "text": "Ein echtes Feuerwerk im Kopf, das sich einfach wunderschön anfühlt.",
+     "image": "Boy looking up at sky smiling happily",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "Feuerwerk"
+     ],
+     "overlay": null,
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "sunny park with green trees and a wooden bench",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Junge sieht schmunzelnd auf sein Handy.",
+     "text": "Denn am Ende steuert nicht dein Bauch die Gefühle.",
+     "image": "Boy looking at his phone warmly in his bedroom",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Gefühle"
+     ],
+     "overlay": null,
+     "shot": "wide",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "cozy bedroom with desk and soft lighting",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [],
+  "title": "Verliebtsein im Gehirn: 3 verrückte Anzeichen",
+  "created": 1795120301.325061
  }
 }

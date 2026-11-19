@@ -2,19 +2,20 @@
  "last_category": "liebe",
  "done_slots": [
   "2026-11-19 13:00",
-  "2026-11-19 18:00"
+  "2026-11-19 18:00",
+  "2026-11-19 21:00"
  ],
  "used_queue": [],
- "last_stats": 1795115293.0558114,
- "next_id": 5,
+ "last_stats": 1795120302.2355223,
+ "next_id": 6,
  "connected": {},
- "last_trends": 1795104557.2532644,
+ "last_trends": 1795120302.2360435,
  "tiktok_handle": "Liebes..leben",
  "engine_updated": "2026-11-19 21:00",
- "voice_wps": 2.513,
+ "voice_wps": 2.3,
  "last_poster": {
   "hero": "",
-  "palette": 2,
-  "video": 4
+  "palette": 4,
+  "video": 5
  }
 }

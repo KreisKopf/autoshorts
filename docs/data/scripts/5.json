@@ -1,0 +1,440 @@
+{
+ "title": "3 Zeichen, dass ihr in der Schulaula heimlich verliebt seid",
+ "scenes": [
+  {
+   "text": "Drei Zeichen in der Schulaula verraten eure heimliche Liebe.",
+   "see": "Du stehst in der großen Schulaula und schaust dich um.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Und das letzte passiert genau dann, wenn ihr euch nicht traut hinzusehen.",
+   "see": "Er steht am anderen Ende der Aula und schaut in deine Richtung.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "er",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Nummer eins: Der sofortige Blickkontakt.",
+   "see": "Eine Grafik zeigt Nummer eins und den sofortigen Blickkontakt.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "er",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "NUMMER 1",
+    "text": "BLICKKONTAKT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Sobald du den Raum betrittst, wandern seine Augen wie von Zauberhand sofort zu dir.",
+   "see": "Du betrittst den Raum und seine Augen wandern sofort zu dir.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "blink",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love"
+  },
+  {
+   "text": "Du merkst es genau, weil er jedes Mal sofort wegschaut, wenn du ihn dabei erwischt.",
+   "see": "Du erwischst ihn dabei und er schaut sofort weg.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "er",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Das ist reine Biologie, denn das Gehirn sucht automatisch nach dem Lieblingsmenschen.",
+   "see": "Eine Grafik zeigt das Gehirn und das Phänomen der Biologie.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "er",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "badge",
+    "kicker": "BIOLOGIE",
+    "text": "LIEBLINGSMENSCH",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nummer zwei: Das spiegelnde Lächeln.",
+   "see": "Eine Grafik kündigt Nummer zwei an.",
+   "place": "bathroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "er",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "NUMMER 2",
+    "text": "SPIEGELNDES LÄCHELN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Egal wie stressig der Schultag gerade ist, in seiner Nähe musst du grundlos grinsen.",
+   "see": "Du grinst grundlos vor dich hin.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Und er fängt sofort an, an seinem Stift zu spielen oder nervös zu lachen.",
+   "see": "Er fängt an, nervös an seinem Stift zu spielen und lacht.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_stift"
+    }
+   ],
+   "actors": [
+    {
+     "id": "er",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Spiegeln nennt die Psychologie dieses Phänomen, bei dem ihr unbewusst eins werdet.",
+   "see": "Eine Grafik zeigt das psychologische Phänomen des Spiegelns.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "er",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "badge",
+    "kicker": "PSYCHOLOGIE",
+    "text": "SPIEGELN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nummer drei: Die magische Nähe im Gewimmel.",
+   "see": "Eine Grafik kündigt Nummer drei an.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "er",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "NUMMER 3",
+    "text": "MAGISCHE NÄHE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Obwohl die Aula riesig ist, landet ihr irgendwie immer am selben Snackautomaten.",
+   "see": "Ihr steht beide am selben Snackautomaten in der großen Aula.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Zufall oder steuert euch eine unsichtbare Macht zielsicher zueinander?",
+   "see": "Du schaust verwundert zum Automaten.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Plötzlich berühren sich eure Hände kurz beim Greifen nach derselben Münze.",
+   "see": "Eine Infokarte zeigt den Moment an dem Snackautomaten.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_muenze"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "badge",
+    "kicker": "ZUFALL",
+    "text": "BERÜHRUNG",
+    "dark": false
+   }
+  },
+  {
+   "text": "In diesem Moment steht die Welt in der lauten Schulaula für eine Sekunde komplett still.",
+   "see": "Die Welt steht in der lauten Aula für eine Sekunde still.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "shocked",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "freeze",
+     "emotion": "shocked",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "pulse",
+    "value": "1",
+    "label": "EINE SEKUNDE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Keiner von euch sagt auch nur ein einziges Wort, aber jeder versteht die Botschaft.",
+   "see": "Ihr steht euch gegenüber und sagt kein Wort.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Und genau deshalb fängt das Herz bei drei kleinen Zeichen in der Schulaula an.",
+   "see": "Dein Herz fängt an zu schlagen bei diesen drei Zeichen.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "love"
+  }
+ ]
+}
