@@ -2222,7 +2222,7 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True, parked=Tru
 
 
 MOODS = {"panic": (255, 60, 40), "tense": (255, 120, 40), "scary": (10, 10, 40), "sad": (40, 70, 130), "happy": (255, 220, 120),
-         "calm": None}
+         "love": (255, 120, 160), "calm": None}
 
 
 def draw_burst(layer, x, y, k, sc=1.0):
@@ -2258,6 +2258,26 @@ def draw_mood(layer, mood, t, confetti=False):
             d.rectangle((i * 10, i * 10, W - i * 10, H - i * 10), outline=(0, 0, 0, (12 - i) * 6), width=10)
     elif m == "sad":
         d.rectangle((0, 0, W, H), fill=(*col, 56))
+    elif m == "love":                                              # Romantik: rosiger Schimmer, warmer Rand, Herzen und Blütenblätter schweben
+        d.rectangle((0, 0, W, H), fill=(*col, 30))
+        for i in range(10):
+            d.rectangle((i * 9, i * 9, W - i * 9, H - i * 9), outline=(255, 150, 120, (10 - i) * 5), width=9)
+        for i, (a, b, c) in enumerate(_DROPS[:26]):
+            ph = (b + t * (0.05 + c * 0.05)) % 1
+            if i % 3 == 0:                                         # Herz steigt langsam auf und verblasst oben
+                x = a * W + math.sin(t * 1.1 + i) * 46
+                y = H - ph * (H + 120)
+                r = 18 + c * 18
+                al = int(210 * min(1.0, (1 - ph) * 2.2) * min(1.0, ph * 6))
+                for dx in (-r * 0.5, r * 0.5):
+                    d.ellipse((x + dx - r * 0.62, y - r * 0.62, x + dx + r * 0.62, y + r * 0.62), fill=(255, 92, 132, al))
+                d.polygon([(x - r * 1.06, y + r * 0.12), (x + r * 1.06, y + r * 0.12), (x, y + r * 1.3)], fill=(255, 92, 132, al))
+            else:                                                  # Blütenblatt fällt und dreht sich
+                x = (a * W + math.sin(t * 1.6 + i * 2) * 70 + t * 18) % W
+                y = ph * (H + 80) - 40
+                rw, rh = 9 + c * 7, 5 + c * 4
+                k = abs(math.sin(t * 2.2 + i))
+                d.ellipse((x - rw, y - rh * k - 1, x + rw, y + rh * k + 1), fill=(255, 170, 190, 215) if i % 2 else (250, 120, 150, 215))
     elif m == "happy":
         d.rectangle((0, 0, W, H), fill=(*col, 26))
         for i, (a, b, c) in enumerate(_DROPS[:30] if confetti else ()):               # Konfetti (nur wenn gefeiert wird)
@@ -3192,14 +3212,33 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         brow(hx - 14, by - 46, 13, 1)
         brow(hx + 30, by - 50, 13, -1)
         cheek(hx - 34, by + 14, 14)
-    elif kind in ("cheetah", "gepard"):
+    elif kind in ("cheetah", "gepard", "chimera"):
         # Gepard: schlanke Raubkatze mit langen Beinen, Tupfen, Tränenstreifen und Ringelschwanz; action = "run": gestreckter Galopp
+        # "chimera": das Misch-Wesen aus „Was wäre, wenn man ein Super-Tier baut“ (Prüfung 19.11.2026) – Gepard-Körper mit Adlerflügeln,
+        # großen gelben Adleraugen und einem leuchtenden, schlagenden Herzen in der Brust; action = "down": zusammengesackt am Boden
+        chim = kind == "chimera"
+        down = chim and action == "down"
         col = (236, 184, 96)
         belly = _light(col, 0.6)
         spot = (64, 46, 34)
         run = action == "run"
         ext = math.sin(t * 11) if run else 0.0                                   # +1 gestreckt, -1 Beine unter dem Bauch
         oy = (-16 - 12 * ext) if run else bob * 0.25                             # im Galopp hebt der Körper ab
+        if down:
+            oy = 96 + bob * 0.1                                                  # der Rumpf liegt am Boden, die Beine sind eingeknickt
+        wcol = (112, 78, 54)
+        wfl = math.sin(t * (9 if run else 2.2)) * (0.5 if run else 0.25) + (0.2 if not down else -1.5)
+
+        def chim_wing(front):
+            wy_ = -40 * wfl
+            ax_, ay_ = (-10 if front else 14), -232 + oy
+            pts = [(ax_ + 30, ay_ + 4), (ax_ - 6, ay_ - 96 + wy_), (ax_ - 62, ay_ - 160 + wy_ * 1.3), (ax_ - 96, ay_ - 134 + wy_ * 1.2), (ax_ - 116, ay_ - 164 + wy_ * 1.3),
+                   (ax_ - 146, ay_ - 130 + wy_ * 1.2), (ax_ - 170, ay_ - 150 + wy_ * 1.25), (ax_ - 190, ay_ - 110 + wy_ * 1.1), (ax_ - 214, ay_ - 116 + wy_ * 1.1),
+                   (ax_ - 200, ay_ - 60 + wy_ * 0.7), (ax_ - 110, ay_ + 14)]
+            poly(pts, wcol if front else _dark(wcol, 0.3), shade=0.08 if front else 0)
+            if front:
+                for q in (0.3, 0.52, 0.74):
+                    d.line((*P(ax_ - 10 - 110 * q, ay_ - 20 - 100 * q + wy_ * q), *P(ax_ - 100 - 90 * q, ay_ + 6 - 76 * q + wy_ * q * 0.8)), fill=_dark(wcol, 0.35), width=max(2, int(5 * k)))
         wag = math.sin(t * 3) * 12
         tail = [(-168, -196 + oy), (-232, -176 + oy), (-272, -128 + oy + wag * 0.5), (-268 + wag * 0.4, -78 + oy + wag)] if not run else \
                [(-168, -196 + oy), (-232, -206 + oy), (-272, -214 + oy - ext * 10), (-296, -196 + oy - ext * 18)]
@@ -3215,14 +3254,20 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
                 top = (98, -150 + oy)
                 paw = (98 + 122 * e, -10 - 34 * abs(e) if run else -10)
                 knee = ((top[0] + paw[0]) / 2 + 16 - 10 * e, (top[1] + paw[1]) / 2 + 6)
+                if down:
+                    paw, knee = (190, -8), (150, -40)
             else:
                 top = (-128, -150 + oy)
                 paw = (-128 - 118 * e, -10 - 30 * abs(e) if run else -10)
                 knee = ((top[0] + paw[0]) / 2 - 30 + 8 * e, (top[1] + paw[1]) / 2 + 14)
+                if down:
+                    paw, knee = (-60, -8), (-150, -44)
             stroke([top, knee, paw], 24, c2)
             ell(paw[0] - 14, paw[1] - 12, paw[0] + 26, paw[1] + 10, _light(c2, 0.35), shade=0)
         for fr in (True, False):                                                 # Beine der abgewandten Seite (leicht versetzt im Takt)
             leg(fr, math.sin(t * 11 - 0.7) if run else -0.22, _dark(col, 0.22))
+        if chim:
+            chim_wing(False)
         ell(-190, -240 + oy, 60, -128 + oy, col)                                 # schlanker Rumpf mit tiefer Brust
         ell(10, -256 + oy, 160, -112 + oy, col)
         ell(-176, -234 + oy, 100, -134 + oy, col, shade=0, line=False)           # Naht zwischen Rumpf und Brust schließen
@@ -3231,7 +3276,20 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
             ell(sx - 9, sy - 8 + oy, sx + 9, sy + 8 + oy, spot, shade=0, line=False)
         for fr in (True, False):
             leg(fr, ext if run else 0.0, col)
+        if chim:
+            chim_wing(True)
+            beat = 1.0 + 0.16 * max(0.0, math.sin(t * (2.0 if down else 7.0))) ** 2          # das Wal-Herz schlägt sichtbar in der Brust
+            hcx, hcy, hr = 96, -176 + oy, 30 * beat
+            hcol = (150, 150, 160) if down else (232, 60, 76)
+            if not down:
+                d.ellipse(B(hcx - hr * 1.9, hcy - hr * 1.7, hcx + hr * 1.9, hcy + hr * 1.9), fill=(255, 90, 100, 70))
+            ell(hcx - hr, hcy - hr * 0.9, hcx, hcy + hr * 0.1, hcol, shade=0)
+            ell(hcx, hcy - hr * 0.9, hcx + hr, hcy + hr * 0.1, hcol, shade=0)
+            poly([(hcx - hr * 0.96, hcy - hr * 0.2), (hcx + hr * 0.96, hcy - hr * 0.2), (hcx, hcy + hr * 1.05)], hcol, shade=0)
+            d.ellipse(B(hcx - hr * 0.8, hcy - hr * 0.7, hcx + hr * 0.8, hcy + hr * 0.05), fill=hcol)
         hx, hy = 186, -306 + oy + (bob * 0.3 if not run else 0)
+        if down:
+            hx, hy = 214, -150 + oy                                              # der Kopf liegt vorn auf den Pfoten
         stroke([(118, -214 + oy), (158, hy + 26)], 58, col)                      # Hals
         for ex_ in (-34, 22):                                                    # kleine runde Ohren
             ell(hx + ex_ - 18, hy - 76, hx + ex_ + 18, hy - 36, _dark(col, 0.2) if ex_ < 0 else col, shade=0)
@@ -3244,8 +3302,16 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
             d.line((*P(hx + ex_ + 6, hy - 4), *P(hx + ex_ + 12, hy + 16), *P(hx + ex_ + 8, hy + 36)), fill=spot, width=max(2, int(6 * k)), joint="curve")
         poly([(hx + 46, hy + 6), (hx + 66, hy + 6), (hx + 56, hy + 19)], (60, 40, 40), shade=0)   # Nase
         mouthf(hx + 54, hy + 32, 13)
-        eye(hx + 4, hy - 18, 14)
-        eye(hx + 46, hy - 18, 14)
+        if chim:                                                                 # Adleraugen: groß, gelb umrandet, strenge Braue
+            for ex_ in (2, 48):
+                ell(hx + ex_ - 29, hy - 49, hx + ex_ + 29, hy + 9, col if down else (248, 196, 60), shade=0, line=not down)
+            eye(hx + 2, hy - 20, 17, "closed" if down else None)
+            eye(hx + 48, hy - 20, 17, "closed" if down else None)
+            if not down and mood not in ("sad", "worried", "scared"):
+                d.line((*P(hx - 22, hy - 52), *P(hx + 26, hy - 42)), fill=INK, width=max(2, int(7 * k)))
+        else:
+            eye(hx + 4, hy - 18, 14)
+            eye(hx + 46, hy - 18, 14)
         brow(hx + 4, hy - 42, 13, 1)
         brow(hx + 46, hy - 42, 13, -1)
         cheek(hx - 24, hy + 20, 13)
@@ -3352,6 +3418,40 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         eye(120, by - 16, 14)
         brow(120, by - 40, 13, 1)
         cheek(98, by + 14, 12)
+    elif kind in ("whale", "wal", "blauwal", "buckelwal"):                          # Blauwal: langer blaugrauer Körper, helle Kehle mit Furchen, winzige Finne weit hinten, breite Fluke – gleitet
+        fly = True
+        by = -300 + bob * 1.5
+        wag = math.sin(t * 2.2) * 16
+        col, belly = (84, 128, 172), (214, 228, 238)
+        x0, x1 = -214, 286
+        xs = [x0 + (x1 - x0) * i / 28 for i in range(29)]
+
+        def half(x, hm):                                                            # Umriss: dünner Schwanzstiel, größte Dicke im vorderen Drittel, stumpfes Maul
+            u = (x - x0) / (x1 - x0)
+            return 15 * (1 - u) + hm * math.sin(math.pi * min(1.0, u ** 1.45)) ** 0.62
+        top = [(x, by - half(x, 66) + wag * max(0.0, (-60 - x) / 154) ** 2) for x in xs]
+        bot = [(x, by + half(x, 84) + wag * max(0.0, (-60 - x) / 154) ** 2) for x in xs]
+        fy = by + wag
+        poly([(-196, fy - 8), (-232, fy - 50), (-268, fy - 92), (-304, fy - 98), (-290, fy - 56), (-262, fy - 2), (-292, fy + 54), (-306, fy + 94), (-268, fy + 90),
+              (-232, fy + 50), (-196, fy + 10)], _dark(col, 0.1))                    # Fluke: zwei geschwungene Lappen mit Kerbe
+        poly([(-112, by - 44), (-132, by - 78), (-74, by - 52)], col, shade=0)        # kleine Rückenfinne, weit hinten
+        d.polygon([P(*q) for q in top + bot[::-1]], fill=_dark(col, 0.22), outline=INK, width=o)
+        d.polygon([P(x + 4, y + 6) for x, y in top[1:-1]] + [P(x + 4, by + (y - by) * 0.12 + 8) for x, y in top[-2:0:-1]], fill=col)   # Rücken im Licht, läuft zum Schwanz spitz aus
+        thr = [(x, y, min(1.0, max(0.0, (x + 44) / 90))) for x, y in bot[:-1] if x >= -44]   # Kehle und Bauch hell, setzt hinter der Brustflosse weich an
+        d.polygon([P(x, y - 7) for x, y, _ in thr] + [P(x, (y - 7) - (y - by) * 0.62 * w_) for x, y, w_ in thr[::-1]], fill=belly)
+        for i in range(4):                                                           # Kehlfurchen folgen dem Bauch
+            fr = 0.52 + i * 0.11
+            d.line([P(x, by + (y - by) * fr) for x, y, w_ in thr if w_ >= 1 and x < 250 - i * 6][i:], fill=_dark(belly, 0.2), width=max(2, int(3.5 * k)), joint="curve")
+        for sx, sy, sr in ((-60, -30, 9), (-20, -44, 7), (40, -40, 10), (96, -48, 7), (-110, -14, 6), (150, -36, 8), (10, -14, 6)):   # helle Sprenkel
+            d.ellipse(B(sx - sr, by + sy - sr * 0.6, sx + sr, by + sy + sr * 0.6), fill=_light(col, 0.22))
+        jaw = mouth * 10
+        d.line([P(278, by + 8), P(236, by + 22 + jaw), P(190, by + 28 + jaw), P(150, by + 22)], fill=INK, width=max(2, int(5 * k)), joint="curve")   # langes Maul
+        d.arc(B(132, by + 4, 168, by + 34), 60, 170, fill=INK, width=max(2, int(5 * k)))                                                        # Mundwinkel lächelt
+        ell(186, by - 60, 210, by - 51, _dark(col, 0.35), shade=0)                     # Blasloch
+        poly([(86, by + 46), (62, by + 96), (24, by + 138), (74, by + 122), (112, by + 92), (134, by + 60)], _dark(col, 0.12))   # lange, spitze Brustflosse
+        eye(162, by - 8, 11)
+        brow(162, by - 28, 11, 1)
+        cheek(140, by + 12, 10)
     elif kind in ("cow", "kuh", "pig", "schwein"):                                  # Hoftiere: Kuh (gefleckt, Hörner, Euter) und Schwein (rosa, Rüsselscheibe, Ringelschwanz)
         cow = kind in ("cow", "kuh")
         col = (246, 244, 238) if cow else (246, 170, 176)
@@ -3541,7 +3641,7 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)
@@ -3751,6 +3851,32 @@ def p_oilcan(d, x, t, s=1.0):
     _r(d, (x - 50, GROUND - 270, x + 20, GROUND - 228), (200, 150, 40), 8)
     _poly(d, [(x + 70, GROUND - 200), (x + 190, GROUND - 300), (x + 204, GROUND - 286), (x + 90, GROUND - 170)], (200, 150, 40))
     _r(d, (x - 66, GROUND - 160, x + 66, GROUND - 80), (40, 40, 44), 8, shade=False)
+
+
+def p_drill(d, x, t, s=1.0):
+    """Akku-Bohrmaschine, steht auf ihrem Akku, der Bohrer zeigt nach rechts und rattert (der Heimwerker-Nachbar; Prüfung 18.11.2026)."""
+    j = int(math.sin(t * 43) * 4)                                             # sie läuft: das ganze Gerät zittert leicht
+    yel, dark = (244, 190, 48), (58, 60, 70)
+    _poly(d, [(x - 78 + j, GROUND - 222), (x - 8 + j, GROUND - 222), (x - 30 + j, GROUND - 84), (x - 100 + j, GROUND - 84)], dark)    # Griff
+    _r(d, (x - 126 + j, GROUND - 92, x + 22 + j, GROUND - 6), dark, 12)                                                         # Akku
+    _r(d, (x - 110 + j, GROUND - 60, x + 6 + j, GROUND - 40), yel, 6, shade=False)
+    _r(d, (x - 130 + j, GROUND - 318, x + 78 + j, GROUND - 212), yel, 26)                                                       # Gehäuse
+    for i in range(3):                                                                                                          # Lüftungsschlitze
+        _r(d, (x - 104 + i * 26 + j, GROUND - 292, x - 92 + i * 26 + j, GROUND - 240), dark, 4, shade=False)
+    _poly(d, [(x + 76 + j, GROUND - 306), (x + 132 + j, GROUND - 286), (x + 132 + j, GROUND - 244), (x + 76 + j, GROUND - 224)], STEEL)   # Bohrfutter
+    by = GROUND - 265 + int(math.sin(t * 61) * 3)
+    _r(d, (x + 130 + j, by - 9, x + 232 + j, by + 9), (170, 176, 186), 6)                                                       # Bohrer
+    _poly(d, [(x + 230 + j, by - 9), (x + 256 + j, by), (x + 230 + j, by + 9)], (170, 176, 186), shade=0)
+    _r(d, (x - 22 + j, GROUND - 214, x + 6 + j, GROUND - 176), RED, 6, shade=False)                                             # Schalter
+    for k in range(3):                                                                                                          # Lärm-Striche an der Spitze
+        a = math.radians(-40 + k * 40)
+        r0, r1 = 34 + (int(t * 12) % 3) * 6, 62 + (int(t * 12) % 3) * 6
+        d.line((x + 262 + j + math.cos(a) * r0, by + math.sin(a) * r0, x + 262 + j + math.cos(a) * r1, by + math.sin(a) * r1), fill=INK, width=7)
+
+
+PROPS["drill"] = p_drill
+PROP_ALIASES.update({"bohrmaschine": "drill", "bohrer": "drill", "akkuschrauber": "drill", "schlagbohrer": "drill", "bohrhammer": "drill"})
+SIZES["drill"] = (0.45, 1262)
 
 
 PROPS.update({"engine": p_engine, "enginestand": p_enginestand, "crane": p_crane, "enginehoist": p_enginehoist, "tire": p_tire, "tires": p_tires,

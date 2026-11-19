@@ -30,6 +30,8 @@ QUERIES = {
     "comedy": ["lustige animation", "ich habe mir"],
     "vergleich": ["wer verdient mehr", "wie viel verdient ein"],
     "motivation": ["motivation deutsch", "motivation speech animation"],
+    "liebe": ["liebesgeschichte", "love story animation", "romantische geschichte"],
+    "nachricht": ["unknown number text story animation", "mystery countdown story", "unbekannte nummer geschichte"],
 }
 
 

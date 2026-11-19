@@ -16,7 +16,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "basement", "attic", "hospital", "serverroom")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "basement", "attic", "hospital", "serverroom")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -216,6 +216,7 @@ def _prepare(scene, cast):
     cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
     _PROP_MIN[0] = 300 if scene.get("_near") else MIN_PROP_PX
+    places.XMAS[0] = bool(scene.get("_xmas"))             # Weihnachts-Video: Wohn- und Esszimmer sind geschmückt (stage._feast_story)
     places.ICE[0] = bool(scene.get("_ice"))               # zugefrorenes Meer: „unter Wasser“ liegt unter der Eisdecke
     places.LAKE[0] = bool(scene.get("_lake"))             # Schatzsuche im See: „unter Wasser“ ist der Seegrund, nicht das Meer
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
@@ -247,6 +248,11 @@ def _prepare(scene, cast):
             if len(humans) == 1:                          # Bildplan sagt „du“, Besetzung nennt die Hauptfigur beim Namen: dieselbe Figur
                 spec = humans[0]
         kind = str(a.get("kind") or spec.get("kind") or "").lower()
+        if not kind and not spec and aid.lower() not in MAIN_IDS:   # „vogel“ im Bildplan, in der Besetzung heißt er „truthahn“ (kind bird): das Tier, kein Mensch im Pulli (Video 148)
+            kind = next((k for pat, k in TOPIC_CREATURES if k not in ("agent", "virus", "cell") and re.search(pat, aid.lower())), "")
+            if not kind:
+                near = [v for k_, v in cast.items() if isinstance(v, dict) and v.get("kind") and (k_.lower()[:5] == aid.lower()[:5])]
+                kind = str(near[0].get("kind")).lower() if near else ""
         if re.search(r"gehirn|hirn|brain", aid.lower()) and kind in ("", "agent", "robot", "cell"):
             kind = "brain"                                # „gehirn_bot“, „dein_gehirn“: das Gehirn selbst als Figur, kein oranges KI-Kästchen
         if re.search(FRIDGE_ID_RE, aid.lower()) and kind in ("", "agent", "robot"):
@@ -430,8 +436,8 @@ def _on_table(key):
     """Auch kleine gelernte Gegenstände (Tasse, Router, Mikroskop …) stehen drinnen auf dem Tisch statt auf dem Boden."""
     return key in ON_TABLE or (key.startswith("lib_") and extras.SIZES.get(key, (9,))[0] <= 0.5)
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
-             "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
-             "village": ("house",), "restaurant": ("table",), "hallway": (), "serverroom": ("computer", "shelf"),
+             "livingroom": ("tv", "lib_sofa", "sofa", "couch"), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
+             "village": ("house",), "restaurant": ("table",), "diningroom": ("table", "chair", "candle", "lib_stuhl"), "hallway": (), "serverroom": ("computer", "shelf"),
              "headquarters": ("house", "streetlamp"), "cinema": ("tv",)}
 
 
@@ -878,7 +884,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         extras.draw_mood(over, opt["mood"], t, opt.get("confetti", False))
     if not close:
         glows = [(x + GLOWS[extras.PROP_ALIASES.get(k_, k_)][0],) + GLOWS[extras.PROP_ALIASES.get(k_, k_)][1:] for k_, x in props if extras.PROP_ALIASES.get(k_, k_) in GLOWS]
-        frame = _light(frame, "night" if glows and night and place in places.OUTDOOR else _light_kind(place, night, opt.get("mood"), xs_now), xs_now, glows)
+        frame = _light(frame, "night" if glows and night and place in places.OUTDOOR else
+                       ("spot" if opt.get("noir") and xs_now else _light_kind(place, night, opt.get("mood"), xs_now)), xs_now, glows)
     if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
         k = 1 - landed / 0.5
         dx, dy = int(math.sin(t * 61) * 22 * k), int(math.cos(t * 53) * 26 * k)
@@ -1217,6 +1224,7 @@ def direct(scenes, times, topic="", style="", look=""):
     size_done = False                                     # „nur einen halben Millimeter groß“: einmal je Video die Größe mit Lineal zeigen
     charts = 0
     neon = str(look or "").lower() == "neon"
+    noir = str(look or "").lower() == "noir"
     cur_hud = ""
     sea_last = any_last = None
     sea_age = any_age = 0
@@ -1242,6 +1250,8 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["mood"] = "scary"
             if sc["crowd"] in ("walk", "cheer"):
                 sc["crowd"] = ""
+        if style == "liebe" and sc["mood"] in ("", "calm", "happy"):   # Liebesgeschichten: rosiges Licht, schwebende Herzen (Trauriges bleibt traurig)
+            sc["mood"] = "love"
         sc["props"] = [q for q in sc["props"] if (lambda k: k in extras.PROPS or k in extras.PROP_ALIASES or k in extras.HELD)(q["type"].lower())]
         low0 = sc["text"].lower()
         if not _re0.search(HEAP_RE, low0):                # weißer Haufen (Zucker/Salz), Sand- oder Müllberg nur, wenn der Satz davon spricht
@@ -1774,6 +1784,8 @@ def direct(scenes, times, topic="", style="", look=""):
         cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud
         if neon:
             sc["look"], sc["time"] = "neon", "night"
+        elif noir:
+            sc["look"] = "noir"
         g_auto = None
         low_c = str(sc.get("text") or "").lower()
         g_t = (sc.get("graphic") or {}).get("type") if sc.get("shot") == "graphic" and isinstance(sc.get("graphic"), dict) else None
@@ -2231,6 +2243,8 @@ def direct(scenes, times, topic="", style="", look=""):
     _named_animals(scenes, topic)
     _tiny_story(scenes)
     _household(scenes)
+    _feast_story(scenes, topic)
+    _relatives(scenes)
     _music(scenes, topic)
     _fur_ancestor(scenes)
     _fur_story(scenes)
@@ -2251,10 +2265,204 @@ def direct(scenes, times, topic="", style="", look=""):
             for a in sc.get("actors") or []:
                 if isinstance(a, dict) and a.get("action") == "shiver" and not re.search(COLD_RE + "|" + SHIVER_RE, str(sc.get("text") or "").lower()):
                     a["action"] = "idle"
+    _hybrid_story(scenes, topic, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                                       if isinstance(a, dict) and a.get("id") and not a.get("kind") and not str(a.get("id")).startswith("_")), "du"))
+    for sc in scenes:                                     # von der Regie eingesetzte Figur („_tier“, „_meer“) ohne Art: wäre ein fremder Mensch im Bild (ein Junge neben dem Eisberg in der Küche, Video 152)
+        if isinstance(sc, dict) and sc.get("actors"):
+            sc["actors"] = [a for a in sc["actors"] if not (isinstance(a, dict) and str(a.get("id") or "") in ("_tier", "_meer") and not a.get("kind"))]   # andere „_…“-Figuren (Gründer, Soldaten, Familie) sind Menschen und bleiben
+        g_k = sc.get("graphic") if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) else None
+        if g_k and str(g_k.get("label") or "").strip().upper() == "KM" and re.search(r"kilometer\w* pro stunde|km/h|stundenkilometer", str(sc.get("text") or "").lower()):
+            g_k["label"] = "KM/H"                         # „93 Kilometer pro Stunde“ stand als „93 KM“ im Bild (Video 152)
+        o_k = sc.get("overlay") if isinstance(sc, dict) and isinstance(sc.get("overlay"), dict) else None
+        if o_k and str(o_k.get("type") or "") == "counter" and str(o_k.get("unit") or "").strip().upper() == "KM" \
+                and re.search(r"kilometer\w* pro stunde|km/h|stundenkilometer", str(sc.get("text") or "").lower()):
+            o_k["unit"] = "KM/H"
+    _last_look(scenes, topic)
     return scenes
 
 
-ROOMS = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
+# Misch-Wesen (Prüfung 19.11.2026, Video 152 „Super-Tier aus vier Arten“): Das Video handelt von einem Wesen, das aus mehreren Tieren gebaut wird.
+# Vorher war dieses Wesen nie zu sehen – stattdessen ein Blauwal unter Wasser (auch im ersten Bild „im Labor“), Passanten zum „Haufen Zellen“,
+# drei Waagen auf der Straße. Jetzt: Sätze über das Wesen zeigen das gezeichnete Misch-Wesen (extras.creature „chimera“) im Labor neben der
+# Hauptfigur bzw. rennend in der Savanne; Sätze, die ein Tier beim Namen nennen, behalten dieses Tier in seinem Lebensraum (höchstens ein Folgesatz).
+HYBRID_RE = (r"super-?tier|mischwesen|misch-wesen|hybrid-?(?:tier|wesen)|chimäre|tier-?mix|wesen aus \w+ (?:verschiedenen )?(?:tier)?arten|tier aus \w+ (?:verschiedenen )?(?:tier)?arten|"
+             r"(?:tiere|tierarten) (?:zu einem|in einem) (?:\w+ )?(?:wesen|tier)|aus (?:mehreren|verschiedenen|vier|drei|fünf) tieren")
+HYBRID_BEING_RE = r"super-?tier|\bwesen\b|\bmonster|\bbiest|\bkreatur|mischwesen|chimäre|geschöpf|unser tier\b|dein tier\b|\bbauplan|\bbaukasten"
+HYBRID_FAIL_RE = r"bricht\b.*zusammen|zusammenbr|kollabier|überhitz|\bversagt|\bstirbt|\bkippt um|\bfällt um|klappt zusammen|macht schlapp|\bschlapp\b|geht k\.?o|am ende seiner kräfte|kann es nicht|schafft es nicht"
+HYBRID_HOME = {"cheetah": "savannah", "lion": "savannah", "eagle": "mountain", "tardigrade": "forest", "flea": "park", "cow": "fields", "pig": "farm", "chimp": "forest"}
+HYBRID_RUN_RE = r"\brenn|\bsprint|\brast\b|\bjagt\b|km/h|kilometer\w* pro stunde|stundenkilometer|\bbeschleunig"
+
+
+def hybrid_story(scenes, topic=""):
+    return bool(re.search(HYBRID_RE, str(topic or "").lower()))
+
+
+def _hybrid_named(low):
+    """Welches zeichenbare Tier nennt der Satz beim Namen?"""
+    for pat, k in ANY_CREATURES + SEA_CREATURES:
+        if re.search(pat, low):
+            return k
+    for pat, k, _pl in NAMED_ANIMALS:
+        if re.search(pat, low):
+            return k
+    for pat, k in TOPIC_CREATURES:
+        if k in ("lion", "cat", "dog", "spider", "bee", "wasp", "shark", "fish", "dino") and re.search(pat, low):
+            return k
+    return None
+
+
+def _hybrid_story(scenes, topic="", main_id="du"):
+    if not hybrid_story(scenes, topic):
+        return scenes
+    last_named, flip, n_lab, fallen = None, False, 0, False
+    wild = ("space", "snow", "desert", "underwater", "mountain", "savannah", "forest", "fields", "highsky", "beach", "cave", "icesea", "lake", "river", "moon")
+
+    def animal(sc, kind, low, keep_place=True):
+        """Das genannte Tier allein in seinem Lebensraum – nicht im Labor (der Adler flog zwischen den Kolben, Video 153)."""
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        hint = _hint(low)
+        home = HYBRID_HOME.get(kind) or ("underwater" if kind in SEA_KINDS + ("fish", "shark", "dolphin") else "")
+        if kind in SEA_KINDS + ("fish", "shark", "dolphin"):
+            place = "underwater"
+        elif hint in wild and hint != "underwater":
+            place = hint
+        elif keep_place and (rp == "custom" or (rp in wild and rp != "underwater")):
+            place = rp                                    # Schnee, Wüste, eigene Landschaft aus dem Drehbuch bleiben
+        else:
+            place = home or rp
+        act = next((a for a in (sc.get("actors") or []) if isinstance(a, dict) and str(a.get("kind") or "").lower() == kind), None)
+        act = dict(act or {"id": "_tier", "speaks": False, "emote": "", "say": "", "hold": "", "action": "idle",
+                           "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}, kind=kind, hero=True, pos="center", facing="right")
+        act.pop("to", None)
+        if kind == "cheetah" and re.search(HYBRID_RUN_RE + r"|\bschnell", low):
+            act.update(action="run", emotion="")
+        if place != rp:
+            sc.update(place=place, backdrop=None, weather="", time="night" if place == "space" else "day")
+        sc.update(actors=[act], crowd="", float="", props=[q for q in (sc.get("props") or []) if place == rp and isinstance(q, dict)
+                                                           and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in extras.SKY][:1])
+        if sc.get("shot") in ("event", "insert", "close"):
+            sc["shot"] = ""
+
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        sc["crowd"] = ""
+        named = _hybrid_named(low)
+        being = bool(re.search(HYBRID_BEING_RE, low))
+        fail = bool(re.search(HYBRID_FAIL_RE, low))
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        ov_h = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        if ov_h and str(ov_h.get("type") or "") == "counter" and not str(ov_h.get("label") or "").strip() and re.search(r"\bminus\b", low) \
+                and re.search(r"grad", str(ov_h.get("unit") or "").lower()):
+            ov_h["label"] = "MINUS"                       # „minus zweihundert Grad“ stand als „200 GRAD“ im Bild
+        if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
+            if last_named:
+                last_named = (last_named[0], i)           # die Zahl gehört noch zum Tier von eben: der Satz danach („Seine eigentliche Stärke …“) meint es weiter
+            continue
+        if named and not fail and not (being and i == 0):
+            animal(sc, named, low)                        # „… die Augen vom Adler“: der Adler in seinem Lebensraum
+            last_named, n_lab = (named, i), 0
+            continue
+        near = bool(last_named and i - last_named[1] == 1 and not re.search(HUMAN_RE, low)
+                    and not re.search(r"^(?:aber|doch|jetzt|dann|nun|und am ende|am ende)\b|superkr|\bpreis|\bhaken|\bzutat|evolution|\bnatur\b", low))   # „In freier Wildbahn wurden 93 km/h gemessen“ direkt nach dem Gepard-Satz meint den Gepard (Video 154: das Wesen rannte)
+        follow = bool(last_named and i - last_named[1] <= 2 and not being and not fail
+                      and (near or re.search(r"^(?:es|er|sie|seine?|ihre?|dieses tier|dieser|im jahr|sogar|dabei|damit|und (?:es|er|sie))\b", low))
+                      and not (re.search(r"\bherz", low) and last_named[0] != "whale"))
+        if follow:
+            animal(sc, last_named[0], low, keep_place=False if _hint(low) is None and i - last_named[1] == 0 else True)   # Folgesätze bleiben beim Tier von eben
+            if scenes[last_named[1]] is not sc and isinstance(scenes[last_named[1]], dict) and scenes[last_named[1]].get("shot") != "graphic" \
+                    and places.resolve(backdrop(sc)) == places.resolve(backdrop(scenes[last_named[1]])) and i - last_named[1] == 1:
+                sc["actors"][0]["facing"] = "left"        # derselbe Ort wie eben: wenigstens gespiegelt
+            n_lab = 0
+            continue
+        last_named = None
+        fallen = fallen or fail
+        run = bool(re.search(HYBRID_RUN_RE, low)) and not fail
+        human = next((a for a in acts if not a.get("kind") and not str(a.get("id") or "").startswith("_")), None)
+        cells = bool(re.search(r"\bzellen\b|zellhaufen|\bhaufen\b", low))
+        lying = fail or cells or (fallen and "?" not in str(sc.get("text") or ""))   # einmal zusammengebrochen, bleibt es liegen – bis zur Schlussfrage
+        beast = {"id": "_tier", "kind": "chimera", "speaks": False, "emote": "", "say": "", "hold": "",
+                 "action": "down" if lying else "run" if run else "idle",
+                 "emotion": "sad" if lying else MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}
+        if sc.get("shot") == "close" and human and not being and i > 0 and n_lab >= 1:
+            sc.update(place="lab", time="day", backdrop=None, weather="", props=[], float="", actors=[human])
+            n_lab += 1
+            continue                                      # „Falsch, denn …“: die Großaufnahme der Hauptfigur bleibt als Abwechslung
+        if run:
+            sc.update(place="savannah", time="day", backdrop=None, weather="", props=[], float="", shot="",
+                      actors=[dict(beast, pos="center", facing="right", hero=True)])
+            n_lab = 0
+            continue
+        me = dict(human or {"id": main_id, "speaks": False, "emote": ""})
+        me.pop("to", None)
+        me["hold"] = ""
+        if str(me.get("action") or "") in ("", "idle", "walk", "run", "sit", "sleep", "fall", "float", "jump", "cower", "swim", "lie"):
+            me["action"] = "shocked" if fail or cells else "point" if being else "think"
+        if lying:
+            me.update(emotion="sad", emote="")
+        flip = not flip                                   # abwechselnd links/rechts; das breite Wesen steht mit Abstand neben der Figur, Kopf nach außen
+        me["pos"], me["facing"] = (230, "right") if flip else (850, "left")   # nicht am Rand: die Kamera schnitt die Figur sonst an (Video 153)
+        beast.update(pos=730 if flip else 350, facing="right" if flip else "left")
+        sc.update(place="lab", time="day", backdrop=None, weather="", props=[], float="", shot="", actors=[me, beast], _no_cut=True, cam_move="push" if n_lab % 2 else "pull")   # Figur und breites Wesen füllen das Bild: kein Schwenk, kein näherer Gegenschnitt (schnitt die Figur an)
+        if str(sc.get("mood") or "") in ("scary", "panic"):
+            sc["mood"] = "tense"
+        n_lab += 1
+    return scenes
+
+
+def _stems(text):
+    import re as _re
+    return {w[:5] for w in _re.findall(r"[a-zäöüß]{4,}", str(text or "").lower())}
+
+
+def _last_look(scenes, topic=""):
+    """Letzter Blick auf die Einblendungen und Großaufnahmen (Prüfung 18.11.2026, Video 144 „Nachbarn“):
+    – dieselbe Zahl als Zähler in zwei Sätzen hintereinander („44 STUNDEN“ zählt zweimal von null hoch): der zweite entfällt;
+    – Abhak-Liste, von deren Punkten der Sprecher keinen nennt („Geld / Gurken“ zu „drohen mit Mietminderung“): entfällt;
+    – Schild, dessen Wörter weder im Satz noch in den Nachbarsätzen noch im Thema vorkommen („NACHTSCHICHT“): entfällt;
+    – eine Tür allein vor leerem Farbgrund ist keine Großaufnahme: sie fällt aus dem Einschub heraus."""
+    sc_l = [sc for sc in scenes if isinstance(sc, dict)]
+    main = next((str(a.get("id")) for sc in sc_l for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")), "du")
+    prev_val = None
+    for i, sc in enumerate(sc_l):
+        ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        ov_t = str((ov or {}).get("type") or "")
+        g = sc.get("graphic") if isinstance(sc.get("graphic"), dict) and sc.get("shot") == "graphic" else None
+        val = None
+        if ov_t == "counter":
+            val = ("n", str(ov.get("value")), str(ov.get("unit") or "").upper())
+        elif g and str(g.get("type") or "") in ("number", "counter"):
+            val = ("n", str(g.get("value")), str(g.get("unit") or "").upper())
+        if val and prev_val and val[1] == prev_val[1] and ov_t == "counter":
+            sc["overlay"], ov, ov_t = None, None, ""
+        prev_val = val
+        near = _stems(" ".join(str(x.get("text") or "") for x in sc_l[max(0, i - 1):i + 2]))
+        if ov_t == "checklist":
+            items = [str(it[0] if isinstance(it, (list, tuple)) and it else it) for it in (ov.get("items") or [])]
+            if items and not any(_stems(it) & near for it in items):
+                sc["overlay"], ov, ov_t = None, None, ""
+        if ov_t == "choice":                              # Auswahl nur an einer einzelnen Frage oder einem „oder“ – nicht zehn Sekunden „NACHSCHLAG KOMMT / VIERTER TYP“ über drei Schlusssätzen (Video 150)
+            txt_c = str(sc.get("text") or "").strip()
+            if not re.search(r"\boder\b", txt_c.lower()) and len([x for x in re.split(r"(?<=[.!?])\s+", txt_c) if x.strip()]) > 1:
+                sc["overlay"], ov, ov_t = None, None, ""
+        if ov_t == "tag":
+            words = _stems(ov.get("text"))
+            if words and not (words & (near | _stems(topic))):
+                sc["overlay"], ov, ov_t = None, None, ""
+        if str(sc.get("shot") or "") == "insert":
+            props = [q for q in (sc.get("props") or []) if isinstance(q, dict)]
+            rest = [q for q in props if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) != "door"]
+            if len(rest) != len(props):
+                if rest:
+                    sc["props"] = rest
+                else:
+                    sc["shot"] = ""
+                    if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)]:
+                        sc["actors"] = [{"id": main, "action": "point", "pos": "left", "speaks": True}]
+
+
+ROOMS = ("bedroom", "livingroom", "diningroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
 OUTSIDE_RE = r"bauernhof|\bhof\b|\bfeld|wiese|draußen|\bgarten|\bwald|strand|straße|\bstadt|\bdorf|\bpark\b|\bberg|\bmeer|\bsee\b|himmel|wüste|\bland\b"
 BODY_PROPS = ("auge", "augen", "ohr", "ohren", "nase", "zahn", "zähne", "finger", "muskel", "muskeln")
 BIG_M = 4.0                                               # Bibliotheks-Dinge ab dieser echten Höhe (Schloss, Wasserturm, Gebäude, Achterbahn) stehen in keinem Zimmer
@@ -2859,7 +3067,7 @@ def _ice_story(scenes, topic):
             sc.update(place="icesea", backdrop=None, props=[{"type": "icehole", "pos": 540}], actors=[], crowd="", shot="")
             continue
         if rp == "underwater" or (re.search(ICE_UNDER_RE, low) and not re.search(ICE_ON_RE, low)):
-            keep = [a for a in acts if str(a.get("kind") or "").lower() in ("fish", "shark", "dolphin", "jelly", "shrimp", "mantis", "axolotl", "tardigrade", "diver")]
+            keep = [a for a in acts if str(a.get("kind") or "").lower() in ("fish", "shark", "dolphin", "whale", "jelly", "shrimp", "mantis", "axolotl", "tardigrade", "diver")]
             emo = MOOD_EMOTION.get(str(sc.get("mood") or ""), "") or "worried"
             if whale:
                 keep = [{"id": "_delfin", "kind": "dolphin", "hero": True, "action": "idle", "emotion": emo, "pos": "center", "speaks": False, "emote": "", "say": "", "hold": "", "facing": "right"}]
@@ -3302,8 +3510,10 @@ PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien
           "dino": r"dinosaurier", "monster": r"monster"}
 # Meerestiere als Figur der Szene (Reihenfolge zählt: „Fangschreckenkrebs“ enthält „krebs“)
 SEA_CREATURES = [(r"fangschreckenkreb|heuschreckenkreb|mantis-?shrimp", "mantis"), (r"pistolenkreb|knallkreb|knallgarnele|\bgarnele|krabben?\b|\bhummer|flusskreb|krebstier|\bshrimp", "shrimp"),
-                 (r"qualle", "jelly"), (r"axolotl", "axolotl")]
-SEA_KINDS = ("shrimp", "mantis", "jelly", "axolotl")
+                 (r"qualle", "jelly"), (r"axolotl", "axolotl"),
+                 # Blauwal und andere Großwale (Ausbau 19.11.2026) – nicht der Schweinswal/Delfin (eigenes Wesen `dolphin`), nicht „Wahl“, nicht „Walnuss“
+                 (r"^(?!.*(?:schweinswal|delfin|delphin|tümmler)).*(?:blauwal|buckelwal|pottwal|finnwal|grauwal|bartenwal|\bwal(?:e|es|en|s)?\b)", "whale")]
+SEA_KINDS = ("shrimp", "mantis", "jelly", "axolotl", "whale")
 # Tiefsee-Technik (Flugzeug-Suche, Wracks): Der Satz spielt unter Wasser; nennt er Blackbox, Wrack oder Tauchboot/Sonar, wird es die dunkle Tiefsee
 SURFACE_RE = (r"\b(?:auf|über) (?:dem|den|der|hoher|offener|offenem) (?:\w+ )?(?:ozean|meer|atlantik|pazifik|wasseroberfläche|meeresoberfläche|see\b)|übers (?:offene )?meer|"
               r"auf hoher see|meeresoberfläche|wasseroberfläche")
@@ -3327,7 +3537,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -3370,7 +3580,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -3453,6 +3663,143 @@ def _carry_thing(scenes, main_id=None):
             acts[0]["pos"] = "left"
         elif main_id:
             sc["actors"] = [{"id": main_id, "action": "shocked", "emotion": "shocked", "emote": "!", "pos": "left", "speaks": False}]
+
+
+# Familienfest / Weihnachten (Prüfung 18.11.2026, Video 148): geschmücktes Wohn- und Esszimmer, Sätze vom Essen spielen an der Festtafel,
+# einheitliche Tageszeit. Verwandte, die der Satz nennt, stehen im Bild (in jedem Video).
+XMAS_RE = r"weihnacht|heiligabend|heilig abend|heiligen abend|\badvent|bescherung|christbaum|tannenbaum|christkind|nikolaus"
+FEAST_RE = XMAS_RE + r"|familienfeier|familienfest|festessen|familienessen|familientisch|ostern|silvester|feiertage?n?\b"
+FEAST_TABLE_RE = (r"\btisch\b|esstisch|festessen|weihnachtsessen|\bessen\b|\bisst\b|\bteller|nachschlag|\bbraten|\bgans\b|kloß|klöße|knödel|kartoffelsalat|würstchen|"
+                  r"raclette|fondue|hauptgang|ersten gang|dessert|nachtisch|plätzchen|servier|\bsatt\b|appetit|\bgabel|besteck|festtafel|\bsoße|rotkohl|blaukraut|\bportion")
+FEAST_TREE_RE = r"weihnachtsbaum|tannenbaum|christbaum|\bbaum\b|geschenk|bescherung|\bsofa\b|wohnzimmer|auspack"
+RELATIVES = [(r"\b(?:oma|omas|omi|omis|großmutter)\b", "oma", {"hair": "bun", "hair_color": "grau", "glasses": True, "shirt": "lila", "gender": "w", "size": 0.9}),
+             (r"\b(?:opa|opas|opi|großvater)\b", "opa", {"hair": "short", "hair_color": "grau", "glasses": True, "shirt": "braun", "size": 0.95}),
+             (r"\b(?:onkel|onkels)\b", "onkel", {"hair": "short", "hair_color": "schwarz", "shirt": "rot", "size": 1.08}),
+             (r"\b(?:tante|tantchen)\b", "tante", {"hair": "bob", "hair_color": "blond", "shirt": "türkis", "gender": "w"}),
+             (r"\b(?:mama|mamas|mutter|mutti)\b", "mama", {"hair": "long", "hair_color": "braun", "shirt": "gelb", "gender": "w"}),
+             (r"\b(?:papa|papas|vater|vati)\b", "papa", {"hair": "short", "hair_color": "dunkelbraun", "glasses": True, "shirt": "blau", "size": 1.05}),
+             (r"\b(?:cousin|cousins|vetter)\b", "cousin", {"hair": "short", "hair_color": "blond", "hat": "cap", "shirt": "orange", "size": 0.85}),
+             (r"\b(?:cousine|kusine)\b", "cousine", {"hair": "ponytail", "hair_color": "rot", "shirt": "pink", "gender": "w", "size": 0.85}),
+             (r"\b(?:schwester|schwesterchen)\b", "schwester", {"hair": "ponytail", "hair_color": "braun", "shirt": "pink", "gender": "w", "size": 0.9}),
+             (r"\b(?:bruder|brüderchen)\b", "bruder", {"hair": "short", "hair_color": "braun", "hat": "cap", "shirt": "orange", "size": 0.9})]
+SELF_RE = r"\b(?:du|dich|dir|dein\w*|ich|mich|mir|mein\w*|wir|uns|unser\w*)\b"
+RELATIVE_IDIOM_RE = r"vater staat|mutter natur|mutter erde|vater unser|großer bruder sieht|big brother|mutter aller|vater aller|mutter(?:sprache|land|mal|schiff|boden|kuchen|leib)|vater(?:land|schaft)"
+
+
+def _feast_story(scenes, topic=""):
+    """Weihnachten / Familienfest: Spricht Thema oder Text von Weihnachten, sind Wohn- und Esszimmer geschmückt (Baum, Girlande –
+    `places.XMAS`); Sätze vom Essen spielen an der gedeckten Tafel im Esszimmer, nicht im Flur („nach dem ersten Gang“) oder vor dem Sofa;
+    die Tageszeit springt nicht ohne Grund mitten im Fest von Tag auf Nacht."""
+    import re as _re
+    sc_l = [sc for sc in scenes if isinstance(sc, dict)]
+    all_t = (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in sc_l)).lower()
+    if not _re.search(FEAST_RE, all_t):
+        return
+    xmas = bool(_re.search(XMAS_RE, all_t))
+    main = next((str(a.get("id")) for sc in sc_l for a in (sc.get("actors") or []) if isinstance(a, dict) and str(a.get("id") or "").lower() in MAIN_IDS), "du")
+    for sc in sc_l:
+        low = str(sc.get("text") or "").lower()
+        if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
+            continue
+        rp = places.resolve(backdrop(sc))
+        home = rp in ("livingroom", "diningroom", "plain", "restaurant", "kitchen") or (rp == "hallway" and not _re.search(r"\bflur\b|\btür|treppenhaus|klingel|klopf", low))
+        if (rp in MAPS or rp in ("street", "park", "supermarket")) and _re.search(FEAST_TABLE_RE, low) and not _re.search(r"straße|supermarkt|einkauf|\bladen\b|draußen", low):
+            home = True                                    # „In Deutschland liegt Kartoffelsalat ganz vorn“ / „noch vor der Gans“: am Esstisch, nicht auf der Landkarte oder mit einer Gans auf der Straße (Video 149)
+            sc["shot"], sc["graphic"], sc["crowd"], sc["weather"] = "", None, "", ""
+            if not [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("to")]:
+                sc["actors"] = [{"id": main, "action": "point", "emotion": "happy", "pos": "left", "speaks": True}]
+            for a in sc["actors"]:
+                if isinstance(a, dict) and str(a.get("action") or "") in ("walk", "run"):
+                    a["action"] = "point"
+        if home and _re.search(FEAST_TABLE_RE, low) and not _re.search(r"restaurant|\bküche\b|\bherd\b|\bofen\b", low):
+            sc["place"], rp = "diningroom", "diningroom"
+            sc.pop("backdrop", None)
+        elif home and rp in ("plain", "hallway", "restaurant") or (rp == "diningroom" and _re.search(FEAST_TREE_RE, low) and not _re.search(FEAST_TABLE_RE, low)):
+            sc["place"], rp = "livingroom", "livingroom"
+            sc.pop("backdrop", None)
+        if xmas and rp in ("livingroom", "diningroom"):
+            sc["_xmas"] = True
+            sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(),
+                           str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("tree", "plant")]      # der geschmückte Baum steht schon im Zimmer
+        if rp == "diningroom":                             # Tisch, Stühle, Kerzen stehen dort schon
+            sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(),
+                           str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("table", "chair", "candle", "lib_stuhl", "stuhl", "lib_gans", "gans")]
+            sc["_no_insert"] = True                        # das Essen steht auf dem Tisch: kein Schnitt auf einen einzelnen Kloß vor leerem Grund
+    inside = [sc for sc in sc_l if sc.get("shot") != "graphic" and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in ("livingroom", "diningroom", "kitchen", "hallway")]
+    if inside and not _re.search(r"stromausfall|kerzenschein|im dunkeln|\bdunkel\b|finster|licht (?:geht |ist )?aus|mitten in der nacht|mitternacht", all_t):
+        for sc in inside:                                  # ein Fest, ein Licht: das Festzimmer ist hell erleuchtet – „Heiligabend“ als Nacht legte das ganze Video ins düstere Halbdunkel (Video 150), in Video 148 wurde es nach der Hälfte grundlos Nacht
+            sc["time"] = "day"
+
+
+def _relatives(scenes):
+    """Nennt der Satz Oma, Opa, Onkel, Tante, Mama, Papa, Cousin …, steht die Person im Bild – mit eigenem Aussehen (graue Haare, Dutt, Brille …).
+    Handelt der Satz nur von ihr (kein du/ich), steht sie anstelle der Hauptfigur da; sonst rechts neben ihr. In Video 148 „zog Oma eine
+    Trillerpfeife“ – zu sehen war die Hauptfigur; im Nachbarn-Video 147 war kein einziger Nachbar zu sehen."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict) or sc.get("shot") == "graphic" or sc.get("_sea") or sc.get("_balloon") or sc.get("float"):
+            continue
+        low = str(sc.get("text") or "").lower()
+        if _re.search(RELATIVE_IDIOM_RE, low):
+            continue
+        if not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in MAPS + ("space", "underwater", "cave", "highsky"):
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if any(_re.search(pat, low) for pat, _k, _l in RELATIVES):
+            sc["_no_insert"] = True                        # der Satz handelt von der Person: kein Schnitt auf ein Ding allein
+            if sc.get("shot") == "insert" and any(not a.get("kind") for a in acts):
+                sc["shot"] = ""                            # „Der Onkel sitzt auf dem Sofa und erzählt“: sechs Sekunden ein Sofa vor leerem Grund (Video 150)
+                sc["props"] = [q for q in (sc.get("props") or []) if not _re.search(r"sofa|couch|sessel", str(q.get("type") if isinstance(q, dict) else q).lower())]
+        found = sorted(((m.start(), key, look) for pat, key, look in RELATIVES for m in [_re.search(pat, low)] if m), key=lambda x: x[0])[:2]
+        found = [(pos, key, look) for pos, key, look in found if not any(key in str(a.get("id") or "").lower() for a in acts)]
+        if not found or any(a.get("kind") for a in acts):  # Tier-Szenen bleiben, wie sie sind („die Mutter säugt ihre Jungen“)
+            continue
+        creature = [a for a in acts if a.get("kind")][:1]
+        humans = [a for a in acts if not a.get("kind")]
+        lead = humans[0] if humans else {}
+        only_them = not _re.search(SELF_RE, low)
+        new = []
+        for n, (pos, key, look) in enumerate(found):
+            new.append({"id": key, "look": dict(look), "speaks": n == 0 and pos < 25,
+                        "action": (str(lead.get("action") or "talk") if only_them and n == 0 and str(lead.get("action") or "") not in ("walk", "run", "freeze", "pant", "cower", "sleep", "fall") else "talk" if n == 0 else "idle"),
+                        "emotion": str(lead.get("emotion") or "") if only_them and n == 0 else "happy" if n == 0 else "",
+                        "say": str(lead.get("say") or "") if only_them and n == 0 else "", "hold": str(lead.get("hold") or "") if only_them and n == 0 else ""})
+        if only_them or not humans:
+            cast_n = (new + creature)[:2]
+        else:
+            lead.update(pos=300, to="", speaks=False)
+            if str(lead.get("action") or "") in ("walk", "run"):
+                lead["action"] = "idle"
+            cast_n = [lead] + new[:1]
+        if len(cast_n) == 1:
+            cast_n[0]["pos"] = "center"
+        else:
+            for a, x in zip(cast_n, (300, 780)):
+                a["pos"], a["to"] = x, ""
+        sc["actors"] = cast_n
+        sc["crowd"] = ""
+        sc["_no_insert"] = True                            # es geht um die Person und was sie tut, nicht um das Ding allein
+        if sc.get("shot") in ("insert", "event") or (sc.get("shot") == "close" and len(cast_n) > 1):
+            sc["shot"] = ""
+    keys_r = [key for _p, key, _l in RELATIVES]
+    seen = {}                                             # Verwandte, die im Video schon auftreten (aus Drehbuch oder von oben), in der Reihenfolge ihres Auftritts
+    for sc in scenes:
+        for a in (sc.get("actors") or []) if isinstance(sc, dict) else []:
+            if isinstance(a, dict) and str(a.get("id") or "").lower() in keys_r:
+                seen.setdefault(str(a["id"]).lower(), a)
+    if len(seen) >= 2:                                    # „Diese vier Typen sitzen an jedem Tisch“: die Gruppe sind die Verwandten des Videos, keine drei Fremden (Video 149)
+        for sc in scenes:
+            acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)] if isinstance(sc, dict) else []
+            fill = [a for a in acts if str(a.get("id") or "").startswith("_team")]
+            if not fill:
+                continue
+            pool = [v for k, v in seen.items() if not any(str(a.get("id") or "").lower() == k for a in acts)]
+            for a, rel in zip(fill, pool):
+                a["id"] = rel["id"]
+                if isinstance(rel.get("look"), dict):
+                    a["look"] = dict(rel["look"])
+                else:
+                    a.pop("look", None)
 
 
 FAMILY_RE = (r"\bfamilien?\b|frauen und (?:\w+ ){0,2}kinder|erwachsene und (?:\w+ ){0,2}kinder|(?:ehe)?frau(?:en)? und (?:\w+ ){0,2}kind|mit (?:ihren|seinen|den|ihrer|seiner|deinen|deiner) (?:\w+ ){0,3}kindern|eltern und (?:\w+ ){0,2}kinder|"
@@ -4053,7 +4400,8 @@ HINTS = [
     (r"mondoberfläche|auf dem mond|mondlandung", "moon"),
     (r"wasserwerk|klärwerk|talsperre|staudamm|wasserversorgung|wasserspeicher", {"elements": ["factory", "river", "hills"]}),
     (r"feuerwehr|löschen|\bbrände", "street"),
-    (r"\bflur\b|korridor|\bgang\b|treppenhaus|hotel|vor der tür|an der tür|türklinke|klopft|zimmernummer", "hallway"),
+    (r"esszimmer|esstisch|festtafel|familientisch|weihnachtsessen|festessen|festtagsessen|am (?:gedeckten |festlich gedeckten |langen )?(?:ess|fest|familien)?tisch\b", "diningroom"),
+    (r"\bflur\b|korridor|(?:im|durch den|auf dem|über den|den) gang\b|treppenhaus|hotel|vor der tür|an der tür|türklinke|klopft|zimmernummer", "hallway"),
     (r"dachboden|(?<![a-zäöüß])speicher\b", "attic"),
     (r"\bbett\b|schlafzimmer|wachst auf|aufwach|einschlaf|schläfst|decke über|schlafen (zu )?(lassen|gehen|legen)|weckt (er |es |sie |das )?(dich|mich)|(dich|mich) (auf)?weck", "bedroom"),
     (r"(?<![a-zäöüß])spiegel(?!bild| (?:im|in|des|der|an|steigt|sinkt|fällt))|badezimmerspiegel|waschbecken", "bathroom"),
@@ -4155,7 +4503,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
@@ -4167,7 +4515,7 @@ INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge",
 TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
               (r"motorständer|montageständer", "enginestand"), (r"\bv8\b|\bv12\b|\bw12\b|\bw16\b|\bmotor(?!rad|roller|säge|boot)\w*|motorblock|verbrenner|\bzylinder|\bps\b", "engine"),
               (r"kolben|pleuel|kurbelwelle", "piston"), (r"getriebe|kupplung|\bgänge?\b|schaltknauf", "gearbox"), (r"kühler\b|kühlwasser|überhitz", "radiator"),
-              (r"reifen|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"),
+              (r"(?<![a-zäöüß])(?:\w*?(?:auto|winter|sommer|ersatz|hinter|vorder|renn|gummi))?reifen\b|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"), (r"bohrmaschine|schlagbohrer|akkuschrauber|\bbohrt\b|\bbohren\b|\bbohrer\b", "drill"),
               (r"\btacho|km/h|stundenkilometer|höchstgeschwindigkeit|beschleunig|von 0 auf 100|0 auf 100", "speedometer"),
               (r"\bwaage\b|wiegt|gewicht|\bkilo\b|schwerer als", "scale"), (r"motoröl|ölwechsel|ölkanne", "oilcan"),
               (SUB_RE, "submersible"), (r"nähmaschine|\bnäh(?:en|t|ten|te)\b|zusammennäh|zusammengenäh|vernäh", "sewing"), (r"stoffbahn|stoffballen|stoffrolle|(?:quadrat)?meter (?:\w+ )?stoff\b|\bstoff\b.{0,60}(?:kauf|geschäft|läden)|kauf\w*\b.{0,60}\bstoff\b", "fabric"), (r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
@@ -4186,7 +4534,7 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
@@ -4347,8 +4695,8 @@ def _punch_time(scene, words, t0, dur):
     return dur * 0.5 if dur >= 3.2 else None
 
 
-CALM_MAX = 4.5       # eine ruhige Szene ohne Schnitt höchstens so lang (s); länger steht sonst dasselbe Bild zu lange
-CUT_MIN = 2.6        # ab dieser Szenenlänge (s) wird mitten im Satz geschnitten – wie in den Vorbild-Shorts etwa alle 1,8 Sekunden ein neues Bild
+CALM_MAX = 3.6       # eine ruhige Szene ohne Schnitt höchstens so lang (s); länger steht sonst dasselbe Bild zu lange
+CUT_MIN = 2.3        # ab dieser Szenenlänge (s) wird mitten im Satz geschnitten – wie in den Vorbild-Shorts etwa alle 1,8 Sekunden ein neues Bild
 
 
 def _said_prop(kind, low):
@@ -4407,6 +4755,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     neon_look = str(scene.get("look") or "") == "neon"
     if neon_look:                             # Neon-Nacht: nur die Kulisse wird violett getönt – Figuren und Dinge bleiben kräftig
         bg = graphics.tint(bg)
+    elif str(scene.get("look") or "") == "noir":
+        bg = graphics.noir(bg)                # Düster: graue, kühle Kulisse, Licht nur über den Figuren
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors and not scene.get("float") else ""
     ov_tall = str((scene.get("overlay") or {}).get("type") or "") in TALL_OV if has_ov else False
     ov_kind = str((scene.get("overlay") or {}).get("type") or "") if has_ov else ""
@@ -4495,6 +4845,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     party = bool(re.search(PARTY_RE, str(scene.get("text") or "").lower())) or (str(scene.get("crowd") or "") == "cheer" and crowd_ok(scene))
     fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "confetti": party,   # Konfetti nur, wenn gefeiert wird – nicht in jeder fröhlichen Szene (Klinik, Büro) "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
               "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""),
+              "noir": str(scene.get("look") or "") == "noir",
               "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")), "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))}
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
@@ -4545,6 +4896,8 @@ def poster_hero(topic, scenes, cast=None, avoid=()):
     auf dem letzten Titelbild war (avoid), kommt nur, wenn es keine andere Wahl gibt."""
     import re as _re
     low = str(topic or "").lower()
+    if _re.search(HYBRID_RE, topic_head(low)):
+        return "chimera"                                  # Misch-Wesen-Video: das gebaute Wesen ist das Gesicht des Videos
     named = [k for pat, k in TOPIC_CREATURES if _re.search(pat, low)]
     sk = _sea_kind(low, bool(_re.search(SEA_TOPIC_RE, low)))
     named += [sk] if sk else []
@@ -4633,6 +4986,9 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
         keys = []                                         # Video über einen Winzling: das Tier aufs Titelbild – nicht ein Gegenstand aus dem Vorschlag der Text-KI (Videos 138/139: ein Holzfass für „Tönnchen“)
     if hk == "fridge":
         keys = []                                         # der Kühlschrank ist eine Figur der Geschichte: mit Gesicht aufs Titelbild, nicht als Gerät
+    if _re.search(HYBRID_RE, low):
+        keys, hk = [], "chimera"                          # Misch-Wesen-Video: das gebaute Wesen aufs Titelbild – nicht ein Herz aus den Requisiten (Video 153)
+        spec["hero_kind"] = "chimera"
     for k in keys:
         if k in extras.PROPS:
             lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))

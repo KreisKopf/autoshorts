@@ -96,7 +96,7 @@ def main():
     for w in ("rain", "storm", "snow", "cold", "wind", "ash", "quake", "heat", "dark", "steam", "unbekannt"):
         for pl in ("street", "forest", "office"):
             check(f"Wetter {w} in {pl}", lambda: frame({"place": pl, "weather": w, "time": "night" if w == "dark" else "day", "actors": [{"id": "du"}]}))
-    for m in ("panic", "tense", "scary", "sad", "happy", "calm", "unbekannt"):
+    for m in ("panic", "tense", "scary", "sad", "happy", "love", "calm", "unbekannt"):
         check(f"Stimmung {m}", lambda: frame({"place": "street", "mood": m, "crowd": "walk", "actors": []}))
         check(f"Einschub Stimmung {m}", lambda: frame({"place": "kitchen", "mood": m, "props": ["candle", "cans"], "shot": "insert", "actors": []}))
     for hat in ("", "cap", "helmet", "beanie", "bow", "crown", "unbekannt"):
@@ -589,6 +589,56 @@ def main():
             frame(sc_g, {"du": {"shirt": "blau"}}, 1.2)
     check("Katze sträubt das Fell, „dir ist kalt“, gerupfte Gans, Mäuse (Prüfung 17.11.)", _goose)
 
+    def _feast():                                                # Prüfung 18.11.2026 (Video 148): Weihnachten am Esstisch, Verwandte im Bild, „greifen“ ist kein Reifen
+        T = [("Weihnachten mit der Familie eskaliert nach dem ersten Gang.", "diningroom", "day", [{"id": "du", "action": "shocked"}], ["table"]),
+             ("Oma zieht seelenruhig eine Trillerpfeife aus der Handtasche.", "livingroom", "day", [{"id": "du", "action": "talk", "emotion": "angry"}], []),
+             ("Dein Onkel erzählt dir zum zehnten Mal dieselbe Geschichte.", "livingroom", "night", [{"id": "du", "action": "idle"}], []),
+             ("Alle greifen endlich nach dem Kartoffelsalat.", "livingroom", "night", [{"id": "du", "action": "idle"}], []),
+             ("Unter dem Weihnachtsbaum liegen die Geschenke.", "diningroom", "night", [{"id": "du", "action": "idle"}], ["tree"])]
+        scs = stage.direct([{"text": t_, "place": pl, "time": tm, "actors": a_, "props": pr} for t_, pl, tm, a_, pr in T],
+                           [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T))], "Weihnachten mit der Familie", "comedy", "")
+        ids = lambda i: [str(a.get("id")) for a in scs[i].get("actors") or []]   # noqa: E731
+        kn = lambda i: [str(q.get("type") if isinstance(q, dict) else q).lower() for q in scs[i].get("props") or []]   # noqa: E731
+        assert scs[0]["place"] == "diningroom" and scs[0].get("_xmas"), f"erster Gang spielt am Esstisch: {scs[0]['place']}"
+        assert ids(1) == ["oma"], f"Oma steht im Bild: {ids(1)}"
+        assert ids(2) == ["du", "onkel"], f"Onkel neben der Hauptfigur: {ids(2)}"
+        assert scs[3]["place"] == "diningroom" and "tire" not in kn(3), f"Kartoffelsalat am Tisch, kein Reifen: {scs[3]['place']} {kn(3)}"
+        assert scs[4]["place"] == "livingroom" and "tree" not in kn(4), f"Baum im Wohnzimmer: {scs[4]['place']} {kn(4)}"
+        assert {sc.get("time") for sc in scs} == {"day"}, "eine Tageszeit für das ganze Fest"
+        s5 = stage.direct([{"text": "Nummer zwei, der Onkel.", "place": "livingroom", "time": "night", "actors": [{"id": "onkel", "action": "sit"}]},
+                           {"text": "Der Onkel sitzt auf dem Sofa am Weihnachtsbaum und erzählt dieselbe Geschichte.", "place": "livingroom", "time": "night", "shot": "insert",
+                            "props": ["lib_sofa"], "actors": [{"id": "onkel", "action": "talk"}]},
+                           {"text": "Schaust du das am Familientisch? Dann bist du Nummer vier. Wer sitzt bei euch am Tisch?", "place": "diningroom", "time": "night",
+                            "actors": [{"id": "du", "action": "shocked"}], "overlay": {"type": "choice", "a": "NACHSCHLAG KOMMT", "b": "VIERTER TYP"}}],
+                          [(0, 3.5), (3.5, 7), (7, 12)], "Vier Typen an Weihnachten am Familientisch", "comedy", "")
+        assert s5[1]["shot"] == "" and not s5[1]["props"], f"Onkel auf dem Sofa ist kein Sofa allein: {s5[1]['shot']} {s5[1]['props']}"
+        assert s5[2].get("overlay") is None, "Auswahl über drei Schlusssätzen entfällt"
+        assert {sc.get("time") for sc in s5} == {"day"}, "Festzimmer hell erleuchtet"
+        for sc in scs:
+            frame(sc, {"du": {"shirt": "grün"}})
+        assert places.resolve("esszimmer") == "diningroom"
+        assert stage._hint("Im Gang brennt noch Licht.") == "hallway" and stage._hint("Nach dem zweiten Gang wird es still.") != "hallway"
+        pl_, _n, _s, ac_, _p, _w = stage._prepare({"text": "Der Vogel springt auf.", "place": "livingroom", "actors": [{"id": "vogel", "action": "jump"}]}, {"du": {}, "truthahn": {"kind": "bird"}})
+        assert ac_[0]["kind"] == "bird", f"Kennung „vogel“ ist ein Vogel: {ac_[0]['kind']}"
+        T4 = [("Nummer eins, die Oma, füllt meinen Teller.", "diningroom", [{"id": "oma", "action": "talk"}, {"id": "du", "action": "sit"}], []),
+              ("Der Onkel erzählt dieselbe Geschichte.", "diningroom", [{"id": "onkel", "action": "talk"}], []),
+              ("In Umfragen liegt an Heiligabend in Deutschland Kartoffelsalat mit Würstchen ganz vorn.", "germany", [{"id": "du", "action": "walk"}], []),
+              ("Sogar noch vor der festlichen Gans landet dieser Klassiker auf den Tellern.", "street", [], ["table", "lib_gans"]),
+              ("Diese vier Typen sitzen an jedem Familientisch.", "diningroom", [{"id": "du", "action": "talk"}], [])]
+        s4 = stage.direct([{"text": t_, "place": pl, "time": "day", "actors": a_, "props": pr} for t_, pl, a_, pr in T4],
+                          [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T4))], "Vier Typen, die an Weihnachten an jedem Familientisch sitzen", "comedy", "")
+        assert s4[2]["place"] == "diningroom" and s4[3]["place"] == "diningroom", f"Essens-Sätze am Tisch statt Karte/Straße: {s4[2]['place']} {s4[3]['place']}"
+        assert s4[3]["actors"] and not [q for q in s4[3]["props"] if "gans" in str(q.get("type"))], f"keine lebende Gans am Esstisch: {s4[3]['props']}"
+        assert not any(str(a.get("id")).startswith("_team") for a in s4[4]["actors"]), f"Gruppe aus Verwandten: {[a.get('id') for a in s4[4]['actors']]}"
+        for sc in s4:
+            frame(sc, {"du": {"shirt": "grün"}})
+        from .. import writer as _wf
+        assert _wf.hook_drops([{"text": "a"}, {"text": "Nummer eins, die Oma, füllt Teller."}, {"text": "Wer satt sagt, bekommt Nachschlag."}], "Vier Typen an Weihnachten.", "Und der letzte bist du.")
+        s3 = stage.direct([{"text": "Die Mutter säugt ihre Jungen.", "place": "forest", "time": "day", "actors": [{"id": "katze", "kind": "cat", "action": "idle"}]}], [(0, 3.5)], "Katzen", "tiere", "")
+        assert "mama" not in [str(a.get("id")) for a in s3[0]["actors"]] and any(a.get("kind") == "cat" for a in s3[0]["actors"]), "Tier-Szene bleibt ohne Verwandte"
+
+    check("Weihnachten am Esstisch, Verwandte im Bild (Prüfung 18.11., Video 148)", _feast)
+
     def _body():                                                 # Körper-Sätze (Prüfung 16.11.2026, Video 126): die Figur macht vor, was der Satz beschreibt; Gehirn als Figur statt Passanten; „Welle“ ist kein Strand
         cast_b = {"du": {"shirt": "blau", "hair": "curly", "gender": "w"}}
         T = [("Ein lauter Knall, und du zuckst zusammen.", "livingroom", "shocked", ""), ("Zuerst blinzeln die Augen, um sich zu schützen.", "livingroom", "shocked", ""),
@@ -665,6 +715,19 @@ def main():
         g = stage.direct([{"text": "Sein Schlag erreicht achtzig Kilometer pro Stunde.", "place": "underwater", "shot": "graphic",
                            "graphic": {"type": "compare", "left": "SCHLAG", "right": "SCHNEIDEN", "value": "80 km/h", "sub": "80 km/h"}}], [(0, 3)], "Tiere")
         assert (g[0].get("graphic") or {}).get("type") != "compare", "Vergleich mit zweimal derselben Zahl"
+        TW = [("Als vierte Zutat pflanzen wir das Herz eines Blauwals in die Brust.", "lab", [{"id": "du"}], ""),      # Ausbau 19.11.2026: Blauwal als Wesen
+              ("Wir gehen heute zur Wahl und essen eine Walnuss.", "livingroom", [{"id": "du"}], ""),
+              ("Der Schweinswal ist der einzige Wal der Ostsee.", "underwater", [], "")]
+        for n_, (t_, pl_, a_, sh_) in enumerate(TW):
+            w_ = stage.direct([{"text": t_, "place": pl_, "actors": a_, "shot": sh_}], [(0, 4)], "Tiere im Vergleich")[0]
+            ks = [x.get("kind") for x in w_.get("actors") or []]
+            if n_ == 0:
+                assert ks == ["whale"] and places.resolve(stage.backdrop(w_)) == "underwater", f"Blauwal: {ks} am Ort {stage.backdrop(w_)}"
+                assert frame(w_, {"du": {"shirt": "blau"}}).getbbox(), "Blauwal-Bild leer"
+            else:
+                assert "whale" not in ks, f"Wal, wo keiner gemeint ist ({t_}): {ks}"
+        from .. import main as _main_w
+        assert _main_w.known_thing("blauwal") and _main_w.known_thing("wal"), "Blauwal gilt als unbekannt"
         T2 = [("Kandidat Nummer zwei ist der Axolotl.", "lab", [{"id": "du"}], "graphic"), ("Sogar Rückenmark wächst lückenlos nach.", "lab", [{"id": "du", "action": "shocked"}], ""),
               ("Mediziner erforschen das, um Menschen zu helfen.", "lab", [{"id": "du"}], ""), ("Bärtierchen überleben extreme Kälte.", "kitchen", [{"id": "du", "action": "walk"}], ""),
               ("Sie trocknen jahrelang ohne Wasser einfach aus.", "desert", [], ""), ("Dann wachen sie auf und krabbeln einfach weiter.", "lab", [{"id": "du"}], ""),
@@ -903,6 +966,15 @@ def main():
             writer.ai.chat_json = old_chat
         t = [x["text"] for x in out["scenes"]]
         assert t[5].startswith("Gold? Falsch") and t[6].startswith("Es sollte") and "500" not in t[4] and t[0] == "Eins.", t
+        js2 = {"title": "Vier Typen", "scenes": [{"text": t_} for t_ in ["Eins.", "Zwei.", "Wer satt sagt, bekommt bei Oma Nachschlag.",
+               "Nach dem dritten Kloß gebe ich auf, aber Oma legt den vierten drauf.", "Mein Teller wird bei Oma nie leer.", "Nummer zwei, der Onkel.", "Er erzählt.", "Ende."]]}
+        writer.ai.chat_json = lambda *a, **k: ({"edits": [{"i": 4, "text": "Nach dem dritten Kloß gebe ich auf, aber weißt du, was Oma danach macht?", "why": "rehook"},
+                                                          {"i": 5, "text": "Mein Teller wird bei Oma nie leer, aber warum eigentlich?", "why": "rehook"}]}, "t")
+        try:
+            t2 = [x["text"] for x in writer.loop_pass(js2, "Vier Typen")["scenes"]]
+        finally:
+            writer.ai.chat_json = old_chat
+        assert t2[3].endswith("vierten drauf.") and t2[4].endswith("nie leer."), t2   # Pointe bleibt; keine offene Frage direkt vor „Nummer zwei“
     check("Spannungsbogen (Rehook/Finte)", _loop)
     def _bounce():                                               # Musik-Kugel: jeder Ton trifft genau eine Scheibe, alle Melodien, Ton und Bild
         import math
@@ -1041,6 +1113,35 @@ def main():
         assert not sc[1].get("float"), sc[1]
         assert not any("insekt" in str(p_) for s_ in sc for p_ in (s_.get("props") or [])), sc
     check("Bugs: kein Käfer, keine Strichliste, Absturz", _bugs)
+    def _neighbours():                                           # Video 144 „Nachbarn“: Aufzählung ohne Aufzählung, Keule bei „Club“, doppelter Zähler, fremde Liste, fremdes Schild, Tür als Großaufnahme
+        from .. import writer
+        from . import library
+        T = ["Vier Nachbarn, die dein Leben zur Hölle machen.", "Der letzte Vorfall treibt mich in den Wahnsinn.", "Die Wand vibriert seit Stunden.",
+             "Also bin ich rübergegangen.", "Aber Uwe hat nicht geöffnet.", "Jetzt habe ich Ohrstöpsel."]
+        assert str(writer.list_trouble({"scenes": [{"text": t} for t in T]})).startswith("Der Einstieg"), "angekündigte Aufzählung fehlt, nicht erkannt"
+        assert not writer.list_trouble({"scenes": [{"text": t} for t in ["Fünf Sekunden, die alles verändern.", "Die Schwerkraft fällt aus.", "Alles schwebt.", "Dann kracht es."]]})
+        it = library.clean({"name": "keule", "aliases": ["keulen", "club"], "height_m": 0.8,
+                            "shapes": [{"t": "ellipse", "cx": 200, "cy": 300, "rx": 80, "ry": 100, "c": "#cc3333"}, {"t": "rect", "x": 150, "y": 200, "w": 100, "h": 60, "c": "#222222"}]})
+        assert it and it["aliases"] == ["keulen"], it
+        sc = [{"text": "Nachbarn, die dein Leben zur Hölle machen.", "place": "hallway", "actors": [{"id": "du", "action": "talk"}], "overlay": {"type": "tag", "text": "NACHTSCHICHT"}},
+              {"text": "Der Lärm treibt mich seit vierundvierzig Stunden in den Wahnsinn.", "place": "bedroom", "actors": [{"id": "du", "action": "walk"}],
+               "overlay": {"type": "counter", "label": "", "value": 44, "unit": "STUNDEN"}},
+              {"text": "Die Wand vibriert seit vierundvierzig Stunden ohne Pause.", "place": "bedroom", "actors": [{"id": "du", "action": "cower"}],
+               "overlay": {"type": "counter", "label": "STUNDEN LÄRM", "value": 44, "unit": "STUNDEN"}},
+              {"text": "Viele drohen jetzt mit Mietminderung.", "place": "office", "actors": [{"id": "du", "action": "talk"}],
+               "overlay": {"type": "checklist", "title": "MIETMINDERUNG", "items": [["Geld", False], ["Gurken", True]]}},
+              {"text": "Er hat mir eine Melone vor die Tür gelegt.", "place": "hallway", "shot": "insert", "props": [{"type": "door"}], "actors": []},
+              {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage._last_look(sc, "Nervige Nachbarn")
+        assert not sc[0].get("overlay"), sc[0]
+        assert sc[1].get("overlay") and not sc[2].get("overlay"), (sc[1], sc[2])
+        assert not sc[3].get("overlay"), sc[3]
+        assert sc[4].get("shot") != "insert" and sc[4].get("actors"), sc[4]
+        keep = [{"text": "Im August 1914 beginnt der Krieg.", "overlay": {"type": "tag", "text": "AUGUST 1914"}},
+                {"text": "Du packst Wasser, Brot und Kerzen ein.", "overlay": {"type": "checklist", "title": "CHECKLISTE", "items": [["Wasser", True], ["Brot", True]]}}]
+        stage._last_look(keep, "")
+        assert keep[0].get("overlay") and keep[1].get("overlay"), keep
+    check("Nachbarn: Aufzählung, Club, doppelter Zähler, fremde Liste", _neighbours)
     def _labels():                                               # Nummern-Schild nur beim Satz mit der Nummer, Stempel nur mit Wort aus dem Satz, kein Zuckerhaufen ohne Anlass
         from .. import writer
         sc = [{"text": "Drei verrückte Regeln, die im Alltag eskalieren würden.", "place": "street", "actors": [{"id": "du", "action": "talk"}]},
@@ -1385,7 +1486,113 @@ def main():
         import json
         cats = {c["slug"]: c for c in json.loads((Path(__file__).resolve().parents[2] / "docs" / "data" / "config.json").read_text(encoding="utf-8"))["categories"]}
         assert cats["motivation"]["enabled"] and cats["motivation"]["caption_style"] == "word" and cats["vergleich"]["enabled"]
-    check("Motivation: Wort für Wort, Rubriken da", _word_caps)
+        assert cats["liebe"]["enabled"] and cats["liebe"]["own_voice"] and cats["liebe"]["gemini_voice"] == "Despina"
+        from .. import sound
+        assert sound.MOOD_OF["liebe"] == "romantisch" and sound.MUSIC["romantisch"]
+        sc_ = stage.direct([{"text": "Sie sahen sich an.", "place": "beach", "actors": [{"id": "lena"}], "mood": "calm"},
+                      {"text": "Dann ging er für immer.", "place": "station", "actors": [{"id": "lena"}], "mood": "sad"}], [(0, 2), (2, 4)], "Liebe", "liebe")
+        assert sc_[0]["mood"] == "love" and sc_[1]["mood"] == "sad", [s["mood"] for s in sc_]
+        from .. import fresh, state as st_
+        keep, sv = json.loads(json.dumps(st_.CONFIG)), fresh.save
+        fresh.save = lambda *a, **k: None
+        try:
+            fresh.sync_admin_settings(json.loads(json.dumps(keep)), {"rubriken": True}, ["liebe", "tiere"])
+            assert sorted(c["slug"] for c in st_.CONFIG["categories"] if c.get("enabled")) == ["liebe", "tiere"]
+        finally:
+            st_.CONFIG.clear(); st_.CONFIG.update(keep); fresh.save = sv
+    check("Motivation: Wort für Wort, Rubriken da (auch Liebe), freigegebene Rubriken je Zugang", _word_caps)
+
+    def _hook_count():                                           # Hook-Titel im ersten Bild, Listen-Zähler „2/4“
+        import tempfile
+        from pathlib import Path
+        from .. import render as rd
+        sc_l = [{"text": "Vier Typen sitzen an Weihnachten an jedem Tisch."}, {"text": "Und den letzten kennst du."}, {"text": "Nummer eins, die Oma."},
+                {"text": "Sie kocht zu viel."}, {"text": "Nummer zwei: der Onkel."}, {"text": "Typ Nummer drei ist der Handy-Neffe."}, {"text": "Und Nummer vier bist du."}]
+        m_, n_ = rd.list_counter(sc_l, "Vier Typen am Tisch")
+        assert n_ == 4 and m_ == {2: 1, 4: 2, 5: 3, 6: 4}, (m_, n_)
+        assert rd.list_counter([{"text": "Was wäre, wenn die Sonne ausgeht?"}, {"text": "Es wird kalt."}, {"text": "Nummer eins der Gefahren."}])[1] == 0
+        with tempfile.TemporaryDirectory() as td:
+            f_ = Path(td) / "a.ass"
+            tm = [(i * 2.0, i * 2.0 + 2.0) for i in range(len(sc_l))]
+            rd.build_ass([("Vier", 0.1, 0.4)], sc_l, tm, f_, hook="VIER TYPEN AM WEIHNACHTSTISCH", title="Vier Typen am Tisch")
+            ev = [ln for ln in f_.read_text(encoding="utf-8").splitlines() if ln.startswith("Dialogue")]
+            hk = [ln for ln in ev if ",Hook," in ln]
+            assert len(hk) == 1 and hk[0].startswith("Dialogue: 4,0:00:00.00") and "\\N" in hk[0], hk
+            assert len([ln for ln in ev if ",Num," in ln]) == 4
+            rd.build_ass([("Mut", 0.1, 0.4)], sc_l, tm, f_, style="word", hook="NIE AUFGEBEN")
+            assert not [ln for ln in f_.read_text(encoding="utf-8").splitlines() if ",Hook," in ln or ",Num," in ln]
+    check("Hook-Titel im ersten Bild, Listen-Zähler", _hook_count)
+
+    def _ytcut():                                                # kürzere YouTube-Fassung: was darf raus, wer bekommt welche Datei
+        from .. import ytcut, main as mn, uploaders as up
+        sc_y = [{"text": f"Satz {i}."} for i in range(14)]
+        sc_y[5]["text"] = "Nummer zwei ist der Onkel."
+        tm = [(i * 5.0, i * 5.0 + 5.0) for i in range(14)]       # 70 s
+        keep = ytcut.plan(sc_y, tm, 55, lambda *a: ({"drop": [0, 1, 4, 5, 7, 12, 13, "x"]}, ""))
+        assert keep == [0, 1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 13], keep        # nie Anfang/Ende/Listen-Nummer, nur gültige Nummern
+        assert ytcut.plan(sc_y, tm, 0, lambda *a: ({"drop": [4]}, "")) is None
+        assert ytcut.plan(sc_y[:8], tm[:8], 55, lambda *a: ({"drop": [4]}, "")) is None          # 40 s: schon kurz genug
+        k2 = ytcut.plan(sc_y, tm, 55, lambda *a: ({"drop": [2, 3, 4, 6, 7, 8, 9, 10]}, ""))
+        assert k2 and 70 - 5 * (14 - len(k2)) >= 47, k2                      # nicht zu viel wegschneiden
+        calls, saved = [], (up.upload_video, up.zernio_ready, up.connected, mn.cfg)
+        def fake(v, path):
+            calls.append((path, bool(v.get("yt_id")), bool(v.get("tt_publish_id"))))
+            if not v.get("yt_id"):
+                v["yt_id"] = "Y1"
+            if not v.get("tt_publish_id"):
+                v["tt_publish_id"] = "T1"
+            v["error"] = None
+        try:
+            up.upload_video, up.zernio_ready, up.connected = fake, (lambda: False), (lambda p: True)
+            mn.cfg = lambda k: True if k == "youtube_enabled" else saved[3](k)
+            import tempfile
+            from pathlib import Path
+            with tempfile.TemporaryDirectory() as td:
+                short = Path(td) / "k.mp4"
+                short.write_bytes(b"x")
+                v_ = {"id": 1}
+                mn.upload_split(v_, "voll.mp4", short)
+                assert calls == [(short, False, True), ("voll.mp4", True, False)], calls
+                assert v_["yt_id"] == "Y1" and v_["tt_publish_id"] == "T1" and v_["status"] == "published", v_
+                calls.clear()
+                mn.upload_split({"id": 2}, "voll.mp4", None)
+                assert calls == [("voll.mp4", False, False)], calls
+        finally:
+            up.upload_video, up.zernio_ready, up.connected, mn.cfg = saved
+    check("YouTube-Kurzfassung: Auswahl und getrennte Uploads", _ytcut)
+
+    def _shape():                                                # KI schreibt eine Liste, wo ein Objekt stehen muss
+        from .. import ai
+        js_ = ai._shape({"scenes": [{"text": "a", "overlay": [{"type": "card", "text": "X"}], "graphic": [], "actors": ["du", {"id": "er"}, 3]}, "kaputt"],
+                         "thumbnail": [{"text": "T"}], "cast": [{"id": "du", "shirt": "rot"}], "fixes": [{"i": 1}]})
+        assert js_ == {"scenes": [{"text": "a", "overlay": {"type": "card", "text": "X"}, "graphic": None, "actors": [{"id": "du"}, {"id": "er"}]}],
+                       "thumbnail": {"text": "T"}, "cast": {"du": {"shirt": "rot"}}, "fixes": [{"i": 1}]}, js_
+    check("KI-Antwort: Liste statt Objekt wird bereinigt", _shape)
+
+    for g_m in ({"type": "message", "kicker": "UNBEKANNT", "lines": ["In sieben Tagen", "beginnt es.", "!Öffne niemals die Tür."]},
+                {"type": "message", "text": "Geh zur Bank. / Heb alles ab. / !Alles."}, {"type": "message", "lines": ["x" * 80] * 9},
+                {"type": "chapter", "value": "7", "text": "TAGE ÜBRIG"}, {"type": "chapter", "value": "1", "kicker": "LETZTER TAG", "text": "NOCH 24 STUNDEN"}):
+        for t_m in (0.0, 0.5, 2.0, 4.9):
+            check(f"Grafik {g_m['type']} t={t_m}", lambda: graphics.frame(graphics.clean(g_m), t_m, 5.0))
+    assert graphics.clean({"type": "message"}) is None and graphics.clean({"type": "chapter", "text": "x"}) is None
+    assert len(graphics.clean({"type": "message", "lines": ["a"] * 9})["lines"]) == 6
+
+    def _noir():                                                 # Rubrik „Unbekannte Nachricht“: düsterer Look, Nachricht, Kapitelkarte
+        import json
+        from pathlib import Path
+        cats = {c["slug"]: c for c in json.loads((Path(__file__).resolve().parents[2] / "docs" / "data" / "config.json").read_text(encoding="utf-8"))["categories"]}
+        assert cats["nachricht"]["enabled"] and cats["nachricht"]["look"] == "noir" and cats["nachricht"]["own_voice"]
+        sc_n = [{"text": "Drei Uhr zwölf. Dein Handy vibriert.", "place": "bedroom", "time": "night", "actors": [{"id": "du", "action": "sleep"}]},
+                {"text": "Vertrau niemandem.", "shot": "graphic", "graphic": {"type": "message", "lines": ["Vertrau niemandem.", "!Öffne nicht die Tür."]}},
+                {"text": "Noch sieben Tage.", "shot": "graphic", "graphic": {"type": "chapter", "value": "7", "text": "TAGE ÜBRIG"}}]
+        stage.direct(sc_n, [(0, 3), (3, 6), (6, 8)], "Unbekannte Nachricht", "nachricht", "noir")
+        assert [s.get("look") for s in sc_n] == ["noir"] * 3
+        assert [(s.get("graphic") or {}).get("type") for s in sc_n[1:]] == ["message", "chapter"], [s.get("graphic") for s in sc_n]
+        from PIL import Image
+        bg = graphics.noir(Image.new("RGB", (graphics.W, graphics.H), (240, 200, 120)))
+        r_, g_, b_ = bg.getpixel((10, 10))
+        assert max(r_, g_, b_) < 200 and abs(r_ - b_) < 60, (r_, g_, b_)
+    check("Unbekannte Nachricht: düsterer Look, Nachricht, Kapitelkarte", _noir)
 
     def _adopt():                                                # Gelerntes aus Kopien: nur Neues, keine fremden Wörter, nur nach Bild-Prüfung
         import tempfile
@@ -1567,6 +1774,55 @@ def main():
         from .. import overlays as _ov
         assert _ov.quote("FORSCHER VERMUTEN", "…dass die plötzliche Wende der Musik im Gehirn kurz wie ein Alarm wirkt.") is not None
     check("Prüfung 16.11.: Nacht ohne Grund, Haarbalgmuskeln, Vorfahren, blitzschnell", _pruef_1116b)
+    def _hybrid():                                               # Prüfung 19.11.2026 (Video 152): Super-Tier aus vier Arten – das Misch-Wesen ist zu sehen, kein Wal im Labor
+        T = ["Du baust im Labor das perfekte Super-Tier aus vier Tieren.", "Zutat eins: die Beine vom Gepard.", "In freier Wildbahn wurden 93 Kilometer pro Stunde gemessen.",
+             "Dein Super-Tier sprintet jetzt los.", "Zutat drei: die Zähigkeit vom Bärtierchen.", "Es übersteht fast minus 272 Grad.", "Zutat vier: das Herz vom Blauwal.",
+             "Du denkst, dieses Monster ist unbesiegbar?", "Dein Super-Tier bricht unter seinem eigenen Herzen zusammen.", "Übrig bleibt nur ein Haufen verwirrter Zellen auf dem Tisch.",
+             "Welche Tier-Superkraft hättest du gern?"]
+        sc = [{"text": t_, "place": "street", "time": "day", "crowd": "walk", "actors": [{"id": "du", "action": "walk", "speaks": True}]} for t_ in T]
+        sc[2].update(shot="graphic", graphic={"type": "number", "value": "93", "label": "KM"})
+        sc[5]["overlay"] = {"type": "counter", "label": "", "value": 272, "unit": "GRAD"}
+        sc[7]["props"] = [{"type": "scale", "pos": 600}]
+        sd = stage.direct(sc, [(i_ * 4, i_ * 4 + 4) for i_ in range(len(sc))], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
+        kinds = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd]
+        assert sd[4].get("place") == "forest" and sd[1].get("place") == "savannah" and sd[6].get("place") == "underwater", "genanntes Tier in seinem Lebensraum, nicht auf der Straße"
+        sf = stage.direct([{"text": t_, "place": "lab", "actors": [{"id": "du"}]} for t_ in ("Du baust ein Super-Tier.", "Zutat drei ist das Bärtierchen.", "Es übersteht extreme Kälte.",
+                                                                                              "Im Jahr 2007 überlebte es sogar den offenen Weltraum.", "Das Herz wiegt 180 Kilogramm.")],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(5)], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
+        kf = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sf]
+        assert kf[2] == ["tardigrade"] and kf[3] == ["tardigrade"] and sf[3].get("place") == "space", f"Folgesätze bleiben beim Tier: {kf} {sf[3].get('place')}"
+        assert "chimera" in kf[4] and "tardigrade" not in kf[4], f"Herz-Satz zeigt das Wesen, nicht das Tier von eben: {kf[4]}"
+        for i_ in (0, 7, 8, 9, 10):
+            assert "chimera" in kinds[i_] and "" in kinds[i_] and sd[i_].get("place") == "lab", f"Satz {i_}: Misch-Wesen und Hauptfigur im Labor erwartet: {kinds[i_]} {sd[i_].get('place')}"
+            assert not sd[i_].get("crowd") and not sd[i_].get("props"), f"Satz {i_}: Passanten/Waage im Labor"
+        assert kinds[3] == ["chimera"] and sd[3]["actors"][0].get("action") == "run" and sd[3].get("place") == "savannah", f"Sprint: {kinds[3]} {sd[3].get('place')}"
+        assert kinds[1] == ["cheetah"] and kinds[4] == ["tardigrade"] and kinds[6] == ["whale"], f"genannte Tiere: {kinds[1]} {kinds[4]} {kinds[6]}"
+        assert [a_ for a_ in sd[8]["actors"] if a_.get("kind")][0].get("action") == "down", "bricht zusammen: Wesen liegt"
+        assert sd[2]["graphic"].get("label") == "KM/H", sd[2]["graphic"]
+        assert sd[5]["overlay"].get("label") == "MINUS", sd[5]["overlay"]
+        assert all(not (str(a_.get("id") or "") in ("_tier", "_meer") and not a_.get("kind")) for s_ in sd for a_ in s_.get("actors") or [])
+        for s_ in sd:
+            assert frame(s_, {"du": {}}) is not None
+        assert stage.poster_hero("Was wäre, wenn du ein Super-Tier aus vier Tierarten baust? – Herz vom Blauwal", sd, None, []) == "chimera", "Titelbild: das Misch-Wesen"
+        for act_ in ("idle", "run", "down"):
+            for mood_ in ("", "sad", "scared"):
+                assert extras.creature("chimera", 0.7, 1, 0.0, mood_, 1.0, act_)[0].getbbox()
+        other = stage.direct([{"text": "Dieses Monster wohnt unter deinem Bett.", "place": "bedroom", "actors": [{"id": "du"}]}], [(0, 4)], "Warum Kinder Angst vor Monstern haben", "fakten")
+        assert "chimera" not in [str(a_.get("kind") or "") for a_ in other[0].get("actors") or []], "Misch-Wesen in fremdem Video"
+        from .. import writer as _w
+        js_ = {"title": "x", "description": "y", "hashtags": ["#fakte"], "tags": [], "scenes": [{"text": "Es sieht eine Maus aus mehrerenhundert Metern Höhe."}]}
+        js_ = _w.polish(js_) or js_
+        assert js_["hashtags"] == ["#fakten"] and "mehreren hundert" in js_["scenes"][0]["text"], js_
+        js_ = {"title": "x", "description": "y", "hashtags": [], "tags": [], "scenes": [{"text": "In freier Wildbahn wurden neunzig und drei Kilometer pro Stunde gemessen."}]}
+        js_ = _w.polish(js_) or js_
+        assert "dreiundneunzig Kilometer" in js_["scenes"][0]["text"], js_
+        sn = stage.direct([{"text": t_, "place": "lab", "actors": [{"id": "du"}]} for t_ in ("Du baust ein Super-Tier.", "Zutat eins sind die Beine vom Gepard.",
+                                                                                              "In freier Wildbahn wurden dreiundneunzig Kilometer pro Stunde gemessen.", "Aber jede Superkraft hat ihren Preis.")],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(4)], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
+        kn = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sn]
+        assert sn[2].get("shot") == "graphic" or kn[2] == ["cheetah"], f"Messwert gehört zum Gepard: {kn[2]}"
+        assert "cheetah" not in kn[3], f"neuer Gedanke: nicht mehr der Gepard: {kn[3]}"
+    check("Super-Tier aus vier Arten: Misch-Wesen im Bild (Prüfung 19.11., Video 152)", _hybrid)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):
