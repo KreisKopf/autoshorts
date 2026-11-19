@@ -1873,9 +1873,58 @@ def main():
         frame({"place": "transit", "time": "night", "actors": [{"id": "du"}]})
         assert stage._hint("Nach zwei Sekunden liest es deinen Suchverlauf laut im Bus vor.") == "transit" and stage._hint("Der Bus fährt los.") != "transit"
         from .. import writer as wr_
-        js_ = wr_.polish({"title": "T", "scenes": [{"text": "Warum du jeden Abend hineinschaußt."}]})
+        js_ = wr_.polish({"title": "T", "hashtags": ["#fy", "#geraete"], "tags": ["kuehlschrank"], "scenes": [{"text": "Warum du jeden Abend hineinschaußt."}, {"text": "Es war nämlich nur du."}]})
         assert "hineinschaust" in js_["scenes"][0]["text"], js_["scenes"][0]["text"]
+        assert js_["scenes"][1]["text"] == "Es warst nämlich nur du." and js_["hashtags"] == ["#fyp", "#geräte"] and js_["tags"] == ["kühlschrank"], (js_["scenes"][1], js_["hashtags"], js_["tags"])
+        sd2 = stage.direct([{"text": "Das ist der Anfang.", "place": "livingroom", "actors": [{"id": "du"}]},
+                            {"text": "Plötzlich drehen sich alle Fahrgäste um und mustern dich mit großen Augen.", "place": "transit", "crowd": "worried", "props": [{"type": "lib_auge"}], "actors": [{"id": "du", "action": "cower"}]},
+                            {"text": "Auf dem Weg zum Bäcker sagt das Navi im Auto, dass du auch zu Fuß gehen kannst.", "place": "street", "props": [{"type": "car"}], "actors": [{"id": "du", "action": "sit"}]},
+                            {"text": "Ende.", "place": "livingroom", "actors": [{"id": "du"}]}], [(i_ * 4, i_ * 4 + 4) for i_ in range(4)], "Geräte sagen die Wahrheit", "whatif")
+        assert "lib_auge" not in [stage._pkey(q_) for q_ in sd2[1].get("props") or []], "kein einzelnes Auge in der Bahn"
+        assert all(a_.get("action") != "sit" for a_ in sd2[2].get("actors") or []), "niemand sitzt auf dem Gehweg vor dem Auto"
     check("Sprechende Geräte, Bus-Innenraum, Verneinung, fallende Kurve (Prüfung 19.11., Videos 156/157)", _devices)
+    def _cute():                                                 # Prüfung 19.11.2026 (Plan „Tödlich niedlich“): Pfeilgiftfrosch, Schnabeltier, Kugelfisch als Wesen; Koch mit Mütze
+        T = ["Drei Tiere, die niedlich aussehen.", "Nummer eins: Der Pfeilgiftfrosch ist knallgelb.", "Sein Hautgift reicht für zehn Menschen.",
+             "Schon eine Berührung ist gefährlich.", "Nummer zwei: das Schnabeltier.", "Männchen tragen am Hinterbein einen Giftsporn.",
+             "Das Gift tötet dich zwar nicht, verursacht aber extreme Schmerzen.", "Nummer drei: der Kugelfisch.", "Bei Gefahr bläst er sich zur Stachelkugel auf.",
+             "Nur ausgebildete Köche dürfen den Kugelfisch zubereiten.", "Ich habe einen Frosch im Hals."]
+        sc = [{"text": t_, "place": "livingroom", "time": "day", "props": [], "actors": [{"id": "du", "action": "walk", "pos": "offleft", "to": "center"}]} for t_ in T]
+        sc[1].update(place="forest", actors=[], props=["pfeilgiftfrosch"], shot="insert")
+        sc[4].update(place="river", actors=[{"id": "pete", "kind": "cat"}])
+        sc[7].update(place="underwater", actors=[], props=["kugelfisch"], shot="event")
+        sd = stage.direct(sc, [(i_ * 4, i_ * 4 + 4) for i_ in range(len(sc))], "Tiere, die niedlich aussehen, aber gefährlich sind", "tiere")
+        kinds = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd]
+        acts = [[str(a_.get("action") or "") for a_ in s_.get("actors") or []] for s_ in sd]
+        assert kinds[1] == ["frog"] and sd[1].get("shot") != "insert" and not sd[1].get("props"), ("Pfeilgiftfrosch als Wesen", kinds[1], sd[1].get("shot"))
+        assert kinds[2] == ["frog"], ("„Sein Hautgift …“ bleibt beim Frosch", kinds[2])
+        assert kinds[3] == ["", "frog"] and acts[3][0] == "cower", ("Berührung: Mensch weicht vor dem Frosch zurück", kinds[3], acts[3])
+        assert kinds[4] == ["platypus"] and kinds[5] == ["platypus"] and acts[5] == ["spur"], ("Schnabeltier zeigt den Sporn", kinds[4], kinds[5], acts[5])
+        assert "platypus" not in kinds[6], ("Satz über den Menschen: kein Schnabeltier", kinds[6])
+        assert kinds[7] == ["puffer"] and acts[7] == ["idle"] and places.resolve(sd[7]["place"]) == "underwater", ("Kugelfisch unter Wasser", kinds[7], acts[7])
+        assert kinds[8] == ["puffer"] and acts[8] == ["puff"], ("Kugelfisch bläst sich auf", kinds[8], acts[8])
+        assert kinds[9] == [""] and (sd[9]["actors"][0].get("look") or {}).get("hat") == "chef" and places.resolve(sd[9]["place"]) == "kitchen", ("Koch mit Mütze in der Küche", sd[9]["actors"])
+        assert "frog" not in kinds[10], "Frosch im Hals ist kein Frosch"
+        sd3 = stage.direct([{"text": "Drei süße Tiere, die giftig sind.", "place": "river", "actors": [{"id": "du"}]},
+                            {"text": "Nummer eins, der Pfeilgiftfrosch, ist knallgelb.", "place": "forest", "actors": [{"id": "du"}]},
+                            {"text": "Er passt problemlos auf deine Handfläche.", "place": "forest", "shot": "close", "actors": [{"id": "du"}]},
+                            {"text": "Das Gift eines einzigen Froschs würde für rund zehn Menschen reichen.", "place": "forest", "shot": "graphic", "graphic": {"type": "number", "value": "10", "label": "MENSCHEN"}},
+                            {"text": "Es sitzt direkt in seiner Haut, und die grelle Farbe warnt alle Fressfeinde.", "place": "forest", "actors": [{"id": "du", "action": "talk"}]},
+                            {"text": "Nummer zwei ist das Schnabeltier.", "place": "river", "actors": [{"id": "du"}]},
+                            {"text": "Welches der drei hättest du gestreichelt?", "place": "river", "actors": [{"id": "du"}], "overlay": {"type": "choice", "a": "Frosch", "b": "Schnabeltier"}}],
+                           [(i_ * 4, i_ * 4 + 4) for i_ in range(7)], "Drei niedliche Tiere, die du besser nie anfasst", "tiere")
+        k3 = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd3]
+        assert k3[0] == ["frog", "platypus"], ("erstes Bild zeigt die Tiere", k3[0])
+        assert k3[2] == ["frog"] and sd3[2].get("shot") != "close", ("Handfläche: der Frosch bleibt im Bild", k3[2])
+        assert k3[4] == ["frog"], ("nach der Zahl-Grafik bleibt „Es sitzt in seiner Haut“ beim Frosch", k3[4])
+        assert not sd3[6].get("overlay"), "Auswahl mit zwei Antworten zur Frage nach den dreien entfällt"
+        frame(sd3[0])
+        for k_, a_ in (("frog", ""), ("frog", "hop"), ("platypus", ""), ("platypus", "spur"), ("puffer", ""), ("puffer", "puff")):
+            for f_ in (1, -1):
+                assert extras.creature(k_, 1.3, facing=f_, action=a_)[0].getbbox(), (k_, a_)
+        for i_ in (1, 3, 5, 8, 9):
+            frame(sd[i_])
+        frame({"place": "kitchen", "actors": [{"id": "k", "look": {"hat": "chef", "shirt": "weiß"}}]})
+    check("Niedliche Gifttiere: Pfeilgiftfrosch, Schnabeltier, Kugelfisch; Koch mit Mütze (Prüfung 19.11., Plan 21 Uhr)", _cute)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

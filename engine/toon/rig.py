@@ -117,7 +117,7 @@ class Look:
     shirt: tuple = COLORS["blau"]
     pants: tuple = (40, 40, 48)
     skin: tuple = SKINS["schwarz"]
-    hat: str = ""            # cap | helmet | bow | beanie | crown | army | headphones | ""
+    hat: str = ""            # cap | helmet | bow | beanie | crown | army | headphones | chef | ""
     hat_color: tuple = COLORS["rot"]
     glasses: bool = False
     hair: str = ""           # long | bun | ponytail | bob | curly | "" (kurz)
@@ -293,7 +293,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
 
     shoe_col = _mix(shirt, (250, 250, 250), 0.12) if not mask else (60, 60, 70)
     # Haar hinten (lang, Bob, Pferdeschwanz, Locken): VOR dem Körper gezeichnet, liegt also hinter Hals, Kapuze und Schultern
-    if not mask and look.hat not in ("helmet", "army") and look.hair in ("long", "bob", "ponytail", "curly"):
+    if not mask and look.hat not in ("helmet", "army", "chef") and look.hair in ("long", "bob", "ponytail", "curly"):
         _hr = 80 * k
         _hc = _pt(top, 180 - (pose.head * f + lean), _hr * 0.86)
         _back_hair(d, look, _hc, _hr * 1.04, _hr * 0.96, _hr, k, f, o, hair, hair_d, hair_l, pose)
@@ -451,6 +451,19 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         base = ty + hr * 0.6
         d.rounded_rectangle((hcx - rx * 1.16 - o, base - 2 * u - o, hcx + rx * 1.16 + o, base + 12 * u + o), 8 * u, fill=INK)
         d.rounded_rectangle((hcx - rx * 1.16, base - 2 * u, hcx + rx * 1.16, base + 12 * u), 7 * u, fill=_dark(col, 0.1))
+    elif look.hat == "chef":                               # Kochmütze: weißer Bund, darüber der gebauschte Kopf (Köche in Küche und Restaurant, stage._cooks)
+        col = (250, 250, 246)
+        base = ty + hr * 0.5
+        top = ty - 52 * u                                 # niedrig gehalten: in der Großaufnahme füllte die erste Fassung das halbe Bild (Video 162)
+        blobs = ((hcx - rx * 0.5, top + 34 * u, 32 * u), (hcx + rx * 0.5, top + 34 * u, 32 * u), (hcx, top + 22 * u, 38 * u))
+        for bx_, by_, r_ in blobs:
+            d.ellipse((bx_ - r_ - o, by_ - r_ - o, bx_ + r_ + o, by_ + r_ + o), fill=INK)
+        d.rectangle((hcx - rx * 0.72 - o, top + 34 * u, hcx + rx * 0.72 + o, base), fill=INK)
+        for bx_, by_, r_ in blobs:
+            d.ellipse((bx_ - r_, by_ - r_, bx_ + r_, by_ + r_), fill=col)
+        d.rectangle((hcx - rx * 0.72, top + 34 * u, hcx + rx * 0.72, base), fill=col)
+        d.rounded_rectangle((hcx - rx * 0.84 - o, base - 22 * u - o, hcx + rx * 0.84 + o, base + 10 * u + o), 8 * u, fill=INK)
+        d.rounded_rectangle((hcx - rx * 0.84, base - 22 * u, hcx + rx * 0.84, base + 10 * u), 7 * u, fill=_dark(col, 0.07))
     elif look.hat in ("cap", "helmet", "beanie"):
         col = (242, 140, 40) if look.hat == "helmet" else look.hat_color
         d.chord((hat_box[0] - o, hat_box[1] - o, hat_box[2] + o, hat_box[3] + o), 180, 360, fill=INK)
