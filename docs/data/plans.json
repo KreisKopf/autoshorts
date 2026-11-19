@@ -1,1 +1,698 @@
-{}
+{
+ "2026-11-19 13:00": {
+  "category": "liebe",
+  "topic": "3 kleine Essensgewohnheiten im Späti, die verraten, dass ihr längst zusammen seid",
+  "trend": null,
+  "script": {
+   "title": "3 Essensgewohnheiten im Späti, die eure Liebe verraten",
+   "description": "Echte Liebe zeigt sich nicht nur in großen Worten, sondern im ganz normalen Alltag.\nDrei kleine Essensgewohnheiten im Späti, an denen du erkennst, dass ihr längst zusammen seid.\nTeilst du dir auch immer alles?",
+   "hashtags": [
+    "#shorts",
+    "#beziehung",
+    "#paare",
+    "#liebe",
+    "#alltag",
+    "#fy",
+    "#viral"
+   ],
+   "tags": [
+    "beziehung",
+    "paare",
+    "liebe",
+    "späti",
+    "alltag",
+    "essensgewohnheiten",
+    "verliebt",
+    "partnerschaft"
+   ],
+   "thumbnail": {
+    "place": "supermarket",
+    "time": "night",
+    "actor": "du",
+    "action": "talk",
+    "emotion": "happy",
+    "props": [
+     "cart"
+    ],
+    "weather": "",
+    "image": "Close-up of a young couple sharing snacks in a convenience store, smiling at each other, warm lighting",
+    "text": "LÄNGST ZUSAMMEN"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "leo": {
+     "shirt": "grün",
+     "hat": "",
+     "hair": "curly",
+     "gender": "m",
+     "hair_color": "braun",
+     "skin": "mittel"
+    },
+    "mia": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "ponytail",
+     "gender": "w",
+     "hair_color": "blond",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Drei Späti-Gewohnheiten, die beweisen, dass ihr längst zusammen seid.",
+     "image": "Leo and Mia standing together in a small convenience store, looking at the snack shelf.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "supermarket",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Essensgewohnheiten",
+      "längst zusammen"
+     ],
+     "overlay": null,
+     "see": "Du und er schieben gemeinsam einen Einkaufswagen durch den hell erleuchteten Späti.",
+     "time": "night",
+     "props": [
+      "cart"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "walk",
+       "emotion": "happy",
+       "pos": "offright",
+       "to": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "A small corner shop with shelves full of snacks and drinks, warm interior lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer drei verrät, wer bei euch wirklich den Ton angibt.",
+     "image": "Mia holding a bag of chips in the store, smiling at Leo.",
+     "who": [
+      "mia"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "eine einzige Tüte"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 1",
+      "text": "GETEILTE CHIPS"
+     },
+     "see": "Eine runde Grafik blendet Runde 3 ein.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "round",
+      "kicker": "GEWOHNHΕΙΤ",
+      "text": "NUMMER 3"
+     },
+     "who_desc": "",
+     "place_desc": "A small corner shop with shelves full of snacks and drinks, warm interior lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber am Ende isst nur eine Person fast alles auf.",
+     "image": "Leo looking surprised at the nearly empty chip bag in Mia's hand.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "livingroom",
+     "camera": "pan_right",
+     "sfx": "pop",
+     "highlight": [
+      "fast alles auf"
+     ],
+     "overlay": null,
+     "see": "Du isst eine Tüte Chips fast ganz alleine im Wohnzimmer auf dem Sofa.",
+     "time": "night",
+     "props": [
+      "tv",
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du denkst an Streit, doch ihr überlasst den letzten Knabberkram kampflos.",
+     "image": "Mia handing the last chip to Leo with a sweet smile.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "kampflos überlasst"
+     ],
+     "overlay": null,
+     "see": "Ihr sitzt zusammen und teilt euch kampflos die letzten Chips.",
+     "time": "night",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "sit",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer zwei: Du greifst blind in seine Jackentasche und findest immer etwas.",
+     "image": "Mia putting her hand into Leo's jacket pocket and pulling out a small candy.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Jackentasche"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 2",
+      "text": "DIE NOTFALLRESERVE"
+     },
+     "see": "Eine runde Grafik zeigt Nummer zwei.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "round",
+      "kicker": "GEWOHNHEIT",
+      "text": "NUMMER 2"
+     },
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Egal ob zerdrückte Bonbons oder Kaugummis mit Staub.",
+     "image": "Close-up of an old candy wrapper in her hand.",
+     "who": [
+      "mia"
+     ],
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Bonbons"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "IMMER DABEI"
+     },
+     "see": "Eine Jacke liegt auf dem Stuhl im Flur.",
+     "time": "night",
+     "props": [
+      "jacke",
+      "stuhl"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du isst es trotzdem, weil du genau weißt, wo es herkommt.",
+     "image": "Mia smiling happily and eating the candy.",
+     "who": [
+      "mia"
+     ],
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "isst es trotzdem"
+     ],
+     "overlay": null,
+     "see": "Du holst ein zerdrücktes Bonbon aus der Jackentasche und lächelst.",
+     "time": "night",
+     "props": [
+      "jacke"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer drei: Ihr teilt euch eine Flasche und diskutiert über den Geschmack.",
+     "image": "Leo holding a drink bottle and offering it to Mia.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "supermarket",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "eine Flasche"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 3",
+      "text": "EIN GETRÄNK"
+     },
+     "see": "Eine runde Grafik zeigt Nummer drei.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "round",
+      "kicker": "GEWOHNHΕΙΤ",
+      "text": "NUMMER 3"
+     },
+     "who_desc": "; ",
+     "place_desc": "A small corner shop with shelves full of snacks and drinks, warm interior lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du behauptest, es schmeckt nach Seife, doch was trinkst du dann freiwillig?",
+     "image": "Mia making a funny face while taking another sip from the bottle.",
+     "who": [
+      "mia"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nach Seife"
+     ],
+     "overlay": null,
+     "see": "Ihr steht im Späti und haltet eine gemeinsame Flasche.",
+     "time": "night",
+     "props": [
+      "bottle"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "talk",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "A small corner shop with shelves full of snacks and drinks, warm interior lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Weil es zusammen einfach besser schmeckt als allein auf dem Sofa.",
+     "image": "Leo laughing and putting his arm around Mia's shoulders.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "besser schmeckt"
+     ],
+     "overlay": null,
+     "see": "Ihr sitzt abends gemütlich zusammen auf dem Sofa.",
+     "time": "night",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "sit",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer so einkauft, braucht keine großen Liebeserklärungen mehr im Alltag.",
+     "image": "Both walking towards the checkout counter with their snacks.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "supermarket",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "keine großen Liebeserklärungen"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ECHTES GLÜCK"
+     },
+     "see": "Eine Karte zeigt den Späti-Einkauf.",
+     "time": "night",
+     "props": [
+      "shelf"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "badge",
+      "kicker": "LIEBE",
+      "text": "IM ALLTAG"
+     },
+     "who_desc": "; ",
+     "place_desc": "A small corner shop with shelves full of snacks and drinks, warm interior lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Ihr kennt euch in und auswendig bei jedem kleinen Snack.",
+     "image": "The cashier smiling at them as they place items on the counter.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "in und auswendig"
+     ],
+     "overlay": null,
+     "see": "Ihr greift gleichzeitig nach demselben Snack im Regal.",
+     "time": "night",
+     "props": [
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "point",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "A small corner shop with shelves full of snacks and drinks, warm interior lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Manchmal reicht ein kleiner Gang zum Späti für das größte Glück.",
+     "image": "They pay for the snacks and exchange a loving glance.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "größte Glück"
+     ],
+     "overlay": null,
+     "see": "Ihr lauft nachts glücklich aus der Späti-Tür heraus.",
+     "time": "night",
+     "props": [
+      "door",
+      "streetlamp"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "walk",
+       "emotion": "happy",
+       "pos": "offright",
+       "to": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Keine Sekunde geht verloren, wenn ihr gemeinsam durch die Gänge schlendert.",
+     "image": "Looking at the shelves one last time before leaving.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "gemeinsam"
+     ],
+     "overlay": null,
+     "see": "Ihr schlendert zusammen durch die beleuchtete Straße.",
+     "time": "night",
+     "props": [
+      "streetlamp"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "walk",
+       "emotion": "happy",
+       "pos": "offright",
+       "to": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und plötzlich merkt ihr, wie perfekt dieser kleine Moment eigentlich ist.",
+     "image": "Stepping outside the shop into the warm evening air together.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "street",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "perfekter Moment"
+     ],
+     "overlay": null,
+     "see": "Ihr seht euch auf der Straße tief in die Augen.",
+     "time": "night",
+     "props": [
+      "streetlamp"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "idle",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Drei kleine Essensgewohnheiten im Späti, die verraten, dass ihr längst zusammen seid.",
+     "image": "Walking down the street side by side, sharing the snacks.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "supermarket",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Essensgewohnheiten",
+      "längst zusammen"
+     ],
+     "overlay": null,
+     "see": "Ihr steht Arm in Arm im Späti an der Kasse.",
+     "time": "night",
+     "props": [
+      "cart"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "idle",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "; ",
+     "place_desc": "A small corner shop with shelves full of snacks and drinks, warm interior lighting",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "späti",
+   "bonbon",
+   "sofa"
+  ],
+  "title": "3 Essensgewohnheiten im Späti, die eure Liebe verraten",
+  "created": 1795081652.675727
+ }
+}
