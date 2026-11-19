@@ -1,11 +1,13 @@
 {
- "updated": 1795077945.986146,
+ "updated": 1795079926.6320617,
  "enough": false,
  "counted": 0,
  "total": 0,
  "needed": 6,
  "categories": [],
- "weights": {},
+ "weights": {
+  "liebe": 1.0
+ },
  "advice": [
   "Noch zu wenig Daten: 0 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
  ],
