@@ -1,763 +1,4 @@
 {
- "2026-11-19 18:00": {
-  "category": "nachricht",
-  "topic": "Nachts um 3:12 Uhr schreibt dir eine unbekannte Nummer: Kauf im Supermarkt genau sieben Packungen billige Instant-Nudeln und versteck sie im Spind der Schulaula – und die Tage bis zum großen Ereignis am Freitag laufen ab.",
-  "trend": null,
-  "script": {
-   "title": "Nachts um drei Uhr vibriert das Handy mit einer unheimlichen Nachricht",
-   "description": "Erlebe die unheimliche Geschichte einer mysteriösen Nacht.\nWem gehört die unbekannte Nummer, die dir unheimliche Befehle schickt?\nWürdest du den Anweisungen einer fremden Nachricht folgen?",
-   "hashtags": [
-    "#shorts",
-    "#mystery",
-    "#creepy",
-    "#countdown",
-    "#geschichte",
-    "#viral",
-    "#foryou"
-   ],
-   "tags": [
-    "mystery geschichte",
-    "unbekannte nummer",
-    "countdown",
-    "grusel",
-    "handy nachricht",
-    "schlaflos",
-    "geheimnis",
-    "thriller",
-    "TikTok Story"
-   ],
-   "thumbnail": {
-    "place": "bedroom",
-    "time": "night",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "phone"
-    ],
-    "weather": "dark",
-    "image": "Close up of a shocked person looking at a glowing smartphone in a dark bedroom at night, bold simple composition, high contrast",
-    "text": "UNBEKANNTE NUMMER"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "lila",
-     "hair": "ponytail",
-     "hair_color": "blond",
-     "gender": "w"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Nachts um drei Uhr kam diese unheimliche Nachricht.",
-     "image": "Nachts um drei Uhr kam diese unheimliche Nachricht.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "Drei Uhr zwölf",
-      "Unbekannte Nummer"
-     ],
-     "hud": "3:12 UHR",
-     "overlay": null,
-     "see": "Du liegst nachts im dunklen Schlafzimmer und starrst erschrocken auf das vibrierende Handy.",
-     "time": "night",
-     "weather": "dark",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "close",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "status": ""
-    },
-    {
-     "text": "Und die letzte Anweisung verändert alles bis Freitag.",
-     "image": "Und die letzte Anweisung verändert alles bis Freitag.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "seltsame Nachricht"
-     ],
-     "overlay": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "Kauf sieben Packungen",
-       "billige Instant-Nudeln.",
-       "Versteck sie im Spind.",
-       "!Öffne niemals die Tür."
-      ]
-     },
-     "see": "Eine unheimliche Nachricht erscheint auf dem Display des Smartphones.",
-     "time": "night",
-     "weather": "dark",
-     "props": [
-      "phone"
-     ],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "Bis Freitag",
-       "wird sich",
-       "alles ändern.",
-       "!Mach dich bereit."
-      ]
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du hältst es für einen dummen Scherz und löschst den Chat.",
-     "image": "Du hältst es für einen dummen Scherz und löschst den Chat.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "dummen Scherz"
-     ],
-     "overlay": null,
-     "see": "Du hältst das Handy mit genervtem Blick und löschst den Chat.",
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dann kommt ein Beweis, dass der Absender wirklich alles weiß.",
-     "image": "Dann kommt ein Beweis, dass der Absender wirklich alles weiß.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_out",
-     "sfx": "ding",
-     "highlight": [
-      "Beweis"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "ALLES WISSEN"
-     },
-     "see": "Auf dem Bildschirm taucht eine seltsame Karte mit einer geheimen Warnung auf.",
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "card",
-      "kicker": "WARNUNG",
-      "text": "ICH WEISS ALLES"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein Regenschirm.",
-     "image": "In deinem Kühlschrank liegen eine halbe Pizza und ein Regenschirm.",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kühlschrank",
-      "Regenschirm"
-     ],
-     "overlay": null,
-     "see": "Du öffnest den Kühlschrank und siehst eine halbe Pizza und einen Regenschirm.",
-     "time": "night",
-     "props": [
-      "fridge"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du prüfst es nach und es stimmt exakt.",
-     "image": "Du prüfst es nach und es stimmt exakt.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "stimmt exakt"
-     ],
-     "overlay": null,
-     "see": "Du überprüfst die Nachricht und merkst, dass es exakt stimmt.",
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Sieben Tage bleiben dir bis zum großen Ereignis am Freitag.",
-     "image": "Sieben Tage bleiben dir bis zum großen Ereignis am Freitag.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "Sieben Tage"
-     ],
-     "overlay": {
-      "type": "chapter",
-      "value": "7",
-      "text": "TAGE ÜBRIG"
-     },
-     "see": "Eine Zeitanzeige erinnert an die verbleibenden Tage bis Freitag.",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "7",
-      "text": "TAGE ÜBRIG"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Am nächsten Tag holst du genau sieben Packungen billige Nudeln.",
-     "image": "Am nächsten Tag holst du genau sieben Packungen billige Nudeln.",
-     "who": [
-      "du"
-     ],
-     "place": "supermarket",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "sieben Packungen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "TAG 6"
-     },
-     "see": "Am nächsten Tag kaufst du im Supermarkt genau sieben Packungen billige Nudeln.",
-     "time": "day",
-     "props": [
-      "cart",
-      "cans"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "left",
-       "to": "center",
-       "speaks": true,
-       "hold": "bag"
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "crowd": "walk",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du versteckst sie heimlich im alten Spind der Schulaula.",
-     "image": "Du versteckst sie heimlich im alten Spind der Schulaula.",
-     "who": [
-      "du"
-     ],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Schulaula"
-     ],
-     "overlay": null,
-     "see": "Du versteckst die Nudeln heimlich im alten Spind der Schulaula.",
-     "time": "day",
-     "props": [
-      "shelf"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "bag"
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Fünf Tage übrig. Die nächste Nachricht fordert Geld abzuheben.",
-     "image": "Fünf Tage übrig. Die nächste Nachricht fordert Geld abzuheben.",
-     "who": [
-      "du"
-     ],
-     "place": "classroom",
-     "camera": "zoom_out",
-     "sfx": "tick",
-     "highlight": [
-      "Fünf Tage"
-     ],
-     "overlay": {
-      "type": "chapter",
-      "value": "5",
-      "text": "TAGE ÜBRIG"
-     },
-     "see": "Die nächste Kapitelkarte zeigt den neuen Countdown an.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "5",
-      "text": "TAGE ÜBRIG"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du befolgst den Befehl, obwohl deine Hände leicht zittern.",
-     "image": "Du befolgst den Befehl, obwohl deine Hände leicht zittern.",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "befolgst den Befehl"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "ERSPART",
-      "value": 4300,
-      "unit": "€"
-     },
-     "see": "Du hebst Geld ab und deine Hände zittern leicht vor Aufregung.",
-     "time": "day",
-     "props": [
-      "money"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "tremble",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "money"
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "walk",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Drei Tage übrig. Du sollst dreihundert Dosen im Keller stapeln.",
-     "image": "Drei Tage übrig. Du sollst dreihundert Dosen im Keller stapeln.",
-     "who": [
-      "du"
-     ],
-     "place": "basement",
-     "camera": "pan_left",
-     "sfx": "tick",
-     "highlight": [
-      "dreihundert Dosen"
-     ],
-     "overlay": {
-      "type": "chapter",
-      "value": "3",
-      "text": "TAGE ÜBRIG"
-     },
-     "see": "Eine weitere Kapitelkarte zählt die Tage herunter.",
-     "time": "day",
-     "props": [
-      "cans",
-      "shelf"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "3",
-      "text": "TAGE ÜBRIG"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Jede Anweisung wirft Fragen auf, aber wer steckt dahinter?",
-     "image": "Jede Anweisung wirft Fragen auf, aber wer steckt dahinter?",
-     "who": [
-      "du"
-     ],
-     "place": "basement",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "seltsame Frage"
-     ],
-     "overlay": null,
-     "see": "Du stapelst hunderte Dosen im dunklen Keller und grübelst über den Sinn.",
-     "time": "day",
-     "props": [
-      "cans",
-      "shelf"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Niemandem etwas sagen. Besonders nicht deinem neugierigen Nachbarn.",
-     "image": "Niemandem etwas sagen. Besonders nicht deinem neugierigen Nachbarn.",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Niemandem etwas sagen"
-     ],
-     "overlay": null,
-     "see": "Du schaust dich misstrauisch um, damit niemand dein Versteck bemerkt.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Ein Tag übrig. Im Fernsehen läuft plötzlich eine Eilmeldung.",
-     "image": "Ein Tag übrig. Im Fernsehen läuft plötzlich eine Eilmeldung.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Eilmeldung"
-     ],
-     "overlay": {
-      "type": "chapter",
-      "value": "1",
-      "text": "TAGE ÜBRIG"
-     },
-     "see": "Der vorletzte Tag bricht an und die Anspannung wächst.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "1",
-      "text": "TAG ÜBRIG"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Der Nachbar wird misstrauisch und beobachtet dein Fenster.",
-     "image": "Der Nachbar wird misstrauisch und beobachtet dein Fenster.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "misstrauisch"
-     ],
-     "overlay": {
-      "type": "news",
-      "kicker": "NACHRICHTEN",
-      "text": "SELTSAME VORFÄLLE",
-      "sub": "Polizei warnt"
-     },
-     "see": "Im Fernsehen läuft plötzlich eine dramatische Eilmeldung.",
-     "time": "day",
-     "props": [
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Die Anspannung steigt ins Unermessliche in diesem dunklen Raum.",
-     "image": "Die Anspannung steigt ins Unermessliche in diesem dunklen Raum.",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "Anspannung steigt"
-     ],
-     "overlay": null,
-     "see": "Dein neugieriger Nachbar beobachtet dein Fenster von draußen.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "nachbar",
-       "action": "point",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "watch",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wer schreibt diese Nachrichten eigentlich jede Nacht um drei Uhr zwölf?",
-     "image": "Wer schreibt diese Nachrichten eigentlich jede Nacht um drei Uhr zwölf?",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Wer schreibt"
-     ],
-     "overlay": null,
-     "see": "Du sitzt nachts wieder im Zimmer und fragst dich, wer dahintersteckt.",
-     "time": "night",
-     "weather": "dark",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Es war dein eigenes altes Handy aus der Zukunft.",
-     "image": "Es war dein eigenes altes Handy aus der Zukunft.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_out",
-     "sfx": "ding",
-     "highlight": [
-      "aus der Zukunft"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DEINE ZUKUNFT"
-     },
-     "see": "Die überraschende Auflösung erscheint als geheimnisvolle Nachricht.",
-     "time": "night",
-     "weather": "dark",
-     "props": [
-      "phone"
-     ],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "card",
-      "kicker": "AUFLÖSUNG",
-      "text": "DEIN ZUKUNFT-ICH"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "3:12 UHR",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "spind"
-  ],
-  "title": "Nachts um drei Uhr vibriert das Handy mit einer unheimlichen Nachricht",
-  "created": 1795092946.6906133
- },
  "2026-11-19 21:00": {
   "category": "liebe",
   "topic": "3 kleine Zeichen in der Schulaula, die verraten, dass ihr längst heimlich ineinander verliebt seid",
@@ -3042,5 +2283,772 @@
   ],
   "title": "3 Dinge, die beim Kochen Dopamin im Gehirn auslösen",
   "created": 1795177556.4672408
+ },
+ "2026-11-20 21:00": {
+  "category": "liebe",
+  "topic": "Was in deinem Gehirn passiert, wenn ihr euch beim Spätkauf die letzte Spezi teilt: 3 wissenschaftliche Zeichen für Romantik",
+  "trend": null,
+  "script": {
+   "title": "Drei wissenschaftliche Zeichen für Romantik im Späti",
+   "description": "Was in deinem Gehirn passiert, wenn ihr euch die letzte Spezi teilt\nDrei wissenschaftliche Zeichen, dass mehr als nur Freundschaft im Spiel ist\nTeilst du deine Spezi auch nur mit ganz besonderen Menschen?",
+   "hashtags": [
+    "#shorts",
+    "#liebe",
+    "#foryou",
+    "#wissenschaft",
+    "#pärchen",
+    "#psychologie",
+    "#viral",
+    "#romantik"
+   ],
+   "tags": [
+    "spezi",
+    "liebe",
+    "gehirn",
+    "romantik",
+    "wissenschaft",
+    "pärchen",
+    "beziehung",
+    "psychologie",
+    "späti",
+    "gefühl"
+   ],
+   "thumbnail": {
+    "place": "supermarket",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "glass"
+    ],
+    "weather": "",
+    "image": "Close-up of two young people sharing a soft drink bottle with two straws in a neon-lit convenience store, dramatic lighting, smiling, highly detailed",
+    "text": "SPEZI GEHEIMNIS"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "braun",
+     "gender": "w",
+     "skin": "hell"
+    },
+    "leon": {
+     "shirt": "schwarz",
+     "hat": "beanie",
+     "hair": "",
+     "hair_color": "schwarz",
+     "gender": "m",
+     "skin": "mittel"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Wenn ihr im Späti die letzte Spezi teilt, passiert Magie.",
+     "image": "Two young people standing in a bright convenience store holding a drink bottle together",
+     "who": [
+      "du",
+      "leon"
+     ],
+     "place": "supermarket",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Spezi",
+      "Magie"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ECHTE ROMANTIK"
+     },
+     "see": "Du und er teilen im Späti eine Spezi, magisches Licht leuchtet auf",
+     "time": "night",
+     "props": [
+      "späti",
+      "glass"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "hold",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true,
+       "hold": "glass"
+      },
+      {
+       "id": "er",
+       "action": "smile",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Drei wissenschaftliche Zeichen verraten sofort, ob das echte Romantik ist.",
+     "image": "Close-up of a neon sign flickering inside a convenience store at night",
+     "who": [
+      "du"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Zeichen",
+      "Romantik"
+     ],
+     "overlay": null,
+     "see": "Grafik zeigt drei Zeichen für Romantik im Späti",
+     "time": "night",
+     "props": [
+      "späti"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer eins ist die Spiegelung deiner Bewegungen.",
+     "image": "Two friends drinking from the same bottle, mirroring each other's postures",
+     "who": [
+      "du",
+      "leon"
+     ],
+     "place": "supermarket",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Nummer",
+      "Spiegelung"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 1",
+      "text": "SPIEGELUNG"
+     },
+     "see": "Du spiegelst seine Bewegungen beim Greifen der Flasche",
+     "time": "night",
+     "props": [
+      "späti",
+      "glass"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dein Gehirn schüttet massenhaft Dopamin aus, aber warum genau?",
+     "image": "A glowing pink brain floating in the air with electric sparks around it",
+     "who": [],
+     "place": "supermarket",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Gehirn",
+      "Dopamin"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DOPAMIN-KICK"
+     },
+     "see": "Das Gehirn leuchtet auf und schüttet Dopamin aus",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du nimmst plötzlich jeden Schluck bewusster wahr.",
+     "image": "A close-up shot of a glass bottle of cola mix catching the neon light",
+     "who": [
+      "du"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Schluck",
+      "bewusster"
+     ],
+     "overlay": null,
+     "see": "Du nimmst jeden Schluck aus dem Glas bewusst wahr",
+     "time": "night",
+     "props": [
+      "glass"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "hold",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "glass"
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Weil der Puls bei diesem Anblick sofort nach oben schießt.",
+     "image": "A heart symbol flashing above two smiling people in the store",
+     "who": [
+      "leon"
+     ],
+     "place": "supermarket",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "Puls",
+      "Anblick"
+     ],
+     "overlay": {
+      "type": "pulse",
+      "value": "1",
+      "label": "HERZSCHLAG"
+     },
+     "see": "Puls steigt nach oben, Herz pocht stark",
+     "time": "night",
+     "props": [
+      "herz"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "pant",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer zwei zeigt sich beim gemeinsamen Lachen.",
+     "image": "Two young people laughing loudly together near the snack shelves",
+     "who": [
+      "du",
+      "leon"
+     ],
+     "place": "supermarket",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Nummer",
+      "Lachen"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 2",
+      "text": "LACHEN"
+     },
+     "see": "Ihr lacht gemeinsam im Späti",
+     "time": "night",
+     "props": [
+      "späti"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "laugh",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Oxytocin senkt den Stresspegel, doch was passiert im Körper?",
+     "image": "A tiny chemical formula graphic floating in the air between two friends",
+     "who": [],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Oxytocin",
+      "Stresspegel"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "Kuschel-Hormon"
+     },
+     "see": "Oxytocin strömt durch den Körper und senkt Stress",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "muskel",
+       "action": "flex",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Plötzlich ist der graue Alltag komplett vergessen.",
+     "image": "A dark street outside the glass window contrasting with bright indoor lights",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Alltag",
+      "vergessen"
+     ],
+     "overlay": null,
+     "see": "Der graue Alltag draußen verschwimmt in bunten Farben",
+     "backdrop": {
+      "sky": "night",
+      "ground": "road",
+      "elements": [
+       "street",
+       "city"
+      ]
+     },
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Jeder dumme Witz wirkt plötzlich unglaublich witzig.",
+     "image": "Leon making a funny face while holding a bag of chips",
+     "who": [
+      "leon"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "dumme",
+      "Witz"
+     ],
+     "overlay": null,
+     "see": "Ein dummer Witz bringt euch zum schallenden Lachen",
+     "time": "night",
+     "props": [
+      "späti"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "left",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und selbst der Kassierer guckt neidisch zu.",
+     "image": "A store clerk looking bored behind the cash register, rolling eyes",
+     "who": [],
+     "place": "supermarket",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Kassierer",
+      "neidisch"
+     ],
+     "overlay": null,
+     "see": "Der Kassierer schaut neidisch hinter der Kasse zu",
+     "time": "night",
+     "props": [
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "er",
+       "action": "look_around",
+       "emotion": "sad",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer drei ist der Blickkontakt.",
+     "image": "Close-up of two pairs of eyes looking deeply at each other",
+     "who": [
+      "du",
+      "leon"
+     ],
+     "place": "supermarket",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Nummer",
+      "Blickkontakt"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 3",
+      "text": "BLICK"
+     },
+     "see": "Deutscher Blickkontakt im hell erleuchteten Gang",
+     "time": "night",
+     "props": [
+      "auge"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du denkst, das ist Zufall? Falsch, Pupillen weiten sich automatisch.",
+     "image": "A graphic showing human eyes with dilating pupils in neon pink light",
+     "who": [],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Pupillen",
+      "Interesse"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "PUPILLEN"
+     },
+     "see": "Pupillen weiten sich automatisch im engen Raum",
+     "time": "night",
+     "props": [
+      "auge"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "pupils",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Niemand achtet in diesem Moment auf den Inhalt.",
+     "image": "Rows of drinks on shelves blurred in the background",
+     "who": [
+      "du"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Moment",
+      "Inhalt"
+     ],
+     "overlay": null,
+     "see": "Regale und Flaschen im Hintergrund verschwimmen völlig",
+     "time": "night",
+     "props": [
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Es zählt nur die Person gegenüber.",
+     "image": "Leon smiling warmly towards the camera with soft glowing background",
+     "who": [
+      "leon"
+     ],
+     "place": "supermarket",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "zählt",
+      "Person"
+     ],
+     "overlay": null,
+     "see": "Nur die Person gegenüber zählt in diesem Moment",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "er",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Zeit bleibt für ein paar Sekunden stehen.",
+     "image": "A digital clock on the wall glowing with frozen numbers",
+     "who": [],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Zeit",
+      "stehen"
+     ],
+     "overlay": {
+      "type": "timer",
+      "value": "00:00",
+      "kicker": "ZEIT"
+     },
+     "see": "Die Zeit bleibt für ein paar Sekunden stehen",
+     "time": "night",
+     "props": [
+      "stoppuhr"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dein Verstand sagt dir, dass es nur Limonade ist.",
+     "image": "A brown glass bottle standing on the counter under bright lights",
+     "who": [
+      "du"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Verstand",
+      "Limonade"
+     ],
+     "overlay": null,
+     "see": "Dein Verstand denkt an normale Limonade in der Flasche",
+     "time": "night",
+     "props": [
+      "glass"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true,
+       "hold": "glass"
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber dein Herz plant heimlich schon die Hochzeit.",
+     "image": "A small glowing cartoon heart floating in the air between them",
+     "who": [
+      "du",
+      "leon"
+     ],
+     "place": "chapel",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "Herz",
+      "Hochzeit"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "HOCHZEIT"
+     },
+     "see": "Dein Herz plant heimlich schon eine große Hochzeit",
+     "time": "day",
+     "props": [
+      "krone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "dance",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "crowd": "cheer",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "dopamin",
+   "kasse"
+  ],
+  "title": "Drei wissenschaftliche Zeichen für Romantik im Späti",
+  "created": 1795200041.5787897
  }
 }
