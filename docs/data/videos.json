@@ -168,5 +168,46 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Nicht hochgeladen: Der Engine fehlt noch schulaula, blickkontakt. Nach dem Ausbau neu erstellen oder trotzdem von Hand hochladen."
+ },
+ {
+  "id": 6,
+  "category": "liebe",
+  "topic": "Was beim Verliebtsein in deinem Gehirn passiert: 3 verrückte Anzeichen",
+  "status": "error",
+  "created": 1795176478.428812,
+  "title": "Verliebtsein im Gehirn: 3 verrückte Anzeichen",
+  "description": "Was beim Verliebtsein in deinem Gehirn wirklich passiert!\nVom Hormon-Rausch bis zur totalen Schlaflosigkeit.\nBist du eher Team Herz oder Team Verstand?",
+  "hashtags": [
+   "#shorts",
+   "#liebe",
+   "#psychologie",
+   "#gehirn",
+   "#beziehung",
+   "#fakten",
+   "#viral"
+  ],
+  "tags": [
+   "verliebtsein gehirn",
+   "was passiert beim verlieben",
+   "liebe psychologie",
+   "dopamin liebe",
+   "anzeichen verliebt",
+   "liebeskummer gehirn",
+   "beziehung tipps"
+  ],
+  "thumb_text": "DEIN GEHIRN AUF LIEBE",
+  "missing": null,
+  "cover_ms": 100193,
+  "yt_duration": 62.1,
+  "duration": 100.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "edge",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "error": "Zernio: Zernio HTTP 401: Invalid, revoked or expired API key."
  }
 ]
