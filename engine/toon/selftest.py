@@ -670,7 +670,7 @@ def main():
         for sc_b in scs:
             for t_b in (0.1, 1.2, 2.4):
                 frame(sc_b, cast_b, t_b)
-        for ac_b in ("cower", "freeze", "tremble", "blink", "pant", "pupils"):
+        for ac_b in ("cower", "freeze", "tremble", "blink", "pant", "pupils", "laugh"):
             for t_b in (0.0, 0.2, 1.0, 2.9):
                 rig.pose_at(ac_b, t_b, 3.0, "scared", 0.3, 1)
         from .. import writer as _wr_b
@@ -1954,7 +1954,9 @@ def main():
              ("In der Kirche war es so leise, dass man Stecknadeln hören konnte.", "church", [{"id": "du", "action": "freeze"}], ["car"], "walk"),
              ("Oma weinte leise und alle blickten betroffen auf den Boden.", "church", [{"id": "oma", "action": "sad"}], [], ""),
              ("Vor der Kirche atmete ich tief durch.", "church", [{"id": "du", "action": "pant"}], [], ""),
-             ("In der Kirche dachte ich nur an den Staubsauger.", "church", [{"id": "du", "action": "think"}], ["staubsauger"], "")]
+             ("In der Kirche dachte ich nur an den Staubsauger.", "church", [{"id": "du", "action": "think"}], ["staubsauger"], ""),
+             ("Zwecklos: Ich pruste laut los und die ganze Trauergemeinde dreht sich um.", "chapel", [{"id": "du", "action": "shocked", "emotion": "sad"}], [], "worried"),
+             ("Aber warum passiert so etwas immer im schlimmsten Augenblick?", "kirche", [], [], "worried")]
         sf = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "crowd": cr_} for t_, pl_, a_, pr_, cr_ in T],
                           [(i_ * 4, i_ * 4 + 4) for i_ in range(len(T))], "Warum wir in unpassenden Situationen lachen", "comedy")
         kn = lambda i_: [str(q.get("type") if isinstance(q, dict) else q) for q in sf[i_].get("props") or []]
@@ -1964,6 +1966,14 @@ def main():
         assert sf[3]["place"] == "chapel" and sf[3].get("_mourn"), "Folgesatz bleibt im Kirchenraum"
         assert sf[4]["place"] == "church", "vor der Kirche bleibt draußen"
         assert sf[5]["place"] == "chapel" and not kn(5), f"an den Staubsauger denken stellt ihn nicht in die Kirche: {kn(5)}"
+        assert kn(1).count("vacuum_broken") == 1, f"nur ein Staubsauger: {kn(1)}"
+        assert sf[6]["actors"][0]["action"] == "laugh" and sf[6]["actors"][0]["emotion"] == "happy", f"losprusten ist Lachen: {sf[6]['actors']}"
+        assert sf[7]["place"] == "chapel" and sf[7].get("actors"), "Frage ohne Figur: Hauptfigur im Kirchenraum, kein leeres Bild"
+        gp = stage.direct([{"text": "Ich stand auf einer Beerdigung.", "place": "graveyard", "actors": [{"id": "du"}]},
+                           {"text": "Aber warum passiert so etwas immer im schlimmsten Augenblick?", "place": "kirche", "shot": "graphic", "graphic": {"type": "pulse", "value": "1", "label": "MOMENT DER STILLE"}},
+                           {"text": "Dein Puls steigt auf hundertachtzig.", "place": "lab", "shot": "graphic", "graphic": {"type": "pulse", "value": "180", "label": "PULS"}}],
+                          [(0, 4), (4, 8), (8, 12)], "Warum wir in unpassenden Situationen lachen", "comedy")
+        assert (gp[1].get("graphic") or {}).get("type") != "pulse" and (gp[2].get("graphic") or {}).get("type") == "pulse", "Herzschlag-Kurve nur zu einem Satz über Puls oder Herz"
         assert places.resolve("kapelle") == "chapel" and stage._prepare({"place": "chapel", "_mourn": True, "actors": [{"id": "oma"}]}, {"oma": {"shirt": "lila", "hat": "beanie"}})[3][0]["look"].hat == ""
         no = stage.direct([{"text": "In der Kirche heiraten zwei.", "place": "church", "actors": [{"id": "du"}]}], [(0, 4)], "Hochzeit", "fakten")
         assert no[0]["place"] == "church" and not no[0].get("_mourn"), "ohne Beerdigung greift die Regel nicht"
@@ -1980,6 +1990,40 @@ def main():
             for t_ in (0.1, 0.6, 2.4):
                 frame({"place": "livingroom", "props": [k_], "actors": [{"id": "du"}]}, None, t_)
     check("Beerdigung: Kirchenraum, Trauerkleidung, Staubsauger (Prüfung 20.11., Plan 18 Uhr)", _funeral)
+    def _studios():                                              # Prüfung 20.11.2026 (Plan „Tattoo-Studio gegen Nagelstudio“): beide Orte, Werkzeug in der Hand
+        T = [("Tobi sticht ein großes Tattoo und verlangt achtzig Euro pro Stunde.", "tattoo_shop", [{"id": "tobi", "action": "talk"}], ["car"], "walk"),
+             ("Nina feilt den ganzen Tag Nägel im Nagelstudio.", "nail_salon", [{"id": "nina", "action": "talk"}], [], ""),
+             ("Er schafft nur einen Kunden am Tag.", "plain", [{"id": "tobi", "action": "think"}], [], ""),
+             ("Sie schafft locker acht Termine am Tag.", "plain", [{"id": "nina", "action": "happy"}], [], ""),
+             ("Wer verdient am Ende mehr?", "plain", [{"id": "tobi", "action": "think"}, {"id": "nina", "action": "think"}], [], "")]
+        sf = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "crowd": cr_} for t_, pl_, a_, pr_, cr_ in T],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(len(T))], "Tattoo-Studio gegen Nagelstudio: Wer verdient mehr?", "vergleich")
+        kn = lambda i_: [str(q.get("type") if isinstance(q, dict) else q) for q in sf[i_].get("props") or []]
+        hold = lambda i_: [extras.PROP_ALIASES.get(str(a.get("hold") or ""), str(a.get("hold") or "")) for a in sf[i_].get("actors") or [] if isinstance(a, dict)]
+        assert places.resolve(sf[0]["place"]) == "tattoostudio" and "car" not in kn(0) and not sf[0].get("crowd"), f"Tattoo-Studio ohne Auto und Passanten: {sf[0]['place']} {kn(0)} {sf[0].get('crowd')}"
+        assert "tattoomachine" in hold(0), f"Tätowierer hält die Maschine: {hold(0)}"
+        assert places.resolve(sf[1]["place"]) == "nailstudio" and "nailfile" in hold(1), f"Nagelstudio, Feile in der Hand: {sf[1]['place']} {hold(1)}"
+        assert places.resolve(sf[2]["place"]) == "tattoostudio", f"Folgesatz ohne Ort: Tobi bleibt in seinem Studio: {sf[2]['place']}"
+        assert places.resolve(sf[3]["place"]) == "nailstudio", f"Folgesatz ohne Ort: Nina bleibt in ihrem Studio: {sf[3]['place']}"
+        assert places.resolve(sf[4]["place"]) not in ("tattoostudio", "nailstudio"), "beide zusammen: neutraler Ort"
+        for k_ in ("tattoo_shop", "Tattoo-Studio", "nail_salon", "Nagelstudio", "tätowierstudio"):
+            assert places.resolve(k_) in ("tattoostudio", "nailstudio"), k_
+        assert places.resolve("fitnessstudio") == "plain" and places.resolve("neutral_studio") == "plain"
+        no = stage.direct([{"text": "Ich schneide mir die Nägel im Bad.", "place": "bathroom", "actors": [{"id": "du"}]}], [(0, 4)], "Morgenroutine", "fakten")
+        assert places.resolve(no[0]["place"]) == "bathroom", "ein genannter Ort bleibt"
+        up = stage.direct([{"text": "Beratung und Motive zeichnen bezahlt Tobi leider niemand.", "place": "tattoostudio", "actors": [{"id": "tobi", "action": "think", "hold": "money"}], "props": ["money"]},
+                           {"text": "Einfache Gelnägel bei Nina kosten vierzig Euro.", "place": "nagelstudio", "actors": [{"id": "nina", "action": "point"}], "props": ["nailpolish"]}],
+                          [(0, 4), (4, 8)], "Tattoo-Studio gegen Nagelstudio", "vergleich")
+        assert not [q for q in up[0].get("props") or [] if "money" in str(q)] and not str(up[0]["actors"][0].get("hold") or ""), f"unbezahlt: kein Geld im Bild: {up[0].get('props')} {up[0]['actors'][0].get('hold')}"
+        assert not [q for q in up[1].get("props") or [] if "nailpolish" in str(q)] and up[1]["actors"][0].get("hold"), f"Fläschchen in der Hand statt am Boden: {up[1].get('props')} {up[1]['actors'][0].get('hold')}"
+        for sc_ in sf + up:
+            frame(sc_, {"tobi": {"shirt": "schwarz", "hat": "beanie"}, "nina": {"shirt": "pink", "hair": "ponytail", "gender": "w"}})
+        for pl_ in ("tattoostudio", "nailstudio"):
+            frame({"place": pl_, "time": "night", "actors": [{"id": "du"}]})
+        for k_ in ("tattoomachine", "nailfile", "nailpolish"):
+            assert extras.held_key(k_) == "prop:" + k_
+            frame({"place": "plain", "props": [k_], "actors": [{"id": "du", "hold": k_}]}, None, 0.7)
+    check("Tattoo-Studio und Nagelstudio: Orte, Werkzeug in der Hand (Prüfung 20.11., Plan 21 Uhr)", _studios)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

@@ -16,7 +16,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -1365,6 +1365,9 @@ def direct(scenes, times, topic="", style="", look=""):
         if g0 and g0.get("type") in FIGURE_GFX and unspoken_figures(g0, said_c):
             sc["graphic"], g0 = None, None                # Grafik mit einer Zahl, die niemand sagt („1.000.000 KARTEN“, „100 % KONTROLLE“): erfunden – weg
             sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
+        if g0 and g0.get("type") == "pulse" and not _re0.search(r"puls|herz|schläge pro|\bbpm\b|adrenalin|blutdruck", sc["text"].lower()):
+            sc["graphic"], g0 = None, None                # Herzschlag-Kurve mit „1 · MOMENT DER STILLE“ zu einem Satz, der von keinem Herzschlag spricht (Video 168)
+            sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
         if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") in ("card", "counter", "note", "stamp") and unspoken_figures(ov_c, said_c):
             sc["overlay"] = None
         if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") == "tag" and not _re0.search(r"\b(1[0-9]|20)\d{2}\b", str(ov_c.get("text") or "")) \
@@ -2278,6 +2281,8 @@ def direct(scenes, times, topic="", style="", look=""):
     _feast_story(scenes, topic)
     _relatives(scenes)
     _funeral_story(scenes, topic)
+    _studio_story(scenes, topic)
+    _unpaid(scenes)
     _music(scenes, topic)
     _fur_ancestor(scenes)
     _fur_story(scenes)
@@ -2550,6 +2555,7 @@ BODY_ACTS = ((r"zuck\w* (?:\w+ ){0,3}zusammen|zusammenzuck|zusammengezuckt|kopf 
              (r"(?:hände|finger|knie|beine) (?:\w+ ){0,3}zitter|zitter\w* (?:\w+ ){0,4}(?:hände|finger|knie|beine)|\bzitterst\b", "tremble", ""),
              (r"pupillen (?:\w+ ){0,5}(?:weit|groß|größer|riesig|öffn|licht)|(?:weit|groß|riesig|geweitet)\w* (?:\w+ ){0,2}pupillen", "pupils", "close"),
              (r"blinzel|lidschl|lider (?:\w+ ){0,3}(?:zu\b|schließ)|augen (?:\w+ ){0,4}(?:zu\b|schließ|kneif)|kneifst (?:\w+ ){0,3}augen", "blink", "close"),
+             (r"\bprust\w*|\bloslach|\blosgelacht|lachkrampf|lachanfall|\blach\w* (?:\w+ ){0,2}(?:laut|los)\b|laut (?:\w+ ){0,2}lach|vor lachen", "laugh", ""),
              (r"atmest (?:\w+ ){0,3}(?:schneller|flach|hektisch)|atmung (?:\w+ ){0,3}(?:schneller|beschleunig|flach|rast)|schnappst nach luft|außer atem|keuch", "pant", ""),
              (r"herz (?:\w+ ){0,3}(?:schlägt|rast|klopft|pocht|hämmert|pumpt)|herzschlag (?:\w+ ){0,3}(?:schneller|beschleunig|rast)|puls (?:\w+ ){0,3}(?:steigt|rast|schnellt|jagt)", "pant", "wide"))
 BODY_BRAIN_RE = r"\bgehirn|\bhirn\b|hirnstamm|mandelkern|amygdala|großhirn|kleinhirn|denkzentrale"
@@ -2592,6 +2598,8 @@ def _body_story(scenes):
             act, want = hit
             h.update(action=act, emote="", pos="center")
             h.pop("to", None)
+            if act == "laugh":
+                h["emotion"] = "happy"
             if act in ("tremble", "pant", "cower") and not str(h.get("emotion") or ""):
                 h["emotion"] = "worried"
             if want == "close":
@@ -3427,6 +3435,12 @@ def _household(scenes):
             for q in (sc.get("props") or []):
                 if isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type") or "").lower(), str(q.get("type") or "").lower()) == "vacuum":
                     q["type"] = "vacuum_broken"
+            seen_v = False                                # Drehbuch nennt ihn und die Text-Regel stellt ihn dazu: nur einer steht da (Video 168: zwei ineinander)
+            for q in list(sc.get("props") or []):
+                if isinstance(q, dict) and q.get("type") == "vacuum_broken":
+                    if seen_v:
+                        sc["props"].remove(q)
+                    seen_v = True
             if any(isinstance(q, dict) and q.get("type") == "vacuum_broken" for q in (sc.get("props") or [])):
                 sc["props"] = [q for q in sc["props"] if not (isinstance(q, dict) and str(q.get("type") or "").lower() in ("smoke", "explosion", "fire"))]   # die Staubwolke gehört zum Gerät: kein Qualm quer durchs Zimmer, keine Feuer-Explosion
     for sc in scenes:
@@ -4044,6 +4058,8 @@ def _funeral_story(scenes, topic=""):
     if not _re.search(FUNERAL_RE, all_t):
         return
     inside = False
+    lead_f = next((str(a.get("id")) for sc in sc_l for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")
+                   and not _re.search(r"gehirn|hirn|brain", str(a.get("id")).lower())), "du")
     for sc in sc_l:
         low = str(sc.get("text") or "").lower()
         if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
@@ -4070,10 +4086,96 @@ def _funeral_story(scenes, topic=""):
             sc["time"] = "day"
             sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
                                                                not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa"))]
+        if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and str(sc.get("shot") or "") != "insert" and _re.search(SELF_RE + r"|\bwarum\b|\bwieso\b", low):
+            sc["actors"] = [{"id": lead_f, "action": "think", "emotion": "worried", "emote": "?" if "?" in low else "", "pos": "center", "speaks": True, "say": "", "hold": "", "facing": ""}]
+            sc["shot"] = ""                                # „Aber warum passiert so etwas …?“ ohne Figur: die Hauptfigur grübelt in der Bank, kein leerer Kirchenraum
         for a in (sc.get("actors") or []):
             if isinstance(a, dict) and not a.get("kind") and str(a.get("action") or "") in ("dance", "cheer", "run") and not _re.search(r"renn|rann|lauf|lief|tanz|flücht|stürm", low):
                 a["action"] = "freeze"                     # in der Kirche tanzt und rennt niemand ohne Grund
                 a["to"] = ""
+
+
+TATTOO_RE = r"tattoo|tätowier|tatowier"
+NAILS_RE = r"nagelstudio|nageldesign|nagelsalon|manik[üu]re|neumodellage|gel-?nägel|kunstnägel|fingernägel|nagellack|\bnägel\b|nagelfeile|\bfeilt\b|\bfeile\b"
+TATTOO_DO_RE = r"\bsticht\b|\bstechen\b|\bgestochen|tätowiert|tätowieren|\bnadel|tattoo"
+NAILS_DO_RE = r"\bfeilt\b|\bfeilen\b|\bfeile\b|lackier|\bnägel\b|gel-?nägel|kunstnägel|modellage|manik[üu]re|auffüllen|aufgefüllt"
+UNPAID_RE = r"unbezahlt|bezahlt \w+ (?:leider |aber |natürlich )?(?:niemand|keiner)|(?:niemand|keiner) bezahlt|bezahlt (?:leider |aber )?(?:niemand|keiner)|ohne bezahlung|\bkostenlos\b|\bumsonst\b|\bgratis\b|kein(?:en)? cent|kein geld"
+
+
+def _unpaid(scenes):
+    """„Beratung und Zeichnen bezahlt Tobi leider niemand“ (Video 171, Prüfung 20.11.2026): die Figur hielt dabei einen Stapel Geldscheine.
+    Sagt der Satz, dass etwas unbezahlt oder kostenlos ist, liegt und hält niemand Geld."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict) or not _re.search(UNPAID_RE, str(sc.get("text") or "").lower()):
+            continue
+        key = lambda q: extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
+        sc["props"] = [q for q in (sc.get("props") or []) if key(q) != "money"]
+        for a in (sc.get("actors") or []):
+            if isinstance(a, dict) and extras.PROP_ALIASES.get(str(a.get("hold") or "").lower(), str(a.get("hold") or "").lower()) in ("money", "prop:money"):
+                a["hold"] = ""
+        if sc.get("shot") == "insert" and not sc.get("props"):
+            sc["shot"] = "wide"
+
+
+def _studio_story(scenes, topic=""):
+    """Tattoo-Studio und Nagelstudio (Prüfung 20.11.2026, Plan „Tattoo-Studio gegen Nagelstudio“): Die Orte gab es nicht – „tattoo_shop“ und
+    „nail_salon“ wurden zur leeren Wand. Spricht ein Satz vom Tätowieren oder von Nägeln, spielt er im passenden Studio und die Figur hält
+    die Tätowiermaschine bzw. die Nagelfeile. Wer einmal in seinem Studio stand, steht in Folgesätzen ohne eigenen Ort wieder dort
+    (Tobi im Tattoo-Studio, Nina im Nagelstudio). Drinnen kein Wetter, kein Auto, keine Passanten."""
+    import re as _re
+    sc_l = [sc for sc in scenes if isinstance(sc, dict)]
+    all_t = (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in sc_l)).lower()
+    if not _re.search(TATTOO_RE + "|" + NAILS_RE, all_t):
+        return
+    home = {}
+    for sc in sc_l:
+        if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        rp = places.resolve(backdrop(sc))
+        humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")]
+        tat, nail = bool(_re.search(TATTOO_RE, low)), bool(_re.search(NAILS_RE, low))
+        if rp in GENERIC + ("plain", "office", "hospital", "lab", "supermarket"):
+            want = ""
+            if tat != nail:
+                want = "tattoostudio" if tat else "nailstudio"
+            elif not tat and len(humans) == 1 and str(humans[0]["id"]) in home and rp in ("plain", "livingroom", "street", "park") and not _said_place(low):
+                want = home[str(humans[0]["id"])]         # „Sie schafft acht Termine am Tag“: Nina steht in ihrem Nagelstudio
+            if want:
+                sc["place"], rp = want, want
+        if rp in ("tattoostudio", "nailstudio") and not (tat or nail) and humans:
+            hs = {home.get(str(a["id"])) for a in humans}
+            if len(humans) == 1 and hs - {None, rp}:
+                sc["place"] = rp = hs.pop()               # der Ort blieb vom Satz davor stehen: Tobi steht nicht im Nagelstudio
+            elif len(humans) > 1 and len(hs - {None}) > 1:
+                sc["place"] = rp = "plain"                # beide zusammen im Vergleich: neutraler Ort
+        if rp not in ("tattoostudio", "nailstudio"):
+            continue
+        sc["weather"] = ""
+        if str(sc.get("time") or "") == "night" and not _re.search(r"nacht|abend|mitternacht", low):
+            sc["time"] = "day"
+        sc["crowd"] = ""
+        tools = ("tattoomachine",) if rp == "tattoostudio" else ("nailfile", "nailpolish")
+        sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
+                                                           not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa", "table", "shelf", "tattoomachine", "nailfile") + (("nailpolish",) if rp == "tattoostudio" else ()))]
+        loose = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())) in ("nailpolish", "nailfile", "tattoomachine")]
+        if loose:                                         # Fläschchen und Feile liegen nicht auf dem Fußboden: in die Hand oder weg
+            sc["props"] = [q for q in sc["props"] if q not in loose]
+            if humans and not str(humans[0].get("hold") or "") and str(humans[0].get("action") or "") not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake", "lie"):
+                humans[0]["hold"] = str(loose[0].get("type") if isinstance(loose[0], dict) else loose[0])
+        if len(humans) == 1:
+            home.setdefault(str(humans[0]["id"]), rp)
+        do = _re.search(TATTOO_DO_RE if rp == "tattoostudio" else NAILS_DO_RE, low)
+        for a in humans[:1]:
+            if home.get(str(a["id"]), rp) != rp:
+                continue                                  # der Tätowierer hält im Nagelstudio keine Feile
+            if do:
+                sc["_no_insert"] = True                   # der Satz beschreibt die Arbeit: kein Schnitt auf Geld oder Werkzeug allein
+                if sc.get("shot") == "insert":
+                    sc["shot"] = "wide"
+            if do and not str(a.get("hold") or "") and str(a.get("action") or "") not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake", "lie"):
+                a["hold"] = tools[0]                      # das Werkzeug in der Hand statt am Boden
 
 
 def _relatives(scenes):
@@ -4855,7 +4957,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
