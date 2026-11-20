@@ -1,0 +1,493 @@
+{
+ "title": "Drei wissenschaftliche Zeichen für Romantik im Späti",
+ "scenes": [
+  {
+   "text": "Wenn ihr im Späti die letzte Spezi teilt, passiert Magie.",
+   "see": "Du und er teilen im Späti eine Spezi, magisches Licht leuchtet auf",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "späti"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "love",
+   "overlay": {
+    "type": "card",
+    "text": "ECHTE ROMANTIK"
+   }
+  },
+  {
+   "text": "Drei wissenschaftliche Zeichen verraten sofort, ob das echte Romantik ist.",
+   "see": "Grafik zeigt drei Zeichen für Romantik im Späti",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "späti"
+    }
+   ],
+   "mood": "love",
+   "crowd": "walk"
+  },
+  {
+   "text": "Nummer eins ist die Spiegelung deiner Bewegungen.",
+   "see": "Du spiegelst seine Bewegungen beim Greifen der Flasche",
+   "place": "bathroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "späti"
+    },
+    {
+     "type": "glass"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "ZEICHEN 1",
+    "text": "SPIEGELUNG",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dein Gehirn schüttet massenhaft Dopamin aus, aber warum genau?",
+   "see": "Das Gehirn leuchtet auf und schüttet Dopamin aus",
+   "place": "supermarket",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "question",
+    "text": "WARUM?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Du nimmst plötzlich jeden Schluck bewusster wahr.",
+   "see": "Du nimmst jeden Schluck aus dem Glas bewusst wahr",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "glass"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "hold",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "glass",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love"
+  },
+  {
+   "text": "Weil der Puls bei diesem Anblick sofort nach oben schießt.",
+   "see": "Puls steigt nach oben, Herz pocht stark",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nummer zwei zeigt sich beim gemeinsamen Lachen.",
+   "see": "Ihr lacht gemeinsam im Späti",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "späti"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "laugh",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "crowd": "sad",
+   "graphic": {
+    "type": "round",
+    "kicker": "ZEICHEN 2",
+    "text": "LACHEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Oxytocin senkt den Stresspegel, doch was passiert im Körper?",
+   "see": "Oxytocin strömt durch den Körper und senkt Stress",
+   "place": "supermarket",
+   "time": "day",
+   "actors": [
+    {
+     "id": "muskel",
+     "speaks": true,
+     "action": "flex",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love",
+   "overlay": {
+    "type": "card",
+    "text": "Kuschel-Hormon"
+   }
+  },
+  {
+   "text": "Plötzlich ist der graue Alltag komplett vergessen.",
+   "see": "Der graue Alltag draußen verschwimmt in bunten Farben",
+   "place": "street",
+   "backdrop": {
+    "sky": "night",
+    "ground": "road",
+    "elements": [
+     "street",
+     "city"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_spaeti"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Jeder dumme Witz wirkt plötzlich unglaublich witzig.",
+   "see": "Ein dummer Witz bringt euch zum schallenden Lachen",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "späti"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Und selbst der Kassierer guckt neidisch zu.",
+   "see": "Der Kassierer schaut neidisch hinter der Kasse zu",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "watch"
+  },
+  {
+   "text": "Nummer drei ist der Blickkontakt.",
+   "see": "Deutscher Blickkontakt im hell erleuchteten Gang",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "auge"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "ZEICHEN 3",
+    "text": "BLICK",
+    "dark": false
+   }
+  },
+  {
+   "text": "Du denkst, das ist Zufall? Falsch, Pupillen weiten sich automatisch.",
+   "see": "Pupillen weiten sich automatisch im engen Raum",
+   "place": "supermarket",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pupils",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love",
+   "overlay": {
+    "type": "card",
+    "text": "PUPILLEN"
+   }
+  },
+  {
+   "text": "Niemand achtet in diesem Moment auf den Inhalt.",
+   "see": "Regale und Flaschen im Hintergrund verschwimmen völlig",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    }
+   ],
+   "mood": "love",
+   "crowd": "walk"
+  },
+  {
+   "text": "Es zählt nur die Person gegenüber.",
+   "see": "Nur die Person gegenüber zählt in diesem Moment",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_spaeti"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "er",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Die Zeit bleibt für ein paar Sekunden stehen.",
+   "see": "Die Zeit bleibt für ein paar Sekunden stehen",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "stoppuhr"
+    }
+   ],
+   "mood": "love",
+   "crowd": "walk"
+  },
+  {
+   "text": "Dein Verstand sagt dir, dass es nur Limonade ist.",
+   "see": "Dein Verstand denkt an normale Limonade in der Flasche",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "glass"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "glass",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love"
+  },
+  {
+   "text": "Aber dein Herz plant heimlich schon die Hochzeit.",
+   "see": "Dein Herz plant heimlich schon eine große Hochzeit",
+   "place": "chapel",
+   "time": "day",
+   "props": [
+    {
+     "type": "krone"
+    },
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "love",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "card",
+    "text": "HOCHZEIT"
+   }
+  }
+ ]
+}

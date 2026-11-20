@@ -249,5 +249,52 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Zernio: Zernio HTTP 401: Invalid, revoked or expired API key."
+ },
+ {
+  "id": 8,
+  "category": "liebe",
+  "topic": "Was in deinem Gehirn passiert, wenn ihr euch beim Spätkauf die letzte Spezi teilt: 3 wissenschaftliche Zeichen für Romantik",
+  "status": "rendered",
+  "created": 1795206530.5555956,
+  "title": "Drei wissenschaftliche Zeichen für Romantik im Späti",
+  "description": "Was in deinem Gehirn passiert, wenn ihr euch die letzte Spezi teilt\nDrei wissenschaftliche Zeichen, dass mehr als nur Freundschaft im Spiel ist\nTeilst du deine Spezi auch nur mit ganz besonderen Menschen?",
+  "hashtags": [
+   "#shorts",
+   "#liebe",
+   "#foryou",
+   "#wissenschaft",
+   "#pärchen",
+   "#psychologie",
+   "#viral",
+   "#romantik"
+  ],
+  "tags": [
+   "spezi",
+   "liebe",
+   "gehirn",
+   "romantik",
+   "wissenschaft",
+   "pärchen",
+   "beziehung",
+   "psychologie",
+   "späti",
+   "gefühl"
+  ],
+  "thumb_text": "SPEZI GEHEIMNIS",
+  "missing": [
+   "dopamin"
+  ],
+  "cover_ms": 76698,
+  "yt_duration": 50.5,
+  "duration": 76.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "edge",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "error": "Nicht hochgeladen: Der Engine fehlt noch dopamin. Nach dem Ausbau neu erstellen oder trotzdem von Hand hochladen."
  }
 ]
