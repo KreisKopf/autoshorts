@@ -1,0 +1,597 @@
+{
+ "title": "3 Dinge, die beim Kochen Dopamin im Gehirn auslösen",
+ "scenes": [
+  {
+   "text": "Drei Dinge, die beim Kochen zu zweit sofort Dopamin freisetzen.",
+   "see": "Das Paar kocht zusammen in der Küche und strahlt sich an.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gemuese",
+     "pos": 800
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Und Punkt drei verändert eure Beziehung spürbar.",
+   "see": "Das Gehirn schüttet Glückshormone aus.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "synapse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love",
+   "overlay": {
+    "type": "card",
+    "text": "DOPAMIN-EFFEKT"
+   }
+  },
+  {
+   "text": "Erstens. Gemeinsames Schnippeln.",
+   "see": "Ein Banner für den ersten Punkt erscheint.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "ZEICHEN 1",
+    "text": "SCHNIPPELN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wenn ihr im selben Takt Gemüse schneidet, synchronisieren sich eure Handlungen.",
+   "see": "Die beiden schnippeln zusammen Gemüse am Tisch.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "lib_gemuese"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Dein Kopf wertet dieses Teamwork sofort als gemeinsamen Erfolg aus.",
+   "see": "Das Gehirn freut sich im abstrakten Raum.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gemuese",
+     "pos": 800
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "love",
+   "overlay": {
+    "type": "tag",
+    "text": "TEAMWORK"
+   }
+  },
+  {
+   "text": "Zweitens. Der Duft von frischem Essen.",
+   "see": "Das Paar probiert die Suppe aus dem Kessel.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "emotion": "",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "ZEICHEN 2",
+    "text": "AROMA",
+    "dark": false
+   }
+  },
+  {
+   "text": "Gerüche steigen direkt in dein limbisches System im Gehirn auf.",
+   "see": "Dampf steigt auf und beide riechen vergnügt am Topf.",
+   "place": "kitchen",
+   "time": "day",
+   "weather": "steam",
+   "props": [
+    {
+     "type": "kessel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Du verbindest das leckere Aroma automatisch mit deiner Lieblingsperson.",
+   "see": "Eine Herzschlaggrafik zeigt die emotionale Verbindung.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "love"
+  },
+  {
+   "text": "Du denkst, Rezepte einzuhalten bringt die meiste Freude.",
+   "see": "Er gibt ihr verneinende Signale wegen des Rezepts, beide schmunzeln.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Falsch. Es sind kleine Missgeschicke und das gemeinsame Lachen.",
+   "see": "Sie lassen das Rezeptbuch fallen und machen Quatsch.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Drittens. Das gegenseitige Probieren lassen.",
+   "see": "Banner für das dritte Zeichen.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love",
+   "graphic": {
+    "type": "round",
+    "kicker": "ZEICHEN 3",
+    "text": "FÜTTERN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Fütterst du deinen Partner mit einem Löffel Soße?",
+   "see": "Er hält ihr sanft einen Löffel vor den Mund.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "gabel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "shot": "close",
+   "mood": "love"
+  },
+  {
+   "text": "Das schüttet nicht nur Dopamin, sondern auch Bindungshormone aus.",
+   "see": "Grafik über Oxytocin und Dopamin.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "love",
+   "graphic": {
+    "type": "badge",
+    "kicker": "HORMON-BOOST",
+    "text": "DOPAMIN PLUS",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das Gehirn verbindet den Geschmack direkt mit tiefem Vertrauen.",
+   "see": "Das Paar probiert gemeinsam das köstliche Gericht.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love",
+   "overlay": {
+    "type": "tag",
+    "text": "VERTRAUEN"
+   }
+  },
+  {
+   "text": "Vermutlich schmeckt das Essen Paaren beim gemeinsamen Kochen besonders gut.",
+   "see": "Eine Messleiste mit 100 Prozent Glück beim Essen.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Schon zehn Minuten in der Küche stärken eure Verbindung.",
+   "see": "Sie sitzen romantisch bei Kerzenschein am Tisch.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "candle"
+    },
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love",
+   "overlay": {
+    "type": "counter",
+    "label": "MINUTEN KOCHEN",
+    "value": 10
+   }
+  },
+  {
+   "text": "Deshalb schmeckt selbst gemachtes Essen gemeinsam immer am besten.",
+   "see": "Ein Notizzettel mit dem Rezepttipp.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "love"
+  },
+  {
+   "text": "Gemeinsam kochen ist eben die süßeste Art, Liebe zu zeigen.",
+   "see": "Das Paar umarmt sich glücklich in der Küche.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "schatz",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "love"
+  }
+ ]
+}

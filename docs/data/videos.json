@@ -209,5 +209,45 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Zernio: Zernio HTTP 401: Invalid, revoked or expired API key."
+ },
+ {
+  "id": 7,
+  "category": "liebe",
+  "topic": "3 Dinge, die das Liebes-Hormon Dopamin in deinem Gehirn auslösen, wenn ihr zusammen kocht",
+  "status": "error",
+  "created": 1795196464.0054014,
+  "title": "3 Dinge, die beim Kochen Dopamin im Gehirn auslösen",
+  "description": "Erfahre, warum Kochen zu zweit glücklich macht!\nEntdecke drei Gründe, wie Dopamin euer Gehirn belohnt.\nKochst du lieber mit Schatz oder bestellst du Pizza?",
+  "hashtags": [
+   "#shorts",
+   "#liebe",
+   "#beziehung",
+   "#kochen",
+   "#dopamin",
+   "#psychologie",
+   "#pärchen"
+  ],
+  "tags": [
+   "liebe",
+   "beziehung",
+   "dopamin",
+   "kochen zu zweit",
+   "psychologie der liebe",
+   "pärchen tipps"
+  ],
+  "thumb_text": "DOPAMIN BEIM KOCHEN",
+  "missing": null,
+  "cover_ms": 86393,
+  "yt_duration": 55.2,
+  "duration": 86.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "edge",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "error": "Zernio: Zernio HTTP 401: Invalid, revoked or expired API key."
  }
 ]

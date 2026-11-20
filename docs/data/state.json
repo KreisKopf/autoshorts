@@ -4,19 +4,20 @@
   "2026-11-19 13:00",
   "2026-11-19 18:00",
   "2026-11-19 21:00",
-  "2026-11-20 13:00"
+  "2026-11-20 13:00",
+  "2026-11-20 18:00"
  ],
  "used_queue": [],
- "last_stats": 1795192744.6032481,
- "next_id": 7,
+ "last_stats": 1795197503.1232338,
+ "next_id": 8,
  "connected": {},
  "last_trends": 1795192744.6068375,
  "tiktok_handle": "Liebes..leben",
  "engine_updated": "2026-11-20 18:00",
- "voice_wps": 2.133,
+ "voice_wps": 1.951,
  "last_poster": {
-  "hero": "",
-  "palette": 0,
-  "video": 6
+  "hero": "brain",
+  "palette": 2,
+  "video": 7
  }
 }
