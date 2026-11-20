@@ -1044,7 +1044,22 @@ def main():
             import numpy as _np
             with _wave.open(str(Path(tmp) / "e.wav")) as w5:           # Aussteuerung: Abstand zum Vollausschlag (AAC übersteuerte)
                 x5 = _np.frombuffer(w5.readframes(w5.getnframes()), "<i2")
-            assert 0.5 < abs(x5).max() / 32768 <= 0.7, abs(x5).max()
+            assert 0.5 < abs(x5).max() / 32768 <= remix.TRUE_PEAK + 0.01, abs(x5).max()
+            for mel_, stl, sd in (("bella_ciao", "glas", 165), ("saints", "pop", 135)):   # Video 165: Glas-Klirren lag auf +4,4 dBTP, zwei Scheiben über Eck
+                h6, _t6 = remix.build(bounce.SONGS[mel_], remix.KEYS[mel_], stl, Path(tmp) / "g.wav", seed=sd)
+                with _wave.open(str(Path(tmp) / "g.wav")) as w6:
+                    x6 = _np.frombuffer(w6.readframes(w6.getnframes()), "<i2").reshape(-1, 2)[:, 0] / 32767
+                assert remix.true_peak(x6) <= remix.TRUE_PEAK + 0.01, (stl, remix.true_peak(x6))   # Spitze zwischen den Abtastwerten
+                f6 = _np.abs(_np.fft.rfft(x6)) ** 2
+                assert f6[int(19000 * len(x6) / remix.SR):].sum() < 0.001 * f6.sum(), stl          # kein Rauschen an der halben Abtastrate
+                hg6 = bounce.with_ghosts(h6)
+                sg6, _st6 = bounce.path(hg6, sd)
+                tm6 = [g["t"] for g in sg6]
+                rc6 = [bounce._pane_rect(g["p"], g["n"]) for g in sg6]
+                for a6 in range(len(sg6)):                  # gleichzeitig sichtbare Scheiben berühren sich nicht
+                    for b6 in range(a6 + 1, len(sg6)):
+                        if tm6[a6] > bounce.appear_at(tm6, b6):
+                            assert not bounce._rects_touch(rc6[a6], rc6[b6]), (mel_, a6, b6)
             dur5, _th = bounce.render({"remix": "saints", "style": "pop"}, Path(tmp) / "s.mp4", seed=134, work=Path(tmp))
             assert 23.5 < dur5 < 25.5, dur5                          # vorher 27,9 s
             out5 = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(Path(tmp) / "s.mp4")],
@@ -1599,7 +1614,7 @@ def main():
         from pathlib import Path
         from .. import adopt, state as st_
         good = [{"t": "rect", "x": 150, "y": 200, "w": 100, "h": 200, "c": "#88aa44"}, {"t": "ellipse", "cx": 200, "cy": 180, "rx": 60, "ry": 40, "c": "#cc4444"}]
-        theirs = {"kompass": {"name": "kompass", "aliases": ["kompasse", "haus", "geld"], "shapes": good}, "auto": {"name": "auto", "shapes": good},
+        theirs = {"sextant": {"name": "sextant", "aliases": ["sextanten", "haus", "geld"], "shapes": good}, "auto": {"name": "auto", "shapes": good},
                   "kaputt": {"name": "kaputt", "shapes": [{"t": "rect"}]}, "boese": {"name": "boese", "shapes": good}, "x": "<script>"}
         saved = {}
         old = (adopt._repo_ok, adopt._fetch_shapes, adopt._looks_ok, adopt.load, adopt.save)
@@ -1612,7 +1627,7 @@ def main():
             assert adopt.adopt("freund/autoshorts,fremd/repo") == 1
         finally:
             adopt._repo_ok, adopt._fetch_shapes, adopt._looks_ok, adopt.load, adopt.save = old
-        assert set(saved) == {"kompass"} and saved["kompass"]["aliases"] == ["kompasse"], saved.keys()
+        assert set(saved) == {"sextant"} and saved["sextant"]["aliases"] == ["sextanten"], saved.keys()
     check("Kanäle: Übernahme aus Kopien nur geprüft", _adopt)
 
     def _size():                                                 # winzige Tiere: Größe mit Zoom und Lineal statt Tier so groß wie ein Bär
@@ -1918,6 +1933,13 @@ def main():
         assert k3[4] == ["frog"], ("nach der Zahl-Grafik bleibt „Es sitzt in seiner Haut“ beim Frosch", k3[4])
         assert not sd3[6].get("overlay"), "Auswahl mit zwei Antworten zur Frage nach den dreien entfällt"
         frame(sd3[0])
+        sd4 = stage.direct([{"text": "Drei Tiere sind giftig.", "place": "park", "actors": [{"id": "du"}]},
+                            {"text": "Und das Gift der Nummer drei schlägt jedes Zyankali.", "place": "underwater", "actors": [{"id": "fisch", "kind": "fish"}]},
+                            {"text": "Nummer drei ist der Kugelfisch.", "place": "underwater", "actors": []},
+                            {"text": "Ende.", "place": "park", "actors": [{"id": "du"}]}], [(i_ * 4, i_ * 4 + 4) for i_ in range(4)], "Drei niedliche Tiere", "tiere")
+        assert [str(a_.get("kind") or "") for a_ in sd4[1].get("actors") or []] == ["puffer"], "Goldfisch der Text-KI wird im Kugelfisch-Video zum Kugelfisch"
+        assert stage.poster_hero("Süß, aber giftig – das Schnabeltier aus Australien", sd) != "alien", "Australien ist kein Alien (Titelbild von Video 163 zeigte einen Außerirdischen)"
+        assert stage.poster_hero("Aliens landen auf der Erde", []) == "alien"
         for k_, a_ in (("frog", ""), ("frog", "hop"), ("platypus", ""), ("platypus", "spur"), ("puffer", ""), ("puffer", "puff")):
             for f_ in (1, -1):
                 assert extras.creature(k_, 1.3, facing=f_, action=a_)[0].getbbox(), (k_, a_)
